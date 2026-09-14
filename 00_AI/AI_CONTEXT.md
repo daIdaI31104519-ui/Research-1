@@ -1,4 +1,4 @@
-# 市場理解OS — AI_CONTEXT v0.1.1
+# 市場理解OS — AI_CONTEXT v0.1.2
 
 **Document Role:** AI Current-State Index / Navigation Map  
 **Status:** REVIEWED / WORKING BASELINE  
@@ -50,12 +50,12 @@ AI_CONTEXT自身が新しい設計正本になってはいけない。
 CURRENT PHASE:
 Human-First Rebuild
 +
-AI設計運用基盤の整備
+Architecture / Connection分割設計
 +
-Architecture / Connection設計への移行段階
+Partial Connection Map構築段階
 ```
 
-現在は、市場理解OS本体を詳細実装する前に、人間とGPTが設計全体で迷子にならないための設計管理基盤を整えている。
+現在はMaster Connection Mapを一気に完成させるのではなく、主要責任領域をPartial Connection Mapへ分割し、各Mapを70〜80%程度のWorking Baselineとして接続可能にしてから全体統合する段階にある。
 
 ---
 
@@ -63,10 +63,12 @@ Architecture / Connection設計への移行段階
 
 ```text
 CURRENT TASK:
-CONNECTION MAP v0.2 の設計準備
+03_RESEARCH の役割・境界設計準備
 ```
 
-`AI_CONTEXT v0.1.1` の初版作成・保存は完了したため、現在Taskは次工程へ移行する。
+`01_EXTERNAL_DATA` と `02_MARKET_UNDERSTANDING` はCross Check後、Working Baselineとして保存済み。
+
+次は、Cause Candidate・Market DNA Snapshot・その他領域からResearchへ入る共通入口を整理し、Research Candidate → Intake / Router → Research → Validationの接続境界を設計する。
 
 ---
 
@@ -95,25 +97,57 @@ Current Use: CURRENT HUMAN REFERENCE
 
 Canonicalではないが、現在の市場理解OSのHuman思想を確認するときの主要参照先とする。
 
-## 3.3 CONNECTION MAP
+## 3.3 PARTIAL CONNECTION MAP — EXTERNAL / DATA
+
+```text
+Path: 02_ARCHITECTURE/CONNECTIONS/01_EXTERNAL_DATA.md
+Version: v0.1.1
+Status: REVIEWED / WORKING BASELINE
+Role: External SourcesをQualified Market Observation Setへ変換する接続境界
+```
+
+主要Downstream Boundary:
+
+```text
+Qualified Market Observation Set
+```
+
+## 3.4 PARTIAL CONNECTION MAP — MARKET UNDERSTANDING
+
+```text
+Path: 02_ARCHITECTURE/CONNECTIONS/02_MARKET_UNDERSTANDING.md
+Version: v0.1.1
+Status: REVIEWED / WORKING BASELINE
+Role: Qualified ObservationからFeature / Context / Market Intelligence / Current Market Understandingへ接続し、Cause CandidateとMarket DNA Snapshotへ分岐する境界
+```
+
+主要Downstream Boundaries:
+
+```text
+Current Market Understanding
+Cause Candidate
+Market DNA Snapshot
+```
+
+## 3.5 MASTER CONNECTION MAP
 
 ```text
 Path: 02_ARCHITECTURE/CONNECTION_MAP.md
 Status: PLACEHOLDER / NOT CANONICAL
 Known State: v0.1は設計・Cross Check済み。Failure Reviewあり。
-Next: v0.2を作成
+Current Direction: Partial Connection Map群を先に作成し、その後Masterへ統合する。
 ```
 
 現在のPlaceholderを完成設計として扱わない。
 
-## 3.4 CROSS-CUTTING MAP
+## 3.6 CROSS-CUTTING MAP
 
 ```text
 Path: 02_ARCHITECTURE/CROSS_CUTTING_MAP.md
 Status: PLACEHOLDER / NOT CANONICAL
 ```
 
-Connection Map v0.2との接続を確認した後、本格設計する。
+Partial Connection Map群およびMaster Connection Mapとの接続を確認した後、本格設計する。
 
 ---
 
@@ -133,6 +167,7 @@ WIN ≠ 正しい理解
 LOSS ≠ 間違った理解
 Candidate ≠ Production Authority
 Research Result ≠ 即Live反映
+Observation ≠ Feature ≠ Interpretation ≠ Candidate
 AIは主に 解釈 / 仮説 / 反証 / 査読 / 説明 へ使用する
 Gitに存在 ≠ 現在採用中
 局所100%より、全体を接続可能な状態へ先に進める
@@ -142,16 +177,44 @@ Gitに存在 ≠ 現在採用中
 
 ---
 
-# 5. Current Roadmap
+# 5. Current Connection Split
+
+現在採用するConnection Map分割:
+
+```text
+01_EXTERNAL_DATA
+↓
+02_MARKET_UNDERSTANDING
+↓
+03_RESEARCH
+↓
+04_KNOWLEDGE_APPLICABILITY
+↓
+05_DECISION
+↓
+06_EXECUTION_POST_DECISION
+↓
+MASTER CONNECTION MAP
+```
+
+Cross-Cutting責任はこの縦分割へ無理に混ぜず、別途 `CROSS_CUTTING_MAP.md` で扱う。
+
+---
+
+# 6. Current Roadmap
 
 現在採用する上位ロードマップ:
 
 ```text
 Human Understanding
 ↓
-Architecture / Connection
+Architecture / Partial Connection
+↓
+Master Connection
 ↓
 Cross-Layer Reconciliation
+↓
+Cross-Cutting
 ↓
 Detailed Design
 ↓
@@ -169,39 +232,41 @@ Production
 
 ---
 
-# 6. Pending / Open
+# 7. Pending / Open
 
 AI_CONTEXTへ残すのは、次の設計へ影響する重要事項だけとする。
 
 ```text
 PENDING-001
-AI_CONTEXTのContext Sync運用が実際のGit作業で正しく機能するか検証する。
+AI_CONTEXTのContext Sync運用が実際のGit作業で正しく機能するか継続確認する。
 
-確認ポイント:
-- Current Taskが更新されるか
-- Working Baseline変更を反映できるか
-- 重要Pendingだけ残せるか
-- 不要な履歴を蓄積しないか
+現在までの確認:
+- Working Baseline追加をCurrent Documentsへ反映
+- Current Taskを次Mapへ更新
+- 不要な作業履歴はAI_CONTEXTへ蓄積しない
 ```
 
 軽微な保留、一時的な案、単なる思いつきはここへ保存しない。
 
 ---
 
-# 7. Next Actions
+# 8. Next Actions
 
 ```text
 NEXT-001
-CONNECTION MAP v0.2を設計
+03_RESEARCH の役割・境界を設計
 
 NEXT-002
-Connection Map v0.2をCross Check
+03_RESEARCHをCross Checkし、問題が軽微ならWorking Baseline候補として保存
 
 NEXT-003
-問題が軽微ならGitへ保存し、AI_CONTEXT同期要否を判定
+04_KNOWLEDGE_APPLICABILITYへ進み、Market DNA Snapshot / Current Market Understanding / Approved Knowledgeの接続を設計
 
 NEXT-004
-Cross-Layer / Cross-Cutting設計へ進む
+Partial Connection Map群が揃った段階でMaster Connection Mapへ統合
+
+NEXT-005
+Master統合後にCross-Layer / Cross-Cutting整合を確認
 ```
 
 ```text
@@ -211,7 +276,7 @@ PENDING = 今は解決しないが忘れてはいけない問題
 
 ---
 
-# 8. Required Read
+# 9. Required Read
 
 GPTが市場理解OSについて新しい設計作業を開始するとき、必要な範囲だけ読む。
 
@@ -223,16 +288,17 @@ GPTが市場理解OSについて新しい設計作業を開始するとき、必
 3. 現在Taskの対象md
 ```
 
+Connection分割設計では、直前のPartial Connection MapとのBoundary一致を確認する。
+
 Human思想の確認が必要なら `00_HUMAN/HUMAN_MAP.md` を読む。
 変更理由・過去失敗が必要なら `01_HISTORY/` を読む。
-Connection設計では `02_ARCHITECTURE/CONNECTION_MAP.md` と関連Failure Reviewを優先する。
 旧Repo・過去資料・外部情報は、現在Taskに必要な場合だけ確認する。
 
 毎回Repo全体を読むことを要求しない。
 
 ---
 
-# 9. Do Not Design Yet
+# 10. Do Not Design Yet
 
 現在は次を最終固定しない。
 
@@ -254,7 +320,7 @@ Production Capital Allocation
 
 ---
 
-# 10. Context Sync Rules
+# 11. Context Sync Rules
 
 AI_CONTEXTは日記ではない。
 
@@ -279,21 +345,11 @@ NEXT ACTION変更
 
 更新方法は原則として追記ではなく現在値の置換とする。
 
-```text
-悪い:
-Connection Map v0.1
-Connection Map v0.2
-Connection Map v0.3
-
-良い:
-Current Connection Map: v0.3
-```
-
 過去Versionと変更理由はHistoryへ送る。
 
 ---
 
-# 11. Workflow Reference
+# 12. Workflow Reference
 
 次のような作業判断はAI_CONTEXT自身で詳細定義しない。
 
@@ -313,7 +369,7 @@ AI_CONTEXTは必要に応じて、現在重要なWorkflow Ruleを短く示すだ
 
 ---
 
-# 12. Navigation Principle
+# 13. Navigation Principle
 
 GPTが迷った場合:
 
@@ -323,6 +379,8 @@ AI_CONTEXT
 現在Taskを確認
 ↓
 対象Designを読む
+↓
+直前 / 直後Boundaryを確認
 ↓
 不足した場合だけ関連Design
 ↓
@@ -337,7 +395,7 @@ AI_CONTEXT
 
 ---
 
-# 13. Human Responsibility
+# 14. Human Responsibility
 
 人間が、全ファイル名、保存先、Version、Historyの場所、影響md、Current / Legacy判定を暗記することを前提としない。
 
@@ -357,6 +415,6 @@ GPTはGitとAI_CONTEXTを使って設計運用を補助する。
 
 ---
 
-# AI_CONTEXT v0.1.1 一文定義
+# AI_CONTEXT v0.1.2 一文定義
 
-> **AI_CONTEXTとは、市場理解OSの設計内容そのものを複製する文書ではなく、GPTが現在Phase・Current Task・主要Documentの身分・重要Pending・Next Action・参照先を短時間で把握し、Gitという長期作業空間の中から現在Taskに必要な正しい設計情報へ移動するための軽量なAI専用現在地マップである。**
+> **AI_CONTEXTとは、市場理解OSの設計内容そのものを複製する文書ではなく、GPTが現在Phase・Current Task・主要Working Baseline・重要Pending・Next Action・参照先を短時間で把握し、Gitという長期作業空間の中から現在Taskに必要な正しい設計情報へ移動するための軽量なAI専用現在地マップである。**
