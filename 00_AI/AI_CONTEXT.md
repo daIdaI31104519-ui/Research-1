@@ -1,4 +1,4 @@
-# 市場理解OS — AI_CONTEXT v0.1.2
+# 市場理解OS — AI_CONTEXT v0.1.3
 
 **Document Role:** AI Current-State Index / Navigation Map  
 **Status:** REVIEWED / WORKING BASELINE  
@@ -63,12 +63,12 @@ Partial Connection Map構築段階
 
 ```text
 CURRENT TASK:
-03_RESEARCH の役割・境界設計準備
+04_KNOWLEDGE_APPLICABILITY の役割・境界設計準備
 ```
 
-`01_EXTERNAL_DATA` と `02_MARKET_UNDERSTANDING` はCross Check後、Working Baselineとして保存済み。
+`01_EXTERNAL_DATA`、`02_MARKET_UNDERSTANDING`、`03_RESEARCH` はCross Check後、Working Baselineとして保存済み。
 
-次は、Cause Candidate・Market DNA Snapshot・その他領域からResearchへ入る共通入口を整理し、Research Candidate → Intake / Router → Research → Validationの接続境界を設計する。
+次は、`Validated Research Result` を受け取り、Knowledgeとしてどう昇格・保持・Version管理するか、さらにCurrent Market Understanding / Market DNA Snapshotと照合して現在市場で利用可能かを判断するKnowledge / Applicability境界を設計する。
 
 ---
 
@@ -129,7 +129,34 @@ Cause Candidate
 Market DNA Snapshot
 ```
 
-## 3.5 MASTER CONNECTION MAP
+## 3.5 PARTIAL CONNECTION MAP — RESEARCH
+
+```text
+Path: 02_ARCHITECTURE/CONNECTIONS/03_RESEARCH.md
+Version: v0.1.1
+Status: REVIEWED / WORKING BASELINE
+Role: Research Candidateを共通入口から受け取り、Research Plan / Hypothesis / Validation / Refutation / Failure Boundaryを経てValidated Research Resultへ接続する研究境界
+```
+
+主要Downstream Boundary:
+
+```text
+Validated Research Result
+```
+
+重要境界:
+
+```text
+Research Candidate
+≠ Research Context
+
+Validated Research Result
+≠ Supported Hypothesis
+≠ Production Knowledge
+≠ Current Market Applicable
+```
+
+## 3.6 MASTER CONNECTION MAP
 
 ```text
 Path: 02_ARCHITECTURE/CONNECTION_MAP.md
@@ -140,7 +167,7 @@ Current Direction: Partial Connection Map群を先に作成し、その後Master
 
 現在のPlaceholderを完成設計として扱わない。
 
-## 3.6 CROSS-CUTTING MAP
+## 3.7 CROSS-CUTTING MAP
 
 ```text
 Path: 02_ARCHITECTURE/CROSS_CUTTING_MAP.md
@@ -167,6 +194,7 @@ WIN ≠ 正しい理解
 LOSS ≠ 間違った理解
 Candidate ≠ Production Authority
 Research Result ≠ 即Live反映
+Validated Research Result ≠ Supported Hypothesis
 Observation ≠ Feature ≠ Interpretation ≠ Candidate
 AIは主に 解釈 / 仮説 / 反証 / 査読 / 説明 へ使用する
 Gitに存在 ≠ 現在採用中
@@ -254,18 +282,21 @@ AI_CONTEXTのContext Sync運用が実際のGit作業で正しく機能するか�
 
 ```text
 NEXT-001
-03_RESEARCH の役割・境界を設計
+04_KNOWLEDGE_APPLICABILITY の役割・境界を設計
 
 NEXT-002
-03_RESEARCHをCross Checkし、問題が軽微ならWorking Baseline候補として保存
+04_KNOWLEDGE_APPLICABILITYをCross Checkし、問題が軽微ならWorking Baseline候補として保存
 
 NEXT-003
-04_KNOWLEDGE_APPLICABILITYへ進み、Market DNA Snapshot / Current Market Understanding / Approved Knowledgeの接続を設計
+05_DECISIONへ進み、Trade Thesis → Expected Value → Signal → Risk / Defenseの責任境界を設計
 
 NEXT-004
-Partial Connection Map群が揃った段階でMaster Connection Mapへ統合
+06_EXECUTION_POST_DECISIONまでPartial Connection Mapを構築
 
 NEXT-005
+Partial Connection Map群が揃った段階でMaster Connection Mapへ統合
+
+NEXT-006
 Master統合後にCross-Layer / Cross-Cutting整合を確認
 ```
 
@@ -415,6 +446,6 @@ GPTはGitとAI_CONTEXTを使って設計運用を補助する。
 
 ---
 
-# AI_CONTEXT v0.1.2 一文定義
+# AI_CONTEXT v0.1.3 一文定義
 
 > **AI_CONTEXTとは、市場理解OSの設計内容そのものを複製する文書ではなく、GPTが現在Phase・Current Task・主要Working Baseline・重要Pending・Next Action・参照先を短時間で把握し、Gitという長期作業空間の中から現在Taskに必要な正しい設計情報へ移動するための軽量なAI専用現在地マップである。**
