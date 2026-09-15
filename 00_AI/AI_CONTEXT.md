@@ -1,4 +1,4 @@
-# 市場理解OS — AI_CONTEXT v0.1.4
+# 市場理解OS — AI_CONTEXT v0.1.5
 
 **Document Role:** AI Current-State Index / Navigation Map  
 **Status:** REVIEWED / WORKING BASELINE  
@@ -52,10 +52,10 @@ Human-First Rebuild
 +
 Architecture / Connection分割設計
 +
-Partial Connection Map構築段階
+Project Charter Reconciliation
 ```
 
-現在はMaster Connection Mapを一気に完成させるのではなく、主要責任領域をPartial Connection Mapへ分割し、各Mapを70〜80%程度のWorking Baselineとして接続可能にしてから全体統合する段階にある。
+現在は05_DECISIONへ進む直前に、Project Mission / Research Mission / Capital-Risk Philosophy / Knowledge-Data Asset Philosophy / Extensibility等の最上位思想不足を確認したため、Partial Connection Map構築を一時停止し、`PROJECT_CHARTER` を先に整備して既存Working Baselineと再照合する段階にある。
 
 ---
 
@@ -63,12 +63,19 @@ Partial Connection Map構築段階
 
 ```text
 CURRENT TASK:
-05_DECISION の役割・境界設計準備
+00_HUMAN/PROJECT_CHARTER.md v0.1 Draft の作成
+現在焦点: 1. Project Mission
 ```
 
-`01_EXTERNAL_DATA`、`02_MARKET_UNDERSTANDING`、`03_RESEARCH`、`04_KNOWLEDGE_APPLICABILITY` はCross Check後、Working Baselineとして保存済み。
+`01_EXTERNAL_DATA`、`02_MARKET_UNDERSTANDING`、`03_RESEARCH`、`04_KNOWLEDGE_APPLICABILITY` はWorking Baselineとして保存済み。
 
-次は、`Applicable Knowledge Set` とCurrent Market Contextを受け取り、複数Knowledgeを多数決せずにTrade Thesisへ統合し、Expected Value Evaluation → Signal Decision → Trade Candidate / WAIT / NO TRADE → Risk / Defenseへ接続する意思決定境界を設計する。
+05_DECISIONは破棄していない。PROJECT_CHARTERをWorking Baseline化し、HUMAN_MAP / AI_WORKFLOW / 01〜04を必要最小限で再照合した後に05_DECISIONへ復帰する。
+
+一時移行手順:
+
+```text
+00_AI/TEMP_CHARTER_RECONCILIATION_PLAN.md
+```
 
 ---
 
@@ -97,7 +104,18 @@ Current Use: CURRENT HUMAN REFERENCE
 
 Canonicalではないが、現在の市場理解OSのHuman思想を確認するときの主要参照先とする。
 
-## 3.3 PARTIAL CONNECTION MAP — EXTERNAL / DATA
+## 3.3 TEMP CHARTER RECONCILIATION PLAN
+
+```text
+Path: 00_AI/TEMP_CHARTER_RECONCILIATION_PLAN.md
+Version: v0.1
+Status: TEMPORARY / ACTIVE UNTIL RECONCILIATION COMPLETE
+Role: PROJECT_CHARTER導入中の作業順・影響範囲・Checkpoint・復帰条件を固定する一時ナビ
+```
+
+恒久設計ではない。PROJECT_CHARTER導入と01〜04再照合が完了し、Current Taskが05_DECISIONへ戻った後に削除する。
+
+## 3.4 PARTIAL CONNECTION MAP — EXTERNAL / DATA
 
 ```text
 Path: 02_ARCHITECTURE/CONNECTIONS/01_EXTERNAL_DATA.md
@@ -112,7 +130,7 @@ Role: External SourcesをQualified Market Observation Setへ変換する接続�
 Qualified Market Observation Set
 ```
 
-## 3.4 PARTIAL CONNECTION MAP — MARKET UNDERSTANDING
+## 3.5 PARTIAL CONNECTION MAP — MARKET UNDERSTANDING
 
 ```text
 Path: 02_ARCHITECTURE/CONNECTIONS/02_MARKET_UNDERSTANDING.md
@@ -129,7 +147,7 @@ Cause Candidate
 Market DNA Snapshot
 ```
 
-## 3.5 PARTIAL CONNECTION MAP — RESEARCH
+## 3.6 PARTIAL CONNECTION MAP — RESEARCH
 
 ```text
 Path: 02_ARCHITECTURE/CONNECTIONS/03_RESEARCH.md
@@ -156,7 +174,7 @@ Validated Research Result
 ≠ Current Market Applicable
 ```
 
-## 3.6 PARTIAL CONNECTION MAP — KNOWLEDGE / APPLICABILITY
+## 3.7 PARTIAL CONNECTION MAP — KNOWLEDGE / APPLICABILITY
 
 ```text
 Path: 02_ARCHITECTURE/CONNECTIONS/04_KNOWLEDGE_APPLICABILITY.md
@@ -187,7 +205,7 @@ Knowledge Maintenance Path
 ≠ Runtime Applicability Path
 ```
 
-## 3.7 MASTER CONNECTION MAP
+## 3.8 MASTER CONNECTION MAP
 
 ```text
 Path: 02_ARCHITECTURE/CONNECTION_MAP.md
@@ -198,7 +216,7 @@ Current Direction: Partial Connection Map群を先に作成し、その後Master
 
 現在のPlaceholderを完成設計として扱わない。
 
-## 3.8 CROSS-CUTTING MAP
+## 3.9 CROSS-CUTTING MAP
 
 ```text
 Path: 02_ARCHITECTURE/CROSS_CUTTING_MAP.md
@@ -267,7 +285,7 @@ Cross-Cutting責任はこの縦分割へ無理に混ぜず、別途 `CROSS_CUTTI
 現在採用する上位ロードマップ:
 
 ```text
-Human Understanding
+Human Understanding / Project Charter
 ↓
 Architecture / Partial Connection
 ↓
@@ -307,6 +325,28 @@ AI_CONTEXTのContext Sync運用が実際のGit作業で正しく機能するか�
 - 不要な作業履歴はAI_CONTEXTへ蓄積しない
 ```
 
+```text
+PENDING-002
+Runtime Knowledge Switching / Unknown Market / In-Trade Thesis Re-evaluation
+
+再開時期:
+PROJECT_CHARTER Reconciliation完了後、04_KNOWLEDGE_APPLICABILITY → 05_DECISION → 06_EXECUTION_POST_DECISION の接続を設計するとき。
+
+現在方向:
+1. Positionなし:
+   市場を常時観測し、Current Market Pattern / Market DNA / Contextに応じてApplicable Knowledgeを動的に切り替える。
+   Applicable Knowledgeが見つかっても自動Tradeとはせず、Entry条件成立まではWAITできる。
+
+2. 既存Pattern / Knowledgeに十分属さない市場:
+   無理にTradeせず、UNKNOWN / NOT_APPLICABLEとしてWAIT / NO TRADEを許容し、必要ならResearch Candidateとして03_RESEARCHへ戻す。
+
+3. Position保有中:
+   市場Patternが変化して別KnowledgeがApplicableになっても、Entry時Trade Thesisの理由を後付けで差し替えない。
+   新しい市場状態に対して、元のTrade Thesisがまだ成立するかを再評価し、HOLD / REDUCE / EXIT等へ接続する。
+
+4. 詳細なPattern State、Switch Threshold、HOLD / REDUCE / EXIT Ruleは未設計。
+```
+
 軽微な保留、一時的な案、単なる思いつきはここへ保存しない。
 
 ---
@@ -315,19 +355,20 @@ AI_CONTEXTのContext Sync運用が実際のGit作業で正しく機能するか�
 
 ```text
 NEXT-001
-05_DECISION の役割・境界を設計
+PROJECT_CHARTER v0.1 Draftを一項目ずつ作成
+現在: Project Mission
 
 NEXT-002
-05_DECISIONをCross Checkし、問題が軽微ならWorking Baseline候補として保存
+PROJECT_CHARTER全体をCross Checkし、問題が軽微ならWorking Baseline候補として保存
 
 NEXT-003
-06_EXECUTION_POST_DECISIONへ進み、Risk Permission / Execution / Position Supervision / Exit / Post-Decisionの接続境界を設計
+TEMP_CHARTER_RECONCILIATION_PLANに従い、HUMAN_MAP / AI_WORKFLOW / 01〜04を必要最小限で再照合
 
 NEXT-004
-Partial Connection Map群が揃った段階でMaster Connection Mapへ統合
+DESIGN_CHANGE_LOGへ今回の上位設計補完理由を記録し、AI_CONTEXT Current Taskを05_DECISIONへ復帰
 
 NEXT-005
-Master統合後にCross-Layer / Cross-Cutting整合を確認
+TEMP_CHARTER_RECONCILIATION_PLANを削除後、05_DECISION設計を再開
 ```
 
 ```text
@@ -349,9 +390,16 @@ GPTが市場理解OSについて新しい設計作業を開始するとき、必
 3. 現在Taskの対象md
 ```
 
-Connection分割設計では、直前のPartial Connection MapとのBoundary一致を確認する。
+PROJECT_CHARTER Reconciliation中は追加で、
 
-Human思想の確認が必要なら `00_HUMAN/HUMAN_MAP.md` を読む。
+```text
+00_AI/TEMP_CHARTER_RECONCILIATION_PLAN.md
+00_HUMAN/HUMAN_MAP.md
+```
+
+を必要範囲で参照する。
+
+Connection分割設計では、直前のPartial Connection MapとのBoundary一致を確認する。
 変更理由・過去失敗が必要なら `01_HISTORY/` を読む。
 旧Repo・過去資料・外部情報は、現在Taskに必要な場合だけ確認する。
 
@@ -374,6 +422,8 @@ Production Capital Allocation
 最終Risk数値
 全例外ケース
 全Test Case
+Runtime Knowledge Switch Threshold
+In-Trade HOLD / REDUCE / EXIT詳細Rule
 ```
 
 理由は、Architecture / Connection / Cross-Layer責任がまだ十分に固定されていないため。
@@ -476,6 +526,6 @@ GPTはGitとAI_CONTEXTを使って設計運用を補助する。
 
 ---
 
-# AI_CONTEXT v0.1.4 一文定義
+# AI_CONTEXT v0.1.5 一文定義
 
 > **AI_CONTEXTとは、市場理解OSの設計内容そのものを複製する文書ではなく、GPTが現在Phase・Current Task・主要Working Baseline・重要Pending・Next Action・参照先を短時間で把握し、Gitという長期作業空間の中から現在Taskに必要な正しい設計情報へ移動するための軽量なAI専用現在地マップである。**
