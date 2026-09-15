@@ -1,4 +1,4 @@
-# TEMP — PROJECT CHARTER RECONCILIATION PLAN v0.1
+# TEMP — PROJECT CHARTER RECONCILIATION PLAN v0.2
 
 **Document Role:** Temporary Design Migration / Navigation Plan  
 **Status:** TEMPORARY / ACTIVE UNTIL RECONCILIATION COMPLETE  
@@ -50,8 +50,8 @@ Research Mission
 Capital / Risk Philosophy
 Knowledge / Data Asset Philosophy
 Independent Data / Metric Extensibility
-Market / Asset Portability
-Research Product / Business Mission
+Current Crypto Scope / Future Expansion
+Research Publication / User Value / Future Business Opportunity
 Constitution Change Governance
 ```
 
@@ -110,16 +110,32 @@ PROJECT_CHARTER自体を変更する場合は明示的な上位設計変更と�
 7. Capital / Risk Philosophy
 8. Knowledge / Dataを長期資産として扱う思想
 9. 独自Data / Derived Metric / Research Outputを追加・交換・Version変更可能にする思想
-10. BTCは初期対象でありCore Conceptは市場一般とするか
+10. Current Market Scope / Future Expansion
+    - Current Scope = 仮想通貨FX + 仮想通貨現物
+    - Crypto First
+    - 株式 / 通常FX / その他市場は現在の完成条件に含めない
+    - Future Expansion Readyだが、将来対応を理由に現在設計を複雑化しない
 11. Research成果の利用先
     - Automated Trading
-    - Research Product / Intelligence Output
+    - Human-readable Research Publication
+    - 無料Application / Interface等による人間への還元方向
+    - 具体的収益化方法は現時点で固定しない
 12. AI / Human / Production Authority
 13. 変えてよいもの / 変えてはいけないもの
 14. Charter変更時のGovernance
 ```
 
 具体DB Schema、Python Class、API、Threshold、Risk数値はここで固定しない。
+
+現在進捗:
+
+```text
+Section 1 Project Mission
+= DRAFT / LEADING CANDIDATE 保存済み
+
+Current Focus
+= 2. Success Definition
+```
 
 ---
 
@@ -148,16 +164,16 @@ ADAPTATION RESEARCH
 OPPORTUNITY RESEARCH
 = 非対称な大Opportunityを限定Risk内で研究する
 
-INTELLIGENCE / PRODUCT RESEARCH
-= 研究成果をグラフ・独自Data・Scenario等として人間が利用可能にする
+INTELLIGENCE / PUBLICATION SUPPORT
+= 研究成果をGraph・独自Data・Research Note・Scenario等として人間が利用可能にする
 ```
 
-ただし商品都合でResearch Coreを歪めない。
+ただしPublication都合でResearch Coreを歪めない。
 
 ```text
 Research Core
         ├─→ Automated Trading
-        └─→ Research Product / Intelligence
+        └─→ Human-readable Research Publication
 ```
 
 を基本方向とする。
@@ -217,7 +233,7 @@ Versioned Calculation
 ↓
 Standard Output Contract
 ↓
-Market Intelligence / Research / Product
+Market Intelligence / Research / Publication
 ```
 
 へ落とす。
@@ -227,9 +243,10 @@ Market Intelligence / Research / Product
 # 8. 既存ファイルへの影響順位
 
 ```text
-NEW
+CURRENT DRAFT
 00_HUMAN/PROJECT_CHARTER.md
-= 最優先で作成
+= Section 1 Project Mission保存済み
+= 現在はSection 2 Success Definitionを設計する
 
 HIGH IMPACT
 00_HUMAN/HUMAN_MAP.md
@@ -264,6 +281,8 @@ NOT YET CREATED
 ```text
 STEP 1
 PROJECT_CHARTER v0.1 Draft
+- Section 1 Project Mission = 保存済み
+- Current = Section 2 Success Definitionから継続
 
 STEP 2
 PROJECT_CHARTER Cross Check
@@ -288,7 +307,7 @@ Research MissionをIntake / Prioritizationへ反映
 
 STEP 8
 04_KNOWLEDGE_APPLICABILITY Reconciliation
-Knowledge Consumer / Product分岐との責任境界確認
+Knowledge Consumer / Publication分岐との責任境界確認
 
 STEP 9
 DESIGN_CHANGE_LOGへ今回の上位設計補完を記録
@@ -346,9 +365,9 @@ Capital Allocation数値
 DB Schema
 Python Class
 Plugin実装
-商品価格
-販売サイト
-API料金設計
+無料Applicationの具体UI / 機能一覧
+ユーザー獲得施策
+収益化方式の固定
 全独自Indexの計算式
 ```
 
