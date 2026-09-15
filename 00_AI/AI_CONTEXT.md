@@ -1,4 +1,4 @@
-# 市場理解OS — AI_CONTEXT v0.1.5
+# 市場理解OS — AI_CONTEXT v0.1.6
 
 **Document Role:** AI Current-State Index / Navigation Map  
 **Status:** REVIEWED / WORKING BASELINE  
@@ -64,7 +64,13 @@ Project Charter Reconciliation
 ```text
 CURRENT TASK:
 00_HUMAN/PROJECT_CHARTER.md v0.1 Draft の作成
-現在焦点: 1. Project Mission
+
+Section 1:
+Project Mission
+= DRAFT / LEADING CANDIDATE 保存済み
+
+現在焦点:
+2. Success Definition
 ```
 
 `01_EXTERNAL_DATA`、`02_MARKET_UNDERSTANDING`、`03_RESEARCH`、`04_KNOWLEDGE_APPLICABILITY` はWorking Baselineとして保存済み。
@@ -93,7 +99,31 @@ Role: GPTが市場理解OSをどう設計・確認・保存するかを決める
 設計作業の方法について判断が必要な場合は、この文書を優先して参照する。
 AI_CONTEXTへAI_WORKFLOWの詳細ルールを複製しない。
 
-## 3.2 HUMAN MAP
+## 3.2 PROJECT CHARTER
+
+```text
+Path: 00_HUMAN/PROJECT_CHARTER.md
+Version: v0.1
+Status: DRAFT / LEADING CANDIDATE
+Current State:
+- Section 1 Project Mission = 保存済み
+- Section 2以降 = 未設計
+Current Focus: 2. Success Definition
+```
+
+Project Missionの現在本命方向には、Crypto First、選択的Research、Fast Adaptation / Research Adaptation、Research Note / Research Asset、長期生存と正の期待値、人間向けResearch Publicationが含まれる。
+
+重要:
+
+```text
+Project Mission保存済み
+≠
+PROJECT_CHARTER Working Baseline
+```
+
+Section 2以降を設計し、PROJECT_CHARTER全体をCross Checkするまでは、Charter全体を確定扱いしない。
+
+## 3.3 HUMAN MAP
 
 ```text
 Path: 00_HUMAN/HUMAN_MAP.md
@@ -104,18 +134,18 @@ Current Use: CURRENT HUMAN REFERENCE
 
 Canonicalではないが、現在の市場理解OSのHuman思想を確認するときの主要参照先とする。
 
-## 3.3 TEMP CHARTER RECONCILIATION PLAN
+## 3.4 TEMP CHARTER RECONCILIATION PLAN
 
 ```text
 Path: 00_AI/TEMP_CHARTER_RECONCILIATION_PLAN.md
-Version: v0.1
+Version: v0.2
 Status: TEMPORARY / ACTIVE UNTIL RECONCILIATION COMPLETE
 Role: PROJECT_CHARTER導入中の作業順・影響範囲・Checkpoint・復帰条件を固定する一時ナビ
 ```
 
 恒久設計ではない。PROJECT_CHARTER導入と01〜04再照合が完了し、Current Taskが05_DECISIONへ戻った後に削除する。
 
-## 3.4 PARTIAL CONNECTION MAP — EXTERNAL / DATA
+## 3.5 PARTIAL CONNECTION MAP — EXTERNAL / DATA
 
 ```text
 Path: 02_ARCHITECTURE/CONNECTIONS/01_EXTERNAL_DATA.md
@@ -130,7 +160,7 @@ Role: External SourcesをQualified Market Observation Setへ変換する接続�
 Qualified Market Observation Set
 ```
 
-## 3.5 PARTIAL CONNECTION MAP — MARKET UNDERSTANDING
+## 3.6 PARTIAL CONNECTION MAP — MARKET UNDERSTANDING
 
 ```text
 Path: 02_ARCHITECTURE/CONNECTIONS/02_MARKET_UNDERSTANDING.md
@@ -147,7 +177,7 @@ Cause Candidate
 Market DNA Snapshot
 ```
 
-## 3.6 PARTIAL CONNECTION MAP — RESEARCH
+## 3.7 PARTIAL CONNECTION MAP — RESEARCH
 
 ```text
 Path: 02_ARCHITECTURE/CONNECTIONS/03_RESEARCH.md
@@ -174,7 +204,7 @@ Validated Research Result
 ≠ Current Market Applicable
 ```
 
-## 3.7 PARTIAL CONNECTION MAP — KNOWLEDGE / APPLICABILITY
+## 3.8 PARTIAL CONNECTION MAP — KNOWLEDGE / APPLICABILITY
 
 ```text
 Path: 02_ARCHITECTURE/CONNECTIONS/04_KNOWLEDGE_APPLICABILITY.md
@@ -205,7 +235,7 @@ Knowledge Maintenance Path
 ≠ Runtime Applicability Path
 ```
 
-## 3.8 MASTER CONNECTION MAP
+## 3.9 MASTER CONNECTION MAP
 
 ```text
 Path: 02_ARCHITECTURE/CONNECTION_MAP.md
@@ -216,7 +246,7 @@ Current Direction: Partial Connection Map群を先に作成し、その後Master
 
 現在のPlaceholderを完成設計として扱わない。
 
-## 3.9 CROSS-CUTTING MAP
+## 3.10 CROSS-CUTTING MAP
 
 ```text
 Path: 02_ARCHITECTURE/CROSS_CUTTING_MAP.md
@@ -321,7 +351,7 @@ AI_CONTEXTのContext Sync運用が実際のGit作業で正しく機能するか�
 
 現在までの確認:
 - Working Baseline追加をCurrent Documentsへ反映
-- Current Taskを次Mapへ更新
+- Current Taskを次Map / 次Charter項目へ更新
 - 不要な作業履歴はAI_CONTEXTへ蓄積しない
 ```
 
@@ -356,7 +386,8 @@ PROJECT_CHARTER Reconciliation完了後、04_KNOWLEDGE_APPLICABILITY → 05_DECI
 ```text
 NEXT-001
 PROJECT_CHARTER v0.1 Draftを一項目ずつ作成
-現在: Project Mission
+Section 1 Project Mission = DRAFT / LEADING CANDIDATE 保存済み
+現在: 2. Success Definition
 
 NEXT-002
 PROJECT_CHARTER全体をCross Checkし、問題が軽微ならWorking Baseline候補として保存
@@ -393,6 +424,7 @@ GPTが市場理解OSについて新しい設計作業を開始するとき、必
 PROJECT_CHARTER Reconciliation中は追加で、
 
 ```text
+00_HUMAN/PROJECT_CHARTER.md
 00_AI/TEMP_CHARTER_RECONCILIATION_PLAN.md
 00_HUMAN/HUMAN_MAP.md
 ```
@@ -526,6 +558,6 @@ GPTはGitとAI_CONTEXTを使って設計運用を補助する。
 
 ---
 
-# AI_CONTEXT v0.1.5 一文定義
+# AI_CONTEXT v0.1.6 一文定義
 
 > **AI_CONTEXTとは、市場理解OSの設計内容そのものを複製する文書ではなく、GPTが現在Phase・Current Task・主要Working Baseline・重要Pending・Next Action・参照先を短時間で把握し、Gitという長期作業空間の中から現在Taskに必要な正しい設計情報へ移動するための軽量なAI専用現在地マップである。**
