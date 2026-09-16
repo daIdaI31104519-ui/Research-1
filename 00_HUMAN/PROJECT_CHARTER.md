@@ -3,7 +3,7 @@
 **Document Role:** Project Constitution / Top-Level Mission  
 **Status:** DRAFT / LEADING CANDIDATE  
 **Purpose:** 市場理解OSが何のために存在し、何を優先し、どの方向へ育てるかを定義する最上位方針文書。  
-**Current Scope:** Section 1 `Project Mission` のみ設計済み。Section 2以降は未設計であり、現時点では固定しない。
+**Current Scope:** Section 1 `Project Mission` と Section 2 `Success Definition` を設計済み。Section 3以降は未設計であり、現時点では固定しない。
 
 ---
 
@@ -277,12 +277,406 @@ Research PublicationのためにResearch Coreの結論を歪めてはならな�
 
 ---
 
+# 2. Success Definition
+
+## 2.1 Successの中心思想
+
+市場理解OSにおけるSuccessは、特定の利益額、勝率、研究数、予測精度等へ到達することだけでは定義しない。
+
+市場は変化するため、現在成功している方法・Knowledge・Edge・判断基準が、将来も同じように成功を生む保証はない。
+
+したがって市場理解OSでは、
+
+> **資本・Research Asset・意思決定能力を成長させながら、そのSuccess状態と成立条件を継続的に再検証し、市場変化へ適応する循環を止めない状態**
+
+をSuccessの中心思想とする。
+
+簡潔には、
+
+> **稼ぐ。学ぶ。疑う。適応する。そして止めない。**
+
+と表現する。
+
+ここで「疑う」とは、EvidenceのあるKnowledgeを無条件に捨てることではない。
+
+> **Knowledgeを信用する。しかし永久には信用しない。**
+
+という意味である。
+
+---
+
+## 2.2 Successは到達地点ではなく維持される循環である
+
+市場理解OSでは、
+
+```text
+Success
+≠
+完成地点
+```
+
+とする。
+
+例えば、
+
+```text
+利益が増えた
+Researchが増えた
+Decision精度が改善した
+```
+
+としても、それだけで市場理解OSが完成したとは考えない。
+
+むしろ、
+
+```text
+利益 / 結果が出る
+↓
+なぜその結果になったか検証する
+↓
+Knowledge / Edgeの成立条件を確認する
+↓
+Failure / Contradiction / Unknownを確認する
+↓
+市場構造の変化を確認する
+↓
+必要なら再Researchする
+↓
+Knowledgeを更新・非適用・Retire候補へ送る
+↓
+新しいDecisionへ利用する
+↓
+再び結果を検証する
+```
+
+という循環を維持できることをSuccessとする。
+
+> **成功している時にも検証を止めないこと自体がSuccessの一部である。**
+
+---
+
+## 2.3 Success Loop
+
+市場理解OSのSuccessは、概念上次のLoopとして維持する。
+
+```text
+Market Observation
+↓
+Market Understanding
+↓
+Research
+↓
+Knowledge
+↓
+Applicability
+↓
+Decision
+↓
+Risk Control
+↓
+Execution / No Action
+↓
+Economic / Decision Result
+↓
+Post-Analysis
+↓
+Research Asset蓄積
+↓
+既存Knowledge / Edge / Success状態を再検証
+↓
+必要なら再Research
+↓
+市場変化へ適応
+↓
+再びMarket Observation
+```
+
+一時的なProfitが大きくても、
+
+```text
+Research停止
+Knowledge固定
+Failure無視
+市場変化無視
+```
+
+となった場合は、Success状態が劣化していると考える。
+
+---
+
+## 2.4 Successを支える3つの成長
+
+市場理解OSでは、長期的に少なくとも以下の3つが成長していることを重視する。
+
+### A. Economic Capability
+
+Research・Knowledge・Decisionを利用し、Cost・Fee・Slippage・Risk等を考慮した上で、適切な期間において正の期待値を持つ利益機会へ接続できる能力を育てる。
+
+これは、毎日・毎月必ず資本残高が増え続けることを意味しない。
+
+短期ProfitだけでEconomic Successを判定しない。
+
+### B. Research Asset Capability
+
+市場理解OSが運用されるほど、
+
+```text
+Research Note
+Evidence
+Research Result
+Refutation
+Failure
+Failure Boundary
+Constraint
+Knowledge
+Unknown
+Decision History
+Post-Analysis
+```
+
+等の再利用可能なResearch Assetが増え、次の市場理解・研究・再検証へ利用できる状態を育てる。
+
+単なるData量の増加をSuccessとはしない。
+
+### C. Decision Capability
+
+市場理解OSは年月が経つほど、
+
+```text
+TRADEすべき時
+WAITすべき時
+REDUCEすべき時
+NO TRADEすべき時
+UNKNOWNとしてResearchへ戻す時
+```
+
+をより適切に区別できる能力を育てる。
+
+Resultだけで過去Decisionを正当化せず、その時点で利用可能だったEvidence・Knowledge・Risk・UncertaintyからDecisionを後から検証できることを重視する。
+
+---
+
+## 2.5 成功したKnowledgeも再検証する
+
+市場理解OSは、過去に利益を生んだKnowledgeを永久の正解として扱わない。
+
+Evidenceが維持されているKnowledgeは利用する。
+
+ただし継続的に、
+
+```text
+成立条件は維持されているか？
+Edgeは弱くなっていないか？
+Market Regimeは変化していないか？
+参加者構造は変化していないか？
+新しいFailureは発生していないか？
+LossはVarianceか、Knowledge Decayか？
+```
+
+を確認する。
+
+重大なContradiction・Edge Decay・Failure・未知状態等が確認された場合は、必要に応じてResearchへ戻す。
+
+---
+
+## 2.6 疑うことと不安定に変更し続けることを混同しない
+
+継続的な再検証は、
+
+```text
+すべてを信用しない
+毎回Strategyを変更する
+過去Researchを無視する
+```
+
+という意味ではない。
+
+基本方向は、
+
+```text
+Evidenceが維持されている
+↓
+Knowledgeを利用する
+
+Evidenceが弱まる / 条件が変わる
+↓
+Applicabilityを再評価する
+
+重大な矛盾・未知・Failureが発生する
+↓
+Researchへ戻す
+```
+
+とする。
+
+目的は頻繁に変えることではなく、
+
+> **Evidenceに基づいて安定性と適応性を両立すること**
+
+である。
+
+---
+
+## 2.7 Success状態と評価基準も再検証可能とする
+
+市場理解OSでは、現在使っているOperationalなSuccess Metricや評価方法も、長期Observation・Research・System成熟度に応じて再検証可能とする。
+
+例:
+
+```text
+Profit評価期間
+Expected Value評価方法
+Risk評価方法
+Edge評価方法
+Knowledge利用基準
+Research再現性の評価
+Adaptationの評価
+```
+
+ただし、
+
+```text
+結果が悪くなった
+↓
+都合よくSuccess基準を変更する
+```
+
+ことは禁止する。
+
+Success Metricや評価方法を変更する場合は、Evidence・Research Result・明確な変更理由・履歴を必要とする。
+
+また、これは `PROJECT_CHARTER` 自身を自動的・継続的に書き換えるという意味ではない。
+
+Charter本文の変更は、後続の `Charter Change Governance` に従って明示的に行う。
+
+---
+
+## 2.8 Core SuccessとSecondary Successを分ける
+
+市場理解OS本体のCore Successでは、少なくとも、
+
+```text
+Economic Valueへ接続できる
+Research Assetを蓄積・再利用できる
+Decision能力を改善・検証できる
+既存Knowledgeを再検証できる
+未知市場をResearchへ戻せる
+Production結果を再Researchへ戻せる
+市場変化へ適応できる
+この循環を長期間維持できる
+```
+
+ことを重視する。
+
+これらを一つの万能Scoreへ潰し、一つの強い成果で重大なFailureを相殺しない。
+
+一方、以下は市場理解OSの価値を拡張するSecondary Successとする。
+
+```text
+Human-readable Research Publication
+無料Application / Interface
+User Growth
+External Trust
+Business Opportunity
+他市場へのExpansion
+```
+
+Secondary Successは重要だが、Core OSが成立するための絶対条件ではない。
+
+またSecondary SuccessのためにResearch Integrity・Risk Control・長期生存を犠牲にしてはならない。
+
+具体的な最大化禁止事項、SurvivalとProfitの優先順位、Business / Publicationの詳細は後続Sectionで定義する。
+
+---
+
+## 2.9 Current ScopeにおけるSuccess
+
+現在のCore Success判定対象は、
+
+```text
+仮想通貨FX
++
+仮想通貨現物
+```
+
+とする。
+
+株式、通常FX、その他市場への対応は現在のCore Success成立条件ではない。
+
+現在はCrypto市場において、Research → Knowledge → Applicability → Decision → Risk → Result → Re-Researchの循環を成立・成熟させることを優先する。
+
+---
+
+## 2.10 Failureを単純なLossと同一視しない
+
+市場理解OSにとって、
+
+```text
+Loss
+≠
+Project Failure
+```
+
+である。
+
+例えば、
+
+```text
+Loss
+↓
+正しく記録
+↓
+原因分析
+↓
+Failure Boundary発見
+↓
+Knowledge改善
+```
+
+であれば、LossはResearch Assetへ変換され得る。
+
+一方、
+
+```text
+Profit
+↓
+理由不明
+↓
+再現不能
+↓
+記録なし
+↓
+過信
+```
+
+であれば、Profitが出ても市場理解OSとして健全なSuccessとは言えない。
+
+市場理解OSにとって重大なFailureは、Lossそのものより、
+
+```text
+学ばない
+記録しない
+再検証しない
+Evidenceを無視する
+同じFailureを理由なく繰り返す
+市場変化へ適応しない
+```
+
+状態が継続することである。
+
+---
+
+# Success Definition — 一文定義
+
+> **市場理解OSのSuccessとは、資本・Research Asset・意思決定能力を成長させながら、過去に成功したKnowledgeやEdgeを固定された正解とせず、その成立条件とSuccess状態を継続的に再検証し、未知・変化・失敗を必要に応じてResearchへ戻し、市場変化へ適応する循環を長期間止めないことである。**
+
+---
+
 # 未設計
 
 以下は今後、一項目ずつ設計する。
 
 ```text
-2. Success Definition
 3. What Not To Maximize
 4. Survival / Profit Priority
 5. Research Mission
@@ -297,4 +691,4 @@ Research PublicationのためにResearch Coreの結論を歪めてはならな�
 14. Charter Change Governance
 ```
 
-これらは現時点では `TBD` であり、Section 1から自動的に詳細内容を確定しない。
+これらは現時点では `TBD` であり、Section 1〜2から自動的に詳細内容を確定しない。
