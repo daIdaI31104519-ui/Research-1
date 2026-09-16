@@ -1,4 +1,4 @@
-# TEMP — PROJECT CHARTER RECONCILIATION PLAN v0.2
+# TEMP — PROJECT CHARTER RECONCILIATION PLAN v0.3
 
 **Document Role:** Temporary Design Migration / Navigation Plan  
 **Status:** TEMPORARY / ACTIVE UNTIL RECONCILIATION COMPLETE  
@@ -133,8 +133,11 @@ PROJECT_CHARTER自体を変更する場合は明示的な上位設計変更と�
 Section 1 Project Mission
 = DRAFT / LEADING CANDIDATE 保存済み
 
+Section 2 Success Definition
+= DRAFT / LEADING CANDIDATE 保存済み
+
 Current Focus
-= 2. Success Definition
+= 3. What Not To Maximize
 ```
 
 ---
@@ -246,7 +249,8 @@ Market Intelligence / Research / Publication
 CURRENT DRAFT
 00_HUMAN/PROJECT_CHARTER.md
 = Section 1 Project Mission保存済み
-= 現在はSection 2 Success Definitionを設計する
+= Section 2 Success Definition保存済み
+= 現在はSection 3 What Not To Maximizeを設計する
 
 HIGH IMPACT
 00_HUMAN/HUMAN_MAP.md
@@ -282,7 +286,8 @@ NOT YET CREATED
 STEP 1
 PROJECT_CHARTER v0.1 Draft
 - Section 1 Project Mission = 保存済み
-- Current = Section 2 Success Definitionから継続
+- Section 2 Success Definition = 保存済み
+- Current = Section 3 What Not To Maximize
 
 STEP 2
 PROJECT_CHARTER Cross Check
