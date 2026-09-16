@@ -1,4 +1,4 @@
-# 市場理解OS — AI_CONTEXT v0.1.6
+# 市場理解OS — AI_CONTEXT v0.1.7
 
 **Document Role:** AI Current-State Index / Navigation Map  
 **Status:** REVIEWED / WORKING BASELINE  
@@ -69,8 +69,12 @@ Section 1:
 Project Mission
 = DRAFT / LEADING CANDIDATE 保存済み
 
+Section 2:
+Success Definition
+= DRAFT / LEADING CANDIDATE 保存済み
+
 現在焦点:
-2. Success Definition
+3. What Not To Maximize
 ```
 
 `01_EXTERNAL_DATA`、`02_MARKET_UNDERSTANDING`、`03_RESEARCH`、`04_KNOWLEDGE_APPLICABILITY` はWorking Baselineとして保存済み。
@@ -107,21 +111,24 @@ Version: v0.1
 Status: DRAFT / LEADING CANDIDATE
 Current State:
 - Section 1 Project Mission = 保存済み
-- Section 2以降 = 未設計
-Current Focus: 2. Success Definition
+- Section 2 Success Definition = 保存済み
+- Section 3以降 = 未設計
+Current Focus: 3. What Not To Maximize
 ```
 
 Project Missionの現在本命方向には、Crypto First、選択的Research、Fast Adaptation / Research Adaptation、Research Note / Research Asset、長期生存と正の期待値、人間向けResearch Publicationが含まれる。
 
+Success Definitionの現在本命方向は、資本・Research Asset・意思決定能力を成長させながら、Knowledge / Edge / Success状態を継続的に再検証し、市場変化へ適応する循環を止めないことを中心とする。
+
 重要:
 
 ```text
-Project Mission保存済み
+Section 1〜2 保存済み
 ≠
 PROJECT_CHARTER Working Baseline
 ```
 
-Section 2以降を設計し、PROJECT_CHARTER全体をCross Checkするまでは、Charter全体を確定扱いしない。
+Section 3以降を設計し、PROJECT_CHARTER全体をCross Checkするまでは、Charter全体を確定扱いしない。
 
 ## 3.3 HUMAN MAP
 
@@ -138,7 +145,7 @@ Canonicalではないが、現在の市場理解OSのHuman思想を確認する�
 
 ```text
 Path: 00_AI/TEMP_CHARTER_RECONCILIATION_PLAN.md
-Version: v0.2
+Version: v0.3
 Status: TEMPORARY / ACTIVE UNTIL RECONCILIATION COMPLETE
 Role: PROJECT_CHARTER導入中の作業順・影響範囲・Checkpoint・復帰条件を固定する一時ナビ
 ```
@@ -387,7 +394,8 @@ PROJECT_CHARTER Reconciliation完了後、04_KNOWLEDGE_APPLICABILITY → 05_DECI
 NEXT-001
 PROJECT_CHARTER v0.1 Draftを一項目ずつ作成
 Section 1 Project Mission = DRAFT / LEADING CANDIDATE 保存済み
-現在: 2. Success Definition
+Section 2 Success Definition = DRAFT / LEADING CANDIDATE 保存済み
+現在: 3. What Not To Maximize
 
 NEXT-002
 PROJECT_CHARTER全体をCross Checkし、問題が軽微ならWorking Baseline候補として保存
@@ -558,6 +566,6 @@ GPTはGitとAI_CONTEXTを使って設計運用を補助する。
 
 ---
 
-# AI_CONTEXT v0.1.6 一文定義
+# AI_CONTEXT v0.1.7 一文定義
 
 > **AI_CONTEXTとは、市場理解OSの設計内容そのものを複製する文書ではなく、GPTが現在Phase・Current Task・主要Working Baseline・重要Pending・Next Action・参照先を短時間で把握し、Gitという長期作業空間の中から現在Taskに必要な正しい設計情報へ移動するための軽量なAI専用現在地マップである。**
