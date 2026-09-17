@@ -32,22 +32,42 @@ Cold Start、新しいChat、Context Loss、別AIへの引き継ぎ時は、最�
 
 ## 現在の状態
 
-このRepoは再構築初期段階である。
-
-`00_HUMAN/HUMAN_MAP.md` は現在作成中で、詳細設計を確定したものではない。
-
-設計史は `01_HISTORY/` に保存する。
-
-領域間接続は `02_ARCHITECTURE/` で今後整理する。
-
-## 基本フロー候補
+現在のProject Phase、Current Task、主要Working Baseline、重要Pending、Next Actionは、
 
 ```text
-Human Understanding
+00_AI/AI_CONTEXT.md
+```
+
+を正本とする。
+
+README自身へ、頻繁に変化するProject Current Stateを重複保存しない。
+
+設計変更・失敗・却下・教訓の履歴入口は、
+
+```text
+01_HISTORY/README.md
+```
+
+を参照する。
+
+Architecture / Connection設計は、
+
+```text
+02_ARCHITECTURE/
+```
+
+を参照する。
+
+## 基本フロー
+
+```text
+Human Understanding / Project Charter
 ↓
 Architecture / Connection
 ↓
 Cross-Layer Reconciliation
+↓
+Cross-Cutting
 ↓
 Detailed Design
 ↓
@@ -55,11 +75,43 @@ Contract / Implementation Spec
 ↓
 Python
 ↓
-Unit / Contract / Integration / E2E Test
+Tests
+↓
+Production
 ```
+
+詳細な現在地点は `00_AI/AI_CONTEXT.md` を参照する。
 
 ## 注意
 
-このRepoの文書は状態を明示する。
+このRepoには、
 
-`DRAFT` / `PROPOSED` / `ADOPTED` / `SUPERSEDED` / `REJECTED` 等を使い、古い案と現在採用中の設計を混同しない。
+```text
+Current Design
+
+Draft
+
+Working Baseline
+
+History
+
+Failure Review
+
+Rejected / Legacy
+
+Reference
+```
+
+が共存できる。
+
+したがって、
+
+```text
+Gitに存在する
+≠
+現在採用中
+```
+
+である。
+
+現在採用中の設計を判断するときは、Document Role、Status、History、Superseded関係を確認する。
