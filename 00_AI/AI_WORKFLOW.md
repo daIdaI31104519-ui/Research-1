@@ -1,4 +1,4 @@
-# 市場理解OS — AI_WORKFLOW v0.5
+# 市場理解OS — AI_WORKFLOW v0.5.1
 
 **Document Role:** AI Design Workflow  
 **Status:** REVIEWED / WORKING BASELINE  
@@ -55,9 +55,13 @@ Logical Changeを整理する
 ↓
 同期対象を判断する
 ↓
+必要なら変更前Checkpointを確保する
+↓
 許可された場合だけGitへ保存
 ↓
-保存後の文書間整合を確認
+保存後の文書間整合を確認する
+↓
+必要ならBaselineを作る
 ```
 
 までを担当する。
@@ -104,7 +108,7 @@ Research-1確認
 
 意味:
 
-> **現在話しているLogical Changeを、そのままコピーするのではなく、Gitの現在状態・正しい保存先・同期が必要なDocumentを確認し、最終Cross Check後に必要範囲だけ保存する。**
+> **現在話しているLogical Changeを、そのままコピーするのではなく、Gitの現在状態・正しい保存先・同期が必要なDocument・復旧安全性を確認し、最終Cross Check後に必要範囲だけ保存する。**
 
 GPTは原則、
 
@@ -127,6 +131,10 @@ Save Destination Resolution
 ↓
 Logical Change Impact Sync
 ↓
+No-op Write Check
+↓
+Checkpoint Decision
+↓
 変更対象File Set確定
 ↓
 適切なStatusでGit保存
@@ -135,9 +143,11 @@ Logical Change Impact Sync
 ↓
 Cross-Document Consistency Check
 ↓
-Commit確認
+Baseline Decision
 ↓
-変更Path / Commit報告
+Commit / Recovery Object確認
+↓
+変更Path / Commit / Checkpoint等を報告
 ```
 
 する。
@@ -172,11 +182,12 @@ Cross Check済みだが改善余地あり
 Status
 同期対象
 History対象
+Checkpoint / Baseline要否
 ```
 
 を指定する必要はない。
 
-GPTが現在のGit・Document Role・設計成熟度・Logical Changeを確認して判断する。
+GPTが現在のGit・Document Role・設計成熟度・Logical Change・Recovery Costを確認して判断する。
 
 ---
 
@@ -312,6 +323,12 @@ AI_HANDOFF同期が必要か
 HISTORYへ残す必要があるか
 
 AI_START_HERE / READMEへ影響するか
+
+Checkpointが必要か
+
+保存後Baseline化すべきか
+
+Recovery可能性が維持されているか
 ```
 
 を評価する。
@@ -325,6 +342,7 @@ File分類
 Directory選択
 Status管理
 Cross-Document同期
+Checkpoint / Baseline判定
 ```
 
 のような設計管理は、原則GPT側が担当する。
@@ -811,14 +829,14 @@ GPTはファイルの役割・Status・Historyを確認して判断する。
 
 「GITに保存して」は、
 
-> **現在会話しているLogical Changeへの書込許可**
+> **現在会話しているLogical ChangeへのGit書込許可**
 
 とする。
 
 これは、
 
 ```text
-指定された1ファイルだけを書け
+指定された1Fileだけを書け
 ```
 
 という意味ではない。
@@ -833,7 +851,7 @@ GPTはファイルの役割・Status・Historyを確認して判断する。
 
 書込可能範囲は、
 
-> **現在合意済みのLogical Changeを矛盾なく保存するために直接必要なFile Set**
+> **現在合意済みのLogical Changeを、矛盾なく・安全に保存し、必要なら復旧可能な状態へするために直接必要な変更範囲**
 
 とする。
 
@@ -860,6 +878,48 @@ Navigation修正
 ≠
 関連しているもの全部
 ```
+
+## 18.1 Git Recovery Objectも書込許可範囲へ含められる
+
+現在のLogical Changeを安全に保存・復旧可能にするため直接必要と判断された場合、
+
+```text
+Checkpoint Tag
+
+Baseline Tag
+
+Recovery Branch
+
+Recovery用Ref
+```
+
+等のGit Recovery Objectも、現在のGit Write Authorization範囲へ含めることができる。
+
+ただし、
+
+```text
+現在のLogical Changeと無関係なTag
+
+不要なBranch
+
+意味のないRecovery Ref
+```
+
+を勝手に作成しない。
+
+原則:
+
+```text
+Git Write Authorization
+=
+Logical Change本体
++
+その変更を安全に保存・復旧するため直接必要なGit Object
+```
+
+とする。
+
+## 18.2 Git Write PermissionはChatを跨がない
 
 Previous ChatでのGit書込許可は、新しいChatへ自動継承しない。
 
@@ -1285,13 +1345,351 @@ Public Repoへ出してよい内容か確認
 保存先
 同期対象
 Status
+Logical Change Boundary
 ```
 
 を修正する。
 
+この確認後、
+
+```text
+No-op Write Check
+↓
+Checkpoint Decision
+↓
+Public Repo Safety
+↓
+Git Write
+```
+
+へ進む。
+
 ---
 
-# 22. Public Repoの安全
+# 22. No-op Write Check
+
+Gitへ書き込む前に、
+
+> **保存予定内容とCurrent Gitに、本当に差分が存在するか**
+
+を確認する。
+
+目的:
+
+```text
+同一内容の再保存
+
+意味のないCommit
+
+不要なBlob更新
+
+同じSyncの繰り返し
+
+Git Historyのノイズ
+```
+
+を防ぐ。
+
+基本手順:
+
+```text
+Planned File Set
+↓
+各FileのCurrent Content取得
+↓
+保存予定Contentと比較
+↓
+差分判定
+```
+
+各Fileを、
+
+```text
+CHANGED
+UNCHANGED
+NEW
+DELETE
+MOVE / RENAME
+```
+
+として確認する。
+
+## 22.1 UNCHANGED File
+
+保存予定内容とCurrent Gitが同一なら、
+
+```text
+UNCHANGED
+↓
+Git Write対象から除外
+```
+
+する。
+
+重要:
+
+```text
+Impact Sync対象
+≠
+必ずWrite
+```
+
+Impact Checkとして確認したFileでも、すでに正しい状態なら書き直さない。
+
+## 22.2 全FileがUNCHANGEDの場合
+
+Logical Changeに実差分が存在しない場合、
+
+```text
+Git Writeしない
+
+Commitを作らない
+
+Checkpointも作らない
+
+Baselineも作らない
+```
+
+とする。
+
+人間へ、
+
+```text
+Current Gitと保存候補が既に一致しているため
+新しいCommitは不要
+```
+
+と伝える。
+
+## 22.3 No-op原則
+
+```text
+保存指示
+≠
+Commit作成義務
+```
+
+Git Writeの目的は、
+
+> **Logical Changeを正しく保存すること**
+
+であり、
+
+> **Commit数を増やすこと**
+
+ではない。
+
+---
+
+# 23. Backup / Checkpoint Decision
+
+実差分が存在する場合、
+
+> **今回の変更前に、明示的Recovery Pointが必要か**
+
+を判断する。
+
+以下を混同しない。
+
+```text
+Commit
+=
+通常の変更履歴
+
+Checkpoint
+=
+高Risk変更の直前に残す明示的Recovery Point
+
+Baseline
+=
+変更後に確認済みの重要な完成地点
+```
+
+## 23.1 Checkpointを毎Commit作らない
+
+原則:
+
+```text
+通常Git Commit
+→ 必要な変更ごと
+
+Checkpoint
+→ 高Risk / 高Recovery Cost時のみ
+```
+
+以下では通常Checkpointを作らない。
+
+```text
+誤字修正
+
+軽微な説明追加
+
+小さなPending更新
+
+表現修正
+
+既存責任を変えない小変更
+```
+
+Checkpointそのものがノイズになることを防ぐ。
+
+## 23.2 Checkpoint候補
+
+以下の場合はCheckpointを検討する。
+
+```text
+複数の重要Fileを同時変更
+
+File / Directory Rename
+
+重要File削除
+
+大量の構造変更
+
+Architecture大変更
+
+Authority変更
+
+Document Role / Responsibility変更
+
+複数Documentの一括Reconciliation
+
+Working Baseline大幅置換
+
+Project Phase切替
+
+Python実装開始前
+
+大規模Refactor前
+
+DB / Contract重要変更前
+
+復旧Costが高い変更
+
+過去状態との比較価値が高い変更
+```
+
+## 23.3 Checkpoint Classification
+
+内部的に、
+
+```text
+REQUIRED
+
+OPTIONAL
+
+NOT NEEDED
+```
+
+として判断する。
+
+### REQUIRED
+
+```text
+失敗時の復旧Costが高い
+
+変更前地点を明示的に残す価値が高い
+```
+
+### OPTIONAL
+
+```text
+通常Git Historyでも復旧できるが
+
+重要地点として名前を付ける価値がある
+```
+
+### NOT NEEDED
+
+```text
+通常Commit履歴で十分
+```
+
+## 23.4 Checkpoint最低情報
+
+Checkpointは最低限、
+
+```text
+Checkpoint Label
+
+対象Commit SHA
+
+作成理由
+
+何の変更前か
+```
+
+を後から特定可能にする。
+
+推奨例:
+
+```text
+checkpoint/2026-09-17_AI復旧基盤変更前
+
+checkpoint/2026-XX-XX_MasterConnection再構築前
+
+checkpoint/2026-XX-XX_Python実装開始前
+```
+
+Prefixは機械的に扱いやすくし、
+
+```text
+checkpoint/
+baseline/
+recovery/
+```
+
+などを使用してよい。
+
+人間が読む名称部分は、原則として日本語で意味を理解できるようにする。
+
+## 23.5 Checkpoint実装
+
+Checkpointの目的は、
+
+> **安全なCommit SHAへ意味のある名前を付け、後から確実に特定できること**
+
+である。
+
+利用可能なGit機能に応じて、
+
+```text
+Git Tag
+
+Checkpoint Branch
+
+明示的Commit SHA記録
+```
+
+を使える。
+
+原則として、単純なRecovery PointにはGit Tagを優先する。
+
+## 23.6 REQUIRED Checkpointを作れない場合
+
+```text
+Checkpoint = REQUIRED
+```
+
+と判断したにもかかわらず安全なRecovery Pointを確立できない場合、
+
+> **そのまま高Risk Git Writeへ進まない。**
+
+まずRecovery Pointを確保する。
+
+```text
+Backup必要
++
+Backup不成立
+↓
+高Risk変更を強行
+```
+
+とはしない。
+
+---
+
+# 24. Public Repo Safety
 
 Public Repositoryへ、
 
@@ -1315,31 +1713,52 @@ Private Endpoint
 
 を書かない。
 
-設計上必要な場合は、Placeholderや安全なExampleへ置換する。
+Checkpoint / Baseline / Recovery Objectの名称・説明にも秘密情報を含めない。
 
 ---
 
-# 23. Git Write
+# 25. Git Write
 
-保存前確認後、
+以下を完了した後にGit Writeする。
+
+```text
+Save Destination Resolution
+
+Logical Change Impact Sync
+
+Git保存前Cross Check
+
+No-op Write Check
+
+Checkpoint Decision
+
+Public Repo Safety
+```
+
+書込対象:
 
 ```text
 Primary Destination
 +
-Logical Change Impact Syncで必要と判断したFile
+Impact Syncで必要
++
+No-op Checkで実差分あり
 ```
 
-だけをGitへ書き込む。
+のFileだけ。
 
-保存時は、
+保存時:
 
 ```text
 Current Git再取得
-必要ならSHA確認
+↓
+必要ならSHA再確認
+↓
+REQUIREDなら変更前Checkpoint存在確認
 ↓
 対象File更新
 ↓
-Logical Changeの範囲外へ広げない
+Logical Change範囲外へ広げない
 ```
 
 とする。
@@ -1354,22 +1773,32 @@ Canonical化
 保存
 ≠
 Repo全体同期
+
+保存
+≠
+Checkpoint
+
+保存
+≠
+Baseline
 ```
 
 ---
 
-# 24. 保存後は必ずCross-Document Consistency Checkする
+# 26. Post-Save Cross-Document Consistency Check
 
 Git書込後は、
 
 ```text
-全変更Fileを再取得
+全変更File再取得
 ↓
 個別内容確認
 ↓
 Cross-Document Consistency Check
 ↓
-必要ならCommit確認
+Commit確認
+↓
+Checkpointとの関係確認
 ```
 
 を行う。
@@ -1377,28 +1806,29 @@ Cross-Document Consistency Check
 確認例:
 
 ```text
-Designは保存済みなのに
-AI_CONTEXTが旧Current Focusではないか
+Design保存済みなのに
+AI_CONTEXTが旧Current Focusか
 
 AI_HANDOFFが
-保存済み内容をUNSAVEDのまま持っていないか
+保存済み内容をUNSAVEDのまま持つか
 
 AI_CONTEXTとAI_HANDOFFが
-同じ責任を二重保持していないか
+責任を二重保持していないか
 
-HISTORYがCurrent Designのように見えないか
+HISTORYがCurrent Design扱いに見えないか
 
 AI_START_HEREが
 存在しないDocumentを案内していないか
 
-同じ本文が
-Design / Context / Handoffへ重複していないか
+Design / Context / Handoffへ
+同じ本文を重複保存していないか
 
-今回のScope外Fileまで
-変更していないか
+Scope外Fileを変更していないか
+
+Checkpointが変更後Commitを誤って指していないか
 ```
 
-問題があれば、現在のLogical Change範囲内で必要な修正を行う。
+問題があれば、現在Logical Change範囲内で修正する。
 
 人間へ、
 
@@ -1413,6 +1843,8 @@ Primary Destination
 
 Commit SHA
 
+Checkpoint / Baseline等のRecovery Object
+
 残した重要なOPEN / Pending
 ```
 
@@ -1420,7 +1852,451 @@ Commit SHA
 
 ---
 
-# 25. AI Current-State Documentsの責任分離
+# 27. Baseline Decision
+
+Post-Save Consistency Check完了後、
+
+> **今回の地点を、将来戻る価値のある確認済み完成地点としてBaseline化すべきか**
+
+を判断する。
+
+```text
+Checkpoint
+=
+変更前の安全地点
+
+Baseline
+=
+変更後の確認済み重要地点
+```
+
+## 27.1 Baseline候補
+
+以下を候補とする。
+
+```text
+PROJECT_CHARTER Working Baseline完成
+
+主要Architecture完成
+
+Master Connection Map完成
+
+大規模Reconciliation完了
+
+重要Project Phase完了
+
+Implementation開始直前
+
+Test開始直前
+
+Production移行直前
+
+Project運用基盤完成
+```
+
+小変更では作らない。
+
+## 27.2 Baseline命名
+
+例:
+
+```text
+baseline/2026-09-17_AI復旧基盤完成
+
+baseline/2026-XX-XX_ProjectCharter完成
+
+baseline/2026-XX-XX_Architecture_v1
+
+baseline/2026-XX-XX_Python実装開始前
+```
+
+人間が見て意味の分かる名称を優先する。
+
+## 27.3 Baseline作成条件
+
+Baseline化前に、
+
+```text
+Cross Check完了
+
+主要File保存済み
+
+AI_CONTEXT必要同期済み
+
+HISTORY必要同期済み
+
+重大UNSAVEDなし
+
+重大Failure未解決なし
+```
+
+を確認する。
+
+重要:
+
+```text
+Commit成功
+≠
+Baseline
+```
+
+---
+
+# 28. Recovery / Restore Rule
+
+事故・誤変更・誤削除・大量破損等が発生しても、
+
+> **mainを即座に過去Commitへ強制Rollbackすることを標準手順にしない。**
+
+基本Recovery Flow:
+
+```text
+Failure確認
+↓
+Current HEAD SHAを記録
+↓
+可能ならRecovery Branch / Refで事故時点を隔離保存
+↓
+最後の安全Checkpoint / Baseline特定
+↓
+Current状態と安全地点を比較
+↓
+失われる変更を確認
+↓
+必要なFile / CommitだけRestore
+↓
+Cross Check
+↓
+必要ならmainへ反映
+```
+
+原則:
+
+```text
+Rollback
+```
+
+より、
+
+```text
+Recover
+↓
+Compare
+↓
+Restore
+```
+
+を優先する。
+
+## 28.1 Current HEADとCheckpointを混同しない
+
+事故発生時のCurrent HEADは、
+
+```text
+Known Good State
+```
+
+とは限らない。
+
+しかし、事故後にしか存在しない正常な変更を含んでいる可能性がある。
+
+そのため、
+
+```text
+Current HEAD
+=
+調査・比較のため保存する事故時点Snapshot
+
+Checkpoint / Baseline
+=
+過去に確認されたRecovery候補
+```
+
+として区別する。
+
+## 28.2 Current HEADを先に破壊しない
+
+避ける:
+
+```text
+Failure発見
+↓
+即Hard Reset
+```
+
+推奨:
+
+```text
+Failure発見
+↓
+Current HEAD SHA記録
+↓
+必要ならrecovery/事故調査用Branch等へ隔離
+↓
+安全地点確認
+↓
+比較
+```
+
+事故状態もEvidenceとして扱う。
+
+## 28.3 Recovery Source — Git Historyが正常な場合
+
+RepositoryとGit Historyが正常かつ信頼できる場合、
+
+```text
+Validated Baseline
+↓
+Relevant Checkpoint
+↓
+Known Good Commit
+↓
+Git History
+```
+
+からRecovery Candidateを探す。
+
+ただし、
+
+```text
+古いBaseline
+=
+現在より正しい
+```
+
+とは限らない。
+
+必ずCurrent HEADとの差分を見る。
+
+## 28.4 Recovery Source — Git History自体が信頼できない場合
+
+以下の場合、
+
+```text
+Repository消失
+
+Git History破損
+
+Remote側事故
+
+誤ったHistory Rewrite
+
+Account / Repository障害
+
+Current Remoteを信頼できない
+```
+
+は、内部Git Historyだけへ依存しない。
+
+Recovery Flow:
+
+```text
+Independent Backup取得
+↓
+BackupのIntegrity確認
+↓
+復元可能なHistory / Filesを確認
+↓
+Current Remote / Local Stateと比較
+↓
+安全な復旧地点特定
+↓
+Restore
+```
+
+重要:
+
+```text
+Git Historyが壊れている
+↓
+壊れたGit Historyを唯一のRecovery Sourceにする
+```
+
+ことを避ける。
+
+## 28.5 Partial Restore
+
+問題が一部Fileだけなら、
+
+```text
+Repo全体Rollback
+```
+
+ではなく、
+
+```text
+対象FileだけRestore
+```
+
+を優先できる。
+
+目的:
+
+> **正常な新しい変更まで一緒に失わないこと。**
+
+## 28.6 Recovery後
+
+復旧完了後、
+
+```text
+何が壊れたか
+
+原因
+
+Current HEAD SHA
+
+使用したCheckpoint / Baseline / Backup
+
+RestoreしたFile / Commit
+
+失われた変更の有無
+
+Recovery後Cross Check結果
+```
+
+を確認する。
+
+重大事故なら、
+
+```text
+01_HISTORY/
+```
+
+へFailure原因・改善理由を残す候補とする。
+
+---
+
+# 29. Independent Backup Principle
+
+Checkpoint / Baselineは、
+
+> **同じGit Repository内部のRecovery Point**
+
+である。
+
+そのため、
+
+```text
+Repository消失
+
+Account事故
+
+Remote障害
+
+History破壊
+```
+
+への完全なBackupにはならない。
+
+長期的には、
+
+```text
+GitHub Current Repository
++
+Local Clone
++
+必要ならPrivate Mirror / Secondary Backup
+```
+
+のように複数地点へRepositoryを保持できる状態を目指す。
+
+重要:
+
+```text
+Checkpoint
+≠
+Independent Backup
+
+Baseline
+≠
+Independent Backup
+```
+
+Independent Backupの具体的な、
+
+```text
+保存先
+
+頻度
+
+自動化方法
+
+Retention
+```
+
+は必要になった段階で別途決める。
+
+現在は、
+
+> **市場理解OSの重要資産を単一Remoteだけへ永久依存させない**
+
+ことを原則とする。
+
+---
+
+# 30. Backup / Checkpoint / Baseline 最終原則
+
+```text
+Commit
+=
+日常の変更履歴
+
+Checkpoint
+=
+高Risk変更前の安全地点
+
+Baseline
+=
+Cross Check済みの重要完成地点
+
+Recovery Snapshot
+=
+事故発生時点を比較用に保持した状態
+
+Independent Backup
+=
+Repository自体を失った場合の別コピー
+```
+
+これらを混同しない。
+
+GPTはGit保存時、
+
+```text
+実差分があるか？
+
+Checkpointが必要か？
+
+通常Commitだけで十分か？
+
+保存後Baselineにする価値があるか？
+
+復旧可能性は維持されているか？
+```
+
+を確認する。
+
+ただし、
+
+```text
+全CommitをCheckpoint化
+
+全CheckpointをBaseline化
+
+全変更でRecovery Branch作成
+
+全変更でBackup File追加
+```
+
+はしない。
+
+目的はGit管理自体を複雑化することではない。
+
+> **市場理解OSを壊しても、理由・現在状態・安全地点を失わず、必要な変更だけを復旧し、再び前へ進める状態を作る。**
+
+---
+
+# 31. AI Current-State Documentsの責任分離
 
 ## AI_START_HERE
 
@@ -1502,7 +2378,7 @@ Latest Conversation Delta
 
 ---
 
-# 26. Workflow自身も疑う
+# 32. Workflow自身も疑う
 
 この `AI_WORKFLOW.md` 自身も永久固定ではない。
 
@@ -1526,6 +2402,10 @@ GPTが誤解する
 Save Destination判定が複雑すぎる
 
 AI_HANDOFF更新が作業そのものになっている
+
+Checkpoint / Baselineが増えすぎる
+
+Recovery Ruleが通常作業を重くしすぎる
 ```
 
 ことが分かった場合は修正する。
@@ -1534,7 +2414,7 @@ AI_HANDOFF更新が作業そのものになっている
 
 ---
 
-# 27. GPTの基本姿勢
+# 33. GPTの基本姿勢
 
 市場理解OSについてGPTは、
 
@@ -1552,6 +2432,8 @@ AI_HANDOFF更新が作業そのものになっている
 設計管理担当
 +
 Git整合管理担当
++
+Recovery Safety管理担当
 ```
 
 として振る舞う。
@@ -1562,7 +2444,7 @@ Git整合管理担当
 
 ---
 
-# 28. 最終原則
+# 34. 最終原則
 
 市場理解OSの設計では、
 
@@ -1595,6 +2477,8 @@ Statusを判断する
 同期対象を判断する
 History配置を判断する
 Navigationへの影響を判断する
+Checkpoint / Baseline要否を判断する
+Recovery可能性を確認する
 
 許可後にGitへ保存する
 保存後に文書間整合を確認する
@@ -1611,6 +2495,7 @@ Status管理
 Cross-Document同期
 History配置
 Navigation同期
+Checkpoint / Baseline管理
 ```
 
 の複雑さを押し付けない。
@@ -1627,10 +2512,39 @@ GPTが無許可でGitを書き換える
 
 人間は市場理解OSについて考える。
 
-GPTは、その考えを現在の市場理解OSへ矛盾なく整理・接続・保存する責任を持つ。
+GPTは、その考えを現在の市場理解OSへ矛盾なく整理・接続・保存し、必要なRecovery Pointを維持する責任を持つ。
 
 ---
 
-# AI_WORKFLOW v0.5 一文定義
+# Version Note — v0.5 → v0.5.1
 
-> **AI_WORKFLOWとは、人間が市場理解OSについて普通の言葉で目的・疑問・アイデア・方向性を伝えれば、GPTがGitから現在状態と設計の身分を確認し、必要に応じて外部情報や過去設計を調査し、案を深掘り・批判・整理し、既存設計との接続と失敗可能性を確認し、不要な複雑化を止め、重要な保留やConversation Deltaを適切な場所へ振り分け、Logical ChangeのPrimary保存先・同期対象・Statusを判断し、ユーザーから現在のChatで明示的なGit保存許可を受けた場合だけ必要なFile Setを保存し、保存後にCross-Document Consistencyまで確認するためのHuman-First作業規則である。**
+`v0.5.1` では、v0.5のHuman-First / Save Destination / Logical Change Impact Syncの基本思想は変更しない。
+
+追加・修正内容:
+
+```text
+No-op Write Check追加
+
+Backup / Checkpoint Decision追加
+
+Baseline Decision追加
+
+Recovery / Restore Rule追加
+
+Independent Backup Principle追加
+
+Git Write AuthorizationをFile変更だけでなく
+Checkpoint / Baseline / Recovery用Git Objectへ拡張
+
+事故時Current HEADをKnown Good Stateと誤認せず
+Recovery Snapshotとして隔離するRule追加
+
+Recovery Sourceを
+Git History正常時 / Git History破損時へ分離
+```
+
+---
+
+# AI_WORKFLOW v0.5.1 一文定義
+
+> **AI_WORKFLOWとは、人間が市場理解OSについて普通の言葉で目的・疑問・アイデア・方向性を伝えれば、GPTがGitから現在状態と設計の身分を確認し、必要に応じて外部情報や過去設計を調査し、案を深掘り・批判・整理し、既存設計との接続と失敗可能性を確認し、不要な複雑化を止め、重要な保留やConversation Deltaを適切な場所へ振り分け、Logical ChangeのPrimary保存先・同期対象・Status・Checkpoint / Baseline要否を判断し、ユーザーから現在のChatで明示的なGit保存許可を受けた場合だけ実差分のある必要なFile SetとRecovery Objectを保存し、保存後にCross-Document Consistencyと復旧可能性まで確認するためのHuman-First作業規則である。**
