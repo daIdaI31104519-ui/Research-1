@@ -1,4 +1,4 @@
-# 市場理解OS — AI_CONTEXT v0.1.7
+# 市場理解OS — AI_CONTEXT v0.1.8
 
 **Document Role:** AI Current-State Index / Navigation Map  
 **Status:** REVIEWED / WORKING BASELINE  
@@ -20,11 +20,17 @@
 Research-1
 = GPTの長期作業スペース / 図書館全体
 
-AI_CONTEXT.md
-= 現在地 / 案内板 / 目録
+AI_START_HERE.md
+= Cold Start / Context Recoveryの起動入口
 
 AI_WORKFLOW.md
-= GPTの作業方法
+= GPTの作業方法 / 保存先判定 / Impact Sync
+
+AI_CONTEXT.md
+= 長期Project Current State / 現在地 / 案内板 / 目録
+
+AI_HANDOFF.md
+= Latest Conversation Delta / 直前Conversationの短期引き継ぎ
 
 各Design md
 = 設計本文
@@ -36,7 +42,8 @@ AI_WORKFLOW.md
 原則:
 
 ```text
-AI_CONTEXT = 現在
+AI_CONTEXT = Project Current State
+AI_HANDOFF = Latest Conversation Delta
 HISTORY = 過去
 ```
 
@@ -95,9 +102,9 @@ Success Definition
 
 ```text
 Path: 00_AI/AI_WORKFLOW.md
-Version: v0.4.1
+Version: v0.5
 Status: REVIEWED / WORKING BASELINE
-Role: GPTが市場理解OSをどう設計・確認・保存するかを決める作業規則
+Role: GPTが市場理解OSをどう設計・確認・保存し、保存先・同期対象・文書間整合をどう管理するかを決める作業規則
 ```
 
 設計作業の方法について判断が必要な場合は、この文書を優先して参照する。
@@ -262,6 +269,30 @@ Status: PLACEHOLDER / NOT CANONICAL
 
 Partial Connection Map群およびMaster Connection Mapとの接続を確認した後、本格設計する。
 
+## 3.11 AI_START_HERE
+
+```text
+Path: 00_AI/AI_START_HERE.md
+Version: v0.2
+Status: REVIEWED / WORKING BASELINE
+Role: Cold Start / 新Chat / Context Loss / 別AI交代時のAI用起動地図
+```
+
+Cold Start順・主要Document Role・Recovery Ruleの正本として扱う。
+通常Taskごとに毎回読む必要はない。
+
+## 3.12 AI_HANDOFF
+
+```text
+Path: 00_AI/AI_HANDOFF.md
+Version: v0.2
+Status: REVIEWED / WORKING BASELINE
+Role: AI_CONTEXTでは保持しないLatest Conversation Deltaを短く引き継ぐConversation Snapshot
+```
+
+AI_HANDOFFはCurrent Designや長期Pendingの正本ではない。
+具体的なField / State / Maintenance RuleはAI_HANDOFF自身を正本とする。
+
 ---
 
 # 4. Current Design Guardrails
@@ -360,6 +391,8 @@ AI_CONTEXTのContext Sync運用が実際のGit作業で正しく機能するか�
 - Working Baseline追加をCurrent Documentsへ反映
 - Current Taskを次Map / 次Charter項目へ更新
 - 不要な作業履歴はAI_CONTEXTへ蓄積しない
+- AI_CONTEXT = Project Current State / AI_HANDOFF = Latest Conversation Deltaへ責任分離
+- AI_WORKFLOW v0.5でSave Destination Resolution / Logical Change Impact Syncを導入
 ```
 
 ```text
@@ -419,14 +452,23 @@ PENDING = 今は解決しないが忘れてはいけない問題
 
 # 9. Required Read
 
-GPTが市場理解OSについて新しい設計作業を開始するとき、必要な範囲だけ読む。
+Cold Start / 新Chat / Context Loss / 別AI交代時の読込順は、
+
+```text
+00_AI/AI_START_HERE.md
+```
+
+を正本とする。
+
+通常の設計作業では必要な範囲だけ読む。
 
 基本入口:
 
 ```text
 1. 00_AI/AI_WORKFLOW.md
 2. 00_AI/AI_CONTEXT.md
-3. 現在Taskの対象md
+3. 必要なら 00_AI/AI_HANDOFF.md
+4. 現在Taskの対象md
 ```
 
 PROJECT_CHARTER Reconciliation中は追加で、
@@ -496,6 +538,7 @@ NEXT ACTION変更
 
 更新方法は原則として追記ではなく現在値の置換とする。
 
+Conversation固有の短期差分はAI_HANDOFFへ送る。
 過去Versionと変更理由はHistoryへ送る。
 
 ---
@@ -508,6 +551,8 @@ NEXT ACTION変更
 いつDeep Diveを止めるか
 設計成熟度をどう判断するか
 Git保存時の確認
+Save Destination Resolution
+Logical Change Impact Sync
 Document Impact Check
 Design Closure Guidance
 外部Webを使う条件
@@ -526,6 +571,8 @@ GPTが迷った場合:
 
 ```text
 AI_CONTEXT
+↓
+必要ならAI_HANDOFF
 ↓
 現在Taskを確認
 ↓
@@ -558,14 +605,15 @@ AI_CONTEXT
 案
 重視したいこと
 最終的な方向性
+Git書込の最終許可
 ```
 
 を伝える。
 
-GPTはGitとAI_CONTEXTを使って設計運用を補助する。
+GPTはGit・AI_WORKFLOW・AI_CONTEXT・必要ならAI_HANDOFFを使って設計運用を補助する。
 
 ---
 
-# AI_CONTEXT v0.1.7 一文定義
+# AI_CONTEXT v0.1.8 一文定義
 
-> **AI_CONTEXTとは、市場理解OSの設計内容そのものを複製する文書ではなく、GPTが現在Phase・Current Task・主要Working Baseline・重要Pending・Next Action・参照先を短時間で把握し、Gitという長期作業空間の中から現在Taskに必要な正しい設計情報へ移動するための軽量なAI専用現在地マップである。**
+> **AI_CONTEXTとは、市場理解OSの設計内容そのものや直前Conversationを複製する文書ではなく、GPTが現在Phase・Current Task・主要Working Baseline・重要Pending・Next Action・参照先を短時間で把握し、Gitという長期作業空間の中から現在Taskに必要な正しい設計情報へ移動するための軽量なAI専用Project Current-State Mapである。**
