@@ -1,7 +1,7 @@
 # AI_WORKFLOW — 失敗と改善履歴
 
 **Status:** ACTIVE HISTORY  
-**対象:** AI_WORKFLOW v0.1 → v0.4.1  
+**対象:** AI_WORKFLOW v0.1 → v0.5  
 **目的:** 市場理解OSをGPTと人間で設計する際に、どの運用案がなぜ問題になり、どう改善したかを残す。
 
 ---
@@ -385,9 +385,11 @@ History
 
 から現在状態を復元するBootstrap方式を採用した。
 
+後に `AI_START_HERE.md` を追加し、Cold Start / Context Lossの入口を独立したNavigation責任として分離した。
+
 ## 教訓
 
-運用規則は初回起動時も成立しなければならない。
+運用規則は初回起動時も成立しなければならず、Cold Start手順をWorkflow本文へ重複保持し続けない。
 
 ---
 
@@ -539,9 +541,21 @@ HISTORY
 
 へ振り分ける方式にした。
 
+v0.5ではさらに、
+
+```text
+次Chatへ引き継ぐ最新Conversation差分
+→ AI_HANDOFF
+
+長期Project Current State / Pending
+→ AI_CONTEXT
+```
+
+へ責任を分離した。
+
 ## 教訓
 
-簡略化しても、重要な未解決事項のTraceは失わない。
+簡略化しても重要な未解決事項のTraceは失わず、短期Conversation Stateと長期Project Stateを混ぜない。
 
 ---
 
@@ -573,14 +587,17 @@ v0.4.1では、
 
 ---
 
-# 19. 最終的に採用した人間とGPTの役割分担
+# 19. 現在の人間とGPTの役割分担
 
 ## 人間
 
 ```text
 目的
 疑問
+アイデア
 方向性
+重要判断への意見
+Git書込の最終許可
 ```
 
 を普通の言葉で伝える。
@@ -593,7 +610,7 @@ v0.4.1では、
 「GITに保存して」
 ```
 
-で十分とする。
+を中心とする。
 
 ## GPT
 
@@ -609,8 +626,13 @@ Current Git確認
 Cross Check
 Failure確認
 設計整理
+Logical Change整理
+保存先判定
+既存File / 新規File判定
+Status判定
+Impact Sync判定
 許可後のGit保存
-保存後再確認
+保存後Cross-Document確認
 ```
 
 を担当する。
@@ -624,13 +646,19 @@ Failure確認
 ```text
 人間側のCommandを増やしすぎない
 
+保存先判断を人間へ押し付けない
+
 WorkflowへCurrent Designをコピーしすぎない
+
+AI_CONTEXTとAI_HANDOFFを混ぜない
 
 関連事項を全部同時に設計しない
 
 Git保存と採用を混同しない
 
 Gitの更新日時だけでCurrent Designを決めない
+
+同じ情報を複数Documentへ重複保存しない
 
 過去失敗を削除しない
 
@@ -667,16 +695,128 @@ AI_WORKFLOW v0.4
 保存Status / Current Design判定 / 保留 / Web利用を修正
 ↓
 AI_WORKFLOW v0.4.1
+↓
+Cold Start / Context RecoveryをAI_START_HEREとAI_HANDOFFへ責任分離
+↓
+Save Destination Resolution
++
+Logical Change Impact Syncを導入
+↓
+AI_WORKFLOW v0.5
 ```
 
 現在のWorkflowは、
 
-> **人間が設計管理用語を覚えるのではなく、GPTが設計管理の複雑さを引き受ける**
+> **人間が設計管理用語・保存先・同期先を管理するのではなく、GPTが設計管理の複雑さを引き受ける**
 
-方向へ到達した。
+方向へ進んだ。
+
+---
+
+# 22. v0.5 — Context継続・保存先・文書同期の運用Failure
+
+## 起きたこと
+
+長いChatで設計を続けると、Context LimitやChat切替によって、Gitへまだ保存していないConversation Decisionや次の作業地点を失う危険が見えた。
+
+同時に、設計が増えるほど人間が、
+
+```text
+どのmdへ保存するか
+既存Fileか新規Fileか
+AI_CONTEXTも更新するか
+Historyへ残すか
+READMEやNavigationへ影響するか
+```
+
+まで判断する必要が出始めた。
+
+さらに、対象Designだけ保存すると、
+
+```text
+Designは新しい
+AI_CONTEXTは古い
+HANDOFFは未保存扱い
+Navigationは旧状態
+```
+
+というDocument間の状態ズレが起こり得る。
+
+## 問題
+
+これはHuman-Firstの目的に反する。
+
+人間が市場理解OSそのものではなく、File配置・同期・履歴管理へ注意を奪われる。
+
+また、Conversation StateとProject Current Stateを同じFileへ持たせると、AI_CONTEXTが日記化・巨大化する。
+
+## 改善
+
+v0.5で次を導入した。
+
+```text
+AI_START_HERE
+= Cold Start / Navigation
+
+AI_WORKFLOW
+= HOW / WHEN / Git管理
+
+AI_CONTEXT
+= Long-Term Project Current State
+
+AI_HANDOFF
+= Latest Conversation Delta
+```
+
+さらに、
+
+```text
+Save Destination Resolution
+=
+Logical ChangeのPrimary Owner DocumentをGPTが判断
+
+Logical Change Impact Sync
+=
+Primary変更により同期が必要なDocumentだけを判定
+```
+
+をGit保存工程へ組み込んだ。
+
+原則として、
+
+```text
+新しいアイデア
+≠ 新しいFile
+
+関連している
+≠ 変更対象
+
+Authority
+≠ Save Destination
+```
+
+とする。
+
+## 教訓
+
+```text
+Human
+= 目的・疑問・アイデア・方向性・最終Git許可
+
+GPT
+= 設計・保存先・同期先・Status・History・Navigation整合
+```
+
+と分ける。
+
+また、
+
+> **対象Designを保存することではなく、Logical Changeを必要範囲で矛盾なく保存すること**
+
+をGit運用の単位とする。
 
 ---
 
 # 一文まとめ
 
-> **AI_WORKFLOWの最大の失敗は、設計を安全にしようとして人間側の操作やWorkflow自体を複雑化しすぎたことであり、最終的には「人間は普通の言葉で目的を伝え、GPTがGit・History・外部情報・矛盾・Failureを管理する」というHuman-Firstな運用へ戻した。**
+> **AI_WORKFLOWの改善は、安全性のために人間やWorkflowへ管理負荷を増やす方向ではなく、人間は普通の言葉で市場理解OSを考え、GPTがCurrent Git・保存先・同期先・History・Conversation Delta・文書間整合を必要範囲で管理するHuman-Firstな方向へ進める。**
