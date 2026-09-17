@@ -2,6 +2,16 @@
 
 このRepositoryは、市場理解OSを旧設計からそのまま複製するのではなく、**人間が理解でき、AIが詳細設計を補助し、Pythonへ落とし込みやすく、領域間を接続・検証できる形へ再構築するための新Repository**である。
 
+## AI / GPT Entry
+
+Cold Start、新しいChat、Context Loss、別AIへの引き継ぎ時は、最初に次を読む。
+
+```text
+00_AI/AI_START_HERE.md
+```
+
+ここを市場理解OSのAI用起動入口とし、作業方法・現在地・直前Conversation・Current Taskへ必要な範囲だけ移動する。
+
 ## このRepoの位置づけ
 
 - `Research-1` = 現在の再構築先 / Current Rebuild
