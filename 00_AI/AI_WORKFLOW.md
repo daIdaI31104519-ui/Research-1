@@ -108,7 +108,7 @@ Research-1確認
 
 意味:
 
-> **現在話しているLogical Changeを、そのままコピーするのではなく、Gitの現在状態・正しい保存先・同期が必要なDocumentを確認し、最終Cross Check後に必要範囲だけ保存する。**
+> **現在話しているLogical Changeを、そのままコピーするのではなく、Gitの現在状態・正しい保存先・同期が必要なDocument・復旧安全性を確認し、最終Cross Check後に必要範囲だけ保存する。**
 
 GPTは原則、
 
@@ -131,9 +131,11 @@ Save Destination Resolution
 ↓
 Logical Change Impact Sync
 ↓
-変更対象File Set確定
+No-op Write Check
 ↓
-必要ならCheckpoint確保
+Checkpoint Decision
+↓
+変更対象File Set確定
 ↓
 適切なStatusでGit保存
 ↓
@@ -141,11 +143,11 @@ Logical Change Impact Sync
 ↓
 Cross-Document Consistency Check
 ↓
-必要ならBaseline判定
+Baseline Decision
 ↓
-Commit確認
+Commit / Recovery Object確認
 ↓
-変更Path / Commit報告
+変更Path / Commit / Checkpoint等を報告
 ```
 
 する。
@@ -180,11 +182,12 @@ Cross Check済みだが改善余地あり
 Status
 同期対象
 History対象
+Checkpoint / Baseline要否
 ```
 
 を指定する必要はない。
 
-GPTが現在のGit・Document Role・設計成熟度・Logical Changeを確認して判断する。
+GPTが現在のGit・Document Role・設計成熟度・Logical Change・Recovery Costを確認して判断する。
 
 ---
 
@@ -320,6 +323,12 @@ AI_HANDOFF同期が必要か
 HISTORYへ残す必要があるか
 
 AI_START_HERE / READMEへ影響するか
+
+Checkpointが必要か
+
+保存後Baseline化すべきか
+
+Recovery可能性が維持されているか
 ```
 
 を評価する。
@@ -333,6 +342,7 @@ File分類
 Directory選択
 Status管理
 Cross-Document同期
+Checkpoint / Baseline判定
 ```
 
 のような設計管理は、原則GPT側が担当する。
