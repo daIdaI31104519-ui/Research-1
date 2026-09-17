@@ -1,7 +1,7 @@
 # AI_WORKFLOW — 失敗と改善履歴
 
 **Status:** ACTIVE HISTORY  
-**対象:** AI_WORKFLOW v0.1 → v0.5  
+**対象:** AI_WORKFLOW v0.1 → v0.5.1  
 **目的:** 市場理解OSをGPTと人間で設計する際に、どの運用案がなぜ問題になり、どう改善したかを残す。
 
 ---
@@ -631,6 +631,8 @@ Logical Change整理
 既存File / 新規File判定
 Status判定
 Impact Sync判定
+Checkpoint / Baseline判定
+Recovery Safety確認
 許可後のGit保存
 保存後Cross-Document確認
 ```
@@ -657,6 +659,14 @@ AI_CONTEXTとAI_HANDOFFを混ぜない
 Git保存と採用を混同しない
 
 Gitの更新日時だけでCurrent Designを決めない
+
+同一内容のNo-op Commitを作らない
+
+Checkpointを毎Commit作らない
+
+CheckpointとBaselineを混同しない
+
+事故時Current HEADを即破壊しない
 
 同じ情報を複数Documentへ重複保存しない
 
@@ -703,11 +713,21 @@ Save Destination Resolution
 Logical Change Impact Syncを導入
 ↓
 AI_WORKFLOW v0.5
+↓
+No-op Write Check
++
+Checkpoint / Baseline
++
+Recovery / Restore
++
+Independent Backup Principleを導入
+↓
+AI_WORKFLOW v0.5.1
 ```
 
 現在のWorkflowは、
 
-> **人間が設計管理用語・保存先・同期先を管理するのではなく、GPTが設計管理の複雑さを引き受ける**
+> **人間が設計管理用語・保存先・同期先・Recovery Pointを管理するのではなく、GPTが設計管理とGit Safetyの複雑さを引き受ける**
 
 方向へ進んだ。
 
@@ -817,6 +837,133 @@ GPT
 
 ---
 
+# 23. v0.5.1 — Git履歴だけではRecovery Pointが分かりにくい問題
+
+## 起きたこと
+
+Git保存工程を実運用した結果、同一内容の `AI_WORKFLOW` が複数回Commitされ、Git Historyへ意味のないNo-op Commitが発生した。
+
+また、Repository全体を確認すると、
+
+```text
+main Branchのみ
+Tagなし
+明示的な一般Checkpoint Ruleなし
+```
+
+であり、Git History自体は存在しても、
+
+```text
+どの地点が安全なのか
+どの変更前へ戻るべきか
+どこまでが確認済み完成地点か
+```
+
+を人間・AIが一目で判断しにくい状態だった。
+
+さらに、事故時に `main` を即Rollbackすると、事故後にしか存在しない正常な変更まで失う危険がある。
+
+## 問題
+
+```text
+Commit Historyがある
+≠
+Recovery Strategyがある
+```
+
+である。
+
+すべてのCommitをCheckpoint化すると逆にノイズになる一方、明示的Recovery Pointが全くないと高Risk変更の復旧Costが上がる。
+
+また、CheckpointとRepository外Backupを同一視すると、Remote / History自体の破損へ対応できない。
+
+## 改善
+
+v0.5.1で次を導入した。
+
+```text
+No-op Write Check
+=
+Current Gitと同一内容ならWrite / Commitしない
+
+Checkpoint
+=
+高Risk変更前の安全地点
+
+Baseline
+=
+Cross Check済みの重要完成地点
+
+Recovery Snapshot
+=
+事故時Current HEADを比較用に隔離保存
+
+Independent Backup
+=
+Repository自体を失った場合の別コピー
+```
+
+Git保存フローを、
+
+```text
+Cross Check
+↓
+No-op Write Check
+↓
+Checkpoint Decision
+↓
+Git Write
+↓
+Post-Save Consistency Check
+↓
+Baseline Decision
+```
+
+へ拡張した。
+
+事故時は、
+
+```text
+即Rollback
+```
+
+ではなく、
+
+```text
+Current HEAD記録
+↓
+必要ならRecovery Branchへ隔離
+↓
+Checkpoint / Baselineと比較
+↓
+必要部分だけRestore
+```
+
+を基本とする。
+
+Git History自体が信頼できない場合はIndependent BackupをRecovery Sourceとする。
+
+## 教訓
+
+```text
+Commit
+≠ Checkpoint
+≠ Baseline
+≠ Independent Backup
+```
+
+である。
+
+Git Safetyは「たくさんBackupを作ること」ではなく、
+
+> **変更前の安全地点・変更後の確認済み地点・事故時点・Repository外Backupを役割分離し、必要な時だけ使うこと**
+
+で成立する。
+
+Human-Firstの観点では、Checkpoint / Baseline要否も人間へ毎回判断させず、GPTがLogical ChangeとRecovery Costから判定する。
+
+---
+
 # 一文まとめ
 
-> **AI_WORKFLOWの改善は、安全性のために人間やWorkflowへ管理負荷を増やす方向ではなく、人間は普通の言葉で市場理解OSを考え、GPTがCurrent Git・保存先・同期先・History・Conversation Delta・文書間整合を必要範囲で管理するHuman-Firstな方向へ進める。**
+> **AI_WORKFLOWの改善は、安全性のために人間やWorkflowへ管理負荷を増やす方向ではなく、人間は普通の言葉で市場理解OSを考え、GPTがCurrent Git・保存先・同期先・History・Conversation Delta・Checkpoint / Baseline・Recovery Safetyを必要範囲で管理するHuman-Firstな方向へ進める。**
