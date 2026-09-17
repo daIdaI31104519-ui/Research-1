@@ -1,4 +1,4 @@
-# 市場理解OS — AI_CONTEXT v0.1.9
+# 市場理解OS — AI_CONTEXT v0.1.10
 
 **Document Role:** AI Current-State Index / Navigation Map  
 **Status:** REVIEWED / WORKING BASELINE  
@@ -102,12 +102,12 @@ Success Definition
 
 ```text
 Path: 00_AI/AI_WORKFLOW.md
-Version: v0.5.1
+Version: v0.5.2
 Status: REVIEWED / WORKING BASELINE
-Role: GPTが市場理解OSをどう設計・確認・保存し、保存先・同期対象・文書間整合・Checkpoint / Baseline / Recoveryをどう管理するかを決める作業規則
+Role: GPTが市場理解OSをどう設計・確認・保存し、保存先・同期対象・文書間整合・Checkpoint / Baseline / Recovery・Human-Readable File Namingをどう管理するかを決める作業規則
 ```
 
-設計作業・Git保存・復旧判断について判断が必要な場合は、この文書を優先して参照する。
+設計作業・Git保存・復旧判断・新規File命名について判断が必要な場合は、この文書を優先して参照する。
 AI_CONTEXTへAI_WORKFLOWの詳細ルールを複製しない。
 
 ## 3.2 PROJECT CHARTER
@@ -392,8 +392,7 @@ AI_CONTEXTのContext Sync運用が実際のGit作業で正しく機能するか�
 - Current Taskを次Map / 次Charter項目へ更新
 - 不要な作業履歴はAI_CONTEXTへ蓄積しない
 - AI_CONTEXT = Project Current State / AI_HANDOFF = Latest Conversation Deltaへ責任分離
-- AI_WORKFLOW v0.5でSave Destination Resolution / Logical Change Impact Syncを導入
-- AI_WORKFLOW v0.5.1でNo-op Write Check / Checkpoint / Baseline / Recovery / Independent Backup原則を導入
+- AI_WORKFLOW v0.5.2でSave Destination Resolution / Logical Change Impact Sync / Git Safety / Human-Readable File Naming Policyを運用
 ```
 
 ```text
@@ -483,7 +482,7 @@ PROJECT_CHARTER Reconciliation中は追加で、
 を必要範囲で参照する。
 
 Connection分割設計では、直前のPartial Connection MapとのBoundary一致を確認する。
-変更理由・過去失敗が必要なら `01_HISTORY/` を読む。
+変更理由・過去失敗が必要なら `01_HISTORY/README.md` から該当Historyへ進む。
 旧Repo・過去資料・外部情報は、現在Taskに必要な場合だけ確認する。
 
 毎回Repo全体を読むことを要求しない。
@@ -554,14 +553,12 @@ Conversation固有の短期差分はAI_HANDOFFへ送る。
 Git保存時の確認
 Save Destination Resolution
 Logical Change Impact Sync
-No-op Write Check
-Checkpoint / Baseline Decision
-Recovery / Restore
 Document Impact Check
 Design Closure Guidance
 外部Webを使う条件
 GPTが反対すべき条件
 Scope管理
+Human-Readable File Naming
 ```
 
 これらは `00_AI/AI_WORKFLOW.md` を参照する。
@@ -586,7 +583,7 @@ AI_CONTEXT
 ↓
 不足した場合だけ関連Design
 ↓
-理由が必要ならHistory
+理由が必要ならHistory Router
 ↓
 必要なら旧Repo / 過去資料
 ↓
@@ -618,6 +615,6 @@ GPTはGit・AI_WORKFLOW・AI_CONTEXT・必要ならAI_HANDOFFを使って設計�
 
 ---
 
-# AI_CONTEXT v0.1.9 一文定義
+# AI_CONTEXT v0.1.10 一文定義
 
 > **AI_CONTEXTとは、市場理解OSの設計内容そのものや直前Conversationを複製する文書ではなく、GPTが現在Phase・Current Task・主要Working Baseline・重要Pending・Next Action・参照先を短時間で把握し、Gitという長期作業空間の中から現在Taskに必要な正しい設計情報へ移動するための軽量なAI専用Project Current-State Mapである。**
