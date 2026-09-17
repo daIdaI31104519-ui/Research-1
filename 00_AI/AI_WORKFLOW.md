@@ -1,4 +1,4 @@
-# 市場理解OS — AI_WORKFLOW v0.5.1
+# 市場理解OS — AI_WORKFLOW v0.5.2
 
 **Document Role:** AI Design Workflow  
 **Status:** REVIEWED / WORKING BASELINE  
@@ -108,7 +108,7 @@ Research-1確認
 
 意味:
 
-> **現在話しているLogical Changeを、そのままコピーするのではなく、Gitの現在状態・正しい保存先・同期が必要なDocument・復旧安全性を確認し、最終Cross Check後に必要範囲だけ保存する。**
+> **現在話しているLogical Changeを、そのままコピーするのではなく、Gitの現在状態・正しい保存先・同期が必要なDocumentを確認し、最終Cross Check後に必要範囲だけ保存する。**
 
 GPTは原則、
 
@@ -131,11 +131,9 @@ Save Destination Resolution
 ↓
 Logical Change Impact Sync
 ↓
-No-op Write Check
-↓
-Checkpoint Decision
-↓
 変更対象File Set確定
+↓
+必要ならCheckpoint確保
 ↓
 適切なStatusでGit保存
 ↓
@@ -143,11 +141,11 @@ Checkpoint Decision
 ↓
 Cross-Document Consistency Check
 ↓
-Baseline Decision
+必要ならBaseline判定
 ↓
-Commit / Recovery Object確認
+Commit確認
 ↓
-変更Path / Commit / Checkpoint等を報告
+変更Path / Commit報告
 ```
 
 する。
@@ -182,12 +180,11 @@ Cross Check済みだが改善余地あり
 Status
 同期対象
 History対象
-Checkpoint / Baseline要否
 ```
 
 を指定する必要はない。
 
-GPTが現在のGit・Document Role・設計成熟度・Logical Change・Recovery Costを確認して判断する。
+GPTが現在のGit・Document Role・設計成熟度・Logical Changeを確認して判断する。
 
 ---
 
@@ -323,12 +320,6 @@ AI_HANDOFF同期が必要か
 HISTORYへ残す必要があるか
 
 AI_START_HERE / READMEへ影響するか
-
-Checkpointが必要か
-
-保存後Baseline化すべきか
-
-Recovery可能性が維持されているか
 ```
 
 を評価する。
@@ -342,7 +333,6 @@ File分類
 Directory選択
 Status管理
 Cross-Document同期
-Checkpoint / Baseline判定
 ```
 
 のような設計管理は、原則GPT側が担当する。
@@ -1069,6 +1059,174 @@ Responsibility確認
 人間の指定を勝手に無視しない。
 
 ただし、不適切な保存先へ機械的に書き込まない。
+
+## 19.4 Human-Readable File Naming Policy
+
+File名は、AIだけでなく人間がRepositoryを見た時にも、
+
+> **そのFileが何を担当するのか、おおよそ理解できること**
+
+を重視する。
+
+市場理解OSはHuman-Firstであるため、今後新しく作るHuman-facing Design Fileは、原則として日本語の責任名を使用する。
+
+基本形:
+
+```text
+番号_責任名.md
+```
+
+または、
+
+```text
+対象_役割.md
+```
+
+例:
+
+```text
+05_意思決定.md
+
+06_実行と事後分析.md
+
+市場データ契約.md
+
+研究候補受付.md
+
+失敗境界設計.md
+
+取引判断設計.md
+```
+
+### 固定英語名を許容するFile
+
+AI・Git・Repositoryの安定した入口として既に責任が定着しているFileは、無理に日本語化しない。
+
+代表例:
+
+```text
+README.md
+
+AI_START_HERE.md
+
+AI_WORKFLOW.md
+
+AI_CONTEXT.md
+
+AI_HANDOFF.md
+```
+
+既存Working BaselineのFileについても、名前だけを理由に通常設計作業中へ混ぜてRenameしない。
+
+### 既存Fileの日本語化
+
+既存Fileを日本語化する場合は、
+
+```text
+通常設計変更
++
+ついでにRename
+```
+
+とはしない。
+
+原則:
+
+```text
+Dedicated Naming Migration
+↓
+Checkpoint
+↓
+Rename対象一覧確定
+↓
+Repository内参照Path確認
+↓
+Rename
+↓
+参照先更新
+↓
+Cross-Document Consistency Check
+↓
+Baseline
+```
+
+として独立したLogical Changeで行う。
+
+このPolicyではDirectory名の一括日本語化は行わない。
+
+既存Directory / Existing Working BaselineのRenameは、Dedicated Naming Migrationでのみ扱う。
+
+### File名で避けるもの
+
+以下のような、責任が判断できない名前を避ける。
+
+```text
+まとめ.md
+
+重要.md
+
+新しい設計.md
+
+最終版.md
+
+最終版2.md
+
+その他.md
+
+test2.md
+```
+
+File名にVersion管理の代わりをさせない。
+
+Version / Status / Git HistoryとFile Responsibilityを分ける。
+
+### 日本語名の表記
+
+原則:
+
+```text
+意味が一目で分かる
+
+短すぎて責任不明にしない
+
+長すぎる文章名にしない
+
+Spaceを多用しない
+
+記号を増やしすぎない
+
+同じConceptの表記を揺らさない
+```
+
+専門用語として英語の方が責任を正確に表せる場合は、英語を残してよい。
+
+目的は、
+
+```text
+日本語化そのもの
+```
+
+ではなく、
+
+```text
+人間がRepositoryを見て
+File Responsibilityを理解できること
+```
+
+である。
+
+重要:
+
+```text
+新しいFile
+=
+原則Human-Readable Name
+
+既存File
+=
+安全性を優先し、
+必要になるまで無理にRenameしない
+```
 
 ---
 
@@ -2516,35 +2674,26 @@ GPTは、その考えを現在の市場理解OSへ矛盾なく整理・接続・
 
 ---
 
-# Version Note — v0.5 → v0.5.1
+# Version Note — v0.5.1 → v0.5.2
 
-`v0.5.1` では、v0.5のHuman-First / Save Destination / Logical Change Impact Syncの基本思想は変更しない。
+`v0.5.2` では、v0.5.1のHuman-First / Save Destination / Logical Change Impact Sync / Git Safety / Recoveryの基本思想は変更しない。
 
-追加・修正内容:
+追加内容:
 
 ```text
-No-op Write Check追加
+Human-Readable File Naming Policy
+=
+新規Human-facing Design Fileは原則として日本語の責任名を使う
 
-Backup / Checkpoint Decision追加
-
-Baseline Decision追加
-
-Recovery / Restore Rule追加
-
-Independent Backup Principle追加
-
-Git Write AuthorizationをFile変更だけでなく
-Checkpoint / Baseline / Recovery用Git Objectへ拡張
-
-事故時Current HEADをKnown Good Stateと誤認せず
-Recovery Snapshotとして隔離するRule追加
-
-Recovery Sourceを
-Git History正常時 / Git History破損時へ分離
+既存Working Baseline / DirectoryのRename
+=
+通常設計変更へ混ぜずDedicated Naming Migrationで扱う
 ```
+
+目的は日本語化そのものではなく、人間がRepositoryを見てFile Responsibilityを理解できる状態を作ることである。
 
 ---
 
-# AI_WORKFLOW v0.5.1 一文定義
+# AI_WORKFLOW v0.5.2 一文定義
 
-> **AI_WORKFLOWとは、人間が市場理解OSについて普通の言葉で目的・疑問・アイデア・方向性を伝えれば、GPTがGitから現在状態と設計の身分を確認し、必要に応じて外部情報や過去設計を調査し、案を深掘り・批判・整理し、既存設計との接続と失敗可能性を確認し、不要な複雑化を止め、重要な保留やConversation Deltaを適切な場所へ振り分け、Logical ChangeのPrimary保存先・同期対象・Status・Checkpoint / Baseline要否を判断し、ユーザーから現在のChatで明示的なGit保存許可を受けた場合だけ実差分のある必要なFile SetとRecovery Objectを保存し、保存後にCross-Document Consistencyと復旧可能性まで確認するためのHuman-First作業規則である。**
+> **AI_WORKFLOWとは、人間が市場理解OSについて普通の言葉で目的・疑問・アイデア・方向性を伝えれば、GPTがGitから現在状態と設計の身分を確認し、必要に応じて外部情報や過去設計を調査し、案を深掘り・批判・整理し、既存設計との接続と失敗可能性を確認し、不要な複雑化を止め、重要な保留やConversation Deltaを適切な場所へ振り分け、Logical ChangeのPrimary保存先・同期対象・Status・Checkpoint / Baseline要否と人間が理解できるFile Responsibility表現を判断し、ユーザーから現在のChatで明示的なGit保存許可を受けた場合だけ実差分のある必要なFile SetとRecovery Objectを保存し、保存後にCross-Document Consistencyと復旧可能性まで確認するためのHuman-First作業規則である。**
