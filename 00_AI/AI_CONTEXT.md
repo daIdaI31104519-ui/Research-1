@@ -392,7 +392,9 @@ AI_CONTEXTのContext Sync運用が実際のGit作業で正しく機能するか�
 - Current Taskを次Map / 次Charter項目へ更新
 - 不要な作業履歴はAI_CONTEXTへ蓄積しない
 - AI_CONTEXT = Project Current State / AI_HANDOFF = Latest Conversation Deltaへ責任分離
-- AI_WORKFLOW v0.5.2でSave Destination Resolution / Logical Change Impact Sync / Git Safety / Human-Readable File Naming Policyを運用
+- AI_WORKFLOW v0.5でSave Destination Resolution / Logical Change Impact Syncを導入
+- AI_WORKFLOW v0.5.1でNo-op Write Check / Checkpoint / Baseline / Recovery / Independent Backup原則を導入
+- AI_WORKFLOW v0.5.2でHuman-Readable File Naming Policyを追加
 ```
 
 ```text
@@ -553,6 +555,9 @@ Conversation固有の短期差分はAI_HANDOFFへ送る。
 Git保存時の確認
 Save Destination Resolution
 Logical Change Impact Sync
+No-op Write Check
+Checkpoint / Baseline Decision
+Recovery / Restore
 Document Impact Check
 Design Closure Guidance
 外部Webを使う条件
