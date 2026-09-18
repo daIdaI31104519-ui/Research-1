@@ -791,7 +791,7 @@ Legacyを参照してCurrent Design Proposalを作成した場合、必要に応
 
 # 19. Reference Summary
 
-今後作成候補:
+Current Legacy Knowledge Master Index:
 
 ```text
 99_REFERENCE/
