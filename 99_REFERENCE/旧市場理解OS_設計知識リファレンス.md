@@ -1,7 +1,7 @@
 # 旧市場理解OS — 設計知識リファレンス
 
 **Document Role:** Legacy Knowledge Master Index / Comparison Reference  
-**Status:** DRAFT / REFERENCE CONTENT NOT YET POPULATED  
+**Status:** DRAFT / LEGACY REVIEW IN PROGRESS  
 **Structure Review:** REVIEWED  
 **Current Design Authority:** NONE  
 **Parent Policy:** `99_REFERENCE/README.md`  
@@ -259,7 +259,7 @@ LEGACY_REVIEW_STATUS
 
 | Source Group | SOURCE_REVIEW_STATUS | Purpose |
 |---|---|---|
-| まとめ案 1〜11 | NOT_REVIEWED | Legacy全体像 |
+| まとめ案 1〜11 | REVIEWED | Legacy全体像 / Research Evidence / Production / Governance |
 | OBJECT_DICTIONARY | NOT_REVIEWED | Object / Concept |
 | ROLE_DICTIONARY | NOT_REVIEWED | Role |
 | STATE_DICTIONARY | NOT_REVIEWED | State / Lifecycle |
@@ -633,6 +633,1020 @@ Related Backup:
 
 ---
 
+
+## 7.1 Review Batch A — Research Evidence / Knowledge Maintenance
+
+**Review Date:** 2026-09-20  
+**Review Scope:** 旧市場理解OSのResearch Evidence系ConceptをCurrent \`03_RESEARCH\` / \`04_KNOWLEDGE_APPLICABILITY\` と比較し、再利用候補を整理する。  
+**Current Design Authority:** NONE  
+**Current Design Status:** NOT_ADOPTED  
+
+このBatchは、
+
+\`\`\`text
+Legacy Source-backed Fact
++
+Current Design Relation
++
+Derived Reuse Proposal
+\`\`\`
+
+を分離して記録する。
+
+重要:
+
+\`\`\`text
+このSectionに保存
+≠ Current Designへ採用
+
+Formal Definition Candidate
+≠ Current正式Definition
+
+Reuse Recommendation
+≠ Current Design Decision
+\`\`\`
+
+### 7.1.1 Review Summary
+
+| Concept | Legacy Support | Current Relation | Review Result | Reuse Recommendation | Current Status |
+|---|---|---|---|---|---|
+| Demo Forward | STRONG | Forward Evidence / Validation Channelあり | PARTIAL_REUSE | MERGE / REFINE | NOT_ADOPTED |
+| Evidence Channel | STRONG | Current 03に明示 | ADOPTABLE | MERGE | NOT_ADOPTED |
+| Evidence Role | PARTIAL | Source / Role分離要求あり | PARTIAL_REUSE | REFINE / MERGE | NOT_ADOPTED |
+| Evidence Outcome | WEAK / IMPLICIT | Currentに独立Conceptなし | REDESIGN_REQUIRED | DERIVED PROPOSAL | NOT_ADOPTED |
+| Evidence Evaluation Status | NO DIRECT LEGACY OBJECT | Currentに独立Conceptなし | DERIVED | NEW PROPOSAL | NOT_ADOPTED |
+| Shared Evidence | STRONG | Current 04に明示 | ADOPTABLE | MERGE | NOT_ADOPTED |
+| Evidence Dependency | PARTIAL / STRONG AT HYPOTHESIS LEVEL | Overlap / Derived Relationあり | PARTIAL_REUSE | REFINE / MERGE | NOT_ADOPTED |
+| Evidence Strength | STRONG | Current 04でApplicabilityと分離 | ADOPTABLE | MERGE / REFINE | NOT_ADOPTED |
+| Evidence Profile | STRONG AS EVIDENCE SEPARATION / PACKAGE | Current 04に明示 | PARTIAL_REUSE | MERGE / OWNERSHIP REFINE | NOT_ADOPTED |
+| Hypothesis Assessment | PARTIAL / IMPLICIT | Currentに独立Objectなし | REDESIGN_REQUIRED | DERIVED PROPOSAL | NOT_ADOPTED |
+| Research Result | STRONG | Current 03に明示 | ADOPTABLE | MERGE / REFINE | NOT_ADOPTED |
+| Validation Gate | PARTIAL / RELATED VALIDATION | Current 03に明示 | PARTIAL_REUSE | CURRENT REFINEMENT | NOT_ADOPTED |
+| Validated Research Result | PARTIAL / RELATED VALIDATION | Current 03に明示 | PARTIAL_REUSE | CURRENT REFINEMENT | NOT_ADOPTED |
+| Knowledge Admission | PARTIAL | Current 04でAdmission / Promotion一体 | PARTIAL_REUSE | SPLIT / REFINE | NOT_ADOPTED |
+| Knowledge Promotion | PARTIAL | Current 04でAdmission / Promotion一体 | PARTIAL_REUSE | SPLIT / REFINE | NOT_ADOPTED |
+| Knowledge Record | Knowledge Object思想あり | Current 04にContext候補あり | IN_REVIEW | DEFINE LATER | NOT_ADOPTED |
+| Knowledge Pool | STRONG | Current 04に明示 | ADOPTABLE | CURRENTを優先 | NOT_ADOPTED |
+
+---
+
+## 7.2 Demo Forward
+
+### Legacy Source-backed Fact
+
+Legacyでは、Demo Forwardを、
+
+\`\`\`text
+Hypothesis / Hypothesis SetをT0で固定
+↓
+T0以降の新しい市場Dataだけを使用
+↓
+Forward Trial
+↓
+Evidence Package
+\`\`\`
+
+として扱う案が存在する。
+
+Historical / OOS / Demo Forward / Liveは同質Evidenceとして単純合算しない。
+
+**Primary Legacy Sources:**
+
+\`\`\`text
+市場理解OS まとめ案 5.md
+市場理解OS まとめ案 10.md
+市場理解OS まとめ案 11.md
+\`\`\`
+
+### Current Research-1 Relation
+
+Current \`03_RESEARCH\` はすでに、
+
+\`\`\`text
+Forward Validation
+Forward Evidence
+Historical / OOS / Forward / Stress / LiveのChannel分離
+\`\`\`
+
+を持つ。
+
+### Derived Reuse Proposal
+
+> **Demo Forward = 特定VersionのResearch Target / HypothesisをT0でFreezeし、T0以降に新しく到着したDataだけを使ってForward Evidenceを生成する03_RESEARCH内のValidation Method候補。**
+
+Responsibility候補:
+
+\`\`\`text
+Version Freeze
+T0境界
+Future-only Validation
+Forward Evidence生成
+Process FailureとHypothesis Failureの分離
+\`\`\`
+
+Does Not Own:
+
+\`\`\`text
+Knowledge Promotion
+Applicability
+Signal
+Trade Permission
+Live Execution Authority
+\`\`\`
+
+禁止候補:
+
+\`\`\`text
+T0前後Data Leakage
+Outcomeを見た後の同Version書換え
+HistoricalとForwardの同質合算
+Demo PASSからProductionへ直結
+\`\`\`
+
+関係:
+
+\`\`\`text
+Demo Forward
+= HOW
+
+Forward Evidence
+= RESULT
+
+Evidence Channel = FORWARD
+= IDENTITY
+\`\`\`
+
+### Review
+
+\`\`\`text
+LEGACY_CONFLICT_STATUS:
+MINOR
+
+LEGACY_REVIEW_STATUS:
+PARTIAL_REUSE
+
+LEGACY_REUSE_RECOMMENDATION:
+MERGE / REFINE
+
+CURRENT_DESIGN_STATUS:
+NOT_ADOPTED
+\`\`\`
+
+---
+
+## 7.3 Evidence Channel
+
+### Legacy Source-backed Fact
+
+LegacyはHistorical / OOS / Demo Forward / Stress / Live等のEvidence Sourceを分離し、単一件数・単一勝率へ潰さない思想を持つ。
+
+### Current Research-1 Relation
+
+Current \`03_RESEARCH\` に以下が明示済み。
+
+\`\`\`text
+Runtime / Observational Evidence
+Historical Evidence
+OOS Evidence
+Forward Evidence
+Stress Evidence
+Production / Live Evidence
+\`\`\`
+
+### Derived Reuse Proposal
+
+> **Evidence Channel = EvidenceがどのValidation / Observation経路から生成されたかというIdentity / Contextを保持する分類責任。**
+
+Evidence Channelは、
+
+\`\`\`text
+Hypothesis Verdict
+Evidence Strength
+Knowledge Promotion
+Applicability
+Trade Permission
+\`\`\`
+
+を決定しない。
+
+Different ChannelであってもIndependent Evidenceとは限らない。
+
+### Review
+
+\`\`\`text
+LEGACY_CONFLICT_STATUS:
+NONE
+
+LEGACY_REVIEW_STATUS:
+ADOPTABLE
+
+LEGACY_REUSE_RECOMMENDATION:
+MERGE
+
+CURRENT_DESIGN_STATUS:
+NOT_ADOPTED
+\`\`\`
+
+---
+
+## 7.4 Evidence Role
+
+### Legacy Source-backed Fact
+
+LegacyにはSupporting / Conditional / Contradicting等の役割分離思想があり、Current 03にもEvidence Source / Roleを区別する要求が存在する。
+
+### Derived Reuse Proposal
+
+> **Evidence Role = Evidenceが特定Research Targetに対して何を確認する目的で使われるかを表すTarget-relative Relationship Context。**
+
+詳細Taxonomy候補:
+
+\`\`\`text
+SUPPORTING
+CONTRADICTING
+DISCRIMINATING
+CONDITIONING
+BOUNDARY
+CONTEXTUAL
+PROCESS_VALIDATION
+\`\`\`
+
+重要:
+
+\`\`\`text
+Role
+≠ Outcome
+≠ Strength
+≠ Channel
+≠ Source
+\`\`\`
+
+同一EvidenceがTargetごとに異なるRoleを持つことを許容する。
+
+Taxonomy自体はLegacy原文ではなくDerived Proposal。
+
+### Review
+
+\`\`\`text
+LEGACY_CONFLICT_STATUS:
+NONE / MINOR
+
+LEGACY_REVIEW_STATUS:
+PARTIAL_REUSE
+
+LEGACY_REUSE_RECOMMENDATION:
+REFINE / MERGE
+
+CURRENT_DESIGN_STATUS:
+NOT_ADOPTED
+\`\`\`
+
+---
+
+## 7.5 Evidence Outcome / Evidence Evaluation Status
+
+### Legacy Source-backed Fact
+
+Legacy / CurrentにはSUPPORTED / REFUTED / INCONCLUSIVE等のResearch Result思想はあるが、Evidence単位の独立したEvidence Outcome Object / Definitionは確認できない。
+
+したがって、以下はLegacy DefinitionではなくDerived Proposal。
+
+### Derived Reuse Proposal — Evidence Outcome
+
+> **Evidence Outcome = Evidenceを特定Research Targetに対して定義されたRoleに沿って評価した際、実際に何を示したかを表すTarget-relative Result Context。**
+
+Outcome候補:
+
+\`\`\`text
+SUPPORTIVE
+CONTRADICTING
+NEUTRAL
+MIXED
+INCONCLUSIVE
+UNKNOWN
+\`\`\`
+
+### Important Correction — Evaluation Statusを分離
+
+\`NOT_OBSERVED\` と \`INVALID\` はOutcome Directionと同一Enumへ入れない。
+
+別軸候補:
+
+\`\`\`text
+Evidence Evaluation Status
+├─ VALID
+├─ INVALID
+├─ NOT_OBSERVED
+├─ NOT_EVALUATED
+└─ UNKNOWN
+\`\`\`
+
+理由:
+
+\`\`\`text
+Outcome
+= 何を示したか
+
+Evaluation Status
+= そもそも評価可能 / 観測可能だったか
+\`\`\`
+
+したがって、
+
+\`\`\`text
+INVALID
+≠ CONTRADICTING
+
+NOT_OBSERVED
+≠ 自動的にCONTRADICTING
+\`\`\`
+
+とする。
+
+### Review
+
+\`\`\`text
+LEGACY_CONFLICT_STATUS:
+MINOR
+
+LEGACY_REVIEW_STATUS:
+REDESIGN_REQUIRED
+
+LEGACY_REUSE_RECOMMENDATION:
+DERIVED PROPOSAL
+
+CURRENT_DESIGN_STATUS:
+NOT_ADOPTED
+\`\`\`
+
+---
+
+## 7.6 Shared Evidence / Evidence Dependency
+
+### Shared Evidence — Source-backed Fact
+
+LegacyではHypothesis数をConfidenceとして使わず、
+
+\`\`\`text
+shared_evidence_ids
+dependency
+redundancy
+common_cause
+mechanism_group
+\`\`\`
+
+等を認識する案が存在する。
+
+Current 04にも、
+
+\`\`\`text
+Shared Evidence
+Shared Cause
+Derived Relationship
+Duplicate / Overlap
+\`\`\`
+
+が存在する。
+
+### Shared Evidence — Derived Definition
+
+> **Shared Evidence = 複数Hypothesis / Research Result / Knowledge等が同一または実質的に重複するEvidence / Observation / Market Event / Source等を共有しているRelationship。**
+
+目的:
+
+> 同じEvidenceを複数の独立支持として二重計上しない。
+
+### Evidence Dependency — Derived Definition
+
+> **Evidence Dependency = Evidenceや評価の意味・成立が、別Evidence / Observation / Source / Market Event / Derived Feature / Research Result等へ依存しているRelationship。**
+
+概念候補:
+
+\`\`\`text
+Direct Dependency
+Derived Dependency
+Common Source Dependency
+Common Event Dependency
+Common Cause Dependency
+Temporal Dependency
+Research Dependency
+Unknown Dependency
+\`\`\`
+
+具体Enumはまだ固定しない。
+
+重要:
+
+\`\`\`text
+Shared
+≠ Dependency
+
+Dependency
+≠ Invalid
+
+Dependency
+≠ Causality Proof
+\`\`\`
+
+### Review
+
+\`\`\`text
+Shared Evidence:
+LEGACY_CONFLICT_STATUS = NONE
+LEGACY_REVIEW_STATUS = ADOPTABLE
+LEGACY_REUSE_RECOMMENDATION = MERGE
+
+Evidence Dependency:
+LEGACY_CONFLICT_STATUS = MINOR
+LEGACY_REVIEW_STATUS = PARTIAL_REUSE
+LEGACY_REUSE_RECOMMENDATION = REFINE / MERGE
+
+CURRENT_DESIGN_STATUS:
+NOT_ADOPTED
+\`\`\`
+
+---
+
+## 7.7 Evidence Strength
+
+### Legacy Source-backed Fact
+
+Legacy Causal Engineには \`Evidence Strength\` が研究項目として明示される。
+
+Current 04にも、
+
+\`\`\`text
+Evidence Strength
+≠ Applicability
+\`\`\`
+
+が明示されている。
+
+### Derived Reuse Proposal
+
+> **Evidence Strength = Evidenceが特定Targetに対して割り当てられたEvidence Roleを、どの程度信頼して研究判断へ利用できるかを表すTarget-relative Assessment Context。**
+
+評価Context候補:
+
+\`\`\`text
+Data / Source Quality
+Reproducibility
+Channel Context
+Target Relevance
+Independence / Dependency
+Contradiction Context
+Temporal / Version Validity
+Sample / Unique Market Event Coverage
+Research Process Integrity
+Uncertainty
+\`\`\`
+
+重要:
+
+\`\`\`text
+Strength
+≠ Evidence Count
+≠ Channel
+≠ Outcome
+≠ Independence
+≠ Applicability
+\`\`\`
+
+現段階ではUniversal Score化しない。
+
+### Review
+
+\`\`\`text
+LEGACY_CONFLICT_STATUS:
+NONE / MINOR
+
+LEGACY_REVIEW_STATUS:
+ADOPTABLE
+
+LEGACY_REUSE_RECOMMENDATION:
+MERGE / REFINE
+
+CURRENT_DESIGN_STATUS:
+NOT_ADOPTED
+\`\`\`
+
+---
+
+## 7.8 Evidence Profile
+
+### Legacy Source-backed Fact
+
+LegacyはEvidence Package / Evidence Source Separationを持ち、Historical / OOS / Demo / Live等を一つの数字へ潰さない。
+
+Current 04にはすでに \`Evidence Profile\` が存在する。
+
+### Derived Reuse Proposal
+
+> **Evidence Profile = 一つのResearch Target / Hypothesisに対する複数Evidenceを、Channel・Role・Outcome・Strength・Source・Time・Version・Quality・Uncertainty・Shared / Dependency Contextを失わず整理し、支持・矛盾・不足・依存関係を確認可能にするEvidence構造。**
+
+### Important Correction — Ownership
+
+推奨Ownership候補:
+
+\`\`\`text
+03_RESEARCH
+↓
+Evidence Profileを生成 / 構成
+↓
+Research Resultへ保持
+↓
+Validated Research Result
+↓
+04_KNOWLEDGE_APPLICABILITY
+Evidence Profileを参照
+\`\`\`
+
+04が同じEvidence Profileを再生成しない。
+
+これはCurrentへの採用決定ではなくOwnership Refinement Proposal。
+
+Evidence Profileは、
+
+\`\`\`text
+Evidence Score
+Hypothesis Verdict
+Knowledge Promotion
+Applicability
+Trade Permission
+\`\`\`
+
+を所有しない。
+
+### Review
+
+\`\`\`text
+LEGACY_CONFLICT_STATUS:
+MINOR
+
+LEGACY_REVIEW_STATUS:
+PARTIAL_REUSE
+
+LEGACY_REUSE_RECOMMENDATION:
+MERGE / OWNERSHIP REFINE
+
+CURRENT_DESIGN_STATUS:
+NOT_ADOPTED
+\`\`\`
+
+---
+
+## 7.9 Hypothesis Assessment
+
+### Source Relation
+
+LegacyにはHypothesis Score / Reliability / Lifecycle / SUPPORTED / WEAK / RETIRED等が存在するが、今回の多軸 \`Hypothesis Assessment\` と同一ではない。
+
+Current 03にも独立Objectとしては存在しない。
+
+したがって、これはDerived Reuse Proposal。
+
+### Derived Definition
+
+> **Hypothesis Assessment = 特定VersionのHypothesisに紐付くEvidence Profileを、Role・Outcome・Strength・Channel・Quality・Shared Evidence・Dependency・Contradiction・Alternative Hypothesis・Condition・Failure Boundary・Evidence Gap・Uncertainty・Research Process Integrityを保持したまま解釈し、「このHypothesisについて研究上どこまで言えるか」を整理するResearch評価。**
+
+多軸候補:
+
+\`\`\`text
+Conclusion
+Scope
+Contradiction
+Alternative Status
+Boundary Status
+Evidence Coverage
+Dependency Context
+Uncertainty
+Process Integrity
+\`\`\`
+
+禁止:
+
+\`\`\`text
+Evidence数 → Hypothesis Result
+平均Strength → Hypothesis Result
+Supporting多数決 → SUPPORTED
+AI判断 → SUPPORTED
+\`\`\`
+
+Hypothesis AssessmentはLifecycle変更Authorityを持たない。
+
+### Review
+
+\`\`\`text
+LEGACY_CONFLICT_STATUS:
+MINOR
+
+LEGACY_REVIEW_STATUS:
+REDESIGN_REQUIRED
+
+LEGACY_REUSE_RECOMMENDATION:
+DERIVED PROPOSAL
+
+CURRENT_DESIGN_STATUS:
+NOT_ADOPTED
+\`\`\`
+
+---
+
+## 7.10 Research Result
+
+### Legacy Source-backed Fact
+
+LegacyにはResearch ResultがKnowledge Object / Research Outputとして存在する。
+
+Current 03でも正式なResearch出口候補として明示されている。
+
+### Derived Refinement
+
+> **Research Result = 特定Research Question / Research Planについて得られたEvidence ProfileとHypothesis Assessmentを中心に、Alternative Hypothesis・Contradiction・Condition・Failure Boundary・Constraint Candidate・Reproducibility・Regime Dependency・Uncertainty・Unknown・Research Process状態・Trace / Versionを統合し、そのResearchによって何が分かり、何が分からず、どの条件で成立し、どこで壊れたかを追跡可能に表現するResearch成果。**
+
+重要:
+
+\`\`\`text
+Research Result
+≠ Hypothesis Assessment
+≠ Knowledge
+≠ Applicability
+≠ Production Approval
+\`\`\`
+
+成功だけでなく、
+
+\`\`\`text
+REFUTED
+INCONCLUSIVE
+REGIME DEPENDENT
+FAILURE BOUNDARY FOUND
+INSUFFICIENT EVIDENCE
+UNKNOWN
+\`\`\`
+
+もResearch Assetになり得る。
+
+### Review
+
+\`\`\`text
+LEGACY_CONFLICT_STATUS:
+NONE / MINOR
+
+LEGACY_REVIEW_STATUS:
+ADOPTABLE
+
+LEGACY_REUSE_RECOMMENDATION:
+MERGE / REFINE
+
+CURRENT_DESIGN_STATUS:
+NOT_ADOPTED
+\`\`\`
+
+---
+
+## 7.11 Validation Gate
+
+### Source Relation
+
+LegacyにはValidation / Evidence Package / Approval等の関連思想があるが、Current \`Validation Gate\` と同一Definitionではない。
+
+Current 03にValidation Gateが明示済み。
+
+### Derived Refinement
+
+> **Validation Gate = Research Resultが次のKnowledge領域で再評価・再利用可能な最低限のResearch Integrity / Trace / Version / Evidence Contextを保持しているかを確認する03_RESEARCHの品質境界。**
+
+確認候補:
+
+\`\`\`text
+Research Question / Target / Version
+Evidence Source / Channel / Role
+Contradiction / Alternative
+Failure Boundary / Constraint
+Uncertainty / Unknown
+Research Process FailureとHypothesis Refutationの分離
+Trace / Provenance
+\`\`\`
+
+### Important Correction — 新Conceptを無条件必須化しない
+
+Evidence Strength / Shared Evidence / Evidence Dependency等は、
+
+> **Research Type上必要な場合に追跡可能であること**
+
+をGate確認候補とする。
+
+全Researchへ空Object生成を強制しない。
+
+\`\`\`text
+Required when applicable
+≠ Required for every Research
+\`\`\`
+
+Validation Gateは、
+
+\`\`\`text
+Hypothesis Truth Gate
+Knowledge Approval Gate
+Production Approval Gate
+\`\`\`
+
+ではない。
+
+### Review
+
+\`\`\`text
+LEGACY_CONFLICT_STATUS:
+MINOR
+
+LEGACY_REVIEW_STATUS:
+PARTIAL_REUSE
+
+LEGACY_REUSE_RECOMMENDATION:
+CURRENT REFINEMENT
+
+CURRENT_DESIGN_STATUS:
+NOT_ADOPTED
+\`\`\`
+
+---
+
+## 7.12 Validated Research Result
+
+### Current Source-backed Fact
+
+Current 03では、
+
+> **Validated = Hypothesisが正しい、ではなく、Research Resultが定義された研究・検証・Trace要件を満たし次のKnowledge領域で評価可能な形になっていること**
+
+と定義されている。
+
+### Derived Refinement
+
+> **Validated Research Result = Validation Gateで必要なResearch Integrity・Evidence Traceability・Version Integrity・Contradiction / Uncertainty保持・Process Integrity等を満たし、SUPPORTED / REFUTED / INCONCLUSIVE等の結論種別に関係なく04が再評価可能になった正式Research Output。**
+
+重要:
+
+\`\`\`text
+Validated
+≠ Proven
+≠ Supported
+≠ Knowledge
+≠ Applicable
+≠ Production Approved
+\`\`\`
+
+例:
+
+\`\`\`text
+Research Conclusion = REFUTED
+Validation Status = VALIDATED
+
+Research Conclusion = INCONCLUSIVE
+Validation Status = VALIDATED
+\`\`\`
+
+も成立し得る。
+
+### Review
+
+\`\`\`text
+LEGACY_CONFLICT_STATUS:
+MINOR
+
+LEGACY_REVIEW_STATUS:
+PARTIAL_REUSE
+
+LEGACY_REUSE_RECOMMENDATION:
+CURRENT REFINEMENT
+
+CURRENT_DESIGN_STATUS:
+NOT_ADOPTED
+\`\`\`
+
+---
+
+## 7.13 Knowledge Admission / Knowledge Promotion
+
+### Legacy / Current Source Relation
+
+LegacyにはEvidence Package → Knowledge Candidate → Approval等の近い思想が存在する。
+
+Current 04には、
+
+\`\`\`text
+Validated Research Result
+↓
+Knowledge Admission / Promotion
+↓
+Knowledge Record / Knowledge Pool
+\`\`\`
+
+が存在するが、AdmissionとPromotionはまだ一体Concept。
+
+今回の二段分離はDerived Proposal。
+
+### Knowledge Admission — Derived Definition
+
+> **Knowledge Admission = Validated Research Resultを将来再利用可能なKnowledgeとして管理する価値があるか、また既存KnowledgeとのRelation上どの扱いが適切かを判断する04 Knowledge Maintenance Pathの入口審査。**
+
+扱い候補:
+
+\`\`\`text
+NEW
+MERGE
+UPDATE_CANDIDATE
+LINK
+DEFER
+REJECT_AS_KNOWLEDGE
+\`\`\`
+
+具体Enumは未確定。
+
+Important:
+
+\`\`\`text
+Validated
+≠ Admission必須
+
+Not Admitted as Knowledge
+≠ Research Result Deleted
+\`\`\`
+
+### Knowledge Promotion — Derived Definition
+
+> **Knowledge Promotion = AdmissionでKnowledge化価値があると判断されたValidated Research Resultについて、Claim・Condition・Failure Boundary・Constraint・Evidence Profile・Contradiction・Uncertainty・Version・Trace・既存Knowledge Relationを整理し、新規Knowledge Recordまたは既存Knowledge Version / Relationship UpdateとしてKnowledge Poolへ正式反映するMaintenance処理。**
+
+### Important Correction — Naming Collision
+
+Legacyには別責任としてProduction Promotion Ladderが存在する。
+
+したがって必ず、
+
+\`\`\`text
+Knowledge Promotion
+≠ Production Promotion
+\`\`\`
+
+を明記する。
+
+将来のRename候補:
+
+\`\`\`text
+Knowledge Registration
+Knowledge Materialization
+Knowledge Commit
+\`\`\`
+
+ただし現時点ではRenameを確定しない。
+
+### Does Not Own
+
+\`\`\`text
+Current Applicability
+Production Approval
+Trade Thesis
+Signal
+Risk Permission
+Execution
+\`\`\`
+
+### Review
+
+\`\`\`text
+LEGACY_CONFLICT_STATUS:
+MINOR
+
+LEGACY_REVIEW_STATUS:
+PARTIAL_REUSE
+
+LEGACY_REUSE_RECOMMENDATION:
+SPLIT / REFINE
+
+CURRENT_DESIGN_STATUS:
+NOT_ADOPTED
+\`\`\`
+
+---
+
+## 7.14 Knowledge Record / Knowledge Pool
+
+### Knowledge Record
+
+LegacyにはKnowledge Object思想、Current 04にはKnowledgeが保持すべきContext候補が存在する。
+
+今回のConceptual Candidate:
+
+> **Knowledge Record = Validated Research ResultからKnowledge Admission / Promotionを経て、Claim・Condition・Failure Boundary・Constraint・Evidence Context・Uncertainty・Version・Trace等を再利用可能な形で保持する正式Knowledge表現候補。**
+
+ただしFormal Definition Reviewは未完了。
+
+\`\`\`text
+LEGACY_REVIEW_STATUS:
+IN_REVIEW
+
+CURRENT_DESIGN_STATUS:
+NOT_ADOPTED
+\`\`\`
+
+### Knowledge Pool
+
+Current 04の既存責任を優先する。
+
+\`\`\`text
+Knowledge Pool
+≠ Trade Rule一覧
+≠ SUPPORTED Hypothesis一覧
+\`\`\`
+
+役割:
+
+\`\`\`text
+何が分かったか
+どこで成立するか
+どこで失敗するか
+何が否定されたか
+何が禁止条件か
+何が不明か
+\`\`\`
+
+を再利用可能な形で参照する論理Knowledge領域。
+
+---
+
+## 7.15 Review Batch A — Final Boundary
+
+このBatchで得た再利用候補の論理フロー:
+
+\`\`\`text
+Demo Forward
+↓
+Evidence Channel
+↓
+Evidence Role
+↓
+Evidence Outcome
++
+Evidence Evaluation Status
+↓
+Shared Evidence / Evidence Dependency
+↓
+Evidence Strength
+↓
+Evidence Profile
+↓
+Hypothesis Assessment
+↓
+Research Result
+↓
+Validation Gate
+↓
+Validated Research Result
+──────────────
+03_RESEARCH Boundary
+──────────────
+↓
+Knowledge Admission
+↓
+Knowledge Promotion
+↓
+Knowledge Record
+↓
+Knowledge Pool
+──────────────
+04 Knowledge Maintenance
+\`\`\`
+
+重要:
+
+\`\`\`text
+Evidence
+≠ Hypothesis Assessment
+
+Hypothesis Assessment
+≠ Research Result
+
+Research Result
+≠ Validated Research Result
+
+Validated Research Result
+≠ Knowledge
+
+Knowledge
+≠ Applicable Knowledge
+
+Applicable Knowledge
+≠ Trade Permission
+\`\`\`
+
+このFlow全体は、
+
+> **Legacy Source + Current Working Baselineを比較して作ったReuse Proposalであり、Current Design採用済みFlowではない。**
+
+
+---
+
 # 8. FIX / Failure Index
 
 FIX履歴を、単なるGit履歴ではなく再利用可能なFailure Knowledgeとして索引化する。
@@ -776,17 +1790,17 @@ ConceptからOriginal Sourceへ戻れるようにする。
 
 | Source | LEGACY_SOURCE_CLASS | SOURCE_REVIEW_STATUS | Main Knowledge |
 |---|---|---|---|
-| `市場理解OS まとめ案 1.md` | LEGACY_SUMMARY | NOT_REVIEWED | `<TODO>` |
-| `市場理解OS まとめ案 2.md` | LEGACY_SUMMARY | NOT_REVIEWED | `<TODO>` |
-| `市場理解OS まとめ案 3.md` | LEGACY_SUMMARY | NOT_REVIEWED | `<TODO>` |
-| `市場理解OS まとめ案 4.md` | LEGACY_SUMMARY | NOT_REVIEWED | `<TODO>` |
-| `市場理解OS まとめ案 5.md` | LEGACY_SUMMARY | NOT_REVIEWED | `<TODO>` |
-| `市場理解OS まとめ案 6.md` | LEGACY_SUMMARY | NOT_REVIEWED | `<TODO>` |
-| `市場理解OS まとめ案 7.md` | LEGACY_SUMMARY | NOT_REVIEWED | `<TODO>` |
-| `市場理解OS まとめ案 8.md` | LEGACY_SUMMARY | NOT_REVIEWED | `<TODO>` |
-| `市場理解OS まとめ案 9.md` | LEGACY_SUMMARY | NOT_REVIEWED | `<TODO>` |
-| `市場理解OS まとめ案 10.md` | LEGACY_SUMMARY | NOT_REVIEWED | `<TODO>` |
-| `市場理解OS まとめ案 11.md` | LEGACY_SUMMARY | NOT_REVIEWED | `<TODO>` |
+| `市場理解OS まとめ案 1.md` | LEGACY_SUMMARY | REVIEWED | Legacy全体像 / Domain構成 |
+| `市場理解OS まとめ案 2.md` | LEGACY_SUMMARY | REVIEWED | Outer / Control / Connection |
+| `市場理解OS まとめ案 3.md` | LEGACY_SUMMARY | REVIEWED | Market Understanding Core |
+| `市場理解OS まとめ案 4.md` | LEGACY_SUMMARY | REVIEWED | Causal / Market DNA / Knowledge |
+| `市場理解OS まとめ案 5.md` | LEGACY_SUMMARY | REVIEWED | Research / Experimental / Validation |
+| `市場理解OS まとめ案 6.md` | LEGACY_SUMMARY | REVIEWED | Production / Trading |
+| `市場理解OS まとめ案 7.md` | LEGACY_SUMMARY | REVIEWED | Post-Trade / Feedback / Trace |
+| `市場理解OS まとめ案 8.md` | LEGACY_SUMMARY | REVIEWED | Python Runtime / Operations / Telegram |
+| `市場理解OS まとめ案 9.md` | LEGACY_SUMMARY | REVIEWED | 固定候補 / 未解決TODO / Formal Design Checklist |
+| `市場理解OS まとめ案 10.md` | LEGACY_SUMMARY | REVIEWED | Research Evidence Ladder / Multi-Hypothesis Trade Thesis |
+| `市場理解OS まとめ案 11.md` | LEGACY_SUMMARY | REVIEWED | Long-term Governance / Plane / Knowledge Spine |
 | `01_DICTIONARY/OBJECT_DICTIONARY.md` | LEGACY_ORIGINAL | NOT_REVIEWED | Object / Concept |
 | `01_DICTIONARY/ROLE_DICTIONARY.md` | LEGACY_ORIGINAL | NOT_REVIEWED | Role |
 | `01_DICTIONARY/STATE_DICTIONARY.md` | LEGACY_ORIGINAL | NOT_REVIEWED | State / Lifecycle |
@@ -867,7 +1881,7 @@ Save Destination Resolution
 
 ```text
 REFERENCE_BUILD_STATE:
-SKELETON
+LEGACY_REVIEW_IN_PROGRESS
 ```
 
 候補:
