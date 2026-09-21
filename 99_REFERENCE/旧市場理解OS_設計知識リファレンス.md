@@ -636,7 +636,7 @@ Related Backup:
 
 ## 7.1 Review Batch A — Research Evidence / Knowledge Maintenance
 
-**Review Date:** 2026-09-20  
+**Review Date:** 2026-09-21  
 **Review Scope:** 旧市場理解OSのResearch Evidence系ConceptをCurrent \`03_RESEARCH\` / \`04_KNOWLEDGE_APPLICABILITY\` と比較し、再利用候補を整理する。  
 **Current Design Authority:** NONE  
 **Current Design Status:** NOT_ADOPTED  
@@ -685,8 +685,14 @@ Reuse Recommendation
 | Validated Research Result | PARTIAL / RELATED VALIDATION | Current 03に明示 | PARTIAL_REUSE | CURRENT REFINEMENT | NOT_ADOPTED |
 | Knowledge Admission | PARTIAL | Current 04でAdmission / Promotion一体 | PARTIAL_REUSE | SPLIT / REFINE | NOT_ADOPTED |
 | Knowledge Promotion | PARTIAL | Current 04でAdmission / Promotion一体 | PARTIAL_REUSE | SPLIT / REFINE | NOT_ADOPTED |
-| Knowledge Record | Knowledge Object思想あり | Current 04にContext候補あり | IN_REVIEW | DEFINE LATER | NOT_ADOPTED |
+| Knowledge Record | Knowledge Object思想あり | Current 04にContext候補あり | PARTIAL_REUSE | REFINE / DEFINE | NOT_ADOPTED |
 | Knowledge Pool | STRONG | Current 04に明示 | ADOPTABLE | CURRENTを優先 | NOT_ADOPTED |
+| Applicability Evaluation | PARTIAL / IMPLICIT | Current 04に明示 | PARTIAL_REUSE | CURRENT REFINEMENT | NOT_ADOPTED |
+| Applicability Assessment | NO DIRECT LEGACY OBJECT | Current 04にConcept候補あり | PARTIAL_REUSE | CURRENT REFINEMENT | NOT_ADOPTED |
+| Applicable Knowledge Set | PARTIAL / PRODUCTION APPLICABILITY思想 | Current 04に明示 | PARTIAL_REUSE | CURRENT REFINEMENT | NOT_ADOPTED |
+| Evaluation Status | NO DIRECT LEGACY OBJECT | Current state候補から分離Proposal | DERIVED | NEW PROPOSAL | NOT_ADOPTED |
+| Constraint Gate Status | PARTIAL / Constraint思想あり | Current Constraint Checkを精密化 | DERIVED | NEW PROPOSAL | NOT_ADOPTED |
+| Candidate Retrieval Trace | NO DIRECT LEGACY OBJECT | Current Runtime検索責任の精密化 | DERIVED | NEW PROPOSAL | NOT_ADOPTED |
 
 ---
 
@@ -1532,118 +1538,783 @@ NOT_ADOPTED
 
 ## 7.14 Knowledge Record / Knowledge Pool
 
-### Knowledge Record
+### Source Relation
 
-LegacyにはKnowledge Object思想、Current 04にはKnowledgeが保持すべきContext候補が存在する。
+LegacyにはKnowledge Domain / Knowledge Object / Knowledge Spine思想があり、Current 04にはKnowledge Pool・Knowledge Version・Knowledge Status・条件付きKnowledgeの責任が存在する。
 
-今回のConceptual Candidate:
+今回のKnowledge Record正式化は、Legacy原文の単純復活ではなくCurrent責任を細分化したDerived Refinement。
 
-> **Knowledge Record = Validated Research ResultからKnowledge Admission / Promotionを経て、Claim・Condition・Failure Boundary・Constraint・Evidence Context・Uncertainty・Version・Trace等を再利用可能な形で保持する正式Knowledge表現候補。**
+### Knowledge Record — Formal Definition Candidate
 
-ただしFormal Definition Reviewは未完了。
+> **Knowledge Record = Validated Research ResultがKnowledge Admission / Knowledge Promotionを経て、ClaimだけでなくScope・成立条件・Failure Boundary・Constraint Context・Evidence Context・Contradiction・Uncertainty・Version・Validation History・Trace / Provenance・他KnowledgeとのRelationshipを保持し、将来のResearchおよびApplicabilityから再利用可能な形へ整理された正式Knowledge単位候補。**
 
-\`\`\`text
-LEGACY_REVIEW_STATUS:
-IN_REVIEW
+重要:
 
-CURRENT_DESIGN_STATUS:
-NOT_ADOPTED
-\`\`\`
+~~~text
+Research Result
+≠ Knowledge Record
 
-### Knowledge Pool
+Hypothesis
+≠ Knowledge Record
 
-Current 04の既存責任を優先する。
+Knowledge Record
+≠ Current Applicability
 
-\`\`\`text
+Knowledge Record
+≠ Trade Permission
+~~~
+
+Knowledge Recordは概念上、以下を保持可能にする。
+
+~~~text
+Knowledge Identity
+Knowledge Type
+Claim / Finding
+Scope
+Condition
+Failure Boundary
+Constraint Context
+Evidence Profile Reference
+Contradiction
+Uncertainty
+Target Asset / Market
+Time Horizon
+Regime / Market Context
+Version
+Validation History
+Source Research Result
+Trace / Provenance
+Knowledge Relationships
+~~~
+
+具体Field / Schemaは未確定。
+
+### 1:N / N:1を許容
+
+~~~text
+1 Research Result
+→ 複数Knowledge候補
+
+複数Research Result
+→ 1 Knowledge Recordを支持 / 更新
+~~~
+
+Research ResultとKnowledge Recordを1:1固定しない。
+
+### Knowledge Version Correction
+
+~~~text
+Knowledge Content Version
+≠ Validation / Evidence History
+~~~
+
+Claim・Scope・Condition・Boundary等の意味変更はKnowledge Version候補。
+単なるEvidence追加だけで毎回Knowledge Versionを増やすとは限らない。
+
+旧Versionを無言で上書きしない。
+
+### Constraint Authority Correction
+
+Research側のConstraint CandidateをKnowledge Recordへ移しただけでProduction Hard Constraintへ自動昇格させない。
+
+概念上:
+
+~~~text
+Research Constraint Candidate
+↓
+Knowledge Constraint / Constraint Context
+↓
+別Authority / Governance
+↓
+Runtime Authorized Constraint
+~~~
+
+の身分差を保持可能にする。
+
+具体State / Authorityは未確定。
+
+### Failure Boundary Authority Correction
+
+Failure Boundaryも、存在するだけで無条件Hard Gateとしない。
+
+Applicabilityでは最低限、
+
+~~~text
+Failure Boundary Status
+Boundary Evidence Context
+Boundary Uncertainty
+~~~
+
+を参照可能にする。
+
+強く確立したBoundaryと限定EvidenceしかないBoundaryを同一扱いしない。
+
+### Knowledge Pool — Formal Definition Candidate
+
+> **Knowledge Pool = Knowledge Admission / Promotionを経て正式化されたPositive・Negative・Failure・Constraint・Uncertainty等のKnowledge Recordと、それらのVersion・Relationship・Research / Evidence Traceを、ResearchおよびRuntime Applicabilityから再利用可能な形で参照する04内の論理Knowledge領域。**
+
+重要:
+
+~~~text
+Knowledge Pool
+≠ Database Table
+
 Knowledge Pool
 ≠ Trade Rule一覧
-≠ SUPPORTED Hypothesis一覧
-\`\`\`
+
+Knowledge Pool
+≠ Approved Hypothesis一覧
+
+Knowledge Pool
+≠ Applicable Knowledge Set
+~~~
 
 役割:
 
-\`\`\`text
+~~~text
 何が分かったか
 どこで成立するか
 どこで失敗するか
 何が否定されたか
-何が禁止条件か
+何が制限条件か
 何が不明か
-\`\`\`
+~~~
 
-を再利用可能な形で参照する論理Knowledge領域。
+RuntimeからKnowledge Poolを直接書き換えない。
+
+~~~text
+Runtime Finding
+↓
+Research Candidate
+↓
+03_RESEARCH
+↓
+Validated Research Result
+↓
+Knowledge Maintenance
+~~~
+
+を基本方向とする。
+
+### Review
+
+~~~text
+Knowledge Record:
+LEGACY_CONFLICT_STATUS = MINOR
+LEGACY_REVIEW_STATUS = PARTIAL_REUSE
+LEGACY_REUSE_RECOMMENDATION = REFINE / DEFINE
+
+Knowledge Pool:
+LEGACY_CONFLICT_STATUS = NONE / MINOR
+LEGACY_REVIEW_STATUS = ADOPTABLE
+LEGACY_REUSE_RECOMMENDATION = CURRENT DESIGNを優先
+
+CURRENT_DESIGN_STATUS:
+NOT_ADOPTED
+~~~
 
 ---
 
-## 7.15 Review Batch A — Final Boundary
+## 7.15 Applicability Evaluation
 
-このBatchで得た再利用候補の論理フロー:
+### Current Relation
 
-\`\`\`text
-Demo Forward
+Current 04には既にApplicability Evaluation / State / Failure Boundary Check / Constraint Check / Evidence StrengthとApplicabilityの分離 / Validation Age / Knowledge Conflict・Overlapが存在する。
+
+今回のDefinitionはCurrent Working Baselineの精密化Proposal。
+
+### Formal Definition Candidate
+
+> **Applicability Evaluation = Knowledge Poolから参照したKnowledge RecordのScope・成立条件・Failure Boundary・Constraint Context・Evidence Context・Validation Age・Version・Uncertainty等を、特定時点のCurrent Market Understanding・Market DNA Snapshot・Quality / Freshness・Runtime Contextと照合し、Knowledgeの真偽やTrade方向を変更することなく、現在市場の意思決定材料として利用対象にできるかを評価するRuntime処理。**
+
+中心的な問い:
+
+> **「このKnowledgeは、今この市場条件で利用対象にしてよいか？」**
+
+Does Not Own:
+
+~~~text
+Research
+Knowledge Validation
+Knowledge Lifecycle Update
+Expected Value
+Trade Thesis
+BUY / SELL
+Risk Permission
+Execution
+~~~
+
+### Conceptual Evaluation
+
+~~~text
+Candidate Retrieval
 ↓
-Evidence Channel
+Knowledge Eligibility
 ↓
-Evidence Role
+Scope / Target Match
 ↓
-Evidence Outcome
-+
-Evidence Evaluation Status
+Condition Match
 ↓
-Shared Evidence / Evidence Dependency
+Failure Boundary Check
 ↓
-Evidence Strength
+Constraint Check
 ↓
-Evidence Profile
+Evidence Context
 ↓
-Hypothesis Assessment
+Validation Age / Version
 ↓
-Research Result
+Current Quality / Freshness
 ↓
-Validation Gate
+Contradiction
 ↓
-Validated Research Result
-──────────────
-03_RESEARCH Boundary
-──────────────
+Uncertainty
 ↓
-Knowledge Admission
+Relationship / Overlap
 ↓
-Knowledge Promotion
-↓
-Knowledge Record
-↓
-Knowledge Pool
-──────────────
-04 Knowledge Maintenance
-\`\`\`
+Applicability Assessment
+~~~
+
+これは責任整理の概念順であり、Python実装順を固定しない。
+
+### Condition Context
+
+~~~text
+MATCHED
+MISSING
+MISMATCHED
+UNKNOWN
+~~~
+
+の違いを表現可能にする。
 
 重要:
 
-\`\`\`text
-Evidence
-≠ Hypothesis Assessment
+~~~text
+MISSING
+≠ MISMATCHED
+~~~
 
-Hypothesis Assessment
-≠ Research Result
+UNKNOWNを自動MATCH扱いしない。
 
-Research Result
-≠ Validated Research Result
+### Applicability State Correction — MUST
 
-Validated Research Result
-≠ Knowledge
+従来候補のApplicability Stateは意味の異なるStateを混在させるため、Derived Proposalでは三軸へ分離する。
 
-Knowledge
-≠ Applicable Knowledge
+#### Applicability State
+
+~~~text
+APPLICABLE
+PARTIALLY_APPLICABLE
+NOT_APPLICABLE
+UNCERTAIN
+~~~
+
+#### Evaluation Status
+
+~~~text
+COMPLETED
+NOT_EVALUATED
+INCOMPLETE
+FAILED
+~~~
+
+#### Constraint Gate Status
+
+~~~text
+CLEAR
+LIMITED
+BLOCKED
+UNKNOWN
+~~~
+
+正式Enumは未確定。
+
+例:
+
+~~~text
+Applicability State = APPLICABLE
+Evaluation Status = COMPLETED
+Constraint Gate Status = BLOCKED
+~~~
+
+は成立し得る。
+
+これにより「KnowledgeはCurrent Marketに適合していたが、Runtime利用は禁止された」という情報を失わない。
+
+### PARTIALLY_APPLICABLE Correction — SHOULD
+
+PARTIALLY_APPLICABLEは主にScope / Conditionが部分一致している状態へ意味を寄せる。
+
+~~~text
+Condition完全一致
+BUT
+Evidence古い / Uncertainty高い
+~~~
+
+だけを理由にPARTIALへ潰さない。
+
+その場合は、
+
+~~~text
+Applicability State = APPLICABLE
++
+Uncertainty / Validation Age Context
+~~~
+
+または必要に応じてUNCERTAINとする方向を残す。
+
+### Current Context ≠ New Knowledge
+
+Runtime ObservationはApplicability Contextとして使えるが、新Knowledgeへ即昇格させない。
+新しい矛盾・未知はResearch Candidateへ戻す。
+
+### Review
+
+~~~text
+LEGACY_CONFLICT_STATUS:
+NONE / MINOR
+
+LEGACY_REVIEW_STATUS:
+PARTIAL_REUSE
+
+LEGACY_REUSE_RECOMMENDATION:
+CURRENT REFINEMENT
+
+CURRENT_DESIGN_STATUS:
+NOT_ADOPTED
+~~~
+
+---
+
+## 7.16 Applicability Assessment
+
+### Formal Definition Candidate
+
+> **Applicability Assessment = 特定VersionのKnowledge Recordを、特定Evaluation Contextに対してApplicability Evaluationした結果を、Applicability StateだけでなくEvaluation Status・Constraint Gate Status・Matched / Missing / Mismatched / Unknown Conditions・Failure Boundary・Evidence Context・Validation Age・Current Data Quality / Freshness・Contradiction・Uncertainty・Relationship / Overlap・Evaluation Reason / Limitationとともに保持する、説明可能なRuntime評価結果Object候補。**
+
+重要:
+
+~~~text
+Applicability Evaluation
+= 評価処理
+
+Applicability Assessment
+= 評価結果Object
+
+Knowledge Record
+≠ Applicability Assessment
+~~~
+
+AssessmentはKnowledgeの永久属性ではなくRuntime Snapshot。
+
+~~~text
+09:00 K-101 = APPLICABLE
+12:00 K-101 = NOT_APPLICABLE
+18:00 K-101 = UNCERTAIN
+~~~
+
+は正常。
+
+### Target / Context Binding
+
+必ず概念上、
+
+~~~text
+Knowledge ID
+Knowledge Version
+Evaluation Context
+Evaluation Time
+Applicability Logic / Assessment Version
+~~~
+
+へ紐付け可能にする。
+
+Evaluation Context候補:
+
+~~~text
+Market / Asset
+Current Market Understanding Ref
+Market DNA Snapshot Ref
+Quality Context
+Freshness Context
+Runtime Event / Session Context
+~~~
+
+### Assessment Context
+
+~~~text
+Applicability State
+Evaluation Status
+Constraint Gate Status
+Matched Conditions
+Missing Conditions
+Mismatched Conditions
+Unknown Conditions
+Failure Boundary Status
+Boundary Evidence / Uncertainty
+Evidence Context
+Validation Age Context
+Current Quality / Freshness
+Known Research Contradiction
+Current Applicability Contradiction
+Uncertainty
+Relationship / Shared Evidence / Dependency / Overlap Context
+Evaluation Reasons
+Evaluation Limitations
+~~~
+
+具体Schemaは未確定。
+
+### Excluded Assessmentも保持
+
+~~~text
+NOT_APPLICABLE
+UNCERTAIN
+Constraint Gate BLOCKED
+Evaluation INCOMPLETE / FAILED
+~~~
+
+もTrace対象とする。
+
+Runtimeで見つかった新しい矛盾はResearch Candidateへ返し、AssessmentがKnowledge Lifecycleを直接更新しない。
+
+### Review
+
+~~~text
+LEGACY_CONFLICT_STATUS:
+NONE / MINOR
+
+LEGACY_REVIEW_STATUS:
+PARTIAL_REUSE
+
+LEGACY_REUSE_RECOMMENDATION:
+CURRENT REFINEMENT
+
+CURRENT_DESIGN_STATUS:
+NOT_ADOPTED
+~~~
+
+---
+
+## 7.17 Applicable Knowledge Set
+
+### Formal Definition Candidate
+
+> **Applicable Knowledge Set = 特定Evaluation Contextに対して評価されたKnowledge Record群から、05_DECISIONが現在の意思決定材料として利用可能なものをApplicability Assessment付きで選別し、各KnowledgeのCondition・Failure Boundary・Constraint・Evidence・Uncertaintyを保持するとともに、Knowledge間のConflict・Shared Evidence・Dependency・Overlap等のRelationship Contextを解決せず引き継ぐ、04の正式Downstream Boundary Object候補。**
+
+重要:
+
+~~~text
+Applicable Knowledge Set
+≠ Knowledge Pool
+≠ Knowledge ID一覧
+≠ Trade Thesis
+≠ BUY / SELL
+≠ Trade Permission
+~~~
+
+### Member Selection Direction
+
+概念上:
+
+~~~text
+APPLICABLE
+→ Active Member候補
+
+PARTIALLY_APPLICABLE
+→ Conditional / Partial Member候補
+
+NOT_APPLICABLE
+→ Evaluated Exclusion Trace
+
+UNCERTAIN
+→ Active Setから通常除外 + Uncertainty Trace
+
+Constraint Gate = BLOCKED
+→ Active Setから除外 + Block Trace
+
+Evaluation Status ≠ COMPLETED
+→ Active Setから除外 + Process Trace
+~~~
+
+正式Selection Ruleは未確定。
+
+PARTIALをSetへ含める場合もPARTIALLY_APPLICABLEの身分を保持し、APPLICABLEへ昇格させない。
+単純な0.5票として扱わない。
+
+### Conflict / Shared Evidence
+
+04では、
+
+~~~text
+Conflict Exists
+Shared Evidence Exists
+Dependency Exists
+Overlap Exists
+~~~
+
+まで認識する。
+
+~~~text
+Conflict Winner
+Knowledge Weight
+Direction
+~~~
+
+は05の責任。
+
+したがって、
+
+~~~text
+3 Knowledge
+≠ 3 Independent Reasons
+~~~
+
+を05が理解できるRelationship Contextを保持する。
+
+### Empty Set
+
+~~~text
+Applicable Knowledge Set = EMPTY
+~~~
+
+を正常状態として許容する。
+
+重要:
+
+~~~text
+EMPTY
+≠ Evaluation Failure
+EMPTY
+≠ NO_TRADE Decision
+~~~
+
+### Review
+
+~~~text
+LEGACY_CONFLICT_STATUS:
+NONE / MINOR
+
+LEGACY_REVIEW_STATUS:
+PARTIAL_REUSE
+
+LEGACY_REUSE_RECOMMENDATION:
+CURRENT REFINEMENT
+
+CURRENT_DESIGN_STATUS:
+NOT_ADOPTED
+~~~
+
+---
+
+## 7.18 Runtime Applicability Review Corrections
+
+Knowledge Record → Applicable Knowledge Set全体Reviewで、保存前に以下6点をCorrectionとして反映する。
+
+### CORRECTION-01 — Applicability / Process / Constraint State Separation
+
+~~~text
+Applicability State
+Evaluation Status
+Constraint Gate Status
+~~~
+
+を分離する。
+
+理由:
+
+> 「市場に適合するか」「評価処理が完了したか」「利用禁止Gateに掛かったか」は別問題。
+
+### CORRECTION-02 — Constraint Candidate ≠ Runtime Hard Constraint
+
+~~~text
+Research Constraint Candidate
+≠ Knowledge Constraint / Constraint Context
+≠ Runtime Authorized Hard Constraint
+~~~
+
+Authority昇格を暗黙化しない。
+
+### CORRECTION-03 — Evaluation Context Binding
+
+同一Applicable Knowledge Set内のAssessmentは原則、同一または互換性を確認できるEvaluation Contextへ紐付ける。
+
+Evaluation Context候補:
+
+~~~text
+Evaluation Cycle / Time Window
+Current Market Understanding Ref
+Market DNA Snapshot Ref
+Quality Context
+Freshness Context
+~~~
+
+暴落前Assessmentと暴落後Assessmentを無条件に同一Setへ混ぜない。
+
+### CORRECTION-04 — Candidate Retrieval TraceとEvaluated Exclusion Traceを分離
+
+~~~text
+Knowledge Pool
+↓
+Candidate Retrieval
+├ Retrieved
+└ Not Retrieved
+       ↓
+Retrieved Candidate
+↓
+Applicability Evaluation
+├ Included
+└ Evaluated but Excluded
+~~~
+
+重要:
+
+~~~text
+Not Retrieved
+≠ NOT_APPLICABLE
+~~~
+
+### CORRECTION-05 — PARTIALLY_APPLICABLE Meaning
+
+PARTIALは主にScope / Conditionの部分一致を示す。
+
+Evidence Age / Evidence Weakness / UncertaintyだけをPARTIALへ押し込まない。
+
+### CORRECTION-06 — Failure Boundary Authority / Uncertainty
+
+Failure Boundaryが存在するだけで無条件Hard Gateとしない。
+
+最低限、
+
+~~~text
+Boundary Status
+Boundary Evidence Context
+Boundary Uncertainty
+~~~
+
+を保持可能にし、Boundaryの確立度を失わない。
+
+---
+
+## 7.19 Runtime Applicability Trace Separation
+
+### Candidate Retrieval Trace
+
+> **どのKnowledgeが今回Applicability Evaluation候補として取得された / されなかったか、その検索Contextと理由を追跡するTrace候補。**
+
+用途:
+
+~~~text
+なぜK-999は今回評価対象に入らなかったか？
+~~~
+
+を説明する。
+
+### Evaluated Exclusion Trace
+
+> **Applicability EvaluationされたKnowledgeが、なぜApplicable Knowledge Setへ入らなかったかを追跡するTrace候補。**
+
+例:
+
+~~~text
+NOT_APPLICABLE
+UNCERTAIN
+Constraint Gate BLOCKED
+Evaluation INCOMPLETE
+Evaluation FAILED
+PARTIAL but not selected
+~~~
+
+重要:
+
+~~~text
+Candidate Retrieval Trace
+≠ Evaluated Exclusion Trace
+~~~
+
+---
+
+## 7.20 Runtime Applicability — Final Boundary
+
+今回のRefinement後の概念Flow:
+
+~~~text
+Knowledge Pool
+↓
+Candidate Retrieval
+↓
+Candidate Retrieval Trace
+↓
+Knowledge Candidates
+        +
+Evaluation Context
+        ↓
+Applicability Evaluation
+        ↓
+Applicability Assessment
+├ Applicability State
+├ Evaluation Status
+├ Constraint Gate Status
+├ Condition Match
+├ Failure Boundary Context
+├ Evidence Context
+├ Validation Age
+├ Quality / Freshness
+├ Contradiction
+├ Uncertainty
+└ Relationship Context
+        ↓
+Set Construction
+├ Applicable Members
+├ Conditional / Partial Members
+└ Evaluated Exclusion Trace
+        ↓
+Applicable Knowledge Set
++
+Conflict / Shared Evidence /
+Dependency / Overlap Context
+        ↓
+05_DECISION
+~~~
+
+Responsibility Boundary:
+
+~~~text
+04
+= Knowledgeの現在利用資格を評価・選別し、
+  理由とRelationshipを保持して05へ渡す
+
+05
+= Applicable Knowledgeを統合し、
+  Conflictを扱い、
+  Decision / Trade Thesisを作る
+~~~
+
+絶対境界:
+
+~~~text
+Knowledge Record
+≠ Applicability Assessment
+
+Knowledge Pool
+≠ Applicable Knowledge Set
 
 Applicable Knowledge
+≠ Positive Expected Value
+
+Conflict Detection
+≠ Conflict Resolution
+
+Applicable Knowledge Set
 ≠ Trade Permission
-\`\`\`
+~~~
 
-このFlow全体は、
+このRuntime Flow全体は、Current 04 Working Baseline + Legacy Referenceを比較して作ったDerived Reuse / Current Refinement Proposalであり、Current Design採用済みではない。
 
-> **Legacy Source + Current Working Baselineを比較して作ったReuse Proposalであり、Current Design採用済みFlowではない。**
-
+~~~text
+CURRENT_DESIGN_STATUS:
+NOT_ADOPTED
+~~~
 
 ---
 
