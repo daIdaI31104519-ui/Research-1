@@ -702,6 +702,15 @@ Reuse Recommendation
 | Decision Result | STRONG SignalDecision思想 | Current 05候補へ再設計 | PARTIAL_REUSE | REFINE | NOT_ADOPTED |
 | Decision Scope | NO DIRECT LEGACY OBJECT | 複数Horizon比較問題のDerived Correction | DERIVED | NEW PROPOSAL | NOT_ADOPTED |
 | Expected Value Assessment | PARTIAL / expected_value_profile | Trade Thesisとの責任分離Proposal | DERIVED | REFINE | NOT_ADOPTED |
+| Defense / Risk Boundary | STRONG Pre-Trade Defense思想 | 05後段Safety Domainとして再配置 | PARTIAL_REUSE | REFINE | NOT_ADOPTED |
+| Defense Evaluation | STRONG | Safety Gateへ精密化 | ADOPTABLE / PARTIAL_REUSE | REFINE | NOT_ADOPTED |
+| DefenseDecision | STRONG | ALLOW / REDUCE / BLOCKを維持 | ADOPTABLE | REFINE | NOT_ADOPTED |
+| DefenseEvaluationResult | NO DIRECT LEGACY OBJECT | BLOCKとFail-Closed分離のDerived Boundary | DERIVED | NEW PROPOSAL | NOT_ADOPTED |
+| RiskState | STRONG | Current Risk Permissionへ限定 | ADOPTABLE / PARTIAL_REUSE | REFINE | NOT_ADOPTED |
+| Risk Governance / RiskState Transition | STRONG FIX-013/015/016 | Risk専用Contractへ精密化 | ADOPTABLE / PARTIAL_REUSE | REFINE | NOT_ADOPTED |
+| Emergency Fast Path | STRONG | Safety Restrictionのみ高速化 | ADOPTABLE / PARTIAL_REUSE | REFINE | NOT_ADOPTED |
+| Recovery Strict Path | STRONG | Permission Expansionを厳格化 | ADOPTABLE / PARTIAL_REUSE | REFINE | NOT_ADOPTED |
+| Defense → Execution Contract | STRONG FIX-009境界 | Current Execution Admissionへ再設計 | PARTIAL_REUSE | REFINE | NOT_ADOPTED |
 
 ---
 
@@ -3425,6 +3434,1141 @@ LOSS
 この05全体は、
 
 > **Legacy Production / Signal Concept + Current 04 Boundary + Derived Refinementを比較して作ったReference Proposalであり、Current正式設計ではない。**
+
+~~~text
+CURRENT_DESIGN_STATUS:
+NOT_ADOPTED
+~~~
+
+---
+
+
+## 7.28 Defense / Risk — Integrated Boundary
+
+### Formal Domain Candidate
+
+> **Defense / Risk = 05_DECISIONが生成したRisk-taking Decision Resultについて、市場論拠やExpected Valueを再評価せず、Current RiskState・Authorized Runtime Constraint・Liquidity / Exposure / Drawdown / Exchange Health等のSafety Contextから、現在そのRiskをExecutionへ通してよいかをGateするRuntime Safety Domain候補。**
+
+中心境界:
+
+~~~text
+05 Decision Evaluation
+= Riskを取りたいか
+
+Defense Evaluation
+= 今そのRiskをExecutionへ通して安全か
+
+RiskState
+= Scope全体として現在どこまでRiskを許すか
+
+Risk Governance
+= RiskStateを誰がどう変更できるか
+
+Execution
+= 許可Envelopeを具体的なEntry / Orderへ変換
+~~~
+
+Absolute Boundaries:
+
+~~~text
+Decision Result
+≠ DefenseDecision
+
+DefenseDecision
+≠ RiskState
+
+RiskState
+≠ Production Promotion
+
+BLOCK
+≠ Decision Wrong
+
+Fail-Closed
+≠ BLOCK
+
+ALLOW
+≠ Order Sent
+
+REDUCE
+≠ Exact Position Size
+~~~
+
+### Legacy Relation
+
+~~~text
+Legacy Pre-Trade Defense
+→ Current Defense Evaluation
+
+Legacy DefenseDecision
+→ Current DefenseDecision
+
+Legacy RiskState
+→ Current RiskState
+
+FIX-013 / FIX-015
+→ Current Risk Governance / Transition
+
+FIX-009 Defense → Entry boundary
+→ Current Defense → Execution Contract
+~~~
+
+### Status
+
+~~~text
+LEGACY_CONFLICT_STATUS:
+MINOR
+
+LEGACY_REVIEW_STATUS:
+STRONGLY ADOPTABLE / PARTIAL_REUSE
+
+CURRENT_DESIGN_STATUS:
+NOT_ADOPTED
+~~~
+
+---
+
+## 7.29 Defense Evaluation
+
+### Formal Definition Candidate
+
+> **Defense Evaluation = 正常なRisk-taking Decision Resultについて、そのDirection / Trade Thesis / Expected Valueを再評価せず、Current RiskState・Authorized Runtime Constraint・Liquidity / Spread / Slippage Risk・Exposure・Drawdown / Loss Context・Data / Runtime Quality・Exchange / API Health・Abnormal Event・Global Risk Limit等を独立Safety Gateとして評価し、そのDecisionをExecutionへALLOW・制限付きREDUCE・またはBLOCKできるかを判断するRuntime Safety処理候補。**
+
+### Gate Candidate
+
+~~~text
+Decision Validity Gate
+RiskState Gate
+Constraint Gate
+Liquidity Gate
+Exposure Gate
+Drawdown Gate
+Data Quality Gate
+Exchange / API Health Gate
+Abnormal Event Gate
+~~~
+
+各Gateを万能総合Scoreへ潰さない。
+
+候補状態:
+
+~~~text
+CLEAR
+RESTRICT
+BLOCK
+UNKNOWN
+NOT_EVALUATED
+~~~
+
+正式Enumは未確定。
+
+### Safety Meaning
+
+~~~text
+Liquidity
+= 約定 / Exit可能性を含む市場実行安全性
+
+Exposure
+= 既存Riskとの合成安全性
+
+Drawdown
+= 追加Riskを許容できる資本安全性
+
+Exchange / API Health
+= 注文・約定・Positionを安全に管理できるInfrastructure安全性
+
+Constraint
+= RuntimeでEnforcement権限を持つAuthorized Constraint
+~~~
+
+### Hard Gate Principle
+
+~~~text
+Authorized Hard Constraint violation
+Critical Exchange Failure
+Position State Unknown
+NO_NEW_ENTRY
+Global hard DD breach
+~~~
+
+等を単なる減点として相殺しない。
+
+### Evaluation Status vs Outcome
+
+~~~text
+Defense Evaluation Status
+≠ Defense Outcome
+~~~
+
+候補:
+
+~~~text
+COMPLETED
+NOT_REQUIRED
+INCOMPLETE
+FAILED
+STALE
+NOT_EVALUATED
+~~~
+
+正常完了時のみ:
+
+~~~text
+ALLOW
+REDUCE
+BLOCK
+~~~
+
+を生成する。
+
+### Fail-Closed
+
+~~~text
+Evaluation FAILED / INCOMPLETE / Critical UNKNOWN
+↓
+DefenseDecisionを捏造しない
+↓
+Safety PolicyによりExecution DENY
+~~~
+
+重要:
+
+~~~text
+BLOCK
+= 正常Safety判断による禁止
+
+Fail-Closed
+= 正常Safety判断を作れなかったためのSafety停止
+~~~
+
+### Does Not Own
+
+~~~text
+Trade Thesis
+Expected Value Assessment
+Trade Direction
+Knowledge Applicability
+RiskState Apply
+Constraint Authorization
+Exact Position Size
+Order Planning
+~~~
+
+### Review
+
+~~~text
+LEGACY_SOURCE_RELATION:
+ROLE-DEF-001 Pre-Trade Defense
+
+LEGACY_REVIEW_STATUS:
+ADOPTABLE / PARTIAL_REUSE
+
+CURRENT_REFINEMENT:
+Independent Safety Gates
+Evaluation Status / Outcome separation
+Fail-Closed separation
+Authorized Constraint boundary
+
+CURRENT_DESIGN_STATUS:
+NOT_ADOPTED
+~~~
+
+---
+
+## 7.30 DefenseDecision / DefenseEvaluationResult
+
+### DefenseDecision — Formal Definition Candidate
+
+> **DefenseDecision = 正常に完了したDefense Evaluationの結果として、特定Decision Resultを現在Safety Context上Executionへ通常条件で通すか、Risk制限付きで通すか、または通さないかをALLOW / REDUCE / BLOCKとしてReason・Restriction・RiskState / Constraint / Safety Context Reference・Version / Validity / Trace付きで固定したImmutable Runtime Safety Decision Object候補。**
+
+Outcome:
+
+~~~text
+ALLOW
+REDUCE
+BLOCK
+~~~
+
+### ALLOW
+
+~~~text
+Defense Gate passed
+→ Execution Planning Candidate
+~~~
+
+ただしOrder送信ではない。
+
+### REDUCE
+
+~~~text
+Decision / Directionは維持
++
+通常Risk量は禁止
++
+Restriction Context内だけExecution可能
+~~~
+
+Exact Position SizeはExecution側。
+
+### BLOCK
+
+~~~text
+Defense Evaluation completed
++
+Current Safety Context上Execution禁止
+~~~
+
+Trade Thesisの誤りを意味しない。
+
+### DefenseEvaluationResult — Derived Boundary Candidate
+
+> **DefenseEvaluationResult = Defense Evaluation自体のProcessing Status、正常完了時のDefenseDecision Reference、正常完了できなかった場合のFail-Closed適用、Diagnostics、Validity / Traceを束ね、ExecutionがBLOCKとEvaluation Failureを混同しないためのDefense→Execution境界Context候補。**
+
+概念:
+
+~~~text
+DefenseEvaluationResult
+
+evaluation_status
+defense_decision_ref
+fail_closed_applied
+execution_disposition
+failure_reason
+policy_ref
+validity
+trace
+~~~
+
+### CORRECTION-DR-01 — execution_dispositionは第二のDecisionではない
+
+保存前Reviewで次を明確化する。
+
+~~~text
+execution_disposition
+= DefenseEvaluationResultから決定論的に導出されるExecution Boundary Projection
+
+execution_disposition
+≠ 独立Decision Authority
+~~~
+
+候補Mapping:
+
+~~~text
+COMPLETED + ALLOW
+→ PROCEED
+
+COMPLETED + REDUCE
+→ PROCEED_RESTRICTED
+
+COMPLETED + BLOCK
+→ DENY
+
+FAILED / INCOMPLETE / STALE + Fail-Closed
+→ DENY
+~~~
+
+矛盾Combinationを許さない。
+
+### Invariants
+
+~~~text
+DefenseDecision exists
+⇒ Evaluation COMPLETED
+
+Evaluation failed
+⇒ No DefenseDecision
+
+BLOCK
+≠ Fail-Closed
+
+REDUCE
+≠ Exact Position Size
+
+Missing Defense
+≠ ALLOW
+~~~
+
+### Status
+
+~~~text
+LEGACY_SOURCE_RELATION:
+OBJ-PRD-006 DefenseDecision
+
+DefenseEvaluationResult:
+DERIVED CURRENT PROPOSAL
+
+CURRENT_DESIGN_STATUS:
+NOT_ADOPTED
+~~~
+
+---
+
+## 7.31 RiskState
+
+### Formal Definition Candidate
+
+> **RiskState = 明示されたRisk Scopeについて、市場理解OSが現在どこまで新規Risk / Exposureを許容するかを表すCross-Cutting Runtime Permission State候補であり、Research Maturity・Knowledge Health・Production Promotion・DefenseDecisionとは独立する。**
+
+Legacy Candidate States:
+
+~~~text
+NORMAL
+CAUTION
+RISK_REDUCED
+MICRO_ONLY
+NO_NEW_ENTRY
+EMERGENCY
+~~~
+
+### State Meaning
+
+~~~text
+NORMAL
+= 通常Risk Envelope
+
+CAUTION
+= 警戒。必ずしも縮小ではない
+
+RISK_REDUCED
+= 通常より縮小されたRisk Envelope
+
+MICRO_ONLY
+= 最小級Riskのみ許可
+
+NO_NEW_ENTRY
+= 新規Risk追加禁止。既存Position安全管理は継続
+
+EMERGENCY
+= 重大Safety Event。通常Risk-takingよりContainment / Recovery優先
+~~~
+
+### Scope Candidate
+
+Source-backed中心:
+
+~~~text
+OS
+Account
+Portfolio
+Market Instance
+~~~
+
+Derived候補:
+
+~~~text
+Venue / Exchange
+Asset
+~~~
+
+各RiskStateは明示ScopeへBindingする。
+
+### Multiple Scope
+
+~~~text
+Global NORMAL
+Portfolio RISK_REDUCED
+BTC Market Instance NO_NEW_ENTRY
+~~~
+
+等を許容可能。
+
+単純平均・万能Severity Scoreへ潰さない。
+
+Defenseは対象DecisionへApplicableなScope群からEffective Risk Permission Contextを評価する。
+
+### CORRECTION-DR-02 — allowed_exposureとDefense Restrictionを分離
+
+~~~text
+RiskState.allowed_exposure
+= Scope-level Risk Policyが許すBaseline / Ceiling
+
+Defense Restriction Context
+= 今回1 Decisionに対するPer-Decision Effective Restriction
+~~~
+
+同一ではない。
+
+DefenseはRiskStateのBaselineを参照し、Liquidity / Exposure / DD等を合わせて今回のRestrictionをより厳しくできる。
+
+DefenseがRiskState.allowed_exposure自体を書き換えない。
+
+### Legacy Health Field Refinement
+
+Legacy RiskState内の、
+
+~~~text
+money_dd_state
+knowledge_health_state
+execution_health_state
+data_health_state
+market_novelty_state
+~~~
+
+はCurrentでは第二の正本として複製せず、
+
+~~~text
+trigger_refs
+basis_refs
+risk_context_refs
+~~~
+
+としてSource Stateへ参照する方向が安全。
+
+### Absolute Separation
+
+~~~text
+RiskState
+≠ Production Promotion
+
+RiskState
+≠ Knowledge Health
+
+RiskState
+≠ Runtime State
+
+RiskState
+≠ DefenseDecision
+
+RiskState
+≠ Command
+~~~
+
+### Status
+
+~~~text
+LEGACY_SOURCE_RELATION:
+OBJ-PRD-007 RiskState
+STATE-RISK-001
+
+LEGACY_REVIEW_STATUS:
+ADOPTABLE / PARTIAL_REUSE
+
+CURRENT_DESIGN_STATUS:
+NOT_ADOPTED
+~~~
+
+---
+
+## 7.32 Risk Governance / RiskState Transition
+
+### Formal Definition Candidate
+
+> **Risk Governance = RiskStateを変更する必要性の発生からCurrent RiskStateへの実適用までをREQUEST / RECOMMEND / APPROVE / APPLYの独立Authority責任として統治し、Safety Restrictionでは明示Policyに基づくEmergency Fast Pathを許容しつつ、Recovery / Permission ExpansionではStrict Approval / Revalidationを要求し、成功State変更だけをImmutable StateTransitionEventとして記録するCross-Cutting Governance責任候補。**
+
+### Canonical Authority Flow
+
+~~~text
+Trigger / Finding
+↓
+REQUEST
+↓
+RECOMMEND
+↓
+APPROVE
+↓
+ApprovalDecision
+↓
+APPLY Validation
+↓
+Atomic State Apply
+↓
+StateTransitionEvent
+↓
+Current RiskState Projection
+~~~
+
+### Authority Meaning
+
+~~~text
+REQUEST
+= State変更検討を正式要求
+
+RECOMMEND
+= どのTransitionが妥当か専門推奨
+
+APPROVE
+= Policy / Authority上Applyしてよいか判断
+
+APPLY
+= Current State / Approval / Ruleを再検証し実際にWrite
+~~~
+
+絶対原則:
+
+~~~text
+REQUEST
+≠ RECOMMEND
+≠ APPROVE
+≠ APPLY
+
+APPROVE
+≠ APPLIED
+~~~
+
+### Single Writer
+
+~~~text
+1 RiskState Machine
+= 原則1 Apply Authority
+~~~
+
+Defense / AI / Logger / Telegram / Post-Trade等がCurrent RiskStateへ無制限に直接Writeしない。
+
+### ApprovalDecision
+
+Legacy FIX-015のSource-backed Objectを再利用候補とする。
+
+Decision:
+
+~~~text
+APPROVE
+REJECT
+HOLD
+~~~
+
+Binding候補:
+
+~~~text
+Target
+Target Version
+State Machine
+State Machine Version
+expected_from_state
+requested_to_state
+Scope
+Validity
+Approval Policy
+Authority Policy
+~~~
+
+### Apply Validation
+
+Apply直前に少なくとも概念上:
+
+~~~text
+Required Approval Set
+Target / Version
+Scope
+Expiry
+Supersession
+Single-use
+Current State
+expected_previous_state
+Transition Legality
+Current Constraint / Policy
+Authority
+~~~
+
+を再検証する。
+
+### Concurrent / Stale Write
+
+~~~text
+expected_previous_state
+≠ actual current_state
+→ Apply reject
+~~~
+
+### StateTransitionEvent
+
+成功ApplyだけをImmutable Historical Factとして保存。
+
+候補:
+
+~~~text
+target_ref
+state_machine_id / version
+from_state
+to_state
+expected_previous_state
+transition_sequence
+trigger_refs
+reason_codes
+requested_by_role
+recommended_by_role
+recommendation_ref
+approval_decision_refs
+applied_by_role
+transitioned_at
+effective_at
+previous_transition_event_ref
+trace_id
+~~~
+
+Rejected / Failed AttemptはStateTransitionEventではない。
+
+### Current Projection
+
+~~~text
+Current RiskState
+= 高速参照Projection
+
+StateTransitionEvent
+= Historical Fact
+~~~
+
+HistoryからProjectionを再構築可能な方向を維持する。
+
+### Status
+
+~~~text
+LEGACY_SOURCE_RELATION:
+FIX-013
+FIX-015
+FIX-016
+STATE_DICTIONARY
+OBJECT_DICTIONARY
+
+LEGACY_REVIEW_STATUS:
+STRONGLY ADOPTABLE / PARTIAL_REUSE
+
+CURRENT_DESIGN_STATUS:
+NOT_ADOPTED
+~~~
+
+---
+
+## 7.33 Emergency Fast Path / Recovery Strict Path
+
+### Emergency Fast Path — Formal Candidate
+
+> **Emergency Fast Path = Critical Safety Trigger時にRisk Restrictionを低LatencyでApplyするため、明示Emergency Authority Policyのもとで通常Governance Pathを高速化する仕組みであり、Governanceを省略する仕組みではない。**
+
+Restrictive例:
+
+~~~text
+NORMAL → EMERGENCY
+NORMAL → NO_NEW_ENTRY
+~~~
+
+中間Stateを飛ばせる。
+
+### CORRECTION-DR-03 — Fast PathのAuthority意味
+
+保存前Reviewで以下を明確化する。
+
+~~~text
+Emergency Fast Path
+≠ No Approval
+≠ No Authority
+≠ Direct DB Write
+~~~
+
+Fast Pathでは、
+
+~~~text
+pre-authorized emergency policy
+designated emergency authority
+pre-validated restrictive transition class
+~~~
+
+等によりLatencyを減らせる候補がある。
+
+ただし必ず、
+
+~~~text
+Authority provenance
+Policy reference
+Scope
+Current State check
+Transition legality
+Apply provenance
+StateTransitionEvent
+Audit / Trace
+~~~
+
+を残す。
+
+具体Emergency IAM / Approval実装は未確定。
+
+### Recovery — Formal Candidate
+
+> **Recovery = Restrictive RiskStateからRisk Permissionを再拡張するTransition系列であり、Restrictive Authorityによる自動復帰を禁止し、Root Cause Resolution・Data / Execution Reconciliation・必要Cooldown・Revalidation・Strict Approvalを検証した後にApplyする。**
+
+候補:
+
+~~~text
+EMERGENCY
+→ NO_NEW_ENTRY
+→ MICRO_ONLY
+→ RISK_REDUCED
+→ CAUTION
+→ NORMAL
+~~~
+
+原則段階的。
+
+飛び越しは明示Policy時のみ。
+
+### Safety Asymmetry
+
+~~~text
+Restriction
+= Fast Path allowed candidate
+
+Recovery / Risk Expansion
+= Strict Path
+~~~
+
+一回のAPI成功等をRecovery証明にしない。
+
+### Status
+
+~~~text
+LEGACY_SOURCE_RELATION:
+FIX-013 Safety Asymmetry
+FIX-015 Approval Provenance
+STATE-RISK-001 Recovery
+
+CURRENT_DESIGN_STATUS:
+NOT_ADOPTED
+~~~
+
+---
+
+## 7.34 Defense → Execution Contract
+
+### Formal Definition Candidate
+
+> **Defense → Execution Contract = 有効Risk-taking Decision ResultについてDefense Evaluation完了後、Execution DomainがRiskをEntry / Orderへ変換してよいかをDefenseEvaluationResult・DefenseDecision・RiskState Reference・Authorized Constraint・Restriction Context・Validity / Version / Traceによって明示するRuntime境界Contract候補。**
+
+### Boundary Flow
+
+~~~text
+Decision Result
+↓
+Defense Evaluation
+↓
+DefenseEvaluationResult
+│
+├ COMPLETED + ALLOW
+│   → PROCEED
+│
+├ COMPLETED + REDUCE
+│   → PROCEED_RESTRICTED
+│
+├ COMPLETED + BLOCK
+│   → DENY
+│
+└ FAILED / INCOMPLETE / STALE
+    + Fail-Closed
+    → DENY
+
+↓
+Execution Admission
+↓
+RiskState / Constraint / Validity Recheck
+↓
+Entry Snapshot Builder
+↓
+EntryThesis
+↓
+OrderIntent
+~~~
+
+### Execution Admission Candidate
+
+Executionへ進める条件候補:
+
+~~~text
+Valid Risk-taking Decision Result
+DefenseEvaluationResult exists
+Evaluation COMPLETED
+DefenseDecision exists
+Outcome ALLOW or REDUCE
+Disposition consistent
+Decision / Defense not stale
+RiskState ref valid
+Authorized Constraint refs resolvable
+Restriction Context present when REDUCE
+~~~
+
+### REDUCE Contract
+
+~~~text
+Defense
+= Maximum Safety Envelope
+
+Execution
+= Envelope内で実際のPosition Size / Leverage / Order Planを構成
+~~~
+
+ExecutionはDefense Restrictionを緩和しない。
+より厳しくすることは可能。
+
+### BLOCK / Fail-Closed
+
+~~~text
+BLOCK
+→ No EntryThesis
+→ No OrderIntent
+
+Fail-Closed
+→ No EntryThesis
+→ No OrderIntent
+~~~
+
+意味は別なのでTraceを分ける。
+
+### RiskState / Constraint Change
+
+Defense後にRiskStateがよりRestrictiveになった場合:
+
+~~~text
+Old ALLOW / REDUCE
+→ blindly reuse禁止
+→ New Defense / Admission evaluation candidate
+~~~
+
+RiskStateが緩和しても旧REDUCE / BLOCKを自動昇格しない。
+
+Constraint変更も同様。
+
+### Entry Snapshot Boundary
+
+Legacy FIX-009の強い原則を維持:
+
+~~~text
+Defense passed
+↓
+Entry Snapshot Builder
+↓
+EntryThesis
+↓
+OrderIntent
+~~~
+
+EntryThesis生成失敗:
+
+~~~text
+ENTRY_SNAPSHOT_NOT_BUILDABLE
+→ No OrderIntent
+~~~
+
+これはDefense BLOCK / NO_TRADEとは別。
+
+### Generator Boundary
+
+~~~text
+DefenseDecision Generator
+= Defense Domain
+
+EntryThesis Generator
+= Execution / Entry Snapshot Builder
+
+OrderIntent Generator
+= Execution / Order Planning
+
+Logger
+= Custodian
+
+Post-Trade
+= Analyzer
+~~~
+
+### Absolute Invariants
+
+~~~text
+ALLOW
+≠ Order Sent
+
+REDUCE
+≠ Exact Position Size
+
+BLOCK
+≠ Decision Wrong
+
+Fail-Closed
+≠ BLOCK
+
+Missing Defense
+≠ ALLOW
+
+Expired Defense
+≠ ALLOW
+
+DefenseDecision
+≠ EntryThesis
+
+No EntryThesis
+→ No OrderIntent
+
+Execution
+must not override Defense
+
+Execution
+must not rewrite Decision / Thesis / Defense
+~~~
+
+### Status
+
+~~~text
+LEGACY_SOURCE_RELATION:
+ROLE-EXEC-001
+OBJ-PRD-008 OrderIntent
+OBJ-PRD-010 EntryThesis
+FIX-009
+
+LEGACY_REVIEW_STATUS:
+STRONGLY ADOPTABLE / PARTIAL_REUSE
+
+CURRENT_DESIGN_STATUS:
+NOT_ADOPTED
+~~~
+
+---
+
+## 7.35 Defense / Risk — Integrated Review / Final Candidate Flow
+
+### Review Result
+
+05保存済みReferenceと今回のDefense / Risk候補を再照合した結果、Architectureを作り直す必要がある重大矛盾は確認されなかった。
+
+保存前に以下3点を補強した。
+
+### CORRECTION-DR-01
+
+~~~text
+execution_disposition
+= Defense結果からの決定論的Boundary Projection
+≠ 第二のDecision Authority
+~~~
+
+### CORRECTION-DR-02
+
+~~~text
+RiskState.allowed_exposure
+= Scope-level Baseline / Ceiling
+
+Defense Restriction Context
+= Per-Decision Effective Restriction
+~~~
+
+### CORRECTION-DR-03
+
+~~~text
+Emergency Fast Path
+= Restriction Governance高速化
+
+Emergency Fast Path
+≠ Authority / Approval / Provenance省略
+~~~
+
+### Final Candidate Flow
+
+~~~text
+05_DECISION
+↓
+Decision Result
+
+────────────────────────
+Defense / Risk
+────────────────────────
+
+Defense Evaluation
+├ Decision Validity
+├ RiskState
+├ Authorized Constraint
+├ Liquidity
+├ Exposure
+├ Drawdown
+├ Data Quality
+└ Exchange / API Health
+↓
+DefenseEvaluationResult
+↓
+DefenseDecision
+├ ALLOW
+├ REDUCE
+└ BLOCK
+
+別系統:
+
+Risk Trigger / Finding
+↓
+REQUEST
+↓
+RECOMMEND
+↓
+APPROVE
+↓
+ApprovalDecision
+↓
+APPLY
+↓
+StateTransitionEvent
+↓
+Current RiskState
+
+Restriction:
+Emergency Fast Path candidate
+
+Recovery:
+Strict Path
+
+────────────────────────
+Defense → Execution
+────────────────────────
+
+ALLOW
+→ PROCEED
+
+REDUCE
+→ PROCEED_RESTRICTED
+
+BLOCK
+→ DENY
+
+Evaluation Failure
+→ Fail-Closed
+→ DENY
+
+↓
+Execution Admission
+↓
+Entry Snapshot Builder
+↓
+EntryThesis
+↓
+OrderIntent
+~~~
+
+### Absolute Semantic Boundaries
+
+~~~text
+Decision Result
+≠ DefenseDecision
+
+DefenseDecision
+≠ RiskState
+
+RiskState
+≠ Production Promotion
+
+RiskState
+≠ Knowledge Health
+
+BLOCK
+≠ Fail-Closed
+
+APPROVE
+≠ APPLIED
+
+Emergency Fast Path
+≠ Governance Bypass
+
+ALLOW
+≠ Order Sent
+
+REDUCE
+≠ Exact Position Size
+
+No EntryThesis
+→ No OrderIntent
+~~~
+
+### Status
+
+> **このDefense / Risk全体はLegacy Defense / State Authority / Approval / Risk Separation / Entry Boundaryを比較して作ったReference Proposalであり、Current正式設計ではない。**
 
 ~~~text
 CURRENT_DESIGN_STATUS:
