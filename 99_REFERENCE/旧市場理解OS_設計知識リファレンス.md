@@ -693,6 +693,15 @@ Reuse Recommendation
 | Evaluation Status | NO DIRECT LEGACY OBJECT | Current state候補から分離Proposal | DERIVED | NEW PROPOSAL | NOT_ADOPTED |
 | Constraint Gate Status | PARTIAL / Constraint思想あり | Current Constraint Checkを精密化 | DERIVED | NEW PROPOSAL | NOT_ADOPTED |
 | Candidate Retrieval Trace | NO DIRECT LEGACY OBJECT | Current Runtime検索責任の精密化 | DERIVED | NEW PROPOSAL | NOT_ADOPTED |
+| Legacy 05 Decision Boundary | STRONG Production/Signal思想 | Current 04後段として再配置 | PARTIAL_REUSE | SPLIT / REFINE | NOT_ADOPTED |
+| Decision Context Assembly | PARTIAL / Builder Input Assembly | Current 04出力を固定するDerived Concept | DERIVED | NEW PROPOSAL | NOT_ADOPTED |
+| Knowledge Integration | STRONG Dependency/Contradiction思想 | Selectionを04へ移し05で再設計 | PARTIAL_REUSE | SPLIT / REFINE | NOT_ADOPTED |
+| Trade Thesis Construction | STRONG | Current 05候補 | ADOPTABLE / PARTIAL_REUSE | REFINE | NOT_ADOPTED |
+| Trade Thesis | STRONG | Current 05候補 | ADOPTABLE / PARTIAL_REUSE | REFINE | NOT_ADOPTED |
+| Decision Evaluation | STRONG Signal Engine思想 | Current 05候補へ再設計 | PARTIAL_REUSE | REFINE | NOT_ADOPTED |
+| Decision Result | STRONG SignalDecision思想 | Current 05候補へ再設計 | PARTIAL_REUSE | REFINE | NOT_ADOPTED |
+| Decision Scope | NO DIRECT LEGACY OBJECT | 複数Horizon比較問題のDerived Correction | DERIVED | NEW PROPOSAL | NOT_ADOPTED |
+| Expected Value Assessment | PARTIAL / expected_value_profile | Trade Thesisとの責任分離Proposal | DERIVED | REFINE | NOT_ADOPTED |
 
 ---
 
@@ -2310,6 +2319,1112 @@ Applicable Knowledge Set
 ~~~
 
 このRuntime Flow全体は、Current 04 Working Baseline + Legacy Referenceを比較して作ったDerived Reuse / Current Refinement Proposalであり、Current Design採用済みではない。
+
+~~~text
+CURRENT_DESIGN_STATUS:
+NOT_ADOPTED
+~~~
+
+---
+
+
+## 7.21 Legacy 05_DECISION Equivalent — Reference Extraction
+
+### Source-backed Legacy Flow
+
+Legacy Production / Trading Domainでは概ね以下の責任が存在した。
+
+~~~text
+Approved Hypothesis / Edge Pool
++ Current Market Context
++ Market DNA
+↓
+Applicable Hypothesis Set
+↓
+Trade Thesis
+↓
+External AI Review (optional)
+↓
+Signal Engine
+↓
+Pre-Trade Defense
+↓
+Execution Logic
+↓
+EntryThesis
+↓
+OrderIntent
+~~~
+
+Current 04ではすでにKnowledgeのApplicability Selectionを担当するため、Legacy Production全体を05へそのまま移植しない。
+
+### Responsibility Redistribution
+
+~~~text
+Legacy ApplicableHypothesisSet
+→ Current 04 Applicable Knowledge Setへ吸収 / 再設計
+
+Legacy Production Thesis Builder Selection
+→ Current 04
+
+Legacy Production Thesis Builder Composition
+→ Current 05
+
+Legacy TradeThesis
+→ Current 05候補
+
+Legacy Signal Engine / SignalDecision
+→ Current 05 Decision Evaluation / Decision Result候補
+
+Legacy Pre-Trade Defense
+→ 05外のDefense / Risk
+
+Legacy EntryThesis / OrderIntent
+→ Execution
+~~~
+
+中心境界:
+
+~~~text
+04
+= Selection / Applicability
+
+05
+= Integration / Thesis / Decision
+
+Defense
+= Current Safety / Risk Permission
+
+Execution
+= Order / Entry / Fill
+~~~
+
+### Legacy Review
+
+~~~text
+LEGACY_CONFLICT_STATUS:
+MINOR / RESPONSIBILITY REDISTRIBUTION REQUIRED
+
+LEGACY_REVIEW_STATUS:
+PARTIAL_REUSE
+
+LEGACY_REUSE_RECOMMENDATION:
+SPLIT / REFINE / MERGE
+
+CURRENT_DESIGN_STATUS:
+NOT_ADOPTED
+~~~
+
+---
+
+## 7.22 05_DECISION — Core Responsibility Boundary
+
+### Formal Definition Candidate
+
+> **05_DECISION = 04_KNOWLEDGE_APPLICABILITYから受け取ったApplicable Knowledge Setを、Conflict・Shared Evidence・Dependency・Overlap・Contradiction・Uncertaintyを失わず意思決定目的で統合し、現在市場についてのTrade Thesisを構成し、そのThesisにRiskを取りたいだけの合理性・期待価値があるかを評価してDecision Resultを生成する意思決定領域候補。**
+
+### Formal Input Candidate
+
+~~~text
+Applicable Knowledge Set
+Applicability Assessments
+Evaluation Context
+Conflict Context
+Shared Evidence
+Dependency / Overlap
+Failure Boundary Context
+Constraint Context
+Evidence Context
+Quality / Freshness
+Uncertainty
+~~~
+
+### Formal Output Candidate
+
+~~~text
+Trade Thesis 0..N
+Decision Evaluation Status
+Decision Result
+Decision Trace
+Diagnostics
+Research Feedback Candidate
+~~~
+
+### Does Not Own
+
+~~~text
+Research
+Knowledge Promotion
+Applicability Re-evaluation
+Knowledge Lifecycle Update
+Constraint Authority Update
+Production Promotion
+Risk State Update
+Defense
+EntryThesis
+OrderIntent
+Execution
+~~~
+
+### Absolute Boundaries
+
+~~~text
+Applicable Knowledge
+≠ Trade Thesis
+
+Trade Thesis
+≠ Decision Result
+
+Decision Result
+≠ Defense Decision
+
+Decision Result
+≠ Execution Permission
+~~~
+
+### Review
+
+~~~text
+LEGACY_REVIEW_STATUS:
+PARTIAL_REUSE
+
+REUSE_RECOMMENDATION:
+SPLIT / REFINE
+
+CURRENT_DESIGN_STATUS:
+NOT_ADOPTED
+~~~
+
+---
+
+## 7.23 Decision Context Assembly
+
+### Formal Definition Candidate
+
+> **Decision Context Assembly = 04から渡されたApplicable Knowledge Setと、そのEvaluation Context・Applicability Assessment・Relationship・Constraint・Failure Boundary・Evidence・Quality / Freshness・Uncertaintyを、身分・Version・時間的一貫性を変更せず検証・束ね、特定Decision Cycleで後続05処理が同一入力状態を再現可能に利用できるDecision Context Snapshotへ固定する05内部の入口責任候補。**
+
+### Core Responsibility
+
+~~~text
+Applicable Knowledge Set
++
+Evaluation Context
++
+Assessment / Relationship Context
+↓
+Identity / Version / Temporal Compatibility Check
+↓
+Decision Context Snapshot
+~~~
+
+### Important Boundary
+
+Decision Context Assemblyは以下を行わない。
+
+~~~text
+Knowledge再検索
+Applicability再判定
+Knowledge昇格 / 降格
+Knowledge Version差替え
+Conflict Resolution
+Knowledge Weighting
+Thesis Role Assignment
+Expected Value Evaluation
+Direction生成
+Trade Thesis生成
+BUY / SELL / NO_TRADE
+Defense
+Execution
+~~~
+
+### Evaluation Context vs Decision Context
+
+~~~text
+Evaluation Context
+= 04がApplicabilityを評価した市場Context
+
+Decision Context
+= そのEvaluation結果を今回のDecision Cycleで使用するため固定したInput Context
+~~~
+
+05が新しいMarket DNAへ勝手に差し替え、旧Assessmentを再利用しない。
+
+### Decision Context Snapshot Candidate
+
+概念上:
+
+~~~text
+Decision Cycle ID / Context ID
+Evaluation Context Ref
+Applicable Knowledge Set Ref
+Knowledge IDs / Versions
+Assessment Refs / Versions
+Relationship Context
+Constraint / Boundary Context
+Quality / Freshness
+Uncertainty
+Assembly Logic Version
+Assembled At
+Trace
+~~~
+
+正式Persistent Object化は未確定。
+
+### Assembly Process Status
+
+候補:
+
+~~~text
+READY
+INCOMPLETE
+INCONSISTENT
+FAILED
+~~~
+
+正式Enumは未確定。
+
+重要:
+
+~~~text
+Assembly FAILED
+≠ NO_TRADE
+
+Applicable Knowledge Set EMPTY
+≠ Assembly Failure
+~~~
+
+### Trace
+
+~~~text
+Decision Context
+→ Applicable Knowledge Set
+→ Applicability Assessment
+→ Knowledge Record
+
+Decision Context
+→ Evaluation Context
+→ Current Market Understanding / Market DNA
+~~~
+
+### Review
+
+~~~text
+LEGACY_SOURCE_RELATION:
+Production Thesis Builder Input Assembly
+
+LEGACY_CONFLICT_STATUS:
+MINOR
+
+LEGACY_REVIEW_STATUS:
+PARTIAL_REUSE
+
+REUSE_RECOMMENDATION:
+SPLIT / REFINE
+
+CURRENT_DESIGN_STATUS:
+NOT_ADOPTED
+~~~
+
+---
+
+## 7.24 Knowledge Integration
+
+### Formal Definition Candidate
+
+> **Knowledge Integration = Decision Context Snapshotに固定されたApplicable Knowledge群の意味・方向・条件・独立性・Shared Evidence・Dependency・Overlap・Common Cause・Conflict・Failure Boundary・Constraint・Uncertaintyを、元Knowledgeを変更せず意思決定用に構造化し、重複根拠の二重計上やKnowledge多数決を防ぎながらTrade Thesis Constructionへ渡せるIntegrated Knowledge Contextを生成する05内部責任候補。**
+
+### Core Flow
+
+~~~text
+Decision Context Snapshot
+↓
+Semantic / Horizon Alignment
+↓
+Effect / Direction Context
+↓
+Shared Evidence / Independence
+↓
+Dependency / Common Cause
+↓
+Overlap / Redundancy
+↓
+Conflict Structure
+↓
+Condition / Failure Boundary / Constraint
+↓
+Uncertainty Structure
+↓
+Integrated Knowledge Context
+~~~
+
+### Critical Correction — Thesis Roleをまだ確定しない
+
+Knowledge Integrationでは、
+
+~~~text
+PRIMARY
+SUPPORTING
+CONDITIONAL
+CONTRADICTING
+~~~
+
+をCanonical Roleとして確定しない。
+
+理由:
+
+> Thesis RoleはTrade Thesisに対するTarget-relative Roleであり、Trade Thesisが未構築の段階では確定できない。
+
+IntegrationではThesis非依存の、
+
+~~~text
+Effect Group
+Mechanism Group
+Shared Evidence Group
+Dependency Group
+Conflict Group
+Conditional Context
+Uncertainty Context
+~~~
+
+等へ整理する。
+
+### Independence Rule
+
+~~~text
+3 Knowledge
+≠ 3 Independent Reasons
+~~~
+
+Shared Evidence / Same Market Event / Dependency / Common Cause / Redundancyを独立票として数えない。
+
+### Conflict
+
+~~~text
+Conflict Detection
+→ 04
+
+Conflict Structure / Meaning
+→ Knowledge Integration
+
+Conflict Resolution / Thesis handling
+→ 後続05
+~~~
+
+Integration段階でWinnerを決定しない。
+
+### Runtime Integration ≠ Knowledge Merge
+
+~~~text
+05 Runtime Integration
+≠ Knowledge Record Merge
+~~~
+
+Duplicate / Overlapを発見してもKnowledge Poolを直接修正しない。
+必要ならKnowledge Maintenance / Research CandidateへFeedbackする。
+
+### Integrated Knowledge Context Candidate
+
+~~~text
+Knowledge Members
+Semantic / Effect Relations
+Evidence Independence Structure
+Shared Evidence
+Dependency
+Common Cause
+Overlap / Redundancy
+Conflict Structure
+Condition Structure
+Failure Boundary Context
+Constraint Context
+Uncertainty Context
+Trace
+Integration Logic Version
+~~~
+
+正式Object化は未確定。
+
+### Process Status Candidate
+
+~~~text
+INTEGRATED
+PARTIALLY_INTEGRATED
+UNRESOLVED
+FAILED
+~~~
+
+重要:
+
+~~~text
+UNRESOLVED
+≠ NO_TRADE
+
+FAILED
+≠ NO_TRADE
+~~~
+
+### Does Not Own
+
+~~~text
+Applicability Re-evaluation
+Knowledge Promotion / Merge / Delete
+Lifecycle Update
+Constraint Override
+Final Thesis Role
+Expected Value Assessment
+Final Direction
+BUY / SELL / NO_TRADE
+Defense
+Execution
+~~~
+
+### Review
+
+~~~text
+LEGACY_SOURCE_RELATION:
+FIX-008 Dependency / Redundancy Checker
++ Contradiction Integrator
+
+LEGACY_CONFLICT_STATUS:
+MINOR
+
+MAIN REDESIGN:
+Hypothesis → Knowledge
+Selection → 04
+Final Thesis Role → Trade Thesis Construction
+
+LEGACY_REVIEW_STATUS:
+PARTIAL_REUSE
+
+CURRENT_DESIGN_STATUS:
+NOT_ADOPTED
+~~~
+
+---
+
+## 7.25 Trade Thesis Construction / Trade Thesis
+
+### Trade Thesis Construction — Formal Definition Candidate
+
+> **Trade Thesis Construction = Integrated Knowledge Contextに整理されたApplicable Knowledge群から、Shared Evidence・Dependency・Conflict・Condition・Failure Boundary・Constraint・Uncertaintyを失わず、KnowledgeへThesis-relativeなPRIMARY / SUPPORTING / CONDITIONAL / CONTRADICTING Roleを割り当て、Expected Direction・Effect・Horizon・成立条件・反証・Invalidationを持つ0個以上の一貫したTrade Thesisを構成する05内部責任候補。**
+
+### Trade Thesis — Formal Definition Candidate
+
+> **Trade Thesis = 特定Decision ContextにおいてApplicable Knowledge群を一つの市場論拠として構成し、何を・なぜ・どのHorizonで期待するか、どのKnowledgeが中心・支持・条件・反証を担うか、何が論拠を弱化・無効化するか、どの不確実性を抱えるかをVersion / Trace付きで固定したImmutable Decision-Reasoning Snapshot候補であり、BUY / SELL / NO_TRADEやExecution Permissionそのものではない。**
+
+### 0..N Thesis
+
+Current Refinementでは、
+
+~~~text
+Integrated Knowledge Context
+→ Trade Thesis 0..N
+~~~
+
+を許容する。
+
+Conflictがある場合にConstructionが無理に一つへ決着させない。
+
+例:
+
+~~~text
+T-A = Downside Deleveraging Thesis
+T-B = Spot-led Continuation Thesis
+~~~
+
+両方が成立可能なら両方を後段へ渡せる。
+
+### Thesis-relative Roles
+
+ここで初めて、
+
+~~~text
+PRIMARY
+SUPPORTING
+CONDITIONAL
+CONTRADICTING
+~~~
+
+をTrade Thesisに対する相対Roleとして確定する。
+
+~~~text
+Thesis Role
+≠ Knowledge永久属性
+~~~
+
+### Expected Value Ownership Correction
+
+Legacy TradeThesisには expected_value_profile が存在したが、Current Proposalでは責任を分離する。
+
+Trade Thesisが保持する候補:
+
+~~~text
+Expected Value Input Context
+Research-derived Return / Loss Profile Refs
+Cost Estimate Inputs
+Probability / Frequency Context
+Tail Risk Context
+Uncertainty
+~~~
+
+Trade Thesis自身は、
+
+~~~text
+Final Expected Value Assessment
+Trade-worthy Verdict
+~~~
+
+を所有しない。
+
+それらはDecision Evaluationの責任。
+
+### Thesis Context Candidate
+
+~~~text
+Identity / Version
+Decision Context Ref
+Integrated Knowledge Context Ref
+Expected Direction
+Expected Effect
+Expected Horizon
+Primary Knowledge
+Supporting Knowledge
+Conditional Knowledge
+Contradicting Knowledge
+Shared Evidence / Dependency / Redundancy / Common Cause
+Required / Weakening Conditions
+Failure Boundary Context
+Invalidation Conditions
+Main Market Risks / Counter-mechanisms
+Expected Value Input Context
+Quality
+Uncertainty
+Construction Logic Version
+Created At / Validity
+Trace
+~~~
+
+### Failure Boundary ≠ Invalidation
+
+~~~text
+Failure Boundary
+= Research上Knownな成立限界
+
+Thesis Invalidation
+= 今回のThesisを維持できなくなる条件
+~~~
+
+関連するが同一ではない。
+
+### Invalidation ≠ Stop Loss
+
+~~~text
+Thesis Invalidation
+≠ Execution Stop Loss
+~~~
+
+### Construction Status Candidate
+
+~~~text
+BUILDABLE
+PARTIAL
+NOT_BUILDABLE
+FAILED
+~~~
+
+重要:
+
+~~~text
+THESIS_NOT_BUILDABLE
+≠ Decision NO_TRADE
+
+NOT_BUILDABLE
+≠ FAILED
+~~~
+
+### AI
+
+AIは説明・矛盾・Missing Alternative等のAdvisoryに利用可能。
+不足KnowledgeをAI一般知識で補ってThesisを捏造しない。
+新しいIdeaはResearch Candidateへ送る。
+
+### Does Not Own
+
+~~~text
+Applicability変更
+Knowledge Lifecycle
+Knowledge Merge
+Final Expected Value Assessment
+BUY / SELL / NO_TRADE
+Defense
+Risk State
+EntryThesis
+OrderIntent
+Execution
+~~~
+
+### Review
+
+~~~text
+LEGACY_SOURCE_RELATION:
+OBJ-PRD-003 TradeThesis
+FIX-008 Thesis Composer
+
+LEGACY_CONFLICT_STATUS:
+MINOR
+
+LEGACY_REVIEW_STATUS:
+ADOPTABLE / PARTIAL_REUSE
+
+CURRENT REDESIGN:
+Hypothesis → Knowledge
+Selection → 04
+Trade Thesis 1 → 0..N
+Final EV Assessment → Decision Evaluation
+
+CURRENT_DESIGN_STATUS:
+NOT_ADOPTED
+~~~
+
+---
+
+## 7.26 Decision Evaluation / Decision Result
+
+### Decision Scope — Important Correction
+
+複数Trade Thesisを比較する前に、比較可能なDecision ScopeへBindingする。
+
+> **Decision Scope = 一つのDecision Resultが責任を持つ比較可能なMarket / Asset / Instrument / Horizon / Evaluation Window等の意思決定対象Context候補。**
+
+原則:
+
+~~~text
+同一 / Compatible Decision Scope
+→ Cross-Thesis Comparison可能
+
+Incompatible Horizon / Instrument / Context
+→ 無理に一つのWinnerを選ばない
+→ 別Decision ResultまたはContext扱い
+~~~
+
+例:
+
+~~~text
+BTC 5m Downside Thesis
+≠ BTC 1d Upside Thesisを単純Winner比較
+~~~
+
+Decision Cycleは複数Decision Scopeを含み得る。
+
+### Decision Evaluation — Formal Definition Candidate
+
+> **Decision Evaluation = 同一または互換性のあるDecision Scopeに属する有効Trade Thesis群を、Expected Value・損益非対称性・Evidence Independence・Contradiction・Invalidation・Quality・Uncertainty・相互競合の観点から評価・比較し、Knowledge数やThesis数の多数決に頼らず、現在のDecision ContextでRiskを取りたい合理性があるかを判断する05の最終評価処理候補。**
+
+### Decision Result — Formal Definition Candidate
+
+> **Decision Result = 正常に評価されたTrade Thesis群について、どのThesisを根拠にどの方向のRiskを取りたいか、またはRiskを取らないかを、Expected Value Assessment・比較結果・Contradiction・Uncertainty・Reason・Version / Trace付きで固定した05のImmutable Decision Object候補であり、Defense Approval・Execution Permission・Orderそのものではない。**
+
+### Expected Value Assessment — Ownership
+
+Decision Evaluationが正式に所有する候補:
+
+~~~text
+Expected Value Assessment
+Expected Return / Loss Asymmetry
+Probability / Frequency Context
+Tail Risk Context
+Estimated Cost Context
+Expected Value Uncertainty
+Trade-worthiness Context
+~~~
+
+重要:
+
+~~~text
+Expected Value Assessment
+≠ Evidence Strength
+
+Expected Value Assessment
+≠ Applicability
+
+Expected Value Assessment
+≠ Confidence
+~~~
+
+具体Formula / Thresholdは未確定。
+
+### Estimated Cost vs Actual Execution Cost
+
+Decision時:
+
+~~~text
+Estimated Fee
+Estimated Spread
+Estimated Slippage
+Funding / Financing Estimate
+~~~
+
+Execution後:
+
+~~~text
+Actual Fill
+Actual Fee
+Actual Slippage
+Actual Latency
+~~~
+
+を分離する。
+
+同じLiquidity / Spread情報がDecisionとDefense双方で参照されても、責任は異なる。
+
+~~~text
+Decision Evaluation
+= EV / Trade-worthinessへの影響
+
+Defense
+= 今安全に実行可能か
+~~~
+
+### Evaluation Process Status
+
+市場Decisionと処理状態を分ける。
+
+候補:
+
+~~~text
+COMPLETED
+INCOMPLETE
+FAILED
+STALE
+NOT_EVALUATED
+~~~
+
+正式Enumは未確定。
+
+重要:
+
+~~~text
+Evaluation FAILED
+≠ NO_TRADE
+
+Decision STALE
+≠ NO_TRADE
+~~~
+
+### Thesis Evaluation / Cross-Thesis Comparison
+
+概念上:
+
+~~~text
+Trade Thesis T-A
+→ Thesis Evaluation A
+
+Trade Thesis T-B
+→ Thesis Evaluation B
+
+Compatible Decision Scope
+↓
+Cross-Thesis Comparison
+↓
+Decision Result
+~~~
+
+Thesis数による多数決は禁止。
+
+比較Context候補:
+
+~~~text
+Expected Value Assessment
+Expected Horizon
+Mechanism Independence
+Evidence Independence
+Contradiction
+Applicability Quality
+Uncertainty
+Invalidation Risk
+Overlap
+Mutual Exclusivity
+Context Compatibility
+~~~
+
+### Decision Outcome
+
+Legacy候補:
+
+~~~text
+BUY
+SELL
+NO_TRADE
+~~~
+
+ただしBUY / SELLはExecution Orderと誤認しやすいため、意味上は、
+
+~~~text
+TAKE_LONG_RISK
+TAKE_SHORT_RISK
+NO_TRADE
+~~~
+
+相当として扱う方向をDerived Recommendationとする。
+
+正式Renameは未確定。
+
+### NO_TRADE — Formal Meaning
+
+> **NO_TRADE = 有効Trade Thesisを正常に評価した結果、Expected Value・Conflict・Uncertainty・Invalidation等を考慮して現在Riskを取る合理性が十分でないと判断した正常なDecision Outcome候補。**
+
+重要:
+
+~~~text
+THESIS_NOT_BUILDABLE
+= 論拠が成立しない
+
+Decision Evaluation FAILED
+= 評価処理失敗
+
+NO_TRADE
+= 正常評価した結果、Riskを取らない
+
+TAKE_LONG_RISK / TAKE_SHORT_RISK
+= Riskを取りたい方向
+  ただしExecution Permissionではない
+~~~
+
+### Decision Result Candidate
+
+~~~text
+Decision Result ID / Version
+Decision Context Ref
+Decision Scope Ref
+Evaluation Status
+Evaluated Thesis Refs
+Selected Thesis Ref
+Non-selected Thesis Refs / Reasons
+Decision Outcome
+Expected Value Assessment
+Contradiction / Alternative Context
+Invalidation Context
+Uncertainty
+Decision Reasons
+Limitations
+Evaluation Logic Version
+Expected Value Logic Version
+Created At / Validity
+Trace
+~~~
+
+### Defense Boundary
+
+~~~text
+Decision Evaluation
+= Riskを取りたいか
+
+Defense
+= 今そのRiskを取って安全か
+~~~
+
+したがって、
+
+~~~text
+TAKE_LONG_RISK / TAKE_SHORT_RISK
+≠ Execution Permission
+~~~
+
+### AI Review
+
+AI ReviewはAdvisory。
+AI多数決をDecision Authorityにしない。
+AI新案はResearch Candidateへ送る。
+
+### Immutable / Trace
+
+結果を見てDecision Resultを書き換えない。
+
+~~~text
+Decision Result
+→ Trade Thesis
+→ Integrated Knowledge Context
+→ Decision Context
+→ Applicable Knowledge Set
+→ Applicability Assessment
+→ Knowledge Record
+→ Research Result
+→ Evidence
+~~~
+
+へ戻れる構造を候補とする。
+
+### Does Not Own
+
+~~~text
+Research
+Knowledge Promotion
+Applicability Evaluation
+Trade Thesis Construction
+Knowledge Lifecycle
+Constraint Authority
+Production Promotion
+Risk State Update
+Defense
+Position Size
+Leverage
+Entry / Stop / Take Profit
+OrderIntent
+Execution
+~~~
+
+### Review
+
+~~~text
+LEGACY_SOURCE_RELATION:
+ROLE-SIG-001 Signal Engine
+OBJ-PRD-005 SignalDecision
+FIX-008 Signal Boundary
+
+LEGACY_CONFLICT_STATUS:
+MINOR
+
+LEGACY_REVIEW_STATUS:
+ADOPTABLE / PARTIAL_REUSE
+
+CURRENT REDESIGN:
+Single Thesis → 0..N Thesis
+Decision Scope Binding added
+Expected Value Assessment ownership clarified
+Process Status separated from Decision Outcome
+BUY / SELL retained only as Legacy-compatible naming candidate
+
+CURRENT_DESIGN_STATUS:
+NOT_ADOPTED
+~~~
+
+---
+
+## 7.27 05_DECISION — Integrated Review / Final Candidate Flow
+
+### Review Result
+
+今回、05内部候補を全体Reviewした結果、Architectureを作り直す必要がある重大矛盾は確認されなかった。
+
+保存前に以下3点をCorrectionとして反映した。
+
+### CORRECTION-05-01 — Decision Scope Binding
+
+~~~text
+Incompatible Horizon / Instrument / Context
+≠ Direct Cross-Thesis Winner Comparison
+~~~
+
+比較可能なDecision Scope単位でDecision Resultを生成する方向へ修正。
+
+### CORRECTION-05-02 — Expected Value Ownership Separation
+
+~~~text
+Trade Thesis
+= EV Input / Context
+
+Decision Evaluation
+= Expected Value Assessment / Trade-worthiness
+~~~
+
+へ分離。
+
+### CORRECTION-05-03 — Thesis Role Timing
+
+~~~text
+Knowledge Integration
+= Thesis-independent Relationship / Effect / Mechanism Structure
+
+Trade Thesis Construction
+= PRIMARY / SUPPORTING / CONDITIONAL / CONTRADICTING
+  をThesis-relativeに確定
+~~~
+
+へ修正。
+
+### Final Candidate Flow
+
+~~~text
+04_KNOWLEDGE_APPLICABILITY
+↓
+Applicable Knowledge Set
+
+────────────────────────────
+05_DECISION
+────────────────────────────
+
+Decision Context Assembly
+↓
+Decision Context Snapshot
+↓
+Knowledge Integration
+↓
+Integrated Knowledge Context
+↓
+Trade Thesis Construction
+↓
+Trade Thesis 0..N
+↓
+Optional AI Review
+↓
+Decision Scope Binding
+↓
+Individual Thesis Evaluation
+↓
+Expected Value Assessment
+↓
+Cross-Thesis Comparison
+↓
+Decision Result
+
+────────────────────────────
+05 Boundary
+────────────────────────────
+
+↓
+Defense / Risk
+↓
+Execution
+~~~
+
+### Absolute Semantic Boundaries
+
+~~~text
+Applicable Knowledge
+≠ Trade Thesis
+
+Knowledge Integration
+≠ Knowledge Merge
+
+Trade Thesis
+≠ Expected Value Assessment
+
+Trade Thesis
+≠ Decision Result
+
+THESIS_NOT_BUILDABLE
+≠ NO_TRADE
+
+Evaluation FAILED
+≠ NO_TRADE
+
+Decision Result
+≠ Defense Decision
+
+Decision Result
+≠ Execution Permission
+
+WIN
+≠ Correct Understanding
+
+LOSS
+≠ Wrong Understanding
+~~~
+
+### Status
+
+この05全体は、
+
+> **Legacy Production / Signal Concept + Current 04 Boundary + Derived Refinementを比較して作ったReference Proposalであり、Current正式設計ではない。**
 
 ~~~text
 CURRENT_DESIGN_STATUS:
