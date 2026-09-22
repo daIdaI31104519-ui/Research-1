@@ -716,6 +716,15 @@ Reuse Recommendation
 | ExecutionRecord | STRONG OBJ-PRD-009 / ROLE-ADP-002 | Requested / Submitted / Actualを分離 | ADOPTABLE / PARTIAL_REUSE | REFINE | NOT_ADOPTED |
 | ProductionEvidence | STRONG OBJ-PRD-013 / FIX-009 | LIVE Research Evidenceへ精密化 | ADOPTABLE / PARTIAL_REUSE | REFINE | NOT_ADOPTED |
 | Execution Integrated Flow | STRONG | Defense境界からLive Evidenceまで統合 | PARTIAL_REUSE | REFINE | NOT_ADOPTED |
+| TradeResult / Post-Trade Entry Boundary | STRONG OBJ-PRD-014 | Final Trade FactとAnalysisを分離 | PARTIAL_REUSE | REFINE | NOT_ADOPTED |
+| OutcomeAnalysisResult | STRONG OBJ-POST-001 | Outcome / Opportunity / System Integrityを分離 | ADOPTABLE / PARTIAL_REUSE | REFINE | NOT_ADOPTED |
+| TradeThesisEvaluation | STRONG OBJ-POST-002 | PnL非依存のThesis全体評価 | ADOPTABLE / PARTIAL_REUSE | REFINE | NOT_ADOPTED |
+| HypothesisAttribution | STRONG OBJ-POST-003 | CurrentではThesis Member Attributionへ意味拡張 | PARTIAL_REUSE | REFINE | NOT_ADOPTED |
+| DefenseDecisionEvaluation | STRONG OBJ-POST-004 | Pre-Trade Defense Evaluationとの命名衝突を分離 | PARTIAL_REUSE | RENAME / REFINE | NOT_ADOPTED |
+| SupervisorEvaluation | STRONG OBJ-POST-005 | Detection / Timing / Stability / Utilityへ精密化 | ADOPTABLE / PARTIAL_REUSE | REFINE | NOT_ADOPTED |
+| DemoLiveDivergence | STRONG OBJ-POST-006 | Channel比較とComparability Gateへ精密化 | ADOPTABLE / PARTIAL_REUSE | REFINE | NOT_ADOPTED |
+| CounterfactualResult | STRONG OBJ-POST-007 | Hindsight防止 / Minimal Interventionを追加 | ADOPTABLE / PARTIAL_REUSE | REFINE | NOT_ADOPTED |
+| Post-Trade Integrated Flow | STRONG ROLE-ANL-001 | Trade Fact→Analysis→Research Candidateを統合 | PARTIAL_REUSE | REFINE | NOT_ADOPTED |
 
 ---
 
@@ -5621,7 +5630,867 @@ ExecutionRecord
 ProductionEvidence
 ≠ Post-Trade Analysis
 
+ProductionEv
+## 7.41 TradeResult / Post-Trade Entry Boundary
+
+### Boundary Definition Candidate
+
+> **TradeResult = 一つのTradeがTerminal Conditionへ到達した時点で、Entry / Exit・Exposure・ExecutionRecord・ProductionEvidence・Fee / Funding・Slippage・PnL・MAE / MFE・Exit Reason・Quality / Provenanceを、意味評価を加えず固定するFinal Trade Outcome Fact候補。**
+
+Post-TradeはTradeResultを分析Inputとして扱い、Source Factを書き換えない。
+
+~~~text
+ExecutionRecord
+= 個々の注文で何が起きたか
+
 ProductionEvidence
+= LIVEで何が観測されたか
+
+TradeResult
+= Trade全体として何が起きたか
+
+Post-Trade Analysis
+= それをどう解釈するか
+~~~
+
+### Ownership Correction
+
+LegacyではLogger / Post-TradeがTradeResult Owner候補だが、Currentでは、
+
+~~~text
+Trade Finalization / Outcome Assembly
+= Generator responsibility
+
+Logger
+= Custodian
+
+Post-Trade
+= Analyzer
+~~~
+
+とする方が既存原則と整合する。
+
+### Critical Invariants
+
+~~~text
+TradeResult
+≠ OutcomeAnalysisResult
+
+TradeResult
+≠ Hypothesis Result
+
+Positive PnL
+≠ Thesis correct
+
+Negative PnL
+≠ Thesis wrong
+
+Gross PnL
+≠ Net PnL
+
+Slippage metric
+must not be double-counted in PnL
+~~~
+
+~~~text
+LEGACY_SOURCE_RELATION:
+OBJ-PRD-014 TradeResult
+
+LEGACY_REVIEW_STATUS:
+PARTIAL_REUSE / OWNER BOUNDARY REDESIGN
+
+CURRENT_DESIGN_STATUS:
+NOT_ADOPTED
+~~~
+
+---
+
+## 7.42 OutcomeAnalysisResult
+
+### Formal Definition Candidate
+
+> **OutcomeAnalysisResult = TradeResultを、事前Expectationとの整合性・Horizon・MAE / MFE・Exit Timing・Execution Cost / Slippage・Risk-adjusted Outcome・Opportunity・System Integrityへ分解するVersioned Immutable Post-Trade Analysis候補。**
+
+### CORRECTION-PT-01 — Legacy 6分類を3軸へ分離
+
+Legacy:
+
+~~~text
+EXPECTED_SUCCESS
+UNEXPECTED_SUCCESS
+EXPECTED_FAILURE
+UNEXPECTED_FAILURE
+MISSED_OPPORTUNITY
+SYSTEM_FAILURE
+~~~
+
+Current:
+
+~~~text
+Axis A:
+Economic Outcome / Expectation Alignment
+
+Axis B:
+Opportunity
+
+Axis C:
+System Integrity
+~~~
+
+Derived Outcome Classification候補:
+
+~~~text
+EXPECTED_SUCCESS
+UNEXPECTED_SUCCESS
+EXPECTED_FAILURE
+UNEXPECTED_FAILURE
+~~~
+
+重要:
+
+~~~text
+EXPECTED_FAILURE
+≠ System Failure
+
+UNEXPECTED_SUCCESS
+≠ Thesis proven
+
+SYSTEM_FAILURE
+can coexist with Profit
+
+MISSED_OPPORTUNITY
+can coexist with Profit or Loss
+~~~
+
+OutcomeAnalysisResultはPost-Trade分析の入口であり、Root Causeを確定しない。
+
+~~~text
+LEGACY_SOURCE_RELATION:
+OBJ-POST-001
+ROLE-ANL-001
+
+LEGACY_REVIEW_STATUS:
+STRONGLY ADOPTABLE / PARTIAL_REUSE
+
+CURRENT_DESIGN_STATUS:
+NOT_ADOPTED
+~~~
+
+---
+
+## 7.43 TradeThesisEvaluation
+
+### Formal Definition Candidate
+
+> **TradeThesisEvaluation = TradeのPnLとは独立して、Entry時に固定されたTrade ThesisのDirection・Expected Effect・Magnitude / Sequence / Persistence・Horizon・Invalidation・Contradiction・Applicability・Uncertaintyが実市場Behavior / Evidenceとどの程度整合したかを評価するVersioned Immutable Analysis候補。**
+
+### Main Axes
+
+~~~text
+Direction Match
+Expected Effect Match
+Magnitude / Sequence / Persistence
+Horizon Match
+Invalidation Evaluation
+Contradiction Handling
+Applicability Evaluation
+Uncertainty Calibration
+Dependency / Redundancy Context
+Risk Coverage
+~~~
+
+Overall Outcome候補:
+
+~~~text
+MATCHED
+PARTIALLY_MATCHED
+MISMATCHED
+INVALIDATED
+INDETERMINATE
+~~~
+
+多数決で決めない。
+
+### Critical Boundaries
+
+~~~text
+Profit
+≠ Thesis correct
+
+Loss
+≠ Thesis wrong
+
+Direction Match
+≠ Thesis proven
+
+Expected Effect observed
+≠ Cause proven
+
+Invalidation triggered
+≠ Hypothesis retired
+
+Applicability mistake
+≠ Knowledge invalid
+~~~
+
+~~~text
+LEGACY_SOURCE_RELATION:
+OBJ-POST-002
+ROLE-ANL-001
+
+LEGACY_REVIEW_STATUS:
+STRONGLY ADOPTABLE / PARTIAL_REUSE
+
+CURRENT_DESIGN_STATUS:
+NOT_ADOPTED
+~~~
+
+---
+
+## 7.44 HypothesisAttribution / Thesis Member Attribution
+
+### Formal Definition Candidate
+
+> **HypothesisAttribution = Trade Thesisを構成した各Memberについて、Entry時Role・Expected Effect・Horizon・Evidence Validity・Applicability・Contradiction・Shared Evidence・Dependency・Redundancy・Common Causeを個別評価し、そのMemberがThesis全体へどの程度の独立した説明価値を持ったかを記録するVersioned Immutable Analysis候補。**
+
+### CORRECTION-PT-02 — Current Target Refinement
+
+LegacyはHypothesis-centric。
+
+Current 05では、
+
+~~~text
+Applicable Knowledge
+↓
+Trade Thesis Construction
+↓
+Thesis-relative Role
+~~~
+
+なので、Current意味は:
+
+~~~text
+thesis_member_ref
+↓
+source_knowledge_ref
+↓
+source_hypothesis_ref / research provenance
+~~~
+
+が自然。
+
+PRIMARY / SUPPORTING / CONDITIONAL / CONTRADICTING はKnowledgeの永久属性ではなく、特定Trade Thesis内の相対Role。
+
+### Raw Match ≠ Independent Contribution
+
+~~~text
+Member Match
+≠ Causal Proof
+
+Member Count
+≠ Independent Evidence Count
+
+Shared Evidence
+≠ Independent Support
+
+Dependency
+≠ Invalidity
+
+Redundancy
+≠ Additional Support
+
+Common Cause
+≠ Multiple Independent Causes
+~~~
+
+CONDITIONALは弱いSUPPORTINGではなく、When / Under What Conditionsを担う。
+
+Current正式名は将来 ThesisMemberAttribution 等へ改名候補だが、現段階ではLegacy対応上HypothesisAttributionを作業名として保持する。
+
+~~~text
+LEGACY_SOURCE_RELATION:
+OBJ-POST-003
+ROLE-ANL-001
+
+LEGACY_REVIEW_STATUS:
+PARTIAL_REUSE / TARGET REFINEMENT
+
+CURRENT_DESIGN_STATUS:
+NOT_ADOPTED
+~~~
+
+---
+
+## 7.45 DefenseDecisionEvaluation
+
+### Formal Definition Candidate
+
+> **DefenseDecisionEvaluation = 過去のALLOW / REDUCE / BLOCKについて、当時のRiskState・Authorized Constraint・Liquidity・Exposure・Drawdown・Data / Exchange Health等と、その後のActual / Shadow / Counterfactual Outcomeを比較し、Safety判断がRisk抑制・損失回避・過剰制限・機会損失等へどう作用した可能性があるかを評価するVersioned Immutable Post-Trade Analysis候補。**
+
+### CORRECTION-PT-03 — Naming Collision
+
+Currentには既にPre-Trade:
+
+~~~text
+Defense Evaluation
+→ DefenseDecision
+~~~
+
+が存在する。
+
+Post-Trade Legacy DefenseEvaluation はCurrentでは:
+
+~~~text
+DefenseDecisionEvaluation
+~~~
+
+と呼ぶ方が安全。
+
+### Evaluation Axes
+
+~~~text
+Decision Appropriateness
+Safety Benefit
+Restriction Cost
+Gate Effectiveness
+Constraint Effectiveness
+Counterfactual Confidence
+~~~
+
+Outcome-specific Candidate:
+
+~~~text
+ALLOW
+→ False Allow Candidate
+
+REDUCE
+→ Over / Under Restriction Candidate
+
+BLOCK
+→ False Block Candidate
+~~~
+
+ただし全てCandidate。
+
+~~~text
+avoided_loss
+→ estimated_avoided_loss
+
+missed_profit
+→ estimated_missed_profit
+~~~
+
+Actual Factとして扱わない。
+
+Hard Safetyについて:
+
+~~~text
+Would-have-profited
+≠ Hard Block was wrong
+~~~
+
+~~~text
+LEGACY_SOURCE_RELATION:
+OBJ-POST-004
+
+LEGACY_REVIEW_STATUS:
+STRONGLY ADOPTABLE / NAME + COUNTERFACTUAL REFINEMENT
+
+CURRENT_DESIGN_STATUS:
+NOT_ADOPTED
+~~~
+
+---
+
+## 7.46 SupervisorEvaluation
+
+### Formal Definition Candidate
+
+> **SupervisorEvaluation = Position保有中にPosition Supervisorが生成したThesis Health State / Warningについて、実際のThesis deterioration・Invalidation・Recoveryとの整合性、検知Timing・Severity・Persistence・State Stability・Exit EngineへのAdvisory Utilityを評価するVersioned Immutable Post-Trade Analysis候補。**
+
+### Main Axes
+
+~~~text
+Detection Accuracy
+Detection Timing
+Severity Calibration
+State Transition Quality
+Persistence / Stability
+Action Utility
+False Alarm
+Late Warning
+Missed Warning
+Recovery Detection
+~~~
+
+### Temporal Boundary
+
+~~~text
+Pre-Entry Safety
+= Defense
+
+Post-Entry Thesis Monitoring
+= Supervisor
+
+Hard Safety During Position
+= In-Trade Defense
+
+Normal Exit Authority
+= Exit Engine
+~~~
+
+### Important Separation
+
+~~~text
+Warning
+≠ Exit Command
+
+Action Followed
+≠ Supervisor correct
+
+Action Not Followed
+≠ Supervisor wrong
+
+Trade Loss
+≠ Supervisor Failure
+~~~
+
+Legacy Hypothesis-centric health fieldsはCurrentではThesis Member Healthへ意味上読み替える候補。
+
+Hysteresisでは、
+
+~~~text
+Noise reduction
+vs
+Detection latency
+~~~
+
+を研究対象にする。
+
+~~~text
+LEGACY_SOURCE_RELATION:
+OBJ-POST-005
+ROLE-SUP-001
+
+LEGACY_REVIEW_STATUS:
+STRONGLY ADOPTABLE / PARTIAL_REUSE
+
+CURRENT_DESIGN_STATUS:
+NOT_ADOPTED
+~~~
+
+---
+
+## 7.47 DemoLiveDivergence
+
+### Formal Definition Candidate
+
+> **DemoLiveDivergence = Historical / OOS / Demo Forward等のReference ProfileとLIVE ProductionEvidenceを、Target Version・Market / Regime・Scale・Execution / Measurement条件の比較可能性を確認した上で比較し、Market Behavior・Execution・Cost・Liquidity・Regime・Data Quality・Simulation AssumptionのどこにMaterialな差が生じたかを原因候補と分離して保存するVersioned Immutable Comparative Analysis候補。**
+
+### CORRECTION-PT-04 — Comparability Gate
+
+比較前に:
+
+~~~text
+COMPARABLE
+PARTIALLY_COMPARABLE
+NOT_COMPARABLE
+INDETERMINATE
+~~~
+
+を評価する。
+
+比較Context候補:
+
+~~~text
+Instrument
+Venue
+Direction
+Horizon
+Position Scale
+Market DNA / Regime
+Trade Thesis Version
+Execution Policy Version
+Fee Structure
+Liquidity Context
+Metric Identity / Formula Version
+Data Quality
+~~~
+
+### Divergence Dimensions
+
+~~~text
+Market Behavior
+Execution
+Slippage / Fee / Funding
+Liquidity
+Regime / Market DNA
+Scale / Venue
+Data Quality
+Measurement Definition
+Simulation Assumption
+~~~
+
+### Critical Boundary
+
+~~~text
+NOT_COMPARABLE
+≠ NO_DIVERGENCE
+
+Observed Divergence
+≠ Proven Cause
+
+Live Failure
+≠ Hypothesis Failure
+
+Live Failure
+≠ Knowledge Invalid
+
+Model Error Candidate
+≠ Model Error Confirmed
+~~~
+
+Channelを消して単純合算しない。
+
+~~~text
+LEGACY_SOURCE_RELATION:
+OBJ-POST-006
+ProductionEvidence
+Evidence Channel definition
+
+LEGACY_REVIEW_STATUS:
+STRONGLY ADOPTABLE / PARTIAL_REUSE
+
+CURRENT_DESIGN_STATUS:
+NOT_ADOPTED
+~~~
+
+---
+
+## 7.48 CounterfactualResult
+
+### Formal Definition Candidate
+
+> **CounterfactualResult = 過去のDecision Pointとその時点で利用可能だったInformation Setを固定し、Actual Actionの代わりに明示されたAlternative Actionを選択していた場合のOutcomeを、Model Assumption・Execution Realism・Feasibility・Uncertainty・Limitations付きでSimulationし、COUNTERFACTUAL Channelの研究補助結果として保存するVersioned Immutable Object候補。**
+
+### CORRECTION-PT-05 — Hindsight Leakage Prevention
+
+~~~text
+Decision-time Information Set
+≠ Evaluation-time Data Set
+~~~
+
+Future DataはAlternative Actionを正当化するために使用しない。
+Future DataはT0で固定したAlternative Outcomeを評価するためには利用可能。
+
+### Minimal Intervention
+
+原則:
+
+~~~text
+1 Counterfactual
+≈ 1 Main Intervention
+~~~
+
+変更点を明示する。
+
+### Feasibility
+
+候補:
+
+~~~text
+POLICY_COMPLIANT
+POLICY_VIOLATING_RESEARCH_SCENARIO
+TECHNICALLY_INFEASIBLE
+CONDITIONALLY_FEASIBLE
+UNKNOWN
+~~~
+
+Hard Safetyを無視したScenarioも研究可能だが、Productionで取るべきだった機会として扱わない。
+
+### Execution Realism
+
+~~~text
+Large Size Change
+≠ Naive Linear PnL Scaling
+~~~
+
+必要に応じてFill / Slippage / Liquidity / Market Impact / Latency / Fee / Funding Modelを使う。
+
+### Channel Separation
+
+~~~text
+LIVE
+≠ SHADOW
+≠ DEMO_FORWARD
+≠ COUNTERFACTUAL
+~~~
+
+Best hindsight action ≠ actionable policy。
+
+~~~text
+LEGACY_SOURCE_RELATION:
+OBJ-POST-007
+Evidence Channel definition
+
+LEGACY_REVIEW_STATUS:
+STRONGLY ADOPTABLE / MAJOR PRECISION EXPANSION
+
+CURRENT_DESIGN_STATUS:
+NOT_ADOPTED
+~~~
+
+---
+
+## 7.49 Post-Trade — Integrated Review / Final Candidate Flow
+
+### Review Result
+
+Legacy ROLE-ANL-001 Post-Trade Analysis と7つのPost-Trade Objectを、Current Decision / Defense / Execution / Research境界へ照合した結果、Architectureを作り直す必要がある重大矛盾は確認されなかった。
+
+保存前に以下を正式補正した。
+
+### CORRECTION-PT-01 — Outcome分類の多軸化
+
+~~~text
+Outcome Alignment
+≠ Opportunity
+≠ System Integrity
+~~~
+
+### CORRECTION-PT-02 — Whole / Parts分離
+
+~~~text
+TradeThesisEvaluation
+= Thesis全体
+
+HypothesisAttribution
+= Thesis Member個別
+~~~
+
+### CORRECTION-PT-03 — Defense命名衝突解消
+
+~~~text
+Pre-Trade:
+Defense Evaluation
+
+Post-Trade:
+DefenseDecisionEvaluation
+~~~
+
+### CORRECTION-PT-04 — Demo/LIVE比較前のComparability
+
+~~~text
+Comparison Conditions
+↓
+Comparability
+↓
+Difference Measurement
+~~~
+
+NOT_COMPARABLEを差なしへ変換しない。
+
+### CORRECTION-PT-05 — Actual / Counterfactual分離
+
+~~~text
+Actual Fact
+≠ Shadow
+≠ Demo
+≠ Counterfactual
+~~~
+
+### CORRECTION-PT-06 — Post-Trade Has No Apply Authority
+
+~~~text
+Post-Trade Analysis
+may create:
+Analysis
+Candidate
+Request / Recommendation material
+
+Post-Trade Analysis
+must not directly APPLY:
+Hypothesis State
+Knowledge State
+RiskState
+Defense Rule
+Supervisor Threshold
+Production Rule
+Trainer Update
+~~~
+
+### Responsibility Matrix
+
+~~~text
+OutcomeAnalysisResult
+= Trade結果の全体的な意味
+
+TradeThesisEvaluation
+= 市場Thesis全体の整合性
+
+HypothesisAttribution
+= Thesis Member個別の説明貢献
+
+DefenseDecisionEvaluation
+= Entry前Safety判断の有効性
+
+SupervisorEvaluation
+= Entry後Thesis監視の有効性
+
+DemoLiveDivergence
+= Validation ChannelとLIVE Realityの差
+
+CounterfactualResult
+= Alternative ActionのSimulation結果
+~~~
+
+### No Overwrite Principle
+
+すべての分析ObjectはSource Objectを改変しない。
+
+~~~text
+TradeResult
+ProductionEvidence
+ExecutionRecord
+EntryThesis
+TradeThesis
+DefenseDecision
+PositionThesisState History
+~~~
+
+はSource / Snapshotとして保持する。
+
+分析Logic改善時は新Versionを生成する。
+
+### Research Feedback Boundary
+
+~~~text
+Post-Trade Analysis Objects
+↓
+ResearchCandidate(s)
+↓
+Research Router
+↓
+ResearchRoute
+↓
+03_RESEARCH
+~~~
+
+Post-Trade Analysis Object自体はRouting Authorityではない。
+
+### Canonical Integrated Flow
+
+~~~text
+Trade / Position Terminal
+↓
+TradeResult
++
+ProductionEvidence
++
+Entry / Decision / Defense / Execution / Position / Exit Trace
+↓
+OutcomeAnalysisResult
+↓
+├ TradeThesisEvaluation
+│   ↓
+│ HypothesisAttribution
+│
+├ DefenseDecisionEvaluation
+│
+├ SupervisorEvaluation
+│
+├ DemoLiveDivergence
+│
+└ CounterfactualResult
+↓
+ResearchCandidate(s)
+↓
+Research Router
+↓
+ResearchRoute
+↓
+03_RESEARCH
+↓
+Research Plan / Validation
+↓
+Validated Research Result
+↓
+04_KNOWLEDGE_APPLICABILITY
+↓
+05_DECISION
+↓
+Production
+↓
+Post-Trade
+~~~
+
+### Failure / Meaning Separation
+
+~~~text
+Trade LOSS
+≠ Thesis Failure
+
+Thesis MISMATCH
+≠ Hypothesis Retired
+
+Member mismatch
+≠ Knowledge invalid
+
+False Block Candidate
+≠ Defense Rule invalid
+
+Late Warning Candidate
+≠ Supervisor Rule invalid
+
+Demo/LIVE divergence
+≠ Model failure confirmed
+
+Counterfactual Better Outcome
+≠ Production should have chosen it
+~~~
+
+### Deferred but Required Work
+
+~~~text
+Research Router / ResearchRoute
+
+ExitDecision / Exit-side Evaluation refinement
+
+In-Trade Defense post-trade evaluation
+
+Position identity / lifecycle contract
+
+Post-Trade analysis orchestration order
+
+Cross-analysis conflict handling
+
+Analysis-to-ResearchCandidate contract
+~~~
+
+直近Owner:
+
+~~~text
+Research Router / ResearchRoute
+~~~
+
+### Integrated Status
+
+> **Post-Trade 7系統は、Trade Outcomeを単一WIN / LOSSへ潰さず、市場理解・Thesis構成・Safety・Position監視・Demo/LIVE差・Alternative Actionを独立評価してResearchへ戻すCurrent Reference Proposalとして整合した。重大な責任重複はなく、残る主な未設計境界はResearch Router / ResearchRouteである。**
+
+~~~text
+LEGACY_CONFLICT_STATUS:
+MINOR / MODERATE NAMING
+
+LEGACY_REVIEW_STATUS:
+STRONGLY ADOPTABLE / PARTIAL_REUSE
+
+CURRENT_DESIGN_STATUS:
+NOT_ADOPTED
+~~~
+
+---
+
+idence
 ≠ DemoLiveDivergence
 
 Initial Stop / TP Intent
