@@ -711,6 +711,11 @@ Reuse Recommendation
 | Emergency Fast Path | STRONG | Safety Restrictionのみ高速化 | ADOPTABLE / PARTIAL_REUSE | REFINE | NOT_ADOPTED |
 | Recovery Strict Path | STRONG | Permission Expansionを厳格化 | ADOPTABLE / PARTIAL_REUSE | REFINE | NOT_ADOPTED |
 | Defense → Execution Contract | STRONG FIX-009境界 | Current Execution Admissionへ再設計 | PARTIAL_REUSE | REFINE | NOT_ADOPTED |
+| EntryThesis | STRONG FIX-009 / OBJ-PRD-010 | Current Entry Snapshotへ再設計 | ADOPTABLE / PARTIAL_REUSE | REFINE | NOT_ADOPTED |
+| OrderIntent | STRONG OBJ-PRD-008 / ROLE-EXEC-001 | Exchange-independent execution intentへ精密化 | ADOPTABLE / PARTIAL_REUSE | REFINE | NOT_ADOPTED |
+| ExecutionRecord | STRONG OBJ-PRD-009 / ROLE-ADP-002 | Requested / Submitted / Actualを分離 | ADOPTABLE / PARTIAL_REUSE | REFINE | NOT_ADOPTED |
+| ProductionEvidence | STRONG OBJ-PRD-013 / FIX-009 | LIVE Research Evidenceへ精密化 | ADOPTABLE / PARTIAL_REUSE | REFINE | NOT_ADOPTED |
+| Execution Integrated Flow | STRONG | Defense境界からLive Evidenceまで統合 | PARTIAL_REUSE | REFINE | NOT_ADOPTED |
 
 ---
 
@@ -4518,7 +4523,1139 @@ REDUCE
 BLOCK
 → DENY
 
-Evaluation Failure
+Evaluation Fai
+## 7.36 EntryThesis
+
+### Formal Definition Candidate
+
+> **EntryThesis = 有効なRisk-taking DecisionがDefense / Risk Gateを通過した後、OrderIntent生成直前のTrade Thesis・Decision Result・DefenseEvaluationResult・DefenseDecision・Risk Permission・Authorized Constraint・Restriction Context・Market Context・Version / Quality / Uncertaintyを、時間的に一貫した状態で固定するImmutable Entry Snapshot候補。**
+
+中心意味:
+
+~~~text
+Trade Thesis
+= なぜRiskを取りたいか
+
+Decision Result
+= Riskを取りたいか
+
+DefenseDecision
+= 今そのRiskを取って安全か
+
+EntryThesis
+= 実際にEntryへ進む直前、
+  何を根拠・条件としていたか
+~~~
+
+### Canonical Flow
+
+~~~text
+Trade Thesis
+↓
+Decision Result
+↓
+DefenseEvaluationResult
+↓
+DefenseDecision
+↓
+Execution Admission
+↓
+RiskState / Constraint / Validity Recheck
+↓
+Entry Snapshot Builder
+↓
+EntryThesis
+↓
+Order Planning
+↓
+OrderIntent
+~~~
+
+### Generator Boundary
+
+~~~text
+Generator
+= Execution Logic / Entry Snapshot Builder
+
+Custodian
+= Logger / Storage
+
+Analyzer
+= Post-Trade Analysis
+~~~
+
+FIX-009の、
+
+~~~text
+Generator
+≠ Custodian
+≠ Analyzer
+~~~
+
+を維持。
+
+### Current Refinement
+
+Legacy:
+
+~~~text
+SignalDecision
+ApplicableHypothesisSet
+~~~
+
+Current候補:
+
+~~~text
+Decision Result
+Applicable Knowledge / Trade Thesis Trace
+~~~
+
+へ読み替える。
+
+### Snapshot Principle
+
+EntryThesisは上流Object全文をDeep Copyする巨大Objectではない。
+
+~~~text
+必要なEntry時点Runtime Facts
++
+Immutable / Versioned References
+~~~
+
+を固定する。
+
+候補Trace:
+
+~~~text
+trade_thesis_ref
+decision_result_ref
+defense_evaluation_result_ref
+defense_decision_ref
+risk_state_ref
+authorized_constraint_refs
+entry_market_context_ref
+entry_market_dna_ref
+quality_ref
+uncertainty
+entry_snapshot_at
+snapshot_builder_version
+trace_id
+~~~
+
+### Recheck ≠ Re-evaluate
+
+Entry Snapshot Builderは、
+
+~~~text
+Current RiskState
+Constraint
+Decision validity
+Defense validity
+Market Context compatibility
+Version consistency
+~~~
+
+をRecheckできる。
+
+しかし、
+
+~~~text
+Direction変更
+Expected Value再計算
+Trade Thesis再構成
+Defense Outcome変更
+~~~
+
+を行わない。
+
+必要ならNew Decision / Defense Cycleへ戻す。
+
+### Failure
+
+~~~text
+ENTRY_SNAPSHOT_NOT_BUILDABLE
+~~~
+
+候補を維持。
+
+意味:
+
+> Defense→Execution Admissionまでは到達したが、必須ContextをEntry時点で時間的・意味的に一貫したSnapshotとして固定できない。
+
+これは、
+
+~~~text
+Defense BLOCK
+≠ ENTRY_SNAPSHOT_NOT_BUILDABLE
+≠ NO_TRADE
+≠ Processing FAILED
+~~~
+
+。
+
+### Invariants
+
+~~~text
+No valid Defense
+→ No EntryThesis
+
+BLOCK / Fail-Closed
+→ No EntryThesis
+
+ENTRY_SNAPSHOT_NOT_BUILDABLE
+→ No OrderIntent
+
+EntryThesis BUILT
+≠ OrderIntent guaranteed
+
+EntryThesis
+= Immutable after creation
+
+Outcome
+must not rewrite EntryThesis
+~~~
+
+### Status
+
+~~~text
+LEGACY_SOURCE_RELATION:
+OBJ-PRD-010
+ROLE-EXEC-001
+FIX-009
+
+LEGACY_REVIEW_STATUS:
+STRONGLY ADOPTABLE / PARTIAL_REUSE
+
+CURRENT_DESIGN_STATUS:
+NOT_ADOPTED
+~~~
+
+---
+
+## 7.37 OrderIntent
+
+### Formal Definition Candidate
+
+> **OrderIntent = 正常なEntryThesisを基準として、許可Risk Envelope内でPosition Size・Leverage・Order Style・Price Condition・Split Execution・Protection Intent・Slippage / Liquidity Constraint等を、取引所APIに依存しない形で固定するImmutable Execution Intent候補。**
+
+中心境界:
+
+~~~text
+EntryThesis
+= WHY / UNDER WHAT CONDITIONS
+
+OrderIntent
+= HOW / HOW MUCH / UNDER WHAT EXECUTION LIMITS
+
+Exchange Adapter
+= HOW ON THIS VENUE
+~~~
+
+### Order Planning Responsibility
+
+Source-backed:
+
+~~~text
+Position Size
+Leverage
+Market / Limit
+Split Order
+Stop / Take Profit
+Slippage tolerance
+Liquidity requirement
+~~~
+
+Currentでは次へ整理候補:
+
+~~~text
+Sizing Intent
+Leverage Intent
+Entry Order Style
+Price Condition
+Split Execution Plan
+Protection Intent
+Slippage / Price Protection
+Liquidity Requirement
+Execution Constraints
+~~~
+
+### Sizing Boundary
+
+~~~text
+Defense / Risk
+= Maximum Safety Envelope
+
+Execution
+= Actual Requested Size
+~~~
+
+必ず概念上:
+
+~~~text
+requested risk
+≤ Defense Restriction
+≤ Effective Risk Permission
+~~~
+
+。
+
+Size Unitを暗黙化しない。
+
+~~~text
+BASE_QUANTITY
+QUOTE_NOTIONAL
+CONTRACT_QUANTITY
+~~~
+
+等のExplicit Quantity Semanticsが必要候補。
+
+### Leverage
+
+Leverage対応Instrumentのみ。
+
+~~~text
+Leverage Intent
+≠ Risk Permission
+~~~
+
+RiskStateがExact Leverageを直接決めない。
+
+### Order Style
+
+Legacyで強く支持されるのは:
+
+~~~text
+MARKET
+LIMIT
+~~~
+
+。
+
+Exchange-specific enumをCoreへ持ち込まない。
+
+~~~text
+MARKET
+≠ Unlimited Slippage
+~~~
+
+。
+
+### Split
+
+候補:
+
+~~~text
+1 EntryThesis
+→ 1 OrderIntent
+→ N Execution Slices
+~~~
+
+長時間Split時の再ValidationはExecution Lifecycleへ後送り。
+
+### CORRECTION-EX-01 — Protection IntentとExit Authority
+
+保存前Reviewで以下を明確化。
+
+~~~text
+OrderIntent Stop / TP
+= Entry時点のInitial Protection Intent
+
+Position Supervisor
+= Thesis健全性監督
+
+In-Trade Defense
+= Hard Safety
+
+Exit Engine
+= 継続中の通常Exit Authority
+~~~
+
+したがって、
+
+~~~text
+Initial Stop / TP Intent
+≠ 永続的なExit Decision Authority
+~~~
+
+。
+
+Entry後の状態変化でExit判断が変わる場合、OrderIntentを書き換えず、Exit / Position側の新しいDecision / Actionとして扱う。
+
+### Exchange Adapter Boundary
+
+Adapter owns:
+
+~~~text
+Symbol mapping
+Tick size
+Minimum order
+Venue enum
+Authentication interface
+Request / Response conversion
+~~~
+
+AdapterはOrderIntentのEconomic / Risk Meaningを拡張してはならない。
+
+Safe conversion不能ならSubmitしない。
+
+### Build Failure
+
+~~~text
+ORDER_INTENT_NOT_BUILDABLE
+≠ Defense BLOCK
+≠ Planner FAILED
+~~~
+
+例:
+
+~~~text
+safe size < minimum tradable size
+required leverage unsupported
+required protection unsupported
+liquidity / slippage condition cannot be satisfied
+~~~
+
+### Invariants
+
+~~~text
+No EntryThesis
+→ No OrderIntent
+
+OrderIntent
+≠ Exchange Order
+
+REDUCE Restriction
+must not be relaxed
+
+OrderIntent BUILT
+≠ Exchange accepted
+
+OrderIntent
+= Immutable
+~~~
+
+### Status
+
+~~~text
+LEGACY_SOURCE_RELATION:
+OBJ-PRD-008
+ROLE-EXEC-001
+ROLE-ADP-002
+
+LEGACY_REVIEW_STATUS:
+STRONGLY ADOPTABLE / PARTIAL_REUSE
+
+CURRENT_DESIGN_STATUS:
+NOT_ADOPTED
+~~~
+
+---
+
+## 7.38 ExecutionRecord
+
+### Formal Definition Candidate
+
+> **ExecutionRecord = 特定OrderIntentがExchange Adapterを通じて取引所へ実際にどのような注文として送信され、どのように受理・拒否・約定・部分約定・取消・失効・不明状態となったかを、Submission / Acknowledgement / Fill / Price / Size / Fee / Slippage / Latency / Exchange Status / Diagnostics付きで固定するPrimary Execution Fact候補。**
+
+中心境界:
+
+~~~text
+OrderIntent
+= What we intended
+
+ExecutionRecord
+= What actually happened at venue
+~~~
+
+### Requested / Submitted / Actual
+
+保存前ReviewでCurrent Refinementとして3段階を維持。
+
+~~~text
+INTENDED
+= OrderIntent values
+
+SUBMITTED
+= AdapterがVenue仕様へ正規化し実際に送った値
+
+ACTUAL
+= Exchangeで起きたFill / Fee / Status
+~~~
+
+例:
+
+~~~text
+requested size:
+0.01037 BTC
+
+submitted size:
+0.010 BTC
+
+filled size:
+0.008 BTC
+~~~
+
+これにより、
+
+~~~text
+Planning
+Adapter Conversion
+Exchange Execution
+~~~
+
+を分離可能。
+
+### Generator
+
+~~~text
+Exchange Adapter
+= Canonical Generator
+
+Logger
+= Custodian
+
+Post-Trade
+= Analyzer
+~~~
+
+### Execution Fact
+
+候補:
+
+~~~text
+order_intent_ref
+submission_attempt_id
+exchange_order_id
+submitted_at
+acknowledged_at
+submitted_quantity
+submitted_price
+fills[]
+filled_quantity
+remaining_quantity
+average_fill_price
+partial_fill_state
+fees
+actual_slippage
+exchange_order_state
+diagnostics_ref
+adapter_version
+trace_id
+~~~
+
+### Fill Preservation
+
+平均値だけに潰さず、
+
+~~~text
+fill_id
+filled_at
+fill_price
+fill_quantity
+fee
+exchange_trade_id
+~~~
+
+等の個別Fill Factを保持可能にする。
+
+### UNKNOWN ≠ REJECTED
+
+~~~text
+REJECTED
+= Exchange拒否確認済み
+
+UNKNOWN
+= Orderが存在するか確定不能
+~~~
+
+UNKNOWNをFILLED / REJECTEDへ推測変換しない。
+Reconciliation候補へ送る。
+
+### Cardinality
+
+Split / Retryを踏まえ、
+
+~~~text
+1 OrderIntent
+→ 1..N ExecutionRecords
+~~~
+
+を許容候補とする。
+
+原則、
+
+> 1 ExecutionRecord = 1 Venue Submission Attempt / Venue Order Lifecycle候補。
+
+### CORRECTION-EX-02 — Runtime Order StateとCanonical Record
+
+Orderは、
+
+~~~text
+OPEN
+→ PARTIAL
+→ FILLED
+~~~
+
+のように時間変化する。
+
+したがってCurrent候補では、
+
+~~~text
+Runtime Open Order State
+≠ Canonical Immutable ExecutionRecord
+~~~
+
+を明確化する。
+
+第一候補:
+
+> Terminal / Reconciled boundaryまで確定したSubmission AttemptをCanonical ExecutionRecordとしてImmutable固定する。
+
+Open中の詳細追跡方式:
+
+~~~text
+Runtime State
+Exchange Events
+Versioned Snapshot
+Append-only Event
+~~~
+
+のどれを採るかは後続Execution Lifecycle Contractで決める。
+
+現段階では新Objectを自動追加しない。
+
+### Strategy vs Execution
+
+~~~text
+Strategy Outcome
+≠ Execution Outcome
+~~~
+
+を維持。
+
+ExecutionRecordだけでWIN / LOSSやHypothesis correctnessを決めない。
+
+### Status
+
+~~~text
+LEGACY_SOURCE_RELATION:
+OBJ-PRD-009
+ROLE-ADP-002
+
+LEGACY_REVIEW_STATUS:
+STRONGLY ADOPTABLE / PARTIAL_REUSE
+
+CURRENT_DESIGN_STATUS:
+NOT_ADOPTED
+~~~
+
+---
+
+## 7.39 ProductionEvidence
+
+### Formal Definition Candidate
+
+> **ProductionEvidence = Live Productionで生成されたExecutionRecordを、同時間帯のEntry / Market / Liquidity / Fee / Funding / Market Event / Quality Contextと結合し、Actual Slippage・Fee・Partial Fill・Latency・Liquidity Impact等をLIVE Channelの研究再利用可能なEvidenceへ構造化したImmutable Object候補。**
+
+### Canonical Flow
+
+~~~text
+ExecutionRecord 1..N
++
+EntryThesis
+TradeThesis
+Live Market Context
+Liquidity
+Fee / Funding
+Market Events
+Quality / Diagnostics
+↓
+Live Evidence Collector
+↓
+ProductionEvidence
+channel = LIVE
+↓
+Post-Trade / Research
+~~~
+
+### Generator Boundary
+
+~~~text
+Live Evidence Collector
+= Generator
+
+Exchange Adapter
+≠ Semantic Generator
+
+Logger
+= Custodian
+
+Post-Trade
+= Analyzer
+~~~
+
+### LIVE Identity
+
+~~~text
+evidence_source_channel = LIVE
+~~~
+
+を維持。
+
+~~~text
+Historical
+≠ Demo
+≠ Forward
+≠ LIVE
+~~~
+
+を無言で単純合算しない。
+
+### Evidence Groups
+
+候補:
+
+~~~text
+Fill Metrics
+Actual Slippage
+Actual Fee
+Funding Context
+Partial Fill
+Latency Components
+Liquidity Impact
+Market Context
+Market Event Refs
+Quality
+Completeness
+Uncertainty
+Diagnostics
+~~~
+
+### Source Fact vs Derived Measurement
+
+~~~text
+ExecutionRecord fill_price
+= Source Fact
+
+ProductionEvidence actual_slippage
+= Derived Measurement
+~~~
+
+Derived MeasurementはFormula / VersionへTrace可能にする方向。
+
+### Completeness / Quality / Uncertainty
+
+分離:
+
+~~~text
+Completeness
+= 必要Observationがどこまで取得できたか
+
+Quality
+= 取得Dataをどこまで信用できるか
+
+Uncertainty
+= 測定 / Attributionにどの程度不確実性があるか
+~~~
+
+一つの万能Statusへ潰さない。
+
+Incompleteでも残存Evidenceに価値があれば保存する。
+
+Missing値を推測補完しない。
+
+### CORRECTION-EX-03 — LIVE EvidenceとDemo比較を分離
+
+~~~text
+ProductionEvidence
+= LIVE side facts / measurements
+
+Demo Evidence
+= DEMO side
+
+DemoLiveDivergence
+= Post-Trade comparison result
+~~~
+
+ProductionEvidence自身が、
+
+~~~text
+Demoより悪い
+Execution Model failed
+Hypothesis failed
+~~~
+
+等の比較結論を持たない。
+
+Comparison-readyにするため、
+
+~~~text
+Metric Identity
+Unit
+Formula Version
+Time Context
+Market Context
+~~~
+
+を保持する。
+
+### Research Boundary
+
+~~~text
+ProductionEvidence
+→ Post-Trade / Research Router
+→ Research Candidate
+→ 03_RESEARCH
+~~~
+
+直接、
+
+~~~text
+Knowledge update
+Trainer immediate update
+Production Rule update
+~~~
+
+へ接続しない。
+
+### Invariants
+
+~~~text
+ExecutionRecord
+≠ ProductionEvidence
+
+ProductionEvidence
+≠ TradeResult
+
+ProductionEvidence
+≠ DemoLiveDivergence
+
+ProductionEvidence
+≠ Research Result
+
+ProductionEvidence
+≠ Knowledge
+
+LIVE
+must remain LIVE
+
+Incomplete Evidence
+must not be fabricated
+
+Market Event association
+≠ Causal proof
+
+Live failure
+≠ Hypothesis failure
+~~~
+
+### Status
+
+~~~text
+LEGACY_SOURCE_RELATION:
+OBJ-PRD-013
+ROLE-EXEC-001 Live Evidence Collector
+FIX-009
+OBJ-POST-006 DemoLiveDivergence
+
+LEGACY_REVIEW_STATUS:
+STRONGLY ADOPTABLE / PARTIAL_REUSE
+
+CURRENT_DESIGN_STATUS:
+NOT_ADOPTED
+~~~
+
+---
+
+## 7.40 Execution — Integrated Review / Final Candidate Flow
+
+### Review Result
+
+Defense→Execution Contractと今回の4Objectを横断Reviewした結果、Architectureを作り直す必要がある重大矛盾は確認されなかった。
+
+以下4点を保存前Correctionとして反映。
+
+### CORRECTION-EX-01 — Protection Intent / Exit Authority Separation
+
+~~~text
+OrderIntent Stop / TP
+= Initial Protection Intent
+
+Exit Engine / In-Trade Defense
+= Ongoing Exit Authority
+~~~
+
+Entry後にOrderIntentを書き換えてExit Policyを更新しない。
+
+### CORRECTION-EX-02 — Runtime Order State / Immutable ExecutionRecord Separation
+
+~~~text
+Open Order Runtime State
+≠ Canonical immutable ExecutionRecord
+~~~
+
+Canonical recordのTerminal / Reconciled boundaryは候補として維持し、詳細Event Modelは後続Execution Lifecycleへ。
+
+### CORRECTION-EX-03 — LIVE Evidence / Comparative Analysis Separation
+
+~~~text
+ProductionEvidence
+= LIVE Evidence
+
+DemoLiveDivergence
+= Post-Trade comparative analysis
+~~~
+
+### CORRECTION-EX-04 — Pre-submit Runtime Safety Recheck
+
+OrderIntent生成後でも、
+
+~~~text
+RiskState
+Authorized Constraint
+OrderIntent expiry
+EntryThesis expiry
+Emergency / Runtime Safety
+~~~
+
+が変化し得る。
+
+したがって、
+
+~~~text
+OrderIntent BUILT
+≠ unconditional Submit Permission
+~~~
+
+。
+
+Exchange Adapterへ実Submissionする直前に、Execution Controller / Submission Gate相当のRuntime Safety Recheck責任が必要候補。
+
+重要:
+
+~~~text
+Submission Gate
+≠ New Market Decision
+≠ New Defense Decision
+
+Submission Gate
+= 既存Permission / Validity / Emergency状態が
+  submit時点でも成立しているか確認するProcessing Responsibility
+~~~
+
+新Top-Level RoleやPersistent Objectの追加は現段階では行わない。
+
+### Responsibility Review
+
+~~~text
+Defense / Risk
+= 今Riskを取って安全か
+
+Entry Snapshot Builder
+= Entry直前の根拠を固定
+
+Order Planning
+= どう注文するか
+
+Exchange Adapter
+= Venue仕様へ変換し実Execution Factを回収
+
+Live Evidence Collector
+= Execution FactをLIVE Evidenceへ構造化
+
+Position Supervisor
+= Entry後のThesis健全性監視
+
+In-Trade Defense
+= Position中Hard Safety
+
+Exit Engine
+= Ongoing Exit Decision
+
+Post-Trade
+= 結果の意味を分析
+~~~
+
+責任重複は許容範囲内で分離可能。
+
+### Trace Review
+
+最低限のCanonical Trace:
+
+~~~text
+ProductionEvidence
+↓
+ExecutionRecord[]
+↓
+OrderIntent
+↓
+EntryThesis
+↓
+DefenseEvaluationResult / DefenseDecision
+↓
+Decision Result
+↓
+Trade Thesis
+↓
+Applicable Knowledge / Research
+~~~
+
+Risk side:
+
+~~~text
+OrderIntent / EntryThesis
+↓
+Defense Restriction
+↓
+RiskState
+↓
+StateTransitionEvent
+↓
+ApprovalDecision / Trigger
+~~~
+
+Trace断絶はCurrent候補上確認されなかった。
+
+### Failure Separation
+
+~~~text
+THESIS_NOT_BUILDABLE
+≠ NO_TRADE
+
+Defense BLOCK
+≠ Fail-Closed
+
+ENTRY_SNAPSHOT_NOT_BUILDABLE
+≠ Defense BLOCK
+
+ORDER_INTENT_NOT_BUILDABLE
+≠ Planner FAILED
+
+Adapter Conversion Failure
+≠ Exchange REJECTED
+
+Exchange REJECTED
+≠ Submission UNKNOWN
+
+ExecutionRecord INCOMPLETE
+≠ ProductionEvidence INCOMPLETE
+
+ProductionEvidence INCOMPLETE
+≠ Research Failure
+~~~
+
+### Deferred but Required Execution Work
+
+Execution主要4Objectは揃ったが、次の詳細は後続Contractとして未確定。
+
+~~~text
+Execution Submission Gate
+Open Order Runtime Lifecycle
+Retry / Idempotency / Reconciliation
+Split Execution Lifecycle
+Position creation / Position identity
+Exit-side OrderIntent / ExecutionRecord reuse
+Protection order lifecycle
+Venue routing / multi-exchange policy
+~~~
+
+これらは重大矛盾ではなく、Object定義後に処理Contractとして詰める項目。
+
+### Final Candidate Flow
+
+~~~text
+05_DECISION
+↓
+Decision Result
+↓
+Defense Evaluation
+↓
+DefenseEvaluationResult
+↓
+DefenseDecision
+↓
+Defense → Execution Admission
+↓
+Entry Snapshot Builder
+↓
+EntryThesis
+↓
+Order Planning
+↓
+OrderIntent
+↓
+Submission Safety Recheck candidate
+↓
+Exchange Adapter
+↓
+ExecutionRecord 1..N
+↓
+Live Evidence Collector
+↓
+ProductionEvidence [LIVE]
+↓
+Logger / Immutable Storage
+↓
+Post-Trade Analysis
+↓
+Research Router
+↓
+03_RESEARCH
+~~~
+
+### Absolute Semantic Boundaries
+
+~~~text
+EntryThesis
+≠ OrderIntent
+
+OrderIntent
+≠ Exchange Order
+
+OrderIntent BUILT
+≠ Submitted
+
+ExecutionRecord
+≠ ProductionEvidence
+
+ProductionEvidence
+≠ Post-Trade Analysis
+
+ProductionEvidence
+≠ DemoLiveDivergence
+
+Initial Stop / TP Intent
+≠ Ongoing Exit Authority
+
+Execution Outcome
+≠ Strategy Outcome
+
+Live Failure
+≠ Hypothesis Failure
+
+Generator
+≠ Custodian
+≠ Analyzer
+~~~
+
+### Integrated Status
+
+> **Execution主要4ObjectとDefense→Execution境界は、Legacy Execution / FIX-009をCurrent 05 / Defense設計へ接続するReference Proposalとして整合し、重大な責任衝突は確認されなかった。ただしSubmission Lifecycle / Position / Exitの詳細Contractは未設計。**
+
+~~~text
+LEGACY_CONFLICT_STATUS:
+MINOR
+
+LEGACY_REVIEW_STATUS:
+STRONGLY ADOPTABLE / PARTIAL_REUSE
+
+CURRENT_DESIGN_STATUS:
+NOT_ADOPTED
+~~~
+
+---
+
+lure
 → Fail-Closed
 → DENY
 
