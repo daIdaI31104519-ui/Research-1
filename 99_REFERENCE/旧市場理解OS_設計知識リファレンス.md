@@ -725,6 +725,12 @@ Reuse Recommendation
 | DemoLiveDivergence | STRONG OBJ-POST-006 | Channel比較とComparability Gateへ精密化 | ADOPTABLE / PARTIAL_REUSE | REFINE | NOT_ADOPTED |
 | CounterfactualResult | STRONG OBJ-POST-007 | Hindsight防止 / Minimal Interventionを追加 | ADOPTABLE / PARTIAL_REUSE | REFINE | NOT_ADOPTED |
 | Post-Trade Integrated Flow | STRONG ROLE-ANL-001 | Trade Fact→Analysis→Research Candidateを統合 | PARTIAL_REUSE | REFINE | NOT_ADOPTED |
+| Finding Extractor Common Contract | DERIVED | Analysis→Finding共通Gate | CURRENT_DERIVED | ADD | NOT_ADOPTED |
+| Finding Normalizer Common Contract | DERIVED | Draft→Canonical Finding標準化 | CURRENT_DERIVED | ADD | NOT_ADOPTED |
+| Finding Type Registry v1.0 | DERIVED | Post-Trade 7系統のCanonical Finding語彙 | CURRENT_DERIVED | ADD | NOT_ADOPTED |
+| Analysis→ResearchCandidate Contract | DERIVED + 03_RESEARCH | Finding→Candidate Promotion境界 | CURRENT_DERIVED | ADD | NOT_ADOPTED |
+| Research Router / ResearchRoute | STRONG ROLE-RTR-001 + OBJ-POST-008 | Research Domain Routingへ責任補正 | PARTIAL_REUSE | REFINE | NOT_ADOPTED |
+| Finding Pipeline Integrated Flow | DERIVED + 03_RESEARCH | Analysis→Finding→Candidate→Intake→Routerを統合 | CURRENT_DERIVED | ADD | NOT_ADOPTED |
 
 ---
 
@@ -6577,6 +6583,1574 @@ No EntryThesis
 > **このDefense / Risk全体はLegacy Defense / State Authority / Approval / Risk Separation / Entry Boundaryを比較して作ったReference Proposalであり、Current正式設計ではない。**
 
 ~~~text
+CURRENT_DESIGN_STATUS:
+NOT_ADOPTED
+~~~
+
+---
+
+
+## 7.50 Finding Pipeline — Integrated Cross-Review
+
+### Review Target
+
+本Sectionは以下5責任を横断ReviewしたCurrent Reference Proposalである。
+
+~~~text
+Finding Extractor
+Finding Normalizer
+Finding Type Registry / Normalization Mapping
+Candidate Promotion
+Research Router / ResearchRoute
+~~~
+
+Source-backed Authority:
+
+~~~text
+03_RESEARCH
+ROLE-ANL-001 Post-Trade Analysis
+ROLE-RTR-001 Research Router
+OBJ-POST-001..008
+~~~
+
+ただしFinding Extractor / Normalizer / Registry / Candidate Promotionの詳細ContractはLegacyに明示されていないためCurrent Derived Proposalである。
+
+### Review Result
+
+重大なArchitecture破綻は確認されなかった。
+
+ただし責任重複・抜けを避けるため、以下8補正を固定候補とする。
+
+### CORRECTION-FP-01 — Post-Trade→ResearchCandidate直結を廃止候補
+
+7.49のReference Flowは概念上、
+
+~~~text
+Post-Trade Analysis
+→ ResearchCandidate
+~~~
+
+と短縮されていた。
+
+Current Detailed Candidate Flowではこれを以下へ展開する。
+
+~~~text
+Post-Trade Analysis
+↓
+Finding Extractor
+↓
+ExtractedFindingDraft
+↓
+Finding Normalizer
+↓
+Canonical Finding
+↓
+Candidate Promotion
+↓
+ResearchCandidate
+↓
+Research Intake
+~~~
+
+Analysis Object自身をそのままResearchCandidateにしない。
+
+### CORRECTION-FP-02 — Materiality / Research Value Authority分離
+
+三つの段階を混同しない。
+
+~~~text
+Finding Extractor:
+Findingとして非自明なSemantic Deltaか？
+
+Candidate Promotion:
+Research Intakeへ提示するResearch Problem Seedになり得るか？
+
+Research Intake:
+実際に研究対象として受理 / 保留 / 統合 / Rejectするか？
+~~~
+
+ExtractorはFinal Research Valueを決めない。
+
+Candidate PromotionはResearch Resource Allocationを決めない。
+
+### CORRECTION-FP-03 — Duplicate / Merge Authority分離
+
+~~~text
+Normalizer:
+Semantic Fingerprintを生成可能
+ただしMergeしない
+
+Candidate Promotion:
+同一Underlying FindingをCandidate単位へ集約可能
+ただし既存Researchとの正式Mergeはしない
+
+Research Intake:
+既存Candidate / Researchとの正式MERGE Authority
+~~~
+
+同一Trade / Market Event由来の複数Analysisを独立Evidenceとして水増ししない。
+
+### CORRECTION-FP-04 — Research Routerと03 Routingを二段階化
+
+Legacy Research RouterとCurrent 03 Routing / Prioritizationの責任重複を解消する。
+
+~~~text
+Research Router
+= Research Ingress Domain Routing
+  どの研究領域がOwnerか？
+
+03_RESEARCH Routing
+= Research Method / Validation Routing
+  どう研究するか？
+~~~
+
+Research RouterはHistorical / OOS / Stress等を直接起動しない。
+
+### CORRECTION-FP-05 — RouterはResearch Intake ACCEPT後
+
+~~~text
+Canonical Finding
+↓
+Candidate Promotion
+↓
+ResearchCandidate
+↓
+Research Intake
+↓
+ACCEPT
+↓
+Research Router
+~~~
+
+DEFER / MERGE / REJECT / NEED_MORE_CONTEXT状態のCandidateを自動Routingしない。
+
+### CORRECTION-FP-06 — CROSS_ANALYSIS Finding補完
+
+7系統単体Analysisだけでは検出できない以下をCross-Analysis Reviewで補う。
+
+~~~text
+FND.CROSS_ANALYSIS.ANALYSIS_CONFLICT
+FND.CROSS_ANALYSIS.SHARED_ORIGIN_OVERCOUNT_RISK
+FND.CROSS_ANALYSIS.TRACE_GAP
+FND.CROSS_ANALYSIS.VERSION_MISMATCH
+FND.CROSS_ANALYSIS.RESPONSIBILITY_AMBIGUITY
+~~~
+
+Cross-Analysisは単一Analysis Extractorの責任ではない。
+
+### CORRECTION-FP-07 — UNMAPPABLEとUNKNOWN_STRUCTUREを分離
+
+~~~text
+UNMAPPABLE
+= Normalizerが既存TaxonomyへMappingできない
+
+FND.DISCOVERY.UNKNOWN_STRUCTURE
+= 市場 / System上の未知構造そのものがFinding
+~~~
+
+Taxonomy不足を市場の未知構造と誤認しない。
+
+### CORRECTION-FP-08 — Stage-local NEED_MORE_CONTEXT
+
+各StageのNEED_MORE_CONTEXTは意味が異なる。
+
+~~~text
+Extractor NEED_MORE_CONTEXT
+= Finding成立判定に必要なContext不足
+
+Normalizer NEED_MORE_CONTEXT
+= Canonical Mappingに必要なContext不足
+
+Candidate Promotion NEED_MORE_CONTEXT
+= Candidate形成に必要なResearch Value Context不足
+
+Research Intake NEED_MORE_CONTEXT
+= Research受理判断に必要なContext不足
+
+Router NEED_MORE_CONTEXT
+= Domain Routingに必要なContext不足
+~~~
+
+一つの共通Stateへ潰さず、origin_stageを保持する。
+
+### Final Responsibility Chain
+
+~~~text
+Post-Trade Analysis
+= Meaning Analysis
+
+Finding Extractor
+= What semantic issue exists?
+
+Finding Normalizer
+= What canonical language represents it?
+
+Finding Type Registry
+= Which canonical vocabulary is allowed?
+
+Candidate Promotion
+= Is this worth presenting to Research Intake?
+
+Research Intake
+= Should Research accept it?
+
+Research Router
+= Which Research Domain owns it?
+
+03 Routing / Prioritization
+= How and when should it be studied?
+
+Research Plan
+= What exact validation plan will be executed?
+~~~
+
+### Cross-Review Status
+
+~~~text
+MAJOR_RESPONSIBILITY_CONFLICT:
+NONE after corrections
+
+KNOWN_GAPS:
+- Taxonomy Governance detailed approval process
+- Cross-Analysis extraction detailed rules
+- Candidate aggregation detailed algorithm
+- Research Intake formal state contract
+- Research Domain Registry
+- Research Method Routing detailed contract
+
+CURRENT_DESIGN_STATUS:
+NOT_ADOPTED
+~~~
+
+---
+
+## 7.51 Finding Extractor Common Contract
+
+### Formal Definition Candidate
+
+> **Finding Extractor = Post-Trade Analysis Result内の状態・差分・異常・矛盾・未知・限界・Opportunity候補等について、Source Identity・Traceability・Evaluability・Temporal Validity・Comparison Validity・Semantic Significance・Quality・Dependency・Scope・Claim Boundaryを共通Gateで確認し、Findingとして表現可能な意味単位だけを抽出するProcessing Responsibility候補。**
+
+### Responsibility
+
+~~~text
+Analysis
+= What does the result mean?
+
+Finding Extractor
+= Is there a semantic Finding we are allowed to state?
+~~~
+
+Does Not Own:
+
+~~~text
+Canonical Finding Code
+ResearchCandidate
+Research Admission
+Research Route
+Root Cause
+Production Action
+~~~
+
+### Common Gate Order
+
+~~~text
+G0 Source Contract
+↓
+G1 Identity / Version Binding
+↓
+G2 Traceability
+↓
+G3 Evaluability
+↓
+G4 Temporal Validity
+↓
+G5 Reference / Comparability Validity
+↓
+G6 Semantic Delta
+↓
+G7 Finding Significance
+↓
+G8 Quality / Completeness
+↓
+G9 Shared Origin / Dependency
+↓
+G10 Responsibility / Scope
+↓
+G11 Claim Boundary / Non-Causality
+↓
+G12 Finding Atomicity
+↓
+G13 Normal-State Suppression
+↓
+Extraction Decision
+~~~
+
+### Hard Gate Candidates
+
+~~~text
+G0 Source Contract
+G1 Identity / Version
+G2 Minimum Traceability
+G3 Evaluability
+G4 Temporal Validity when required
+G5 Comparability when required
+G10 Responsibility / Scope
+G11 Claim Boundary
+~~~
+
+### Contextual Gate Candidates
+
+~~~text
+G6 Semantic Delta
+G7 Finding Significance
+G8 Quality / Completeness
+G9 Shared Origin / Dependency
+G12 Atomicity
+G13 Normal-State Suppression
+~~~
+
+### Extraction Decisions
+
+~~~text
+EXTRACT
+NO_FINDING
+NEED_MORE_CONTEXT
+EXTRACTION_FAILED
+~~~
+
+Meaning:
+
+~~~text
+EXTRACT
+= Finding Draft生成可能
+
+NO_FINDING
+= Findingなしと評価できた正常結果
+
+NEED_MORE_CONTEXT
+= Finding有無をまだ評価できない
+
+EXTRACTION_FAILED
+= Extractor処理自体のFailure
+~~~
+
+### Critical Semantics
+
+~~~text
+NOT_EVALUABLE
+≠ MISMATCH
+
+UNKNOWN
+≠ FAILURE
+
+NOT_COMPARABLE
+≠ NO_DIVERGENCE
+
+Difference
+≠ Finding automatically
+
+Loss
+≠ Failure Finding automatically
+
+Profit
+≠ No Finding automatically
+~~~
+
+### Input Candidate
+
+~~~text
+Versioned Post-Trade Analysis Result
+Source Facts / Evidence
+Time Context
+Reference / Expected Context
+Quality Context
+Dependency Context
+Analysis-specific Extraction Policy
+~~~
+
+### Output Candidate
+
+~~~text
+0..N ExtractedFindingDraft
++
+Extraction diagnostics / unresolved context
+~~~
+
+Conceptual Draft:
+
+~~~text
+ExtractedFindingDraft
+├ source_analysis_ref
+├ raw_finding_kind
+├ subject_refs
+├ observed_state
+├ reference_state
+├ difference_context
+├ significance_context
+├ quality_context
+├ uncertainty
+├ origin_fact_refs
+├ dependency_context
+├ statement_seed
+└ limitations
+~~~
+
+### Invariants
+
+~~~text
+Finding Extractor
+≠ Analyzer
+
+Finding Extractor
+≠ Normalizer
+
+Finding Extractor
+≠ Candidate Promotion
+
+Finding Extractor
+must not invent Cause
+
+Finding Extractor
+must not create ResearchRoute
+
+Finding Statement Seed
+must not exceed Source Analysis
+
+Shared Origin
+must remain visible
+~~~
+
+### Status
+
+~~~text
+SOURCE_STATUS:
+CURRENT_DERIVED
+
+CURRENT_03_CONFLICT_STATUS:
+NONE
+
+CURRENT_DESIGN_STATUS:
+NOT_ADOPTED
+~~~
+
+---
+
+## 7.52 Finding Normalizer Common Contract
+
+### Formal Definition Candidate
+
+> **Finding Normalizer = Finding Extractorによって成立済みとされたExtractedFindingDraftについて、その意味を新たに解釈・拡張せず、Canonical Finding Domain・Class・Code・Standard Statement・Subject / Trace / Quality / Uncertainty / Dependency Contextを共通規則へ正規化し、市場理解OS全体で参照可能なCanonical Findingを生成するProcessing Responsibility候補。**
+
+### Fixed Flow
+
+~~~text
+ExtractedFindingDraft
+↓
+N0 Draft Contract Validation
+↓
+N1 Domain Resolution
+↓
+N2 Class Resolution
+↓
+N3 Canonical Code Resolution
+↓
+N4 Taxonomy Registry Validation
+↓
+N5 Subject / Scope Binding
+↓
+N6 Trace / Provenance Binding
+↓
+N7 Standard Statement Generation
+↓
+N8 Quality / Uncertainty Preservation
+↓
+N9 Shared-Origin / Dependency Preservation
+↓
+N10 Semantic Fingerprint
+↓
+N11 Semantic Integrity Check
+↓
+Canonical Finding
+~~~
+
+### Normalization Decisions
+
+~~~text
+NORMALIZED
+NEED_MORE_CONTEXT
+UNMAPPABLE
+NORMALIZATION_FAILED
+~~~
+
+NO_FINDINGはNormalizerのStateではない。
+
+### Critical Separation
+
+~~~text
+Extraction Policy
+= Findingが存在する条件
+
+Normalization Policy
+= Findingを何と呼ぶか
+
+Finding Type Registry
+= どのCanonical語彙が存在可能か
+~~~
+
+### Canonical Structured Fields are Source
+
+~~~text
+Structured Finding Data
+= Semantic Source
+
+Standard Statement
+= Human-readable Projection
+~~~
+
+StatementだけからFindingを再構築しない。
+
+### Semantic Fingerprint
+
+候補:
+
+~~~text
+finding_code
+subject_ref
+scope
+origin key
+observation window
+~~~
+
+等からDuplicate Detection Hintを作れる。
+
+重要:
+
+~~~text
+Fingerprint
+≠ Merge Authority
+
+finding_id
+≠ semantic_fingerprint
+~~~
+
+### Invariants
+
+~~~text
+Normalizer
+must not add Cause
+
+Normalizer
+must not change Research Value
+
+Normalizer
+must not change Quality upward
+
+Normalizer
+must preserve Uncertainty
+
+Normalizer
+must preserve Candidate semantics
+
+Normalizer
+must preserve Dependency
+
+Domain
+≠ Root Cause
+
+Domain
+≠ Research Domain
+
+Class
+≠ Severity
+
+Finding Code
+≠ Research Route
+~~~
+
+### Status
+
+~~~text
+SOURCE_STATUS:
+CURRENT_DERIVED
+
+CURRENT_03_CONFLICT_STATUS:
+NONE
+
+CURRENT_DESIGN_STATUS:
+NOT_ADOPTED
+~~~
+
+---
+
+## 7.53 Finding Type Registry v1.0 / Normalization Mapping
+
+### Registry Identity
+
+~~~text
+taxonomy_version:
+FINDING_TAXONOMY_v1.0
+
+normalization_policy_version:
+FINDING_NORMALIZATION_v1.0
+~~~
+
+### Canonical Code Format
+
+~~~text
+FND.<DOMAIN>.<SPECIFIC_CODE>
+~~~
+
+VersionをCode名へ埋め込まない。
+
+### Fixed Domains
+
+~~~text
+OUTCOME
+THESIS
+THESIS_MEMBER
+DEFENSE
+SUPERVISOR
+DEMO_LIVE
+COUNTERFACTUAL
+CROSS_ANALYSIS
+DISCOVERY
+~~~
+
+### Fixed Classes
+
+~~~text
+DEVIATION
+ANOMALY
+CONTRADICTION
+FAILURE_CANDIDATE
+SYSTEM_GAP
+BOUNDARY
+SAFETY_GAP
+MONITORING_GAP
+VALIDATION_DIVERGENCE
+MODEL_GAP
+OPPORTUNITY
+QUALITY_GAP
+UNKNOWN_STRUCTURE
+POSITIVE_DISCOVERY
+ANALYSIS_CONFLICT
+~~~
+
+### Source Analysis → Domain
+
+~~~text
+OutcomeAnalysisResult
+→ OUTCOME
+
+TradeThesisEvaluation
+→ THESIS
+
+HypothesisAttribution / ThesisMemberAttribution
+→ THESIS_MEMBER
+
+DefenseDecisionEvaluation
+→ DEFENSE
+
+SupervisorEvaluation
+→ SUPERVISOR
+
+DemoLiveDivergence
+→ DEMO_LIVE
+
+CounterfactualResult
+→ COUNTERFACTUAL
+
+Cross-Analysis Review
+→ CROSS_ANALYSIS
+~~~
+
+### OUTCOME Mapping
+
+| raw_finding_kind | Class | Canonical Code |
+|---|---|---|
+| EXPECTATION_MISMATCH | DEVIATION | FND.OUTCOME.EXPECTATION_MISMATCH |
+| UNEXPECTED_SUCCESS | POSITIVE_DISCOVERY | FND.OUTCOME.UNEXPECTED_SUCCESS |
+| UNEXPECTED_FAILURE | FAILURE_CANDIDATE | FND.OUTCOME.UNEXPECTED_FAILURE |
+| OUTCOME_HORIZON_MISMATCH | DEVIATION | FND.OUTCOME.OUTCOME_HORIZON_MISMATCH |
+| EXIT_TIMING_OPPORTUNITY | OPPORTUNITY | FND.OUTCOME.EXIT_TIMING_OPPORTUNITY |
+| RISK_ADJUSTED_OUTCOME_ANOMALY | ANOMALY | FND.OUTCOME.RISK_ADJUSTED_OUTCOME_ANOMALY |
+| EXECUTION_COST_IMPACT | DEVIATION | FND.OUTCOME.EXECUTION_COST_IMPACT |
+| SYSTEM_INTEGRITY_DEGRADED | SYSTEM_GAP | FND.OUTCOME.SYSTEM_INTEGRITY_DEGRADED |
+
+### THESIS Mapping
+
+| raw_finding_kind | Class | Canonical Code |
+|---|---|---|
+| DIRECTION_MISMATCH | DEVIATION | FND.THESIS.DIRECTION_MISMATCH |
+| EFFECT_NOT_OBSERVED | FAILURE_CANDIDATE | FND.THESIS.EFFECT_NOT_OBSERVED |
+| EFFECT_PARTIAL | DEVIATION | FND.THESIS.EFFECT_PARTIAL |
+| EFFECT_MAGNITUDE_MISMATCH | DEVIATION | FND.THESIS.EFFECT_MAGNITUDE_MISMATCH |
+| EFFECT_SEQUENCE_MISMATCH | DEVIATION | FND.THESIS.EFFECT_SEQUENCE_MISMATCH |
+| EFFECT_PERSISTENCE_MISMATCH | DEVIATION | FND.THESIS.EFFECT_PERSISTENCE_MISMATCH |
+| EFFECT_HORIZON_MISMATCH | DEVIATION | FND.THESIS.EFFECT_HORIZON_MISMATCH |
+| INVALIDATION_RULE_ISSUE | BOUNDARY | FND.THESIS.INVALIDATION_RULE_ISSUE |
+| CONTRADICTION_UNDERWEIGHTED | CONTRADICTION | FND.THESIS.CONTRADICTION_UNDERWEIGHTED |
+| CONTRADICTION_OVERWEIGHTED | CONTRADICTION | FND.THESIS.CONTRADICTION_OVERWEIGHTED |
+| APPLICABILITY_MISMATCH | DEVIATION | FND.THESIS.APPLICABILITY_MISMATCH |
+| UNCERTAINTY_UNDERSTATED | ANOMALY | FND.THESIS.UNCERTAINTY_UNDERSTATED |
+| UNCERTAINTY_OVERSTATED | ANOMALY | FND.THESIS.UNCERTAINTY_OVERSTATED |
+| RISK_COVERAGE_GAP | BOUNDARY | FND.THESIS.RISK_COVERAGE_GAP |
+
+### THESIS_MEMBER Mapping
+
+| raw_finding_kind | Class | Canonical Code |
+|---|---|---|
+| PRIMARY_EFFECT_NOT_OBSERVED | FAILURE_CANDIDATE | FND.THESIS_MEMBER.PRIMARY_EFFECT_NOT_OBSERVED |
+| PRIMARY_HORIZON_MISMATCH | DEVIATION | FND.THESIS_MEMBER.PRIMARY_HORIZON_MISMATCH |
+| SUPPORT_NOT_INDEPENDENT | ANOMALY | FND.THESIS_MEMBER.SUPPORT_NOT_INDEPENDENT |
+| SHARED_EVIDENCE_OVERCOUNT | ANOMALY | FND.THESIS_MEMBER.SHARED_EVIDENCE_OVERCOUNT |
+| STRONG_MEMBER_DEPENDENCY | ANOMALY | FND.THESIS_MEMBER.STRONG_MEMBER_DEPENDENCY |
+| REDUNDANCY_OVERCOUNT | ANOMALY | FND.THESIS_MEMBER.REDUNDANCY_OVERCOUNT |
+| COMMON_CAUSE_OVERCOUNT | ANOMALY | FND.THESIS_MEMBER.COMMON_CAUSE_OVERCOUNT |
+| CONDITIONAL_CONTEXT_MISCLASSIFIED | DEVIATION | FND.THESIS_MEMBER.CONDITIONAL_CONTEXT_MISCLASSIFIED |
+| CONDITION_BROKEN | BOUNDARY | FND.THESIS_MEMBER.CONDITION_BROKEN |
+| CONTRADICTION_UNDERWEIGHTED | CONTRADICTION | FND.THESIS_MEMBER.CONTRADICTION_UNDERWEIGHTED |
+| CONTRADICTION_OVERWEIGHTED | CONTRADICTION | FND.THESIS_MEMBER.CONTRADICTION_OVERWEIGHTED |
+| MEMBER_MISAPPLIED | DEVIATION | FND.THESIS_MEMBER.MEMBER_MISAPPLIED |
+| EVIDENCE_DECAY | QUALITY_GAP | FND.THESIS_MEMBER.EVIDENCE_DECAY |
+| ALTERNATIVE_EXPLANATION_UNRESOLVED | CONTRADICTION | FND.THESIS_MEMBER.ALTERNATIVE_EXPLANATION_UNRESOLVED |
+
+### DEFENSE Mapping
+
+| raw_finding_kind | Class | Canonical Code |
+|---|---|---|
+| FALSE_ALLOW_CANDIDATE | SAFETY_GAP | FND.DEFENSE.FALSE_ALLOW_CANDIDATE |
+| FALSE_BLOCK_CANDIDATE | SAFETY_GAP | FND.DEFENSE.FALSE_BLOCK_CANDIDATE |
+| OVER_RESTRICTION_CANDIDATE | SAFETY_GAP | FND.DEFENSE.OVER_RESTRICTION_CANDIDATE |
+| UNDER_RESTRICTION_CANDIDATE | SAFETY_GAP | FND.DEFENSE.UNDER_RESTRICTION_CANDIDATE |
+| RISK_STATE_GATE_INEFFECTIVE | SAFETY_GAP | FND.DEFENSE.RISK_STATE_GATE_INEFFECTIVE |
+| CONSTRAINT_GATE_INEFFECTIVE | SAFETY_GAP | FND.DEFENSE.CONSTRAINT_GATE_INEFFECTIVE |
+| LIQUIDITY_GATE_OVER_SENSITIVE | SAFETY_GAP | FND.DEFENSE.LIQUIDITY_GATE_OVER_SENSITIVE |
+| LIQUIDITY_GATE_UNDER_SENSITIVE | SAFETY_GAP | FND.DEFENSE.LIQUIDITY_GATE_UNDER_SENSITIVE |
+| EXPOSURE_GATE_TOO_PERMISSIVE | SAFETY_GAP | FND.DEFENSE.EXPOSURE_GATE_TOO_PERMISSIVE |
+| DRAWDOWN_GATE_LATE | SAFETY_GAP | FND.DEFENSE.DRAWDOWN_GATE_LATE |
+| EXCHANGE_HEALTH_GATE_MISSED | SYSTEM_GAP | FND.DEFENSE.EXCHANGE_HEALTH_GATE_MISSED |
+| HARD_SAFETY_BLIND_SPOT | SAFETY_GAP | FND.DEFENSE.HARD_SAFETY_BLIND_SPOT |
+
+### SUPERVISOR Mapping
+
+| raw_finding_kind | Class | Canonical Code |
+|---|---|---|
+| LATE_WARNING | MONITORING_GAP | FND.SUPERVISOR.LATE_WARNING |
+| MISSED_WARNING | MONITORING_GAP | FND.SUPERVISOR.MISSED_WARNING |
+| FALSE_ALARM_CANDIDATE | MONITORING_GAP | FND.SUPERVISOR.FALSE_ALARM_CANDIDATE |
+| OVER_ESCALATION | MONITORING_GAP | FND.SUPERVISOR.OVER_ESCALATION |
+| UNDER_ESCALATION | MONITORING_GAP | FND.SUPERVISOR.UNDER_ESCALATION |
+| STATE_OSCILLATION | MONITORING_GAP | FND.SUPERVISOR.STATE_OSCILLATION |
+| HYSTERESIS_TOO_WEAK_CANDIDATE | MONITORING_GAP | FND.SUPERVISOR.HYSTERESIS_TOO_WEAK_CANDIDATE |
+| HYSTERESIS_TOO_STRONG_CANDIDATE | MONITORING_GAP | FND.SUPERVISOR.HYSTERESIS_TOO_STRONG_CANDIDATE |
+| RECOVERY_MISSED | MONITORING_GAP | FND.SUPERVISOR.RECOVERY_MISSED |
+| FALSE_RECOVERY_CANDIDATE | MONITORING_GAP | FND.SUPERVISOR.FALSE_RECOVERY_CANDIDATE |
+| EXPECTED_EFFECT_PROGRESS_MISREAD | MONITORING_GAP | FND.SUPERVISOR.EXPECTED_EFFECT_PROGRESS_MISREAD |
+| CONDITIONAL_CONTEXT_MISSED | MONITORING_GAP | FND.SUPERVISOR.CONDITIONAL_CONTEXT_MISSED |
+| CONTRADICTION_STRENGTH_MISREAD | MONITORING_GAP | FND.SUPERVISOR.CONTRADICTION_STRENGTH_MISREAD |
+
+### DEMO_LIVE Mapping
+
+| raw_finding_kind | Class | Canonical Code |
+|---|---|---|
+| EXECUTION_DIVERGENCE | VALIDATION_DIVERGENCE | FND.DEMO_LIVE.EXECUTION_DIVERGENCE |
+| FILL_RATIO_DIVERGENCE | VALIDATION_DIVERGENCE | FND.DEMO_LIVE.FILL_RATIO_DIVERGENCE |
+| PARTIAL_FILL_DIVERGENCE | VALIDATION_DIVERGENCE | FND.DEMO_LIVE.PARTIAL_FILL_DIVERGENCE |
+| SLIPPAGE_DIVERGENCE | VALIDATION_DIVERGENCE | FND.DEMO_LIVE.SLIPPAGE_DIVERGENCE |
+| FEE_DIVERGENCE | VALIDATION_DIVERGENCE | FND.DEMO_LIVE.FEE_DIVERGENCE |
+| FUNDING_DIVERGENCE | VALIDATION_DIVERGENCE | FND.DEMO_LIVE.FUNDING_DIVERGENCE |
+| LIQUIDITY_DIVERGENCE | VALIDATION_DIVERGENCE | FND.DEMO_LIVE.LIQUIDITY_DIVERGENCE |
+| LATENCY_DIVERGENCE | VALIDATION_DIVERGENCE | FND.DEMO_LIVE.LATENCY_DIVERGENCE |
+| REGIME_DIVERGENCE | VALIDATION_DIVERGENCE | FND.DEMO_LIVE.REGIME_DIVERGENCE |
+| DATA_QUALITY_DIVERGENCE | QUALITY_GAP | FND.DEMO_LIVE.DATA_QUALITY_DIVERGENCE |
+| VENUE_MICROSTRUCTURE_GAP | VALIDATION_DIVERGENCE | FND.DEMO_LIVE.VENUE_MICROSTRUCTURE_GAP |
+| POSITION_SCALE_GAP | VALIDATION_DIVERGENCE | FND.DEMO_LIVE.POSITION_SCALE_GAP |
+| MEASUREMENT_DEFINITION_MISMATCH | QUALITY_GAP | FND.DEMO_LIVE.MEASUREMENT_DEFINITION_MISMATCH |
+| SIMULATION_ASSUMPTION_GAP | MODEL_GAP | FND.DEMO_LIVE.SIMULATION_ASSUMPTION_GAP |
+| COMPARABILITY_GAP | QUALITY_GAP | FND.DEMO_LIVE.COMPARABILITY_GAP |
+
+### COUNTERFACTUAL Mapping
+
+| raw_finding_kind | Class | Canonical Code |
+|---|---|---|
+| DEFENSE_POLICY_ALTERNATIVE | OPPORTUNITY | FND.COUNTERFACTUAL.DEFENSE_POLICY_ALTERNATIVE |
+| SUPERVISOR_ACTION_ALTERNATIVE | OPPORTUNITY | FND.COUNTERFACTUAL.SUPERVISOR_ACTION_ALTERNATIVE |
+| EXIT_TIMING_ALTERNATIVE | OPPORTUNITY | FND.COUNTERFACTUAL.EXIT_TIMING_ALTERNATIVE |
+| POSITION_SIZE_ALTERNATIVE | OPPORTUNITY | FND.COUNTERFACTUAL.POSITION_SIZE_ALTERNATIVE |
+| ORDER_STYLE_ALTERNATIVE | OPPORTUNITY | FND.COUNTERFACTUAL.ORDER_STYLE_ALTERNATIVE |
+| RISK_POLICY_ALTERNATIVE | OPPORTUNITY | FND.COUNTERFACTUAL.RISK_POLICY_ALTERNATIVE |
+| MATERIAL_IMPROVEMENT_CANDIDATE | OPPORTUNITY | FND.COUNTERFACTUAL.MATERIAL_IMPROVEMENT_CANDIDATE |
+| MATERIAL_RISK_REDUCTION_CANDIDATE | OPPORTUNITY | FND.COUNTERFACTUAL.MATERIAL_RISK_REDUCTION_CANDIDATE |
+| MATERIAL_RISK_INCREASE_CANDIDATE | DEVIATION | FND.COUNTERFACTUAL.MATERIAL_RISK_INCREASE_CANDIDATE |
+| MODEL_UNCERTAINTY_HIGH | MODEL_GAP | FND.COUNTERFACTUAL.MODEL_UNCERTAINTY_HIGH |
+| FEASIBILITY_LIMITATION | BOUNDARY | FND.COUNTERFACTUAL.FEASIBILITY_LIMITATION |
+| HINDSIGHT_LEAKAGE_RISK | QUALITY_GAP | FND.COUNTERFACTUAL.HINDSIGHT_LEAKAGE_RISK |
+
+### CROSS_ANALYSIS Mapping
+
+| raw_finding_kind | Class | Canonical Code |
+|---|---|---|
+| ANALYSIS_CONFLICT | ANALYSIS_CONFLICT | FND.CROSS_ANALYSIS.ANALYSIS_CONFLICT |
+| SHARED_ORIGIN_OVERCOUNT_RISK | ANOMALY | FND.CROSS_ANALYSIS.SHARED_ORIGIN_OVERCOUNT_RISK |
+| TRACE_GAP | QUALITY_GAP | FND.CROSS_ANALYSIS.TRACE_GAP |
+| VERSION_MISMATCH | QUALITY_GAP | FND.CROSS_ANALYSIS.VERSION_MISMATCH |
+| RESPONSIBILITY_AMBIGUITY | ANALYSIS_CONFLICT | FND.CROSS_ANALYSIS.RESPONSIBILITY_AMBIGUITY |
+
+### Standard Statement Rules
+
+Statementは原則、
+
+~~~text
+Subject
++
+Observed State
++
+Reference / Expected State if needed
++
+Material Difference
++
+Context
++
+Uncertainty qualifier when needed
+~~~
+
+Structured FieldsがSemantic Sourceであり、StatementはHuman-readable Projection。
+
+### Candidate Semantics Preservation
+
+以下の_CANDIDATEを確定表現へ変えない。
+
+~~~text
+FALSE_ALLOW_CANDIDATE
+FALSE_BLOCK_CANDIDATE
+OVER_RESTRICTION_CANDIDATE
+UNDER_RESTRICTION_CANDIDATE
+FALSE_ALARM_CANDIDATE
+HYSTERESIS_TOO_WEAK_CANDIDATE
+HYSTERESIS_TOO_STRONG_CANDIDATE
+FALSE_RECOVERY_CANDIDATE
+MATERIAL_IMPROVEMENT_CANDIDATE
+MATERIAL_RISK_REDUCTION_CANDIDATE
+MATERIAL_RISK_INCREASE_CANDIDATE
+~~~
+
+### Registry Record Candidate
+
+~~~text
+finding_code
+domain
+class
+canonical_label
+meaning
+allowed_source_analysis
+allowed_raw_finding_kinds
+required_context
+allowed_subject_types
+statement_template_ref
+taxonomy_version
+status
+replacement_code
+~~~
+
+Registry Status候補:
+
+~~~text
+ACTIVE
+DEPRECATED
+RESERVED
+REMOVED
+~~~
+
+Historical Findingを無言でMigrationしない。
+
+### Status
+
+~~~text
+SOURCE_STATUS:
+CURRENT_DERIVED
+
+LEGACY_CONFLICT_STATUS:
+NONE
+
+CURRENT_03_CONFLICT_STATUS:
+NONE
+
+CURRENT_DESIGN_STATUS:
+NOT_ADOPTED
+~~~
+
+---
+
+## 7.54 Analysis → ResearchCandidate / Candidate Promotion Contract
+
+### Formal Definition Candidate
+
+> **Candidate Promotion = Canonical Findingについて、そのFindingが研究可能な問題として最低限のIdentity・Trace・Contextを持ち、Research IntakeへResearchCandidateとして提示するだけのResearch Value Signalがあるかを評価する境界責任候補。Research採用そのものは決定しない。**
+
+### Input
+
+~~~text
+Canonical Finding
+Related Canonical Findings
+Source Trace
+Market Context / DNA
+Quality / Uncertainty
+Shared Origin / Dependency
+Existing Research relation hints
+~~~
+
+### Eligibility Axes
+
+~~~text
+Finding Clarity
+Traceability
+Researchability
+Finding Significance Context
+Recurrence / Pattern
+Novelty / Unknown
+Contradiction
+Production Relevance
+Risk / Safety Relevance
+Evidence / Quality Sufficiency
+Uncertainty
+Possible Existing Research Relation
+~~~
+
+重要:
+
+~~~text
+Promotion
+≠ Final Research Value Decision
+
+Promotion
+≠ Research Admission
+~~~
+
+### Promotion Decisions
+
+~~~text
+CREATE_CANDIDATE
+ACCUMULATE
+RECORD_ONLY
+NEED_MORE_CONTEXT
+~~~
+
+Meaning:
+
+~~~text
+CREATE_CANDIDATE
+= Research IntakeへResearchCandidateとして提示可能
+
+ACCUMULATE
+= 単独Candidate化はまだ弱いがPattern蓄積対象
+
+RECORD_ONLY
+= Analysis / Finding historyとして保存しCandidate化しない
+
+NEED_MORE_CONTEXT
+= Candidate形成に必要なContext不足
+~~~
+
+REJECTはResearch Intakeの責任なのでCandidate Promotionでは使わない。
+
+### Minimum Candidate Formation
+
+概念上最低限:
+
+~~~text
+Finding identifiable
++
+Source Trace sufficient
++
+Research Question Seedを作れる
+
+AND
+
+少なくとも一つのPromotion Basis:
+- MATERIAL_ANOMALY
+- REPEATED_PATTERN
+- NOVEL_BEHAVIOR
+- CONTRADICTION
+- BOUNDARY_DISCOVERY
+- PRODUCTION_RELEVANCE
+- RISK_RELEVANCE
+- VALIDATION_DIVERGENCE
+- MODEL_GAP
+- EXPLANATORY_GAP
+- OPPORTUNITY_CANDIDATE
+- UNKNOWN_STRUCTURE
+~~~
+
+全部をAND必須にはしない。
+
+重大な単発Safety / Unknown Failureを逃さないため。
+
+### Atomic Finding → Research Problem Aggregation
+
+FindingはAtomic。
+
+ResearchCandidateはResearch Problem単位。
+
+~~~text
+Atomic Findings
+↓
+Shared Origin / Dependency Review
+↓
+Candidate Aggregation
+↓
+One Research Problem Candidate
+~~~
+
+例:
+
+~~~text
+FND.OUTCOME.UNEXPECTED_FAILURE
++
+FND.DEMO_LIVE.SLIPPAGE_DIVERGENCE
++
+FND.DEMO_LIVE.PARTIAL_FILL_DIVERGENCE
+↓
+one candidate:
+Comparable LIVE conditionsでExecution Realityが
+Reference assumptionをMaterialに下回る可能性
+~~~
+
+### Duplicate Boundary
+
+Candidate Promotionは、
+
+~~~text
+possible_duplicate_refs
+related_research_refs
+~~~
+
+を付けられる。
+
+正式MERGEはResearch Intake責任。
+
+### Counterfactual Promotion Strictness
+
+~~~text
+Alternative Outcome > Actual
+≠ Automatic Candidate
+~~~
+
+最低候補:
+
+~~~text
+Decision-time information fixed
+Predefined / explicit alternative
+Feasibility acceptable
+No obvious hindsight leakage
+Model quality suitable
+Difference material
+Uncertainty preserved
+~~~
+
+### Positive Discovery
+
+Failureだけでなく、
+
+~~~text
+Unexpected Success
+New Stable Pattern
+New Applicability Region
+Potential Edge Strengthening
+~~~
+
+もCandidate Sourceになり得る。
+
+### ResearchCandidate Conceptual Structure
+
+~~~text
+ResearchCandidate
+├ identity
+├ origin_finding_refs
+├ finding_statement
+├ candidate_type
+├ promotion_basis
+├ research_question_seed
+├ materiality / recurrence / novelty context
+├ production / risk relevance
+├ market context / DNA
+├ evidence / quality / uncertainty
+├ shared-origin / dependency
+├ related research / hypothesis / knowledge hints
+└ limitations
+~~~
+
+### Invariants
+
+~~~text
+Finding
+≠ ResearchCandidate
+
+CREATE_CANDIDATE
+≠ Intake ACCEPT
+
+Trade Loss
+≠ Automatic Candidate
+
+Trade Profit
+≠ No Candidate
+
+Repeated Trades
+≠ Independent Cases
+
+Multiple Findings
+≠ Independent Evidence
+
+Counterfactual Better
+≠ Automatic Candidate
+
+Candidate Promotion
+must not set Root Cause
+
+Candidate Promotion
+must not set Research Priority
+
+Candidate Promotion
+must not change Production
+~~~
+
+### Status
+
+~~~text
+SOURCE_STATUS:
+CURRENT_DERIVED + 03_RESEARCH BOUNDARY
+
+CURRENT_03_CONFLICT_STATUS:
+NONE after admission separation
+
+CURRENT_DESIGN_STATUS:
+NOT_ADOPTED
+~~~
+
+---
+
+## 7.55 Research Router / ResearchRoute
+
+### Research Router — Formal Definition Candidate
+
+> **Research Router = Research Intakeで受理されたResearch Candidateについて、その原因を確定せず、Origin・Finding Type・Affected Responsibility・Evidence / Contextを基に、一つ以上の適切なResearch Domainを選び、その理由・Basis・UncertaintyをResearchRouteへ固定するResearch Ingress Domain Routing Responsibility候補。**
+
+### ResearchRoute — Formal Definition Candidate
+
+> **ResearchRoute = 一つのAccepted Research CandidateをどのResearch Domainへなぜ送ると判断したかを、Route Target・Reason・Basis・Uncertainty・Routing Policy Version・Trace付きで固定するVersioned Immutable Routing Decision Object候補。Research Plan・Root Cause・Final Priority・Research Resultではない。**
+
+### Input Boundary
+
+~~~text
+Research Intake
+↓
+ACCEPTED ResearchCandidate
+↓
+Research Router
+~~~
+
+RouterはRaw Finding / Raw Analysisを直接受け取らない。
+
+### Two-Stage Routing
+
+~~~text
+Stage 1:
+Research Router
+= Domain Routing
+
+Stage 2:
+03_RESEARCH Routing / Prioritization
+= Method / Validation Routing + Research scheduling priority
+~~~
+
+### Domain Candidate Registry
+
+Legacy Source-backed中心:
+
+~~~text
+Data Quality Research
+Event Detection Research
+Formula Research
+Feature Research
+Market Intelligence Research
+Causal Research
+Hypothesis Set / Thesis Composition Research
+Market DNA Research
+Execution Research
+Live Evidence Research
+Supervisor Research
+~~~
+
+Current Derived追加候補:
+
+~~~text
+Applicability Research
+Defense / Risk Research
+Exit / Position Research
+Demo / Simulation Model Research
+Counterfactual Model Research
+Research Structure / Evidence Dependency Research
+~~~
+
+正式ResearchDomainRegistryは後続。
+
+### Multi-Route
+
+1 Candidateから複数Domainを許容する。
+
+~~~text
+PRIMARY
+SECONDARY
+CROSS_CUTTING
+DEPENDENCY
+~~~
+
+はRoute Role候補。
+
+Multi-routeは複数Causeが証明されたことを意味しない。
+
+### Routing Status
+
+~~~text
+COMPLETED
+AMBIGUOUS
+NEED_MORE_CONTEXT
+UNROUTABLE
+ROUTING_FAILED
+~~~
+
+Meaning:
+
+~~~text
+AMBIGUOUS
+= 複数Domainが妥当で一意化不要 / 不可能
+
+NEED_MORE_CONTEXT
+= Routing Context不足
+
+UNROUTABLE
+= 現行Domain Registryに適切なOwnerがない
+
+ROUTING_FAILED
+= Router処理障害
+~~~
+
+### Priority Boundary
+
+Legacy ResearchRouteのpriorityはCurrent 03 PrioritizationとAuthority衝突する。
+
+Routerでは以下へ弱める。
+
+~~~text
+urgency_hint
+production_impact_hint
+risk_relevance_hint
+~~~
+
+Final Priorityは03_RESEARCH Prioritization責任。
+
+### ResearchRoute Conceptual Structure
+
+~~~text
+ResearchRoute
+├ research_route_id
+├ research_candidate_ref
+├ routing_version
+├ routed_at
+├ trace_id
+├ routing_status
+├ route_targets[]
+│  ├ target_research_domain
+│  ├ route_role
+│  ├ reason_codes
+│  ├ basis_refs
+│  └ target_specific_uncertainty
+├ dependency_refs
+├ related_research_refs
+├ market_context_refs
+├ market_dna_refs
+├ urgency_hint
+├ production_impact_hint
+├ risk_relevance_hint
+├ routing_policy_ref
+├ routing_policy_version
+├ routing_uncertainty
+├ limitations
+└ diagnostics_ref
+~~~
+
+### Immutable / Re-route
+
+新ContextでRouteが変わる場合、旧Routeを無言で書き換えない。
+
+~~~text
+ResearchRoute v1
+↓
+New Context
+↓
+ResearchRoute v2
+or
+superseding route
+~~~
+
+### Invariants
+
+~~~text
+ResearchCandidate
+≠ ResearchRoute
+
+ResearchRoute
+≠ ResearchPlan
+
+Routing
+≠ Root Cause
+
+Routing
+≠ Final Priority
+
+Routing
+≠ Validation Method execution
+
+Target Domain
+≠ Cause Confirmed
+
+Multiple Routes
+≠ Multiple Causes Proven
+
+ResearchRoute created
+≠ Research started
+
+AI suggestion
+≠ Routing Authority
+
+Router
+must not directly change Production
+~~~
+
+### Legacy Review
+
+~~~text
+LEGACY_SOURCE_RELATION:
+ROLE-RTR-001 Research Router
+OBJ-POST-008 ResearchRoute
+
+LEGACY_CONFLICT_STATUS:
+MODERATE RESPONSIBILITY OVERLAP
+resolved by two-stage routing separation
+
+LEGACY_REVIEW_STATUS:
+STRONGLY ADOPTABLE / RESPONSIBILITY REFINEMENT
+
+CURRENT_DESIGN_STATUS:
+NOT_ADOPTED
+~~~
+
+---
+
+## 7.56 Finding → Research — Integrated Candidate Flow
+
+### Canonical Detailed Flow
+
+~~~text
+Trade / Position Terminal
+↓
+Post-Trade Analysis
+
+├ OutcomeAnalysisResult
+├ TradeThesisEvaluation
+├ HypothesisAttribution / ThesisMemberAttribution
+├ DefenseDecisionEvaluation
+├ SupervisorEvaluation
+├ DemoLiveDivergence
+└ CounterfactualResult
+
+↓
+Finding Extractor
+↓
+Common Extraction Gates
+↓
+0..N ExtractedFindingDraft
+
+↓
+Finding Normalizer
+↓
+Finding Type Registry v1.0
+↓
+Canonical Finding
+
+↓
+Cross-Analysis Review
+├ ANALYSIS_CONFLICT
+├ SHARED_ORIGIN_OVERCOUNT_RISK
+├ TRACE_GAP
+├ VERSION_MISMATCH
+└ RESPONSIBILITY_AMBIGUITY
+
+↓
+Canonical Finding Set
+↓
+Candidate Promotion
+
+├ CREATE_CANDIDATE
+├ ACCUMULATE
+├ RECORD_ONLY
+└ NEED_MORE_CONTEXT
+
+↓ when CREATE_CANDIDATE
+ResearchCandidate
+↓
+Research Intake
+
+├ ACCEPT
+├ DEFER
+├ MERGE
+├ REJECT
+└ NEED_MORE_CONTEXT
+
+↓ only ACCEPT
+Research Router
+↓
+ResearchRoute / Domain Routing
+
+↓
+03_RESEARCH Routing / Prioritization
+↓
+Research Plan
+↓
+Research Question / Hypothesis
+↓
+Validation Channels
+↓
+Research Result
+↓
+Validation Gate
+↓
+Validated Research Result
+↓
+04_KNOWLEDGE_APPLICABILITY
+~~~
+
+### No Direct Bypass
+
+禁止候補:
+
+~~~text
+Analysis
+→ Router
+
+Analysis
+→ Stress Lab
+
+Finding
+→ Hypothesis
+
+Finding
+→ Trainer
+
+Canonical Finding
+→ Production Rule
+
+ResearchCandidate
+→ Historical Test directly
+
+ResearchRoute
+→ Live change
+~~~
+
+### Authority Matrix
+
+| Stage | Owns | Does Not Own |
+|---|---|---|
+| Post-Trade Analysis | Meaning analysis | Finding taxonomy / Research admission |
+| Finding Extractor | Finding existence / semantic extraction | Canonical naming / Research value |
+| Finding Normalizer | Canonical representation | New analysis / promotion |
+| Finding Registry | Allowed vocabulary | Detection / Research routing |
+| Candidate Promotion | Candidate formation | Research admission / formal merge |
+| Research Intake | Admission / defer / merge / reject | Root cause / validation result |
+| Research Router | Research Domain routing | Method execution / final priority |
+| 03 Routing / Prioritization | Research method mix / priority | Research result |
+| Research Plan | Executable validation plan | Knowledge promotion |
+
+### Pipeline Failure Separation
+
+~~~text
+Analysis INDETERMINATE
+≠ Finding NO_FINDING
+
+Extractor NEED_MORE_CONTEXT
+≠ Normalizer UNMAPPABLE
+
+Normalizer UNMAPPABLE
+≠ UNKNOWN_STRUCTURE
+
+Candidate RECORD_ONLY
+≠ Intake REJECT
+
+Intake DEFER
+≠ Router UNROUTABLE
+
+Router ROUTING_FAILED
+≠ Research Result failure
+~~~
+
+### Final Invariants
+
+~~~text
+Analysis Result
+≠ Finding
+
+Finding
+≠ ResearchCandidate
+
+ResearchCandidate
+≠ Accepted Research
+
+ResearchRoute
+≠ ResearchPlan
+
+Finding Code
+≠ Root Cause
+
+Finding Domain
+≠ Research Domain
+
+Finding Count
+≠ Evidence Count
+
+Route Count
+≠ Cause Count
+
+Finding Standardization
+≠ Confidence Upgrade
+
+Promotion
+≠ Admission
+
+Routing
+≠ Validation
+
+Post-Trade Feedback
+must return through Research Governance
+before Knowledge / Production changes
+~~~
+
+### Integrated Review Status
+
+> **Finding Extractor → Normalizer → Registry → Candidate Promotion → Research Intake → Research Routerの責任境界は、03_RESEARCHと既存Post-Trade Referenceへ接続可能な形で整合した。最大の重複であったMateriality / Admission判断、Duplicate Merge、Research Routingの二重Authorityは分離された。Current Design本体へはまだAdoptしていない。**
+
+~~~text
+SOURCE_STATUS:
+MIXED
+- 03_RESEARCH source-backed boundaries
+- Legacy Research Router / ResearchRoute reuse
+- Finding pipeline detailed semantics are Current Derived
+
+LEGACY_CONFLICT_STATUS:
+MINOR / MODERATE responsibility overlap resolved
+
+CURRENT_03_CONFLICT_STATUS:
+NONE after corrections
+
 CURRENT_DESIGN_STATUS:
 NOT_ADOPTED
 ~~~
