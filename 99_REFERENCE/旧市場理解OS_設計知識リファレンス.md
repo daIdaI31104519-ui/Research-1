@@ -15325,3 +15325,1545 @@ Concept Reviewの判定基準、Conflict、Reuse Recommendation、Currentへの�
 # 一文定義
 
 > **`旧市場理解OS_設計知識リファレンス.md` とは、旧市場理解OS RepositoryのSummary・Dictionary・Governance・FIX / Failureから重要KnowledgeをSource追跡可能な形で圧縮・索引化し、Legacy DefinitionとCurrent Designを混合せず、旧Concept・失敗理由・Currentとの関係・再利用候補を検索できるようにする、Current Design Authorityを持たないLegacy Knowledge Master Indexである。**
+
+
+---
+
+## 7.88 Defense / Risk Post-05 Reconciliation — Checkpoint Scope
+
+### Purpose
+
+This checkpoint reconciles the previously saved Defense / Risk / Execution-boundary Reference (7.28–7.40) with the later 05_DECISION Final Checkpoint (7.86–7.87).
+
+It is intentionally a Reference-only correction checkpoint.
+
+~~~text
+CURRENT_DESIGN_STATUS:
+NOT_ADOPTED
+
+REFERENCE_STAGE:
+POST_05_DEFENSE_RECONCILIATION
+
+ARCHITECTURE_REWRITE_REQUIRED:
+NO
+
+REFERENCE_LOCAL_PRECEDENCE:
+Where 7.28–7.40 conflicts with 7.88+,
+7.88+ is the newer Reference interpretation only.
+This does NOT create Current Design authority.
+~~~
+
+### Major Review Result
+
+No architecture-breaking contradiction was found.
+
+The following older Reference responsibility is refined:
+
+~~~text
+OLD:
+05 Decision
+↓
+Defense Evaluation
+├ broad Decision Validity
+└ Runtime Safety
+
+REFINED:
+05 Decision
+↓
+Defense Handoff
+↓
+Defense Admission
+= full economic-decision admissibility / integrity boundary
+↓
+Defense Evaluation
+= runtime safety only
+~~~
+
+### Critical Semantic Separation
+
+~~~text
+05_DECISION
+= Do we want to take this Risk?
+
+Defense Admission
+= Is this finalized economic Decision still admissible
+  for runtime safety evaluation?
+
+Defense Evaluation
+= Is taking this still-valid Risk safe now?
+
+Execution
+= How exactly will the permitted Risk be entered?
+~~~
+
+### Saving Principle
+
+This checkpoint intentionally does NOT finalize:
+
+~~~text
+DB schema
+Python classes
+numeric thresholds
+EV formula
+Defense threshold values
+IAM implementation
+exact cooldown duration
+exact execution retry policy
+~~~
+
+Those remain later Current adoption / contract / implementation work.
+
+---
+
+## 7.89 Defense Admission — Object / Responsibility Contract Checkpoint
+
+### Formal Responsibility
+
+> **Defense Admission = a boundary-validation responsibility that receives the exact finalized Canonical DecisionResult through a DefenseAdmissionEnvelope, does not re-run 05 economics, and verifies identity, integrity, version, validity, selected-Thesis references, EV validity envelope, post-finalization material change, limitations and trace before allowing runtime Defense Evaluation.**
+
+~~~text
+DecisionResult
+↓
+Defense Handoff Builder
+↓
+DefenseAdmissionEnvelope
+↓
+Defense Admission
+↓
+DefenseAdmissionDecision
+↓
+Defense Evaluation
+~~~
+
+### Handoff Routing Correction
+
+~~~text
+TAKE_LONG_RISK
+TAKE_SHORT_RISK
+→ Defense Admission
+
+NO_TRADE
+→ DEFENSE_NOT_REQUIRED
+→ Audit / Logger / Research Trace
+~~~
+
+Correction:
+
+~~~text
+DEFENSE_NOT_REQUIRED
+= Handoff routing outcome
+≠ Defense Admission outcome
+~~~
+
+### DefenseAdmissionEnvelope
+
+~~~text
+DecisionResult
+= Source of Truth
+
+DefenseAdmissionEnvelope
+= immutable transfer projection
+≠ deep copy of Knowledge / Research / full Decision internals
+~~~
+
+Minimum conceptual groups:
+
+~~~text
+Identity
+Source Binding
+Decision Projection
+Selection Projection
+Economic Validity Projection
+Scope
+Temporal Validity
+Upstream Limitations
+Policy / Version Binding
+Integrity / Trace
+~~~
+
+Core bindings:
+
+~~~text
+decision_result_ref
+decision_result_version
+decision_result_digest
+
+decision_cycle_id
+decision_scope_ref
+decision_context_ref
+decision_finalization_decision_ref
+
+primary_selected_thesis_ref
+selected_thesis_refs[]
+opposing_thesis_refs[]
+cross_thesis_comparison_ref
+
+expected_value_assessment_refs[]
+primary_selected_ev_assessment_ref
+ev_validity_envelope_refs[]
+
+finalized_at
+valid_from
+valid_until
+decision_context_market_watermark
+finalization_market_watermark
+
+decision_policy_bundle_version
+handoff_contract_version
+envelope_schema_version
+envelope_digest
+~~~
+
+### Projection Rule
+
+~~~text
+EconomicValidityProjection
+= minimum runtime-checkable projection of already-finalized EV conditions
+
+EconomicValidityProjection
+≠ ExpectedValueAssessment
+≠ EV recalculation
+~~~
+
+Candidate projected conditions may include:
+
+~~~text
+spread bound
+funding bound
+liquidity assumption
+venue assumption
+cost assumption
+economic notional ceiling
+~~~
+
+### Limitation Rule
+
+~~~text
+TRACE_ONLY
+SAFETY_RELEVANT
+DOWNSTREAM_ENFORCEABLE
+~~~
+
+may be preserved as limitation classes, but:
+
+~~~text
+Limitation
+≠ Authorized Runtime Constraint
+~~~
+
+### DefenseAdmissionProcessStatus
+
+Candidate:
+
+~~~text
+COMPLETED
+COMPLETED_WITH_LIMITATIONS
+INCOMPLETE
+FAILED
+NOT_EVALUATED
+~~~
+
+### DefenseAdmissionOutcome
+
+Candidate:
+
+~~~text
+ADMITTED_TO_DEFENSE
+DECISION_REFRESH_REQUIRED
+EV_REASSESSMENT_REQUIRED
+HANDOFF_CORRECTION_REQUIRED
+HANDOFF_REJECTED
+~~~
+
+Correction:
+
+~~~text
+HANDOFF_FAILED
+≠ normal Admission outcome
+
+processing failure
+→ process status INCOMPLETE / FAILED
+→ no fabricated Admission outcome
+~~~
+
+### Outcome Meaning
+
+~~~text
+ADMITTED_TO_DEFENSE
+≠ Defense ALLOW
+
+DECISION_REFRESH_REQUIRED
+= Decision validity / premise materially changed
+
+EV_REASSESSMENT_REQUIRED
+= economic assumptions breached EV validity envelope
+
+HANDOFF_CORRECTION_REQUIRED
+= Canonical Decision is valid but transfer projection is defective
+
+HANDOFF_REJECTED
+= Canonical / integrity / authority boundary cannot be trusted
+~~~
+
+---
+
+## 7.90 Defense Admission Gate Contract — Checkpoint
+
+### Gate Set
+
+~~~text
+DHA0  Handoff Identity
+DHA1  Outcome Routing
+DHA2  Canonical Decision / Finalization
+DHA3  Version / Digest Integrity
+DHA4  Decision Scope Integrity
+DHA5  Decision Validity Window
+DHA6  Selected Thesis Integrity
+DHA7  Selected Thesis Validity
+DHA8  EV Assessment Integrity
+DHA9  EV Validity Envelope
+DHA10 Limitation / Uncertainty Preservation
+DHA11 Post-Finalization Material Change
+DHA12 Policy / Contract Version
+DHA13 Trace Completeness
+DHA14 Authority Boundary
+DHA15 Concurrency / Final Resolution
+~~~
+
+### Gate Record Candidate
+
+Keep gate details as immutable substructure first, not automatically a canonical top-level object.
+
+~~~text
+gate_code
+gate_status
+checked_refs[]
+observed_values[]
+expected_conditions[]
+reason_codes[]
+required_route
+limitations[]
+evaluated_at
+market_watermark
+diagnostics_ref
+~~~
+
+Gate status candidate:
+
+~~~text
+PASS
+PASS_WITH_LIMITATION
+NOT_APPLICABLE
+FAIL
+ERROR
+~~~
+
+### Critical Routing Rules
+
+~~~text
+Canonical / source integrity failure
+→ HANDOFF_REJECTED
+
+Envelope projection defect only
+→ HANDOFF_CORRECTION_REQUIRED
+
+Decision expired / superseded / premise invalidated
+→ DECISION_REFRESH_REQUIRED
+
+EV economic assumption breach only
+→ EV_REASSESSMENT_REQUIRED
+
+Safety-only material change
+→ ADMITTED_TO_DEFENSE
+  + safety change refs forwarded
+
+Processing failure / unavailable critical validation data
+→ INCOMPLETE / FAILED
+  + no Admission outcome
+  + no progression to Defense Evaluation
+~~~
+
+### Exact-Version Rule
+
+~~~text
+Digest mismatch
+≠ silently load latest object
+
+Superseded Decision
+≠ silently replace with newer Decision
+~~~
+
+A new canonical artifact must enter through its own normal handoff path.
+
+### Temporal Barrier B
+
+~~~text
+finalization_market_watermark
+↓
+defense_admission_market_watermark
+~~~
+
+Materiality candidate:
+
+~~~text
+DECISION_MATERIAL
+SAFETY_MATERIAL
+BOTH
+NEITHER
+~~~
+
+Routing:
+
+~~~text
+DECISION_MATERIAL
+→ DECISION_REFRESH_REQUIRED
+
+BOTH
+→ DECISION_REFRESH_REQUIRED
+
+SAFETY_MATERIAL
+→ ADMITTED_TO_DEFENSE
+  + forward safety change context
+
+NEITHER
+→ normal admission
+~~~
+
+### Repair-Owner Principle
+
+> **Route a defect to the earliest authoritative owner that can correctly repair that defect; do not restart the entire pipeline without need.**
+
+Examples:
+
+~~~text
+Envelope projection defect
+→ Handoff Builder
+
+Economic assumption breach
+→ EV Assessment onward
+
+Decision-material market change
+→ new Decision Cycle
+
+Safety-only change
+→ Defense Evaluation
+~~~
+
+---
+
+## 7.91 Defense Evaluation — Refined Runtime Safety Contract
+
+### Responsibility Correction
+
+The broad Decision Validity responsibility in the earlier 7.29 Reference is moved to Defense Admission.
+
+Defense Evaluation now owns:
+
+> **runtime safety evaluation of an already-admitted economic Decision.**
+
+### Refined Gate Set
+
+~~~text
+DE0  Admission Snapshot Validity Recheck
+DE1  RiskState
+DE2  Authorized Constraint
+DE3  Exposure / Capacity
+DE4  Liquidity / Execution Safety
+DE5  Drawdown / Loss Context
+DE6  Data / Runtime Quality
+DE7  Exchange / API Health
+DE8  Position / Account State
+DE9  Abnormal Event / Global Risk Limit
+DE10 Evaluation Integrity / Final Resolution
+~~~
+
+### DE0 Boundary
+
+~~~text
+DE0
+= lightweight Admission Snapshot validity recheck
+≠ full Decision validity evaluation
+≠ EV recalculation
+≠ Thesis rebuild
+≠ Knowledge applicability review
+~~~
+
+If the Admission snapshot is no longer usable:
+
+~~~text
+→ no DefenseDecision
+→ Defense Admission recheck / upstream route
+~~~
+
+### Known Unsafe vs Unable To Evaluate
+
+Critical separation:
+
+~~~text
+Known unsafe state
+→ normal Defense safety outcome may be BLOCK / REDUCE
+
+Unable to evaluate required safety state
+→ Process INCOMPLETE / FAILED
+→ no fabricated DefenseDecision
+→ Fail-Closed
+~~~
+
+Examples:
+
+~~~text
+Known ExchangeHealth = CRITICAL
+→ BLOCK candidate
+
+ExchangeHealth service unavailable
+→ INCOMPLETE / FAILED
+→ Fail-Closed
+~~~
+
+### Gate Outcome Candidate
+
+~~~text
+CLEAR
+RESTRICT
+BLOCK
+UNKNOWN
+NOT_EVALUATED
+~~~
+
+Hard BLOCK is never majority-voted away.
+
+### DefenseEvaluationProcessStatus
+
+Candidate:
+
+~~~text
+COMPLETED
+COMPLETED_WITH_LIMITATIONS
+INCOMPLETE
+FAILED
+NOT_EVALUATED
+~~~
+
+Generic STALE is not retained as one process status in this refined checkpoint.
+
+Instead:
+
+~~~text
+Admission stale
+→ Admission recheck
+
+Evaluation context stale
+→ Defense Evaluation restart
+
+DefenseDecision expired
+→ downstream rejects reuse
+~~~
+
+### DefenseDecision Creation Rule
+
+~~~text
+DefenseDecision exists
+ONLY IF
+
+process status =
+COMPLETED
+or COMPLETED_WITH_LIMITATIONS
+
+AND
+
+all required hard gates were evaluated
+
+AND
+
+no unresolved critical UNKNOWN remains
+
+AND
+
+final resolution succeeded
+~~~
+
+---
+
+## 7.92 DefenseDecision / DefenseEvaluationResult — Refined Object Checkpoint
+
+### DefenseDecision
+
+Canonical outcomes remain:
+
+~~~text
+ALLOW
+REDUCE
+BLOCK
+~~~
+
+Semantics:
+
+~~~text
+ALLOW
+= current runtime safety context permits normal Defense-envelope progression
+≠ order sent
+
+REDUCE
+= economic direction remains intact,
+  but only a stricter DefenseRestrictionContext may proceed
+≠ exact position size
+
+BLOCK
+= Defense Evaluation completed normally,
+  but current safety context prohibits new Risk progression
+≠ Decision wrong
+≠ NO_TRADE
+≠ process failure
+~~~
+
+### DefenseRestrictionContext
+
+Keep as an immutable substructure first.
+
+Candidate dimensions:
+
+~~~text
+scope refs
+RiskState ceiling refs
+Authorized Constraint refs
+
+max incremental exposure
+max notional
+max risk budget
+max leverage if applicable
+
+venue restrictions
+order-style restrictions
+liquidity restrictions
+required protection conditions
+time validity
+
+reason codes
+limitations
+~~~
+
+Critical correction:
+
+~~~text
+REDUCE
+≠ one universal scalar reduction factor
+~~~
+
+Risk restriction is multi-dimensional.
+
+### DefenseDecision Validity
+
+Strong candidate:
+
+~~~text
+ALLOW
+REDUCE
+→ valid_until REQUIRED
+~~~
+
+Runtime safety permission must not be indefinitely reusable.
+
+Candidate validity context:
+
+~~~text
+evaluated_at
+valid_from
+valid_until
+validity_basis
+defense_evaluation_market_watermark
+~~~
+
+### DefenseEvaluationResult
+
+Conceptual groups:
+
+~~~text
+Identity
+Input Binding
+Processing
+Gate Results
+Decision Ref
+Fail-Closed
+Execution Projection
+Routing
+Temporal
+Policy / Version
+Trace / Diagnostics
+~~~
+
+### execution_disposition
+
+Derived only:
+
+~~~text
+COMPLETED + ALLOW
+→ PROCEED
+
+COMPLETED + REDUCE
+→ PROCEED_RESTRICTED
+
+COMPLETED + BLOCK
+→ DENY
+
+INCOMPLETE / FAILED
++ Fail-Closed
+→ DENY
+~~~
+
+~~~text
+execution_disposition
+≠ second Decision Authority
+~~~
+
+### Fail-Closed
+
+~~~text
+BLOCK
+= normal completed safety prohibition
+
+Fail-Closed
+= safety evaluation could not be responsibly completed
+~~~
+
+Never collapse them for Post-Trade / Research analysis.
+
+---
+
+## 7.93 RiskState / Risk Governance — Reconciliation Checkpoint
+
+### RiskState
+
+Existing candidate states remain:
+
+~~~text
+NORMAL
+CAUTION
+RISK_REDUCED
+MICRO_ONLY
+NO_NEW_ENTRY
+EMERGENCY
+~~~
+
+RiskState remains:
+
+~~~text
+Cross-Cutting Runtime Permission State
+
+RiskState
+≠ DefenseDecision
+≠ Production Promotion
+≠ Knowledge Health
+≠ Runtime command
+~~~
+
+### Effective Risk Permission Context
+
+Correction:
+
+~~~text
+RiskState
+= authoritative source state(s)
+
+Effective Risk Permission Context
+= derived Defense evaluation view
+≠ new canonical authority state
+~~~
+
+Multiple applicable RiskState scopes are resolved conceptually as the intersection of their permission envelopes, not by averaging or assigning arbitrary numeric severity to state names.
+
+~~~text
+Effective Permission
+=
+intersection of applicable authoritative Risk Envelopes
+~~~
+
+If the known intersection permits zero new Risk:
+
+~~~text
+→ normal BLOCK candidate
+~~~
+
+If applicable scope / permission cannot be determined:
+
+~~~text
+→ Evaluation INCOMPLETE
+→ Fail-Closed
+~~~
+
+### Version Barrier
+
+Defense Evaluation binds exact:
+
+~~~text
+RiskState refs / versions
+Authorized Constraint refs / versions
+DefensePolicyBundleVersion
+Admission Decision ref/version
+~~~
+
+Before final Defense resolution, material state/version change requires restart rather than mixing old and new runtime authority in one DefenseDecision.
+
+### Risk Governance
+
+Canonical authority separation remains:
+
+~~~text
+REQUEST
+≠ RECOMMEND
+≠ APPROVE
+≠ APPLY
+
+APPROVE
+≠ APPLIED
+~~~
+
+Single-writer principle remains:
+
+~~~text
+RiskState Machine
+= canonical Apply authority
+
+Defense / AI / Logger / Telegram / Post-Trade
+must not directly mutate Current RiskState
+~~~
+
+Defense BLOCK / ALLOW does not itself change RiskState.
+
+Defense may produce request / finding / recommendation material for Risk Governance.
+
+---
+
+## 7.94 Emergency Fast Path / Recovery Strict Path — Detailed Checkpoint
+
+### Safety Asymmetry
+
+~~~text
+Restrict fast
+Recover slow
+~~~
+
+Emergency Fast Path accelerates restrictive governance under explicit policy; it does not bypass governance.
+
+### Action-Class Separation
+
+Critical correction:
+
+~~~text
+RISK_INCREASING
+RISK_NEUTRAL
+RISK_REDUCING
+~~~
+
+Examples:
+
+~~~text
+RISK_INCREASING:
+new entry
+position add
+exposure increase
+leverage increase
+weaken protection
+
+RISK_REDUCING:
+close / partial reduce
+reduce-only action
+leverage reduction
+protection strengthening
+cancel risk-increasing open order
+
+RISK_NEUTRAL:
+read-only reconciliation
+status query
+audit / logging
+~~~
+
+Important refinement:
+
+~~~text
+risk-reducing intent
+≠ automatically proven actual risk reduction
+~~~
+
+Execution / venue semantics must be able to verify that an action cannot accidentally increase exposure (for example via reduce-only or equivalent enforceable semantics) before it is treated as safely risk-reducing.
+
+### Emergency Meaning
+
+~~~text
+NO_NEW_ENTRY
+= prohibit new Risk addition while existing Position safety management continues
+
+EMERGENCY
+= prioritize containment and block normal Risk-increasing progression,
+  while allowing authorized risk-reducing / reconciliation / recovery actions
+~~~
+
+~~~text
+EMERGENCY
+≠ system everything off
+≠ force liquidate all positions
+~~~
+
+### Emergency Fast Path Candidate
+
+~~~text
+Critical Safety Trigger
+↓
+Trigger Integrity
+↓
+Emergency Qualification
+↓
+Scope Resolution
+↓
+Restriction Direction Check
+↓
+Emergency Authority Match
+↓
+Current RiskState / Version Check
+↓
+Transition Legality
+↓
+Apply Preconditions
+↓
+RiskState Machine
+↓
+Atomic Restrictive Apply
+↓
+StateTransitionEvent
+↓
+Current RiskState Projection
+↓
+Downstream Permission invalidation / containment
+~~~
+
+### Emergency Scope Rule
+
+> **Restrict the smallest scope that safely contains the known failure.**
+
+But add a dependency rule:
+
+~~~text
+shared infrastructure dependency
+cross-scope dependency
+unknown failure scope
+unresolved blast radius
+↓
+restriction scope may expand upward / outward
+until containment is credible
+~~~
+
+Therefore:
+
+~~~text
+minimum scope
+≠ blindly local scope
+~~~
+
+### Fast-Path Authority
+
+Candidate:
+
+~~~text
+Standing Pre-Authorization
++
+Runtime Authority Validation
+~~~
+
+The pre-authorization must constrain:
+
+~~~text
+allowed trigger classes
+allowed scopes
+allowed restrictive transitions
+maximum authority scope
+validity
+policy version
+authorized role/service
+audit requirements
+~~~
+
+This is not "approval omitted"; it is pre-authorized restrictive governance.
+
+### Existing Artifact Rule
+
+Emergency restriction does not mutate old Decision / Defense artifacts.
+
+~~~text
+Old DefenseDecision ALLOW
+remains historical fact
+
+Current RiskState changes
+↓
+old ALLOW is no longer blindly executable
+~~~
+
+Downstream version barriers enforce this.
+
+### Open-Order Containment
+
+After emergency restriction, candidate containment responsibilities include:
+
+~~~text
+cancel risk-increasing open orders
+preserve / recreate valid risk-reducing protection
+reconcile fills
+reconcile positions
+reconcile account exposure
+~~~
+
+RiskState itself is Permission State; it does not perform those venue actions.
+
+### Recovery Strict Path
+
+Candidate:
+
+~~~text
+Restrictive RiskState
+↓
+Recovery Admission
+↓
+Original Trigger Status
+↓
+Root Cause Resolution / Containment
+↓
+Data Reconciliation
+↓
+Execution Reconciliation
+↓
+Position / Exposure Reconciliation
+↓
+Infrastructure Health
+↓
+Cooldown / Stability Window
+↓
+Revalidation
+↓
+Recovery Target Selection
+↓
+Recovery Readiness Assessment
+↓
+Strict Approval
+↓
+Apply Validation
+↓
+RiskState Machine
+↓
+Atomic Permission Expansion
+↓
+StateTransitionEvent
+↓
+Post-Recovery Monitoring
+~~~
+
+### Recovery Readiness
+
+Candidate separation:
+
+~~~text
+RecoveryReadinessProcessStatus:
+COMPLETED
+COMPLETED_WITH_LIMITATIONS
+INCOMPLETE
+FAILED
+
+RecoveryReadinessOutcome:
+READY
+READY_WITH_LIMITATIONS
+NOT_READY
+NEED_MORE_EVIDENCE
+~~~
+
+~~~text
+RecoveryReadiness
+≠ Approval
+≠ Apply
+~~~
+
+### Recovery Principles
+
+~~~text
+Trigger disappeared
+≠ Root Cause resolved
+
+One healthy API call
+≠ Recovery evidence
+
+Cooldown elapsed
+≠ Recovery permission
+
+Previous RiskState
+≠ required Recovery target
+
+Restriction Authority
+≠ Permission Expansion Authority
+~~~
+
+Recovery target is selected from current evidence, not merely by restoring the pre-incident state.
+
+Limited recovery may be considered where root cause is not fully proven but failure is credibly contained and critical reconciliation / monitoring conditions are satisfied; full NORMAL restoration remains stricter.
+
+### Concurrent Transition Precedence
+
+~~~text
+More Restrictive Safety Transition
+>
+Permission Expansion Transition
+~~~
+
+A new emergency condition interrupts Recovery expansion.
+
+### Post-Recovery Monitoring
+
+Recovery permission expansion should enter a stronger observation window rather than immediately returning to ordinary monitoring assumptions.
+
+Exact duration remains policy / research work.
+
+---
+
+## 7.95 Defense → Execution / Temporal Barrier C — Reconciliation Checkpoint
+
+### Barrier C Refinement
+
+05 Final defined:
+
+~~~text
+Defense Decision
+→ EntryThesis / OrderIntent
+~~~
+
+as Temporal Barrier C.
+
+Detailed Reference refinement:
+
+~~~text
+Barrier C1
+= DefenseDecision → Entry Snapshot / EntryThesis
+
+Barrier C2
+= OrderIntent → actual venue Submission
+~~~
+
+These are two checks inside the Execution boundary, not two new top-level architecture layers.
+
+### C1 — Execution Admission
+
+Candidate processing gates:
+
+~~~text
+EA0 Defense Chain Integrity
+EA1 Execution Disposition
+EA2 Decision Validity Recheck
+EA3 DefenseDecision Validity
+EA4 RiskState Version Barrier
+EA5 Constraint Version Barrier
+EA6 Restriction Integrity
+EA7 Emergency / Runtime Permission
+EA8 Entry Context Availability
+EA9 Temporal / Market Compatibility
+EA10 Final Admission Resolution
+~~~
+
+Execution Admission does NOT:
+
+~~~text
+create new Market Decision
+create new Defense Decision
+recalculate EV
+rebuild Trade Thesis
+rewrite RiskState
+~~~
+
+### Entry Snapshot Temporal Check
+
+~~~text
+defense_evaluation_market_watermark
+↓
+entry_snapshot_market_watermark
+~~~
+
+Materiality may distinguish:
+
+~~~text
+DECISION_MATERIAL
+SAFETY_MATERIAL
+EXECUTION_MATERIAL
+NEITHER
+~~~
+
+Routing:
+
+~~~text
+DECISION_MATERIAL
+→ new Decision / upstream refresh
+
+SAFETY_MATERIAL
+→ Defense Evaluation restart
+
+EXECUTION_MATERIAL
+→ Execution re-plan / snapshot handling
+
+NEITHER
+→ continue
+~~~
+
+### EntryThesis
+
+EntryThesis remains:
+
+~~~text
+exact upstream refs
++
+Entry-time runtime facts
+~~~
+
+not a deep copy of Research / Knowledge.
+
+Strong candidate:
+
+~~~text
+EntryThesis valid_until
+~~~
+
+because entry snapshots are time-sensitive.
+
+### Semantic Build Failure Separation
+
+~~~text
+ENTRY_SNAPSHOT_NOT_BUILDABLE
+≠ Defense BLOCK
+≠ NO_TRADE
+≠ Snapshot Builder process failure
+~~~
+
+### OrderIntent Envelope Rule
+
+~~~text
+actual requested risk
+<=
+min(
+  Economic Permission,
+  Defense Safety Permission,
+  Execution Feasibility
+)
+~~~
+
+Execution may tighten upstream permission; it may not relax it.
+
+### OrderIntent Validity
+
+Strong candidate:
+
+~~~text
+OrderIntent
+= immutable
++ time-bounded
+~~~
+
+An expired OrderIntent is replaced by a new planned artifact, not mutated in place.
+
+### C2 — Submission Gate
+
+Candidate processing gates:
+
+~~~text
+SG0 OrderIntent Integrity
+SG1 EntryThesis Validity
+SG2 Decision Validity
+SG3 DefenseDecision Validity
+SG4 RiskState Version
+SG5 Constraint Version
+SG6 Emergency / Kill State
+SG7 Restriction Compliance
+SG8 OrderIntent Validity / Expiry
+SG9 Venue Conversion Preconditions
+SG10 Final Submit Permission
+~~~
+
+Submission Gate:
+
+~~~text
+≠ Market Decision
+≠ Defense Decision
+≠ Order Planning
+≠ Exchange Adapter
+~~~
+
+It only verifies that existing permission is still usable at submit time.
+
+### Submission Routing
+
+~~~text
+Decision invalid
+→ upstream Decision / Admission
+
+Defense invalid
+→ Defense Evaluation
+
+RiskState / Constraint materially changed
+→ Defense Evaluation
+
+EntryThesis expired
+→ Entry Snapshot rebuild
+
+OrderIntent invalid / violates restriction
+→ Order re-plan
+
+Emergency restriction
+→ deny new Risk-increasing submission now
+
+Venue conversion impossible
+→ Execution / Adapter boundary handling
+~~~
+
+### Submit Permission vs Failure
+
+Critical separation:
+
+~~~text
+SUBMIT_NOT_ALLOWED
+≠ SUBMISSION_PROCESS_FAILED
+~~~
+
+A correctly blocked submission is a successful safety behavior, not an execution-system failure.
+
+### Deferred Next Work
+
+After this checkpoint the next intentionally deferred detailed Execution work remains:
+
+~~~text
+Open Order Runtime Lifecycle
+Retry
+Idempotency
+Reconciliation
+Split Execution Lifecycle
+Position creation / Position identity
+Exit-side OrderIntent / ExecutionRecord reuse
+Protection order lifecycle
+Venue routing / multi-exchange policy
+~~~
+
+---
+
+## 7.96 Defense / Risk / Entry Boundary — Integrated Checkpoint
+
+### Integrated Flow
+
+~~~text
+05_DECISION
+↓
+DecisionResult
+↓
+Defense Handoff
+↓
+DefenseAdmissionEnvelope
+↓
+Defense Admission
+↓
+DefenseAdmissionDecision
+↓
+ADMITTED_TO_DEFENSE
+
+↓
+Defense Evaluation
+├ Admission Snapshot lightweight recheck
+├ RiskState
+├ Authorized Constraint
+├ Exposure / Capacity
+├ Liquidity Safety
+├ Drawdown / Loss Context
+├ Data / Runtime Quality
+├ Exchange / API Health
+├ Position / Account State
+└ Abnormal Event / Global Risk Limit
+
+↓
+DefenseEvaluationResult
+
+normal completion only
+↓
+DefenseDecision
+├ ALLOW
+├ REDUCE
+└ BLOCK
+
+parallel governance:
+Safety Trigger / Finding
+↓
+Risk Governance
+↓
+Emergency Restriction / Recovery
+↓
+RiskState Machine
+↓
+Current RiskState
+
+when ALLOW / REDUCE remains valid
+↓
+Barrier C1
+Execution Admission
+↓
+Entry Snapshot Builder
+↓
+EntryThesis
+↓
+Order Planning
+↓
+OrderIntent
+↓
+Barrier C2
+Submission Gate
+↓
+SUBMIT_ALLOWED
+↓
+Exchange Adapter
+
+[next checkpoint]
+Open Order Runtime Lifecycle
+Retry / Idempotency / Reconciliation
+~~~
+
+### Major Corrections Applied in This Checkpoint
+
+~~~text
+DA-01
+DEFENSE_NOT_REQUIRED moved out of Admission outcome
+into Handoff routing
+
+DA-02
+HANDOFF_FAILED treated as processing failure,
+not semantic Admission outcome
+
+DA-03
+DefenseAdmissionEnvelope uses exact refs
++ minimal immutable projection, not deep copy
+
+DA-04
+Admission Process Status separated from Admission Outcome
+
+DR-04
+Full Decision Validity moved to Defense Admission;
+Defense Evaluation keeps lightweight Admission recheck
+
+DR-05
+Known unsafe state separated from unable-to-evaluate failure
+
+DR-06 / DR-07
+REDUCE represented by multi-dimensional Restriction Context,
+not one scalar
+
+DR-08
+Generic STALE removed from Defense Evaluation process status;
+responsibility-specific recheck / restart used instead
+
+DR-09
+Effective Risk Permission Context is a derived view,
+not a new authority state
+
+DR-10
+RiskState / Constraint version barriers added
+
+DR-11
+Risk-increasing / neutral / reducing actions separated
+
+DR-12
+Emergency scope minimizes blast radius but expands
+for shared dependency / unknown scope when needed
+
+DR-13
+Fast Path authority uses constrained standing pre-authorization
++ runtime authority validation
+
+DR-14
+Emergency transitions do not mutate old Decision / Defense artifacts
+
+DR-15
+Cooldown alone cannot authorize Recovery
+
+DR-16
+Recovery target derives from current evidence,
+not automatic return to previous state
+
+DR-17
+Restriction authority separated from permission-expansion authority
+
+DR-18
+Restrictive safety transition takes precedence over concurrent Recovery
+
+DR-19
+Post-Recovery strengthened monitoring window retained
+
+EX-05
+Entry semantic NOT_BUILDABLE separated from processing failure
+
+EX-06
+EntryThesis validity window candidate added
+
+EX-07
+Execution may tighten but never relax upstream permission envelopes
+
+EX-08
+OrderIntent time-bounded immutability candidate added
+
+EX-09
+Submit-not-allowed separated from submission process failure
+~~~
+
+### Final Cross-Review Result
+
+~~~text
+ARCHITECTURE_BREAKING_CONFLICT:
+NONE FOUND
+
+MAJOR_AUTHORITY_COLLISION:
+NONE AFTER CORRECTIONS
+
+05 / DEFENSE ECONOMIC-SAFETY COLLISION:
+RESOLVED
+
+DEFENSE / RISKSTATE WRITE COLLISION:
+RESOLVED BY SINGLE-WRITER GOVERNANCE
+
+EMERGENCY / EXECUTION COLLISION:
+RESOLVED BY ACTION CLASSIFICATION + VERSION BARRIERS
+
+PROCESS FAILURE / BUSINESS OUTCOME COLLISION:
+RESOLVED
+
+TRACE CONTINUITY:
+PRESERVED
+
+OBJECT PROLIFERATION:
+CONTROLLED
+- Gate records / Restriction context remain substructures where possible
+- Execution Admission / Submission Gate remain processing responsibilities
+  until independent identity is proven necessary
+
+CURRENT_DESIGN_STATUS:
+NOT_ADOPTED
+
+REFERENCE_REVIEW_STATUS:
+CHECKPOINT_READY
+
+NEXT_REFERENCE_TARGET:
+OPEN_ORDER_RUNTIME_LIFECYCLE
+RETRY_IDEMPOTENCY_RECONCILIATION
+~~~
+
+### Remaining Known Limitations
+
+This checkpoint intentionally leaves unresolved:
+
+~~~text
+exact numeric thresholds
+exact TTL values
+exact RiskState transition matrix
+exact Emergency IAM implementation
+exact Recovery approval actors
+exact venue reduce-only semantics
+exact order event model
+exact retry count / backoff
+exact reconciliation algorithm
+exact multi-exchange routing
+~~~
+
+Those omissions are acceptable at this Legacy Reference stage and should not be silently invented as Current Design.
+
