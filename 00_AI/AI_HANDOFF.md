@@ -8,22 +8,72 @@
 
 # 0. CURRENT HANDOFF
 
-```text
+~~~text
 State:
-CLEAR
+ACTIVE
 
 Last Updated:
-2026-09-17
+2026-09-25
 
-No unique conversation state to transfer.
+Conversation Focus:
+Legacy Reference side-thread.
+旧市場理解OS Referenceの05_DECISION Final Checkpoint後を継続し、
+Defense Admission → Defense Evaluation → Risk Governance →
+Emergency / Recovery → Defense→Execution / Barrier C
+まで詳細Reference設計を進めた。
 
-Resume From:
-00_AI/AI_CONTEXT.md
+Important Boundary:
+This does NOT change Project Current Task.
+AI_CONTEXT remains authoritative for Current Project state.
+Current Design adoption has NOT occurred.
+
+DONE:
+- 05_DECISION Reference remains SEMANTICALLY_CLOSED_CANDIDATE.
+- 99_REFERENCE/旧市場理解OS_設計知識リファレンス.md
+  Sections 7.88–7.96 saved.
+- Post-05 Defense / Risk / Entry boundary reconciliation completed as Reference checkpoint.
+- No architecture-breaking conflict found.
+- Major corrections saved:
+  Defense Admission responsibility separation,
+  process/outcome separation,
+  RiskState / Constraint version barriers,
+  Emergency restriction vs Recovery authority separation,
+  Barrier C1/C2,
+  EntryThesis / OrderIntent validity candidates,
+  Submission Gate processing boundary.
+- Emergency scope correction:
+  use smallest safe scope, but expand for shared dependency / unknown blast radius.
+- Risk-reducing action correction:
+  intent alone is insufficient; venue/execution semantics must prevent accidental exposure increase.
+
+UNSAVED:
+None for the checkpoint above.
+
+OPEN:
+- This remains Reference only; Current adoption requires separate review later.
+- Exact thresholds, TTLs, IAM actors, retry/backoff, reconciliation algorithm,
+  order event model and multi-exchange routing intentionally remain unresolved.
+
+NEXT:
+Continue Legacy Reference detailed design from:
+Open Order Runtime Lifecycle
+→ Retry / Idempotency / Reconciliation
+→ Split Execution Lifecycle
+→ Position creation / Position identity
+→ Exit / Protection lifecycle as needed.
+
+READ:
+- 99_REFERENCE/旧市場理解OS_設計知識リファレンス.md
+  especially 7.88–7.96 and prior 7.36–7.40
+- 00_AI/AI_CONTEXT.md
+  only to preserve separation between Current Project state and this Reference side-thread
+
+Last Reference Checkpoint Commit:
+e9f30186dea98ae2ec9301216e5a3e0d29dd3a09
 
 Git Write Permission Reminder:
 REQUIRE CURRENT-CHAT USER AUTHORIZATION
-```
-
+~~~
 ---
 
 # 1. ROLE
