@@ -11724,6 +11724,3312 @@ NOT_ADOPTED
 ~~~
 
 
+
+---
+
+## 7.78 05_DECISION — Final Checkpoint Scope
+
+### Purpose
+
+This checkpoint closes the detailed Reference design of 05_DECISION after the Intermediate Checkpoint in 7.57–7.77.
+
+It consolidates the post-checkpoint contracts:
+
+~~~text
+Individual Thesis Evaluation
+Expected Value Assessment
+Cross-Thesis Comparison
+Decision Candidate Resolution
+Decision Result Finalization / Integrity Gate
+Decision Result
+DecisionCycleProcessingResult
+05 → Defense Handoff
+05_DECISION Integrated Final Review
+~~~
+
+This is still Reference material.
+
+~~~text
+REVIEW_STAGE:
+FINAL_CHECKPOINT
+
+05_REFERENCE_SEMANTIC_STATUS:
+CLOSED_CANDIDATE
+
+CURRENT_DESIGN_STATUS:
+NOT_ADOPTED
+
+PRODUCTION_STATUS:
+NOT_A_PRODUCTION_SPEC
+~~~
+
+### Final 05 Flow
+
+~~~text
+04_KNOWLEDGE_APPLICABILITY
+↓
+ApplicableKnowledgeSet
+
+────────────────────────────────
+05_DECISION
+────────────────────────────────
+
+Decision Context Assembly
+↓
+DecisionContextSnapshot
+
+↓
+Knowledge Integration
+↓
+IntegratedKnowledgeContext
+
+↓
+Trade Thesis Construction
+↓
+TradeThesis 0..N
+
+↓
+Decision Scope Binding
+↓
+DecisionScope 0..N
+
+↓
+Individual Thesis Evaluation
+↓
+PreDecisionThesisAssessment[]
+
+↓
+Expected Value Assessment
+↓
+ExpectedValueAssessment[]
+
+↓
+Cross-Thesis Comparison
+↓
+CrossThesisComparisonResult
+
+↓
+Decision Candidate Resolution
+↓
+DecisionResultCandidate
+
+↓
+Decision Result Finalization / Integrity Gate
+↓
+DecisionFinalizationDecision
+
+↓
+FINALIZE_ALLOWED*
+↓
+DecisionResult
+
+────────────────────────────────
+05_DECISION END
+────────────────────────────────
+
+↓
+Defense Handoff
+↓
+DefenseAdmissionEnvelope
+↓
+DefenseAdmissionDecision
+↓
+Defense Evaluation
+~~~
+
+### Final Cardinality
+
+~~~text
+1 DecisionCycle
+→ 1 DecisionContextSnapshot
+
+1 DecisionContextSnapshot
+→ 1 IntegratedKnowledgeContext candidate
+
+1 IntegratedKnowledgeContext
+→ 0..N TradeThesis
+
+1 DecisionCycle
+→ 0..N DecisionScope
+
+1 DecisionScope
+→ 0..N TradeThesis
+
+1 TradeThesis
+→ 0..1 PreDecisionThesisAssessment per evaluation attempt/version
+
+1 eligible TradeThesis
+→ 0..1 ExpectedValueAssessment per evaluation attempt/version
+
+1 DecisionScope
+→ 0..1 CrossThesisComparisonResult per comparison attempt/version
+
+1 DecisionScope
+→ 0..1 Canonical DecisionResult
+
+1 DecisionCycle
+→ 0..N Canonical DecisionResult
+~~~
+
+### Supersession Rule
+
+This Final Checkpoint does not delete the Intermediate Checkpoint.
+
+Where a Final Correction below conflicts with 7.57–7.77, the Final Checkpoint is the later Reference interpretation.
+
+The Intermediate Checkpoint remains historical review evidence.
+
+---
+
+## 7.79 Individual Thesis Evaluation / PreDecisionThesisAssessment — Final Checkpoint
+
+### Formal Responsibility
+
+Individual Thesis Evaluation evaluates one TradeThesis in isolation before economic EV comparison.
+
+Question:
+
+> Is this exact Trade Thesis semantically, evidentially and contextually coherent enough to enter Expected Value Assessment?
+
+It does NOT decide whether the Thesis is profitable, better than another Thesis, or trade-worthy.
+
+### Naming Boundary
+
+~~~text
+PreDecisionThesisAssessment
+= pre-decision thesis health/readiness
+
+TradeThesisEvaluation
+= post-trade evaluation of what actually happened
+~~~
+
+Do not reuse the same object name.
+
+### Inputs
+
+~~~text
+TradeThesis exact version
+DecisionScope
+DecisionContextSnapshot
+IntegratedKnowledgeContext
+TradeThesisMember projections
+ApplicabilityAssessment refs
+Evidence / Independence context
+KnowledgeLifecycle context
+FailureBoundary context
+Constraint context
+Runtime Quality / Freshness
+Optional advisory AI review
+~~~
+
+### Evaluation Flow
+
+~~~text
+ITE0 Input Identity / Integrity
+ITE1 Scope / Context Binding
+ITE2 Thesis Construction Integrity
+ITE3 Expected Effect Coherence
+ITE4 Direction / Horizon Coherence
+ITE5 Mechanism Coherence
+ITE6 Thesis Member Role Integrity
+ITE7 Evidence Independence
+ITE8 Dependency / Common Cause / Overlap
+ITE9 Applicability Quality
+ITE10 Contradiction Burden
+ITE11 Required / Weakening Condition Health
+ITE12 Invalidation Proximity
+ITE13 Failure Boundary Context
+ITE14 Constraint Context
+ITE15 Runtime Quality / Freshness
+ITE16 Uncertainty Structure
+ITE17 EV Input Readiness
+ITE18 Assessment Resolution
+~~~
+
+### Role Integrity
+
+The evaluator checks, but does not rewrite:
+
+~~~text
+PRIMARY
+SUPPORTING
+CONDITIONAL
+CONTRADICTING
+~~~
+
+Examples:
+
+~~~text
+PRIMARY
+= central to the Thesis
+
+SUPPORTING
+= additional compatible support
+  ≠ extra vote
+
+CONDITIONAL
+= activation / regime / weakening / amplification context
+
+CONTRADICTING
+= material opposing knowledge
+  must remain visible
+~~~
+
+Misassignment returns an assessment issue rather than silently changing the TradeThesis.
+
+### Evidence Independence
+
+Within-Thesis independence candidates:
+
+~~~text
+STRONGLY_INDEPENDENT
+MOSTLY_INDEPENDENT
+PARTIALLY_DEPENDENT
+HIGHLY_DEPENDENT
+UNKNOWN
+~~~
+
+Keep dependency structure.
+
+Do not reduce to one unexplained independence score.
+
+~~~text
+3 Knowledge members
+sharing one event
+≠ 3 independent reasons
+~~~
+
+### Applicability Quality
+
+Do not count Applicable members.
+
+Preserve the role of each member.
+
+~~~text
+PRIMARY PARTIALLY_APPLICABLE
+may be materially more important
+than
+minor SUPPORTING PARTIALLY_APPLICABLE
+~~~
+
+### Contradiction Burden
+
+Evaluate contradiction dimensions such as:
+
+~~~text
+EXPECTED_EFFECT
+DIRECTION
+MECHANISM
+HORIZON
+REQUIRED_CONDITION
+MAGNITUDE
+PERSISTENCE
+SEQUENCE
+APPLICABILITY_CONTEXT
+~~~
+
+Contradiction count alone is not a rejection rule.
+
+### Conditions
+
+Required-condition candidates:
+
+~~~text
+SATISFIED
+PARTIALLY_SATISFIED
+NOT_SATISFIED
+UNKNOWN
+NOT_OBSERVABLE
+~~~
+
+A required premise not holding is a semantic result, not a system failure.
+
+### Invalidation Proximity
+
+Candidate:
+
+~~~text
+FAR
+MODERATE_DISTANCE
+NEAR
+TRIGGERED
+UNKNOWN
+~~~
+
+~~~text
+Invalidation
+≠ Stop Loss
+
+Invalidation Triggered
+≠ System Failure
+~~~
+
+If already triggered, the Thesis normally does not proceed to current EV evaluation.
+
+### Failure Boundary
+
+Preserve:
+
+~~~text
+SAFE_REGION
+WEAK_REGION
+UNSAFE_REGION
+UNKNOWN_REGION
+~~~
+
+If an UNSAFE boundary or an effective hard Constraint appears in a Thesis that passed 04 as usable, treat it as an upstream consistency issue.
+
+Do not silently rewrite Applicability.
+
+### EV Input Readiness
+
+Candidate:
+
+~~~text
+READY
+READY_WITH_LIMITATIONS
+INCOMPLETE
+INSUFFICIENT
+NOT_APPLICABLE
+~~~
+
+This checks whether EV can be responsibly assessed.
+
+It does not calculate EV.
+
+### Process Status
+
+~~~text
+COMPLETED
+COMPLETED_WITH_LIMITATIONS
+INCOMPLETE
+STALE
+INCONSISTENT
+ASSESSMENT_FAILED
+~~~
+
+### Semantic Readiness
+
+~~~text
+READY_FOR_EV
+READY_FOR_EV_WITH_LIMITATIONS
+NOT_READY_FOR_EV
+NOT_EVALUABLE
+~~~
+
+Important:
+
+~~~text
+READY_FOR_EV
+≠ Trade-worthy
+
+NOT_READY_FOR_EV
+≠ NO_TRADE
+
+NOT_EVALUABLE
+≠ NO_TRADE
+
+STALE
+≠ NO_TRADE
+
+ASSESSMENT_FAILED
+≠ NO_TRADE
+~~~
+
+### PreDecisionThesisAssessment Minimum Concept
+
+~~~text
+Identity
+- assessment id/version
+- exact TradeThesis ref/version/digest
+- DecisionScope ref
+- DecisionContext ref
+- assessment logic/policy version
+- evaluated_at / trace
+
+Integrity
+- scope binding
+- construction integrity
+- trace integrity
+
+Effect / Horizon / Mechanism
+- effect coherence
+- direction coherence
+- horizon coherence
+- mechanism assessment
+
+Member Roles
+- PRIMARY integrity
+- SUPPORTING integrity
+- CONDITIONAL integrity
+- CONTRADICTING integrity
+
+Evidence / Dependency
+- independence profile
+- shared evidence
+- dependency
+- common cause
+- overlap
+
+Applicability / Conflict
+- applicability context
+- critical partial members
+- contradiction burden
+- counter-mechanism context
+
+Conditions / Invalidation
+- required condition states
+- weakening condition states
+- premise state
+- invalidation proximity
+
+Boundary / Constraint
+- failure boundary context
+- constraint consistency
+
+Runtime
+- quality
+- freshness
+- thesis validity
+
+EV Readiness
+- available / missing / insufficient EV inputs
+
+Uncertainty
+- uncertainty axes
+- unresolved questions
+- limitations
+
+Resolution
+- process status
+- semantic readiness
+- reason codes
+~~~
+
+### Feedback
+
+Unexpected contradiction, unknown dependency, repeated construction defects or missing EV research may create Findings.
+
+~~~text
+Finding
+↓
+ResearchCandidate
+↓
+03_RESEARCH
+~~~
+
+Do not directly mutate Knowledge.
+
+---
+
+## 7.80 Expected Value Assessment — Final Checkpoint
+
+### Formal Responsibility
+
+Expected Value Assessment owns the economic expectation of one eligible Trade Thesis.
+
+It integrates, without collapsing their provenance:
+
+~~~text
+Expected Return
+Expected Loss
+Probability / Frequency
+Gain-Loss Asymmetry
+Tail Risk
+Invalidation Risk
+Estimated Fee
+Estimated Spread
+Estimated Slippage
+Estimated Funding / Financing
+Other material expected costs
+Uncertainty
+~~~
+
+### Admission
+
+Normally only:
+
+~~~text
+READY_FOR_EV
+READY_FOR_EV_WITH_LIMITATIONS
+~~~
+
+enter EV Assessment.
+
+Do not produce artificial EV for:
+
+~~~text
+NOT_READY_FOR_EV
+NOT_EVALUABLE
+~~~
+
+### Position Size Boundary
+
+05 does not own exact Position Size.
+
+Therefore canonical EV is evaluated on an explicit normalized economic basis such as:
+
+~~~text
+RETURN_RATE
+BPS_PER_UNIT_NOTIONAL
+RETURN_PER_REFERENCE_NOTIONAL
+~~~
+
+Do not make canonical 05 EV a portfolio currency profit amount whose meaning depends on an unknown final size.
+
+### EV Basis
+
+Conceptually preserve:
+
+~~~text
+basis_type
+currency when relevant
+reference_notional when relevant
+return_unit
+evaluation_horizon
+cost_basis
+normalization_logic_version
+~~~
+
+### Assessment Flow
+
+~~~text
+EVA0 Input Identity / Admission
+EVA1 EV Basis / Unit Normalization
+EVA2 Outcome Scenario Structure
+EVA3 Probability / Frequency Context
+EVA4 Expected Return
+EVA5 Expected Loss
+EVA6 Gain-Loss Asymmetry
+EVA7 Tail Risk
+EVA8 Invalidation Risk
+EVA9 Estimated Costs
+EVA10 Dependency / Double-Count Control
+EVA11 Uncertainty
+EVA12 Gross EV Synthesis
+EVA13 Cost-Adjusted EV Synthesis
+EVA14 Sensitivity / Robustness
+EVA15 Comparison Readiness
+EVA16 Final Integrity
+~~~
+
+### Probability / Frequency
+
+Keep separate:
+
+~~~text
+Historical Frequency
+≠ True Probability
+~~~
+
+Source candidates:
+
+~~~text
+EMPIRICAL_FREQUENCY
+CONDITIONAL_FREQUENCY
+CALIBRATED_MODEL_PROBABILITY
+SCENARIO_WEIGHT
+UNKNOWN
+~~~
+
+For quantitative probability, preserve where available:
+
+~~~text
+value/range
+condition scope
+sample count
+unique event count
+independent cluster count
+evidence channel
+calibration ref
+coverage
+uncertainty
+limitations
+~~~
+
+AI opinion alone is not canonical Probability.
+
+### Expected Return
+
+Expected Return is not Best Case.
+
+Preserve available distribution context:
+
+~~~text
+mean
+median
+quantiles
+range
+distribution ref
+horizon
+regime scope
+independent event count
+uncertainty
+~~~
+
+### Expected Loss
+
+~~~text
+Expected Loss
+≠ Stop Loss
+~~~
+
+Expected Loss is a research/economic adverse outcome profile.
+
+Stop Loss is downstream risk/execution control.
+
+### Gain-Loss Asymmetry
+
+Candidate context:
+
+~~~text
+expected gain magnitude
+expected loss magnitude
+gain-loss ratio
+positive vs negative tail
+distribution skew
+~~~
+
+Neither win rate nor gain/loss ratio alone defines EV.
+
+### Tail Risk
+
+Tail Risk is separate from ordinary expected loss.
+
+Where available:
+
+~~~text
+tail probability context
+tail loss magnitude
+expected shortfall
+stress result refs
+failure boundary refs
+historical tail cases
+live tail evidence
+uncertainty
+~~~
+
+Unknown tail risk must not become zero.
+
+### Invalidation Risk
+
+Invalidation Risk is the risk that the Thesis premise ceases to be valid before the expected horizon is complete.
+
+It is distinct from price-loss probability.
+
+Preserve where available:
+
+~~~text
+invalidation proximity
+historical invalidation frequency
+time-to-invalidation context
+counter-mechanism strength
+uncertainty
+~~~
+
+### Estimated Costs
+
+Decision-time cost components may include:
+
+~~~text
+Estimated Fee
+Estimated Spread
+Estimated Slippage
+Estimated Funding / Financing
+Borrow / Holding / Conversion Cost when applicable
+~~~
+
+~~~text
+Estimated Cost
+≠ Actual Execution Cost
+~~~
+
+Cost component metadata should identify whether a model already includes:
+
+~~~text
+spread
+fee
+market impact
+funding
+other embedded cost
+~~~
+
+### EV Validity Envelope
+
+Formal Candidate:
+
+> EV Validity Envelope = the market/execution assumption range within which this ExpectedValueAssessment remains economically interpretable.
+
+May include:
+
+~~~text
+reference notional / size band
+spread range
+slippage range
+funding range
+venue assumption
+liquidity assumption
+execution style assumption
+cost model version
+~~~
+
+Defense / Execution may be stricter.
+
+They may not expand the economic envelope without new EV assessment.
+
+### Double-Count Control
+
+Maintain a component overlap map.
+
+Examples:
+
+~~~text
+loss profile already net of fees
+→ do not subtract fee again
+
+all-in slippage already includes spread
+→ do not add spread again
+
+tail events already embedded in loss distribution
+→ no second fixed tail penalty
+
+invalidation cases already embedded in outcome distribution
+→ no second fixed invalidation penalty
+~~~
+
+Overlap states may include:
+
+~~~text
+INDEPENDENT_COMPONENTS
+PARTIAL_OVERLAP
+FULLY_EMBEDDED
+UNKNOWN_OVERLAP
+~~~
+
+UNKNOWN overlap increases uncertainty rather than encouraging arbitrary addition.
+
+### EV Synthesis
+
+Where scenario probability/weight semantics and outcome magnitudes are valid:
+
+~~~text
+Gross EV
+=
+Σ(
+  Scenario Probability/Weight
+  ×
+  Scenario Gross Outcome
+)
+~~~
+
+Cost-adjusted concept:
+
+~~~text
+Cost-Adjusted EV
+=
+Gross EV
+-
+Non-embedded Expected Costs
+~~~
+
+Do not calculate a false precise number if the required semantics are unsupported.
+
+### Tail / Invalidation Integration
+
+Use one of:
+
+~~~text
+A. explicitly modeled scenario
+B. already embedded in distribution
+C. unquantified uncertainty / limitation
+~~~
+
+Do not apply universal fixed penalties.
+
+### Uncertainty
+
+Keep dimensions such as:
+
+~~~text
+Return
+Loss
+Probability
+Tail
+Invalidation
+Cost
+Slippage
+Funding
+Model
+Regime Transfer
+Sample / Independence
+~~~
+
+Point estimate must not hide material range/uncertainty.
+
+### Quantification Status
+
+~~~text
+QUANTIFIED
+QUANTIFIED_WITH_LIMITATIONS
+PARTIALLY_QUANTIFIED
+NOT_QUANTIFIABLE
+NOT_ASSESSED
+~~~
+
+~~~text
+NOT_QUANTIFIABLE
+≠ Negative EV
+~~~
+
+### EV Sign State
+
+Candidate:
+
+~~~text
+POSITIVE
+NEGATIVE
+NEAR_ZERO
+CROSSES_ZERO
+UNKNOWN
+NOT_QUANTIFIABLE
+~~~
+
+### Robustness Context
+
+Candidate:
+
+~~~text
+ROBUSTLY_POSITIVE
+POSITIVE_BUT_FRAGILE
+CROSSES_ZERO_UNDER_PLAUSIBLE_ASSUMPTIONS
+ROBUSTLY_NEGATIVE
+INDETERMINATE
+~~~
+
+### Economic Viability Context
+
+Candidate:
+
+~~~text
+FAVORABLE
+FAVORABLE_BUT_FRAGILE
+MARGINAL
+UNFAVORABLE
+INDETERMINATE
+NOT_ASSESSABLE
+~~~
+
+This is economic context, not Decision Outcome.
+
+### Comparison Readiness
+
+~~~text
+READY_FOR_COMPARISON
+READY_FOR_COMPARISON_WITH_LIMITATIONS
+NOT_READY_FOR_COMPARISON
+NOT_ASSESSABLE
+~~~
+
+A negative EV assessment can still be READY_FOR_COMPARISON.
+
+### Core Invariants
+
+~~~text
+Win Rate
+≠ EV
+
+Evidence Strength
+≠ EV
+
+Applicability
+≠ EV
+
+Causal Strength
+≠ EV
+
+Unknown
+≠ zero
+
+Positive EV
+≠ TAKE_RISK
+
+Negative EV
+≠ NO_TRADE automatically
+
+EV
+≠ Position Size
+
+EV
+≠ Leverage
+
+EV
+≠ BUY/SELL Order
+~~~
+
+---
+
+## 7.81 Cross-Thesis Comparison — Final Checkpoint
+
+### Formal Responsibility
+
+Cross-Thesis Comparison compares eligible TradeTheses inside one exact DecisionScope.
+
+It compares more than EV:
+
+~~~text
+Expected Value
+Expected Horizon
+Evidence Independence
+Mechanism Independence
+Applicability Quality
+Contradiction
+Invalidation Risk
+Failure Boundary / Constraint Context
+Uncertainty
+Overlap / Redundancy
+Mutual Exclusivity / Coexistence
+Context Compatibility
+~~~
+
+It does not produce the canonical trade Decision.
+
+### Final Scope Correction
+
+For v1 direct Cross-Thesis Comparison:
+
+~~~text
+all compared TradeTheses
+must bind to the exact same
+DecisionContextSnapshot
+and decision_cycle_id
+~~~
+
+This supersedes the looser Intermediate Checkpoint phrase:
+
+~~~text
+same / compatible Decision Context
+~~~
+
+Different DecisionContextSnapshot values require a different Decision Scope / later meta-comparison.
+
+### Comparison Flow
+
+~~~text
+CTC0 Input Integrity
+CTC1 Scope Membership
+CTC2 Thesis / Assessment Alignment
+CTC3 EV Basis Compatibility
+CTC4 Economic Value Comparison
+CTC5 Evidence Independence
+CTC6 Mechanism Independence
+CTC7 Applicability Quality
+CTC8 Contradiction
+CTC9 Invalidation Risk
+CTC10 Boundary / Constraint
+CTC11 Uncertainty
+CTC12 Overlap / Redundancy
+CTC13 Mutual Exclusivity / Coexistence
+CTC14 Context Compatibility
+CTC15 Pairwise Comparison
+CTC16 Scope-level Structure
+CTC17 Comparison Frontier / Trade-off
+CTC18 Comparison Integrity
+~~~
+
+### EV Basis Compatibility
+
+Candidate:
+
+~~~text
+DIRECTLY_COMPARABLE
+NORMALIZABLE
+COMPARABLE_WITH_LIMITATIONS
+NOT_COMPARABLE
+UNKNOWN
+~~~
+
+Legitimate unit normalization is allowed.
+
+Do not time-scale market return linearly merely to force comparability.
+
+### Evidence Independence
+
+Between-Thesis candidates:
+
+~~~text
+INDEPENDENT
+MOSTLY_INDEPENDENT
+PARTIALLY_SHARED
+HIGHLY_SHARED
+SAME_EVIDENCE_BASE
+UNKNOWN
+~~~
+
+~~~text
+same direction
+≠ independent confirmation
+~~~
+
+### Mechanism Independence
+
+Candidate:
+
+~~~text
+INDEPENDENT_MECHANISMS
+DISTINCT_BUT_LINKED
+PARTIALLY_OVERLAPPING
+SAME_CORE_MECHANISM
+UNKNOWN
+~~~
+
+Keep separate from Evidence Independence.
+
+### Contradiction
+
+Do not compare contradiction counts.
+
+Preserve which dimension is contradicted and whether the contradictory evidence is independent/material.
+
+### Invalidation
+
+Compare Thesis premise stability, not stop-loss distance.
+
+### Uncertainty
+
+Do not average all uncertainty dimensions into one unexplained value.
+
+Material unquantified risk stays explicit.
+
+### Overlap / Redundancy
+
+Compare:
+
+~~~text
+Knowledge-member overlap
+Evidence overlap
+Mechanism overlap
+Effect overlap
+Condition overlap
+Market-event overlap
+Common-cause overlap
+~~~
+
+Candidate overlap state:
+
+~~~text
+LOW
+MODERATE
+HIGH
+NEAR_DUPLICATE
+UNKNOWN
+~~~
+
+Do not merge or delete TradeThesis objects during runtime comparison.
+
+### Mutual Exclusivity / Coexistence
+
+Candidate:
+
+~~~text
+COEXISTENT
+COMPATIBLE_BUT_COMPETING
+PARTIALLY_EXCLUSIVE
+MUTUALLY_EXCLUSIVE
+CONDITIONALLY_EXCLUSIVE
+UNKNOWN
+~~~
+
+Opposing expected direction alone is not enough to automatically declare mutual exclusivity because sequence/horizon may matter.
+
+### Pairwise Comparison
+
+Candidate relation:
+
+~~~text
+A_DOMINATES_ON_COMPARISON_CRITERIA
+B_DOMINATES_ON_COMPARISON_CRITERIA
+A_PREFERRED_WITH_LIMITATIONS
+B_PREFERRED_WITH_LIMITATIONS
+TRADEOFF
+ROUGHLY_EQUIVALENT
+NO_CLEAR_PREFERENCE
+NOT_COMPARABLE
+~~~
+
+DOMINATES_ON_COMPARISON_CRITERIA is not a Trade Decision.
+
+### Comparison Frontier
+
+Formal Candidate:
+
+> Comparison Frontier = TradeTheses in the DecisionScope that are not clearly dominated on the active comparison criteria.
+
+~~~text
+Comparison Frontier
+≠ Selected Thesis Set
+~~~
+
+### Scope-level Comparison Outcome Candidate
+
+~~~text
+CLEAR_COMPARISON_PREFERENCE
+MULTIPLE_NON_DOMINATED_THESES
+TRADEOFF
+NO_CLEAR_PREFERENCE
+ALL_ECONOMICALLY_UNFAVORABLE
+ALL_COMPARISON_FRAGILE
+CONDITIONAL_BRANCH
+SINGLE_THESIS_SCOPE
+NO_COMPARABLE_THESIS
+~~~
+
+### Process Status
+
+~~~text
+COMPLETED
+COMPLETED_WITH_LIMITATIONS
+PARTIAL
+INCOMPLETE
+STALE
+INCONSISTENT
+COMPARISON_FAILED
+~~~
+
+### Finalization Readiness
+
+~~~text
+READY_FOR_DECISION_FINALIZATION
+READY_FOR_DECISION_FINALIZATION_WITH_LIMITATIONS
+NOT_READY_FOR_DECISION_FINALIZATION
+NOT_COMPARABLE
+~~~
+
+A valid NO_CLEAR_PREFERENCE can still be READY_FOR_DECISION_FINALIZATION.
+
+### Core Invariants
+
+~~~text
+Highest EV
+≠ automatic winner
+
+Thesis count
+≠ direction vote
+
+Knowledge count
+≠ direction vote
+
+Evidence Independence
+≠ Mechanism Independence
+
+Overlap
+≠ automatic merge
+
+Dominated
+≠ false
+
+Comparison Frontier
+≠ Final Selection
+
+All Negative EV
+≠ least-negative Thesis should trade
+
+NO_CLEAR_PREFERENCE
+≠ Process Failure
+
+NO_COMPARABLE_THESIS
+≠ NO_TRADE
+~~~
+
+---
+
+## 7.82 Decision Candidate Resolution — Final Checkpoint
+
+### Why This Contract Is Required
+
+Final Review found a missing formal boundary:
+
+~~~text
+CrossThesisComparisonResult
+↓
+?
+↓
+DecisionResultCandidate
+~~~
+
+Without a resolver, TAKE_LONG_RISK / TAKE_SHORT_RISK / NO_TRADE could appear without a clearly owned selection process.
+
+### Formal Definition
+
+> Decision Candidate Resolution = the 05 internal responsibility that uses a valid CrossThesisComparisonResult and its exact Thesis / PreDecision / EV inputs under a versioned DecisionResolutionPolicy to construct a candidate Risk-taking outcome, Primary Selected Thesis, Selected Thesis Set, Non-selected Thesis Set and structured reasons, without yet creating a Canonical DecisionResult.
+
+### Inputs
+
+~~~text
+DecisionScope
+TradeThesis[]
+PreDecisionThesisAssessment[]
+ExpectedValueAssessment[]
+CrossThesisComparisonResult
+DecisionResolutionPolicy
+DecisionPolicyBundleVersion
+~~~
+
+### Resolution Flow
+
+~~~text
+DCR0 Input Integrity
+DCR1 Scope Integrity
+DCR2 Comparison Readiness
+DCR3 Economic Eligibility
+DCR4 Comparison Frontier Review
+DCR5 Direction Grouping
+DCR6 Conflict / Opposing Thesis Review
+DCR7 Selected Thesis Eligibility
+DCR8 Primary Thesis Selection
+DCR9 Non-selection Reason Construction
+DCR10 Candidate Outcome Resolution
+DCR11 Reason / Limitation Assembly
+DCR12 Candidate Integrity
+~~~
+
+### Candidate Outcome
+
+~~~text
+TAKE_LONG_RISK
+TAKE_SHORT_RISK
+NO_TRADE
+~~~
+
+At this stage these are candidate outcomes only.
+
+### Economic Eligibility
+
+A Thesis that is merely better than another Thesis is not automatically economically eligible.
+
+Example:
+
+~~~text
+T-A EV = -4 bps
+T-B EV = -20 bps
+
+T-A is relatively better
+but
+relative preference
+≠ positive risk-taking rationale
+~~~
+
+### Selection
+
+Risk-taking candidates may contain:
+
+~~~text
+primary_selected_thesis_ref
+selected_thesis_refs[]
+non_selected_thesis_refs[]
+non_selection_records[]
+~~~
+
+v1 rules:
+
+~~~text
+TAKE_LONG_RISK
+→ selected risk Thesis directions compatible with UPWARD
+
+TAKE_SHORT_RISK
+→ selected risk Thesis directions compatible with DOWNWARD
+
+cross-direction Selected Thesis Set
+→ prohibited in v1
+
+multiple same-direction selected Theses
+→ allowed when policy supports it
+
+selected count
+≠ confidence / strength
+~~~
+
+### Primary Selection
+
+One Primary Thesis is required for a risk-taking candidate.
+
+It is the central Decision rationale.
+
+~~~text
+Primary
+≠ highest EV automatically
+~~~
+
+### Non-selection
+
+A non-selected Thesis is not necessarily false or weak.
+
+Frontier Thesis non-selection should preserve an explicit reason.
+
+Especially when an opposing, non-dominated Thesis exists.
+
+### Candidate NO_TRADE
+
+Candidate NO_TRADE is valid only after normal Decision Evaluation.
+
+Examples:
+
+~~~text
+ALL_ECONOMICALLY_UNFAVORABLE
+NO_CLEAR_PREFERENCE
+OPPOSING_ROBUST_THESES
+EV_TOO_FRAGILE
+MATERIAL_UNCERTAINTY
+MATERIAL_UNQUANTIFIED_TAIL_RISK
+INSUFFICIENT_ECONOMIC_ADVANTAGE
+~~~
+
+### Candidate Resolution Status
+
+~~~text
+RESOLVED
+RESOLVED_WITH_LIMITATIONS
+NO_CANONICAL_CANDIDATE
+INCOMPLETE
+INCONSISTENT
+RESOLUTION_FAILED
+~~~
+
+~~~text
+NO_CANONICAL_CANDIDATE
+≠ NO_TRADE
+~~~
+
+### Prohibited Shortcuts
+
+~~~text
+highest EV
+→ automatic selected Thesis
+
+most Theses
+→ direction vote
+
+most Knowledge
+→ direction vote
+
+lowest uncertainty
+→ automatic selection
+
+Comparison Frontier
+→ automatic selected set
+
+Process Failure
+→ NO_TRADE
+~~~
+
+### DecisionResultCandidate
+
+Transient object candidate:
+
+~~~text
+Identity
+- candidate id/version/digest
+- decision cycle/scope/context
+- comparison ref
+- policy version
+- created_at / trace
+
+Candidate Outcome
+- candidate outcome
+- candidate risk direction
+
+Selection
+- primary selected Thesis
+- selected Thesis refs
+- non-selected Thesis refs
+- non-selection records
+
+Reasons
+- structured reason records
+- primary reason codes
+
+Economic / Conflict Context
+- EV refs
+- comparison frontier
+- conflict refs
+- invalidation context
+- uncertainty
+- limitations
+~~~
+
+DecisionResultCandidate has no Defense or Execution authority.
+
+---
+
+## 7.83 Decision Result Finalization / Integrity Gate — Final Checkpoint
+
+### Formal Responsibility
+
+Finalization answers:
+
+> Can this exact DecisionResultCandidate still be frozen now as a Canonical DecisionResult?
+
+It does not decide which direction is better.
+
+### Boundary
+
+~~~text
+Decision Candidate Resolution
+↓
+DecisionResultCandidate
+↓
+Decision Result Finalization / Integrity Gate
+↓
+DecisionFinalizationDecision
+↓
+FINALIZE_ALLOWED*
+↓
+DecisionResult Writer
+~~~
+
+### Finalization Flow
+
+~~~text
+DRF0 Candidate Identity
+DRF1 Input Chain Integrity
+DRF2 Scope Integrity
+DRF3 Thesis Selection Integrity
+DRF4 PreDecision Assessment Integrity
+DRF5 EV Integrity
+DRF6 Comparison Integrity
+DRF7 Outcome / Direction Consistency
+DRF8 Multi-Thesis Selection Integrity
+DRF9 Contradiction / Frontier Integrity
+DRF10 Decision Context Freshness
+DRF11 Thesis Validity / Expiry
+DRF12 EV Validity Envelope
+DRF13 Runtime Data / Market Freshness
+DRF14 Post-Snapshot Material Event
+DRF15 Uncertainty / Limitation Preservation
+DRF16 Policy / Logic Version Integrity
+DRF17 Trace Completeness
+DRF18 Authority Boundary
+DRF19 Concurrency / TOCTOU
+DRF20 Final Resolution
+~~~
+
+### Exact Chain
+
+~~~text
+DecisionResultCandidate
+→ CrossThesisComparisonResult
+→ ExpectedValueAssessment
+→ PreDecisionThesisAssessment
+→ TradeThesis
+→ DecisionScope
+→ DecisionContextSnapshot
+~~~
+
+All refs/versions must resolve exactly.
+
+### Digest Chain
+
+Candidate:
+
+~~~text
+DecisionContext digest
+IntegratedKnowledgeContext digest
+TradeThesis digest
+PreDecisionThesisAssessment digest
+ExpectedValueAssessment digest
+CrossThesisComparisonResult digest
+DecisionResultCandidate digest
+~~~
+
+Digest match means unchanged, not correct.
+
+### Scope
+
+One Canonical DecisionResult belongs to one DecisionScope.
+
+Do not mix multiple scopes into one DecisionResult.
+
+### Candidate Integrity
+
+Finalization validates that:
+
+~~~text
+Selected Thesis belongs to Scope
+Selected Thesis was evaluated
+EV refs match selected Thesis
+Comparison included the Thesis
+Outcome direction matches selected Thesis directions
+Frontier opposition was not silently deleted
+Non-selection reasons are present where required
+limitations are preserved
+~~~
+
+Finalization does not pick a replacement Thesis.
+
+### Freshness
+
+Thresholds are policy/horizon-specific.
+
+Candidate states may include:
+
+~~~text
+FRESH
+WITHIN_TOLERANCE
+NEAR_EXPIRY
+STALE
+UNKNOWN
+~~~
+
+~~~text
+STALE
+≠ NO_TRADE
+~~~
+
+### Material Change Barrier
+
+Finalization checks the interval:
+
+~~~text
+DecisionContextSnapshot market watermark
+→ Finalization market watermark
+~~~
+
+Decision-material change requires a refreshed Decision Cycle rather than silently finalizing an old candidate.
+
+### EV Validity Envelope Recheck
+
+If a currently observable economic assumption is already outside the EV envelope:
+
+~~~text
+→ EV_REASSESSMENT_REQUIRED
+~~~
+
+Do not recalculate EV inside Finalization.
+
+### Policy Bundle Integrity
+
+A DecisionCycle should bind one:
+
+~~~text
+DecisionPolicyBundleVersion
+~~~
+
+and should not silently mix hot-reloaded policy versions inside the same cycle.
+
+### Concurrency / TOCTOU
+
+Finalization should bind:
+
+~~~text
+candidate digest
+context digest
+comparison digest
+market watermark
+policy bundle version
+~~~
+
+The Canonical Writer must not use a FinalizationDecision after these bindings have materially changed.
+
+### Finalization Outcomes
+
+~~~text
+FINALIZE_ALLOWED
+FINALIZE_ALLOWED_WITH_LIMITATIONS
+REFRESH_CONTEXT_REQUIRED
+THESIS_REASSESSMENT_REQUIRED
+EV_REASSESSMENT_REQUIRED
+RECOMPARE_REQUIRED
+CANDIDATE_CORRECTION_REQUIRED
+FINALIZATION_BLOCKED
+FINALIZATION_FAILED
+~~~
+
+Only FINALIZE_ALLOWED* may create a Canonical DecisionResult.
+
+### Mandatory Route Candidate
+
+~~~text
+FINALIZE_ALLOWED*
+→ DECISION_RESULT_WRITER
+
+REFRESH_CONTEXT_REQUIRED
+→ NEW_DECISION_CYCLE
+
+THESIS_REASSESSMENT_REQUIRED
+→ PREDECISION_ASSESSMENT
+
+EV_REASSESSMENT_REQUIRED
+→ EXPECTED_VALUE_ASSESSMENT
+
+RECOMPARE_REQUIRED
+→ CROSS_THESIS_COMPARISON
+
+CANDIDATE_CORRECTION_REQUIRED
+→ DECISION_CANDIDATE_RESOLUTION
+
+FINALIZATION_BLOCKED
+→ MANUAL / SYSTEM REVIEW
+
+FINALIZATION_FAILED
+→ SYSTEM_RECOVERY
+~~~
+
+### Finalization vs Defense
+
+~~~text
+Finalization
+= Is the Decision still logically/currently valid?
+
+Defense
+= Is taking this Risk safe now?
+~~~
+
+No overlap in authority.
+
+---
+
+## 7.84 Decision Result — Final Checkpoint
+
+### Formal Definition
+
+> DecisionResult = the immutable canonical 05_DECISION output for one DecisionScope, created only after normal Thesis evaluation/comparison and a successful Finalization Gate, recording whether the system currently wants Long-direction Risk, Short-direction Risk, or no new Risk, together with the exact selected/non-selected Thesis, economic context, conflict, invalidation, uncertainty, reasons, validity, policy/version and trace.
+
+### Canonical v1 Outcomes
+
+~~~text
+TAKE_LONG_RISK
+TAKE_SHORT_RISK
+NO_TRADE
+~~~
+
+### Legacy Semantic Refinement
+
+~~~text
+Legacy BUY
+→ TAKE_LONG_RISK
+
+Legacy SELL
+→ TAKE_SHORT_RISK
+
+Legacy NO_TRADE
+→ NO_TRADE
+~~~
+
+Reason:
+
+~~~text
+TAKE_LONG_RISK
+≠ BUY Order
+
+TAKE_SHORT_RISK
+≠ SELL Order
+~~~
+
+05 expresses Risk-taking intent, not Exchange action.
+
+### TAKE_LONG_RISK
+
+Means:
+
+> Under the finalized DecisionScope and policy, Long-direction Risk-taking has sufficient current decision rationale.
+
+Does NOT mean:
+
+~~~text
+BUY now
+market order
+full position
+max leverage
+Defense approved
+Execution permitted
+~~~
+
+### TAKE_SHORT_RISK
+
+Same boundary for Short-direction Risk.
+
+### NO_TRADE
+
+Formal meaning:
+
+> Valid TradeThesis material was normally evaluated through the required Decision process, and the finalized 05 judgment is that current risk-taking rationality is insufficient.
+
+~~~text
+NO_TRADE
+≠ Error
+≠ Failure
+≠ Stale
+≠ No Thesis
+≠ No Scope
+≠ Defense BLOCK
+~~~
+
+### Correct NO_TRADE Path
+
+~~~text
+valid evaluated Thesis exists
+↓
+Individual Evaluation completed
+↓
+EV Assessment completed
+↓
+Comparison / single-Thesis evaluation completed
+↓
+Candidate Resolution selects no new Risk
+↓
+Finalization passes
+↓
+Canonical NO_TRADE
+~~~
+
+### Decision Selection Fields
+
+~~~text
+evaluated_thesis_refs[]
+
+primary_selected_thesis_ref
+
+selected_thesis_refs[]
+
+non_selected_thesis_refs[]
+
+comparison_excluded_thesis_refs[]
+~~~
+
+Semantics:
+
+~~~text
+evaluated
+= evaluated in the Decision process
+
+selected
+= directly adopted as rationale for taking Risk
+
+non-selected
+= evaluated but not directly adopted
+
+comparison-excluded
+= did not become a normal final comparison input
+~~~
+
+### Risk-taking Selection Rules
+
+For TAKE_LONG_RISK / TAKE_SHORT_RISK:
+
+~~~text
+primary_selected_thesis_ref
+= REQUIRED
+
+selected_thesis_refs.length
+>= 1
+
+primary_selected_thesis_ref
+∈ selected_thesis_refs
+
+all selected Thesis
+must belong to the same DecisionScope
+
+all selected Thesis
+must be direction-compatible with the v1 Risk outcome
+~~~
+
+Multiple selected same-direction Theses are allowed.
+
+Their count is not a strength/confidence score.
+
+### NO_TRADE Selection Rules
+
+Normally:
+
+~~~text
+primary_selected_thesis_ref = null
+
+selected_thesis_refs = []
+
+evaluated_thesis_refs.length >= 1
+~~~
+
+All evaluated Thesis and reasons for not taking Risk remain traceable.
+
+### Directional v1
+
+TradeThesis may conceptually contain:
+
+~~~text
+UPWARD
+DOWNWARD
+NON_DIRECTIONAL
+TWO_SIDED
+UNRESOLVED
+~~~
+
+but v1 Risk-taking Decision only maps:
+
+~~~text
+UPWARD
+→ TAKE_LONG_RISK-compatible
+
+DOWNWARD
+→ TAKE_SHORT_RISK-compatible
+~~~
+
+NON_DIRECTIONAL / TWO_SIDED / UNRESOLVED are not primary directional Risk selections in v1.
+
+Future strategy types require a versioned outcome-registry extension.
+
+### Decision Reasons
+
+Do not store reasons only as prose.
+
+Candidate structure:
+
+~~~text
+reason_code
+reason_category
+related_thesis_refs
+related_assessment_refs
+related_ev_refs
+related_comparison_refs
+materiality
+optional human explanation
+trace
+~~~
+
+Reason categories may include:
+
+~~~text
+ECONOMIC
+COMPARISON
+CONFLICT
+INVALIDATION
+APPLICABILITY
+UNCERTAINTY
+TAIL_RISK
+COST
+CONTEXT
+CONDITIONAL_BRANCH
+OTHER
+~~~
+
+### Non-selection Records
+
+For evaluated but non-selected Theses preserve structured reasons.
+
+Examples:
+
+~~~text
+ECONOMICALLY_UNFAVORABLE
+LOWER_COMPARISON_PREFERENCE
+HIGHER_INVALIDATION_RISK
+MATERIAL_UNCERTAINTY
+HIGH_EVIDENCE_OVERLAP
+NEAR_DUPLICATE
+OPPOSING_DIRECTION_NOT_SELECTED
+PARTIAL_APPLICABILITY
+DOMINATED_ON_COMPARISON_CRITERIA
+CONDITIONAL_BRANCH_INACTIVE
+NO_CLEAR_ADVANTAGE
+~~~
+
+Non-selected ≠ false.
+
+### Economic Context
+
+Reference exact:
+
+~~~text
+expected_value_assessment_refs[]
+primary_selected_ev_assessment_ref when applicable
+EV sign/viability projection
+robustness projection
+tail-risk context
+cost context
+EV validity envelope refs
+~~~
+
+ExpectedValueAssessment remains the Source of Truth.
+
+Do not average EVs of multiple selected Theses into a fake combined portfolio EV.
+
+### Conflict
+
+Preserve:
+
+~~~text
+opposing_thesis_refs[]
+cross_thesis_conflict_refs[]
+unresolved_conflict_refs[]
+contradiction context
+conditional branch context
+~~~
+
+Selecting one Risk direction does not erase the opposing Thesis.
+
+### Invalidation / Applicability / Uncertainty
+
+Preserve:
+
+~~~text
+selected Thesis invalidation refs
+invalidation proximity
+counter-mechanism context
+critical partial applicability refs
+applicability limitations
+decision uncertainty dimensions
+dominant uncertainty sources
+unquantified risks
+unresolved questions
+limitations
+~~~
+
+Do not require one universal confidence score.
+
+### Validity
+
+Candidate fields:
+
+~~~text
+finalized_at
+valid_from
+valid_until
+decision_horizon
+evaluation_window
+decision_context_market_watermark
+finalization_market_watermark
+validity_basis
+finalization_decision_ref
+~~~
+
+### Final Correction — Risk-taking valid_until
+
+For v1:
+
+~~~text
+TAKE_LONG_RISK
+TAKE_SHORT_RISK
+→ valid_until REQUIRED candidate
+~~~
+
+Do not treat null as indefinite validity.
+
+NO_TRADE may also preserve valid_until for audit/current-decision reuse, but it does not normally enter Defense.
+
+### DecisionResult Conceptual Structure
+
+~~~text
+Identity
+- id/version
+- decision cycle
+- DecisionScope
+- DecisionContext
+- candidate ref
+- FinalizationDecision ref
+- created_at / trace
+
+Outcome
+- TAKE_LONG_RISK / TAKE_SHORT_RISK / NO_TRADE
+- risk direction LONG / SHORT / NONE
+- completed process status
+
+Evaluation Set
+- evaluated Thesis
+- comparison-ready Thesis
+- comparison-excluded Thesis
+
+Selection
+- primary selected Thesis
+- selected Thesis
+- non-selected Thesis
+- non-selection records
+
+Economic
+- EV refs
+- economic summary projection
+- robustness
+- tail/cost context
+- EV validity envelopes
+
+Comparison
+- CrossThesisComparison ref
+- comparison outcome
+- frontier
+- dominated refs
+- overlap
+- evidence/mechanism independence
+
+Conflict
+- opposing Thesis
+- unresolved conflicts
+- contradiction
+- conditional branches
+
+Invalidation / Applicability
+- invalidation refs/context
+- critical partial applicability
+- limitations
+
+Uncertainty
+- decision uncertainty
+- dominant sources
+- unquantified risks
+- unresolved questions
+
+Reasons
+- structured reason records
+- primary reason codes
+- optional summary
+
+Validity
+- finalized/valid_from/valid_until
+- horizon/window
+- watermarks
+
+Versions / Integrity
+- policy bundle
+- resolution / finalization / assessment / EV / comparison versions
+- decision digest
+
+Limitations
+- decision limitations
+- Finalization limitations
+- diagnostics ref
+~~~
+
+### DecisionResult Writer
+
+Single canonical writer candidate.
+
+It:
+
+~~~text
+verifies FINALIZE_ALLOWED*
+verifies exact candidate digest
+creates immutable canonical ID/version
+writes trace
+~~~
+
+It does NOT:
+
+~~~text
+reselect Thesis
+change direction
+recalculate EV
+add hidden reasons
+drop limitations
+~~~
+
+### Outcome Correctness Boundary
+
+~~~text
+TAKE_LONG_RISK + WIN
+≠ Decision automatically correct
+
+TAKE_SHORT_RISK + LOSS
+≠ Decision automatically wrong
+
+NO_TRADE + missed move
+≠ Decision automatically wrong
+~~~
+
+Correctness is a post-decision research/evaluation problem.
+
+---
+
+## 7.85 DecisionCycleProcessingResult — Final Checkpoint
+
+### Why It Is Required
+
+Strict NO_TRADE semantics mean a DecisionCycle may validly produce zero Canonical DecisionResults.
+
+Examples:
+
+~~~text
+0 TradeThesis
+0 DecisionScope
+all Thesis NOT_EVALUABLE
+EV pipeline failure
+context restart before Decision
+~~~
+
+These must not be mislabeled NO_TRADE.
+
+### Formal Definition
+
+> DecisionCycleProcessingResult = a non-market-decision orchestration/audit result that records how far one DecisionCycle progressed, which DecisionScopes were processed, which Canonical DecisionResults were created, and why any scope produced no Canonical DecisionResult.
+
+### Boundary
+
+~~~text
+DecisionCycleProcessingResult
+≠ DecisionResult
+~~~
+
+### Conceptual Structure
+
+~~~text
+decision_cycle_id
+decision_context_ref
+
+decision_scope_refs[]
+decision_result_refs[]
+
+decision_result_count
+
+scope_processing_records[]
+
+processing_status
+
+restart_required
+
+failure / no-result reason refs[]
+
+created_at
+
+trace_id
+~~~
+
+### Processing Status Candidate
+
+~~~text
+COMPLETED_WITH_DECISIONS
+COMPLETED_WITHOUT_CANONICAL_DECISION
+RESTART_REQUIRED
+PARTIAL
+FAILED
+~~~
+
+### Example — No Buildable Thesis
+
+~~~text
+TradeThesis count = 0
+
+DecisionResult count = 0
+
+DecisionCycleProcessingResult:
+COMPLETED_WITHOUT_CANONICAL_DECISION
+
+reason:
+NO_BUILDABLE_TRADE_THESIS
+~~~
+
+This is not NO_TRADE.
+
+### Example — Multiple Scopes
+
+~~~text
+DS-1
+→ TAKE_LONG_RISK
+
+DS-2
+→ NO_TRADE
+
+DecisionCycleProcessingResult:
+COMPLETED_WITH_DECISIONS
+
+decision_result_refs:
+DR-1
+DR-2
+~~~
+
+### Purpose
+
+This object prevents process state from contaminating market Decision outcome semantics.
+
+---
+
+## 7.86 05 → Defense Handoff — Final Checkpoint
+
+### Formal Responsibility
+
+The Handoff transfers a finalized Canonical DecisionResult into the Defense domain without letting Defense redo 05.
+
+~~~text
+DecisionResult
+↓
+Defense Handoff Builder
+↓
+DefenseAdmissionEnvelope
+↓
+Defense Admission Gate
+↓
+DefenseAdmissionDecision
+↓
+Defense Evaluation
+~~~
+
+### Outcome Routing
+
+~~~text
+TAKE_LONG_RISK
+TAKE_SHORT_RISK
+→ Defense Admission candidate
+
+NO_TRADE
+→ DEFENSE_NOT_REQUIRED
+→ Logger / Audit / Research Trace
+~~~
+
+NO_TRADE is a Canonical Decision but does not request new Risk.
+
+### DefenseAdmissionEnvelope
+
+Formal Candidate:
+
+> An immutable transfer projection of the exact Canonical DecisionResult containing the minimum identity, scope, selected-Thesis, economic validity, validity-window, limitation, uncertainty and trace information required by Defense.
+
+~~~text
+DecisionResult
+= Source of Truth
+
+DefenseAdmissionEnvelope
+= Transfer Projection
+~~~
+
+Do not deep-copy all Knowledge/Research.
+
+### Minimum Envelope Context
+
+~~~text
+Identity
+- handoff id/version
+- DecisionResult exact ref/version/digest
+- decision cycle/scope/context
+- FinalizationDecision ref
+- created_at / trace
+
+Decision
+- decision outcome
+- risk direction
+- reason refs
+
+Selection
+- primary selected Thesis
+- selected Thesis exact refs/versions
+- opposing Thesis refs
+- comparison ref
+
+Economic Validity
+- EV Assessment refs
+- primary selected EV ref
+- EV Validity Envelope refs
+- economic/cost assumption refs
+- economic limitations
+
+Scope
+- asset
+- market
+- instrument
+- venue scope
+- decision horizon
+- evaluation window
+
+Validity
+- finalized_at
+- valid_from
+- valid_until
+- validity basis
+- DecisionContext watermark
+- Finalization watermark
+
+Upstream Limitations
+- decision limitations
+- finalization limitations
+- uncertainty refs
+- unquantified risks
+- invalidation refs
+- applicability limitations
+
+Versions / Integrity
+- policy bundle
+- EV/comparison/finalization/handoff versions
+- envelope digest
+~~~
+
+### Defense Admission Gate
+
+~~~text
+DHA0 Handoff Identity
+DHA1 Outcome Routing
+DHA2 Canonical Decision / Finalization
+DHA3 Version / Digest Integrity
+DHA4 Decision Scope Integrity
+DHA5 Decision Validity Window
+DHA6 Selected Thesis Integrity
+DHA7 Selected Thesis Validity
+DHA8 EV Assessment Integrity
+DHA9 EV Validity Envelope
+DHA10 Limitation / Uncertainty Preservation
+DHA11 Post-Finalization Material Change
+DHA12 Policy / Contract Version
+DHA13 Trace Completeness
+DHA14 Authority Boundary
+DHA15 Concurrency / Final Resolution
+~~~
+
+### Decision Digest
+
+Digest mismatch does not trigger silent latest-object replacement.
+
+Candidate result:
+
+~~~text
+HANDOFF_REJECTED
+reason:
+DECISION_DIGEST_MISMATCH
+~~~
+
+### Decision Validity
+
+Admission verifies:
+
+~~~text
+valid_from <= now < valid_until
+~~~
+
+for time-bounded risk decisions.
+
+Expired:
+
+~~~text
+→ DECISION_REFRESH_REQUIRED
+~~~
+
+Expired ≠ Defense BLOCK.
+
+### Selected Thesis
+
+Admission verifies identity/integrity only:
+
+~~~text
+primary exists for TAKE_*
+primary ∈ selected
+selected exact versions resolve
+selected belong to DecisionScope
+selected are direction-compatible
+selected Thesis is not expired under its validity contract
+~~~
+
+Defense does NOT re-evaluate:
+
+~~~text
+Thesis correctness
+Mechanism strength
+PRIMARY role assignment
+Cross-Thesis winner
+Direction
+~~~
+
+### EV Validity Envelope
+
+Admission checks whether currently observable economic assumptions still remain inside the EV envelope.
+
+Examples:
+
+~~~text
+spread
+funding
+venue assumption
+liquidity assumption
+other cost assumptions
+~~~
+
+If current economic assumptions breach the envelope:
+
+~~~text
+→ EV_REASSESSMENT_REQUIRED
+~~~
+
+Do not turn this into Defense BLOCK.
+
+### Size Envelope
+
+Exact final Position Size does not yet exist.
+
+If EV is valid only up to a notional ceiling, that ceiling is passed downstream as an economic upper boundary.
+
+Defense may be more restrictive.
+
+Defense may not expand the economic envelope.
+
+Conceptually:
+
+~~~text
+effective downstream envelope
+<=
+EV economic envelope
+~~~
+
+### Economic Validity vs Safety Validity
+
+~~~text
+Handoff / 05:
+Is the economic Decision still valid?
+
+Defense:
+Is that valid Decision safe to execute now?
+~~~
+
+Example:
+
+~~~text
+EV valid at spread <= 10 bps
+current spread = 7 bps
+→ economic Decision still valid
+
+Defense safety policy requires spread <= 5 bps
+→ Defense may REDUCE/BLOCK
+~~~
+
+Reverse:
+
+~~~text
+EV valid only at spread <= 5 bps
+current spread = 7 bps
+Defense would tolerate 10 bps
+→ still EV_REASSESSMENT_REQUIRED
+~~~
+
+Safety cannot make invalid economics valid.
+
+### Limitations
+
+Upstream limitations must survive Handoff.
+
+Candidate classes:
+
+~~~text
+TRACE_ONLY
+SAFETY_RELEVANT
+DOWNSTREAM_ENFORCEABLE
+~~~
+
+But:
+
+~~~text
+Limitation
+≠ Authorized Runtime Constraint
+~~~
+
+Constraint authority remains separate.
+
+### Post-Finalization Material Change
+
+Admission checks the interval:
+
+~~~text
+Finalization market watermark
+→ Defense Admission market watermark
+~~~
+
+Event materiality may distinguish:
+
+~~~text
+DECISION_MATERIAL
+SAFETY_MATERIAL
+BOTH
+NEITHER
+~~~
+
+Decision-material change:
+
+~~~text
+→ DECISION_REFRESH_REQUIRED
+~~~
+
+Safety-only change:
+
+~~~text
+→ continue to Defense Evaluation
+→ Defense may ALLOW/REDUCE/BLOCK
+~~~
+
+### Defense Admission Outcomes
+
+~~~text
+ADMITTED_TO_DEFENSE
+DEFENSE_NOT_REQUIRED
+DECISION_REFRESH_REQUIRED
+EV_REASSESSMENT_REQUIRED
+HANDOFF_CORRECTION_REQUIRED
+HANDOFF_REJECTED
+HANDOFF_FAILED
+~~~
+
+~~~text
+ADMITTED_TO_DEFENSE
+≠ ALLOW
+~~~
+
+### Defense Must Not Re-evaluate
+
+~~~text
+Knowledge correctness
+Knowledge Applicability
+Trade Thesis construction
+Thesis member roles
+Expected Direction
+Expected Effect
+Expected Horizon
+Mechanism correctness
+Probability
+Expected Return
+Expected Loss
+Gain-Loss Asymmetry
+Expected Value
+Economic Viability
+Cross-Thesis ranking
+Comparison Frontier
+Selected Thesis
+Non-selected Thesis
+Decision Direction
+NO_TRADE vs TAKE_RISK
+~~~
+
+### Defense May Validate / Evaluate
+
+Admission/integrity:
+
+~~~text
+Canonical Decision?
+Digest?
+Expiry?
+Selected refs?
+EV envelope?
+Limitations?
+Decision-material event?
+~~~
+
+Defense safety:
+
+~~~text
+RiskState
+Authorized Runtime Constraints
+Exposure
+Drawdown / loss context
+Liquidity safety
+Spread/slippage safety
+Data / Runtime Quality
+Exchange / API health
+Position state
+Abnormal safety event
+Global Risk Limits
+~~~
+
+### Defense Outcome
+
+Separate object:
+
+~~~text
+ALLOW
+REDUCE
+BLOCK
+~~~
+
+~~~text
+BLOCK
+≠ Decision wrong
+
+REDUCE
+≠ exact Position Size
+
+ALLOW
+≠ Order sent
+~~~
+
+---
+
+## 7.87 05_DECISION — Integrated Final Review / Closure Candidate
+
+### Review Result
+
+The Final Review compared:
+
+~~~text
+Decision Context
+Knowledge Integration
+Trade Thesis
+Decision Scope
+PreDecision Thesis Assessment
+Expected Value Assessment
+Cross-Thesis Comparison
+Decision Candidate Resolution
+Decision Finalization
+Decision Result
+DecisionCycleProcessingResult
+Defense Handoff
+Defense boundary
+~~~
+
+against the saved Current 03 / 04 boundary and Legacy Reference material.
+
+### Architecture Result
+
+~~~text
+ARCHITECTURE_BREAKING_CONFLICT:
+NONE
+
+RESPONSIBILITY_OVERLAP:
+RESOLVED / MINOR BOUNDARY CORRECTIONS APPLIED
+
+OBJECT_DUPLICATION:
+NO MATERIAL DUPLICATION REQUIRED
+
+STATE_COLLISION:
+NO SEMANTIC COLLISION
+NAMESPACED TYPES REQUIRED
+
+BACKWARD_LOOP:
+VALID
+PRECEDENCE REQUIRED
+
+TRACE_CONTINUITY:
+COMPLETE CANDIDATE
+
+NO_TRADE_SEMANTICS:
+CONSISTENT
+
+DEFENSE_BOUNDARY:
+CONSISTENT AFTER VALIDITY-GATE REFINEMENT
+
+ARCHITECTURE_REWRITE_REQUIRED:
+NO
+~~~
+
+### Final Corrections
+
+#### FINAL-CORRECTION-05-01 — Exact Decision Context per Scope
+
+v1 direct Cross-Thesis Comparison requires:
+
+~~~text
+exact same DecisionContextSnapshot
++
+exact same decision_cycle_id
+~~~
+
+not merely semantically compatible Decision Context.
+
+#### FINAL-CORRECTION-05-02 — Namespaced Status Types
+
+Generic words must not become one shared Enum.
+
+Examples:
+
+~~~text
+DecisionContextAssemblyStatus.STALE
+
+TradeThesisConstructionStatus.NOT_BUILDABLE
+
+DecisionScopeBindingStatus.STALE
+
+PreDecisionAssessmentProcessStatus.STALE
+
+EVAssessmentProcessStatus.INCOMPLETE
+
+ComparisonProcessStatus.PARTIAL
+
+DecisionFinalizationOutcome.FINALIZATION_BLOCKED
+
+DefenseAdmissionOutcome.HANDOFF_REJECTED
+
+DefenseDecision.BLOCK
+~~~
+
+Critical semantic distinctions:
+
+~~~text
+BLOCKED_BY_CONSTRAINT
+≠ FINALIZATION_BLOCKED
+≠ HANDOFF_REJECTED
+≠ DefenseDecision.BLOCK
+≠ Fail-Closed
+~~~
+
+#### FINAL-CORRECTION-05-03 — Risk-taking Decision valid_until
+
+For v1:
+
+~~~text
+TAKE_LONG_RISK
+TAKE_SHORT_RISK
+→ valid_until REQUIRED candidate
+~~~
+
+Null must not mean indefinite Risk-taking Decision validity.
+
+#### FINAL-CORRECTION-05-04 — Full Decision Validity Moves to Defense Admission
+
+Existing Defense Evaluation had a broad Decision Validity Gate.
+
+Final refined ownership:
+
+~~~text
+Defense Admission owns:
+- Canonical Decision verification
+- Decision digest
+- Decision validity window
+- Selected Thesis ref integrity
+- EV Validity Envelope
+- Post-Finalization decision-material change
+~~~
+
+Defense Evaluation should narrow its old validity responsibility to a lightweight:
+
+~~~text
+Admission Snapshot Validity Recheck
+~~~
+
+between Admission and actual Defense Evaluation.
+
+Defense does not redo full 05 validity.
+
+#### FINAL-CORRECTION-05-05 — Three Temporal Barriers
+
+Barrier A:
+
+~~~text
+DecisionContext Snapshot
+→ Decision Finalization
+~~~
+
+Question:
+
+> Did the market materially change while 05 was reasoning?
+
+Barrier B:
+
+~~~text
+Decision Finalization
+→ Defense Admission
+~~~
+
+Question:
+
+> Did the finalized economic Decision become invalid before safety evaluation?
+
+Barrier C:
+
+~~~text
+Defense Decision
+→ EntryThesis / OrderIntent
+~~~
+
+Question:
+
+> Did safety / constraint / market validity change before actual entry?
+
+Candidate watermark chain:
+
+~~~text
+decision_context_market_watermark
+finalization_market_watermark
+defense_admission_market_watermark
+defense_evaluation_market_watermark
+entry_snapshot_market_watermark
+~~~
+
+#### FINAL-CORRECTION-05-06 — Backward Route Precedence
+
+1. Material market/context change:
+
+~~~text
+→ NEW DECISION CYCLE
+~~~
+
+Do not partially patch an old Cycle.
+
+2. Thesis premise/validity only changed:
+
+~~~text
+→ PreDecisionThesisAssessment
+→ EV
+→ Comparison
+→ Candidate
+→ Finalization
+~~~
+
+3. Economic assumption only changed:
+
+~~~text
+→ ExpectedValueAssessment
+→ Comparison
+→ Candidate
+→ Finalization
+~~~
+
+4. Comparison input only changed:
+
+~~~text
+→ CrossThesisComparison
+→ Candidate
+→ Finalization
+~~~
+
+5. Candidate logic issue:
+
+~~~text
+→ Decision Candidate Resolution
+→ Finalization
+~~~
+
+6. Handoff projection issue:
+
+~~~text
+→ Handoff Builder only
+~~~
+
+Do not mutate existing artifacts in place.
+
+#### FINAL-CORRECTION-05-07 — DecisionPolicyBundleVersion
+
+A DecisionCycle should freeze one Decision Policy Bundle candidate containing:
+
+~~~text
+Decision Context Policy
+Knowledge Integration Policy
+Trade Thesis Policy
+Decision Scope Binding Policy
+PreDecision Assessment Policy
+Expected Value Policy
+Cross-Thesis Comparison Policy
+Decision Resolution Policy
+Decision Finalization Policy
+Defense Handoff Policy
+~~~
+
+Policy hot reload should apply to the next DecisionCycle rather than silently mixing rule versions inside the current cycle.
+
+### Added Missing Contracts
+
+Final Review adds:
+
+~~~text
+MAJOR-ADD-05-01
+Decision Candidate Resolution
+
+MAJOR-ADD-05-02
+DecisionCycleProcessingResult
+~~~
+
+These close two semantic gaps:
+
+~~~text
+CrossThesisComparisonResult
+→ who selects the candidate?
+
+0 Canonical DecisionResult
+→ how does orchestration record what happened
+  without fabricating NO_TRADE?
+~~~
+
+### Object Separation Review
+
+~~~text
+DecisionContextSnapshot
+= frozen input context
+
+IntegratedKnowledgeContext
+= thesis-independent knowledge structure
+
+TradeThesis
+= one composed market reasoning Thesis
+
+DecisionScope
+= comparison boundary
+
+PreDecisionThesisAssessment
+= pre-EV Thesis readiness/health
+
+ExpectedValueAssessment
+= economic expectation
+
+CrossThesisComparisonResult
+= relative comparison structure
+
+DecisionResultCandidate
+= transient candidate Decision
+
+DecisionFinalizationDecision
+= permission to canonicalize candidate now
+
+DecisionResult
+= canonical 05 market Decision
+
+DecisionCycleProcessingResult
+= outer process/audit result
+
+DefenseAdmissionEnvelope
+= transfer projection
+
+DefenseAdmissionDecision
+= boundary admission result
+
+DefenseDecision
+= runtime safety outcome
+~~~
+
+No material object is required to impersonate another.
+
+### Value Object / Substructure Guidance
+
+To avoid object proliferation, these do not automatically need independent canonical storage:
+
+~~~text
+Comparison Frontier
+EV Validity Envelope
+DecisionReasonRecord
+NonSelectionRecord
+ThesisOverlapProfile
+ComponentOverlapMap
+~~~
+
+They may remain immutable substructures/value objects until independent identity/versioning is actually required.
+
+### NO_TRADE Final Review
+
+Only the normal Decision Resolution path may propose NO_TRADE.
+
+~~~text
+0 Thesis
+≠ NO_TRADE
+
+0 Scope
+≠ NO_TRADE
+
+THESIS_NOT_BUILDABLE
+≠ NO_TRADE
+
+NOT_EVALUABLE
+≠ NO_TRADE
+
+NOT_QUANTIFIABLE
+≠ NO_TRADE
+
+Comparison Failure
+≠ NO_TRADE
+
+Stale
+≠ NO_TRADE
+
+Finalization Failure
+≠ NO_TRADE
+
+Defense BLOCK
+≠ NO_TRADE
+
+Execution Failure
+≠ NO_TRADE
+~~~
+
+Canonical NO_TRADE requires normal Decision evaluation and successful Finalization.
+
+### Trace Continuity
+
+Final candidate trace:
+
+~~~text
+DecisionResult
+→ DecisionFinalizationDecision
+→ DecisionResultCandidate
+→ CrossThesisComparisonResult
+→ ExpectedValueAssessment
+→ PreDecisionThesisAssessment
+→ DecisionScope
+→ TradeThesis
+→ IntegratedKnowledgeContext
+→ DecisionContextSnapshot
+→ ApplicableKnowledgeSet
+→ ApplicableKnowledgeEntry
+→ ApplicabilityAssessment
+→ KnowledgeRecord
+→ Validated Research Result boundary
+→ ResearchSynthesisAssessment
+→ ResearchResult
+→ ResearchTrial
+→ ResearchPlan
+→ ResearchCandidate
+→ Finding / Source
+~~~
+
+Defense:
+
+~~~text
+DefenseAdmissionEnvelope
+→ DecisionResult
+
+DefenseAdmissionDecision
+→ DefenseEvaluationResult
+→ DefenseDecision
+→ EntryThesis
+→ OrderIntent
+~~~
+
+Post-Trade can therefore trace:
+
+~~~text
+TradeResult
+→ EntryThesis
+→ DefenseDecision
+→ DecisionResult
+→ TradeThesis
+→ Knowledge
+→ Research
+~~~
+
+### 05 / Defense Responsibility Boundary
+
+~~~text
+05:
+Do we want to take this Risk?
+
+Defense Admission:
+Is that finalized economic Decision still admissible for safety evaluation?
+
+Defense Evaluation:
+Is taking that Risk safe now?
+
+Execution:
+How exactly will the permitted Risk be entered?
+~~~
+
+Defense must not change:
+
+~~~text
+Direction
+Selected Thesis
+Expected Value
+Knowledge Applicability
+Trade Thesis composition
+~~~
+
+Defense may:
+
+~~~text
+ALLOW
+REDUCE
+BLOCK
+~~~
+
+based on Runtime Safety Context.
+
+### Economic vs Safety Validity
+
+~~~text
+EV envelope breach
+→ EV_REASSESSMENT_REQUIRED
+
+RiskState / Authorized Constraint / Safety problem
+→ Defense REDUCE / BLOCK
+~~~
+
+Defense may be stricter than 05 economics.
+
+Defense may not make invalid economics valid.
+
+### Research Feedback Boundary
+
+05 runtime does not synchronously wait for Research.
+
+Unexpected issues become Findings:
+
+~~~text
+unexpected contradiction
+missing EV distribution
+unknown dependency
+repeated NO_TRADE
+frequent stale Finalization
+decision latency failure
+Defense BLOCK pattern
+missed opportunity
+~~~
+
+Then:
+
+~~~text
+Finding
+↓
+ResearchCandidate
+↓
+03_RESEARCH
+~~~
+
+No direct Knowledge mutation.
+
+### Completion Gate — Responsibility
+
+~~~text
+□ Decision Context freezes only
+□ Knowledge Integration structures only
+□ Trade Thesis composes only
+□ Scope Binding groups comparables only
+□ PreDecision Assessment evaluates Thesis readiness only
+□ EV Assessment owns economics only
+□ Cross-Thesis Comparison compares only
+□ Candidate Resolution selects candidate only
+□ Finalization checks integrity/current validity only
+□ DecisionResult owns canonical 05 outcome only
+□ DecisionCycleProcessingResult owns non-decision process outcome only
+□ Handoff transfers only
+□ Defense Admission validates boundary only
+□ Defense Evaluation owns safety only
+~~~
+
+### Completion Gate — Decision Semantics
+
+~~~text
+□ TAKE_LONG_RISK defined
+□ TAKE_SHORT_RISK defined
+□ NO_TRADE strictly defined
+□ BUY/SELL separated from Decision intent
+□ Selected / Non-selected / Evaluated separated
+□ Primary Selected Thesis defined
+□ Multiple same-direction selected Thesis allowed without vote inflation
+□ Opposing Thesis remains traceable
+□ EV remains traceable
+□ Conflict remains traceable
+□ Invalidation remains traceable
+□ Uncertainty remains traceable
+□ valid_until / watermark semantics defined
+~~~
+
+### Completion Gate — Failure Semantics
+
+~~~text
+□ Process Failure never becomes NO_TRADE
+□ Stale never becomes NO_TRADE
+□ 0 Thesis never becomes NO_TRADE
+□ 0 DecisionResult is representable
+□ Defense BLOCK remains separate
+□ Fail-Closed remains separate
+□ Backward routes are explicit
+□ Material context change starts a new DecisionCycle
+~~~
+
+### Completion Gate — Version / Time
+
+~~~text
+□ exact versions bind each object
+□ digest chain candidate defined
+□ policy bundle candidate defined
+□ Finalization temporal barrier defined
+□ Defense Admission temporal barrier defined
+□ Execution temporal barrier remains downstream
+□ Risk-taking valid_until enforced
+□ EV Validity Envelope preserved
+~~~
+
+### Final 05 High-Level Pipeline
+
+~~~text
+INPUT_READY
+↓
+CONTEXT_FROZEN
+↓
+KNOWLEDGE_INTEGRATED
+↓
+THESIS_CONSTRUCTED
+↓
+SCOPES_BOUND
+↓
+THESES_ASSESSED
+↓
+EV_ASSESSED
+↓
+THESES_COMPARED
+↓
+CANDIDATE_RESOLVED
+↓
+FINALIZATION_PASSED
+↓
+DECISION_FINALIZED
+↓
+HANDED_OFF
+~~~
+
+This is a conceptual pipeline, not one universal state Enum.
+
+### Final Authority Chain
+
+~~~text
+Knowledge
+↓
+Applicability
+
+↓
+05 Decision Reasoning
+
+↓
+DecisionResult
+"Want Risk?"
+
+↓
+DefenseAdmission
+"Is the Decision still admissible?"
+
+↓
+DefenseDecision
+"Safe?"
+
+↓
+EntryThesis
+"Entry-time frozen rationale / safety snapshot"
+
+↓
+OrderIntent
+"How to execute?"
+~~~
+
+### Final Closure Status
+
+~~~text
+05_DECISION_REFERENCE_DESIGN:
+SEMANTICALLY_CLOSED_CANDIDATE
+
+05_FINAL_REVIEW:
+PASSED_WITH_CORRECTIONS_APPLIED
+
+ARCHITECTURE_REWRITE_REQUIRED:
+NO
+
+CURRENT_03_CONFLICT_STATUS:
+MINOR TERMINOLOGY RECONCILIATION REMAINS
+
+CURRENT_04_CONFLICT_STATUS:
+NO NEW BLOCKING CONFLICT
+
+DEFENSE_BOUNDARY_STATUS:
+REFINED / CONSISTENT
+
+LEGACY_CONFLICT_STATUS:
+MINOR / MULTI-THESIS AND AUTHORITY REFINEMENT
+
+REVIEW_STAGE:
+FINAL_CHECKPOINT
+
+CURRENT_DESIGN_STATUS:
+NOT_ADOPTED
+~~~
+
+### What This Closure Does NOT Mean
+
+~~~text
+NOT Current Design adoption
+
+NOT final DB schema
+
+NOT final Python class design
+
+NOT final threshold selection
+
+NOT final EV formula
+
+NOT final Defense policy
+
+NOT final Execution specification
+~~~
+
+Those require separate Current adoption / contract / implementation work.
+
+
 # 8. FIX / Failure Index
 
 FIX履歴を、単なるGit履歴ではなく再利用可能なFailure Knowledgeとして索引化する。
