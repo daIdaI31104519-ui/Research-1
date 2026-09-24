@@ -8157,6 +8157,3573 @@ NOT_ADOPTED
 
 ---
 
+
+---
+
+## 7.57 Unsaved Detailed Design — Intermediate Checkpoint / Cross-Review
+
+### Checkpoint Purpose
+
+This section consolidates the detailed design work created after 7.56 and before completion of 05_DECISION.
+
+It is an intermediate Reference checkpoint only.
+
+~~~text
+REVIEW_STAGE:
+INTERMEDIATE_CHECKPOINT
+
+CURRENT_DESIGN_STATUS:
+NOT_ADOPTED
+
+PRODUCTION_STATUS:
+NOT_A_PRODUCTION_SPEC
+
+CURRENT_ADOPTION:
+REQUIRES_SEPARATE_REVIEW
+~~~
+
+The checkpoint covers:
+
+~~~text
+Research Intake
+Research Domain Registry
+Research Method Registry
+Research Method Routing
+Research Plan
+Plan Validation Gate
+Research Execution
+Research Result Synthesis
+Result Validation Gate
+Knowledge Admission / Promotion
+Knowledge Type Registry
+Knowledge Record Common Contract
+Knowledge Relationship Registry / Contract
+Knowledge Relationship Integrity Gate
+Knowledge Lifecycle / Aging Governance
+Applicability Evaluation
+Applicable Knowledge Set
+Decision Context Assembly
+Knowledge Integration
+Trade Thesis Construction
+Decision Scope Binding
+~~~
+
+The following are intentionally NOT completed in this checkpoint:
+
+~~~text
+Individual Thesis Evaluation
+Expected Value Assessment
+Cross-Thesis Comparison
+Decision Result Finalization / Integrity
+Decision Result
+05 → Defense Handoff
+05_DECISION Final Integrated Review
+~~~
+
+### Cross-Review Result
+
+No architecture-breaking contradiction was found.
+
+The reviewed flow remains connectable as:
+
+~~~text
+Finding / Candidate
+↓
+Research Intake
+↓
+Research Domain Routing
+↓
+Research Method Routing
+↓
+Research Plan
+↓
+Plan Validation
+↓
+Research Trial / ResearchResult
+↓
+Research Synthesis
+↓
+Result Validation
+↓
+Knowledge Admission / Promotion
+↓
+Knowledge Record / Relationship / Lifecycle
+↓
+Runtime Applicability
+↓
+Applicable Knowledge Set
+↓
+Decision Context
+↓
+Knowledge Integration
+↓
+Trade Thesis 0..N
+↓
+Decision Scope Binding
+↓
+[05 remaining evaluation chain]
+~~~
+
+### Corrections Applied Before Checkpoint
+
+#### CHECKPOINT-CORRECTION-01 — ResearchPlan Lifecycle vs Plan Validation
+
+Earlier draft language allowed VALIDATED to appear as a ResearchPlan lifecycle state.
+
+That is rejected.
+
+Legacy FIX-011 remains authoritative for the plan state separation:
+
+~~~text
+ResearchPlan Lifecycle:
+DRAFT
+READY
+ACTIVE
+COMPLETED
+SUPERSEDED
+CANCELLED
+
+ResearchPlan Lock:
+EDITABLE
+PRE_REGISTERED
+FROZEN
+
+Plan Validation:
+separate PlanValidationResult
+~~~
+
+Therefore:
+
+~~~text
+PlanValidation READY
+≠ ResearchPlan lifecycle VALIDATED
+~~~
+
+No new VALIDATED lifecycle state is introduced.
+
+#### CHECKPOINT-CORRECTION-02 — Knowledge Type Naming
+
+The earlier candidate primary family:
+
+~~~text
+KT.RELATIONSHIP
+~~~
+
+is renamed in this checkpoint to:
+
+~~~text
+KT.MARKET_RELATIONSHIP
+~~~
+
+Reason:
+
+~~~text
+KT.MARKET_RELATIONSHIP
+= reusable market relationship / pattern / mechanism Knowledge
+
+KnowledgeRelationship
+= canonical graph edge between Knowledge Objects
+~~~
+
+This avoids type/object name collision.
+
+#### CHECKPOINT-CORRECTION-03 — Relationship Integrity Idempotency
+
+Existing exact or reverse-equivalent symmetric edge is not automatically a semantic integrity failure.
+
+Relationship Integrity outcomes therefore include:
+
+~~~text
+WRITE_ALLOWED
+WRITE_ALLOWED_WITH_LIMITATIONS
+NO_WRITE_REQUIRED
+NEEDS_CORRECTION
+BLOCKED
+INTEGRITY_GATE_FAILED
+~~~
+
+Examples:
+
+~~~text
+exact edge already exists
+→ NO_WRITE_REQUIRED
+
+A CONTRADICTS B exists
+candidate B CONTRADICTS A
+→ NO_WRITE_REQUIRED with existing relationship ref
+
+SUPERSEDES cycle
+→ BLOCKED
+~~~
+
+#### CHECKPOINT-CORRECTION-04 — Validated Research Result Boundary
+
+Do not create another full duplicate result object.
+
+Canonical research-level objects remain:
+
+~~~text
+ResearchResult
+= trial-level result
+
+ResearchSynthesisAssessment
+= research-question-level synthesis
+
+ResultValidationDecision
+= post-synthesis validation decision
+~~~
+
+The downstream expression:
+
+~~~text
+Validated Research Result
+~~~
+
+is treated as a logical qualified boundary/view:
+
+~~~text
+ResearchSynthesisAssessmentRef
++
+ResultValidationDecisionRef
+~~~
+
+not as a copied evidence/result database.
+
+#### CHECKPOINT-CORRECTION-05 — Contradiction vs Applicability
+
+Current 04 has a minor semantic tension:
+
+~~~text
+APPLICABLE description
+mentions absence of major contradiction
+
+while later sections allow
+multiple contradictory Knowledge
+to be simultaneously Applicable
+and passed to 05.
+~~~
+
+Detailed resolution:
+
+~~~text
+Contradiction exists
+≠ automatically NOT_APPLICABLE
+
+Contradiction that prevents responsible
+applicability determination
+→ UNCERTAIN candidate
+
+Both Knowledge can remain APPLICABLE
+when each independently matches current conditions,
+with contradiction context preserved for 05.
+~~~
+
+04 does not resolve the conflict winner.
+
+#### CHECKPOINT-CORRECTION-06 — Common Knowledge Contract Is Not a Duplicate Wrapper
+
+~~~text
+Knowledge Record Common Contract
+= logical interface / semantic contract
+~~~
+
+It does NOT require duplicate physical storage for specialized canonical objects.
+
+Examples:
+
+~~~text
+FeatureKnowledge
+FormulaKnowledge
+Failure
+FailureBoundary
+Constraint
+NegativeKnowledge specialization
+~~~
+
+remain specialized canonical objects while satisfying the common Knowledge contract where applicable.
+
+#### CHECKPOINT-CORRECTION-07 — Decision Scope Specification vs Binding
+
+~~~text
+Decision Scope Specification
+= pre-Thesis requested decision domain
+
+Decision Scope Binding
+= post-Thesis comparison-group binding
+~~~
+
+They are separate responsibilities.
+
+#### CHECKPOINT-CORRECTION-08 — Scope Does Not Contain Direction / EV
+
+The following MUST NOT define Decision Scope identity:
+
+~~~text
+Expected Direction
+Mechanism
+Expected Value
+Evidence Strength
+Thesis Quality
+Trade-worthiness
+~~~
+
+Otherwise opposing Long/Short theses could not be compared inside one scope.
+
+#### CHECKPOINT-CORRECTION-09 — Common Cause Is Not Causal Proof
+
+Knowledge Integration may create:
+
+~~~text
+CommonCauseGroup
+Common Cause Candidate
+Shared Event Group
+~~~
+
+but:
+
+~~~text
+Common Cause Candidate
+≠ causal proof
+~~~
+
+Any new causal claim must return through Research.
+
+---
+
+## 7.58 Research Intake — Formal Contract Checkpoint
+
+### Responsibility
+
+~~~text
+Candidate Promotion
+↓
+ResearchCandidate
+↓
+Research Intake
+↓
+ACCEPT only
+↓
+Research Router
+~~~
+
+Research Intake is the formal admission boundary.
+
+It answers:
+
+> Is this candidate sufficiently identified, traceable, researchable and valuable to enter the formal research system now?
+
+It does NOT answer:
+
+~~~text
+What is the root cause?
+Which method proves it?
+Which domain is the cause?
+What is the final research priority?
+Is the hypothesis true?
+~~~
+
+### Intake Gates
+
+~~~text
+I0 Identity
+I1 Origin / Trace
+I2 Minimum Context
+I3 Researchability
+I4 Duplicate / Merge
+I5 Existing Research / Hypothesis / Knowledge relation
+I6 Evidence / Quality / Uncertainty sufficiency for admission
+I7 Research Value
+I8 Production / Risk relevance
+I9 Admission Conflict / Dependency
+I10 Final Admission Decision
+~~~
+
+### Intake Outcomes
+
+~~~text
+ACCEPT
+DEFER
+MERGE
+REJECT
+NEED_MORE_CONTEXT
+~~~
+
+Meaning:
+
+~~~text
+ACCEPT
+= formally admitted
+≠ research started
+≠ high priority
+≠ true
+
+DEFER
+= worthwhile but not now
+
+MERGE
+= same central research problem;
+  preserve origin history
+
+REJECT
+= not admissible under current rules
+≠ Finding false
+
+NEED_MORE_CONTEXT
+= admission cannot responsibly be decided
+~~~
+
+### Output Candidate
+
+~~~text
+ResearchIntakeDecision
+- candidate ref
+- intake policy version
+- decision
+- reason codes
+- duplicate / merge refs
+- related research refs
+- missing context
+- production / risk relevance
+- uncertainty
+- evaluated_at
+- trace
+~~~
+
+Decision history is immutable. Re-evaluation creates a new decision/version rather than deleting the previous admission history.
+
+### Current 03 Compatibility
+
+Current 03 already contains:
+
+~~~text
+ACCEPT
+DEFER
+MERGE
+REJECT
+NEED_MORE_CONTEXT
+~~~
+
+and the same admission responsibilities.
+
+No material conflict found.
+
+---
+
+## 7.59 Research Domain Registry v1.0 — Checkpoint
+
+### Purpose
+
+Research Domain answers:
+
+> WHERE / WHO owns the research problem?
+
+It does NOT answer:
+
+~~~text
+how to test it
+which evidence channel to use
+which cause is true
+what priority it has
+~~~
+
+### Two-Stage Routing
+
+~~~text
+Research Intake ACCEPT
+↓
+Research Router
+↓
+Research Domain Registry
+↓
+ResearchRoute
+= WHERE / WHO
+
+↓
+03 Research Routing / Prioritization
+↓
+Method / Validation Routing
+= HOW
+~~~
+
+### Canonical Domain IDs
+
+Legacy-backed core:
+
+~~~text
+RD.DATA_QUALITY
+RD.EVENT_DETECTION
+RD.FORMULA
+RD.FEATURE
+RD.MARKET_INTELLIGENCE
+RD.CAUSAL
+RD.THESIS_COMPOSITION
+RD.MARKET_DNA
+RD.SUPERVISOR
+RD.EXECUTION
+RD.LIVE_EVIDENCE
+~~~
+
+Current-derived additions:
+
+~~~text
+RD.APPLICABILITY
+RD.DEFENSE_RISK
+RD.EXIT_POSITION
+RD.DEMO_SIMULATION_MODEL
+RD.COUNTERFACTUAL_MODEL
+RD.RESEARCH_STRUCTURE
+~~~
+
+### Boundary Notes
+
+~~~text
+RD.DATA_QUALITY
+= can the data be trusted?
+
+RD.EVENT_DETECTION
+= what event occurred?
+
+RD.FORMULA
+= is the calculation / formula valid?
+
+RD.FEATURE
+= is the representation useful / stable?
+
+RD.MARKET_INTELLIGENCE
+= what is happening?
+
+RD.CAUSAL
+= why might it happen?
+
+RD.THESIS_COMPOSITION
+= how knowledge/evidence is composed into production reasoning
+
+RD.MARKET_DNA
+= how market state is represented / compared
+
+RD.APPLICABILITY
+= where knowledge is usable
+
+RD.DEFENSE_RISK
+= safety-gate / risk-governance research
+
+RD.SUPERVISOR
+= post-entry thesis-health detection research
+
+RD.EXECUTION
+= live order / fill / venue mechanics
+
+RD.LIVE_EVIDENCE
+= research usability and integrity of live evidence
+
+RD.EXIT_POSITION
+= position / exit lifecycle research
+
+RD.DEMO_SIMULATION_MODEL
+= simulation-to-reality model research
+
+RD.COUNTERFACTUAL_MODEL
+= alternative-action model validity
+
+RD.RESEARCH_STRUCTURE
+= evidence dependency / research-system meta structure
+~~~
+
+Important:
+
+~~~text
+UNROUTABLE
+≠ RD.RESEARCH_STRUCTURE
+~~~
+
+If the registry has no responsible domain, preserve UNROUTABLE rather than hiding vocabulary gaps.
+
+### Route Roles
+
+~~~text
+PRIMARY
+SECONDARY
+DEPENDENCY
+CROSS_CUTTING
+~~~
+
+Multiple routes do not prove multiple causes.
+
+### Registry Lifecycle
+
+~~~text
+ACTIVE
+DEPRECATED
+RESERVED
+REMOVED
+~~~
+
+No silent migration of historical routes.
+
+### Current 03 Reconciliation Note
+
+Current 03 uses the broad phrase Routing / Prioritization.
+
+Future Current adoption must explicitly rename or document:
+
+~~~text
+Research Router
+= domain routing
+
+03 Routing / Prioritization
+= method / validation routing + scheduling priority
+~~~
+
+This is a terminology reconciliation, not an architecture conflict.
+
+---
+
+## 7.60 Research Method Registry v1.0 — Checkpoint
+
+### Purpose
+
+Research Method answers:
+
+> HOW will this research question be studied?
+
+Method is separate from Evidence Channel and Experiment Mode.
+
+### Method Families and IDs
+
+~~~text
+INFERENCE
+- RM.CAUSAL_RESEARCH
+- RM.EMPIRICAL_RESEARCH
+
+COMPARISON
+- RM.CASE_COMPARISON
+- RM.MARKET_DNA_COMPARISON
+
+VALIDATION
+- RM.HISTORICAL_VALIDATION
+- RM.OOS_VALIDATION
+- RM.FORWARD_VALIDATION
+
+ROBUSTNESS
+- RM.STRESS_TEST
+- RM.REGIME_STABILITY
+
+DIAGNOSTIC_REFUTATION
+- RM.FAILURE_ANALYSIS
+- RM.CONTRADICTION_ANALYSIS
+- RM.ALTERNATIVE_HYPOTHESIS
+~~~
+
+### Evidence Channels Remain Separate
+
+Current 03 channels:
+
+~~~text
+RUNTIME_OBSERVATIONAL
+HISTORICAL
+OOS
+FORWARD
+STRESS
+PRODUCTION_LIVE
+~~~
+
+Invariants:
+
+~~~text
+Method
+≠ Evidence Channel
+
+Method
+≠ Experiment Mode
+
+different methods
+≠ independent evidence
+
+Process Failure
+≠ Hypothesis failure
+~~~
+
+### Core Method Semantics
+
+~~~text
+CAUSAL_RESEARCH
+= temporal / lag / confounder / mechanism reasoning
+  correlation ≠ cause
+
+EMPIRICAL_RESEARCH
+= reproducible conditional relationship
+  pattern ≠ cause
+
+CASE_COMPARISON
+= compare case structure
+  similarity ≠ same cause/outcome
+
+MARKET_DNA_COMPARISON
+= compare fixed DNA definition/axes
+  similarity ≠ applicability proof
+
+HISTORICAL_VALIDATION
+= historical reproduction
+  success ≠ future guarantee
+
+OOS_VALIDATION
+= untouched holdout
+  do not tune on OOS
+
+FORWARD_VALIDATION
+= T0-frozen future-only evaluation
+  no hindsight rewrite
+
+STRESS_TEST
+= predefined stress / failure criteria
+  survival ≠ absolute safety
+
+REGIME_STABILITY
+= behavior across explicit regimes
+  coverage required
+
+FAILURE_ANALYSIS
+= expected vs observed failure structure
+  loss ≠ failure/root cause
+
+CONTRADICTION_ANALYSIS
+= actively examine contradicting evidence
+  no contradiction ≠ proof
+
+ALTERNATIVE_HYPOTHESIS
+= generate / compare competing explanations
+  alternative hypothesis ≠ evidence
+~~~
+
+---
+
+## 7.61 Research Method Routing Contract — Checkpoint
+
+### Position
+
+~~~text
+Accepted Research Candidate
+↓
+ResearchRoute / Domain
+↓
+Research Method Routing
+↓
+ResearchMethodSelection
+↓
+Research Plan
+~~~
+
+### Routing Gates
+
+~~~text
+MR0 Input Integrity
+MR1 Research Intent
+MR2 Domain / Method Compatibility
+MR3 Prerequisite
+MR4 Evidence / Data Availability
+MR5 PRIMARY Method selection
+MR6 Validation Coverage
+MR7 Refutation Coverage
+MR8 Robustness / Boundary Coverage
+MR9 Diagnostic Need
+MR10 Dependency / Leakage / Redundancy
+MR11 Feasibility / Cost / Urgency Context
+MR12 Role Assignment
+MR13 Method Set Integrity
+~~~
+
+### Research Intent Candidates
+
+~~~text
+CAUSAL_EXPLANATION
+EMPIRICAL_RELATIONSHIP
+CASE_STRUCTURE_COMPARISON
+GENERALIZATION_VALIDATION
+FAILURE_DIAGNOSIS
+CONTRADICTION_REFUTATION
+BOUNDARY_ROBUSTNESS
+ALTERNATIVE_EXPLANATION
+MODEL_REALISM
+APPLICABILITY_BOUNDARY
+~~~
+
+### Method Roles
+
+Target-relative:
+
+~~~text
+PRIMARY
+SUPPORTING
+VALIDATION
+REFUTATION
+ROBUSTNESS
+DIAGNOSTIC
+~~~
+
+### Eligibility
+
+~~~text
+SELECTED
+SELECTED_CONDITIONAL
+RECOMMENDED_NOT_READY
+NOT_SELECTED
+BLOCKED_PREREQUISITE
+UNAVAILABLE_EVIDENCE
+NOT_APPLICABLE
+~~~
+
+### Overall Routing Status
+
+~~~text
+ROUTED
+ROUTED_WITH_LIMITATIONS
+NEED_MORE_CONTEXT
+METHOD_SET_AMBIGUOUS
+NO_FEASIBLE_METHOD
+ROUTING_FAILED
+~~~
+
+Considered-but-not-selected methods remain auditable.
+
+Do not select all methods by default.
+
+Causal claims must at least consider meaningful refutation / alternative-explanation coverage according to research maturity.
+
+Safety-critical / production-relevant research should strongly consider robustness / failure-boundary coverage.
+
+---
+
+## 7.62 Research Plan / Plan Validation — Checkpoint
+
+### ResearchPlan Responsibility
+
+~~~text
+ResearchMethodSelection
+↓
+ResearchPlan
+~~~
+
+A ResearchPlan converts a method selection into a reproducible execution specification.
+
+One plan normally represents one central Research Question.
+
+### Plan Structure
+
+~~~text
+Identity
+Research Target
+Research Question
+Hypothesis / Claim Set
+Frozen Context
+Method Work Items
+Evidence Plan
+Data Plan
+Comparison Plan
+Evaluation Plan
+Refutation Plan
+Robustness Plan
+Dependency Plan
+Integrity / Leakage Controls
+Execution Preconditions
+Version / Governance
+~~~
+
+### Frozen References
+
+Where material, freeze:
+
+~~~text
+target version
+formula version
+feature version
+Market DNA definition version
+method registry version
+data schema version
+evaluation rule version
+model version
+~~~
+
+### Dataset Roles
+
+~~~text
+DEVELOPMENT
+IN_SAMPLE
+HISTORICAL_VALIDATION
+OOS
+FORWARD
+STRESS_INPUT
+LIVE_REFERENCE
+~~~
+
+Core leakage rules:
+
+~~~text
+development ≠ OOS
+
+pre-T0 inputs
+≠ post-T0 outcome knowledge
+
+future outcome
+must not enter decision-time input
+~~~
+
+### MethodWorkItem Candidate
+
+~~~text
+method_id
+method_role
+research question
+prerequisites
+inputs
+evidence channel
+procedure
+metrics
+comparison
+evaluation rules
+refutation rules
+process-failure rules
+dependencies
+limitations
+~~~
+
+### Process vs Research Outcome
+
+~~~text
+Research process succeeded
+≠ hypothesis supported
+
+Research process failed
+≠ hypothesis refuted
+~~~
+
+### ResearchPlan State Correction
+
+Canonical state separation remains Legacy FIX-011:
+
+~~~text
+Lifecycle:
+DRAFT / READY / ACTIVE / COMPLETED / SUPERSEDED / CANCELLED
+
+Lock:
+EDITABLE / PRE_REGISTERED / FROZEN
+~~~
+
+Do not add VALIDATED as a Plan Lifecycle state.
+
+### Plan Validation Gate
+
+Pre-research gate:
+
+~~~text
+PV0 Identity
+PV1 Trace / Lineage
+PV2 Question / Scope
+PV3 Target / Version Freeze
+PV4 Method Selection Integrity
+PV5 Method Prerequisites
+PV6 Data / Dataset Role
+PV7 Temporal Boundary / Leakage
+PV8 Comparison / Baseline
+PV9 Metric / Evaluation
+PV10 Refutation / Alternative
+PV11 Failure / Inconclusive
+PV12 Dependency / Independence
+PV13 Execution Feasibility
+PV14 Reproducibility / Auditability
+~~~
+
+Outcomes:
+
+~~~text
+READY
+READY_WITH_LIMITATIONS
+NEED_REVISION
+BLOCKED
+PLAN_VALIDATION_FAILED
+~~~
+
+Per-gate candidate status:
+
+~~~text
+PASS
+PASS_WITH_LIMITATION
+FAIL
+BLOCKED_DEPENDENCY
+NOT_APPLICABLE
+UNKNOWN
+~~~
+
+Severity:
+
+~~~text
+HARD
+CONDITIONAL
+ADVISORY
+~~~
+
+A HARD failure is not majority-voted away.
+
+UNKNOWN critical leakage condition should fail closed.
+
+Output candidate:
+
+~~~text
+PlanValidationResult
+~~~
+
+The validator does not silently rewrite the plan.
+
+Execution must bind the exact validated Plan Version.
+
+---
+
+## 7.63 Research Execution Contract — Checkpoint
+
+### Position
+
+~~~text
+ResearchPlan
++
+PlanValidationResult READY
+↓
+Research Execution
+↓
+ResearchTrial 1..N
+↓
+ResearchResult 1..N
+~~~
+
+### Legacy Objects Preserved
+
+~~~text
+OBJ-RSCH-002 ResearchPlan
+OBJ-RSCH-003 ResearchTrial
+OBJ-RSCH-004 ResearchResult
+OBJ-RSCH-008 ResearchBudget
+~~~
+
+### Method / Mode / Channel Separation
+
+~~~text
+Research Method
+≠ Experiment Mode
+≠ Evidence Source Channel
+~~~
+
+Experiment Mode candidates:
+
+~~~text
+RANDOM_BASELINE
+HISTORICAL
+REPLAY
+PAPER
+DEMO_FORWARD
+SHADOW
+COUNTERFACTUAL
+STRESS
+~~~
+
+STRESS is a current candidate extension; specialist StressResult may coexist with canonical ResearchResult.
+
+### Trial Binding
+
+Each Trial binds exact:
+
+~~~text
+ResearchPlan ref/version
+PlanValidationResult
+Method Selection / Method Work Item
+Method ID / Role
+Experiment Mode
+Evidence Source Channel
+Dataset / dataset role
+T0 when applicable
+target versions
+formula / feature / DNA / model versions
+seed where applicable
+Plan lifecycle / lock state at start
+~~~
+
+### Trial Lifecycle Candidate
+
+~~~text
+CREATED
+QUEUED
+RUNNING
+COMPLETED
+PARTIAL
+FAILED_PROCESS
+TIMED_OUT
+CANCELLED
+~~~
+
+### Execution Stages
+
+~~~text
+TE0 Admission
+TE1 Materialize
+TE2 Input Freeze
+TE3 Execute
+TE4 Measure
+TE5 Integrity
+TE6 Evidence Construct
+TE7 Evidence Evaluate
+TE8 Trial Complete
+TE9 ResearchResult
+~~~
+
+### Measurement vs Evidence
+
+~~~text
+Measurement
+≠ Evidence
+
+Evidence
+= measurement
++ provenance
++ trial
++ channel
++ role
++ target
++ quality
++ uncertainty
++ dependency
+~~~
+
+### Evidence Roles
+
+Candidate:
+
+~~~text
+SUPPORTING
+CONTRADICTING
+DISCRIMINATING
+CONDITIONING
+BOUNDARY
+CONTEXTUAL
+PROCESS_VALIDATION
+~~~
+
+Evidence outcome candidate:
+
+~~~text
+SUPPORTIVE
+CONTRADICTING
+NEUTRAL
+MIXED
+INCONCLUSIVE
+UNKNOWN
+~~~
+
+Evidence evaluation status:
+
+~~~text
+VALID
+INVALID
+NOT_OBSERVED
+NOT_EVALUATED
+UNKNOWN
+~~~
+
+Important:
+
+~~~text
+INVALID evidence
+≠ contradicting evidence
+~~~
+
+### Process Axis
+
+~~~text
+SUCCESS
+SUCCESS_WITH_LIMITATIONS
+PARTIAL
+FAILED
+TIMED_OUT
+CANCELLED
+INVALIDATED
+~~~
+
+### Research Outcome Candidate
+
+~~~text
+SUPPORTIVE
+WEAK_SUPPORT
+CONTRADICTING
+REFUTING_CANDIDATE
+MIXED
+INCONCLUSIVE
+INSUFFICIENT_EVIDENCE
+REGIME_DEPENDENT
+DATA_LIMITED
+UNKNOWN
+NOT_EVALUABLE
+~~~
+
+Process failure normally yields NOT_EVALUABLE rather than a research refutation.
+
+### Retry Boundary
+
+Operational retry with unchanged frozen semantics may remain the same Trial attempt lineage.
+
+Material change to:
+
+~~~text
+input
+seed
+dataset
+parameters
+model
+metric
+time boundary
+~~~
+
+creates a new Trial / Plan Version as appropriate.
+
+No result-driven retry cherry-picking.
+
+### Canonical Result Rule
+
+Do not create:
+
+~~~text
+HistoricalValidationResult
+OOSResult
+ForwardResult
+...
+~~~
+
+as separate canonical general result objects.
+
+Use ResearchResult + Trial mode/channel.
+
+ResearchResult is trial-level.
+
+Question-level integration belongs to ResearchSynthesisAssessment.
+
+---
+
+## 7.64 Research Result Synthesis / Result Validation — Checkpoint
+
+### ResearchSynthesisAssessment Responsibility
+
+~~~text
+ResearchResult[]
+↓
+Research Result Synthesis
+↓
+ResearchSynthesisAssessment
+~~~
+
+It integrates evidence without simple vote / case count.
+
+### Synthesis Stages
+
+~~~text
+S0 Eligibility
+S1 Process Integrity
+S2 Evidence Identity / Provenance
+S3 Channel Partition
+S4 Evidence Role Partition
+S5 Independence / Dependency Graph
+S6 Quality / Uncertainty
+S7 Coverage / Comparability
+S8 Within-Channel Assessment
+S9 Contradiction Preservation
+S10 Failure-Boundary Integration
+S11 Cross-Channel Synthesis
+S12 Alternative Explanation
+S13 Conclusion
+S14 Limitations / Unknowns
+~~~
+
+### Channel Separation
+
+Keep separate:
+
+~~~text
+RUNTIME_OBSERVATIONAL
+HISTORICAL
+OOS
+FORWARD
+STRESS
+PRODUCTION_LIVE
+~~~
+
+Do not sum them as homogeneous cases.
+
+### Channel Profile Candidate
+
+~~~text
+evidence_count
+unique_event_count
+independent_cluster_count
+quality
+outcome
+contradiction
+coverage
+uncertainty
+limitations
+~~~
+
+### Evidence Dependency Relations
+
+Candidate:
+
+~~~text
+INDEPENDENT
+PARTIALLY_DEPENDENT
+SHARED_DATASET
+SHARED_EVENT
+SHARED_SOURCE
+DERIVED_FROM
+REDUNDANT
+COMMON_CAUSE
+UNKNOWN_DEPENDENCY
+~~~
+
+Unknown dependency must not be assumed independent.
+
+### Coverage
+
+Track what was and was not tested across:
+
+~~~text
+market
+instrument
+venue
+time
+horizon
+DNA / regime
+volatility
+liquidity
+leverage
+session
+macro context
+~~~
+
+Untested ≠ failed.
+
+### Within-Channel Outcomes
+
+~~~text
+CONSISTENT_SUPPORT
+MIXED_SUPPORT
+CONSISTENT_CONTRADICTION
+INSUFFICIENT
+INCONCLUSIVE
+BOUNDARY_DETECTED
+NOT_EVALUABLE
+~~~
+
+### Synthesis Outcomes
+
+Candidate:
+
+~~~text
+SUPPORTED
+SUPPORTED_WITH_BOUNDARY
+WEAK_SUPPORT
+MIXED
+CONTRADICTED
+REFUTED
+REGIME_DEPENDENT
+INCONCLUSIVE
+INSUFFICIENT_EVIDENCE
+DATA_LIMITED
+PROCESS_LIMITED
+UNKNOWN
+~~~
+
+Empirical support can coexist with causal inconclusiveness.
+
+No universal scalar weighting is fixed here.
+
+### Synthesis Process Status
+
+~~~text
+SYNTHESIZED
+SYNTHESIZED_WITH_LIMITATIONS
+INCOMPLETE_INPUT
+SYNTHESIS_BLOCKED
+SYNTHESIS_FAILED
+~~~
+
+### Result Validation Gate
+
+Post-research quality/trace gate:
+
+~~~text
+RV0 Identity / Version
+RV1 Lineage / Trace
+RV2 Question / Target Binding
+RV3 Synthesis Process Integrity
+RV4 Trial / Result Completeness
+RV5 Evidence Provenance
+RV6 Channel / Role Preservation
+RV7 Independence / Dependency Preservation
+RV8 Quality / Uncertainty
+RV9 Contradiction / Refutation Preservation
+RV10 FailureBoundary / Constraint Preservation
+RV11 Coverage / Tested-vs-Untested
+RV12 Alternative Explanation / Unknown
+RV13 Conclusion / Scope Consistency
+RV14 Reproducibility / Auditability
+RV15 Downstream Authority Boundary
+~~~
+
+Outcomes:
+
+~~~text
+VALIDATED
+VALIDATED_WITH_LIMITATIONS
+NEEDS_CORRECTION
+BLOCKED
+RESULT_VALIDATION_FAILED
+~~~
+
+A SUPPORTED synthesis can be BLOCKED for broken trace/provenance.
+
+A REFUTED or INCONCLUSIVE synthesis can be VALIDATED as a valid research artifact.
+
+The gate does not re-synthesize.
+
+Correction produces a new synthesis version.
+
+### Validated Research Result Boundary Correction
+
+Treat:
+
+~~~text
+Validated Research Result
+~~~
+
+as a logical qualified downstream boundary:
+
+~~~text
+ResearchSynthesisAssessmentRef
++
+ResultValidationDecisionRef
+~~~
+
+not a duplicated full result store.
+
+---
+
+## 7.65 Knowledge Admission / Promotion — Checkpoint
+
+### Position
+
+~~~text
+Validated Research Result boundary
+↓
+Knowledge Admission
+↓
+AdmittedKnowledgeCandidate
+↓
+Knowledge Promotion
+↓
+Canonical Knowledge / Relationships
+↓
+Knowledge Pool
+~~~
+
+### Knowledge Admission
+
+Question:
+
+> Does this validated research artifact contain reusable knowledge meaning worth entering the Knowledge system?
+
+Checks:
+
+~~~text
+KA0 Validation Identity
+KA1 Trace
+KA2 Reusable Meaning
+KA3 Claim / Scope
+KA4 Conditions / Context
+KA5 FailureBoundary / Exclusion
+KA6 Evidence / Quality / Uncertainty
+KA7 Existing Knowledge Retrieval
+KA8 Duplicate / Overlap
+KA9 Contradiction / Support Relation
+KA10 Knowledge Value
+KA11 Integrity
+~~~
+
+Outcomes:
+
+~~~text
+ADMIT
+ADMIT_WITH_LIMITATIONS
+HOLD
+REJECT
+NEED_MORE_CONTEXT
+ADMISSION_FAILED
+~~~
+
+REJECT does not mean bad research.
+
+SUPPORTED is not automatic ADMIT.
+
+REFUTED / INCONCLUSIVE research can generate reusable Negative / Unknown / Boundary / Failure knowledge.
+
+### AdmittedKnowledgeCandidate
+
+Candidate structure:
+
+~~~text
+source validated research refs
+subject
+candidate knowledge type
+claim / effect
+conditions
+exclusions
+failure-boundary candidates
+constraint candidates
+scope / horizon
+evidence / uncertainty
+existing knowledge relations
+limitations
+~~~
+
+It is not yet Canonical Knowledge.
+
+### Knowledge Promotion
+
+Checks:
+
+~~~text
+KP0 Candidate Identity
+KP1 Semantic Identity
+KP2 Knowledge Type
+KP3 Existing Knowledge Relationship
+KP4 New vs Update vs Relation
+KP5 Scope / Condition Binding
+KP6 Boundary / Constraint Binding
+KP7 Evidence / Provenance Binding
+KP8 Contradiction Preservation
+KP9 Version
+KP10 Relationship Construction
+KP11 Integrity
+KP12 Promotion Decision
+~~~
+
+Actions:
+
+~~~text
+CREATE_NEW
+CREATE_NEW_VERSION
+RELATION_ONLY
+NO_CHANGE
+DEFER_PROMOTION
+PROMOTION_BLOCKED
+PROMOTION_FAILED
+~~~
+
+Old Knowledge Versions remain immutable.
+
+Material semantic change creates a new version.
+
+Additional evidence without semantic change may create/update relationship/evidence linkage rather than a new semantic version.
+
+Promotion does NOT directly mutate Knowledge Aging State.
+
+New contradiction should trigger Knowledge Aging review through its own governance.
+
+---
+
+## 7.66 Knowledge Type Registry v1.0 — Corrected Checkpoint
+
+### Two-Axis Design
+
+Do not place Positive / Negative / Conditional at the same primary level as Feature / Formula / Failure.
+
+Reason:
+
+~~~text
+Feature can be negative
+Feature can be conditional
+Formula can be negative
+Market relationship can be positive + conditional
+~~~
+
+### Axis A — Primary Knowledge Family
+
+Corrected IDs:
+
+~~~text
+KT.MARKET_RELATIONSHIP
+KT.FEATURE
+KT.FORMULA
+KT.FAILURE
+KT.FAILURE_BOUNDARY
+KT.CONSTRAINT
+KT.CONTEXT
+KT.UNKNOWN
+~~~
+
+Meaning:
+
+~~~text
+KT.MARKET_RELATIONSHIP
+= reusable market relation / pattern / mechanism knowledge
+
+KT.FEATURE
+= feature usefulness / failure / stability knowledge
+
+KT.FORMULA
+= formula validity / sensitivity / stability knowledge
+
+KT.FAILURE
+= reusable failure mode
+
+KT.FAILURE_BOUNDARY
+= where target transitions safe / weak / unsafe / unknown
+
+KT.CONSTRAINT
+= governed require / exclude / modify / allow safety knowledge
+
+KT.CONTEXT
+= reusable market/context structure
+
+KT.UNKNOWN
+= reusable unresolved region / evidence gap / unknown
+~~~
+
+### Axis B — Semantic Qualifier
+
+Zero or more:
+
+~~~text
+KS.POSITIVE
+KS.NEGATIVE
+KS.CONDITIONAL
+~~~
+
+Example:
+
+~~~text
+KT.FEATURE
++
+KS.NEGATIVE
++
+KS.CONDITIONAL
+~~~
+
+rather than three separate primary Knowledge objects.
+
+### Important Boundaries
+
+~~~text
+KT.MARKET_RELATIONSHIP
+≠ KnowledgeRelationship graph edge
+
+KT.UNKNOWN
+≠ KnowledgeLifecycleProfile.UNKNOWN
+
+UNMAPPABLE
+≠ KT.UNKNOWN
+
+KS.POSITIVE
+≠ profitable
+≠ positive EV
+≠ production approved
+
+KS.NEGATIVE
+≠ failed process
+
+KS.CONDITIONAL
+≠ weak knowledge
+~~~
+
+### Edge
+
+Legacy Edge remains a specialized maturity / promotion artifact:
+
+~~~text
+CAUSAL_EDGE
+EMPIRICAL_EDGE
+~~~
+
+It is NOT a primary Knowledge Family.
+
+Causal strength ≠ positive EV.
+
+### Type Resolution
+
+~~~text
+KTR0 Subject
+KTR1 Reusable Meaning
+KTR2 Primary Family
+KTR3 Semantic Qualifier
+KTR4 Specialized Promotion Target
+KTR5 Relationship / Boundary
+KTR6 Integrity
+↓
+KnowledgeTypeResolution
+~~~
+
+Resolution state:
+
+~~~text
+RESOLVED
+RESOLVED_WITH_LIMITATIONS
+AMBIGUOUS
+NEED_MORE_CONTEXT
+UNMAPPABLE
+TYPE_RESOLUTION_FAILED
+~~~
+
+Registry version:
+
+~~~text
+KNOWLEDGE_TYPE_REGISTRY_v1.0
+~~~
+
+Registry status:
+
+~~~text
+ACTIVE
+DEPRECATED
+RESERVED
+REMOVED
+~~~
+
+---
+
+## 7.67 Knowledge Record Common Contract — Checkpoint
+
+### Principle
+
+~~~text
+Knowledge Record Common Contract
+≠ giant universal Knowledge object
+~~~
+
+Use:
+
+~~~text
+Common semantic contract
++
+Family-specific extension
+~~~
+
+Specialized canonical objects remain specialized.
+
+Do not duplicate them into a second generic Knowledge table solely because of this contract.
+
+### Common Contract
+
+Every canonical Knowledge family should be able to expose:
+
+~~~text
+KR0 Identity
+KR1 Type / Semantic Classification
+KR2 Subject / Claim
+KR3 Scope
+KR4 Conditions
+KR5 Boundary / Exclusion
+KR6 Evidence / Provenance
+KR7 Uncertainty / Limitations
+KR8 Version / Lineage
+KR9 Relationships
+KR10 Lifecycle Reference
+KR11 Integrity / Audit
+~~~
+
+### Common Semantic Shape
+
+~~~text
+Identity
+- knowledge id
+- knowledge version
+- created at
+- trace
+
+Classification
+- primary family
+- semantic qualifiers
+- type registry version
+
+Semantics
+- subject refs
+- canonical claim
+- effect / behavior
+
+Scope
+- asset / market / instrument / venue
+- horizon / session
+- regime / DNA scope
+
+Conditions
+- required
+- supporting
+- weakening
+- context
+
+Boundary
+- known exclusions
+- failure-boundary refs
+- constraint refs
+- unknown-region refs
+
+Evidence
+- validated research boundary refs
+- synthesis refs
+- evidence package refs
+- provenance refs
+
+Uncertainty
+- uncertainty
+- limitations
+- evidence gaps
+- unresolved questions
+
+Version
+- previous version
+- supersession / lineage refs
+- promotion / admission refs
+- version reason
+
+Relationships
+- KnowledgeRelationship refs
+
+Lifecycle
+- KnowledgeLifecycleProfile ref
+
+Integrity
+- contract version
+- type registry version
+- trace status
+- diagnostics
+~~~
+
+### Requiredness
+
+Use:
+
+~~~text
+REQUIRED
+REQUIRED_WHEN_APPLICABLE
+OPTIONAL
+~~~
+
+Do not require fields that are semantically impossible for a family.
+
+### Family Extensions
+
+Examples:
+
+~~~text
+KT.FEATURE
+- feature definition ref
+- known strengths
+- known failures
+- redundancy refs
+
+KT.FORMULA
+- formula ref
+- sensitivity / regime / stress profile
+- known failures
+
+KT.FAILURE
+- failure type
+- origin domain
+- observed effect
+- root-cause state
+- known causes / unknowns
+- reproduction refs
+
+KT.FAILURE_BOUNDARY
+- target ref
+- boundary variables
+- safe / weak / unsafe / unknown regions
+
+KT.CONSTRAINT
+- target scope
+- constraint type
+- condition
+- action/effect
+- source boundary refs
+
+KT.CONTEXT
+- context dimensions
+- market/regime characteristics
+
+KT.UNKNOWN
+- unknown subject
+- known context
+- missing evidence
+- reopen conditions
+~~~
+
+### Source-of-Truth Separation
+
+~~~text
+Knowledge semantics
+→ Canonical Knowledge
+
+Evidence
+→ Research / Evidence objects
+
+Knowledge relationship
+→ KnowledgeRelationship
+
+Freshness / health
+→ KnowledgeLifecycleProfile
+
+Runtime applicability
+→ ApplicabilityAssessment
+
+Production permission
+→ downstream governance
+~~~
+
+---
+
+## 7.68 Knowledge Relationship Registry / Contract v1.0 — Checkpoint
+
+### Formal Role
+
+~~~text
+KnowledgeRecord
+= Node
+
+KnowledgeRelationship
+= canonical semantic Edge
+
+KnowledgeGraph
+= View over Nodes + Edges
+~~~
+
+Graph does not duplicate Knowledge.
+
+### Registry Types
+
+~~~text
+KR.SUPPORTS
+KR.CONTRADICTS
+KR.DEPENDS_ON
+KR.DERIVED_FROM
+KR.APPLIES_TO
+KR.FAILS_UNDER
+KR.SUPERSEDES
+KR.DUPLICATES
+KR.RELATED_TO
+~~~
+
+### Directionality
+
+Directed:
+
+~~~text
+SUPPORTS
+DEPENDS_ON
+DERIVED_FROM
+APPLIES_TO
+FAILS_UNDER
+SUPERSEDES
+~~~
+
+Semantic symmetric:
+
+~~~text
+CONTRADICTS
+DUPLICATES
+RELATED_TO
+~~~
+
+Do not double-store reverse symmetric edges.
+
+### Meaning
+
+~~~text
+SUPPORTS
+= Source materially supports Target
+  ≠ independent evidence
+  ≠ truth propagation
+
+CONTRADICTS
+= materially incompatible claims under overlapping scope
+  ≠ automatic refutation
+
+DEPENDS_ON
+= Source current interpretation/validity materially relies on Target
+
+DERIVED_FROM
+= Source provenance originates from Target
+  ≠ current dependency
+  ≠ support
+
+APPLIES_TO
+= static reusable context relation
+  ≠ runtime Applicability
+
+FAILS_UNDER
+= Source weakens/fails under Target boundary/context
+  ≠ Constraint
+  ≠ production block
+
+SUPERSEDES
+= Source is semantic successor of Target
+  ≠ delete old Knowledge
+
+DUPLICATES
+= materially redundant semantic meaning
+  ≠ automatic merge
+
+RELATED_TO
+= meaningful association when stronger registered relation is not justified
+  no causal/support inference
+~~~
+
+### Version Binding
+
+Relationships should bind exact Knowledge Versions.
+
+New Knowledge Version does not silently inherit old relationships.
+
+### Non-Transitivity
+
+Do not automatically materialize transitive canonical edges.
+
+Examples:
+
+~~~text
+A SUPPORTS B
+B SUPPORTS C
+≠ auto A SUPPORTS C
+
+A DEPENDS_ON B
+B DEPENDS_ON C
+≠ auto canonical A DEPENDS_ON C
+~~~
+
+Traversal views may expose paths without writing new edges.
+
+---
+
+## 7.69 Knowledge Relationship Integrity Gate — Corrected Checkpoint
+
+### Position
+
+~~~text
+KnowledgeRelationshipCandidate
+↓
+Relationship Resolution
+↓
+Knowledge Relationship Integrity Gate
+↓
+RelationshipIntegrityDecision
+↓
+Canonical Graph Writer
+↓
+KnowledgeRelationship
+~~~
+
+Gate ≠ Writer.
+
+Gate does not silently rewrite relation type or endpoints.
+
+### Gates
+
+~~~text
+RI0 Candidate Identity
+RI1 Registry Membership
+RI2 Endpoint Existence
+RI3 Exact Version Binding
+RI4 Self Relation
+RI5 Direction / Symmetry
+RI6 Family Compatibility
+RI7 Scope / Condition Compatibility
+RI8 Evidence / Basis Integrity
+RI9 Existing Edge Check
+RI10 Reverse Symmetric Duplicate Check
+RI11 SUPERSEDES Cycle
+RI12 DERIVED_FROM Cycle
+RI13 DEPENDS_ON Cycle Review
+RI14 Temporal / Validity Consistency
+RI15 Authority Boundary
+RI16 Graph Snapshot / Concurrency
+RI17 Final Write Integrity
+~~~
+
+### Critical Rules
+
+~~~text
+Dangling edge
+→ BLOCKED
+
+Self relation
+→ BLOCKED
+
+SUPERSEDES cycle
+→ BLOCKED
+
+DERIVED_FROM cycle
+→ BLOCKED
+
+DEPENDS_ON cycle
+→ review;
+  block only when it creates invalid circular justification
+
+invalid CONTRADICTS with insufficient scope overlap
+→ NEEDS_CORRECTION
+
+exact existing edge
+→ NO_WRITE_REQUIRED
+
+reverse-equivalent symmetric existing edge
+→ NO_WRITE_REQUIRED
+~~~
+
+### Outcomes
+
+~~~text
+WRITE_ALLOWED
+WRITE_ALLOWED_WITH_LIMITATIONS
+NO_WRITE_REQUIRED
+NEEDS_CORRECTION
+BLOCKED
+INTEGRITY_GATE_FAILED
+~~~
+
+### Concurrency
+
+Decision binds:
+
+~~~text
+candidate version
+candidate digest
+source exact version
+target exact version
+graph snapshot/revision
+registry version
+~~~
+
+Graph Writer must revalidate when the graph revision changed after the gate check.
+
+This prevents TOCTOU cycle/duplicate creation.
+
+### Authority Boundaries
+
+~~~text
+CONTRADICTS
+≠ RETIRE
+
+FAILS_UNDER
+≠ Production BLOCK
+
+APPLIES_TO
+≠ Runtime APPLICABLE
+
+SUPERSEDES
+≠ delete
+
+DUPLICATES
+≠ automatic merge
+~~~
+
+---
+
+## 7.70 Knowledge Lifecycle / Aging Governance — Checkpoint
+
+### Canonical Meaning
+
+Legacy FIX-017 remains the semantic anchor:
+
+~~~text
+KnowledgeLifecycleProfile
+= Current freshness / health / revalidation projection
+
+Evidence history
+= Research / Evidence objects
+
+Research maturity
+= Hypothesis / Edge lifecycle
+
+Production permission
+= Production Promotion
+
+Risk permission
+= RiskState
+
+Storage / archive
+= Storage lifecycle
+~~~
+
+### States
+
+~~~text
+FRESH
+CURRENT
+AGING
+STALE
+DEGRADED
+UNKNOWN
+~~~
+
+Meaning:
+
+~~~text
+FRESH
+= recently formally validated and freshness basis is clear
+
+CURRENT
+= no longer newly validated but still current enough
+
+AGING
+= not invalid, but revalidation is approaching / evidence is aging
+
+STALE
+= freshness / revalidation requirement exceeded
+  ≠ wrong
+  ≠ retired
+
+DEGRADED
+= material health deterioration from new evidence,
+  contradiction, demo-live divergence, etc.
+  ≠ retired
+  ≠ production paused
+
+UNKNOWN
+= health/freshness cannot responsibly be determined
+  ≠ KT.UNKNOWN
+~~~
+
+### Normal Time-Aging Path
+
+~~~text
+FRESH
+→ CURRENT
+→ AGING
+→ STALE
+~~~
+
+DEGRADED and UNKNOWN are not simple lower rankings in the same linear scale.
+
+### Evaluation Inputs
+
+~~~text
+exact Knowledge Version
+last validation
+revalidation due
+freshness basis
+new validated research
+production evidence
+contradiction
+demo-live divergence
+failure-boundary changes
+relationship / dependency context
+aging policy
+~~~
+
+### Assessment / Apply Separation
+
+~~~text
+KnowledgeLifecycleAssessment
+= what state appears justified
+
+Transition Decision / Apply
+= what state is actually changed to
+
+StateTransitionEvent
+= immutable transition fact
+
+KnowledgeLifecycleProfile
+= current projection
+~~~
+
+Evaluator does not directly mutate the projection.
+
+### Review Triggers
+
+~~~text
+REVALIDATION_DUE
+NEW_VALIDATED_RESEARCH
+NEW_MATERIAL_CONTRADICTION
+NEW_PRODUCTION_EVIDENCE
+DEMO_LIVE_DIVERGENCE
+FAILURE_BOUNDARY_CHANGE
+DEPENDENCY_HEALTH_CHANGE
+KNOWLEDGE_VERSION_CHANGE
+AGING_POLICY_CHANGE
+MIGRATION_UNCERTAINTY
+~~~
+
+Trigger ≠ transition.
+
+### Important Current 04 Separation
+
+Current 04 also mentions possible:
+
+~~~text
+ACTIVE
+WEAK
+RETIRED
+UNDER_REVIEW
+SUPERSEDED
+~~~
+
+These MUST NOT be merged into Knowledge Aging State.
+
+Their exact future owner / semantics remain unresolved for Current adoption.
+
+---
+
+## 7.71 Applicability Evaluation Formal Contract — Corrected Checkpoint
+
+### Question
+
+Applicability asks:
+
+> Can this exact Knowledge Version be used as decision material in this exact current market context?
+
+It does NOT ask whether the Knowledge is universally true.
+
+### Inputs
+
+~~~text
+Knowledge Record
+KnowledgeLifecycleProfile
+Current Market Understanding
+Market DNA Snapshot
+Runtime Quality Context
+Runtime Freshness Context
+Current Event Context
+FailureBoundary
+Constraint
+KnowledgeRelationship
+Evidence / Validation Context
+~~~
+
+### Evaluation Flow
+
+~~~text
+AE0 Evaluation Identity
+AE1 Knowledge Integrity
+AE2 Runtime Context Integrity
+AE3 Scope Compatibility
+AE4 Required Condition Match
+AE5 Supporting / Weakening Conditions
+AE6 Market DNA / Regime Compatibility
+AE7 Lifecycle / Aging Context
+AE8 Failure Boundary Check
+AE9 Constraint Check
+AE10 Contradiction / Relationship Review
+AE11 Evidence / Uncertainty Context
+AE12 Data Quality / Freshness
+AE13 State Resolution
+~~~
+
+### States
+
+~~~text
+APPLICABLE
+PARTIALLY_APPLICABLE
+NOT_APPLICABLE
+UNCERTAIN
+BLOCKED_BY_CONSTRAINT
+NOT_EVALUATED
+~~~
+
+### State Meaning
+
+~~~text
+APPLICABLE
+= required scope/conditions sufficiently match,
+  safe known boundary context,
+  no effective hard blocking constraint,
+  quality/context sufficient for decision-material use
+
+PARTIALLY_APPLICABLE
+= core conditions broadly match but material weakening,
+  partial mismatch, weak boundary, aging/limitation, etc.
+
+NOT_APPLICABLE
+= evaluation succeeded and major scope/required conditions
+  do not match, or current state is in an unsafe research boundary
+
+UNCERTAIN
+= evaluation occurred but critical information/conflict/unknown
+  prevents responsible applicable/not-applicable conclusion
+
+BLOCKED_BY_CONSTRAINT
+= an effective/authorized hard Constraint prevents use
+
+NOT_EVALUATED
+= applicability evaluation did not meaningfully complete
+~~~
+
+### Important Correction — Contradiction
+
+~~~text
+Contradiction exists
+≠ NOT_APPLICABLE automatically
+~~~
+
+Two individually applicable Knowledge objects may contradict and both pass to 05.
+
+If contradiction destroys the ability to determine one Knowledge's applicability itself:
+
+~~~text
+→ UNCERTAIN candidate
+~~~
+
+04 still does not choose the conflict winner.
+
+### FailureBoundary vs Constraint
+
+~~~text
+FailureBoundary UNSAFE
+→ NOT_APPLICABLE candidate
+
+Authorized hard Constraint violation
+→ BLOCKED_BY_CONSTRAINT
+~~~
+
+Do not turn every research boundary directly into a Constraint.
+
+### Lifecycle
+
+No fixed mapping such as:
+
+~~~text
+FRESH → APPLICABLE
+STALE → NOT_APPLICABLE
+DEGRADED → BLOCKED
+~~~
+
+Lifecycle is context for Applicability, not Applicability itself.
+
+### Market DNA
+
+~~~text
+DNA similarity
+≠ Applicability proof
+~~~
+
+Critical DNA-axis mismatch must not be hidden by an average similarity score.
+
+### Processing Status
+
+Separate from applicability state:
+
+~~~text
+EVALUATED
+EVALUATED_WITH_LIMITATIONS
+NEED_MORE_CONTEXT
+EVALUATION_BLOCKED
+EVALUATION_FAILED
+~~~
+
+### Output
+
+~~~text
+ApplicabilityAssessment
+~~~
+
+Immutable to:
+
+~~~text
+exact Knowledge Version
+exact Evaluation Cycle
+exact Current Market Context
+policy version
+boundary / constraint context
+uncertainty
+trace
+~~~
+
+---
+
+## 7.72 Applicable Knowledge Set Common Contract — Checkpoint
+
+### Three-Layer Boundary
+
+~~~text
+ApplicableKnowledgeEntry
+= one Knowledge transfer unit
+
+ApplicableKnowledgeSet
+= current decision-material collection
+
+ExcludedApplicabilityTrace
+= evaluated but excluded Knowledge audit
+~~~
+
+### Main Set Includes
+
+~~~text
+APPLICABLE
+PARTIALLY_APPLICABLE
+~~~
+
+Only.
+
+Excluded trace includes:
+
+~~~text
+NOT_APPLICABLE
+UNCERTAIN
+BLOCKED_BY_CONSTRAINT
+NOT_EVALUATED
+~~~
+
+### ApplicableKnowledgeEntry
+
+Must bind at least:
+
+~~~text
+Knowledge ref/version
+ApplicabilityAssessment ref
+Applicability State
+condition summary
+failure-boundary context
+constraint context
+relationship context
+lifecycle context
+evidence context
+uncertainty / limitations
+trace
+~~~
+
+PARTIALLY_APPLICABLE must preserve explicit limitation/restriction context.
+
+### Set-Level Context
+
+~~~text
+same Evaluation Cycle
+Current Market Context refs
+Applicable entries
+Partially-applicable entries
+
+Contradiction groups
+Dependency context
+Duplicate / overlap clusters
+Shared-evidence groups
+Shared-cause groups
+
+Boundary context
+Constraint context
+Set uncertainty
+
+Excluded trace
+Integrity status
+~~~
+
+### No Vote / Double Counting
+
+~~~text
+Knowledge count
+≠ independent evidence count
+
+Shared Evidence
+≠ separate votes
+
+Dependency chain
+≠ extra reasons
+
+Duplicate Knowledge
+≠ extra support
+~~~
+
+### Set Integrity
+
+Candidate status:
+
+~~~text
+COMPLETE
+COMPLETE_WITH_LIMITATIONS
+INCOMPLETE
+BLOCKED
+ASSEMBLY_FAILED
+~~~
+
+### Empty Set
+
+~~~text
+ApplicableKnowledgeSet entries = []
+~~~
+
+is valid.
+
+Important:
+
+~~~text
+EMPTY
+≠ NO_TRADE
+~~~
+
+04 reports absence of usable Knowledge.
+
+05 owns the decision outcome.
+
+---
+
+## 7.73 Decision Context Assembly Formal Contract — Checkpoint
+
+### Position
+
+~~~text
+ApplicableKnowledgeSet
++
+Current Market Understanding
++
+Market DNA Snapshot
++
+Decision Scope Specification
+↓
+Decision Context Assembly
+↓
+DecisionContextSnapshot
+~~~
+
+### Responsibility
+
+~~~text
+VERIFY
+BIND
+FREEZE
+TRACE
+~~~
+
+It does NOT:
+
+~~~text
+re-search Knowledge
+re-evaluate Applicability
+replace Knowledge Versions
+recalculate Market DNA
+resolve conflicts
+weight Knowledge
+assign Thesis Roles
+calculate EV
+produce Trade direction
+produce NO_TRADE
+~~~
+
+### Decision Scope Specification
+
+Pre-Thesis input:
+
+~~~text
+asset
+market
+instrument
+venue scope
+decision horizon
+evaluation window
+target context
+scope policy version
+~~~
+
+Direction-neutral.
+
+### Decision Scope Binding Is Different
+
+~~~text
+Decision Scope Specification
+= requested domain before Thesis
+
+Decision Scope Binding
+= actual Thesis comparison grouping after Thesis construction
+~~~
+
+### Assembly Gates
+
+~~~text
+DC0 Assembly Identity
+DC1 Applicable Set Integrity
+DC2 Evaluation Cycle Compatibility
+DC3 Market Understanding Binding
+DC4 Market DNA Binding
+DC5 Temporal Consistency
+DC6 Decision Scope Compatibility
+DC7 Knowledge Version Binding
+DC8 Applicability Assessment Binding
+DC9 Relationship Context Binding
+DC10 Boundary / Constraint Binding
+DC11 Quality / Freshness Binding
+DC12 Uncertainty / Exclusion Binding
+DC13 Snapshot Freshness
+DC14 Authority Boundary
+DC15 Final Snapshot Integrity
+~~~
+
+### Status
+
+~~~text
+READY
+READY_WITH_LIMITATIONS
+INCOMPLETE
+INCONSISTENT
+STALE
+ASSEMBLY_FAILED
+~~~
+
+Status ≠ Decision Outcome.
+
+### Immutable Snapshot
+
+DecisionContextSnapshot binds exact:
+
+~~~text
+ApplicableKnowledgeSet
+Knowledge Versions
+Applicability Assessments
+Current Market Understanding
+Market DNA Snapshot
+Quality / Freshness / Event Context
+Decision Scope Specification
+Relationship / Boundary / Constraint context
+Excluded Trace
+Uncertainty
+assembly policy/version
+~~~
+
+New market context requires a new applicability/set/context cycle.
+
+Do not mix new DNA with old ApplicabilityAssessment.
+
+---
+
+## 7.74 Knowledge Integration Formal Contract — Checkpoint
+
+### Position
+
+~~~text
+DecisionContextSnapshot
+↓
+Knowledge Integration
+↓
+IntegratedKnowledgeContext
+↓
+Trade Thesis Construction
+~~~
+
+Only DecisionContextSnapshot contents may be used.
+
+No new Knowledge search or excluded-Knowledge restoration.
+
+### Integration Flow
+
+~~~text
+KI0 Input Integrity
+KI1 Knowledge Member Normalization
+KI2 Semantic / Horizon Alignment
+KI3 Effect Structure
+KI4 Mechanism Structure
+KI5 Shared Evidence Structure
+KI6 Independence Assessment
+KI7 Dependency Structure
+KI8 Common Cause Structure
+KI9 Overlap / Redundancy Structure
+KI10 Conflict Structure
+KI11 Condition Structure
+KI12 Failure Boundary Structure
+KI13 Constraint Context
+KI14 Uncertainty Structure
+KI15 Integrated Context Integrity
+~~~
+
+### Core Structures
+
+~~~text
+EffectGroup
+MechanismGroup
+SharedEvidenceGroup
+IndependenceCluster
+DependencyGroup
+CommonCauseGroup
+OverlapGroup
+ConflictGroup
+ConditionGroup
+BoundaryGroup
+ConstraintGroup
+UncertaintyGroup
+~~~
+
+### Semantics
+
+~~~text
+Effect
+≠ Trade Action
+
+Mechanism
+≠ Causal proof
+
+Shared Evidence
+≠ Independent Evidence
+
+Knowledge count
+≠ Independent Reason count
+
+Common Cause Candidate
+≠ Proven Cause
+
+Overlap
+≠ Merge
+
+Conflict
+≠ Winner
+
+Different Horizon
+≠ Contradiction automatically
+
+Failure Boundary
+≠ Thesis Invalidation
+~~~
+
+### Thesis-Relative Roles Are NOT Assigned Here
+
+Do not assign:
+
+~~~text
+PRIMARY
+SUPPORTING
+CONDITIONAL
+CONTRADICTING
+~~~
+
+during Knowledge Integration.
+
+Those roles belong to Trade Thesis Construction.
+
+### Status
+
+~~~text
+INTEGRATED
+PARTIALLY_INTEGRATED
+UNRESOLVED
+FAILED
+~~~
+
+Known unresolved market conflict can still be INTEGRATED if the conflict is correctly represented.
+
+Empty input can produce an empty INTEGRATED context.
+
+### Output
+
+~~~text
+IntegratedKnowledgeContext
+~~~
+
+Immutable and versioned by integration logic.
+
+---
+
+## 7.75 Trade Thesis Construction / Trade Thesis — Checkpoint
+
+### Position
+
+~~~text
+IntegratedKnowledgeContext
+↓
+Trade Thesis Construction
+↓
+TradeThesis 0..N
+↓
+Decision Scope Binding
+~~~
+
+### Construction Flow
+
+~~~text
+TTC0 Input Integrity
+TTC1 Thesis Candidate Discovery
+TTC2 Effect / Horizon Coherence
+TTC3 Mechanism Composition
+TTC4 Thesis Member Selection
+TTC5 Thesis-relative Role Assignment
+TTC6 Shared Evidence / Independence Binding
+TTC7 Dependency / Common Cause Binding
+TTC8 Conflict / Contradiction Binding
+TTC9 Required / Weakening Conditions
+TTC10 Failure Boundary Translation
+TTC11 Invalidation Construction
+TTC12 Counter-mechanism Construction
+TTC13 EV Input Context Assembly
+TTC14 Uncertainty / Quality Assembly
+TTC15 Thesis Coherence / Integrity
+~~~
+
+### 0..N Thesis
+
+~~~text
+0 Thesis
+= valid construction result
+≠ NO_TRADE
+
+Multiple Thesis
+= valid
+~~~
+
+Do not force one thesis from conflicting knowledge.
+
+### Thesis-Relative Roles
+
+Assigned here for the first time:
+
+~~~text
+PRIMARY
+SUPPORTING
+CONDITIONAL
+CONTRADICTING
+~~~
+
+Meaning:
+
+~~~text
+PRIMARY
+= central knowledge whose material collapse requires thesis re-evaluation
+
+SUPPORTING
+= additional compatible support
+  ≠ extra vote
+
+CONDITIONAL
+= activation / regime / amplification / weakening context
+  ≠ weak SUPPORTING
+
+CONTRADICTING
+= applicable knowledge materially opposing/weakening the thesis
+  must not be hidden
+~~~
+
+Role is a Thesis-relative property, not a permanent Knowledge attribute.
+
+### TradeThesis Core Semantics
+
+~~~text
+Expected Direction
+Expected Effect
+Expected Horizon
+
+Required Conditions
+Weakening Conditions
+
+Main / Secondary Mechanism
+Contradicting Members
+Counter-mechanism
+
+Shared Evidence
+Independence
+Dependency
+Common Cause / overlap
+
+Failure Boundary Context
+Invalidation Conditions
+Constraint Context
+
+EV Input Context
+Quality / Uncertainty
+Trace
+~~~
+
+### Expected Direction
+
+Candidate semantics:
+
+~~~text
+UPWARD
+DOWNWARD
+NON_DIRECTIONAL
+TWO_SIDED
+UNRESOLVED
+~~~
+
+Expected Direction is market expectation, not trade action.
+
+~~~text
+DOWNWARD
+≠ TAKE_SHORT_RISK
+~~~
+
+### Failure Boundary / Invalidation / Stop Loss
+
+Strict separation:
+
+~~~text
+Failure Boundary
+= reusable research-level known limit
+
+Thesis Invalidation
+= current Thesis premise no longer holds
+
+Stop Loss
+= later execution / risk protection
+~~~
+
+### Counter-mechanism
+
+Represents market process that may offset/reverse/delay the main mechanism.
+
+It is not an automatic opposite trade.
+
+### EV Ownership Correction
+
+~~~text
+Trade Thesis
+= Expected Value Input Context
+
+Decision Evaluation
+= final Expected Value Assessment
+~~~
+
+Trade Thesis must not own:
+
+~~~text
+final expected value
+trade_worthy
+accept trade
+position size
+risk budget
+~~~
+
+### Expected Magnitude / Sequence / Persistence
+
+Required when supported by research:
+
+~~~text
+expected magnitude
+expected sequence
+expected persistence
+~~~
+
+This is needed for future Post-Trade TradeThesisEvaluation compatibility.
+
+Do not invent them if evidence does not support them.
+
+### Construction Status
+
+~~~text
+BUILDABLE
+PARTIAL
+NOT_BUILDABLE
+FAILED
+~~~
+
+Important:
+
+~~~text
+NOT_BUILDABLE
+≠ FAILED
+
+NOT_BUILDABLE
+≠ NO_TRADE
+~~~
+
+### TradeThesisMember Candidate
+
+A Thesis-relative member projection may preserve:
+
+~~~text
+Knowledge ref/version
+Thesis role
+Applicability state
+Effect / Mechanism group refs
+Shared Evidence
+Dependency / Common Cause
+Conditions
+Contradictions
+Uncertainty / limitations
+~~~
+
+Useful for Post-Trade member attribution.
+
+---
+
+## 7.76 Decision Scope Binding Formal Contract — Checkpoint
+
+### Position
+
+~~~text
+TradeThesis 0..N
+↓
+Optional AI Review
+↓
+Decision Scope Binding
+↓
+DecisionScope 0..N
+↓
+Individual Thesis Evaluation
+~~~
+
+### Question
+
+> Which Trade Theses can be meaningfully evaluated and compared under one Decision Result boundary?
+
+It does NOT rank or evaluate thesis quality.
+
+### Binding Flow
+
+~~~text
+DSB0 Input Integrity
+DSB1 Thesis Validity
+DSB2 Asset Compatibility
+DSB3 Market Compatibility
+DSB4 Instrument Compatibility
+DSB5 Venue / Execution Target Compatibility
+DSB6 Horizon Compatibility
+DSB7 Evaluation Window Compatibility
+DSB8 Decision Context Compatibility
+DSB9 Runtime Context Compatibility
+DSB10 Constraint / Boundary Compatibility
+DSB11 Mutual Comparability
+DSB12 Scope Partitioning
+DSB13 Scope Integrity
+~~~
+
+### Hard / Main Dimensions
+
+Candidate hard dimensions:
+
+~~~text
+same/compatible Decision Context
+same Asset
+same/compatible decision-target Instrument
+~~~
+
+Conditional compatibility dimensions:
+
+~~~text
+Venue
+Expected Horizon
+Evaluation Window
+Context Conditions
+~~~
+
+### Not Scope Dimensions
+
+Do NOT define scope by:
+
+~~~text
+Expected Direction
+Expected Effect direction
+Mechanism
+Expected Value
+Evidence Strength
+Thesis Quality
+Confidence
+Trade-worthiness
+~~~
+
+Reason:
+
+Opposing Long/Short theses must be able to compete inside the same Decision Scope.
+
+### Horizon Compatibility
+
+Candidate:
+
+~~~text
+EXACT
+COMPATIBLE_OVERLAP
+COMPATIBLE_NESTED
+PARTIALLY_COMPATIBLE
+INCOMPATIBLE
+UNKNOWN
+~~~
+
+Do not rewrite original Thesis horizons to the scope comparison window.
+
+Example:
+
+~~~text
+T-A = 20–40m
+T-B = 30–60m
+
+Decision Scope comparison window
+may be 30–40m
+
+but original Thesis horizons remain unchanged.
+~~~
+
+### Decision Target vs Evidence Market
+
+~~~text
+Evidence Market
+≠ Decision-target Market/Instrument
+~~~
+
+A spot-flow thesis and derivatives thesis may still compete if both make expectations about the same decision-target instrument.
+
+### Compatibility Assessment
+
+Candidate:
+
+~~~text
+COMPARABLE
+COMPARABLE_WITH_LIMITATIONS
+NOT_COMPARABLE
+NEED_MORE_CONTEXT
+~~~
+
+### DecisionScope
+
+Immutable comparison boundary containing:
+
+~~~text
+Decision Context
+Asset / Market
+Decision-target Instrument
+Venue Scope
+Decision Horizon
+Evaluation Window
+Trade Thesis refs/versions
+Compatibility assessments
+Binding policy/version
+Trace
+~~~
+
+### Unbound Thesis
+
+Preserve:
+
+~~~text
+UnboundThesisTrace
+~~~
+
+Reasons may include:
+
+~~~text
+HORIZON_INCOMPATIBLE
+INSTRUMENT_INCOMPATIBLE
+CONTEXT_INCOMPATIBLE
+EVALUATION_WINDOW_MISMATCH
+SCOPE_AMBIGUOUS
+MISSING_SCOPE_CONTEXT
+STALE_THESIS
+INVALID_CONTEXT_BINDING
+~~~
+
+Unbound ≠ invalid Thesis.
+
+If possible, create a separate Decision Scope rather than silently discard it.
+
+### Single / Zero Scope
+
+~~~text
+single-Thesis Decision Scope
+= valid
+
+0 Trade Thesis
+→ 0 Decision Scope
+= valid process result
+≠ NO_TRADE
+~~~
+
+### Binding Status
+
+~~~text
+BOUND
+PARTIALLY_BOUND
+NO_BINDABLE_THESIS
+INCOMPLETE
+INCONSISTENT
+STALE
+BINDING_FAILED
+~~~
+
+Binding failure/status ≠ Decision Outcome.
+
+---
+
+## 7.77 Intermediate Checkpoint — Integrated Responsibility Review
+
+### No Major Responsibility Collision Found
+
+After correction, the core responsibilities separate as:
+
+~~~text
+Candidate Promotion
+= worth presenting to Research Intake
+
+Research Intake
+= worth formally admitting
+
+Research Router
+= which research domain owns it
+
+Research Method Routing
+= how to study it
+
+Research Plan
+= reproducible execution specification
+
+Plan Validation
+= may this plan start research?
+
+Research Execution
+= run frozen Trials and create ResearchResult
+
+Research Synthesis
+= integrate trial evidence
+
+Result Validation
+= is synthesis a transferable research artifact?
+
+Knowledge Admission
+= is there reusable knowledge meaning?
+
+Knowledge Promotion
+= how is it canonicalized/versioned/related?
+
+Knowledge Type
+= what kind of reusable knowledge is it?
+
+Knowledge Record
+= canonical semantic knowledge
+
+KnowledgeRelationship
+= graph relation between knowledge versions
+
+Knowledge Lifecycle
+= current freshness / health
+
+Applicability
+= may this knowledge be used now?
+
+Applicable Knowledge Set
+= 04→05 usable-knowledge boundary
+
+Decision Context
+= freeze this decision cycle's inputs
+
+Knowledge Integration
+= structure meaning, dependencies, overlap and conflict
+
+Trade Thesis
+= compose one market reasoning hypothesis
+
+Decision Scope Binding
+= define which theses are directly comparable
+~~~
+
+### Important Non-Equivalences
+
+~~~text
+Research Candidate
+≠ Accepted Research
+
+Research Plan
+≠ PlanValidationResult
+
+ResearchResult
+≠ ResearchSynthesisAssessment
+
+Validated Research Result
+≠ duplicated result store
+
+Research Outcome
+≠ Process Status
+
+Knowledge
+≠ Evidence
+
+KT.MARKET_RELATIONSHIP
+≠ KnowledgeRelationship
+
+Knowledge Aging
+≠ Knowledge Status / Research maturity
+
+Knowledge
+≠ Applicable Knowledge
+
+Applicability
+≠ Evidence Strength
+
+Applicable Knowledge Set
+≠ Vote
+
+Decision Context
+≠ Integrated Knowledge Context
+
+Knowledge Integration
+≠ Knowledge Merge
+
+Trade Thesis
+≠ Expected Value Assessment
+
+Expected Direction
+≠ Trade Action
+
+Failure Boundary
+≠ Thesis Invalidation
+
+Thesis Invalidation
+≠ Stop Loss
+
+Decision Scope
+≠ Trade Thesis
+
+Direction / Mechanism / EV
+≠ Decision Scope identity
+
+THESIS_NOT_BUILDABLE
+≠ NO_TRADE
+~~~
+
+### Trace Continuity Review
+
+The intended trace remains continuous:
+
+~~~text
+Trade Thesis
+→ IntegratedKnowledgeContext
+→ DecisionContextSnapshot
+→ ApplicableKnowledgeSet
+→ ApplicableKnowledgeEntry
+→ ApplicabilityAssessment
+→ KnowledgeRecord
+→ Knowledge Admission / Promotion
+→ Validated Research Result boundary
+→ ResearchSynthesisAssessment
+→ ResearchResult
+→ ResearchTrial
+→ ResearchPlan
+→ ResearchCandidate
+→ Finding / Source
+~~~
+
+No intended silent evidence copy is required.
+
+### Remaining Current-Reconciliation Items
+
+These are intentionally unresolved, not silently fixed:
+
+1. Current 03 broad Routing / Prioritization terminology must be reconciled with the new two-stage:
+   Domain Routing vs Method/Prioritization Routing.
+
+2. Current 04 candidate Knowledge Status:
+   ACTIVE / WEAK / RETIRED / UNDER_REVIEW / SUPERSEDED
+   needs a separate owner/state contract and must not be merged into Knowledge Aging.
+
+3. Applicability thresholds / DNA distance / confidence formulas remain undefined by design.
+
+4. Knowledge Family-specific required fields remain a later contract/schema task.
+
+5. Constraint authorization/effective-state governance remains separate from the Applicability contract.
+
+6. Trade Thesis Expected Direction supports NON_DIRECTIONAL / TWO_SIDED conceptually, but the v1 Production Decision outcome vocabulary has not yet been formally closed.
+
+7. 05 Decision is NOT complete until:
+   Individual Thesis Evaluation,
+   Expected Value Assessment,
+   Cross-Thesis Comparison,
+   Decision Result Finalization,
+   Decision Result,
+   and 05→Defense Handoff are formalized.
+
+### Final Checkpoint Flow
+
+~~~text
+03_RESEARCH
+↓
+Validated Research Result boundary
+
+04_KNOWLEDGE_APPLICABILITY — Maintenance
+↓
+Knowledge Admission
+↓
+Knowledge Promotion
+↓
+Knowledge Type Resolution
+↓
+Knowledge Record
+↓
+Knowledge Relationship
+↓
+Knowledge Lifecycle
+
+04_KNOWLEDGE_APPLICABILITY — Runtime
+↓
+Applicability Evaluation
+↓
+Applicable Knowledge Set
+
+05_DECISION
+↓
+Decision Context Assembly
+↓
+DecisionContextSnapshot
+↓
+Knowledge Integration
+↓
+IntegratedKnowledgeContext
+↓
+Trade Thesis Construction
+↓
+TradeThesis 0..N
+↓
+Decision Scope Binding
+↓
+DecisionScope 0..N
+
+[CHECKPOINT ENDS HERE]
+
+Next:
+Individual Thesis Evaluation
+↓
+Expected Value Assessment
+↓
+Cross-Thesis Comparison
+↓
+Decision Result Finalization
+↓
+Decision Result
+↓
+05→Defense Handoff
+~~~
+
+### Checkpoint Status
+
+~~~text
+SOURCE_STATUS:
+MIXED
+
+SOURCE_BACKED:
+- Current 03 Research boundaries
+- Current 04 Knowledge / Applicability boundaries
+- Legacy ResearchPlan / ResearchTrial / ResearchResult
+- Legacy FeatureKnowledge / FormulaKnowledge / Failure / FailureBoundary / Constraint
+- Legacy KnowledgeRelationship
+- Legacy KnowledgeLifecycleProfile
+- Legacy TradeThesis / SignalDecision concepts
+
+CURRENT_DERIVED:
+- detailed Intake / Registry / Method contracts
+- Research Synthesis / Result Validation refinement
+- two-axis Knowledge Type registry
+- Knowledge Common Contract
+- Relationship semantic/integrity contracts
+- detailed Lifecycle Governance
+- detailed Applicability contract
+- Applicable Knowledge Set transfer contract
+- Decision Context / Integration / 0..N Thesis / Scope Binding
+
+CURRENT_03_CONFLICT_STATUS:
+MINOR TERMINOLOGY RECONCILIATION REQUIRED
+
+CURRENT_04_CONFLICT_STATUS:
+MINOR SEMANTIC REFINEMENT APPLIED
+- contradiction vs applicability clarified
+- aging vs candidate Knowledge Status separated
+
+LEGACY_CONFLICT_STATUS:
+MINOR / MODERATE RESPONSIBILITY REFINEMENT
+NO ARCHITECTURE-BREAKING CONFLICT FOUND
+
+REVIEW_STAGE:
+INTERMEDIATE_CHECKPOINT
+
+CURRENT_DESIGN_STATUS:
+NOT_ADOPTED
+~~~
+
+
 # 8. FIX / Failure Index
 
 FIX履歴を、単なるGit履歴ではなく再利用可能なFailure Knowledgeとして索引化する。
