@@ -17,9 +17,9 @@ Last Updated:
 
 Conversation Focus:
 Legacy Reference side-thread.
-新Execution Lifecycleを基準にTradeResult / Position Terminalと
-7.41–7.49 Post-Trade Source Objectを再照合し、
-7.50–7.56 Finding Pipelineとの整合までCheckpoint保存した。
+Cross-Analysis Review詳細Contract、
+Shared Origin / Dependency / Conflict Handlingを横断Reviewし、
+CA-01〜CA-27を8テーマへ重複整理してCheckpoint保存した。
 
 Important Boundary:
 This does NOT change Project Current Task.
@@ -28,48 +28,58 @@ Current Design adoption has NOT occurred.
 
 DONE:
 - 99_REFERENCE/旧市場理解OS_設計知識リファレンス.md
-  Sections 7.105–7.112 saved.
-- Position CLOSEDをTradeResult terminal boundary候補へ精密化。
-- TerminalityとMeasurement Completenessを分離。
-- DecisionResult multi-selected Thesis lineageを
-  EntryThesis → LogicalPosition → TradeResultまで保持。
-- TradeThesisEvaluationをselected Thesisごとの1..N評価候補へ修正。
-- Trade lifetimeとThesis evaluation horizonを分離。
-- Production Evaluationをreadiness-driven orchestrationへ修正。
-- Defense BLOCK評価をTradeResult必須依存から分離。
-- InTradeDefenseDecisionEvaluation候補を追加。
-- DecisionResultEvaluation候補を追加しNO_TRADEも評価可能化。
-- 7.49 direct Analysis→ResearchCandidateを7.50 Finding Pipelineでsupersede。
-- Finding Taxonomy v1.0を黙って変更せずv1.1 extension candidateを追加。
-- DECISION Finding Domain候補を追加。
-- InTradeDefenseDecisionEvaluationは既存DEFENSE Domainへ追加Source候補。
+  Sections 7.113–7.125 saved.
+- Cross-Analysis placementを
+  Analysis Results → CrossAnalysisReviewResult → Finding Extractor
+  へ固定候補化。
+- v1 Review Scopeを1 Production Evaluation Episode中心へ固定候補化。
+- Shared Origin / Dependency / Common Causeを分離。
+- Analysis / Finding / Trade count ≠ Independent Evidence countを明示。
+- Structural mismatchをSemantic Conflictより先に処理する順序を固定。
+- Responsibility Chain ≠ Causal Chainを固定。
+- CrossAnalysisReviewResultを唯一の新Durable candidateとして整理。
+- SharedOriginRef / DependencyEdge / ConflictRecord等はChild/Value structureへ圧縮。
+- Cross-Analysis Reviewをincremental/versionedにし、Source supersession時の
+  selective re-analysis impact detection候補を追加。
+- CA-01〜CA-27を8 governing themesへ統合。
 - Architecture-breaking conflict: NONE FOUND.
 - Current Design remains NOT_ADOPTED.
 
 UNSAVED:
-None for this Post-Trade / Finding source consistency checkpoint.
+None for this Cross-Analysis detailed checkpoint.
 
 OPEN:
-- Cross-Analysis Review detailed contract.
-- Analysis dependency / shared-origin / conflict handling.
-- Exact taxonomy governance approval/version migration process.
-- Exact Analysis readiness enum/thresholds.
+- Full Legacy Reference Closure Review.
+- Exact DB/schema/graph storage/thresholds remain intentionally deferred.
+- Exact CROSS_ANALYSIS taxonomy governance remains deferred.
 - Current adoption requires separate review later.
 
 NEXT:
-Cross-Analysis Review detailed contract
-→ analysis dependency / shared-origin / conflict handling
-→ then consider full Legacy Reference closure review.
+OLD MARKET-UNDERSTANDING-OS
+FULL LEGACY REFERENCE CLOSURE REVIEW
+
+Closure Review targets:
+1. Whole architecture flow
+2. Duplicate / redundant responsibilities
+3. Object proliferation
+4. Authority collisions
+5. Source-of-Truth conflicts
+6. Trace discontinuities
+7. Circular dependencies
+8. Deferred items
+9. Current adoption candidates
+10. KEEP / REDESIGN / DROP / DEFER candidates
+11. Legacy Reference closure state
 
 READ:
 - 99_REFERENCE/旧市場理解OS_設計知識リファレンス.md
-  especially 7.105–7.112,
-  plus 7.41–7.56 and 7.97–7.104
+  especially 7.113–7.125,
+  plus 7.41–7.56, 7.97–7.112
 - 00_AI/AI_CONTEXT.md
   only to preserve separation between Current Project state and this Reference side-thread
 
 Last Reference Checkpoint Commit:
-b7a8734c139a6b410870034518cac388c580d48a
+acc321fe7bd4764892d0a51bfb4ace7e0abb6891
 
 Git Write Permission Reminder:
 REQUIRE CURRENT-CHAT USER AUTHORIZATION
