@@ -17,10 +17,10 @@ Last Updated:
 
 Conversation Focus:
 Legacy Reference side-thread.
-旧市場理解OS Referenceの05_DECISION Final Checkpoint後を継続し、
-Defense Admission → Defense Evaluation → Risk Governance →
-Emergency / Recovery → Defense→Execution / Barrier C
-まで詳細Reference設計を進めた。
+旧市場理解OS ReferenceのExecution詳細設計をCross Reviewし、
+Open Order Runtime / Retry / Idempotency / Reconciliation /
+Split Execution / Position / Exit / Protection / Venue Routing
+までCheckpoint保存した。
 
 Important Boundary:
 This does NOT change Project Current Task.
@@ -28,48 +28,42 @@ AI_CONTEXT remains authoritative for Current Project state.
 Current Design adoption has NOT occurred.
 
 DONE:
-- 05_DECISION Reference remains SEMANTICALLY_CLOSED_CANDIDATE.
 - 99_REFERENCE/旧市場理解OS_設計知識リファレンス.md
-  Sections 7.88–7.96 saved.
-- Post-05 Defense / Risk / Entry boundary reconciliation completed as Reference checkpoint.
-- No architecture-breaking conflict found.
-- Major corrections saved:
-  Defense Admission responsibility separation,
-  process/outcome separation,
-  RiskState / Constraint version barriers,
-  Emergency restriction vs Recovery authority separation,
-  Barrier C1/C2,
-  EntryThesis / OrderIntent validity candidates,
-  Submission Gate processing boundary.
-- Emergency scope correction:
-  use smallest safe scope, but expand for shared dependency / unknown blast radius.
-- Risk-reducing action correction:
-  intent alone is insufficient; venue/execution semantics must prevent accidental exposure increase.
+  Sections 7.97–7.104 saved.
+- EX-10〜EX-107を6領域へ整理しCross Review。
+- Architecture-breaking conflict: NONE FOUND.
+- Object proliferation reduced.
+- Added review corrections:
+  EX-108 ExecutionRecord generator responsibility refinement.
+  EX-109 Adapter normalization integrity check before dispatch.
+  EX-110 Auditable unresolved record does not release execution safety guard.
+  EX-111 Runtime object collapse before Current adoption.
+- Execution detailed Reference flow now covers:
+  Entry → Runtime Execution → Position → Exit / Protection →
+  Position Close → TradeResult boundary.
+- Current Design remains NOT_ADOPTED.
 
 UNSAVED:
-None for the checkpoint above.
+None for this Execution detailed checkpoint.
 
 OPEN:
-- This remains Reference only; Current adoption requires separate review later.
-- Exact thresholds, TTLs, IAM actors, retry/backoff, reconciliation algorithm,
-  order event model and multi-exchange routing intentionally remain unresolved.
+- Exact DB schema / Python class hierarchy / event storage remain intentionally deferred.
+- Exact retry/backoff/idempotency-key format and venue-specific reconciliation order remain deferred.
+- Exact Exit / Protection thresholds and multi-venue hedge policy remain deferred.
+- Current adoption requires separate review later.
 
 NEXT:
-Continue Legacy Reference detailed design from:
-Open Order Runtime Lifecycle
-→ Retry / Idempotency / Reconciliation
-→ Split Execution Lifecycle
-→ Position creation / Position identity
-→ Exit / Protection lifecycle as needed.
+TradeResult / Position Terminal reconciliation with the new Execution lifecycle
+→ Post-Trade source-object consistency review.
 
 READ:
 - 99_REFERENCE/旧市場理解OS_設計知識リファレンス.md
-  especially 7.88–7.96 and prior 7.36–7.40
+  especially 7.97–7.104, plus 7.41–7.49 for Post-Trade
 - 00_AI/AI_CONTEXT.md
   only to preserve separation between Current Project state and this Reference side-thread
 
 Last Reference Checkpoint Commit:
-e9f30186dea98ae2ec9301216e5a3e0d29dd3a09
+22093ce09e99048c4614ec05c4b2705d39f0c063
 
 Git Write Permission Reminder:
 REQUIRE CURRENT-CHAT USER AUTHORIZATION
