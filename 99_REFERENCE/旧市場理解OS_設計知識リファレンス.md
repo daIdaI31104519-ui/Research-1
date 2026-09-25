@@ -19443,3 +19443,864 @@ before any Current Design adoption
 ~~~
 
 Do not jump to Current adoption from this checkpoint.
+---
+
+## 7.113 Cross-Analysis Review — Detailed Contract Checkpoint
+
+### Purpose
+
+This checkpoint consolidates the detailed Legacy Reference contract for Cross-Analysis Review, Shared Origin, Dependency, Evidence Independence, Conflict Handling, incremental review and Finding Pipeline handoff.
+
+Source-backed anchors:
+
+~~~text
+7.50 FP-03
+same underlying origin must not be counted as independent evidence
+
+7.50 FP-06
+Cross-Analysis may expose:
+ANALYSIS_CONFLICT
+SHARED_ORIGIN_OVERCOUNT_RISK
+TRACE_GAP
+VERSION_MISMATCH
+RESPONSIBILITY_AMBIGUITY
+
+7.54
+Candidate Promotion may aggregate Atomic Findings.
+Research Intake owns formal merge.
+
+7.75
+Shared Evidence / Dependency / Common Cause remain distinct.
+
+7.107 / 7.110 / 7.111
+Production Evaluation Analysis Results are versioned and source-bound.
+~~~
+
+~~~text
+CURRENT_DESIGN_STATUS:
+NOT_ADOPTED
+
+REFERENCE_STAGE:
+CROSS_ANALYSIS_DETAILED_CONTRACT
+~~~
+
+### Formal Definition
+
+> **Cross-Analysis Review = one Production Evaluation Episode内の複数Versioned Analysis Resultについて、Source Identity・Version・Subject・Observation / Evaluation Window・Evidence Channel・Shared Origin・Dependency・Claim Scope・Responsibilityを横断照合し、見かけ上の差と実質Conflictを分離し、Evidence水増し・Trace断絶・Version不整合・責任境界曖昧化を検出するProcessing Responsibility候補。**
+
+It does not re-analyze the market, choose a winning Analysis, prove Root Cause, merge Findings, promote ResearchCandidate, change Production or mutate source Analysis.
+
+### CORRECTION-CA-01 — Placement
+
+~~~text
+Production Evaluation Analysis Results
+↓
+Cross-Analysis Review
+↓
+CrossAnalysisReviewResult
+↓
+Finding Extractor
+↓
+Finding Normalizer
+↓
+Canonical Finding
+↓
+Candidate Promotion
+~~~
+
+Cross-Analysis reviews Analysis Results directly. Candidate Promotion owns Research Problem aggregation.
+
+---
+
+## 7.114 Cross-Analysis Review Scope / Input Gates
+
+Preferred v1 scope:
+
+~~~text
+1 Cross-Analysis Review
+≈ 1 Production Evaluation Episode
+~~~
+
+Episode examples:
+
+~~~text
+TAKE Risk
+→ Decision → Defense → Execution → Position → TradeResult
+
+NO_TRADE
+→ DecisionResult → later evaluative evidence
+
+Defense BLOCK
+→ DecisionResult → DefenseDecision → later evaluative evidence
+~~~
+
+Cross-trade recurrence detection belongs downstream to Candidate Promotion / Research.
+
+CrossAnalysisReviewScope is a value structure, not a top-level business object.
+
+Candidate gates:
+
+~~~text
+CAR0 Review Scope Identity
+CAR1 Analysis Contract
+CAR2 Analysis Version Binding
+CAR3 Source Binding Integrity
+CAR4 Subject Identity
+CAR5 Temporal / Evaluation Window Compatibility
+CAR6 Evidence Channel Compatibility
+CAR7 Shared Origin Resolution
+CAR8 Dependency Resolution
+CAR9 Claim Scope Resolution
+CAR10 Responsibility Boundary
+CAR11 Conflict Eligibility
+CAR12 Review Output Integrity
+~~~
+
+### CA-02 / CA-03
+
+~~~text
+v1 Cross-Analysis centers on one Production Episode.
+
+WAITING_FOR_EVIDENCE / NOT_APPLICABLE / INDETERMINATE / FAILED
+≠ Analysis Conflict
+~~~
+
+---
+
+## 7.115 Shared Origin Contract
+
+> **Shared Origin = multiple Analysis / Finding objects depend on the same or materially overlapping Source Fact, Decision, Position, Execution, Market Event, Reference Model, Evidence Set or observation context.**
+
+~~~text
+Shared Origin
+≠ Duplicate Analysis
+≠ Dependency
+≠ Proven Common Cause
+≠ Invalid Analysis
+~~~
+
+Origin categories candidate:
+
+~~~text
+Episode:
+SAME_DECISION / SAME_POSITION / SAME_TRADE
+
+Event:
+SAME_EXECUTION_ATTEMPT / SAME_FILL / SAME_PROTECTION_EVENT / SAME_EXIT_EVENT / SAME_MARKET_EVENT
+
+Evidence:
+SAME_RAW_OBSERVATION / SAME_DERIVED_METRIC / SAME_EVIDENCE_SET / SAME_REFERENCE_PROFILE
+
+Context:
+SAME_MARKET_WINDOW / SAME_REGIME_DNA / SAME_VENUE_CONTEXT
+~~~
+
+SharedOriginRef remains a child/value structure.
+
+Relation classes candidate:
+
+~~~text
+EXACT_SHARED_ORIGIN
+MATERIAL_OVERLAP
+PARTIAL_OVERLAP
+CONTEXT_ONLY
+UNKNOWN
+~~~
+
+### CA-19 / CA-11 / CA-24
+
+~~~text
+same Trade
+≠ automatically same Evidence
+
+different Trade
+≠ automatically independent Evidence
+
+Shared Origin
+≠ Duplicate Analysis
+≠ Proven Common Cause
+~~~
+
+Common Cause confirmation belongs to Research.
+
+---
+
+## 7.116 Analysis Dependency Graph Contract
+
+> **Analysis Dependency = one Analysis Result materially uses another Analysis Result, its transformation, its reference model/policy, or an explicit derived intermediate as an input to its own conclusion.**
+
+Dependency type candidate:
+
+~~~text
+DIRECT_DERIVATION
+SOURCE_TRANSFORMATION
+REFERENCE_DEPENDENCY
+POLICY_DEPENDENCY
+COUNTERFACTUAL_DEPENDENCY
+NONE_KNOWN
+UNKNOWN
+~~~
+
+AnalysisDependencyEdge remains a directed child/graph-edge structure.
+
+~~~text
+A → B
+≠
+B → A
+~~~
+
+### CA-09
+
+~~~text
+Dependency
+≠ Shared Origin
+~~~
+
+Example:
+
+~~~text
+TradeThesisEvaluation → ThesisMemberAttribution
+= direct dependency
+
+OutcomeAnalysisResult + DemoLiveDivergence using same Fill
+= shared origin
+~~~
+
+### CA-20
+
+If A uses B and B uses A, preserve the dependency-cycle issue rather than silently breaking the graph.
+
+Potential future versioned taxonomy candidate:
+
+~~~text
+FND.CROSS_ANALYSIS.DEPENDENCY_CYCLE
+~~~
+
+### CA-27
+
+Dependency Graph may also drive selective re-analysis impact detection after Source supersession.
+
+---
+
+## 7.117 Evidence Independence / Shared-Origin Clustering
+
+Do not introduce one universal numeric independence score at this stage.
+
+Semantic classes candidate:
+
+~~~text
+INDEPENDENT_ENOUGH_FOR_SEPARATE_COUNT
+PARTIALLY_DEPENDENT
+SHARED_ORIGIN
+DIRECTLY_DEPENDENT
+INDEPENDENCE_UNKNOWN
+~~~
+
+SharedOriginCluster is a derived child structure inside CrossAnalysisReviewResult.
+
+### Consolidated CA-10 / CA-19 / CA-21
+
+~~~text
+Analysis Object Count
+≠ Finding Count
+≠ Trade Count
+≠ Independent Evidence Count
+~~~
+
+Multiple valid interpretations may remain while sharing one underlying origin.
+
+Shared Origin does not delete differentiated Analysis meaning; it prevents Evidence-count inflation.
+
+---
+
+## 7.118 Conflict Eligibility / Conflict Handling Contract
+
+> **Analysis Conflict = compatible Source / Version / Subject / Scope / Time / Channelを前提として、同一またはMaterialに重なるClaim Dimensionについて、同時成立が困難なVersioned Analysis Conclusionが存在する状態。**
+
+Conflict eligibility order:
+
+~~~text
+Trace compatibility
+↓
+Source version compatibility
+↓
+Temporal / evaluation-window compatibility
+↓
+Evidence channel compatibility
+↓
+Subject compatibility
+↓
+Claim-dimension compatibility
+↓
+Responsibility compatibility
+↓
+Semantic conclusion comparison
+~~~
+
+### Consolidated CA-04 / 05 / 06 / 07 / 08 / 13 / 22
+
+~~~text
+Version mismatch
+Different time window
+Different evidence channel
+Different subject
+Different responsibility
+Trace gap
+Structural mismatch
+≠ semantic Analysis Conflict automatically
+~~~
+
+Candidate relation classification:
+
+~~~text
+COMPATIBLE
+COMPLEMENTARY
+APPARENT_DIFFERENCE
+STRUCTURAL_MISMATCH
+MATERIAL_CONFLICT
+INDETERMINATE
+~~~
+
+### CA-23
+
+COMPATIBLE means conclusions may coexist. COMPLEMENTARY means they may coexist and illuminate different responsibility dimensions of the same Episode.
+
+AnalysisConflictRecord is a child structure. Cross-Analysis never stores A_CORRECT / B_WRONG as its authority decision.
+
+---
+
+## 7.119 Trace / Version / Responsibility Handling
+
+Version mismatch is handled before semantic conflict.
+
+~~~text
+OutcomeAnalysis → TradeResult v2
+SupervisorEvaluation → TradeResult v1
+→ VERSION_MISMATCH first
+~~~
+
+Trace Gap candidate:
+
+~~~text
+Analyses claim the same Episode
+but required common source refs cannot be resolved
+→ TRACE_GAP
+~~~
+
+TRACE_GAP means the relation is unverifiable; it does not prove either Analysis wrong.
+
+Responsibility role candidates:
+
+~~~text
+OBSERVATION_OWNER
+DECISION_OWNER
+SAFETY_OWNER
+EXECUTION_OWNER
+STATE_OWNER
+ANALYSIS_OWNER
+RESEARCH_OWNER
+~~~
+
+### Consolidated CA-12 / CA-14 / CA-25
+
+~~~text
+Cross-Analysis may detect:
+- unresolved responsibility boundary
+- shared origin
+- dependency
+- conflict
+
+Cross-Analysis must not decide:
+- proven Root Cause
+- causal winner
+- which Analysis is correct
+- who caused the market outcome
+~~~
+
+Research resolves causal / explanatory conflict.
+
+~~~text
+Responsibility Chain
+≠ Causal Chain
+~~~
+
+---
+
+## 7.120 Incremental Review / Supersession / Re-analysis
+
+Production analyses become READY at different times, so Cross-Analysis is incremental and versioned.
+
+~~~text
+Review v1
+= analyses available now
+
+later new Analysis becomes READY
+↓
+Review v2 supersedes v1
+~~~
+
+### CA-16 / CA-26
+
+~~~text
+New Analysis arrival
+≠ old Review was wrong
+~~~
+
+Old Review remains immutable for the Analysis set available at that time.
+
+Source supersession candidate flow:
+
+~~~text
+Source v1
+↓
+Analysis A/B
+↓
+Cross Review v1
+
+Source v2 supersedes v1
+↓
+dependency/source graph impact check
+↓
+affected Analysis re-evaluated if material
+↓
+Cross Review v2
+~~~
+
+Do not recompute unrelated analyses automatically.
+
+Coverage state candidate:
+
+~~~text
+COMPLETE_FOR_SCOPE
+PARTIAL_EXPECTED_MORE
+PARTIAL_MISSING_SOURCE
+INDETERMINATE
+~~~
+
+---
+
+## 7.121 CrossAnalysisReviewResult Object Contract
+
+> **CrossAnalysisReviewResult = one scoped, versioned, immutable result of Cross-Analysis Review, preserving the reviewed Analysis set, source/dependency/origin relationships, compatibility assessments, detected conflicts and structural issues without resolving Root Cause or changing downstream authority.**
+
+Conceptual structure:
+
+~~~text
+Identity
+- cross_analysis_review_id
+- version
+- created_at
+- trace_id
+
+Scope
+- review_scope
+- production_episode_key
+
+Input Set
+- analysis_refs[]
+- analysis_versions[]
+- included_analysis_refs[]
+- excluded_analysis_refs[]
+- source_binding_digests[]
+
+Coverage
+- expected_analysis_types[]
+- available_analysis_types[]
+- waiting_analysis_types[]
+- coverage_state
+
+Relationship Graph
+- dependency_edges[]
+- shared_origin_clusters[]
+- independence_context[]
+- counterfactual_relations[]
+
+Compatibility
+- source_version_compatibility
+- temporal_compatibility
+- channel_compatibility
+- subject_scope_compatibility
+
+Issues
+- analysis_conflicts[]
+- shared_origin_overcount_risks[]
+- trace_gaps[]
+- version_mismatches[]
+- responsibility_ambiguities[]
+- dependency_cycle_candidates[]
+
+Status
+- process_status
+- review_state
+- completeness
+- quality
+- uncertainty
+
+Policy
+- cross_analysis_policy_version
+- source_binding_policy_version
+
+Limitations
+- limitations[]
+~~~
+
+Process Status candidate:
+
+~~~text
+COMPLETED
+COMPLETED_WITH_LIMITATIONS
+INCOMPLETE
+FAILED
+~~~
+
+Review State candidate:
+
+~~~text
+CONSISTENT
+ISSUES_FOUND
+INDETERMINATE
+~~~
+
+### CA-15 / CA-17
+
+~~~text
+ISSUES_FOUND
+≠ Review failure
+
+FAILED
+≠ Analysis conflict
+~~~
+
+Do not collapse Trace Gap / Version Mismatch / Conflict / Shared Origin / Responsibility into one universal score.
+
+---
+
+## 7.122 Finding Pipeline Integration
+
+CrossAnalysisReviewResult enters the same Finding extraction boundary as other versioned Production Evaluation Analysis Results.
+
+~~~text
+CrossAnalysisReviewResult
+↓
+Finding Extractor
+↓
+Finding Normalizer
+↓
+FND.CROSS_ANALYSIS.*
+~~~
+
+Existing candidates:
+
+~~~text
+ANALYSIS_CONFLICT
+SHARED_ORIGIN_OVERCOUNT_RISK
+TRACE_GAP
+VERSION_MISMATCH
+RESPONSIBILITY_AMBIGUITY
+~~~
+
+Potential future versioned extension:
+
+~~~text
+DEPENDENCY_CYCLE
+~~~
+
+### CA-18
+
+~~~text
+Cross-Analysis clustering
+= evidence / relationship structure
+
+Candidate Promotion aggregation
+= Research Problem formation
+~~~
+
+Candidate Promotion should receive cross_analysis_review_ref, shared-origin context, dependency context and conflict context so multiple Findings are not mistaken for multiple independent confirmations.
+
+No direct Cross-Analysis → Research Router bypass.
+
+---
+
+## 7.123 Object Reduction / Authority Review
+
+Durable candidate:
+
+~~~text
+CrossAnalysisReviewResult
+~~~
+
+Child / Value / Derived structures:
+
+~~~text
+CrossAnalysisReviewScope
+AnalysisClaimSignature
+SharedOriginRef
+AnalysisDependencyEdge
+SharedOriginCluster
+AnalysisConflictRecord
+ResponsibilityReviewRecord
+~~~
+
+Processing responsibilities:
+
+~~~text
+Cross-Analysis Review
+Shared Origin Resolution
+Dependency Resolution
+Conflict Eligibility Check
+Responsibility Boundary Review
+Re-analysis Impact Check
+~~~
+
+Do not add separate Evidence Independence layer, Shared Origin domain, Conflict Resolution authority, Common Cause authority or Analysis winner selector at this stage.
+
+Authority:
+
+~~~text
+Cross-Analysis
+= relationship / compatibility / conflict detection
+
+Finding Extractor
+= Finding existence
+
+Finding Normalizer
+= canonical vocabulary
+
+Candidate Promotion
+= Research Problem candidate formation
+
+Research Intake
+= admission / merge / reject
+
+Research
+= causal / explanatory resolution
+~~~
+
+---
+
+## 7.124 CA-01〜CA-27 Consolidated Cross-Review
+
+The original CA identifiers remain as design-history identifiers, but their semantics collapse into eight governing themes.
+
+### Theme A — Placement / Scope
+
+~~~text
+CA-01 Cross-Analysis reviews Analysis Results before Finding extraction.
+CA-02 v1 scope centers on one Production Evaluation Episode.
+~~~
+
+### Theme B — Readiness / Structural Compatibility Before Conflict
+
+Consolidates CA-03 / 04 / 05 / 06 / 07 / 08 / 13 / 22.
+
+Unified rule:
+
+~~~text
+Before semantic conflict, verify:
+readiness
+trace
+source version
+time/window
+channel
+subject
+claim dimension
+responsibility scope
+~~~
+
+### Theme C — Shared Origin / Independence
+
+Consolidates CA-10 / 11 / 19 / 21 / 24.
+
+~~~text
+Object / Finding / Trade count
+≠ independent Evidence count
+
+Shared Origin
+≠ duplicate meaning
+≠ proven Common Cause
+~~~
+
+### Theme D — Dependency
+
+~~~text
+CA-09 Dependency ≠ Shared Origin
+CA-20 Dependency cycle remains a structural issue candidate
+CA-27 Dependency graph supports re-analysis impact detection
+~~~
+
+### Theme E — Responsibility / Root Cause Boundary
+
+Consolidates CA-12 / 14 / 25.
+
+~~~text
+Cross-Analysis detects unresolved responsibility / conflict.
+Research resolves causal / explanatory conflict.
+Responsibility Chain ≠ Causal Chain.
+~~~
+
+### Theme F — Review Execution Semantics
+
+~~~text
+CA-15 Issues Found ≠ Review Failure
+CA-16 Cross-Analysis is incremental / versioned
+CA-26 New Analysis arrival ≠ old Review wrong
+~~~
+
+### Theme G — Multi-Dimensional Review
+
+~~~text
+CA-17 do not collapse review dimensions into one score
+CA-23 Compatible ≠ Complementary
+~~~
+
+### Theme H — Downstream Boundary
+
+~~~text
+CA-18 Evidence clustering ≠ ResearchCandidate aggregation
+~~~
+
+### Consolidated Invariants
+
+~~~text
+Analysis Count ≠ Independent Evidence Count
+Finding Count ≠ Independent Evidence Count
+Different Analysis Outcome ≠ Conflict automatically
+Different Source Version → version issue first
+Different Window ≠ Conflict automatically
+Different Evidence Channel ≠ Conflict automatically
+Different Subject ≠ Conflict automatically
+Different Responsibility Outcome ≠ Conflict automatically
+Shared Origin ≠ Duplicate Analysis
+Shared Origin ≠ Proven Common Cause
+Dependency ≠ Shared Origin
+Trace Gap ≠ Result mismatch
+Conflict detection ≠ conflict resolution
+Responsibility assignment ≠ causal proof
+Cross-Analysis must not choose a winner
+Cross-Analysis must not merge Findings
+Cross-Analysis must not promote ResearchCandidate
+Cross-Analysis must not mutate source Analysis
+Cross-Analysis must preserve exact versions / windows / channels
+~~~
+
+---
+
+## 7.125 Cross-Analysis Detailed Design — Final Checkpoint
+
+### Review Result
+
+~~~text
+ARCHITECTURE_BREAKING_CONFLICT:
+NONE FOUND
+
+CROSS_ANALYSIS_PLACEMENT_CONFLICT:
+RESOLVED
+
+SHARED_ORIGIN / DEPENDENCY COLLISION:
+RESOLVED
+
+STRUCTURAL_MISMATCH / SEMANTIC_CONFLICT COLLISION:
+RESOLVED
+
+EVIDENCE_OVERCOUNT RISK:
+CONTROLLED
+
+RESPONSIBILITY / CAUSALITY COLLISION:
+RESOLVED
+
+FINDING MERGE / CROSS_ANALYSIS COLLISION:
+RESOLVED
+
+OBJECT_PROLIFERATION:
+CONTROLLED
+
+INCREMENTAL / VERSIONED REVIEW:
+DEFINED
+
+CURRENT_03_CONFLICT_STATUS:
+NONE FOUND
+
+CURRENT_DESIGN_STATUS:
+NOT_ADOPTED
+
+REFERENCE_REVIEW_STATUS:
+CROSS_ANALYSIS_DETAILED_CHECKPOINT_READY
+~~~
+
+### Integrated Reference Flow
+
+~~~text
+Production Evaluation Analysis Results
+↓
+Evaluation Readiness
+↓
+Cross-Analysis Review
+
+├ Scope / Source Binding
+├ Version / Time / Channel Compatibility
+├ Subject / Claim Alignment
+├ Shared Origin Resolution
+├ Dependency Graph
+├ Evidence Independence Context
+├ Conflict Eligibility
+├ Conflict Detection
+├ Responsibility Boundary Review
+└ Coverage / Uncertainty
+
+↓
+CrossAnalysisReviewResult
+↓
+Finding Extractor
+↓
+Finding Normalizer
+↓
+Canonical Finding
+↓
+Candidate Promotion
+↓
+ResearchCandidate
+↓
+Research Intake
+↓
+Research Router
+↓
+03_RESEARCH
+~~~
+
+### Remaining Intentional Deferrals
+
+~~~text
+exact DB tables
+exact graph storage technology
+exact semantic fingerprint algorithm
+exact conflict materiality thresholds
+exact independence-count methodology in 03_RESEARCH
+exact taxonomy governance for new CROSS_ANALYSIS codes
+exact re-analysis scheduler implementation
+exact CrossAnalysis readiness enum
+~~~
+
+### Legacy Reference Next Stage
+
+~~~text
+OLD MARKET-UNDERSTANDING-OS
+FULL LEGACY REFERENCE CLOSURE REVIEW
+~~~
+
+Closure Review target:
+
+~~~text
+1. Whole architecture flow
+2. Duplicate / redundant responsibilities
+3. Object proliferation
+4. Authority collisions
+5. Source-of-Truth conflicts
+6. Trace discontinuities
+7. Circular dependencies
+8. Deferred items
+9. Current adoption candidates
+10. KEEP / REDESIGN / DROP / DEFER candidates
+11. Legacy Reference closure state
+~~~
+
+Do not adopt this Reference directly into Current Design.
