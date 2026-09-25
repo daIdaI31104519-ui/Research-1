@@ -16867,3 +16867,1678 @@ exact multi-exchange routing
 
 Those omissions are acceptable at this Legacy Reference stage and should not be silently invented as Current Design.
 
+
+---
+
+## 7.97 Execution Detailed Cross-Review — Checkpoint Scope
+
+### Purpose
+
+This checkpoint consolidates the detailed Execution Reference work designed after 7.96.
+
+Source-backed anchors:
+
+~~~text
+7.37 OrderIntent
+7.38 ExecutionRecord
+7.40 Execution Integrated Review
+7.95 Defense → Execution / Temporal Barrier C
+7.96 Defense / Risk / Entry Boundary Checkpoint
+~~~
+
+Detailed unsaved design reviewed here:
+
+~~~text
+EX-10 .. EX-30
+Open Order Runtime / Retry / Idempotency / Reconciliation
+
+EX-31 .. EX-41
+Split Execution
+
+EX-42 .. EX-55
+Position Creation / Position Identity
+
+EX-56 .. EX-72
+Exit / In-Trade Defense / Exit Execution
+
+EX-73 .. EX-92
+Protection Lifecycle
+
+EX-93 .. EX-107
+Venue Routing / Multi-Exchange
+~~~
+
+Status:
+
+~~~text
+CURRENT_DESIGN_STATUS:
+NOT_ADOPTED
+
+REFERENCE_STAGE:
+EXECUTION_DETAILED_CROSS_REVIEW
+
+ARCHITECTURE_REWRITE_REQUIRED:
+NO
+
+REFERENCE_LOCAL_PRECEDENCE:
+Where 7.37–7.40 / 7.95–7.96 conflict with 7.97+,
+7.97+ is the newer Reference interpretation only.
+This does NOT create Current Design authority.
+~~~
+
+### Cross-Review Result
+
+No architecture-breaking contradiction was found.
+
+The detailed work is internally coherent if the following principles are preserved:
+
+~~~text
+Intent
+≠ Runtime Attempt
+≠ Event
+≠ Projection
+≠ Reconciliation Result
+≠ Canonical ExecutionRecord
+
+Order ACK
+≠ Fill
+≠ Position exposure
+
+Logical Position
+≠ Venue Position
+
+Normal Exit Authority
+≠ In-Trade Hard Safety Authority
+
+Protection Intent
+≠ Protection State
+
+Venue Routing
+≠ EV / Defense Decision
+~~~
+
+---
+
+## 7.98 Execution Runtime Core — Attempt / Event / Reconciliation Contract
+
+### Refined Runtime Flow
+
+~~~text
+Execution Intent
+↓
+Submission / Position / Venue checks
+↓
+ExecutionAttempt
+↓
+Adapter normalization
+↓
+Conversion Integrity Check
+↓
+Venue dispatch
+↓
+ExecutionEvent[]
+↓
+OpenOrderRuntimeProjection
+↓
+Reconciliation when required
+↓
+Terminal or Auditable Reconciled Boundary
+↓
+ExecutionRecord
+~~~
+
+### ExecutionAttempt
+
+> **ExecutionAttempt = one durable venue-submission lifecycle for one immutable execution intent under one idempotency identity.**
+
+Core identity:
+
+~~~text
+submission_attempt_id
+attempt_sequence
+execution_intent_ref/version
+venue
+account_scope
+instrument
+client_order_id
+idempotency_key
+semantic_request_digest
+adapter_ref/version
+created_at
+trace_id
+~~~
+
+Invariant:
+
+~~~text
+same Attempt
+→ same semantic request
+→ same idempotency identity
+
+semantic request changes
+→ same-Attempt retry forbidden
+→ new Attempt / Replan as appropriate
+~~~
+
+One active Attempt must not have multiple independent submission writers.
+
+### ExecutionEvent
+
+> **ExecutionEvent = an append-only immutable fact observed during an ExecutionAttempt.**
+
+Candidate event families:
+
+~~~text
+ATTEMPT_CREATED
+SUBMISSION_STARTED
+REQUEST_DISPATCHED
+ACK_RECEIVED
+PRE_DISPATCH_FAILURE
+ACK_UNKNOWN
+
+ORDER_OPEN_OBSERVED
+PARTIAL_FILL_OBSERVED
+FILL_OBSERVED
+ORDER_REJECTED_OBSERVED
+ORDER_EXPIRED_OBSERVED
+
+CANCEL_REQUESTED
+CANCEL_ACK_RECEIVED
+ORDER_CANCELED_OBSERVED
+
+RECONCILIATION_STARTED
+RECONCILIATION_EVIDENCE_OBSERVED
+RECONCILIATION_RESOLVED
+RECONCILIATION_UNRESOLVED
+~~~
+
+Time separation:
+
+~~~text
+occurred_at
+= source-side occurrence time
+
+observed_at
+= OS observation time
+
+local_event_sequence
+= durable local append order
+~~~
+
+Source time and local commit order are not assumed identical.
+
+### Runtime Projection
+
+~~~text
+OpenOrderRuntimeProjection
+= derived current view
+≠ historical authority
+~~~
+
+Candidate dimensions:
+
+~~~text
+submission_state
+venue_order_state
+reconciliation_state
+
+filled_quantity
+remaining_quantity
+exchange_order_id
+
+last_event_sequence
+exposure_certainty
+runtime_guard_required
+projection_version
+~~~
+
+Projection must be rebuildable from durable facts.
+
+### UNKNOWN
+
+~~~text
+ACK timeout
+≠ REJECTED
+
+UNKNOWN
+≠ no order
+
+UNKNOWN
+≠ zero exposure
+~~~
+
+Where first submission may have reached the venue:
+
+~~~text
+ACK_UNKNOWN
+↓
+Reconciliation REQUIRED
+~~~
+
+No blind risk-increasing resend is allowed when idempotent safety cannot be established.
+
+### Retry Separation
+
+~~~text
+Transport Retry
+≠ New ExecutionAttempt
+≠ Order Replan
+≠ New Decision
+~~~
+
+Same-Attempt retry requires:
+
+~~~text
+same submission_attempt_id
+same semantic_request_digest
+same client_order_id / idempotency identity
+same venue / account / instrument
+no material permission invalidation
+retry policy allows
+~~~
+
+### Reconciliation
+
+> **Execution Reconciliation = compare local execution facts with venue order/fill/account evidence and resolve divergence without fabricating certainty.**
+
+Candidate Process Status:
+
+~~~text
+COMPLETED
+COMPLETED_WITH_LIMITATIONS
+INCOMPLETE
+FAILED
+~~~
+
+Candidate Outcome:
+
+~~~text
+CONSISTENT
+RESOLVED_OPEN
+RESOLVED_PARTIALLY_FILLED
+RESOLVED_FILLED
+RESOLVED_CANCELED
+RESOLVED_EXPIRED
+RESOLVED_REJECTED
+DUPLICATE_DETECTED
+STATE_DIVERGENCE
+UNRESOLVED
+~~~
+
+Critical separation:
+
+~~~text
+FAILED
+≠ UNRESOLVED
+~~~
+
+FAILED means the reconciliation process could not complete.
+UNRESOLVED means the process completed to the available evidence boundary but certainty remains insufficient.
+
+### Evidence Authority
+
+~~~text
+Intent
+→ Execution Intent
+
+Local dispatch fact
+→ durable ExecutionEvent / adapter dispatch fact
+
+Venue order existence/state
+→ venue order query/history
+
+Actual fill
+→ authoritative venue trade/fill evidence
+
+Current venue exposure
+→ venue position/account evidence
+~~~
+
+Position difference alone does not prove a specific Attempt filled.
+
+### Cancel Race
+
+~~~text
+CANCEL_REQUESTED
+≠ CANCELED
+
+CANCEL_ACK_RECEIVED
+≠ terminal no-fill fact
+~~~
+
+Fill monitoring / reconciliation continues until a terminal or auditable reconciled boundary.
+
+### Canonical ExecutionRecord Generator Correction
+
+The older 7.38 wording:
+
+~~~text
+Exchange Adapter
+= Canonical Generator
+~~~
+
+is refined.
+
+New Reference interpretation:
+
+~~~text
+Exchange Adapter
+= request conversion + venue interaction + venue fact observation
+
+Execution Runtime
+= durable ExecutionEvent commitment
+
+ExecutionRecord Finalizer / Outcome Assembler
+= Canonical ExecutionRecord generator
+
+Logger
+= Custodian
+
+Post-Trade
+= Analyzer
+~~~
+
+This avoids asking the Adapter to own terminal/reconciliation semantics.
+
+### Auditable UNRESOLVED Boundary
+
+An ExecutionRecord may be finalized with explicit incompleteness when the available evidence reaches an auditable unresolved boundary.
+
+But:
+
+~~~text
+ExecutionRecord finalized as unresolved
+≠ execution exposure safely resolved
+≠ runtime safety guard released
+~~~
+
+Historical recording and safety clearance are independent.
+
+### Adapter Conversion Integrity Barrier
+
+After adapter normalization and before venue dispatch:
+
+~~~text
+normalized request
+must preserve
+execution intent semantics
++
+quantity/risk ceiling
++
+instrument identity
++
+position-effect / reduce-only / no-flip requirements
++
+venue/account scope
+~~~
+
+Mismatch:
+
+~~~text
+ADAPTER_CONVERSION_INTEGRITY_FAILED
+→ do not dispatch
+~~~
+
+Adapter conversion failure is not Exchange rejection.
+
+---
+
+## 7.99 Split Execution / Capacity Contract
+
+### Responsibility
+
+~~~text
+OrderIntent
+= parent execution objective
+
+ExecutionSliceIntent
+= immutable child execution sub-intent
+
+ExecutionAttempt
+= one venue submission lifecycle for a Slice
+
+SplitExecutionRuntimeProjection
+= derived parent progress view
+~~~
+
+Candidate cardinality:
+
+~~~text
+1 OrderIntent
+→ N Slice Intents
+
+1 Slice
+→ 0..N ExecutionAttempts
+
+1 ExecutionAttempt
+→ N ExecutionEvents
+→ 1 ExecutionRecord candidate
+~~~
+
+### Future Permission Rule
+
+~~~text
+Split Plan
+≠ future submission permission
+~~~
+
+Every risk-increasing Slice must recheck current permission before submission.
+
+### Exposure Accounting
+
+New Slice capacity must consider:
+
+~~~text
+actual filled exposure
++
+open unfilled potential exposure
++
+unknown potential exposure
++
+reserved not-yet-submitted capacity
+~~~
+
+The same quantity/risk must not be counted twice.
+
+### Runtime Reservation — Object Reduction
+
+Entry capacity reservation and Exit reduction-claim reservation are not separate top-level business objects.
+
+Use one generic runtime coordination concept candidate:
+
+~~~text
+ExecutionReservation
+~~~
+
+with purpose/kind such as:
+
+~~~text
+RISK_CAPACITY
+EXPOSURE_REDUCTION_CLAIM
+~~~
+
+It is a concurrency-control record, not a Market / Risk Decision.
+
+### UNKNOWN Rule
+
+~~~text
+UNKNOWN potential quantity
+≠ zero capacity usage
+~~~
+
+In v1 Reference:
+
+~~~text
+UNKNOWN risk-increasing Slice
+→ later conflicting Slice submission stops
+until reconciliation
+~~~
+
+### Sequential-First
+
+Preferred v1 complexity boundary:
+
+~~~text
+one active risk-increasing Slice
+per OrderIntent / exposure scope
+
+parallel execution
+→ future extension
+→ requires atomic reservation / aggregate exposure control
+~~~
+
+### Partial Fill
+
+~~~text
+filled portion
+= actual exposure
+
+remaining portion
+= future execution intent
+~~~
+
+Upstream invalidation stops remaining execution but does not erase already-filled exposure.
+
+### Replan Ownership
+
+~~~text
+execution mechanics only
+→ Execution Replan
+
+Defense permission change
+→ Defense
+
+economic validity change
+→ EV / Decision route
+
+market thesis / decision-material change
+→ new Decision Cycle
+~~~
+
+### Recovery
+
+~~~text
+Crash Recovery
+= restore execution progress
+
+Crash Recovery
+≠ restore old submission permission
+~~~
+
+Every remaining Slice must use current permission after restart.
+
+---
+
+## 7.100 Position Identity / Lifecycle Contract
+
+### Position Identity
+
+> **LogicalPosition = OS-managed economic exposure lineage created for one Trade/Thesis lineage and updated only from attributable execution facts.**
+
+Core separation:
+
+~~~text
+LogicalPosition
+≠ VenuePosition
+≠ Order
+≠ Fill
+≠ TradeResult
+~~~
+
+### Creation
+
+~~~text
+position_id may be reserved before fill
+
+position economic activation
+= first authoritative exposure-changing Fill
+~~~
+
+Order acknowledgement does not create economic exposure.
+
+### Position Allocation — Object Reduction
+
+A separate top-level PositionAllocation object is not required at this Reference stage.
+
+Instead, explicit Fill → Position attribution should be recorded in the Position ledger/event fact:
+
+~~~text
+fill_ref
+position_ref
+allocated_quantity
+allocation_basis
+~~~
+
+No Fill is silently assigned by symbol alone.
+
+### PositionEvent / Projection
+
+Durable facts candidate:
+
+~~~text
+POSITION_ACTIVATED
+EXPOSURE_INCREASED
+EXPOSURE_REDUCED
+POSITION_FLAT_OBSERVED
+POSITION_RECONCILIATION_STARTED
+POSITION_RECONCILIATION_RESOLVED
+EXTERNAL_EXPOSURE_DETECTED
+POSITION_CLOSED
+~~~
+
+~~~text
+PositionEvent
+= historical fact
+
+CurrentPositionProjection
+= derived current view
+~~~
+
+### Lifecycle
+
+Candidate:
+
+~~~text
+RESERVED
+ACTIVE
+FLAT_PENDING_RECONCILIATION
+CLOSED
+UNRESOLVED
+~~~
+
+Local calculated quantity = 0 is not sufficient for CLOSED.
+
+### Intended vs Actual
+
+~~~text
+intended_direction
+≠ actual_side
+
+BUY / SELL side
+≠ economic position effect by itself
+~~~
+
+Position effect must be determined from actual pre/post exposure and attribution.
+
+### Supervisor / Defense Activation
+
+First actual exposure:
+
+~~~text
+Position ACTIVE
+↓
+Position Supervisor starts
++
+In-Trade Defense starts
+~~~
+
+Full planned Entry completion is not required.
+
+### Venue Position
+
+~~~text
+VenuePositionSnapshot
+= external account fact
+≠ LogicalPosition identity
+~~~
+
+Manual/external exposure must not be silently allocated.
+
+Candidate reconciliation classifications:
+
+~~~text
+CONSISTENT
+DIVERGENT
+UNATTRIBUTED_EXPOSURE_FOUND
+MISSING_EXPECTED_EXPOSURE
+UNKNOWN
+UNRESOLVED
+~~~
+
+Execution Reconciliation and Position Reconciliation remain separate.
+
+### Single Writer
+
+Current logical Position quantity/projection must have one accounting authority candidate:
+
+~~~text
+Position Ledger / Position State Projector
+~~~
+
+Supervisor, Defense, Exit Engine and Logger do not independently mutate quantity.
+
+### Trade Boundary
+
+Preferred v1:
+
+~~~text
+N Entry Fills
++
+N Exit Fills
+↓
+1 Logical Position lifecycle
+↓
+1 TradeResult candidate
+~~~
+
+---
+
+## 7.101 Exit / In-Trade Defense / Position Close Contract
+
+### Authority Separation
+
+~~~text
+Position Supervisor
+= Thesis Health / Warning
+≠ Exit Authority
+
+Exit Engine
+= normal economic / thesis Exit authority
+
+In-Trade Defense
+= hard runtime safety authority
+
+Execution
+= turns authorized exposure reduction into venue actions
+
+Position Accounting
+= updates actual exposure from Fill facts
+~~~
+
+### ExitDecision
+
+Candidate normal outcomes:
+
+~~~text
+MAINTAIN
+REDUCE_EXPOSURE
+CLOSE_POSITION
+~~~
+
+Process failure is not MAINTAIN.
+
+ExitDecision should describe desired economic exposure:
+
+~~~text
+current_exposure
+target_exposure
+requested_reduction
+expected_position_version
+~~~
+
+It should not merely encode BUY/SELL.
+
+### InTradeDefenseDecision
+
+Candidate hard-safety outcomes:
+
+~~~text
+CLEAR
+TIGHTEN_PROTECTION
+REDUCE_EXPOSURE
+CLOSE_POSITION
+~~~
+
+Normal Exit and Hard Safety remain separate authorities.
+
+### Position Action Coordination
+
+Keep as a processing responsibility, not a new top-level object.
+
+It coordinates:
+
+~~~text
+normal Exit
+hard Safety Exit
+Protection execution
+existing exposure-changing orders
+unknown execution exposure
+position version
+no-flip / reduce-only requirements
+~~~
+
+Hard Safety precedence does not authorize duplicate close orders.
+
+### ExitOrderIntent
+
+Treat as a member of an Execution Intent semantic family.
+
+~~~text
+Entry OrderIntent
+→ WHY source: EntryThesis
+
+ExitOrderIntent
+→ WHY source: ExitDecision / InTradeDefenseDecision
+
+ProtectionOrderIntent
+→ WHY source: Protection Requirement / Safety authority
+~~~
+
+Do not force one overloaded object with many nullable authority fields.
+
+### Exit Submission
+
+Candidate checks:
+
+~~~text
+Position identity
+Position version
+Actual exposure
+Exit authority validity
+Existing Exit / Protection orders
+Unknown exposure
+Reduce-only / no-flip enforceability
+Venue capability
+Intent validity
+Final submit permission
+~~~
+
+~~~text
+NO_NEW_ENTRY
+≠ NO_EXIT
+
+EMERGENCY
+≠ block verified risk-reducing action
+~~~
+
+### Exit Facts
+
+~~~text
+Exit Order ACK
+≠ exposure reduced
+
+authoritative Exit Fill
+→ PositionEvent.EXPOSURE_REDUCED
+~~~
+
+### Position Close Gate
+
+CLOSED requires candidate:
+
+~~~text
+known logical exposure = 0
+no unresolved attributable fills
+no unknown exit attempt that can change exposure
+no live protection order that can reopen / flip exposure
+no pending risk-changing action
+acceptable venue / position reconciliation
+consistent Position projection
+~~~
+
+Only then:
+
+~~~text
+POSITION_CLOSED
+→ TradeResult assembly candidate
+~~~
+
+---
+
+## 7.102 Protection Lifecycle Contract
+
+### Semantic Separation
+
+~~~text
+Initial Protection Intent
+= Entry-time protection intention
+
+Protection Requirement
+= current required coverage for an active Position
+
+ProtectionOrderIntent
+= venue-independent conditional execution intent
+
+Venue Protection Order
+= actual venue implementation
+
+ProtectionState
+= derived coverage state
+
+Protection Fill
+= actual execution fact that may change Position exposure
+~~~
+
+Initial Entry Stop is not perpetual Position-lifetime authority.
+
+### Coverage
+
+Candidate states:
+
+~~~text
+FULLY_PROTECTED
+PARTIALLY_PROTECTED
+PENDING_PROTECTION
+UNPROTECTED
+UNKNOWN
+~~~
+
+~~~text
+UNPROTECTED
+≠ UNKNOWN
+~~~
+
+### Quantity Binding
+
+Protection coverage follows actual attributable exposure, not planned Entry target alone.
+
+Every material Position quantity change triggers coverage re-evaluation:
+
+~~~text
+Entry Fill
+Additional Entry
+Partial Exit
+Protection Fill
+External / Manual exposure change
+Reconciliation correction
+~~~
+
+### Trigger
+
+~~~text
+Protection Trigger
+≠ exposure reduction
+
+Protection Trigger
+→ Execution lifecycle begins / continues
+
+Protection Fill
+→ actual Position exposure change
+~~~
+
+Trigger semantics should include:
+
+~~~text
+trigger source
+trigger direction
+trigger value / condition
+~~~
+
+not price alone.
+
+### Mechanism
+
+Candidate context:
+
+~~~text
+SERVER_SIDE
+CLIENT_SIDE
+HYBRID
+~~~
+
+Mechanism reliability is part of Protection interpretation.
+
+### Replace / Mutual Exclusion
+
+Protection replacement must consider both:
+
+~~~text
+coverage gap risk
+double-execution / over-close risk
+~~~
+
+Core semantic requirement:
+
+~~~text
+mutually exclusive exit actions
+must not together over-close / flip Position
+~~~
+
+Venue-native OCO / amend may implement this but does not define the Core meaning.
+
+### Protection Reconciliation
+
+Candidate outcomes:
+
+~~~text
+CONSISTENT
+UNDER_PROTECTED
+OVER_COVERED
+MISSING_PROTECTION
+DUPLICATE_PROTECTION
+UNKNOWN
+UNRESOLVED
+~~~
+
+Over-protection can be unsafe.
+
+### Object Proliferation Correction
+
+Do not add a separate ProtectionEvent stream at this stage.
+
+Use:
+
+~~~text
+ExecutionEvent
+= venue/order execution facts
+
+PositionEvent
+= actual exposure facts
+
+ProtectionState / Protection Reconciliation
+= protection semantic projection / audit
+~~~
+
+A separate ProtectionEvent becomes justified only if later lifecycle semantics cannot be reconstructed cleanly.
+
+### Position Close
+
+Exposure zero is not sufficient while residual protection remains unresolved.
+
+~~~text
+exposure = 0
+↓
+protection cleanup
+↓
+protection reconciliation
+↓
+no orphan risk-changing protection
+↓
+Position Close Gate
+~~~
+
+Orphan protection is a Safety Finding candidate.
+
+---
+
+## 7.103 Venue Routing / Multi-Exchange Contract
+
+### Boundary
+
+~~~text
+Order / Execution Intent
+= venue-independent execution meaning
+
+Venue Routing
+= choose eligible venue/account allocation
+
+Exchange Adapter
+= convert selected route to venue API representation
+~~~
+
+Venue Routing is not EV or Defense authority.
+
+### Instrument Compatibility
+
+~~~text
+same asset
+≠ same economic instrument
+~~~
+
+Routing must preserve:
+
+~~~text
+instrument type
+spot / perpetual / future semantics
+quote / settlement
+contract specification
+margin / leverage semantics
+funding / expiry where applicable
+position mode compatibility
+~~~
+
+### Venue Eligibility
+
+Candidate checks:
+
+~~~text
+Venue authorization
+Instrument compatibility
+Account / credential health
+Venue RiskState
+Authorized Constraint
+Venue / API health
+Data / timestamp quality
+Balance / margin capacity
+Liquidity / slippage feasibility
+Required execution capability
+Protection capability
+Position mode compatibility
+Economic validity envelope
+Exposure / capacity
+Runtime reconciliation health
+~~~
+
+Hard ineligibility is not averaged away.
+
+### Economic Boundary
+
+~~~text
+Routing
+= does current venue execution fit existing economic validity envelope?
+
+EV / 05
+= is the Trade economically worthwhile?
+~~~
+
+Routing does not recalculate Trade EV.
+
+### Fallback
+
+~~~text
+Pre-Submission Fallback
+≠ Post-Submission Fallback
+~~~
+
+Post-submission UNKNOWN requires reconciliation before risk-increasing fallback.
+
+Permission observed for Venue A is not automatically portable to Venue B.
+
+### Routing Plan
+
+Keep VenueRoutingPlan as an immutable execution-planning substructure / trace record first, not a new architecture layer.
+
+~~~text
+eligible venues
+selected route(s)
+venue/account/instrument
+allocated quantity
+route sequence / role
+routing policy version
+validity
+trace
+~~~
+
+Routing Plan is time-bounded and is not future submit permission.
+
+### Single-Venue First
+
+Preferred v1 complexity boundary:
+
+~~~text
+Default:
+1 Logical Position lineage
+→ 1 venue/account exposure leg
+
+Advanced:
+1 Logical Position lineage
+→ N VenueExposureLegs
+~~~
+
+### VenueExposureLeg
+
+Keep as a value/substructure of Logical Position first:
+
+~~~text
+position_ref
+venue
+account
+instrument
+actual side
+quantity
+fill refs
+execution record refs
+protection state ref
+venue position snapshot ref
+exposure certainty
+~~~
+
+Logical Position owns Trade/Thesis lineage.
+VenueExposureLeg shows where physical exposure exists.
+
+### Multi-Venue Capacity
+
+Per-Venue safety is insufficient by itself.
+
+Applicable aggregate constraints must include:
+
+~~~text
+global
+portfolio
+account
+venue
+instrument
+logical position
+~~~
+
+No concurrent route may double-consume the same authorized capacity.
+
+### Exit / Protection
+
+Logical Close is decomposed to actual VenueExposureLegs.
+
+~~~text
+Logical ExitDecision
+↓
+venue exposure resolution
+↓
+venue-local ExitOrderIntent(s)
+~~~
+
+Protection implementation also follows actual venue-local exposure.
+
+### Reconciliation
+
+Aggregate quantity equality alone is not enough.
+
+Example:
+
+~~~text
+Expected:
+A 0.4
+B 0.6
+
+Actual:
+A 0.6
+B 0.4
+
+Total:
+1.0
+~~~
+
+still represents Venue allocation divergence.
+
+### Cross-Venue Hedge
+
+~~~text
+HEDGE
+≠ CLOSE
+~~~
+
+A hedge on another venue may reduce delta exposure while original counterparty / liquidation / funding / venue risk remains.
+
+Cross-venue emergency hedge authority remains intentionally deferred.
+
+### Venue Capability
+
+Candidate capability profile:
+
+~~~text
+market / limit
+reduce-only
+stop market / stop limit
+OCO
+native amend
+hedge mode
+client order id
+idempotency behavior
+position query
+fill history
+funding
+leverage
+~~~
+
+Keep venue-specific API branching inside Adapter/Capability configuration rather than spreading venue-name conditionals through Core logic.
+
+---
+
+## 7.104 Execution Detailed Cross-Review — Object Reduction / Corrections / Final Checkpoint
+
+### Object Proliferation Review
+
+Keep / promote as durable Reference object candidates:
+
+~~~text
+ExecutionAttempt
+ExecutionEvent
+ExecutionReconciliationResult
+ExecutionRecord
+
+LogicalPosition
+PositionEvent
+
+ExitDecision
+InTradeDefenseDecision
+
+Entry / Exit / Protection Execution Intent family
+~~~
+
+Keep primarily as Value Structure / Child Structure / Derived Projection / Runtime Record:
+
+~~~text
+ExecutionSliceIntent
+OpenOrderRuntimeProjection
+SplitExecutionRuntimeProjection
+ExecutionReservation
+
+CurrentPositionProjection
+VenuePositionSnapshot
+VenueExposureLeg
+
+ProtectionRequirement
+ProtectionState / ProtectionReconciliationResult
+
+VenueRoutingPlan
+VenueCapabilityProfile
+~~~
+
+Keep as Processing Responsibilities, not top-level persistent objects:
+
+~~~text
+Submission Gate
+Execution Recovery Gate
+Position Action Coordination
+Protection Reconciliation
+Venue Routing
+Position Close Gate
+~~~
+
+Do not create yet:
+
+~~~text
+separate PositionAllocation top-level object
+separate ProtectionEvent stream
+separate EntryCapacityReservation and ExitCapacityReservation object families
+separate UNKNOWN lock objects per domain
+~~~
+
+Use explicit ledger attribution, generic reservation semantics and derived runtime safety guards first.
+
+### Generic Runtime Safety Guard
+
+The following conditions share one concept:
+
+~~~text
+unknown execution exposure
+startup unreconciled execution
+unknown Position state
+critical protection uncertainty
+~~~
+
+Do not create multiple unrelated lock authorities.
+
+Candidate semantic:
+
+~~~text
+ExecutionSafetyGuard
+= runtime execution restriction derived from unresolved operational uncertainty
+≠ RiskState
+~~~
+
+Long-lived/material guards may generate Risk Governance requests, but do not directly mutate RiskState.
+
+### Additional Cross-Review Corrections
+
+#### CORRECTION-EX-108 — ExecutionRecord Generator Responsibility
+
+~~~text
+Exchange Adapter
+≠ terminal canonical ExecutionRecord owner
+
+Adapter
+= venue conversion / interaction / observation
+
+ExecutionRecord Finalizer
+= terminal or auditable reconciled outcome assembly
+~~~
+
+#### CORRECTION-EX-109 — Adapter Normalization Integrity Barrier
+
+~~~text
+Submission Gate PASS
+↓
+Adapter normalization
+↓
+semantic integrity check
+↓
+dispatch
+~~~
+
+Normalized venue request must remain within the approved execution meaning / quantity / scope / no-flip / protection semantics.
+
+#### CORRECTION-EX-110 — Auditable UNRESOLVED Does Not Clear Safety
+
+~~~text
+ExecutionRecord created at unresolved audit boundary
+≠ exposure certainty recovered
+≠ ExecutionSafetyGuard released
+~~~
+
+Historical closure and safety closure are separate.
+
+#### CORRECTION-EX-111 — Runtime Object Collapse
+
+~~~text
+PositionAllocation
+→ Position ledger/event attribution
+
+ProtectionEvent
+→ not added yet; use ExecutionEvent + PositionEvent + Protection reconciliation
+
+Entry / Exit reservations
+→ generic ExecutionReservation
+
+domain-specific unknown locks
+→ generic ExecutionSafetyGuard
+
+VenueRoutingPlan
+→ execution planning trace/substructure first
+~~~
+
+### Consolidated Correction Index
+
+Runtime Execution:
+
+~~~text
+EX-10  OrderIntent ≠ ExecutionAttempt
+EX-11  Execution Event ≠ Runtime State
+EX-12  UNKNOWN timeout ≠ REJECTED
+EX-13  Transport Retry ≠ New Attempt ≠ Replan
+EX-14  No blind retry when idempotent safety is unproven
+EX-15  Reconciliation must not fabricate certainty
+EX-16  Unknown exposure may require execution safety restriction
+EX-17  Cancel does not stop fill monitoring before terminal/reconciled boundary
+EX-18  Filled exposure ≠ remaining intent
+EX-19  Restart reconciles unresolved execution before conflicting new Risk
+EX-20  ExecutionAttempt gets durable runtime identity
+EX-21  Source occurrence time ≠ local observation/append order
+EX-22  Runtime Projection is rebuildable derived view
+EX-23  Execution safety restriction ≠ RiskState
+EX-24  Idempotency identity binds semantic request digest
+EX-25  Position delta alone does not prove a specific Fill
+EX-26  Resolved UNKNOWN does not erase UNKNOWN history
+EX-27  Cancel ACK ≠ terminal canceled fact
+EX-28  Process started ≠ Trading Ready
+EX-29  Auditable unresolved boundary may produce incomplete ExecutionRecord
+EX-30  Later authoritative evidence uses supersession/versioning, not mutation
+~~~
+
+Split Execution:
+
+~~~text
+EX-31  Split Plan ≠ future submission permission
+EX-32  Slice lifecycle ≠ Venue order lifecycle
+EX-33  Exposure accounting includes open / unknown potential exposure
+EX-34  Permission check needs atomic capacity reservation for concurrency safety
+EX-35  UNKNOWN quantity ≠ zero
+EX-36  Sequential Split preferred for v1
+EX-37  Upstream invalidation stops remaining intent, not already-filled exposure
+EX-38  Slice validity cannot exceed parent validity
+EX-39  Replan ownership follows earliest authoritative repair owner
+EX-40  Aggregate execution metrics remain derived
+EX-41  Crash recovery restores progress, not old permission
+~~~
+
+Position:
+
+~~~text
+EX-42  First authoritative exposure-changing Fill activates Position
+EX-43  VenuePosition ≠ LogicalPosition identity
+EX-44  Fill → Position attribution must be explicit
+EX-45  Position Event ≠ Position command
+EX-46  Intended direction ≠ actual exposure
+EX-47  Local quantity zero ≠ Position CLOSED
+EX-48  Position supervision / hard safety starts from first actual exposure
+EX-49  Average entry price is derived
+EX-50  Venue netting must not erase distinct Thesis lineage
+EX-51  Order side ≠ Position exposure effect
+EX-52  Unattributed venue exposure is not fabricated into a Logical Position
+EX-53  Execution Reconciliation ≠ Position Reconciliation
+EX-54  Multiple fills may belong to one Logical Position / TradeResult
+EX-55  Position accounting needs one authoritative writer/projector
+~~~
+
+Exit:
+
+~~~text
+EX-56  MAINTAIN ≠ Exit evaluation failure
+EX-57  ExitDecision targets exposure, not raw order side
+EX-58  Normal Exit authority ≠ In-Trade hard safety authority
+EX-59  Safety precedence ≠ duplicate Exit order
+EX-60  Position actions bind expected_position_version
+EX-61  Entry OrderIntent is not overloaded blindly for Exit
+EX-62  Full Close means target exposure zero, not stale fixed sell quantity
+EX-63  NO_NEW_ENTRY / EMERGENCY do not prohibit verified risk-reducing Exit
+EX-64  Exit execution failure ≠ ExitDecision wrong
+EX-65  ExecutionAttempt/Event/Record machinery is reusable for Entry and Exit
+EX-66  Exit order submitted ≠ exposure reduced
+EX-67  Full Close requires protection cleanup / reconciliation
+EX-68  Protection Order exists ≠ Protection State sufficient
+EX-69  Exit side also needs concurrency-safe exposure claim/reservation semantics
+EX-70  Hard Safety urgency ≠ unlimited execution risk
+EX-71  Safety CLEAR ≠ economic MAINTAIN
+EX-72  Normal Exit reason and safety terminal reason remain distinct
+~~~
+
+Protection:
+
+~~~text
+EX-73  Protection quantity follows actual exposure
+EX-74  Entry Fill → Protection confirmation gap is explicit
+EX-75  UNPROTECTED ≠ UNKNOWN
+EX-76  Initial Entry Stop is not lifetime protection authority
+EX-77  Trigger semantics include source / direction / value
+EX-78  Protection Trigger ≠ exposure reduced
+EX-79  Server-side / Client-side / Hybrid mechanism context retained
+EX-80  Protection coverage binds Position version
+EX-81  Replace considers both coverage gap and double-execution risk
+EX-82  OCO is venue capability; mutual exclusion is Core semantics
+EX-83  Protection execution failure may escalate Hard Safety
+EX-84  Insufficient/unknown protection may restrict scale-in
+EX-85  Full Exit + protection cleanup are coordinated
+EX-86  Supervisor advisory ≠ protection mutation authority
+EX-87  Hard risk protection ≠ profit target
+EX-88  Material Position quantity change re-evaluates protection coverage
+EX-89  Over-protection can be unsafe
+EX-90  Orphan Protection Order is Safety Finding candidate
+EX-91  Protection recovery required before Position Runtime is fully ready
+EX-92  Do not duplicate ExecutionEvent facts into a separate Protection event stream
+~~~
+
+Venue / Multi-Exchange:
+
+~~~text
+EX-93   Same asset ≠ same economic instrument
+EX-94   Venue cost-envelope check ≠ EV recalculation
+EX-95   ACK_UNKNOWN blocks blind post-submit fallback
+EX-96   Defense permission is not portable across venues without validation
+EX-97   Routing Plan ≠ future submit permission
+EX-98   Single-Venue First for v1
+EX-99   Per-Venue safety ≠ portfolio/global safety
+EX-100  LogicalPosition ≠ VenueExposureLeg
+EX-101  Venue failure ≠ automatic Logical Position full close
+EX-102  Logical close decomposes to actual VenueExposureLegs
+EX-103  Protection implementation follows venue-local exposure
+EX-104  Aggregate quantity match ≠ venue allocation reconciliation
+EX-105  Cross-Venue hedge ≠ Exit
+EX-106  Pre-submit fallback ≠ Post-submit fallback
+EX-107  Venue capability belongs in explicit capability/config semantics, not Core venue-name branching
+~~~
+
+Cross-Review additions:
+
+~~~text
+EX-108  Adapter is not canonical ExecutionRecord finalizer
+EX-109  Adapter-normalized request gets pre-dispatch semantic integrity check
+EX-110  Auditable unresolved record does not release safety guard
+EX-111  Collapse redundant runtime objects before Current adoption
+~~~
+
+### Final Cross-Review Result
+
+~~~text
+ARCHITECTURE_BREAKING_CONFLICT:
+NONE FOUND
+
+MAJOR_AUTHORITY_COLLISION:
+NONE AFTER CORRECTIONS
+
+EXECUTION FACT / RUNTIME STATE COLLISION:
+RESOLVED
+
+RETRY / NEW ATTEMPT COLLISION:
+RESOLVED
+
+UNKNOWN / REJECTED COLLISION:
+RESOLVED
+
+POSITION / VENUE POSITION COLLISION:
+RESOLVED
+
+NORMAL EXIT / HARD SAFETY COLLISION:
+RESOLVED
+
+PROTECTION / EXIT COLLISION:
+RESOLVED BY POSITION ACTION COORDINATION
+
+VENUE ROUTING / EV / DEFENSE COLLISION:
+RESOLVED
+
+OBJECT_PROLIFERATION:
+REDUCED
+
+TRACE_CONTINUITY:
+PRESERVED
+
+CURRENT_DESIGN_STATUS:
+NOT_ADOPTED
+
+REFERENCE_REVIEW_STATUS:
+EXECUTION_DETAILED_CHECKPOINT_READY
+~~~
+
+### Integrated Execution Reference Flow
+
+~~~text
+05 Decision
+↓
+Defense Admission
+↓
+Defense Evaluation
+↓
+Barrier C1
+↓
+EntryThesis
+↓
+Entry OrderIntent
+↓
+Split / Venue Planning
+↓
+ExecutionReservation
+↓
+Barrier C2 / Submission Gate
+↓
+ExecutionAttempt
+↓
+Adapter Normalization
+↓
+Conversion Integrity Check
+↓
+Venue Dispatch
+↓
+ExecutionEvent[]
+↓
+Runtime Projection / Reconciliation
+↓
+ExecutionRecord
+↓
+Fill Attribution
+↓
+LogicalPosition ACTIVE
+↓
+Position Supervisor
++
+In-Trade Defense
++
+Protection Management
++
+Exit Engine
+↓
+Exit / Protection Execution Intents
+↓
+same ExecutionAttempt / Event / Reconciliation machinery
+↓
+PositionEvent / CurrentPositionProjection
+↓
+Position Close Gate
+↓
+POSITION_CLOSED
+↓
+TradeResult
+↓
+Post-Trade
+~~~
+
+### Remaining Intentionally Deferred Work
+
+~~~text
+exact DB schema
+exact class hierarchy / inheritance
+exact event storage technology
+exact lock / lease / CAS implementation
+exact retry / backoff values
+exact idempotency key format
+exact reconciliation query order per venue
+exact Position PnL accounting formula
+exact protection threshold / stop logic
+exact Exit policy thresholds
+exact routing ranking / weighting
+exact multi-venue hedge policy
+exact cross-venue collateral policy
+exact IAM / credential design
+~~~
+
+These omissions are acceptable for the Legacy Reference stage.
+
+### Next Reference Target
+
+Execution detailed design has reached a clean checkpoint.
+
+Candidate next work:
+
+~~~text
+TradeResult / Position Terminal reconciliation with the new Execution lifecycle
+then
+Post-Trade source-object consistency review
+~~~
+
+Do not jump to Current adoption from this checkpoint.
