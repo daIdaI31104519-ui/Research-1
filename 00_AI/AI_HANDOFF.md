@@ -17,10 +17,9 @@ Last Updated:
 
 Conversation Focus:
 Legacy Reference side-thread.
-旧市場理解OS ReferenceのExecution詳細設計をCross Reviewし、
-Open Order Runtime / Retry / Idempotency / Reconciliation /
-Split Execution / Position / Exit / Protection / Venue Routing
-までCheckpoint保存した。
+新Execution Lifecycleを基準にTradeResult / Position Terminalと
+7.41–7.49 Post-Trade Source Objectを再照合し、
+7.50–7.56 Finding Pipelineとの整合までCheckpoint保存した。
 
 Important Boundary:
 This does NOT change Project Current Task.
@@ -29,41 +28,48 @@ Current Design adoption has NOT occurred.
 
 DONE:
 - 99_REFERENCE/旧市場理解OS_設計知識リファレンス.md
-  Sections 7.97–7.104 saved.
-- EX-10〜EX-107を6領域へ整理しCross Review。
+  Sections 7.105–7.112 saved.
+- Position CLOSEDをTradeResult terminal boundary候補へ精密化。
+- TerminalityとMeasurement Completenessを分離。
+- DecisionResult multi-selected Thesis lineageを
+  EntryThesis → LogicalPosition → TradeResultまで保持。
+- TradeThesisEvaluationをselected Thesisごとの1..N評価候補へ修正。
+- Trade lifetimeとThesis evaluation horizonを分離。
+- Production Evaluationをreadiness-driven orchestrationへ修正。
+- Defense BLOCK評価をTradeResult必須依存から分離。
+- InTradeDefenseDecisionEvaluation候補を追加。
+- DecisionResultEvaluation候補を追加しNO_TRADEも評価可能化。
+- 7.49 direct Analysis→ResearchCandidateを7.50 Finding Pipelineでsupersede。
+- Finding Taxonomy v1.0を黙って変更せずv1.1 extension candidateを追加。
+- DECISION Finding Domain候補を追加。
+- InTradeDefenseDecisionEvaluationは既存DEFENSE Domainへ追加Source候補。
 - Architecture-breaking conflict: NONE FOUND.
-- Object proliferation reduced.
-- Added review corrections:
-  EX-108 ExecutionRecord generator responsibility refinement.
-  EX-109 Adapter normalization integrity check before dispatch.
-  EX-110 Auditable unresolved record does not release execution safety guard.
-  EX-111 Runtime object collapse before Current adoption.
-- Execution detailed Reference flow now covers:
-  Entry → Runtime Execution → Position → Exit / Protection →
-  Position Close → TradeResult boundary.
 - Current Design remains NOT_ADOPTED.
 
 UNSAVED:
-None for this Execution detailed checkpoint.
+None for this Post-Trade / Finding source consistency checkpoint.
 
 OPEN:
-- Exact DB schema / Python class hierarchy / event storage remain intentionally deferred.
-- Exact retry/backoff/idempotency-key format and venue-specific reconciliation order remain deferred.
-- Exact Exit / Protection thresholds and multi-venue hedge policy remain deferred.
+- Cross-Analysis Review detailed contract.
+- Analysis dependency / shared-origin / conflict handling.
+- Exact taxonomy governance approval/version migration process.
+- Exact Analysis readiness enum/thresholds.
 - Current adoption requires separate review later.
 
 NEXT:
-TradeResult / Position Terminal reconciliation with the new Execution lifecycle
-→ Post-Trade source-object consistency review.
+Cross-Analysis Review detailed contract
+→ analysis dependency / shared-origin / conflict handling
+→ then consider full Legacy Reference closure review.
 
 READ:
 - 99_REFERENCE/旧市場理解OS_設計知識リファレンス.md
-  especially 7.97–7.104, plus 7.41–7.49 for Post-Trade
+  especially 7.105–7.112,
+  plus 7.41–7.56 and 7.97–7.104
 - 00_AI/AI_CONTEXT.md
   only to preserve separation between Current Project state and this Reference side-thread
 
 Last Reference Checkpoint Commit:
-22093ce09e99048c4614ec05c4b2705d39f0c063
+b7a8734c139a6b410870034518cac388c580d48a
 
 Git Write Permission Reminder:
 REQUIRE CURRENT-CHAT USER AUTHORIZATION
