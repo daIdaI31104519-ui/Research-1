@@ -227,184 +227,1071 @@ Source Fileをどこまで読んだかは、Concept Review Statusと分離する
 
 使用するStatus:
 
-```text
+~~~text
 SOURCE_REVIEW_STATUS =
 NOT_REVIEWED
 IN_REVIEW
 PARTIAL
 REVIEWED
-```
+~~~
 
 重要:
 
-```text
+~~~text
 SOURCE_REVIEW_STATUS
 ≠
 LEGACY_REVIEW_STATUS
-```
+~~~
 
-意味:
+Closure Review時点:
 
-```text
-SOURCE_REVIEW_STATUS
-=
-元Fileそのものをどこまで確認したか
-
-LEGACY_REVIEW_STATUS
-=
-特定ConceptをCurrent Designと比較した結果
-```
-
-初期状態:
-
-| Source Group | SOURCE_REVIEW_STATUS | Purpose |
+| Source Group | SOURCE_REVIEW_STATUS | Purpose / Review Scope |
 |---|---|---|
 | まとめ案 1〜11 | REVIEWED | Legacy全体像 / Research Evidence / Production / Governance |
-| OBJECT_DICTIONARY | NOT_REVIEWED | Object / Concept |
-| ROLE_DICTIONARY | NOT_REVIEWED | Role |
-| STATE_DICTIONARY | NOT_REVIEWED | State / Lifecycle |
-| SECURITY_DICTIONARY | NOT_REVIEWED | Security |
-| CREDENTIAL_DICTIONARY | NOT_REVIEWED | Credential |
-| DATA_CLASSIFICATION_DICTIONARY | NOT_REVIEWED | Data Classification |
-| DESIGN_CHANGE_RULES | NOT_REVIEWED | Legacy Governance |
-| GIT_RULES | NOT_REVIEWED | Legacy Git Governance |
-| FIX-001〜018C | NOT_REVIEWED | Failure / Change Reason |
+| OBJECT_DICTIONARY | PARTIAL | 主要Object Family / FIX関連Semantic / Current影響ConceptをReview。全Field監査は未実施 |
+| ROLE_DICTIONARY | PARTIAL | 主要Role / Responsibility BoundaryをReview。全Role詳細監査は未実施 |
+| STATE_DICTIONARY | PARTIAL | 主要State Family / Authority / State SeparationをReview。全Transition監査は未実施 |
+| SECURITY_DICTIONARY | REVIEWED | Principal / Role / Permission / Authentication / Authorityの主要Semantic |
+| CREDENTIAL_DICTIONARY | REVIEWED | Credential / Secret / Capability / Domain Permissionの主要Semantic |
+| DATA_CLASSIFICATION_DICTIONARY | REVIEWED | Classification level / inheritance / sanitization / separation rule |
+| DESIGN_CHANGE_RULES | NOT_REVIEWED | Legacy Governance — 次のClosure Review対象 |
+| GIT_RULES | NOT_REVIEWED | Legacy Git Governance — 次のClosure Review対象 |
+| FIX-001〜018C | REVIEWED | Failure / Change Reason / Dictionary反映確認 |
 
----
+~~~text
+PARTIAL
+≠
+Closure incomplete
+~~~
+
+INITIAL_REFERENCE_COMPLETE に必要なのはDictionary全文のField単位再監査ではなく、
+Currentへ影響する主要ConceptをSource Pointer付きで索引化できることである。
 
 # 4. Legacy Whole-System Overview
 
-`市場理解OS まとめ案 1〜11` のReview後に作成する。
-
-旧OS全体を再設計するSectionではなく、
-
-> **旧市場理解OSが何を作ろうとしていたのかを短時間で把握するための圧縮Summary**
-
-とする。
-
-## 4.1 Legacy Mission / Goal
-
-```text
-<TODO>
-```
-
-## 4.2 Legacy Architecture
-
-```text
-<TODO>
-```
-
-## 4.3 Legacy Market Understanding Flow
-
-```text
-<TODO>
-```
-
-## 4.4 Legacy Research Flow
-
-```text
-<TODO>
-```
-
-## 4.5 Legacy Knowledge Flow
-
-```text
-<TODO>
-```
-
-## 4.6 Legacy Production / Trading Flow
-
-```text
-<TODO>
-```
-
-## 4.7 Legacy Feedback / Re-Research Flow
-
-```text
-<TODO>
-```
-
-## 4.8 Legacy Governance / Authority Model
-
-```text
-<TODO>
-```
-
----
-
-# 5. Legacy Concept Index
-
-Legacy Conceptを素早く検索するためのMaster Index。
-
-| Legacy Concept | Category | Primary Legacy Source | LEGACY_REVIEW_STATUS | Current Relation | Detail |
-|---|---|---|---|---|---|
-| `<Concept>` | `<Category>` | `<Path>` | NOT_REVIEWED | UNKNOWN | `<Section>` |
-
-基本Category:
-
-```text
-Observation / Data
-Market Understanding
-Research
-Causal
-Evidence
-Market DNA
-Knowledge
-Applicability
-Decision
-Production
-Trade
-Risk
-State / Lifecycle
-Role
-Authority
-Governance
-Security
-Credential
-Data Classification
-Other
-```
-
-原則:
-
-> Categoryを増やす前に既存Categoryへ整理できないか確認する。
-
----
-
-# 6. Legacy → Current Concept Map
-
-旧ConceptとCurrent Research-1の関係を検索するためのIndex。
-
-| Legacy Concept | Current Concept / Owner Candidate | Relationship | Conflict | Recommendation |
-|---|---|---|---|---|
-| `<Legacy>` | `<Current / UNKNOWN>` | UNKNOWN | UNKNOWN | UNDECIDED |
-
-Relationship候補:
-
-```text
-SAME_RESPONSIBILITY
-PARTIAL_OVERLAP
-RENAMED
-SPLIT
-MERGED
-DIFFERENT_RESPONSIBILITY
-NO_CURRENT_EQUIVALENT
-UNKNOWN
-```
+市場理解OS まとめ案 1〜11、Dictionary / FIX、Section 7 Detailed Review、Phase 1〜7 Closure Reviewを基に、旧市場理解OSの全体像を短時間で把握するためのClosure Summaryを記録する。
 
 重要:
 
-```text
-同じ名前
-≠ 同じ責任
+~~~text
+このSection
+= Legacy Reference Overview
 
-違う名前
-≠ 違う責任
-```
+≠ Current Design
+≠ Current Architecture採用決定
+≠ Python / DB / Production Specification
+~~~
 
-名称ではなくResponsibilityを比較する。
+## 4.1 Legacy Mission / Goal
 
----
+旧市場理解OSの中心思想は、単発の価格予測やSignal生成ではなく、
+
+~~~text
+Market Observation / Understanding
+↓
+Research
+↓
+Knowledge
+↓
+Runtime Applicability
+↓
+Decision
+↓
+Safety / Risk
+↓
+Execution / Position
+↓
+Production Outcome
+↓
+Analysis / Finding
+↓
+Research
+~~~
+
+という循環を作り、成功・失敗・矛盾・Boundary・Unknownを再研究可能なKnowledgeへ戻すことである。
+
+重要な分離:
+
+~~~text
+Research Result ≠ Knowledge
+Knowledge ≠ Current Applicability
+Applicable Knowledge ≠ Positive EV
+Decision ≠ Defense
+Defense ≠ Execution
+Execution Outcome ≠ Trade Outcome
+Trade Outcome ≠ Thesis Correctness
+Analysis ≠ Source Fact
+Finding ≠ Research Admission
+Conflict Detection ≠ Conflict Resolution
+~~~
+
+## 4.2 Legacy Architecture
+
+Closure Review後に再構成できるWhole-System Flow:
+
+~~~text
+[LEGACY MARKET UNDERSTANDING]
+詳細上流Contractは一部LEGACY GAP
+↓
+ResearchCandidate
+↓
+Research Intake
+↓
+Domain Routing
+↓
+Method Routing
+↓
+ResearchPlan
+↓
+Plan Validation
+↓
+ResearchTrial[]
+↓
+ResearchResult[]
+↓
+Research Synthesis
+↓
+Result Validation
+↓
+Validated Research Result Boundary
+↓
+Knowledge Admission
+↓
+Knowledge Promotion
+↓
+KnowledgeRecord + KnowledgeRelationship
+↓
+Knowledge Pool / Lifecycle
+↓
+Applicability Evaluation
+↓
+ApplicableKnowledgeSet
+↓
+DecisionContextSnapshot
+↓
+Knowledge Integration
+↓
+TradeThesis[]
+↓
+PreDecision / EV / Cross-Thesis Comparison
+↓
+DecisionResult
+↓
+Defense Admission / Evaluation
++
+RiskState
++
+Authorized Constraint
+↓
+EntryThesis
+↓
+Execution Intent
+↓
+Submission / Venue / Split
+↓
+ExecutionAttempt
+↓
+ExecutionEvent[]
+↓
+Reconciliation
+↓
+ExecutionRecord
+↓
+LogicalPosition / PositionEvent
+↓
+Supervisor / In-Trade Defense / Protection / Exit
+↓
+Position CLOSED
+↓
+TradeResult + ProductionEvidence
+↓
+Production Evaluation
+↓
+Cross-Analysis Review
+↓
+Canonical Finding
+↓
+Candidate Promotion
+↓
+ResearchCandidate
+↓
+Research again
+~~~
+
+~~~text
+CORE_CLOSED_LOOP:
+PASS
+
+ARCHITECTURE_BREAKING_CONFLICT:
+NONE FOUND
+
+CURRENT_DESIGN_STATUS:
+NOT_ADOPTED
+~~~
+
+## 4.3 Legacy Market Understanding Flow
+
+LegacyにはMarket Intelligence / Causal / Market DNA / Cause Candidate思想が存在し、後続Domainは Current Market Understanding と Market DNA Snapshot を参照する。
+
+ただしLegacy Reference単体では、
+
+~~~text
+Raw / External Data
+→ Observation
+→ Feature / Context
+→ Market Intelligence
+→ Current Market Understanding
+→ ResearchCandidate
+~~~
+
+の完全なCanonical上流Contractと、
+
+~~~text
+Current Market Understanding
+= exact canonical object / generator / version lineage
+
+Market DNA Snapshot
+= exact Raw / Feature / Formula / Definition lineage
+~~~
+
+が閉じていない。
+
+したがって:
+
+~~~text
+LEGACY_MARKET_UNDERSTANDING_PRINCIPLE:
+PRESERVE
+
+LEGACY_MARKET_UNDERSTANDING_EXACT_FLOW:
+INCOMPLETE
+
+CURRENT_MARKET_UNDERSTANDING_SOURCE_OF_TRUTH:
+LEGACY GAP
+
+MARKET_DNA_SNAPSHOT_SOURCE_OF_TRUTH:
+LEGACY GAP
+
+CURRENT_ACTION:
+02_MARKET_UNDERSTANDINGで再設計
+~~~
+
+## 4.4 Legacy Research Flow
+
+~~~text
+Finding / Cause / Anomaly / Failure
+↓
+ResearchCandidate
+↓
+Research Intake
+├ ACCEPT
+├ DEFER
+├ MERGE
+└ REJECT
+↓ ACCEPT
+Research Router
+↓
+Research Domain
+↓
+Research Method
+↓
+ResearchPlan
+↓
+Plan Validation
+↓
+ResearchTrial[]
+↓
+ResearchResult[]
+↓
+ResearchSynthesisAssessment
+↓
+ResultValidationDecision
+↓
+Validated Research Result Boundary
+~~~
+
+重要:
+
+~~~text
+Evidence Channel ≠ Evidence Outcome
+Evidence Role ≠ Evidence Strength
+Evidence Count ≠ Independent Evidence Count
+Shared Evidence ≠ Independent Confirmation
+Dependency ≠ Invalidity
+Research Process Failure ≠ Hypothesis Refutation
+SUPPORTED ≠ Validation Passed automatically
+~~~
+
+Validated Research Resultは巨大な複製Objectではなく、Synthesis + ValidationによるLogical Qualified Boundaryとして扱う。
+
+## 4.5 Legacy Knowledge Flow
+
+~~~text
+Validated Research Result Boundary
+↓
+Knowledge Admission
+↓
+Knowledge Promotion
+↓
+KnowledgeRecord
++
+KnowledgeRelationship
+↓
+Knowledge Pool
+↓
+Knowledge Lifecycle / Aging
+↓
+Runtime Applicability
+~~~
+
+Source-of-Truth分離:
+
+~~~text
+Knowledge Semantics → KnowledgeRecord
+Knowledge Relation → KnowledgeRelationship
+Evidence → Research / Evidence objects
+KnowledgeGraph → Derived View
+KnowledgePool → Logical Domain
+KnowledgeLifecycleProfile → Current health/freshness projection
+ApplicabilityAssessment → Current runtime usability assessment
+~~~
+
+重要:
+
+~~~text
+Knowledge ≠ Applicability
+KnowledgeGraph ≠ duplicate Knowledge store
+Knowledge Pool ≠ giant DB object
+Research Constraint Candidate ≠ Runtime Authorized Constraint
+~~~
+
+Knowledge Lifecycle Apply WriterとRuntime Authorized Constraint GovernanceはLegacy GapとしてCurrentへ送る。
+
+## 4.6 Legacy Production / Trading Flow
+
+~~~text
+ApplicableKnowledgeSet
+↓
+Decision Context
+↓
+TradeThesis / EV / DecisionResult
+↓
+Defense Admission
+↓
+DefenseDecision
++
+RiskState
++
+Authorized Constraint
+↓
+EntryThesis
+↓
+Execution
+↓
+LogicalPosition
+↓
+Supervisor / Safety / Protection / Exit
+↓
+Position CLOSED
+↓
+TradeResult
+~~~
+
+Authority boundary:
+
+~~~text
+Decision = economic risk-taking judgment
+Defense = runtime safety judgment
+RiskState = authoritative current risk permission
+Execution = venue action
+Position Accounting = actual logical exposure truth
+Supervisor = advisory
+Exit = normal economic exit
+In-Trade Defense = hard safety
+TradeResult = final trade fact
+~~~
+
+Legacy BUY / SELLはCanonical economic decisionとしてCurrentへそのまま持ち込まない。
+
+## 4.7 Legacy Feedback / Re-Research Flow
+
+~~~text
+TradeResult
++
+ProductionEvidence
++
+Decision / Defense / Execution / Position Trace
+↓
+Production Evaluation
+↓
+Cross-Analysis
+↓
+Canonical Finding
+↓
+ResearchCandidate
+↓
+Research
+↓
+Validated Research Result
+↓
+Knowledge
+~~~
+
+重要:
+
+~~~text
+LOSS ≠ Thesis Failure
+Thesis Mismatch ≠ Knowledge invalid
+Finding ≠ Root Cause
+Cross-Analysis Conflict ≠ Conflict Resolution
+Production Finding ≠ Direct Knowledge Mutation
+~~~
+
+~~~text
+NEXT-CYCLE FEEDBACK_LOOP:
+VALID
+
+SAME-CYCLE CIRCULAR_AUTHORITY:
+NONE FOUND
+~~~
+
+## 4.8 Legacy Governance / Authority Model
+
+確認できた主要分離:
+
+~~~text
+Research Intake = Research Admission
+Research Router = Domain Routing
+Result Validation = Research artifact integrity boundary
+Knowledge Admission = Knowledge entry eligibility
+Applicability = current runtime usability assessment
+DecisionResult = economic decision
+DefenseDecision = runtime safety decision
+RiskState Machine = canonical RiskState Apply authority
+Execution = venue action
+Position Ledger / Projector = logical exposure accounting
+Supervisor = advisory
+Exit = normal exit
+In-Trade Defense = hard safety
+Cross-Analysis = relation/conflict detection
+Research = explanatory/causal resolution
+~~~
+
+禁止境界:
+
+~~~text
+AI Review ≠ final Decision Authority
+Defense ≠ RiskState Writer
+Supervisor ≠ Position Writer
+Exchange Adapter ≠ canonical terminal ExecutionRecord owner
+Post-Production Analysis ≠ Source Fact Writer
+Cross-Analysis ≠ Root Cause Authority
+Candidate Promotion ≠ Research Admission Authority
+~~~
+
+未確定:
+
+~~~text
+Human / AI / Production final authority
+Knowledge Lifecycle Apply Writer
+Runtime Authorized Constraint governance
+Protection Requirement canonical owner
+Production Promotion exact retained meaning
+~~~
+
+~~~text
+LEGACY_WHOLE_SYSTEM_FLOW:
+RECONSTRUCTED
+
+ARCHITECTURE_REVIEW:
+PASS
+
+CURRENT_DESIGN_STATUS:
+NOT_ADOPTED
+~~~
+
+# 5. Legacy Concept Index
+
+Legacy Conceptを素早く検索し、Section 7 Detail Review・Section 12 Source Pointer・Original Legacy Sourceへ辿るためのMaster Index。
+
+~~~text
+このIndexに存在
+≠ Current採用済み
+
+KEEP候補
+≠ Current正式Definition
+~~~
+
+## 5.1 External / Observation Foundation
+
+| Legacy Concept | Category | Review / Current Relation |
+|---|---|---|
+| MarketProfile | Common | KEEP concept / exact contractは後工程 |
+| SourceMetadata | External Data | KEEP separation principle |
+| QualityProfile | External Data | KEEP separation principle |
+| RawData | External Data | KEEP |
+| Observation | External Data | KEEP; NormalizedObservationはMERGED |
+| MarketEvent | Market Understanding | KEEP fact semantics |
+| TimeSeriesMeasurement | External Data | KEEP candidate |
+| FormulaDefinition | Calculation | KEEP candidate |
+| Feature | Calculation | KEEP |
+| FeaturePriorityProfile | Market Understanding | REDESIGN / cycle guardrail KEEP |
+| MarketContext | Market Understanding | REDESIGN |
+| Contradiction | Market Understanding | KEEP candidate |
+| UnexplainedEvent | Market Understanding | KEEP feedback concept |
+
+~~~text
+Observation = 何を観測したか
+Feature = どう測ったか
+MarketEvent = 何が起きたか
+MarketContext = 今どんな市場か
+CauseCandidate = なぜ起きた可能性があるか
+~~~
+
+## 5.2 Market Understanding / Causal / DNA
+
+~~~text
+Market Understanding         → LEGACY_GAP / REDESIGN
+Market Intelligence          → KEEP / REDESIGN detail
+Event Detection Processor    → KEEP principle
+CauseCandidate               → KEEP
+Causal Engine / Research     → SPLIT / REDESIGN
+Market DNA                   → REDESIGN
+Current Market Understanding → DEFER to Current 02
+Market DNA Snapshot          → DEFER to Current 02
+FailureBoundary              → KEEP / REFINE
+Constraint Candidate         → KEEP research meaning / REDESIGN authority
+~~~
+
+## 5.3 Evidence / Validation
+
+~~~text
+Evidence Channel            → KEEP
+Evidence Role               → REDESIGN
+Evidence Outcome            → REDESIGN
+Evidence Evaluation Status  → REDESIGN
+Shared Evidence             → KEEP
+Evidence Dependency         → KEEP
+Evidence Strength           → KEEP
+Evidence Profile            → REDESIGN ownership
+ResearchResult              → KEEP
+ResearchSynthesisAssessment → KEEP candidate
+ResultValidationDecision    → KEEP candidate
+Validated Research Result   → KEEP as logical boundary
+~~~
+
+~~~text
+Evidence Count
+≠ Independent Evidence Count
+≠ Evidence Strength
+≠ Hypothesis Truth
+~~~
+
+## 5.4 Research
+
+~~~text
+ResearchCandidate
+Research Intake
+ResearchIntakeDecision
+Research Router / ResearchRoute
+Research Domain Registry
+Research Method Registry
+ResearchPlan
+Plan Validation
+ResearchTrial
+Research Execution
+~~~
+
+はKEEP / REDESIGN candidate。
+
+## 5.5 Knowledge
+
+~~~text
+Knowledge Admission          → KEEP
+Knowledge Promotion          → REDESIGN name / KEEP responsibility
+KnowledgeRecord              → KEEP
+Knowledge Type Registry      → KEEP candidate
+KnowledgeRelationship        → KEEP
+KnowledgeGraph               → KEEP as View
+KnowledgePool                → KEEP as Logical Domain
+KnowledgeLifecycleAssessment → KEEP
+KnowledgeLifecycleProfile    → REDESIGN / projection
+Knowledge Lifecycle Writer   → LEGACY GAP / DEFER
+~~~
+
+Specialized Knowledge Family:
+
+~~~text
+MarketCase
+FeatureKnowledge
+FormulaKnowledge
+Failure
+StressResult
+FailureBoundary
+Constraint
+NegativeKnowledge
+~~~
+
+## 5.6 Applicability
+
+~~~text
+Applicability Evaluation  → KEEP
+ApplicabilityAssessment   → KEEP candidate
+ApplicableKnowledgeSet    → KEEP
+Failure Boundary Context  → KEEP
+Constraint Gate           → REDESIGN exact authority
+Candidate Retrieval Trace → REDESIGN substructure
+~~~
+
+~~~text
+Knowledge ≠ Applicability
+Applicable ≠ Positive EV
+Applicable ≠ Trade Permission
+~~~
+
+## 5.7 Decision
+
+Legacy Detailed Reference上の主要候補:
+
+~~~text
+DecisionContextSnapshot
+IntegratedKnowledgeContext
+TradeThesis
+DecisionScope
+PreDecisionThesisAssessment
+ExpectedValueAssessment
+CrossThesisComparisonResult
+DecisionResultCandidate
+DecisionFinalizationDecision
+DecisionResult
+DecisionCycleProcessingResult
+~~~
+
+Current 05正式設計で再判定する。
+
+Legacy BUY / SELL as canonical Decision outcome:
+
+~~~text
+DROP candidate
+~~~
+
+## 5.8 Defense / Risk / Governance
+
+~~~text
+Defense Admission              → KEEP candidate
+DefenseDecision                → KEEP candidate
+RiskState                      → KEEP candidate
+RiskState Machine              → KEEP single-writer principle
+Emergency Fast Path            → KEEP / REDESIGN
+Recovery Strict Path           → KEEP / REDESIGN
+EffectiveRiskPermissionContext → KEEP as derived view
+Runtime Authorized Constraint  → LEGACY GAP / DEFER
+Production Promotion           → DROP runtime authority / REDESIGN possible
+~~~
+
+## 5.9 Execution / Position / Protection
+
+Current 06で再評価するKEEP候補:
+
+~~~text
+EntryThesis
+Execution Intent family
+ExecutionAttempt
+ExecutionEvent
+ExecutionReconciliationResult
+ExecutionRecord
+ExecutionReservation
+ExecutionSafetyGuard
+LogicalPosition
+PositionEvent
+CurrentPositionProjection
+ExitDecision
+InTradeDefenseDecision
+ProtectionOrderIntent
+ProtectionState
+VenueRoutingPlan
+VenueCapabilityProfile
+~~~
+
+ProtectionRequirementのCanonical OwnerはLEGACY GAP。
+
+DROP候補:
+
+~~~text
+PositionAllocation top-level
+ProtectionEvent standalone stream
+Entry/Exit別Reservation family
+domain-specific UNKNOWN lock family
+Adapter as canonical ExecutionRecord finalizer
+~~~
+
+## 5.10 Trade Outcome / Production Evaluation / Feedback
+
+KEEP / REDESIGN candidate:
+
+~~~text
+TradeResult
+ProductionEvidence
+OutcomeAnalysisResult
+TradeThesisEvaluation
+ThesisMemberAttribution
+DefenseDecisionEvaluation
+InTradeDefenseDecisionEvaluation
+SupervisorEvaluation
+DemoLiveDivergence
+CounterfactualResult
+DecisionResultEvaluation
+Finding Extractor
+Finding Normalizer
+Canonical Finding
+Candidate Promotion
+Cross-Analysis Review
+CrossAnalysisReviewResult
+~~~
+
+旧 HypothesisAttribution 名はDROP / REDESIGN。
+
+## 5.11 Control / State / Governance Foundation
+
+主要Concept:
+
+~~~text
+RuntimeCommand
+GlobalRiskLimit
+StateTransitionEvent
+ApprovalDecision
+~~~
+
+重要:
+
+~~~text
+Current State ≠ StateTransitionEvent
+Recommendation ≠ ApprovalDecision
+ApprovalDecision ≠ StateTransitionEvent
+APPROVE ≠ APPLIED
+~~~
+
+State Family:
+
+~~~text
+ResearchCandidate Lifecycle
+ResearchPlan Lifecycle
+ResearchPlan Lock
+Knowledge Aging / Health
+RiskState
+Runtime State
+System Health
+Incident Lifecycle
+Source Lifecycle
+Data Quality State
+Storage Lifecycle
+Software Deployment Stage
+~~~
+
+## 5.12 Platform / Operations
+
+~~~text
+Outer Control
+Source Adapter
+Python Runtime / Operations
+Monitoring
+Recovery
+Deployment / Release Control
+Telegram Interface
+
+SystemStatus
+Incident
+RecoveryAction
+AuditEvent
+MigrationRecord
+BackupRecord
+~~~
+
+~~~text
+Monitoring ≠ State Writer
+Telegram Interface ≠ Authority
+Software Deployment Stage ≠ Knowledge Production Eligibility
+~~~
+
+## 5.13 Security / Credential / Classification
+
+~~~text
+SecurityPrincipal
+Authentication Context
+Role Binding
+Permission Policy / Decision
+CredentialProfile
+PUBLIC / INTERNAL / SENSITIVE / SECRET
+Base Classification
+Effective Classification
+Sanitization
+~~~
+
+~~~text
+Principal ≠ Role ≠ Permission
+Authentication ≠ Authorization
+Permission ≠ Approval
+Credential ACTIVE ≠ Trade Authorized
+Classification ≠ Permission ≠ Retention ≠ Storage ≠ Risk
+Sanitization = Derived View
+~~~
+
+## 5.14 Closure Classification
+
+KEEP:
+Research / Validation / Knowledge / Applicability / responsibility separation / Trace / Version / UNKNOWN principles。
+
+REDESIGN:
+Market Understanding exact structure、Market DNA、Knowledge Lifecycle authority、Constraint authorization、Protection Requirement authority、Security exact structure。
+
+DROP:
+Legacy BUY/SELL canonical decision、AI majority final authority、duplicate stores/states、direct feedback bypass、Production Promotion as runtime Trade Permission。
+
+DEFER:
+Current Market Understanding SoT、Market DNA lineage、Human final authority、Lifecycle Apply Writer、Authorized Constraint Governance、Protection Requirement Owner、implementation details。
+
+## 5.15 Usage Rule
+
+~~~text
+Concept
+↓
+Section 5
+↓
+Section 7 Detail
+↓
+Section 12 Source Pointer
+↓
+Original Legacy Source
+~~~
+
+~~~text
+LEGACY_CONCEPT_INDEX_STATUS:
+CLOSURE_READY
+
+CURRENT_DESIGN_STATUS:
+NOT_ADOPTED
+~~~
+
+# 6. Legacy → Current Concept Map
+
+旧市場理解OSの主要ConceptとCurrent Research-1の責任領域との関係を示すClosure Map。
+
+~~~text
+Legacy → Current Map
+≠ Current Adoption
+~~~
+
+Relationship:
+
+~~~text
+SAME_RESPONSIBILITY
+RENAMED
+SPLIT
+MERGED
+NO_CURRENT_EQUIVALENT
+UNKNOWN
+~~~
+
+Current status:
+
+~~~text
+01_EXTERNAL_DATA           = WORKING BASELINE
+02_MARKET_UNDERSTANDING    = WORKING BASELINE
+03_RESEARCH                = WORKING BASELINE
+04_KNOWLEDGE_APPLICABILITY = WORKING BASELINE
+05_DECISION                = NOT YET CURRENT WORKING BASELINE
+06_EXECUTION_POST_DECISION = NOT YET CURRENT WORKING BASELINE
+~~~
+
+## 6.1 Market Understanding
+
+| Legacy | Current | Relation | Closure |
+|---|---|---|---|
+| Market Understanding Domain | 02_MARKET_UNDERSTANDING | SPLIT | KEEP principle / REDESIGN structure |
+| Market Intelligence | Current 02 Market Intelligence | SAME_RESPONSIBILITY | KEEP |
+| Current Market Understanding | Current 02 boundary | SAME_RESPONSIBILITY | KEEP principle / DEFER exact object |
+| Cause Candidate | Cause Candidate | SAME_RESPONSIBILITY | KEEP |
+| Market DNA | Definition + Snapshot | SPLIT | REDESIGN |
+| Causal Engine | Cause Candidate + 03 Research | SPLIT | REDESIGN |
+
+## 6.2 Research
+
+| Legacy | Current | Relation | Closure |
+|---|---|---|---|
+| ResearchCandidate | 03 Research Candidate | SAME_RESPONSIBILITY | KEEP |
+| Research Intake | 03 Research Intake | SAME_RESPONSIBILITY | KEEP |
+| Research Router | 03 Routing / Prioritization | MERGED / REFINE | KEEP |
+| Domain / Method Registry | future 03 | NO_CURRENT_EQUIVALENT | KEEP candidate |
+| ResearchPlan | 03 Research Plan | SAME_RESPONSIBILITY | KEEP |
+| ResearchResult | 03 Research Result | SAME_RESPONSIBILITY | KEEP |
+| Validation Gate | 03 Validation Gate | SAME_RESPONSIBILITY | KEEP |
+| Validated Research Result | 03→04 boundary | SAME_RESPONSIBILITY | KEEP as boundary |
+
+## 6.3 Evidence
+
+~~~text
+Demo Forward → Forward Validation + Forward Evidence → SPLIT / REDESIGN
+Evidence Channel → 03 Validation Channels → SAME_RESPONSIBILITY / KEEP
+Shared Evidence → Current shared/overlap context → KEEP
+Evidence Dependency → 03/04 dependency context → MERGED / KEEP
+Evidence Role/Outcome/Status → NO_CURRENT_EQUIVALENT / REDESIGN
+FailureBoundary → 03 Research + 04 Applicability → SPLIT / KEEP
+~~~
+
+## 6.4 Knowledge / Applicability
+
+~~~text
+Knowledge Admission      → 04 Knowledge Maintenance → SAME_RESPONSIBILITY / KEEP
+Knowledge Promotion      → 04 Admission/Promotion → SAME_RESPONSIBILITY / REDESIGN name
+Knowledge Record / Pool  → 04 Knowledge → SAME_RESPONSIBILITY / KEEP
+KnowledgeGraph           → NO_CURRENT_EQUIVALENT / KEEP as View
+Knowledge Lifecycle      → MERGED/UNKNOWN owner / REDESIGN-DEFER
+Applicability Evaluation → 04 Runtime Applicability → SAME_RESPONSIBILITY / KEEP
+ApplicableKnowledgeSet   → 04→05 boundary → SAME_RESPONSIBILITY / KEEP
+Runtime Constraint       → UNKNOWN / DEFER
+~~~
+
+## 6.5 Decision
+
+Current 05は未設計。
+
+~~~text
+TradeThesis
+DecisionContextSnapshot
+DecisionScope
+ExpectedValueAssessment
+Cross-Thesis Comparison
+DecisionResult
+~~~
+
+は NO_CURRENT_EQUIVALENT / KEEP-REDESIGN candidate。
+
+Legacy BUY / SELL canonical DecisionはDROP。
+
+## 6.6 Defense / Risk
+
+~~~text
+Defense Admission            → NO_CURRENT_EQUIVALENT / KEEP candidate
+DefenseDecision              → NO_CURRENT_EQUIVALENT / KEEP candidate
+RiskState / RiskStateMachine → NO_CURRENT_EQUIVALENT / KEEP principle
+Runtime Authorized Constraint→ UNKNOWN / DEFER
+Production Promotion runtime → NO_CURRENT_EQUIVALENT / DROP
+Production eligibility       → UNKNOWN / REDESIGN candidate
+~~~
+
+## 6.7 Execution / Position / Post-Decision
+
+Current 06は未設計。
+
+~~~text
+EntryThesis
+Execution Intent / Attempt / Event / Record
+LogicalPosition / PositionEvent
+Exit / In-Trade Defense / Protection
+TradeResult / ProductionEvidence
+Production Evaluation
+Finding Pipeline
+Cross-Analysis
+~~~
+
+は NO_CURRENT_EQUIVALENT であり、Legacy KEEP candidateとしてCurrent 06 / Feedback設計時に再評価する。
+
+Protection Requirement OwnerはUNKNOWN。
+
+## 6.8 Object Reduction Mapping
+
+~~~text
+PositionAllocation
+→ Position ledger/event attribution
+→ MERGED / DROP
+
+ProtectionEvent standalone
+→ ExecutionEvent + PositionEvent + Protection reconciliation
+→ MERGED / DROP
+
+Entry/Exit-specific reservation
+→ generic ExecutionReservation
+→ MERGED / DROP
+
+EffectiveRiskPermissionState
+→ RiskState + derived context
+→ SPLIT / DROP duplicate state
+
+ValidatedResearchResult duplicate store
+→ Synthesis + Validation boundary
+→ DROP duplicate object
+
+KnowledgeGraph duplicate store
+→ Record + Relationship + View
+→ DROP duplicate store
+~~~
+
+## 6.9 Feedback
+
+Current 03の共通入口:
+
+~~~text
+Cause Candidate
+Post-Decision Finding
+Anomaly
+Contradiction
+Failure Pattern
+AI Suggestion
+↓
+Research Candidate
+↓
+Research Intake
+~~~
+
+Legacy detailed Finding PipelineはNO_CURRENT_EQUIVALENT / KEEP candidate。
+
+Direct bypassはDROP。
+
+## 6.10 AI / Human Authority
+
+~~~text
+AI advisory / research support → SAME_RESPONSIBILITY / KEEP
+AI Judgment as Evidence        → NO_CURRENT_EQUIVALENT / DROP
+AI final approval / majority   → NO_CURRENT_EQUIVALENT / DROP
+Human Final Authority          → PROJECT_CHARTER §12 / UNKNOWN / DEFER
+Human Override                 → Governance / UNKNOWN / DEFER
+~~~
+
+## 6.11 Major Legacy Gap → Current Destination
+
+| Legacy Gap | Current Destination |
+|---|---|
+| Market Understanding upstream boundary | 02 ↔ 03 |
+| Current Market Understanding exact SoT | Current 02 |
+| Market DNA Snapshot lineage | Current 02 + 03 |
+| Knowledge Lifecycle Apply Writer | Current 04 + Cross-Cutting |
+| Runtime Authorized Constraint Governance | Current 04 + Risk Governance |
+| Protection Requirement Owner | Current 06 |
+| Human / AI / Production Authority | PROJECT_CHARTER §12 |
+| Production Promotion retained meaning | 04 / 05 / Governance |
+
+## 6.12 Precedence
+
+~~~text
+PROJECT_CHARTER
+↓
+Current Working Baseline
+↓
+Current Detailed Design
+↓
+Legacy → Current Map
+↓
+Legacy Detail Reference
+↓
+Legacy Original Source
+~~~
+
+~~~text
+LEGACY_CURRENT_CONCEPT_MAP:
+CLOSURE_READY
+
+CURRENT_DESIGN_STATUS:
+NOT_ADOPTED
+~~~
 
 # 7. Important Concept Reviews
 
@@ -5384,6 +6271,18 @@ NOT_ADOPTED
 
 ## 7.40 Execution — Integrated Review / Final Candidate Flow
 
+~~~text
+LEGACY_FLOW_STATUS:
+SUPERSEDED
+
+SUPERSEDED_BY:
+7.97–7.104 Execution Lifecycle / Position / Protection / Venue detailed contracts
+
+NOTE:
+このSectionはhistorical intermediate checkpointとして保持し、後続ContractをCurrent Reference上の優先解釈とする。
+~~~
+
+
 ### Review Result
 
 Defense→Execution Contractと今回の4Objectを横断Reviewした結果、Architectureを作り直す必要がある重大矛盾は確認されなかった。
@@ -6249,6 +7148,20 @@ NOT_ADOPTED
 ---
 
 ## 7.49 Post-Trade — Integrated Review / Final Candidate Flow
+
+~~~text
+LEGACY_FLOW_STATUS:
+SUPERSEDED
+
+SUPERSEDED_BY:
+7.50+ Finding Pipeline
+7.105–7.112 Production Evaluation / source corrections
+7.113–7.125 Cross-Analysis
+
+NOTE:
+Post-Trade Analysis → ResearchCandidate direct routeは後続Finding Pipelineにより置換された。
+~~~
+
 
 ### Review Result
 
@@ -7948,6 +8861,18 @@ NOT_ADOPTED
 ---
 
 ## 7.56 Finding → Research — Integrated Candidate Flow
+
+~~~text
+LEGACY_FLOW_STATUS:
+SUPERSEDED
+
+SUPERSEDED_BY:
+7.111 / 7.125
+
+NOTE:
+Cross-Analysisの最終配置は Production Evaluation Analysis Results → Cross-Analysis Review → CrossAnalysisReviewResult → Finding Extractor であり、このSectionのNormalizer後Cross-Analysis配置はhistorical intermediate flowとして扱う。
+~~~
+
 
 ### Canonical Detailed Flow
 
@@ -15034,138 +15959,519 @@ Those require separate Current adoption / contract / implementation work.
 
 FIX履歴を、単なるGit履歴ではなく再利用可能なFailure Knowledgeとして索引化する。
 
-| FIX | Target | Problem | Separation / Change | Current Relevance |
+99_ARCHIVE/BACKUP/ のFIX-001〜018C原文と主要Dictionary反映をClosure Reviewで確認した。
+
+| FIX | Target | What Failed | Separation / Change | Current Reuse |
 |---|---|---|---|---|
-| FIX-001 | Observation | `<TODO>` | `<TODO>` | `<TODO>` |
-| FIX-002 | Hypothesis / Production State | `<TODO>` | `<TODO>` | `<TODO>` |
-| FIX-003 | Research Plan State | `<TODO>` | `<TODO>` | `<TODO>` |
-| FIX-004 | Edge / Knowledge State | `<TODO>` | `<TODO>` | `<TODO>` |
-| FIX-005 | Object Naming | `<TODO>` | `<TODO>` | `<TODO>` |
-| FIX-006 | Feature / Priority / DNA Cycle | `<TODO>` | `<TODO>` | `<TODO>` |
-| FIX-007 | Market Event Responsibility | `<TODO>` | `<TODO>` | `<TODO>` |
-| FIX-008 | Production Thesis Builder | `<TODO>` | `<TODO>` | `<TODO>` |
-| FIX-009 | Entry / Production Evidence | `<TODO>` | `<TODO>` | `<TODO>` |
-| FIX-010 | State Transition Event | `<TODO>` | `<TODO>` | `<TODO>` |
-| FIX-011 | Research Plan Two-Axis State | `<TODO>` | `<TODO>` | `<TODO>` |
-| FIX-012 | Lifecycle / Aging / Production Separation | `<TODO>` | `<TODO>` | `<TODO>` |
-| FIX-013 | State Authority Matrix | `<TODO>` | `<TODO>` | `<TODO>` |
-| FIX-014 | Source Metadata / Lifecycle Separation | `<TODO>` | `<TODO>` | `<TODO>` |
-| FIX-015 | Approval Decision | `<TODO>` | `<TODO>` | `<TODO>` |
-| FIX-016 | Production / Risk Stage Separation | `<TODO>` | `<TODO>` | `<TODO>` |
-| FIX-017 | Knowledge Lifecycle | `<TODO>` | `<TODO>` | `<TODO>` |
-| FIX-018A | Security / Identity / Authorization | `<TODO>` | `<TODO>` | `<TODO>` |
-| FIX-018B | Credential Governance | `<TODO>` | `<TODO>` | `<TODO>` |
-| FIX-018C | Data Classification | `<TODO>` | `<TODO>` | `<TODO>` |
+| FIX-001 | Observation | Observation / NormalizedObservation重複 | RawData→Normalizer→Observationへ一本化 | One semantic meaning → one canonical home |
+| FIX-002 | Hypothesis / Production State | Research maturityとProduction利用段階混在 | LifecycleとProduction Promotion分離 | maturity ≠ eligibility |
+| FIX-003 | ResearchPlan State | lifecycleと編集Lock混在 | LifecycleとLock分離 | lifecycle ≠ lock |
+| FIX-004 | Edge / Knowledge State | maturityとfreshness混在 | Edge LifecycleとKnowledge Aging分離 | maturity ≠ health |
+| FIX-005 | Object Naming | ModeごとにObject増殖 | ResearchResult等へ統一 | mode/channel ≠ new object |
+| FIX-006 | Feature / DNA Cycle | 同Cycle未来DNA参照 | previous DNA→current processing→new DNA | same-cycle future dependency禁止 |
+| FIX-007 | Market Event | FactとInterpretation Generator衝突 | Event DetectionをCanonical Event Generatorへ | fact ≠ interpretation ≠ cause |
+| FIX-008 | Production Thesis | Applicability / Thesis / Decision混在 | 責任分離 | applicable ≠ trade-worthy |
+| FIX-009 | Entry / Evidence | Generator / Logger / Analyzer混在 | Generator≠Custodian≠Analyzer | immutable entry snapshot / live evidence |
+| FIX-010 | State Transition | Current Stateと履歴混在 | Projectionとimmutable transition fact分離 | projection ≠ history |
+| FIX-011 | ResearchPlan | Version/Lock binding不足 | exact Plan VersionへTrial bind | exact version binding |
+| FIX-012 | State Axes | maturity/health/production/risk混在 | 独立軸へ分離 | independent state axes |
+| FIX-013 | State Authority | 複数RoleがApply Authorityを持ち得た | REQUEST/RECOMMEND/APPROVE/APPLY分離 | single writer |
+| FIX-014 | Source Metadata | retrieval/source lifecycle/quality混在 | 3責任分離 | retrieval ≠ lifecycle ≠ quality |
+| FIX-015 | Approval | approval/apply/audit混在 | ApprovalDecision分離 | approve ≠ applied |
+| FIX-016 | Production/Risk | Knowledge eligibilityとruntime risk混在 | ProductionとRiskState分離 | eligibility ≠ runtime risk |
+| FIX-017 | Knowledge Lifecycle | Health profile肥大化 | freshness/health projectionへ縮小 | thin lifecycle |
+| FIX-018A | Security | identity/role/permission/auth混在 | Principal≠Role≠Permission≠Auth≠Approval≠Action | default deny / interface≠authority |
+| FIX-018B | Credential | Secret/Credential/Permission混在 | Secret≠Ref≠Profile≠Domain Permission | credential active ≠ trade authorized |
+| FIX-018C | Classification | sensitivityとstorage/risk混在 | Classification独立 | classification ≠ retention/storage/risk |
 
-詳細全文をここへ複製しない。
+## 8.1 Cross-FIX Failure Themes
 
-必要なら、
+~~~text
+A. Semantic Duplication
+B. State Dimension Collision
+C. Responsibility / Authority Collision
+D. Fact / Interpretation Collision
+E. Projection / Historical Fact Collision
+F. Circular Dependency
+G. Permission Domain Collision
+H. Data Governance Collision
+~~~
 
-```text
-Concept Review
-または
-Legacy Original Source
-```
+## 8.2 Reusable Guardrails
 
-へ戻る。
+~~~text
+One Semantic Meaning → One Canonical Home
+Independent State Dimensions remain independent
+Generator ≠ Custodian ≠ Analyzer
+Request ≠ Recommend ≠ Approve ≠ Apply
+One State Machine ≈ One Apply Writer
+Projection ≠ Immutable History
+Fact ≠ Interpretation ≠ Cause
+Same-cycle future dependency prohibited
+Research maturity ≠ production eligibility ≠ runtime risk
+Retrieval ≠ Source Lifecycle ≠ Data Quality
+Authentication ≠ Authorization ≠ Approval ≠ Action
+Credential possession ≠ Domain permission
+Classification ≠ Retention / Storage / Health / Risk
+Restriction Authority ≠ Recovery Authority
+~~~
 
----
+## 8.3 Supersession Note
+
+FIXはFIX当時のLessonを保存する。後続Referenceで精密化された場合は後続Contractを優先する。
+
+Known example:
+
+~~~text
+FIX-009 era:
+Exchange Adapter → ExecutionRecord Generator
+
+later 7.104:
+Exchange Adapter ≠ canonical terminal ExecutionRecord owner
+ExecutionRecord Finalizer → terminal / reconciled outcome assembly
+~~~
+
+~~~text
+FIX-001..018C:
+REVIEWED
+
+FIX_INDEX_STATUS:
+CLOSURE_READY
+
+CURRENT_DESIGN_STATUS:
+NOT_ADOPTED
+~~~
 
 # 9. Important Legacy Design Lessons
 
-複数Concept / FIXから共通して確認できるLegacy上の学びを整理する。
+旧市場理解OSで発生したFIX・責任衝突・Object重複・State混同から得た再利用価値の高いLessonを記録する。
 
-重要:
+~~~text
+Legacy Design Lesson
+≠ Current Design Principle automatically
+~~~
 
-```text
-Legacy Lesson
-≠ Current Design Principle
-```
+1. One Semantic Meaning = One Canonical Home  
+2. Independent Meanings Need Independent State Axes  
+3. Fact ≠ Interpretation ≠ Causal Claim  
+4. Generator ≠ Custodian ≠ Analyzer  
+5. Current Projection ≠ Immutable Historical Fact  
+6. REQUEST ≠ RECOMMEND ≠ APPROVE ≠ APPLY  
+7. One State Machine ≈ One Apply Authority  
+8. Restriction Authority ≠ Recovery Authority  
+9. Retrieval Result ≠ Source Lifecycle ≠ Data Quality  
+10. Logical Source ≠ Provider Source  
+11. Same-Cycle Future Output Must Not Become Earlier Input  
+12. Exact Version Binding > Semantic Similarity  
+13. Material Change → New Version / New Cycle, not Silent Mutation  
+14. UNKNOWN Is First-Class  
+15. Process Failure ≠ Semantic Outcome  
+16. Applicable ≠ Trade-Worthy ≠ Safe ≠ Executed  
+17. Decision ≠ Defense ≠ RiskState ≠ Execution  
+18. Analysis Must Not Rewrite Source Facts  
+19. Conflict Detection ≠ Conflict Resolution  
+20. Object / Analysis Count ≠ Independent Evidence Count  
+21. Production Failure Returns Through Research, not Direct Knowledge Mutation  
+22. View / Projection ≠ Second Source of Truth  
+23. Interface / Channel ≠ Authority  
+24. Authentication ≠ Authorization ≠ Approval ≠ Action  
+25. Credential Possession ≠ Domain Permission  
+26. Secret Value ≠ Credential Metadata  
+27. Classification ≠ Retention ≠ Storage ≠ Health ≠ Risk  
+28. Sanitization Creates a Derived View; It Does Not Rewrite Source  
 
-## LEGACY-LESSON-<N>
+## 9.1 Consolidated Principles
 
-### Evidence
+~~~text
+P1  One Semantic Meaning → One Canonical Home
+P2  Independent Meanings → Independent State Axes
+P3  Fact ≠ Interpretation ≠ Cause
+P4  Generator ≠ Custodian ≠ Analyzer
+P5  Projection ≠ History
+P6  Request ≠ Recommend ≠ Approve ≠ Apply
+P7  One State Machine ≈ One Apply Authority
+P8  Restriction ≠ Recovery Authority
+P9  Retrieval ≠ Source Lifecycle ≠ Data Quality
+P10 Same-cycle future dependency禁止
+P11 Exact Version Binding
+P12 No Silent Mutation
+P13 UNKNOWN First-Class
+P14 Process Failure ≠ Outcome
+P15 Applicable ≠ Trade-Worthy ≠ Safe ≠ Executed
+P16 Decision ≠ Defense ≠ RiskState ≠ Execution
+P17 Analysis does not rewrite Source Facts
+P18 Conflict Detection ≠ Resolution
+P19 Count ≠ Independent Evidence
+P20 Production Failure → Research
+P21 View ≠ Source of Truth
+P22 Interface ≠ Authority
+P23 Authentication ≠ Authorization ≠ Approval ≠ Action
+P24 Credential possession ≠ Domain Permission
+P25 Classification ≠ Lifecycle / Storage / Risk
+~~~
 
-```text
-<TODO>
-```
+主要Evidence:
+FIX-001〜018C、7.57 / 7.64 / 7.70 / 7.73 / 7.83 / 7.87 / 7.93 / 7.96 / 7.104 / 7.109 / 7.125。
 
-### Lesson
+~~~text
+LEGACY_LESSON_STATUS:
+CLOSURE_READY
 
-```text
-<TODO>
-```
-
-### Current Relevance
-
-```text
-<TODO / UNKNOWN>
-```
-
-### Source Pointer
-
-```text
-<TODO>
-```
-
----
+CURRENT_ADOPTION_STATUS:
+NOT_ADOPTED
+~~~
 
 # 10. Legacy Revisit Index
 
-現在は確定しないが、将来特定のCurrent Designを作る際に再確認価値があるLegacy Conceptを索引化する。
+現在のLegacy Referenceでは最終決定しないが、Current設計が該当責任まで到達した時に再確認する価値があるConcept / Gapを索引化する。
 
-これは、
+~~~text
+Legacy Revisit Index
+≠ Project Pending
+≠ Current Task
+≠ Current Adoption Queue
+~~~
 
-```text
-Project Pending
-Current Task
-Next Action
-```
+## 10.1 Project Charter / Authority
 
-ではない。
+~~~text
+Human Final Authority
+AI Approval / Production Authority
+Human Override / Manual Approval
+Production Permission Philosophy
+~~~
 
-| Legacy Concept | Why Revisit | Conflict | Recommendation | Review Trigger |
-|---|---|---|---|---|
-| `<Concept>` | `<Reason>` | UNKNOWN | UNDECIDED | `<When Current Design reaches ...>` |
+Trigger: PROJECT_CHARTER §12 / Cross-Cutting Governance。
 
-ここには、
+## 10.2 Market Understanding
 
-```text
-期限
-担当者
-優先順位
-Project Next Action
-```
+~~~text
+Market Understanding Whole Flow
+Current Market Understanding exact SoT
+Market Intelligence detailed responsibility
+Market DNA Definition
+Market DNA Snapshot lineage
+Feature Priority ↔ DNA cycle
+Event Detection Processor
+~~~
 
-を持たせない。
+Trigger: 02 Detailed Design。
 
-ProjectのPendingは `AI_CONTEXT.md` の責任。
+## 10.3 Research
 
----
+~~~text
+Evidence Role / Outcome / Status
+Evidence Profile Ownership
+Independent Evidence Method
+Evidence Dependency method
+Conflict Materiality
+Domain / Method Registries
+ResearchSynthesisAssessment
+ResultValidationDecision
+~~~
+
+Trigger: 03 Detailed Design。
+
+## 10.4 Knowledge / Applicability
+
+~~~text
+Knowledge Promotion naming
+Knowledge Type / Relationship Registry
+KnowledgeGraph
+Knowledge Lifecycle Apply Writer
+KnowledgeLifecycleProfile
+ACTIVE / WEAK / RETIRED family
+ApplicabilityAssessment / states
+Runtime Authorized Constraint
+Market DNA distance formula
+~~~
+
+Trigger: 04 Detailed Design + Cross-Cutting Governance。
+
+## 10.5 Decision
+
+Trigger: 05_DECISION。
+
+~~~text
+TradeThesis
+DecisionContextSnapshot
+IntegratedKnowledgeContext
+DecisionScope
+PreDecisionThesisAssessment
+ExpectedValueAssessment
+CrossThesisComparison
+DecisionResult
+DecisionCycleProcessingResult
+DecisionPolicyBundleVersion
+~~~
+
+Legacy BUY / SELL canonical decisionはDROP_RECHECK only。
+
+## 10.6 Defense / Risk / Governance
+
+~~~text
+Defense Admission
+DefenseDecision
+RiskState / RiskState Machine
+ApprovalDecision
+Emergency Fast Path
+Recovery Strict Path
+Production Promotion runtime → DROP_RECHECK
+Production Eligibility concept → REDESIGN / DEFER
+~~~
+
+Trigger: Cross-Cutting Risk / Governance、05→06 boundary。
+
+## 10.7 Execution / Position / Protection
+
+Trigger: 06_EXECUTION_POST_DECISION。
+
+~~~text
+EntryThesis
+Execution Intent / Attempt / Event / Record
+ExecutionRecord Finalizer
+ExecutionSafetyGuard
+LogicalPosition
+PositionEvent / Projection
+Position Close Gate
+Protection Requirement
+ProtectionState
+VenueRoutingPlan / Capability
+Cross-Venue policy
+~~~
+
+Protection Requirement OwnerはLEGACY_GAP。
+
+## 10.8 Post-Decision / Feedback
+
+~~~text
+TradeResult
+ProductionEvidence
+Production Evaluation family
+Counterfactual
+DemoLiveDivergence
+Finding Extractor / Normalizer
+Finding Type Registry
+Candidate Promotion
+Cross-Analysis
+~~~
+
+Trigger: 06→03 Feedback Design。
+
+## 10.9 Security / Credential / Data Governance
+
+~~~text
+SecurityPrincipal
+Default Deny
+Authentication vs Authorization
+Interface ≠ Authority
+CredentialProfile
+Research / Production Credential separation
+Read vs Execution Credential
+Data Classification
+Effective Classification
+Sanitized Derived View
+Retention / Deletion
+~~~
+
+Trigger: Cross-Cutting Security。
+
+## 10.10 Rule
+
+~~~text
+Current Design reaches trigger
+↓
+Legacy Source / Failure Reason review
+↓
+Current Charter / Baseline compare
+↓
+KEEP / REDESIGN / DROP / DEFER再判定
+~~~
+
+~~~text
+LEGACY_REVISIT_INDEX:
+CLOSURE_READY
+
+PROJECT_PENDING:
+NOT_DUPLICATED
+
+CURRENT_DESIGN_STATUS:
+NOT_ADOPTED
+~~~
 
 # 11. Unknown / Unresolved
 
-旧Sourceを確認しても確定できなかった内容を残す。
+旧Sourceを確認してもCanonical Definition / Source of Truth / Authority / Provenanceを確定できなかった内容だけを記録する。
 
-## LEGACY-UNKNOWN-<N>
+~~~text
+LEGACY UNKNOWN
+≠ Current Pending
+≠ Implementation Deferred
+≠ Runtime UNKNOWN State
+~~~
 
-```text
-Question:
-<TODO>
+## LEGACY-UNKNOWN-001 — Market Understanding → ResearchCandidate Formal Boundary
 
-Why Unknown:
-<TODO>
+旧市場理解OSで Market Understanding → ResearchCandidate の正式Canonical Boundaryが閉じていない。
 
-Checked Sources:
-<TODO>
+Current Resolution:
+02_MARKET_UNDERSTANDING ↔ 03_RESEARCH で再設計。
 
-Additional Source Required:
-<TODO>
-```
+## LEGACY-UNKNOWN-002 — Current Market Understanding Canonical SoT
 
-分からない部分をGPTの一般知識でLegacy Definitionとして補完しない。
+後続DomainからRefとして使われるが、exact Object / Builder / Inputs / Version lineageがLegacyで未確定。
 
----
+Current Resolution:
+Current 02 Semantic / Object / Contract Design。
+
+## LEGACY-UNKNOWN-003 — Market DNA Snapshot Canonical Lineage
+
+Market DNA思想とSnapshot参照はあるが、Raw / Feature / Formula / Definition VersionからのCanonical lineageが未確定。
+
+Current Resolution:
+Current 02 + 03。
+
+## LEGACY-UNKNOWN-004 — Knowledge Lifecycle Apply Writer
+
+Known:
+
+~~~text
+KnowledgeLifecycleAssessment
+≠ actual Apply
+
+StateTransitionEvent
+= applied fact
+
+KnowledgeLifecycleProfile
+= current projection
+~~~
+
+Unknown:
+Canonical Apply Writer / State Machine Owner。
+
+Current Resolution:
+04 + Cross-Cutting State Authority。
+
+## LEGACY-UNKNOWN-005 — Runtime Authorized Constraint Governance
+
+Known:
+
+~~~text
+Research Constraint Candidate
+≠ Knowledge Constraint
+≠ Runtime Authorized Hard Constraint
+~~~
+
+Unknown:
+
+~~~text
+Approval Authority
+Apply Authority
+Canonical Registry / State
+Version / Revocation / Supersession
+~~~
+
+Current Resolution:
+04 + Cross-Cutting Governance + Risk/Defense。
+
+## LEGACY-UNKNOWN-006 — Protection Requirement Canonical Owner
+
+Known:
+
+~~~text
+Initial Protection Intent
+→ Protection Requirement
+→ ProtectionOrderIntent
+→ Venue Protection Order
+→ ProtectionState
+~~~
+
+Unknown:
+誰がRequirementを生成・更新し、どのPosition Version / Risk Source / PolicyへBindするか。
+
+Current Resolution:
+06 + Risk / Position / Protection。
+
+## LEGACY-UNKNOWN-007 — Human / AI / Production Final Authority
+
+Known guardrails:
+
+~~~text
+AI ≠ Authority by default
+Interface ≠ Authority
+Research Authority ≠ Production Authority
+REQUEST ≠ RECOMMEND ≠ APPROVE ≠ APPLY
+~~~
+
+Unknown:
+Whole-system Authority Matrix。
+
+Current Resolution:
+PROJECT_CHARTER §12 → Cross-Cutting Governance。
+
+## LEGACY-UNKNOWN-008 — Production Promotion Exact Retained Meaning
+
+LegacyではKnowledge-specific Production Promotion思想がある一方、後期Referenceはruntime permissionをDecision / Defense / RiskState / Executionへ分離した。
+
+~~~text
+as Runtime Trade Permission
+→ DROP candidate
+
+as Knowledge / Strategy Production Eligibility
+→ REDESIGN candidate
+~~~
+
+Current Resolution:
+04 / 05 / Cross-Cutting Governance。
+
+## 11.1 Explicitly Not Legacy Unknown
+
+以下は意図的Deferred:
+
+~~~text
+exact DB schema
+Python class hierarchy
+thresholds
+risk numeric limits
+retry/backoff
+DNA distance formula
+independent evidence algorithm
+venue API detail
+credential storage implementation
+retention duration
+IAM mechanism
+~~~
+
+## 11.2 Runtime UNKNOWN ≠ Design UNKNOWN
+
+Runtimeの UNKNOWN / UNCERTAIN / UNKNOWN_DEPENDENCY / UNRESOLVED は正式な不確実性Stateであり、設計欠陥ではない。
+
+## 11.3 Master Register
+
+| ID | Unknown | Type | Current Destination |
+|---|---|---|---|
+| 001 | Market Understanding→ResearchCandidate boundary | FLOW GAP | 02↔03 |
+| 002 | Current Market Understanding SoT | SOT GAP | 02 |
+| 003 | Market DNA Snapshot lineage | TRACE/SOT GAP | 02+03 |
+| 004 | Knowledge Lifecycle Apply Writer | AUTHORITY GAP | 04+Cross-Cutting |
+| 005 | Runtime Authorized Constraint Governance | GOVERNANCE/SOT GAP | 04+Risk |
+| 006 | Protection Requirement Owner | AUTHORITY/TRACE GAP | 06 |
+| 007 | Human/AI/Production Final Authority | GOVERNANCE GAP | Charter §12 |
+| 008 | Production Promotion retained meaning | SEMANTIC/AUTHORITY AMBIGUITY | 04/05/Governance |
+
+~~~text
+LEGACY_UNKNOWN_COUNT:
+8
+
+UNCLASSIFIED_MAJOR_UNKNOWN:
+NONE FOUND
+
+ARCHITECTURE_BREAKING_UNKNOWN:
+NONE FOUND
+
+CURRENT_DESIGN_STATUS:
+NOT_ADOPTED
+~~~
 
 # 12. Source Pointer Index
 
@@ -15173,28 +16479,35 @@ ConceptからOriginal Sourceへ戻れるようにする。
 
 | Source | LEGACY_SOURCE_CLASS | SOURCE_REVIEW_STATUS | Main Knowledge |
 |---|---|---|---|
-| `市場理解OS まとめ案 1.md` | LEGACY_SUMMARY | REVIEWED | Legacy全体像 / Domain構成 |
-| `市場理解OS まとめ案 2.md` | LEGACY_SUMMARY | REVIEWED | Outer / Control / Connection |
-| `市場理解OS まとめ案 3.md` | LEGACY_SUMMARY | REVIEWED | Market Understanding Core |
-| `市場理解OS まとめ案 4.md` | LEGACY_SUMMARY | REVIEWED | Causal / Market DNA / Knowledge |
-| `市場理解OS まとめ案 5.md` | LEGACY_SUMMARY | REVIEWED | Research / Experimental / Validation |
-| `市場理解OS まとめ案 6.md` | LEGACY_SUMMARY | REVIEWED | Production / Trading |
-| `市場理解OS まとめ案 7.md` | LEGACY_SUMMARY | REVIEWED | Post-Trade / Feedback / Trace |
-| `市場理解OS まとめ案 8.md` | LEGACY_SUMMARY | REVIEWED | Python Runtime / Operations / Telegram |
-| `市場理解OS まとめ案 9.md` | LEGACY_SUMMARY | REVIEWED | 固定候補 / 未解決TODO / Formal Design Checklist |
-| `市場理解OS まとめ案 10.md` | LEGACY_SUMMARY | REVIEWED | Research Evidence Ladder / Multi-Hypothesis Trade Thesis |
-| `市場理解OS まとめ案 11.md` | LEGACY_SUMMARY | REVIEWED | Long-term Governance / Plane / Knowledge Spine |
-| `01_DICTIONARY/OBJECT_DICTIONARY.md` | LEGACY_ORIGINAL | NOT_REVIEWED | Object / Concept |
-| `01_DICTIONARY/ROLE_DICTIONARY.md` | LEGACY_ORIGINAL | NOT_REVIEWED | Role |
-| `01_DICTIONARY/STATE_DICTIONARY.md` | LEGACY_ORIGINAL | NOT_REVIEWED | State / Lifecycle |
-| `01_DICTIONARY/SECURITY_DICTIONARY.md` | LEGACY_ORIGINAL | NOT_REVIEWED | Security |
-| `01_DICTIONARY/CREDENTIAL_DICTIONARY.md` | LEGACY_ORIGINAL | NOT_REVIEWED | Credential |
-| `01_DICTIONARY/DATA_CLASSIFICATION_DICTIONARY.md` | LEGACY_ORIGINAL | NOT_REVIEWED | Data Classification |
-| `00_GOVERNANCE/DESIGN_CHANGE_RULES.md` | LEGACY_ORIGINAL | NOT_REVIEWED | Governance |
-| `00_GOVERNANCE/GIT_RULES.md` | LEGACY_ORIGINAL | NOT_REVIEWED | Legacy Git Governance |
-| `99_ARCHIVE/BACKUP/*` | LEGACY_BACKUP | NOT_REVIEWED | FIX / Failure Context |
+| 市場理解OS まとめ案 1.md | LEGACY_SUMMARY | REVIEWED | Legacy全体像 / Domain構成 |
+| 市場理解OS まとめ案 2.md | LEGACY_SUMMARY | REVIEWED | Outer / Control / Connection |
+| 市場理解OS まとめ案 3.md | LEGACY_SUMMARY | REVIEWED | Market Understanding Core |
+| 市場理解OS まとめ案 4.md | LEGACY_SUMMARY | REVIEWED | Causal / Market DNA / Knowledge |
+| 市場理解OS まとめ案 5.md | LEGACY_SUMMARY | REVIEWED | Research / Experimental / Validation |
+| 市場理解OS まとめ案 6.md | LEGACY_SUMMARY | REVIEWED | Production / Trading |
+| 市場理解OS まとめ案 7.md | LEGACY_SUMMARY | REVIEWED | Post-Trade / Feedback / Trace |
+| 市場理解OS まとめ案 8.md | LEGACY_SUMMARY | REVIEWED | Python Runtime / Operations / Telegram |
+| 市場理解OS まとめ案 9.md | LEGACY_SUMMARY | REVIEWED | 固定候補 / TODO / Formal Checklist |
+| 市場理解OS まとめ案 10.md | LEGACY_SUMMARY | REVIEWED | Evidence Ladder / Multi-Hypothesis Thesis |
+| 市場理解OS まとめ案 11.md | LEGACY_SUMMARY | REVIEWED | Long-term Governance / Knowledge Spine |
+| 01_DICTIONARY/OBJECT_DICTIONARY.md | LEGACY_ORIGINAL | PARTIAL | Major Object Families / FIX semantics |
+| 01_DICTIONARY/ROLE_DICTIONARY.md | LEGACY_ORIGINAL | PARTIAL | Major Roles / Responsibility Boundaries |
+| 01_DICTIONARY/STATE_DICTIONARY.md | LEGACY_ORIGINAL | PARTIAL | Major State Families / Authority / Separation |
+| 01_DICTIONARY/SECURITY_DICTIONARY.md | LEGACY_ORIGINAL | REVIEWED | Identity / Authentication / Authorization |
+| 01_DICTIONARY/CREDENTIAL_DICTIONARY.md | LEGACY_ORIGINAL | REVIEWED | Credential / Secret / Capability / lifecycle |
+| 01_DICTIONARY/DATA_CLASSIFICATION_DICTIONARY.md | LEGACY_ORIGINAL | REVIEWED | Classification / inheritance / sanitization |
+| 00_GOVERNANCE/DESIGN_CHANGE_RULES.md | LEGACY_ORIGINAL | NOT_REVIEWED | Legacy Governance — next review |
+| 00_GOVERNANCE/GIT_RULES.md | LEGACY_ORIGINAL | NOT_REVIEWED | Legacy Git Governance — next review |
+| 99_ARCHIVE/BACKUP/* | LEGACY_BACKUP | REVIEWED | FIX-001〜018C Failure Context |
 
----
+~~~text
+PARTIAL
+=
+主要ConceptとCurrent影響範囲はReview済み。
+Dictionary全文Field-by-Field監査は未実施。
+~~~
+
+Source PointerはCurrent Design Authorityを意味しない。
 
 # 13. Maintenance / Scalability Rule
 
