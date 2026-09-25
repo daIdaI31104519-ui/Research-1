@@ -18542,3 +18542,904 @@ Post-Trade source-object consistency review
 ~~~
 
 Do not jump to Current adoption from this checkpoint.
+
+---
+
+## 7.105 TradeResult / Position Terminal — Execution Reconciliation Checkpoint
+
+### Purpose
+
+This checkpoint reconciles the older Post-Trade Reference (7.41–7.49) with the newer detailed Execution / Position / Exit / Protection lifecycle (7.97–7.104).
+
+Source-backed anchors retained:
+
+~~~text
+7.41 TradeResult
+= final Trade outcome fact
+≠ analysis
+
+7.42–7.48
+= versioned Post-Trade analysis objects
+
+7.49
+= integrated Post-Trade flow
+
+7.50–7.56
+= Finding → Research governance
+
+7.100–7.104
+= LogicalPosition / Exit / Protection / Execution detailed terminal boundary
+~~~
+
+Derived refinements in this checkpoint do NOT create Current Design authority.
+
+~~~text
+CURRENT_DESIGN_STATUS:
+NOT_ADOPTED
+
+REFERENCE_STAGE:
+POST_TRADE_EXECUTION_RECONCILIATION
+
+REFERENCE_LOCAL_PRECEDENCE:
+Where 7.41–7.49 conflicts with 7.105+,
+7.105+ is the newer Reference interpretation only.
+~~~
+
+### Position Terminal Refinement
+
+Older shorthand:
+
+~~~text
+Trade / Position Terminal
+↓
+TradeResult
+~~~
+
+Newer detailed Reference interpretation:
+
+~~~text
+LogicalPosition
+↓
+known actual exposure = 0
+↓
+no unresolved Position-attributable execution effect
+↓
+Execution Reconciliation acceptable
+↓
+Protection cleanup
+↓
+Protection Reconciliation acceptable
+↓
+Position Reconciliation acceptable
+↓
+Position Close Gate
+↓
+POSITION_CLOSED
+↓
+TradeResult Finalization
+~~~
+
+Critical separation:
+
+~~~text
+Exit Order Filled
+≠ Trade Terminal
+
+Local calculated quantity = 0
+≠ Position CLOSED
+
+Position CLOSED
+= hard prerequisite for canonical TradeResult finalization candidate
+~~~
+
+### CORRECTION-PT-07 — Position CLOSED is the TradeResult boundary
+
+TradeResult is refined to:
+
+> **A versioned immutable Final Trade Outcome Fact assembled only after the LogicalPosition lifecycle reaches POSITION_CLOSED, preserving the exact Decision / Thesis / Entry / Execution / Position / Exit / Safety / Protection / Venue lineage and realized economic outcome without adding interpretation.**
+
+### TradeResult Finalization Gates
+
+Candidate processing gates:
+
+~~~text
+TR0 Logical Position Identity
+TR1 Position lifecycle = CLOSED
+TR2 final Position version known
+TR3 attributable exposure = known zero
+TR4 no unresolved exposure-changing ExecutionAttempt
+TR5 no unresolved Fill capable of changing Position
+TR6 no live/orphan Protection capable of changing exposure
+TR7 final Position Reconciliation acceptable
+TR8 final Protection Reconciliation acceptable
+TR9 Entry / Exit execution lineage resolvable
+TR10 Source version / integrity sufficient
+TR11 terminal timestamp fixed
+TR12 Outcome Assembly integrity
+~~~
+
+### CORRECTION-PT-08 — Terminality ≠ Measurement Completeness
+
+~~~text
+Exposure safely terminal
++
+some metric / funding / latency / MAE evidence incomplete
+→ TradeResult may still finalize
+→ preserve completeness / quality / uncertainty / limitations
+~~~
+
+But:
+
+~~~text
+Exposure UNKNOWN / unresolved
+→ Position cannot be CLOSED
+→ canonical TradeResult cannot be finalized
+~~~
+
+### TradeResult Source Contract Candidate
+
+~~~text
+Identity / Lineage
+- trade_result_id
+- logical_position_ref
+- decision_result_ref
+- entry_thesis_ref
+- primary_trade_thesis_ref
+- selected_trade_thesis_refs[]
+- trace_id
+
+Terminal
+- position_closed_event_ref
+- final_position_version
+- activated_at
+- closed_at
+- final_position_reconciliation_ref
+- final_protection_reconciliation_ref
+
+Entry
+- entry_execution_intent_refs[]
+- entry_execution_record_refs[]
+- entry_fill_refs[]
+
+Exit
+- exit_decision_refs[]
+- exit_execution_intent_refs[]
+- exit_execution_record_refs[]
+- exit_fill_refs[]
+
+Safety
+- defense_decision_ref
+- in_trade_defense_decision_refs[]
+- risk_state_refs[]
+- safety_reason_refs[]
+
+Protection
+- initial_protection_intent_ref
+- protection_execution_record_refs[]
+- protection_trigger_refs[]
+- protection_failure_refs[]
+- orphan_protection_refs[]
+
+Venue
+- venue_exposure_leg_refs[]
+- venue_position_evidence_refs[]
+
+Economics
+- gross_pnl
+- fee
+- funding
+- net_pnl
+- slippage measurements
+- metric / formula versions
+
+Path
+- holding_duration
+- MAE
+- MFE
+- observation_window_refs[]
+
+Evidence
+- production_evidence_refs[]
+- completeness
+- quality
+- uncertainty
+- limitations[]
+
+Integrity
+- source versions / digests
+- outcome_assembly_version
+- trade_result_version
+- supersedes_ref optional
+~~~
+
+TradeResult should use exact refs + final trade facts + derived measurements.
+It should not deep-copy all upstream objects.
+
+### CORRECTION-PT-09 — Exit Reason ≠ Terminal Close Authority
+
+Preserve separately:
+
+~~~text
+normal_exit_reason_refs[]
+safety_exit_reason_refs[]
+protection_trigger_refs[]
+terminal_close_authority_ref
+~~~
+
+Requested normal Exit reason and the action that actually completed terminal close may differ.
+
+---
+
+## 7.106 Multi-Thesis Lineage / Evaluation Window Refinement
+
+### Source Contract Conflict Found
+
+7.84 DecisionResult explicitly allows:
+
+~~~text
+primary_selected_thesis_ref
+selected_thesis_refs[]
+~~~
+
+with multiple selected same-direction Thesis.
+
+Older Entry / Position / Post-Trade wording often assumes one Thesis.
+
+This is a correctable trace-contract mismatch, not an architecture-breaking conflict.
+
+### CORRECTION-PT-10 — Preserve selected Thesis set through Production
+
+Candidate lineage:
+
+~~~text
+DecisionResult
+- primary_selected_thesis_ref
+- selected_thesis_refs[]
+
+↓
+EntryThesis
+- primary_trade_thesis_ref
+- selected_trade_thesis_refs[]
+
+↓
+LogicalPosition
+- one Decision / Entry lineage
+- preserves primary + all selected Thesis refs
+
+↓
+TradeResult
+- primary_trade_thesis_ref
+- selected_trade_thesis_refs[]
+~~~
+
+No selected Thesis may silently disappear at the Execution boundary.
+
+### CORRECTION-PT-11 — TradeThesisEvaluation cardinality
+
+Preferred candidate:
+
+~~~text
+1 selected TradeThesis
+→ 1 TradeThesisEvaluation
+
+1 TradeResult
+→ 1..N TradeThesisEvaluation
+~~~
+
+Each evaluation binds:
+
+~~~text
+trade_thesis_ref
+is_primary_selected
+decision_result_ref
+entry_thesis_ref
+relevant market evidence
+evaluation window
+~~~
+
+ThesisMemberAttribution then binds to exactly one parent TradeThesisEvaluation / TradeThesis lineage.
+
+Do not mix members from different selected Thesis into one attribution set.
+
+### CORRECTION-PT-12 — Trade lifetime ≠ Thesis evaluation window
+
+Example:
+
+~~~text
+TradeThesis expected horizon = 4h
+Position stopped and CLOSED at 1h
+~~~
+
+Then:
+
+~~~text
+TradeResult
+= READY after Position CLOSED
+
+TradeThesisEvaluation
+= may remain WAITING_FOR_EVIDENCE
+until expected horizon / valid terminal invalidation / policy-defined evaluability boundary
+~~~
+
+Position Close does not automatically prove Thesis mismatch.
+
+---
+
+## 7.107 Production Evaluation Readiness / Common Source Binding
+
+### Post-Trade Analysis Orchestration
+
+Derived processing responsibility candidate:
+
+> **Post-Trade / Production Evaluation Orchestration = checks whether each analysis type has the exact source versions, evaluation window, evidence channel and completeness required to run, and starts only analyses whose own readiness contract is satisfied.**
+
+It is a processing responsibility, not a new canonical architecture layer.
+
+### CORRECTION-PT-13 — Trade CLOSED ≠ all analyses READY
+
+Candidate readiness semantics:
+
+~~~text
+READY
+WAITING_FOR_EVIDENCE
+NOT_APPLICABLE
+INDETERMINATE
+FAILED
+~~~
+
+Exact enum remains deferred.
+
+### Analysis Source Matrix
+
+| Analysis | Minimum source candidate | TradeResult required? | Readiness basis |
+|---|---|---:|---|
+| OutcomeAnalysisResult | TradeResult + execution/exit/position trace | YES | TradeResult finalized |
+| TradeThesisEvaluation | exact TradeThesis + entry-time context + market evidence | NO | horizon / invalidation evaluation boundary ready |
+| ThesisMemberAttribution | parent ThesisEvaluation + ThesisMember refs + provenance | NO | parent Thesis evaluation evaluable |
+| DefenseDecisionEvaluation | DefenseDecision + defense-time context + later evidence | CONDITIONAL | outcome-specific evidence ready |
+| InTradeDefenseDecisionEvaluation | InTradeDefenseDecision + Position / execution safety evidence | usually | safety episode evaluable |
+| SupervisorEvaluation | Supervisor history + Position lifecycle + Thesis evidence + Exit refs | usually | monitoring episode evaluable |
+| DemoLiveDivergence | ProductionEvidence + reference profile + comparability context | NO | both channels evaluable / comparable |
+| CounterfactualResult | exact Decision Point + T0 Information Set + Alternative | NO | evaluation window + model inputs ready |
+| DecisionResultEvaluation | DecisionResult + T0 DecisionContext + later market evidence | NO | decision evaluation window ready |
+
+### CORRECTION-PT-22 — AnalysisSourceBinding common value structure
+
+Do not create a new top-level object.
+
+Candidate common substructure:
+
+~~~text
+AnalysisSourceBinding
+
+subject_refs[]
+
+source_object_refs[]
+source_versions[]
+source_digests[]
+
+decision_time_context_ref optional
+
+position_ref optional
+trade_result_ref optional
+
+observation_window
+evaluation_window
+
+evidence_channel_refs[]
+
+completeness
+quality
+uncertainty
+
+shared_origin_refs[]
+dependency_refs[]
+
+source_limitations[]
+
+binding_policy_version
+~~~
+
+---
+
+## 7.108 Decision / Defense / In-Trade Safety Evaluation Corrections
+
+### CORRECTION-PT-14 — DefenseDecisionEvaluation does not require TradeResult
+
+Defense BLOCK normally produces no Entry, Position or TradeResult.
+
+For ALLOW / REDUCE with actual Trade:
+
+~~~text
+DefenseDecision
++
+defense-time safety context
++
+TradeResult when available
++
+ProductionEvidence
++
+later market evidence
++
+valid Shadow / Counterfactual evidence when applicable
+~~~
+
+For BLOCK:
+
+~~~text
+DefenseDecision
++
+defense-time safety context
++
+later market evidence
++
+valid Shadow / Counterfactual evidence when applicable
+~~~
+
+Preserve:
+
+~~~text
+would-have-profited
+≠ BLOCK was wrong
+~~~
+
+### CORRECTION-PT-15 — In-Trade Defense gets a distinct evaluation path
+
+Semantic analysis family candidate:
+
+~~~text
+Pre-Entry:
+DefenseDecisionEvaluation
+
+In-Position:
+InTradeDefenseDecisionEvaluation
+~~~
+
+Candidate InTradeDefenseDecisionEvaluation axes:
+
+~~~text
+Trigger Validity
+Response Timing
+Safety Benefit
+Exposure Reduction Effectiveness
+Execution Feasibility
+Restriction Cost
+Protection Interaction
+Emergency Interaction
+False Escalation Candidate
+Late Intervention Candidate
+Missed Intervention Candidate
+~~~
+
+Avoided loss remains counterfactual / estimated, not Actual Fact.
+
+### CORRECTION-PT-21 — DecisionResultEvaluation gap
+
+7.84 explicitly states:
+
+~~~text
+TAKE + WIN
+≠ Decision automatically correct
+
+TAKE + LOSS
+≠ Decision automatically wrong
+
+NO_TRADE + missed move
+≠ Decision automatically wrong
+~~~
+
+Candidate:
+
+> **DecisionResultEvaluation = a versioned analysis of a canonical DecisionResult against its frozen decision-time information set and later evaluative evidence, without using hindsight to turn later price movement into an automatic correctness verdict.**
+
+TAKE may use TradeResult when execution occurred.
+
+NO_TRADE:
+
+~~~text
+DecisionResult
++
+Decision-time Context
++
+later market behavior
++
+valid Counterfactual when available
+~~~
+
+No TradeResult is required.
+
+Historical label "Post-Trade" is retained for compatibility, but semantic scope now includes Post-Decision / Post-Defense / Post-Execution / Post-Position Production Evaluation.
+
+---
+
+## 7.109 Post-Trade Analysis Source Corrections
+
+### CORRECTION-PT-16 — OutcomeAnalysis is not Source Owner / Root Cause Authority
+
+OutcomeAnalysisResult may reference:
+
+~~~text
+TradeResult
+ExecutionRecord refs
+Position history
+Exit refs
+Safety refs
+Protection / Reconciliation diagnostics
+~~~
+
+to classify:
+
+~~~text
+Economic Outcome / Expectation Alignment
+Opportunity
+System Integrity
+~~~
+
+It does not own or overwrite Source Facts and does not prove Root Cause.
+
+### CORRECTION-PT-17 — Execution topology joins Demo/LIVE Comparability
+
+Add candidate comparability context:
+
+~~~text
+routing_policy_version
+route allocation
+single / multi venue
+split execution policy
+VenueExposureLeg structure
+protection mechanism
+server-side / client-side / hybrid protection
+position mode
+execution capability context
+~~~
+
+~~~text
+same strategy
+≠ automatically comparable execution environment
+~~~
+
+### CORRECTION-PT-18 — 7.49 direct Analysis → ResearchCandidate is superseded
+
+Use 7.50+:
+
+~~~text
+Analysis
+↓
+Finding Extractor
+↓
+Finding Normalizer
+↓
+Canonical Finding
+↓
+Candidate Promotion
+↓
+ResearchCandidate
+~~~
+
+### CORRECTION-PT-19 — Peer analysis topology
+
+Preferred relation:
+
+~~~text
+Immutable Source Facts / Snapshots
+↓
+Production Evaluation Orchestration
+
+├ OutcomeAnalysisResult
+├ TradeThesisEvaluation 1..N
+│  ↓
+│ ThesisMemberAttribution 0..N
+├ DefenseDecisionEvaluation
+├ InTradeDefenseDecisionEvaluation
+├ DecisionResultEvaluation
+├ SupervisorEvaluation
+├ DemoLiveDivergence
+└ CounterfactualResult
+~~~
+
+The clear parent/child relation retained is:
+
+~~~text
+TradeThesisEvaluation
+→ ThesisMemberAttribution
+~~~
+
+### CORRECTION-PT-20 — Source supersession propagates by versioning
+
+~~~text
+ExecutionRecord v1
+↓
+TradeResult v1
+↓
+Analysis v1
+
+later authoritative evidence
+↓
+ExecutionRecord v2 supersedes v1
+~~~
+
+If material:
+
+~~~text
+TradeResult v2 supersedes v1
+↓
+re-analysis v2
+~~~
+
+Do not mutate old source or analysis objects.
+
+---
+
+## 7.110 Finding Pipeline Reconciliation — Taxonomy / Source Contract
+
+### Cross-Review Result
+
+7.50–7.56 responsibilities remain usable.
+
+No major responsibility collision was introduced by PT-07..PT-22.
+
+However the Finding Registry and 7.56 source list need extension for the new analysis types.
+
+### Finding Extractor Scope Refinement
+
+Older wording:
+
+~~~text
+Versioned Post-Trade Analysis Result
+~~~
+
+Newer semantic interpretation:
+
+~~~text
+Versioned Production Evaluation Analysis Result
+~~~
+
+This includes non-trade Production decisions such as NO_TRADE and Defense BLOCK.
+
+### CORRECTION-PT-23 — Finding Taxonomy requires versioned extension
+
+Do NOT silently rewrite:
+
+~~~text
+FINDING_TAXONOMY_v1.0
+FINDING_NORMALIZATION_v1.0
+~~~
+
+Historical v1.0 Findings remain valid.
+
+Candidate extension:
+
+~~~text
+FINDING_TAXONOMY_v1.1
+FINDING_NORMALIZATION_v1.1
+~~~
+
+### New DECISION Domain Candidate
+
+~~~text
+DecisionResultEvaluation
+→ DECISION
+~~~
+
+Candidate mappings:
+
+| raw_finding_kind | Class | Canonical Code |
+|---|---|---|
+| TAKE_RISK_RATIONALE_MISMATCH_CANDIDATE | DEVIATION | FND.DECISION.TAKE_RISK_RATIONALE_MISMATCH_CANDIDATE |
+| NO_TRADE_OPPORTUNITY_CANDIDATE | OPPORTUNITY | FND.DECISION.NO_TRADE_OPPORTUNITY_CANDIDATE |
+| DECISION_HORIZON_MISMATCH | DEVIATION | FND.DECISION.DECISION_HORIZON_MISMATCH |
+| DECISION_UNCERTAINTY_UNDERSTATED | ANOMALY | FND.DECISION.DECISION_UNCERTAINTY_UNDERSTATED |
+| DECISION_UNCERTAINTY_OVERSTATED | ANOMALY | FND.DECISION.DECISION_UNCERTAINTY_OVERSTATED |
+| DECISION_CONFLICT_HANDLING_GAP | CONTRADICTION | FND.DECISION.DECISION_CONFLICT_HANDLING_GAP |
+| DECISION_ECONOMIC_VALIDITY_GAP | BOUNDARY | FND.DECISION.DECISION_ECONOMIC_VALIDITY_GAP |
+
+### In-Trade Defense Source Mapping
+
+Reuse existing DEFENSE domain:
+
+~~~text
+DefenseDecisionEvaluation
+→ DEFENSE
+
+InTradeDefenseDecisionEvaluation
+→ DEFENSE
+~~~
+
+Candidate additional codes:
+
+| raw_finding_kind | Class | Canonical Code |
+|---|---|---|
+| INTRADE_LATE_INTERVENTION_CANDIDATE | SAFETY_GAP | FND.DEFENSE.INTRADE_LATE_INTERVENTION_CANDIDATE |
+| INTRADE_FALSE_ESCALATION_CANDIDATE | SAFETY_GAP | FND.DEFENSE.INTRADE_FALSE_ESCALATION_CANDIDATE |
+| INTRADE_UNDER_RESPONSE_CANDIDATE | SAFETY_GAP | FND.DEFENSE.INTRADE_UNDER_RESPONSE_CANDIDATE |
+| INTRADE_PROTECTION_RESPONSE_GAP | SAFETY_GAP | FND.DEFENSE.INTRADE_PROTECTION_RESPONSE_GAP |
+| INTRADE_EXECUTION_CONTAINMENT_GAP | SYSTEM_GAP | FND.DEFENSE.INTRADE_EXECUTION_CONTAINMENT_GAP |
+
+### Shared-Origin Protection
+
+DecisionResultEvaluation, DefenseDecisionEvaluation, OutcomeAnalysisResult and CounterfactualResult may share one Decision / Market episode.
+
+Existing FP-03 / FP-06 therefore remain essential:
+
+~~~text
+multiple analysis objects
+≠ independent evidence count
+~~~
+
+---
+
+## 7.111 Finding → Research Flow — Revised Production Evaluation Entry
+
+Older shorthand:
+
+~~~text
+Trade / Position Terminal
+↓
+Post-Trade Analysis
+↓
+Finding Pipeline
+~~~
+
+is too narrow for NO_TRADE / Defense BLOCK.
+
+### Revised Reference Flow
+
+~~~text
+Production Decision / Safety / Execution / Position Sources
+↓
+Evaluation Readiness / Source Binding
+
+├ DecisionResultEvaluation
+├ DefenseDecisionEvaluation
+├ TradeResult when Position CLOSED
+│  ├ OutcomeAnalysisResult
+│  ├ TradeThesisEvaluation 1..N
+│  │  ↓
+│  │ ThesisMemberAttribution
+│  ├ SupervisorEvaluation
+│  └ InTradeDefenseDecisionEvaluation
+├ DemoLiveDivergence when comparable
+└ CounterfactualResult when evaluable
+
+↓
+Cross-Analysis Review
+↓
+Finding Extractor
+↓
+ExtractedFindingDraft
+↓
+Finding Normalizer
+↓
+Finding Type Registry
+↓
+Canonical Finding
+↓
+Candidate Promotion
+↓
+ResearchCandidate
+↓
+Research Intake
+↓ ACCEPT only
+Research Router
+↓
+ResearchRoute
+↓
+03_RESEARCH Routing / Prioritization
+↓
+Research Plan / Validation
+↓
+Validated Research Result
+↓
+04_KNOWLEDGE_APPLICABILITY
+~~~
+
+No direct Analysis → Router / Production mutation bypass is added.
+
+---
+
+## 7.112 Post-Trade / Finding Source Consistency — Final Checkpoint
+
+### Consolidated New Corrections
+
+~~~text
+PT-07 Position CLOSED is the TradeResult terminal boundary candidate
+PT-08 Position terminality ≠ measurement completeness
+PT-09 normal Exit reason ≠ terminal close authority
+PT-10 multi-selected Thesis lineage preserved through Entry / Position / TradeResult
+PT-11 TradeThesisEvaluation cardinality becomes 1..N per selected Thesis
+PT-12 Trade lifetime ≠ Thesis evaluation horizon
+PT-13 Production analyses use readiness-driven orchestration
+PT-14 DefenseDecisionEvaluation does not require TradeResult for BLOCK
+PT-15 In-Trade Defense gets a distinct post-production evaluation target
+PT-16 OutcomeAnalysisResult does not own Source Facts or Root Cause authority
+PT-17 Execution topology is part of Demo/LIVE comparability
+PT-18 7.49 direct Analysis→ResearchCandidate is superseded by 7.50 Finding Pipeline
+PT-19 Post-production analysis objects are peers except ThesisEvaluation→MemberAttribution
+PT-20 Source corrections propagate through immutable supersession/versioning
+PT-21 DecisionResultEvaluation covers TAKE / NO_TRADE decision-quality analysis
+PT-22 AnalysisSourceBinding common substructure binds exact source versions/windows
+PT-23 Finding Taxonomy extension is versioned; v1.0 is not silently rewritten
+~~~
+
+### Source Object Consistency Result
+
+~~~text
+ARCHITECTURE_BREAKING_CONFLICT:
+NONE FOUND
+
+TRADE TERMINAL / POSITION TERMINAL COLLISION:
+RESOLVED
+
+MULTI-THESIS TRACE LOSS:
+RESOLVED BY LINEAGE SET PRESERVATION
+
+TRADE LIFETIME / THESIS HORIZON COLLISION:
+RESOLVED BY ANALYSIS READINESS
+
+DEFENSE BLOCK / TRADERESULT DEPENDENCY:
+RESOLVED
+
+IN-TRADE DEFENSE POST-EVALUATION GAP:
+RESOLVED BY DISTINCT EVALUATION TARGET
+
+NO_TRADE EVALUATION GAP:
+RESOLVED BY DECISIONRESULT EVALUATION
+
+POST-TRADE / FINDING PIPELINE DIRECT-BYPASS CONFLICT:
+RESOLVED
+
+FINDING TAXONOMY SOURCE GAP:
+RESOLVED BY VERSIONED v1.1 EXTENSION CANDIDATE
+
+SHARED-ORIGIN OVERCOUNT RISK:
+PRESERVED / CONTROLLED BY EXISTING CROSS-ANALYSIS CONTRACT
+
+CURRENT_03_CONFLICT_STATUS:
+NONE FOUND
+
+CURRENT_DESIGN_STATUS:
+NOT_ADOPTED
+
+REFERENCE_REVIEW_STATUS:
+POST_TRADE_SOURCE_CONSISTENCY_CHECKPOINT_READY
+~~~
+
+### Object Proliferation Review
+
+New durable analysis candidates justified:
+
+~~~text
+DecisionResultEvaluation
+InTradeDefenseDecisionEvaluation
+~~~
+
+No new top-level orchestration object:
+
+~~~text
+Production Evaluation Orchestration
+= processing responsibility
+
+AnalysisSourceBinding
+= common value substructure
+~~~
+
+Finding Taxonomy remains one registry family; version it instead of creating a second taxonomy system.
+
+### Next Reference Target
+
+Candidate next work:
+
+~~~text
+Cross-Analysis Review detailed contract
++
+analysis dependency / shared-origin / conflict handling
+~~~
+
+or, if sufficient for Legacy Reference closure:
+
+~~~text
+full Legacy Reference closure review
+before any Current Design adoption
+~~~
+
+Do not jump to Current adoption from this checkpoint.
