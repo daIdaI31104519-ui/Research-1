@@ -16,80 +16,63 @@ Last Updated:
 2026-09-25
 
 Conversation Focus:
-Legacy Reference Closure side-thread.
-
-Phase 1〜7 Closure Review、
-Closure Documentation Sections 4 / 5 / 6 / 8 / 9 / 10 / 11、
-FIX-001〜018C Review、
-Dictionary major-concept Closure Reviewを完了し、
-Pre-Governance CheckpointとしてReferenceへ保存した。
+Legacy Reference Closure completed.
+Ready to return to formal Current 市場理解OS design.
 
 Important Boundary:
-This does NOT change Project Current Task.
-AI_CONTEXT remains authoritative for Current Project state.
-Current Design adoption has NOT occurred.
+AI_CONTEXT remains authoritative for Project Current State.
+Legacy Reference is now INITIAL_REFERENCE_COMPLETE but has NO Current Design Authority.
+Current Design adoption from Legacy has NOT occurred.
 
 DONE:
-- Phase 1 Whole Architecture Flow Review
-- Phase 2 Responsibility / Authority Review
-- Phase 3 Object / Source-of-Truth Review
-- Phase 4 Trace / Dependency / Circularity Review
-- Phase 5 Deferred Register
-- Phase 6 KEEP / REDESIGN / DROP / DEFER
-- Phase 7 Final Closure Gate
-- Section 4 Legacy Whole-System Overview saved
-- Section 5 Legacy Concept Index saved
-- Section 6 Legacy → Current Concept Map saved
-- Section 8 FIX / Failure Index saved
-- Section 9 Important Legacy Design Lessons saved
-- Section 10 Legacy Revisit Index saved
-- Section 11 Unknown / Unresolved saved
-- Dictionary major Concept supplement saved
-- Source Review Progress / Source Pointer synchronized
-- FIX-001〜018C marked REVIEWED
-- OBJECT / ROLE / STATE Dictionary = PARTIAL major-concept review
-- SECURITY / CREDENTIAL / DATA_CLASSIFICATION = REVIEWED
-- 7.40 / 7.49 / 7.56 marked LEGACY_FLOW_STATUS: SUPERSEDED
-- Architecture-breaking conflict: NONE FOUND
-- Legacy major Unknown Register: 8 items
+- Full Legacy Closure Review Phase 1〜7 completed
+- Closure Documentation Sections 4 / 5 / 6 / 8 / 9 / 10 / 11 saved
+- FIX-001〜018C reviewed
+- Dictionary major-concept Closure Review completed
+- DESIGN_CHANGE_RULES.md reviewed
+- GIT_RULES.md reviewed
+- Governance Revisit 4 items added
+- Section 3 Source Review Progress synchronized
+- Section 12 Source Pointer synchronized
+- Section 14 final completion gate passed
+- REFERENCE_BUILD_STATE = INITIAL_REFERENCE_COMPLETE
+- LEGACY_DESIGN_EXPANSION_STATE = CLOSED_FOR_DESIGN_EXPANSION
+- Legacy major Unknown Register remains 8 items
+- Architecture-breaking conflict = NONE FOUND
 - Current Design remains NOT_ADOPTED
 
 UNSAVED:
-None for this Pre-Governance Closure checkpoint.
+None for Legacy initial closure.
 
 OPEN:
-- Legacy Governance Source Review:
-  00_GOVERNANCE/DESIGN_CHANGE_RULES.md
-  00_GOVERNANCE/GIT_RULES.md
-- Final Reference Completion State after Governance review
-- Section 14 INITIAL_REFERENCE_COMPLETE decision
-- Current adoption remains a separate later task
+- Legacy Reference moves to maintenance/reference use only
+- Any Legacy concept used later must be re-evaluated against Current Charter / Current Architecture
+- Formal Current project design resumes from AI_CONTEXT
 
 NEXT:
-LEGACY GOVERNANCE SOURCE CLOSURE REVIEW
+RETURN TO CURRENT PROJECT DESIGN
 
-Review:
-1. DESIGN_CHANGE_RULES.md
-2. GIT_RULES.md
-3. Extract only reusable governance lessons / conflicts
-4. Update Section 3 / 12 source statuses
-5. Check whether any new Revisit / Unknown item is required
-6. Re-evaluate Section 14 completion gate
+Resume point:
+00_HUMAN/PROJECT_CHARTER.md
+Current formal focus remains:
+Section 3 — What Not To Maximize
+
+Before using Legacy detail:
+Current Design first
+→ 99_REFERENCE
+→ Legacy Original Source
+→ Current re-decision
 
 READ:
-- 99_REFERENCE/旧市場理解OS_設計知識リファレンス.md
-  especially Sections 3–12 and 14
-- Legacy:
-  00_GOVERNANCE/DESIGN_CHANGE_RULES.md
-  00_GOVERNANCE/GIT_RULES.md
 - 00_AI/AI_CONTEXT.md
-  only to preserve separation from Current Project state
+- 00_HUMAN/PROJECT_CHARTER.md
+- 99_REFERENCE/旧市場理解OS_設計知識リファレンス.md only when Legacy comparison is needed
 
-Last Reference Checkpoint Commit:
-9871acc07a75ed428c7e05b199630a96329c64ec
+Last Reference Closure Commit:
+6000a75988cc23eaadbd7ac2b5cdcc42ad6fe195
 
 Reference Content SHA:
-c62ead395fe0cf826f764f869e535523712e033a
+e148ad56225f7fa19d84c3147b52a363e76bd83b
 
 Git Write Permission Reminder:
 REQUIRE CURRENT-CHAT USER AUTHORIZATION
