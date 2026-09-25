@@ -254,8 +254,8 @@ Closure Review時点:
 | SECURITY_DICTIONARY | REVIEWED | Principal / Role / Permission / Authentication / Authorityの主要Semantic |
 | CREDENTIAL_DICTIONARY | REVIEWED | Credential / Secret / Capability / Domain Permissionの主要Semantic |
 | DATA_CLASSIFICATION_DICTIONARY | REVIEWED | Classification level / inheritance / sanitization / separation rule |
-| DESIGN_CHANGE_RULES | NOT_REVIEWED | Legacy Governance — 次のClosure Review対象 |
-| GIT_RULES | NOT_REVIEWED | Legacy Git Governance — 次のClosure Review対象 |
+| DESIGN_CHANGE_RULES | REVIEWED | Legacy Design Change Governance / Impact / Rollback / Migration / Change Gate |
+| GIT_RULES | REVIEWED | Legacy Git Governance / Source-of-Truth / Write Safety / History / Secret / Portability |
 | FIX-001〜018C | REVIEWED | Failure / Change Reason / Dictionary反映確認 |
 
 ~~~text
@@ -16276,7 +16276,74 @@ Retention / Deletion
 
 Trigger: Cross-Cutting Security。
 
-## 10.10 Rule
+## 10.10 Governance Revisit
+
+Legacy Governance Reviewから、Currentで後から再確認する価値がある項目:
+
+~~~text
+GOV-REVISIT-01
+Current Design Change Governance
+
+Trigger:
+PROJECT_CHARTER Section 13 / 14
+
+Legacy reuse candidates:
+Impact Analysis
+Rollback
+Versioning
+Change Size
+Emergency Change
+~~~
+
+~~~text
+GOV-REVISIT-02
+Current Status / Maturity Model
+
+Trigger:
+Current Governance / Document Status design
+
+Legacy universal lifecycleはCurrentへそのまま移植しない。
+CurrentのDRAFT / WORKING BASELINE / REFERENCE等との整合を再設計する。
+~~~
+
+~~~text
+GOV-REVISIT-03
+Implementation Drift Model
+
+Trigger:
+Implementation Spec / Python Design開始時
+
+Legacy candidate:
+DESIGN_AHEAD
+CODE_AHEAD
+DRIFT
+SYNCED
+~~~
+
+~~~text
+GOV-REVISIT-04
+Decision History / Change Reason Structure
+
+Trigger:
+Current HISTORY / Governance design
+
+Legacy principle:
+Git Commit = what changed
+Decision / History = why changed
+~~~
+
+重要:
+
+~~~text
+Legacy fixed-directory governance
+Legacy file-specific write scope
+Legacy universal status lifecycle
+≠ Current rule automatically
+~~~
+
+Current AI / Git Workflowは 00_AI/AI_WORKFLOW.md を優先する。
+
+## 10.11 Rule
 
 ~~~text
 Current Design reaches trigger
@@ -16496,8 +16563,8 @@ ConceptからOriginal Sourceへ戻れるようにする。
 | 01_DICTIONARY/SECURITY_DICTIONARY.md | LEGACY_ORIGINAL | REVIEWED | Identity / Authentication / Authorization |
 | 01_DICTIONARY/CREDENTIAL_DICTIONARY.md | LEGACY_ORIGINAL | REVIEWED | Credential / Secret / Capability / lifecycle |
 | 01_DICTIONARY/DATA_CLASSIFICATION_DICTIONARY.md | LEGACY_ORIGINAL | REVIEWED | Classification / inheritance / sanitization |
-| 00_GOVERNANCE/DESIGN_CHANGE_RULES.md | LEGACY_ORIGINAL | NOT_REVIEWED | Legacy Governance — next review |
-| 00_GOVERNANCE/GIT_RULES.md | LEGACY_ORIGINAL | NOT_REVIEWED | Legacy Git Governance — next review |
+| 00_GOVERNANCE/DESIGN_CHANGE_RULES.md | LEGACY_ORIGINAL | REVIEWED | Design change gate / impact / rollback / migration / drift |
+| 00_GOVERNANCE/GIT_RULES.md | LEGACY_ORIGINAL | REVIEWED | Git write safety / source-of-truth / history / secret / portability |
 | 99_ARCHIVE/BACKUP/* | LEGACY_BACKUP | REVIEWED | FIX-001〜018C Failure Context |
 
 ~~~text
@@ -16573,49 +16640,392 @@ Save Destination Resolution
 
 # 14. Reference Completion State
 
-このReference全体の進捗を、Source Reviewとは別に管理する。
+このReference全体の進捗を、Source Review・Current Design Statusとは分離して管理する。
 
-```text
+~~~text
 REFERENCE_BUILD_STATE:
-LEGACY_REVIEW_IN_PROGRESS
-```
+INITIAL_REFERENCE_COMPLETE
 
-候補:
+LEGACY_DESIGN_EXPANSION_STATE:
+CLOSED_FOR_DESIGN_EXPANSION
 
-```text
+CURRENT_DESIGN_STATUS:
+NOT_ADOPTED
+~~~
+
+候補Lifecycle:
+
+~~~text
 SKELETON
 SUMMARY_IN_PROGRESS
 CONCEPT_INDEX_IN_PROGRESS
 LEGACY_REVIEW_IN_PROGRESS
 INITIAL_REFERENCE_COMPLETE
 MAINTENANCE
-```
+~~~
 
-## INITIAL_REFERENCE_COMPLETE の最低条件
+## 14.1 INITIAL_REFERENCE_COMPLETE Gate
 
-```text
+最低Completion条件を最終Closure Reviewで確認した。
+
+~~~text
 まとめ案1〜11の全体像Review済み
+→ PASS
 
 Dictionary群から主要Conceptを索引化済み
+→ PASS
 
 FIX-001〜018Cを索引化済み
+→ PASS
 
 主要ConceptにSource Pointerあり
+→ PASS
 
 Legacy → Current Concept Mapあり
+→ PASS
 
 重大Conflict候補を識別済み
+→ PASS
 
 UnknownをUnknownとして保持
+→ PASS
 
 Legacy DefinitionとCurrent Definitionを融合していない
+→ PASS
 
 ReferenceからCurrent Designへ直接昇格していない
-```
+→ PASS
+~~~
+
+~~~text
+INITIAL_REFERENCE_COMPLETE_GATE:
+PASS
+~~~
+
+全Legacy情報を完全転記すること、全DictionaryをField単位で監査すること、Implementation Detailを決定することはCompletion条件ではない。
+
+## 14.2 Closure Review Result
+
+~~~text
+WHOLE ARCHITECTURE FLOW:
+PASS
+
+RESPONSIBILITY REVIEW:
+PASS
+
+AUTHORITY REVIEW:
+PASS WITH EXPLICIT LEGACY GAPS
+
+SOURCE OF TRUTH REVIEW:
+PASS WITH EXPLICIT LEGACY GAPS
+
+OBJECT PROLIFERATION REVIEW:
+PASS
+
+TRACE CONTINUITY:
+PASS WITH EXPLICIT LEGACY GAPS
+
+DEPENDENCY / CIRCULARITY:
+PASS
+
+DEFERRED REGISTER:
+PASS
+
+KEEP / REDESIGN / DROP / DEFER:
+PASS
+
+CURRENT ADOPTION CANDIDATES:
+IDENTIFIED
+
+ARCHITECTURE_BREAKING_CONFLICT:
+NONE FOUND
+
+UNCLASSIFIED MAJOR UNKNOWN:
+NONE FOUND
+~~~
+
+## 14.3 Source Closure Status
+
+~~~text
+市場理解OS まとめ案1〜11
+→ REVIEWED
+
+OBJECT_DICTIONARY
+→ PARTIAL
+
+ROLE_DICTIONARY
+→ PARTIAL
+
+STATE_DICTIONARY
+→ PARTIAL
+
+SECURITY_DICTIONARY
+→ REVIEWED
+
+CREDENTIAL_DICTIONARY
+→ REVIEWED
+
+DATA_CLASSIFICATION_DICTIONARY
+→ REVIEWED
+
+DESIGN_CHANGE_RULES
+→ REVIEWED
+
+GIT_RULES
+→ REVIEWED
+
+FIX-001〜018C
+→ REVIEWED
+~~~
+
+~~~text
+PARTIAL
+≠ Closure incomplete
+~~~
+
+Dictionary全文のField / Transition単位再監査はInitial Reference Completion条件ではない。
+
+## 14.4 Explicit Legacy Gaps
+
+Section 11へ登録済みの主要Gap:
+
+~~~text
+LEGACY-UNKNOWN-001
+Market Understanding → ResearchCandidate formal boundary
+
+LEGACY-UNKNOWN-002
+Current Market Understanding canonical Source of Truth
+
+LEGACY-UNKNOWN-003
+Market DNA Snapshot canonical lineage
+
+LEGACY-UNKNOWN-004
+Knowledge Lifecycle Apply Writer
+
+LEGACY-UNKNOWN-005
+Runtime Authorized Constraint Governance
+
+LEGACY-UNKNOWN-006
+Protection Requirement Owner
+
+LEGACY-UNKNOWN-007
+Human / AI / Production Final Authority
+
+LEGACY-UNKNOWN-008
+Production Promotion exact retained meaning
+~~~
+
+~~~text
+LEGACY_UNKNOWN_COUNT:
+8
+
+ARCHITECTURE_BREAKING_UNKNOWN:
+NONE FOUND
+~~~
+
+これらをLegacyへ推測で補完しない。
+Current設計の適切なResponsibility Ownerで新しく決定する。
+
+## 14.5 Intentional Deferrals
+
+~~~text
+exact DB schema
+exact Python class hierarchy
+numeric thresholds
+risk limits
+retry / backoff
+exact Market DNA distance formula
+exact Applicability score
+exact Evidence-independence algorithm
+exact Cross-Analysis materiality
+venue-specific API behavior
+credential implementation
+IAM
+storage / retention implementation
+exact scheduler / orchestration technology
+~~~
+
+これらの未決定はReference Completionを妨げない。
+
+## 14.6 Legacy Concept Disposition
+
+~~~text
+KEEP
+REDESIGN
+DROP
+DEFER
+~~~
+
+重要:
+
+~~~text
+KEEP ≠ Current adoption
+REDESIGN ≠ Current design created
+DROP ≠ Legacy history deletion
+DEFER ≠ future adoption guaranteed
+~~~
+
+Currentへ正式採用する場合は、Current Charter / Architecture / Responsibility / Authority / Source of Truthと再照合する。
+
+## 14.7 Superseded Legacy Flow Handling
+
+後続Referenceで置換されたIntermediate FlowはHistorical Referenceとして維持する。
+
+~~~text
+7.40
+→ later Execution Lifecycle / Position / Protection / Venue contracts
+
+7.49
+→ Finding Pipeline + Production Evaluation
+
+7.56
+→ Cross-Analysis placement correction
+~~~
+
+旧経路をCurrent Flowとして復活させない。
+
+## 14.8 Governance Closure
+
+Legacy Governance Source:
+
+~~~text
+DESIGN_CHANGE_RULES.md
+GIT_RULES.md
+~~~
+
+をReviewした。
+
+再利用価値の高い原則:
+
+~~~text
+Impact Analysis
+New Layer Gate
+Role / Object / State / Contract change review
+Data Flow / Circularity review
+Single Source of Truth
+Version / Migration
+Rollback
+Emergency Containment
+Research → Live direct jump prohibition
+Design / Code drift detection
+Secret not in Git
+Large market data not in Git
+AI automatic code-fix → Production prohibition
+Provider portability
+~~~
+
+ただし旧GovernanceをCurrentへ丸ごと移植しない。
+
+Currentでは、
+
+~~~text
+00_AI/AI_WORKFLOW.md
+PROJECT_CHARTER
+Current Owner Documents
+~~~
+
+の責任境界を優先する。
+
+旧GIT_RULESのFile-specific Write ScopeはCurrentの、
+
+~~~text
+Logical Change Boundary
++
+required Impact Sync
++
+Recovery Safety
+~~~
+
+により置換済みと扱う。
+
+## 14.9 Revisit Rule
+
+CLOSED_FOR_DESIGN_EXPANSION はLegacyを二度と読まないという意味ではない。
+
+~~~text
+新しいLegacy Architectureを増やさない
+
+Current設計へ必要なConceptが出た時
+↓
+Section 10 Legacy Revisit Index
+↓
+Section 5 / 6
+↓
+Section 7 Detail
+↓
+Original Legacy Source
+↓
+Currentとして再判断
+~~~
+
+Historical correction、Source Pointer correction、誤記修正、CurrentとのMapping更新はMaintenanceとして許可する。
+
+## 14.10 Post-Closure Allowed Changes
+
+許可:
+
+~~~text
+Source Pointer correction
+Typo / factual correction
+SUPERSEDED relation clarification
+Legacy → Current mapping update
+Currentで解決されたLegacy Unknownへのreference追加
+Revisit status update
+historical clarification
+~~~
+
+原則禁止:
+
+~~~text
+Legacy側で新Layerを設計
+新しいLegacy Runtime Authorityを追加
+Current未設計事項をLegacy側で先取り決定
+一般知識でLegacy Gapを埋める
+Legacy Referenceから直接Production仕様を作る
+~~~
+
+## 14.11 Next Lifecycle State
+
+~~~text
+INITIAL_REFERENCE_COMPLETE
+↓
+MAINTENANCE
+~~~
+
+Maintenanceでは、旧市場理解OSを設計対象として育てるのではなく、
+Current市場理解OSを設計するためのHistorical / Failure / Concept Referenceとして維持する。
+
+## 14.12 Final Closure Result
+
+~~~text
+REFERENCE_BUILD_STATE:
+INITIAL_REFERENCE_COMPLETE
+
+LEGACY_DESIGN_EXPANSION_STATE:
+CLOSED_FOR_DESIGN_EXPANSION
+
+REFERENCE_ROLE:
+LEGACY KNOWLEDGE MASTER INDEX
+
+CURRENT DESIGN AUTHORITY:
+NONE
+
+CURRENT ADOPTION:
+NOT PERFORMED
+
+ARCHITECTURE BREAKING CONFLICT:
+NONE FOUND
+
+UNCLASSIFIED MAJOR UNKNOWN:
+NONE FOUND
+
+NEXT:
+REFERENCE MAINTENANCE
++
+RETURN TO CURRENT PROJECT DESIGN
+~~~
 
 全Legacy情報を完全転記することはCompletion条件ではない。
-
----
 
 # Reference Usage
 
