@@ -13,66 +13,94 @@ State:
 ACTIVE
 
 Last Updated:
-2026-09-25
+2026-09-26
 
 Conversation Focus:
-Legacy Reference Closure completed.
-Ready to return to formal Current 市場理解OS design.
+Formal Current Architecture redesign preparation side-thread.
+Research Institute design study has been consolidated and saved as a non-authoritative Working Reference.
 
 Important Boundary:
 AI_CONTEXT remains authoritative for Project Current State.
-Legacy Reference is now INITIAL_REFERENCE_COMPLETE but has NO Current Design Authority.
-Current Design adoption from Legacy has NOT occurred.
+PROJECT_CHARTER Section 3 — What Not To Maximize remains the formal Current design focus.
+This side-thread does NOT replace Current Architecture yet.
+Current 01〜04 remain existing Working Baselines until later comparison / redesign.
+Legacy Reference remains historical/non-authoritative.
 
 DONE:
-- Full Legacy Closure Review Phase 1〜7 completed
-- Closure Documentation Sections 4 / 5 / 6 / 8 / 9 / 10 / 11 saved
-- FIX-001〜018C reviewed
-- Dictionary major-concept Closure Review completed
-- DESIGN_CHANGE_RULES.md reviewed
-- GIT_RULES.md reviewed
-- Governance Revisit 4 items added
-- Section 3 Source Review Progress synchronized
-- Section 12 Source Pointer synchronized
-- Section 14 final completion gate passed
-- REFERENCE_BUILD_STATE = INITIAL_REFERENCE_COMPLETE
-- LEGACY_DESIGN_EXPANSION_STATE = CLOSED_FOR_DESIGN_EXPANSION
-- Legacy major Unknown Register remains 8 items
-- Architecture-breaking conflict = NONE FOUND
-- Current Design remains NOT_ADOPTED
+- Re-examined Research Institute using:
+  Current Git
+  Current 01〜04 Connection Maps
+  HUMAN_MAP / PROJECT_CHARTER
+  Legacy Reference
+  recent user research philosophy
+- Identified current strength:
+  Reactive / diagnostic / validation research is already comparatively strong
+- Identified current weakness:
+  Proactive / exploratory research before anomaly/failure is weak
+- Developed Dual-Entry / Single-Core Research direction
+- Added Research Foundation concept
+- Added Research Question before Research Candidate as a design candidate
+- Clarified candidate roles for:
+  Market Foundation
+  Open Discovery
+  Cause Candidate
+  Hypothesis
+  Market DNA
+  Research Mode
+  Research Ledger
+  Red Team / Independent Challenge
+  Research Synthesis
+  Validated Research Result
+- Reconfirmed boundaries with:
+  External Data
+  Market Understanding
+  Knowledge
+  Applicability
+  Decision
+  Risk / Defense
+  Execution
+  Production Evaluation
+- Saved design study reference:
+  98_DESIGN_STUDY/市場理解OS_研究機関_設計検討リファレンス.md
+- Saved document status:
+  WORKING REFERENCE / NOT CURRENT DESIGN / NOT CANONICAL
 
 UNSAVED:
-None for Legacy initial closure.
+None for the current Research Institute study checkpoint.
 
 OPEN:
-- Legacy Reference moves to maintenance/reference use only
-- Any Legacy concept used later must be re-evaluated against Current Charter / Current Architecture
-- Formal Current project design resumes from AI_CONTEXT
+- Research Foundation exact scope
+- Foundation fact / mechanism / model / heuristic distinction
+- Proactive Research exact entry conditions
+- Research Question / Candidate boundary
+- Research Domain / Intent / Mode / Method taxonomy
+- Market DNA / Cause Candidate / Hypothesis exact responsibility placement
+- Research Ledger / Red Team exact authority
+- Later whole-OS major-category redesign
+- Later comparison against Current 01〜04
+- Later KEEP / REDESIGN / DROP / MERGE decision
 
 NEXT:
-RETURN TO CURRENT PROJECT DESIGN
+Continue the Design Study before formal Architecture replacement.
 
-Resume point:
-00_HUMAN/PROJECT_CHARTER.md
-Current formal focus remains:
-Section 3 — What Not To Maximize
-
-Before using Legacy detail:
-Current Design first
-→ 99_REFERENCE
-→ Legacy Original Source
-→ Current re-decision
+Recommended next study:
+Research Foundation
+- what belongs in it
+- what must not belong in it
+- how it reduces noise without suppressing original discovery
 
 READ:
-- 00_AI/AI_CONTEXT.md
+- 98_DESIGN_STUDY/市場理解OS_研究機関_設計検討リファレンス.md
 - 00_HUMAN/PROJECT_CHARTER.md
+- 00_HUMAN/HUMAN_MAP.md
+- Current 01〜04 only when comparison is needed
 - 99_REFERENCE/旧市場理解OS_設計知識リファレンス.md only when Legacy comparison is needed
 
-Last Reference Closure Commit:
-6000a75988cc23eaadbd7ac2b5cdcc42ad6fe195
+Design Study Save Commit:
+d44efa101b68190e8b45416d01167366ab18ab9a
 
-Reference Content SHA:
-e148ad56225f7fa19d84c3147b52a363e76bd83b
+Design Study Content SHA:
+d7fad4c18e0a1db7574c8d62a6bc170174db449a
 
 Git Write Permission Reminder:
 REQUIRE CURRENT-CHAT USER AUTHORIZATION
