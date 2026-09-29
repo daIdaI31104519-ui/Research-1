@@ -13,94 +13,88 @@ State:
 ACTIVE
 
 Last Updated:
-2026-09-26
+2026-09-29
 
 Conversation Focus:
-Formal Current Architecture redesign preparation side-thread.
-Research Institute design study has been consolidated and saved as a non-authoritative Working Reference.
+Whole Market Understanding OS Reconstruction.
+Current active work is Phase 1 — Source Extraction.
 
 Important Boundary:
-AI_CONTEXT remains authoritative for Project Current State.
+AI_CONTEXT remains authoritative for formal Project Current State.
 PROJECT_CHARTER Section 3 — What Not To Maximize remains the formal Current design focus.
-This side-thread does NOT replace Current Architecture yet.
-Current 01〜04 remain existing Working Baselines until later comparison / redesign.
+The Reconstruction side-thread does NOT replace Current Architecture yet.
+Current 01〜04 remain existing Working Baselines until later Reconstruction / comparison.
 Legacy Reference remains historical/non-authoritative.
+DAISUKE proposal is authoritative only as the user's reconstruction source, not as Final Current Design.
 
-DONE:
-- Re-examined Research Institute using:
-  Current Git
-  Current 01〜04 Connection Maps
-  HUMAN_MAP / PROJECT_CHARTER
-  Legacy Reference
-  recent user research philosophy
-- Identified current strength:
-  Reactive / diagnostic / validation research is already comparatively strong
-- Identified current weakness:
-  Proactive / exploratory research before anomaly/failure is weak
-- Developed Dual-Entry / Single-Core Research direction
-- Added Research Foundation concept
-- Added Research Question before Research Candidate as a design candidate
-- Clarified candidate roles for:
-  Market Foundation
-  Open Discovery
-  Cause Candidate
-  Hypothesis
-  Market DNA
-  Research Mode
-  Research Ledger
-  Red Team / Independent Challenge
-  Research Synthesis
-  Validated Research Result
-- Reconfirmed boundaries with:
-  External Data
-  Market Understanding
-  Knowledge
-  Applicability
-  Decision
-  Risk / Defense
-  Execution
-  Production Evaluation
-- Saved design study reference:
-  98_DESIGN_STUDY/市場理解OS_研究機関_設計検討リファレンス.md
-- Saved document status:
-  WORKING REFERENCE / NOT CURRENT DESIGN / NOT CANONICAL
+RECONSTRUCTION SOURCES:
+1. 99_REFERENCE/旧市場理解OS_設計知識リファレンス.md
+2. Current PROJECT_CHARTER / HUMAN_MAP / 01〜04 Working Baselines
+3. 98_DESIGN_STUDY/市場理解OS_研究機関_設計検討リファレンス.md
+4. 98_DESIGN_STUDY/DAISUKE_MARKET_UNDERSTANDING_OS_PROPOSAL.md
 
-UNSAVED:
-None for the current Research Institute study checkpoint.
+CURRENT METHOD:
+Do NOT compare by Layer / Engine / Object names first.
+Extract:
+- why each responsibility existed
+- what capability it tried to create
+- what it tried to protect
+- what is lost if removed
+- where responsibilities overlap
+- whether it is WHY / WHAT / HOW
 
-OPEN:
-- Research Foundation exact scope
-- Foundation fact / mechanism / model / heuristic distinction
-- Proactive Research exact entry conditions
-- Research Question / Candidate boundary
-- Research Domain / Intent / Mode / Method taxonomy
-- Market DNA / Cause Candidate / Hypothesis exact responsibility placement
-- Research Ledger / Red Team exact authority
-- Later whole-OS major-category redesign
-- Later comparison against Current 01〜04
-- Later KEEP / REDESIGN / DROP / MERGE decision
+CURRENT HIGH-LEVEL EXTRACTION:
+Legacy:
+- strong at separating observation / interpretation / cause / research / production
+- strong at reactive anomaly, causal, stress, failure, defense, execution, feedback
+- strong at research evidence separation and failure routing
+- weaker / incomplete at proactive foundation-driven research and some canonical ownership
+
+Current:
+- strong at Human-First semantics and responsibility boundaries
+- strong at qualified observation → current understanding → research → knowledge → applicability
+- strong at Research Result ≠ Knowledge ≠ Applicable ≠ Trade
+- Decision / Execution remain incomplete
+
+Research Institute Reference:
+- adds proactive + reactive Dual-Entry / Single-Core
+- adds Research Foundation, Research Question, Open Discovery
+- adds Exploratory / Confirmatory / Replication distinction
+- adds Research Ledger, Red Team, Benchmark, Negative Knowledge emphasis
+- remains Working Reference, not Current Design
+
+Daisuke Proposal:
+- adds relationship-based human market understanding as a formal machine-readable idea
+- adds world / market foundation and common relation language
+- separates world/economic foundation library from OS-derived knowledge library
+- adds forward research + reverse investigation from unexpected results
+- emphasizes real-capital safety, runtime market support, long-term storage, modular replacement, multi-market expansion, human-readable research asset
+
+PHASE 1 GOAL:
+Convert the four sources into a source-extraction map of required capabilities and preserved design intents.
+Do NOT yet decide final Architecture.
+Do NOT yet run Destruction Review.
+Do NOT yet assign KEEP / DROP except as later reconstruction work.
 
 NEXT:
-Continue the Design Study before formal Architecture replacement.
-
-Recommended next study:
-Research Foundation
-- what belongs in it
-- what must not belong in it
-- how it reduces noise without suppressing original discovery
+Continue Phase 1 by building:
+1. source-by-source intent extraction
+2. shared capabilities
+3. unique capabilities
+4. overlaps / gaps
+5. HOW concepts that must not be mistaken for required capabilities
 
 READ:
+- 98_DESIGN_STUDY/市場理解OS_全体再構築_設計ログ.md
+- 98_DESIGN_STUDY/DAISUKE_MARKET_UNDERSTANDING_OS_PROPOSAL.md
 - 98_DESIGN_STUDY/市場理解OS_研究機関_設計検討リファレンス.md
+- 99_REFERENCE/旧市場理解OS_設計知識リファレンス.md
 - 00_HUMAN/PROJECT_CHARTER.md
 - 00_HUMAN/HUMAN_MAP.md
-- Current 01〜04 only when comparison is needed
-- 99_REFERENCE/旧市場理解OS_設計知識リファレンス.md only when Legacy comparison is needed
-
-Design Study Save Commit:
-d44efa101b68190e8b45416d01167366ab18ab9a
-
-Design Study Content SHA:
-d7fad4c18e0a1db7574c8d62a6bc170174db449a
+- 02_ARCHITECTURE/CONNECTIONS/01_EXTERNAL_DATA.md
+- 02_ARCHITECTURE/CONNECTIONS/02_MARKET_UNDERSTANDING.md
+- 02_ARCHITECTURE/CONNECTIONS/03_RESEARCH.md
+- 02_ARCHITECTURE/CONNECTIONS/04_KNOWLEDGE_APPLICABILITY.md
 
 Git Write Permission Reminder:
 REQUIRE CURRENT-CHAT USER AUTHORIZATION
