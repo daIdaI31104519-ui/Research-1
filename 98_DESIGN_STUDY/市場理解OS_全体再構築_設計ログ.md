@@ -350,3 +350,74 @@ Concept Name
 **Decision:** 全体再構築はPhase方式で行う。破壊レビューはPhase 6へ移動。  
 **Current Next Action:** Phase 1 Source Extraction。  
 **Formal Current Architecture Changed:** NO
+
+
+---
+
+# 9. Checkpoint 002 — ダイスケ案正式原案の固定
+
+**State:** SAVED  
+**Stage:** Reconstruction Source Preparation  
+**Formal Current Architecture Changed:** NO
+
+正式な再構築Sourceとして以下を追加した。
+
+```text
+98_DESIGN_STUDY/DAISUKE_MARKET_UNDERSTANDING_OS_PROPOSAL.md
+```
+
+Status:
+
+```text
+AUTHORITATIVE DAISUKE PROPOSAL
+NOT FINAL CURRENT DESIGN
+NOT FINAL ARCHITECTURE
+NOT CANONICAL CURRENT
+```
+
+この文書は、ダイスケ本人が考える市場理解OSの正式原案として今後の再構築で必ず比較対象にする。
+
+特に以下を原案の重要Intentとして保持する。
+
+- 基礎的な市場・経済構造から研究を開始する
+- 人間が市場を見る時の「関係性による理解」をAI / Python / Databaseが扱える形へ形式化する
+- Flow / Distortion / Cycle / Propagation / Amplification / Constraint / Substitution / Accumulation / Expectations / Lag / Threshold / Equilibrium等を共通関係候補として扱う
+- 世界経済図書館と、OS自身が研究して得る知識図書館を分離する
+- 通常探索と、旧OS由来の異常・因果・Stress・Failure研究を両立する
+- Knowledgeを直接リアルTradeへ接続しない
+- Trade中も現在市場を観測し、Knowledge成立条件の変化へ対応する
+- Unexpected Resultを単純再学習せずRoot Causeを調査する
+- 順方向だけでなく結果から原因候補へ戻る逆方向研究を持つ
+- 市場固有研究を交換可能にし、Crypto以外へ拡張可能にする
+- 長期運用、Research Asset蓄積、実資金保護を同時に考える
+- 運用監視系を必要能力として持つ
+- 研究結果の人間向け資産化も将来可能にする
+
+## Source Preservation Rule
+
+ダイスケ案は最終設計に合わせて後から改変しない。
+
+変更が必要になった場合は原案を書き換えるのではなく、Reconstruction / Destruction Review側で、
+
+```text
+Original Intent
+↓
+Problem
+↓
+Change Reason
+↓
+Replacement
+↓
+Preserved Intent / Lost Intent
+```
+
+を記録する。
+
+## Current Position
+
+```text
+Source Preparation = COMPLETE
+
+NEXT:
+Phase 1 — Source Extraction
+```
