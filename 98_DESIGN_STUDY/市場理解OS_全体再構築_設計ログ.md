@@ -3756,3 +3756,1247 @@ Causal Engine SPLIT
 ≠
 causal research dropped
 ```
+
+
+---
+
+# 15. Checkpoint 008 — Phase 5 R2 Concept-Level Reconstruction
+
+**Date:** 2026-09-30  
+**State:** SAVED  
+**Formal Current Architecture Changed:** NO  
+**Phase:** 5 Reconstruction  
+**Scope:** R2 — Research
+
+## 15.1 R2 Purpose Candidate
+
+R2の責任候補:
+
+> 市場理解OS内外から生まれる「何を知りたいか」というQuestionを正式研究へAdmissionし、再現可能なResearch Planへ変換し、探索・確認・再現・因果・経験・Stress・反証・Alternative等のMethodを用いてEvidenceを収集・統合し、成立条件・失敗条件・不確実性・未解決点まで含むValidated Research Resultへ変換する。
+
+R2は以下を行わない。
+
+~~~text
+Current Marketを直接Trade Signalへ変換しない
+Knowledgeを自動採用しない
+Capital Permissionを出さない
+Executionを行わない
+Runtime Safetyを支配しない
+AI意見をEvidence扱いしない
+~~~
+
+---
+
+# 15.2 Research Entry — Research Question
+
+## Decision Candidate
+NEW / KEEP
+
+Research QuestionをR2の最上位Conceptual Entry候補として採用する。
+
+定義候補:
+
+> 何を知りたいのか、何が分からないのか、何を確認・反証・再現したいのかを表す研究上の問い。
+
+Source候補:
+
+~~~text
+Foundation / Relation
+Current Market Understanding
+Open Discovery
+Contradiction
+Unknown / Unexplained
+Cause Candidate
+Knowledge contradiction
+Knowledge decay
+Applicability contradiction
+Unexpected Outcome
+Failure
+External Research
+Market Expansion
+Periodic Revalidation
+~~~
+
+重要:
+
+~~~text
+Research Question
+≠ Research Candidate
+≠ Hypothesis
+≠ Research Result
+~~~
+
+Question自体は研究価値を意味しない。
+
+---
+
+# 15.3 Research Question Type
+
+## Decision Candidate
+KEEP / REDESIGN
+
+全ResearchをCause Researchへ押し込まない。
+
+候補:
+
+~~~text
+EXPLANATION
+CAUSAL
+EMPIRICAL
+STATE
+BOUNDARY
+GENERALIZATION
+FAILURE
+REPLICATION
+DISCOVERY
+~~~
+
+正式Enumは後。
+
+目的:
+
+- 原因研究だけでなく再現可能な経験則研究を許す
+- Failure診断を正式研究として扱う
+- Open Discoveryを正式入口にする
+- Research Intentに応じてPlan / Methodを変えられるようにする
+
+---
+
+# 15.4 Research Candidate
+
+## Decision Candidate
+REDESIGN
+
+Research CandidateはQuestionより後に置く。
+
+定義候補:
+
+> Research Questionを「今、正式研究へ進める価値がある対象」として審査可能にしたAdmission対象。
+
+~~~text
+Research Question
+↓
+Research Candidate
+↓
+Admission / Priority
+~~~
+
+Candidateは、
+
+~~~text
+何が発見されたか
+Origin
+Market / Asset
+Time
+Current Context
+Relevant Foundation
+Evidence availability
+Existing research relationship
+Potential impact
+Risk relevance
+Research cost
+~~~
+
+等を追跡可能にする。
+
+重要:
+
+~~~text
+Question exists
+≠ Candidate admitted
+
+Candidate exists
+≠ Research starts
+~~~
+
+---
+
+# 15.5 Research Intake / Admission / Priority
+
+## Decision Candidate
+MERGE / REDESIGN
+
+旧:
+
+~~~text
+Research Intake
+Research Router
+Prioritization
+~~~
+
+を責任として整理する。
+
+候補Flow:
+
+~~~text
+Research Candidate
+↓
+Admission
+├ ACCEPT
+├ DEFER
+├ MERGE
+├ REJECT
+└ NEED MORE CONTEXT
+↓
+Priority / Scheduling
+↓
+Research Design
+~~~
+
+研究しない判断も正常なOutput。
+
+評価候補:
+
+~~~text
+Research value
+Economic relevance
+Risk relevance
+Unknown severity
+Novelty
+Repeated occurrence
+Evidence availability
+Data quality
+Research cost
+Expected reuse
+Urgency
+Existing duplicate research
+~~~
+
+重要:
+
+~~~text
+High curiosity
+≠ High research priority
+~~~
+
+---
+
+# 15.6 Routing Axes
+
+## Decision Candidate
+REDESIGN / KEEP principle
+
+Research Routerを単一Method選択器にしない。
+
+研究を少なくとも以下の別軸として扱える候補:
+
+~~~text
+Research Domain
+Research Intent
+Research Mode
+Research Method
+~~~
+
+例:
+
+~~~text
+Domain:
+Market Microstructure
+
+Intent:
+Empirical Relationship
+
+Mode:
+CONFIRMATORY
+
+Methods:
+Historical + OOS + Regime Stability
+~~~
+
+重要:
+
+~~~text
+1 Question
+≠ 1 Method
+~~~
+
+---
+
+# 15.7 Research Mode
+
+## Decision Candidate
+KEEP / STRENGTHEN
+
+正式に分離する価値が高い。
+
+~~~text
+EXPLORATORY
+= 何があるか探す
+
+CONFIRMATORY
+= 事前Question / Hypothesis / Evaluationを固定して確認
+
+REPLICATION
+= 別期間 / Asset / Venue / Regime等で再現確認
+~~~
+
+最重要原則:
+
+~~~text
+発見
+≠ 確認
+≠ 再現
+~~~
+
+探索Dataを見た後で、同じDataを事前仮説検証として扱わない。
+
+---
+
+# 15.8 Research Plan
+
+## Decision Candidate
+KEEP / STRENGTHEN
+
+Research PlanをCommon Research Coreの中心責任候補とする。
+
+目的:
+
+> Questionを再現可能な実験仕様へ変換する。
+
+候補内容:
+
+~~~text
+Research Question
+Claim / Hypothesis
+Research Mode
+Methods
+Data
+Feature / Formula
+Comparison
+Benchmark
+Evidence Channels
+Evaluation Rules
+Refutation Rules
+Alternative Hypotheses
+Stress
+Failure Criteria
+Temporal rules
+Version
+~~~
+
+重要研究では、結果を見る前にPlan Freezeを行える候補を持つ。
+
+Materialな変更:
+
+~~~text
+Plan v1
+↓
+結果を見て変更
+↓
+Plan v2
+~~~
+
+としてVersion管理し、v1を上書きしない。
+
+---
+
+# 15.9 Hypothesis / Claim
+
+## Decision Candidate
+KEEP / REDESIGN
+
+Hypothesisは、
+
+> 検証・反証可能な形へ整理された研究上の主張。
+
+ただし、すべてのResearch Questionが同じHypothesis形式を必要とするとは限らないため、上位概念としてClaimを許容する候補を残す。
+
+候補:
+
+~~~text
+Causal Hypothesis
+Empirical Hypothesis
+Mechanism Hypothesis
+Regime Hypothesis
+Failure Hypothesis
+Comparison Claim
+Replication Claim
+~~~
+
+重要:
+
+~~~text
+Hypothesis
+≠ Evidence
+≠ Result
+≠ Knowledge
+~~~
+
+現在市場に都合よく書き換えない。
+
+---
+
+# 15.10 Research Trial / Experiment
+
+## Decision Candidate
+KEEP
+
+Planに基づく実行単位。
+
+Trial候補:
+
+~~~text
+Historical
+Replay
+OOS
+Forward
+Paper / Demo
+Shadow
+Stress
+Counterfactual
+Production Evidence Review
+Case Comparison
+State Representation Comparison
+~~~
+
+重要:
+
+~~~text
+Research Method
+≠ Trial / Experiment Mode
+≠ Evidence Channel
+~~~
+
+を維持する。
+
+---
+
+# 15.11 Causal / Empirical Research
+
+## Decision Candidate
+KEEP / MERGE into Method Family
+
+Causal Engineを独立巨大Architectureにせず、Research Method familyへ統合候補。
+
+### Causal Research
+
+見るもの:
+
+~~~text
+Mechanism
+Temporal Order
+Lag
+Confounder
+Alternative Hypothesis
+Common Cause
+Contradiction
+Counter Evidence
+~~~
+
+### Empirical Research
+
+見るもの:
+
+~~~text
+条件付き再現性
+Effect Size
+Stability
+OOS
+Forward
+Regime Dependence
+Cost-adjusted behavior
+~~~
+
+重要:
+
+~~~text
+綺麗な因果説明
+≠ Profitability
+
+因果が完全証明できない
+≠ Empirical Edge不存在
+~~~
+
+---
+
+# 15.12 Evidence Model
+
+## Decision Candidate
+KEEP / STRENGTHEN
+
+Evidenceを一つのScoreや総件数へ潰さない。
+
+### Evidence Channel候補
+
+~~~text
+Runtime / Observational
+Historical
+OOS
+Forward
+Stress
+Production / Live
+~~~
+
+### Evidence Role候補
+
+~~~text
+Supporting
+Contradicting
+Discriminating
+Conditioning
+Boundary
+Contextual
+Process Validation
+~~~
+
+### Evidence Outcome候補
+
+~~~text
+Supportive
+Contradicting
+Neutral
+Mixed
+Inconclusive
+Unknown
+~~~
+
+重要:
+
+~~~text
+Evidence Channel
+≠ Evidence Role
+≠ Evidence Outcome
+≠ Evidence Strength
+~~~
+
+---
+
+# 15.13 Evidence Independence / Dependency
+
+## Decision Candidate
+KEEP / STRENGTHEN
+
+複数Evidenceが同じData / Event / Causeから派生している場合、独立確認として水増ししない。
+
+~~~text
+Evidence Count
+≠ Independent Evidence Count
+≠ Evidence Strength
+≠ Hypothesis Truth
+~~~
+
+Shared Evidence / Dependencyを追跡可能にする。
+
+---
+
+# 15.14 Research Ledger
+
+## Decision Candidate
+KEEP / STRENGTHEN
+
+Research Resultだけではなく、探索履歴をResearch Integrityの一部として保存する。
+
+候補:
+
+~~~text
+Question
+Candidate Origin
+Data Seen
+Features Tried
+Hypotheses Tried
+Plan Versions
+Parameters Tried
+Trials
+Failed Trials
+Rejected Results
+Method Changes
+Window Changes
+Final Results
+~~~
+
+目的:
+
+~~~text
+1回試して成功
+~~~
+
+と、
+
+~~~text
+100000回試して最良1個だけ成功
+~~~
+
+を区別する。
+
+重要:
+
+~~~text
+Research Result
+≠ Research History
+~~~
+
+Research LedgerはCherry-picking / Data Snooping / Hidden Search Space対策として重要。
+
+---
+
+# 15.15 Red Team / Independent Challenge
+
+## Decision Candidate
+KEEP responsibility / DEFER implementation
+
+Hypothesisを作る責任と壊す責任を概念上分離する。
+
+Challenge候補:
+
+~~~text
+Alternative Hypothesis
+Confounder
+Contradiction
+Look-ahead
+Leakage
+Data Snooping
+Selection Bias
+Overfit
+Shared Evidence
+Common Cause
+Regime Dependence
+Cost
+Slippage
+Venue Dependence
+Parameter Sensitivity
+Timing
+~~~
+
+重要:
+
+~~~text
+Researcher self-approval only
+~~~
+
+に依存しない。
+
+別AI / 別Module / Human / Ruleのどれで実現するかは後。
+
+---
+
+# 15.16 Stress / Boundary Research
+
+## Decision Candidate
+MERGE / STRENGTHEN
+
+Stress Labを独立Top-Level Layer必須にしない。
+
+R2内のBoundary Discovery Method familyとして扱う候補。
+
+目的:
+
+> Hypothesis / Edgeを守るのではなく、どこから壊れるかを能動的に探す。
+
+Stress候補:
+
+~~~text
+Extreme Volatility
+Liquidity Collapse
+Spread Expansion
+Exchange Failure
+Funding Extreme
+OI Shock
+ETF Flow Reversal
+Macro Shock
+Correlation Break
+Data Delay
+Missing Source
+Participant Structure Change
+~~~
+
+Output候補:
+
+~~~text
+Failure Boundary
+Constraint Candidate
+Unknown
+New Research Question
+~~~
+
+重要:
+
+~~~text
+Stress Failure
+≠ Entire Hypothesis always false
+~~~
+
+条件付き成立を明確にする。
+
+---
+
+# 15.17 Failure Boundary / Constraint Candidate
+
+## Decision Candidate
+KEEP / REDESIGN
+
+研究成果は「成功条件」だけではなく「利用禁止 / 壊れる条件」を持つ。
+
+候補Dimension:
+
+~~~text
+Regime
+Volatility
+Liquidity
+Leverage
+Time Horizon
+Session
+Macro Condition
+Data Quality
+Event Condition
+Venue
+Participant Structure
+~~~
+
+重要:
+
+~~~text
+Research Constraint Candidate
+≠ Runtime Authorized Constraint
+~~~
+
+R2は研究上の制約候補まで。
+
+Productionで強制するAuthorityはR4 / X06側。
+
+---
+
+# 15.18 Alternative / Contradiction / Confounder
+
+## Decision Candidate
+KEEP / STRENGTHEN
+
+ResearchはHypothesisを守るための場所ではない。
+
+必ず扱える方向を持つ:
+
+~~~text
+Alternative Hypothesis
+Confounder
+Contradiction
+Temporal inconsistency
+Common Cause
+Counter Evidence
+Regime failure
+~~~
+
+Cause Candidateが複数ある場合も多数決しない。
+
+---
+
+# 15.19 Research Synthesis
+
+## Decision Candidate
+KEEP / STRENGTHEN
+
+複数Evidenceを一つの投票へ潰さない。
+
+例:
+
+~~~text
+Historical = Support
+OOS = Weak
+Forward = Support
+Stress = Failure
+~~~
+
+を、
+
+~~~text
+3対1だからSUPPORTED
+~~~
+
+とはしない。
+
+Synthesis候補:
+
+~~~text
+Channel
+Role
+Independence / Dependency
+Quality
+Coverage
+Contradiction
+Failure Boundary
+Regime
+Alternative Explanation
+Uncertainty
+~~~
+
+SynthesisはResultを作るための統合責任。
+
+---
+
+# 15.20 Research Result
+
+## Decision Candidate
+KEEP / REDESIGN
+
+Research Resultは二値にしない。
+
+候補意味:
+
+~~~text
+SUPPORTED
+SUPPORTED WITH BOUNDARY
+WEAK SUPPORT
+REGIME DEPENDENT
+MIXED
+CONTRADICTED
+REFUTED
+INCONCLUSIVE
+INSUFFICIENT EVIDENCE
+DATA LIMITED
+PROCESS LIMITED
+UNKNOWN
+~~~
+
+正式State名は後。
+
+Resultに保持可能な意味:
+
+~~~text
+Question
+Hypothesis / Claim
+Methods
+Evidence Summary
+Refutation
+Alternative
+Conditions
+Failure Boundary
+Constraint Candidate
+Uncertainty
+Regime Dependence
+Reproducibility
+Unresolved Questions
+Process Failure
+~~~
+
+---
+
+# 15.21 Research Process Failure
+
+## Decision Candidate
+KEEP / STRENGTHEN
+
+研究プロセス自身の失敗をHypothesis反証と分ける。
+
+候補:
+
+~~~text
+Data insufficient
+Experiment failure
+Computation failure
+Evidence conflict
+Invalid design
+Leakage
+Look-ahead bias
+Research timeout
+External dependency failure
+Insufficient statistical power
+~~~
+
+重要:
+
+~~~text
+Research Process Failure
+≠ Hypothesis Refutation
+~~~
+
+Process Failureなら結論不能 / 再設計 / 再実行へ。
+
+---
+
+# 15.22 Validation Gate
+
+## Decision Candidate
+KEEP / REDESIGN
+
+Validation Gateの意味を「Hypothesis正解認定」にしない。
+
+確認対象候補:
+
+~~~text
+Question traceable
+Plan/version traceable
+Hypothesis/Claim version known
+Evidence Channel / Role / Dependency traceable
+Research Mode known
+Methods known
+Refutation attempted
+Alternative considered when relevant
+Failure Boundary / Constraint recorded when found
+Process Failure separated
+Research Ledger available
+Temporal integrity satisfied
+Result reproducible/explainable enough for downstream evaluation
+~~~
+
+---
+
+# 15.23 Validated Research Result
+
+## Decision Candidate
+KEEP as logical boundary
+
+Validatedの意味:
+
+> Research Resultが定義されたResearch Integrity / Trace / Validation要件を満たし、R3 Knowledgeで評価可能な身分になっている。
+
+重要:
+
+~~~text
+Validated Research Result
+≠ Supported Hypothesis
+≠ Knowledge
+≠ Applicable Knowledge
+≠ Trade Permission
+~~~
+
+したがって、
+
+~~~text
+REFUTED
+INCONCLUSIVE
+BOUNDARY FOUND
+REGIME DEPENDENT
+INSUFFICIENT EVIDENCE
+~~~
+
+もValidated Research Resultになり得る。
+
+---
+
+# 15.24 Negative / Null / Unknown Research Asset
+
+## Decision Candidate
+KEEP / STRENGTHEN
+
+価値あるResearch AssetはPositive Edgeだけではない。
+
+~~~text
+Negative Result
+Refutation
+Failure Boundary
+Constraint Candidate
+Contradiction
+Unknown
+No Edge
+OOS disappearance
+Replication failure
+Mechanism uncertainty
+~~~
+
+もR3 / C19へ渡す価値がある。
+
+---
+
+# 15.25 Proactive / Reactive / Reverse Research
+
+## Decision Candidate
+MERGE into Multi-Entry / Common Core
+
+Dual-Entryという名称より広く、
+
+~~~text
+Multi-Entry
+↓
+Common Research Core
+~~~
+
+候補へ再設計する。
+
+Entry例:
+
+~~~text
+Foundation-driven
+Observation-driven
+Open Discovery
+Anomaly-driven
+Contradiction-driven
+Failure-driven
+Knowledge-driven
+Applicability-driven
+Reverse / Outcome-driven
+External-research-driven
+Replication / periodic-revalidation
+Market-expansion-driven
+~~~
+
+重要:
+
+~~~text
+Entry differs
+≠ Separate Hypothesis system
+≠ Separate Evidence system
+≠ Separate Knowledge system
+~~~
+
+---
+
+# 15.26 Reverse Investigation Placement
+
+## Decision Candidate
+KEEP as Method before formal research
+
+R5から、
+
+~~~text
+Unexpected Outcome
+↓
+Reverse Investigation
+↓
+Cause / Explanation Candidates
+↓
+Research Question
+↓
+R2
+~~~
+
+と接続。
+
+R2で正式にAlternative / Confounder / Temporal Order / Evidenceを検証する。
+
+重要:
+
+~~~text
+Reverse Investigation
+≠ Evidence
+≠ Root Cause Confirmation
+~~~
+
+---
+
+# 15.27 External Research
+
+## Decision Candidate
+KEEP / REDESIGN
+
+論文・外部分析・第三者Researchを正式Question Source / Referenceとして利用可能にする。
+
+ただし:
+
+~~~text
+External Paper
+≠ Internal Knowledge
+~~~
+
+原則候補:
+
+~~~text
+External Claim
+↓
+Replication / Validation Question
+↓
+R2
+↓
+Validated Research Result
+↓
+R3 Knowledge Admission
+~~~
+
+外部結論をそのまま内部Truthにしない。
+
+---
+
+# 15.28 AI / Python / Rule Boundary
+
+## Decision Candidate
+KEEP / STRENGTHEN
+
+AI候補:
+
+~~~text
+Question suggestion
+Hypothesis generation
+Alternative generation
+Confounder suggestion
+Red Team critique
+Contradiction detection
+Research review
+Explanation
+~~~
+
+Python / Rule候補:
+
+~~~text
+Data processing
+Calculation
+Backtest
+OOS
+Statistics
+Replay
+Reproducible testing
+Stress execution
+Trace checks
+~~~
+
+重要:
+
+~~~text
+AI Suggestion
+≠ Evidence
+
+AI Judgment
+≠ Validation Result
+
+AI Approval
+≠ Production Authority
+~~~
+
+---
+
+# 15.29 R2 Candidate Flow
+
+~~~text
+Multiple Question Sources
+        ↓
+Research Question
+        ↓
+Research Candidate
+        ↓
+Admission / Priority
+        ↓
+Research Design
+        ↓
+Research Plan
+        ↓
+        ├─ EXPLORATORY
+        ├─ CONFIRMATORY
+        └─ REPLICATION
+        ↓
+Research Trials / Experiments
+        ↓
+Evidence
+        ├─ Historical
+        ├─ OOS
+        ├─ Forward
+        ├─ Stress
+        ├─ Runtime / Observational
+        └─ Production / Live
+        ↓
+Independent Challenge / Refutation
+        ↓
+Research Synthesis
+        ↓
+Research Result
+        ↓
+Validation Gate
+        ↓
+Validated Research Result
+        ↓
+R3 Knowledge Admission
+~~~
+
+Cross-cutting:
+
+~~~text
+Research Ledger
+Time / Temporal Integrity
+Trace / Provenance
+Version
+Uncertainty
+State / Lifecycle
+AI Assistance
+Storage
+~~~
+
+---
+
+# 15.30 R2 Concept Classification
+
+| Concept | Phase 5 R2 Candidate |
+|---|---|
+| Research Question | NEW / KEEP |
+| Research Question Type | KEEP / REDESIGN |
+| Research Candidate | REDESIGN |
+| Research Intake | MERGE / REDESIGN |
+| Research Priority | KEEP / STRENGTHEN |
+| Research Router | REDESIGN as multi-axis |
+| Research Domain / Intent / Mode / Method | KEEP distinction |
+| EXPLORATORY / CONFIRMATORY / REPLICATION | KEEP / STRENGTHEN |
+| Research Plan | KEEP / STRENGTHEN |
+| Plan Freeze / Version | NEW / KEEP principle |
+| Hypothesis / Claim | KEEP / REDESIGN |
+| Research Trial | KEEP |
+| Causal Research | KEEP as Method family |
+| Empirical Research | KEEP as Method family |
+| Evidence Channel | KEEP |
+| Evidence Role | KEEP / REDESIGN |
+| Evidence Outcome | KEEP / REDESIGN |
+| Evidence Dependency / Independence | KEEP / STRENGTHEN |
+| Research Ledger | KEEP / STRENGTHEN |
+| Red Team / Independent Challenge | KEEP responsibility |
+| Stress Lab | MERGE / REDESIGN into Research Method |
+| Boundary Discovery | KEEP / STRENGTHEN |
+| Constraint Candidate | KEEP / REDESIGN |
+| Alternative / Confounder / Contradiction | KEEP |
+| Research Synthesis | KEEP / STRENGTHEN |
+| Research Result | KEEP / REDESIGN |
+| Process Failure | KEEP / STRENGTHEN |
+| Validation Gate | KEEP / REDESIGN |
+| Validated Research Result | KEEP logical boundary |
+| Negative / Unknown Result | KEEP / STRENGTHEN |
+| Dual-Entry / Single-Core | REDESIGN → Multi-Entry / Common Core |
+| Reverse Investigation | KEEP method before R2 |
+| External Research | KEEP / REDESIGN |
+| AI Team inside Research | DROP monolith |
+| AI as Evidence | DROP |
+| Research → direct Knowledge mutation | DROP |
+| Research → direct Production | DROP |
+
+---
+
+# 15.31 R2 Open Questions for Later Design
+
+~~~text
+1. Research Question Type正式Taxonomy
+2. Candidate Admission state machine
+3. Priority formula / scheduling policy
+4. Domain / Intent / Mode / Method registry
+5. Plan Freeze対象となる研究レベル
+6. HypothesisとGeneric Claimのexact boundary
+7. Evidence independence判定方法
+8. Evidence Strengthの算定方法
+9. Statistical method / sample adequacy
+10. OOS / Forward / Replication requirements
+11. Red Teamのindependence requirement
+12. Research Synthesis authority
+13. Validation Gate authority
+14. Research Result state taxonomy
+15. Constraint Candidate → Runtime Authorized Constraintのhand-off
+16. External Research licensing / provenance / replication contract
+17. AI-assisted researchのreproducibility
+18. Research backlog / compute-budget governance
+19. Research Ledger retention
+20. Research self-study / method-performance evaluation
+~~~
+
+---
+
+# 15.32 Phase State
+
+~~~text
+Phase 5 R1
+COMPLETE / WORKING CANDIDATE
+
+Phase 5 R2
+COMPLETE / WORKING CANDIDATE
+
+NEXT:
+R3 — Knowledge / Applicability / Decision Preparation
+~~~
+
+重要:
+
+~~~text
+R2 COMPLETE
+≠
+Final Research Architecture
+
+Stress Lab MERGED
+≠
+stress research removed
+
+Causal Engine removed as monolith
+≠
+causal research removed
+
+Multi-Entry / Common Core
+≠
+every question must be researched
+~~~
