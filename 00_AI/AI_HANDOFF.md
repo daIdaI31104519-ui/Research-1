@@ -17,91 +17,85 @@ Last Updated:
 
 Conversation Focus:
 Whole Market Understanding OS Reconstruction.
-Phase 1 Source Extraction is complete.
-Phase 2 Design Intent is checkpointed.
-Phase 3 Capability Map is checkpointed.
-Current active work is Phase 4 — Multiple Blank Architecture Candidates.
+Phases 1-4 are checkpointed.
+Current active work is Phase 5 — Reconstruction.
 
 Important Boundary:
 AI_CONTEXT remains authoritative for formal Project Current State.
 PROJECT_CHARTER Section 3 — What Not To Maximize remains the formal Current design focus.
 The Reconstruction side-thread does NOT replace Current Architecture yet.
-Current 01〜04 remain existing Working Baselines until later Reconstruction / comparison.
+Current 01〜04 remain existing Working Baselines until Phase 5 comparison / redesign.
 Legacy Reference remains historical/non-authoritative.
 DAISUKE proposal remains authoritative only as the user's reconstruction source, not Final Current Design.
-Phase 2 / Phase 3 are WORKING RECONSTRUCTION BASELINES, not Canonical Current Design.
+Phase 2 / 3 / 4 are WORKING RECONSTRUCTION BASELINES.
 
-PHASE 3 FINAL MAIN CAPABILITIES:
-C01 World / Market Observation
-C02 Observation Integrity
-C03 Relation / Foundation Representation
-C04 Current Market Understanding
-C05 Research Question Discovery
-C06 Research Priority / Admission
-C07 Validation / Refutation / Replication
-C08 Boundary / Constraint Discovery
-C09 Knowledge Formation
-C10 Knowledge Lifecycle / Revalidation
-C11 Knowledge Applicability / Runtime Assumption Monitoring
-C12 Decision Synthesis / Conflict Resolution
-C13 Economic Value Assessment
-C14 Capital Allocation / Risk / Portfolio Governance
-C15 Execution Fidelity
-C16 Position / Runtime Protection
-C17 Outcome / Decision Quality Understanding
-C18 Feedback / Research Routing
-C19 Research Asset Preservation
-C20 Replaceability / Market Extensibility / System Evolution
-C21 Human-readable Research Projection
+PHASE 4 CANDIDATES:
+A Research-Centered
+B Relation / World-Model-Centered
+C Knowledge-Loop-Centered
+D Multi-Core Hybrid
 
-CROSS-CUTTING:
-X01 Time / Temporal Integrity
-X02 Trace / Provenance
-X03 Version / Lineage
-X04 Uncertainty / Calibration
-X05 State / Lifecycle Integrity
-X06 Authority / Governance
-X07 Human Control
-X08 Cognitive Assistance Integration
-X09 Security / Identity / Credential / Classification
-X10 Monitoring / Incident / Recovery
-X11 Storage / Retention / Migration
+PHASE 4 STRESS RESULT:
+- A is strongest as Research-domain design philosophy, but whole-OS use risks research overreach / latency
+- B is strongest for relation-based market understanding and multi-market semantics, but whole-OS use risks world-model / ontology explosion
+- C is strongest for long-term knowledge lifecycle and publication, but whole-OS use risks known-knowledge bias
+- D gives the clearest whole-OS responsibility separation and failure routing, but risks contract/object/state bureaucracy
+- no candidate is adopted yet
 
-IMPORTANT PHASE 3 CORRECTIONS:
-- added Decision Synthesis / Conflict Resolution between Applicability and EV
-- split Execution Fidelity from Position / Runtime Protection
-- added Human-readable Research Projection as Secondary Capability
-- AI Team / Market DNA / World Economic Library / Stress Lab / Telegram etc. remain HOW candidates, not required capabilities
+CROSS-CASE PRINCIPLES SENT TO PHASE 5:
+1. Relation/Foundation may be shared market-understanding language, not truth authority
+2. Research may be common research core, not runtime authority
+3. Knowledge may be long-term semantic asset, not exclusive perception lens
+4. Capital/Production needs independent real-capital authority boundary
+5. Feedback routing needs cross-domain failure classification
+6. X01-X11 should remain horizontal capabilities/governance rather than normal sequential layers
+7. Whole OS likely needs two speeds:
+   Evidence/Learning path
+   Runtime/Safety path
+8. Human-readable publication should be derived projection, not internal source of truth
 
-PHASE 4 GOAL:
-Create multiple blank-sheet architectures that can satisfy the same C01-C21 + X01-X11 capability set without patching Current 01-04.
+PHASE 5 GOAL:
+Compare and reconstruct:
+- Legacy concepts
+- Current responsibilities
+- Daisuke proposal concepts
+- Research Institute concepts
+- Phase 4 architecture learnings
 
-Candidate directions may include:
-- Research-centered
-- Relation / World-model-centered
-- Knowledge-loop-centered
-- Hybrid
+Use:
+KEEP
+REDESIGN
+SPLIT
+MERGE
+DROP
+DEFER
+NEW
 
-Do NOT:
-- choose one architecture too early
-- copy Current 01-04 structure by default
-- preserve Legacy names just because they exist
-- treat Architecture Candidate as adoption
-- run final Destruction Review yet
+Do not preserve names automatically.
+For every important concept record:
+- original intent
+- current problem
+- capability served
+- reconstruction decision candidate
+- replacement / merge target
+- what would be lost
 
 NEXT:
-Build 3-4 blank architecture candidates.
-For each candidate compare:
-1. capability coverage
-2. responsibility boundaries
-3. research quality
-4. real-capital safety
-5. long-term maintainability
-6. market extensibility
-7. complexity / duplication risk
-8. failure routing
-9. human understandability
-10. migration cost from current design
+Start Phase 5 with top-level responsibility reconstruction before individual object design.
+
+Recommended first pass:
+1. Perception / Relation / Current Understanding
+2. Research
+3. Knowledge / Applicability / Decision
+4. Capital / Production
+5. Feedback
+6. Cross-Cutting / Operations / Human Output
+
+Do NOT:
+- finalize DB/Object/Python
+- assume Candidate D wholesale
+- run Phase 6 Destruction Review yet
+- modify formal Current Architecture without explicit adoption
 
 READ:
 - 98_DESIGN_STUDY/市場理解OS_全体再構築_設計ログ.md
@@ -109,7 +103,7 @@ READ:
 - 98_DESIGN_STUDY/市場理解OS_研究機関_設計検討リファレンス.md
 - 99_REFERENCE/旧市場理解OS_設計知識リファレンス.md
 - 00_HUMAN/PROJECT_CHARTER.md
-- Current 01〜04 only for later comparison, not as the blank-sheet starting structure
+- Current 01〜04 for Phase 5 comparison
 
 Git Write Permission Reminder:
 REQUIRE CURRENT-CHAT USER AUTHORIZATION
