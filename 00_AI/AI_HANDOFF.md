@@ -13,11 +13,13 @@ State:
 ACTIVE
 
 Last Updated:
-2026-09-29
+2026-09-30
 
 Conversation Focus:
 Whole Market Understanding OS Reconstruction.
-Current active work is Phase 1 — Source Extraction.
+Phase 1 Source Extraction is complete.
+Phase 2 Design Intent is checkpointed.
+Current active work is Phase 3 — Capability Map.
 
 Important Boundary:
 AI_CONTEXT remains authoritative for formal Project Current State.
@@ -25,64 +27,61 @@ PROJECT_CHARTER Section 3 — What Not To Maximize remains the formal Current de
 The Reconstruction side-thread does NOT replace Current Architecture yet.
 Current 01〜04 remain existing Working Baselines until later Reconstruction / comparison.
 Legacy Reference remains historical/non-authoritative.
-DAISUKE proposal is authoritative only as the user's reconstruction source, not as Final Current Design.
+DAISUKE proposal remains authoritative only as the user's reconstruction source, not Final Current Design.
+Phase 2 Design Intent is a WORKING RECONSTRUCTION BASELINE, not Canonical Project Philosophy.
 
-RECONSTRUCTION SOURCES:
-1. 99_REFERENCE/旧市場理解OS_設計知識リファレンス.md
-2. Current PROJECT_CHARTER / HUMAN_MAP / 01〜04 Working Baselines
-3. 98_DESIGN_STUDY/市場理解OS_研究機関_設計検討リファレンス.md
-4. 98_DESIGN_STUDY/DAISUKE_MARKET_UNDERSTANDING_OS_PROPOSAL.md
+PHASE 1:
+COMPLETE
+- source-by-source intent extraction
+- Shared / Unique / Overlap / Gap review
+- HOW concepts separated from required capabilities
 
-CURRENT METHOD:
-Do NOT compare by Layer / Engine / Object names first.
-Extract:
-- why each responsibility existed
-- what capability it tried to create
-- what it tried to protect
-- what is lost if removed
-- where responsibilities overlap
-- whether it is WHY / WHAT / HOW
+PHASE 2:
+COMPLETE / WORKING RECONSTRUCTION BASELINE
+Key intent:
+- understand market/economic/world events through relationships, not price alone
+- formalize human relationship-based market reasoning for AI / Python / Database
+- proactive + reactive research
+- research integrity and semantic separation
+- conditional knowledge, runtime applicability, economic value, risk separation
+- real-capital connection without destroying capital/research/system continuity for short-term profit
+- forward + reverse investigation, with reverse investigation generating Cause Candidates rather than confirming root cause
+- long-term Research Asset, extensibility, human-readable output
+- evaluate past decisions using information available at that time, not hindsight
 
-CURRENT HIGH-LEVEL EXTRACTION:
-Legacy:
-- strong at separating observation / interpretation / cause / research / production
-- strong at reactive anomaly, causal, stress, failure, defense, execution, feedback
-- strong at research evidence separation and failure routing
-- weaker / incomplete at proactive foundation-driven research and some canonical ownership
+Important unresolved:
+- exact Survival / Profit priority
+- Human / AI / Production final authority
+- Capital / Portfolio philosophy
+- Foundation exact scope
+- Relation Language formal structure
+- Research Priority
+- Market extension contract
+- long-term storage policy
+- runtime knowledge condition monitoring
 
-Current:
-- strong at Human-First semantics and responsibility boundaries
-- strong at qualified observation → current understanding → research → knowledge → applicability
-- strong at Research Result ≠ Knowledge ≠ Applicable ≠ Trade
-- Decision / Execution remain incomplete
+CURRENT PHASE 3 METHOD:
+Translate WHY into WHAT.
+For each capability record:
+1. Capability ID / Name
+2. Design Intent supported
+3. What the OS must be able to do
+4. Inputs required in meaning, not schema
+5. Outputs required in meaning, not object design
+6. Failure if capability is absent
+7. Cross-cutting dependencies
+8. Existing source support
+9. Known gaps
+10. HOW candidates, clearly non-binding
 
-Research Institute Reference:
-- adds proactive + reactive Dual-Entry / Single-Core
-- adds Research Foundation, Research Question, Open Discovery
-- adds Exploratory / Confirmatory / Replication distinction
-- adds Research Ledger, Red Team, Benchmark, Negative Knowledge emphasis
-- remains Working Reference, not Current Design
-
-Daisuke Proposal:
-- adds relationship-based human market understanding as a formal machine-readable idea
-- adds world / market foundation and common relation language
-- separates world/economic foundation library from OS-derived knowledge library
-- adds forward research + reverse investigation from unexpected results
-- emphasizes real-capital safety, runtime market support, long-term storage, modular replacement, multi-market expansion, human-readable research asset
-
-PHASE 1 GOAL:
-Convert the four sources into a source-extraction map of required capabilities and preserved design intents.
-Do NOT yet decide final Architecture.
-Do NOT yet run Destruction Review.
-Do NOT yet assign KEEP / DROP except as later reconstruction work.
+Do NOT:
+- choose final Layers yet
+- choose final Engine names
+- lock Market DNA / World Economic Library / AI Team etc.
+- run Destruction Review yet
 
 NEXT:
-Continue Phase 1 by building:
-1. source-by-source intent extraction
-2. shared capabilities
-3. unique capabilities
-4. overlaps / gaps
-5. HOW concepts that must not be mistaken for required capabilities
+Build Phase 3 Capability Map, beginning with top-level capability families and then decomposing each family.
 
 READ:
 - 98_DESIGN_STUDY/市場理解OS_全体再構築_設計ログ.md
@@ -91,10 +90,7 @@ READ:
 - 99_REFERENCE/旧市場理解OS_設計知識リファレンス.md
 - 00_HUMAN/PROJECT_CHARTER.md
 - 00_HUMAN/HUMAN_MAP.md
-- 02_ARCHITECTURE/CONNECTIONS/01_EXTERNAL_DATA.md
-- 02_ARCHITECTURE/CONNECTIONS/02_MARKET_UNDERSTANDING.md
-- 02_ARCHITECTURE/CONNECTIONS/03_RESEARCH.md
-- 02_ARCHITECTURE/CONNECTIONS/04_KNOWLEDGE_APPLICABILITY.md
+- Current 01〜04 only when responsibility comparison is needed
 
 Git Write Permission Reminder:
 REQUIRE CURRENT-CHAT USER AUTHORIZATION
