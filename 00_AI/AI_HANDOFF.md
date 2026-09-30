@@ -18,8 +18,8 @@ Last Updated:
 Conversation Focus:
 Whole Market Understanding OS Reconstruction.
 Phases 1-4 checkpointed.
-Phase 5 R1 and R2 concept-level reconstruction complete.
-Current active work: R3 Knowledge / Applicability / Decision Preparation.
+Phase 5 R1, R2, R3 concept-level reconstruction complete.
+Current active work: R4 Capital / Production.
 
 Important Boundary:
 AI_CONTEXT remains authoritative for formal Project Current State.
@@ -35,72 +35,80 @@ R5 Learning / Feedback
 R6 Long-Term Foundation / Operations / Human Projection
 X Cross-Cutting
 
-R2 KEY RECONSTRUCTION:
-- Research Question is the broad conceptual entry
-- Research Candidate is admission target after Question, not the question itself
-- Research Intake / Priority / Routing redesigned around admission and multi-axis routing
-- Research is Multi-Entry / Common-Core, not only anomaly-driven
-- Research Mode explicitly separates EXPLORATORY / CONFIRMATORY / REPLICATION
-- Research Plan is central reproducible specification; material post-result changes require new version
-- Hypothesis / Claim remains distinct from Evidence / Result / Knowledge
-- Causal and Empirical research coexist as Method families
-- Evidence Channel / Role / Outcome / Strength / Dependency remain separate
-- Research Ledger retains full search/trial history to expose hidden search space
-- Red Team / independent challenge retained as responsibility
-- Stress Lab merged into Research Method / Boundary Discovery; stress capability preserved
-- Failure Boundary / Constraint Candidate retained
-- Research Synthesis cannot use simple evidence majority vote
-- Research Process Failure remains separate from Hypothesis Refutation
-- Validated Research Result means research integrity/trace requirements passed, not hypothesis proven true
-- Negative / Refuted / Inconclusive / Unknown results remain valuable research assets
-- Reverse Investigation generates candidates/questions before formal R2 research
-- External Research is a source to replicate/validate, not internal truth
-- AI suggestion/judgment is advisory, not evidence/validation/production authority
-- Research cannot directly mutate Knowledge or Production
+R3 KEY RECONSTRUCTION:
+- R3 split conceptually into Knowledge Maintenance, Applicability/Runtime Assumption, Decision Preparation/EV
+- Foundation and Research Knowledge remain separate epistemic categories
+- Validated Research Result does not automatically become Knowledge
+- Knowledge Admission may produce Knowledge, merge/update candidate, Research Asset only, or no Knowledge admission
+- Negative/refutation/boundary knowledge retained; pure inconclusive/process-limited results need not become Knowledge claims
+- Knowledge semantics remain conditional and versioned
+- Knowledge relationships separated from Knowledge semantics; Knowledge Graph becomes derived view candidate
+- Knowledge Lifecycle separated from Applicability
+- Revalidation routes back to R2; R3 does not self-research
+- Research Constraint Candidate / Knowledge Constraint / Runtime Authorized Constraint separated
+- Knowledge Retrieval added before Applicability; retrieved does not mean applicable
+- Applicability remains current-usability assessment and records excluded-knowledge reasons
+- Runtime Assumption Monitoring split from pre-decision applicability but shares semantics
+- Runtime deviation cannot directly mutate Knowledge or decide exit
+- Multi-Knowledge Conflict/Dependency/Overlap explicitly retained
+- Decision Synthesis added between Applicability and EV
+- Trade Thesis renamed/deferred; responsibility retained as traceable Decision Thesis candidate
+- Expected Value separated from Applicability and Capital Permission
+- R3 outputs Economic Opportunity / Decision Proposal context to R4, not Order Intent
+- Signal Engine not required top-level concept
+- BUY/SELL-only canonical decision outcome dropped
+- WAIT / NO ACTION / UNKNOWN / conflicted states remain valid candidates
 
-R2 CANDIDATE FLOW:
-Question Sources
-→ Research Question
-→ Research Candidate
-→ Admission / Priority
-→ Research Plan
-→ Mode + Methods
-→ Trials
-→ Evidence
-→ Independent Challenge
-→ Research Synthesis
-→ Research Result
-→ Validation Gate
-→ Validated Research Result
-→ R3
+R3 CANDIDATE FLOW:
+Validated Research Result
+→ Knowledge Admission
+→ Knowledge Version/Lifecycle
+→ Knowledge Domain
++ Current Market
+→ Retrieval
+→ Applicability
+→ Conflict/Dependency/Overlap
+→ Decision Synthesis
+→ Decision Thesis/Candidate
+→ EV
+→ Economic Opportunity Context
+→ R4
 
-NEXT — R3:
+FAST RUNTIME:
+Position-linked Knowledge Assumptions
++ Current Runtime Context
+→ Assumption Monitoring
+→ R4 Protection / R5 Feedback / R2 Question
+
+NEXT — R4:
 Reconstruct:
-1. Knowledge Admission / Formation
-2. Knowledge semantics / relationships
-3. Knowledge lifecycle / aging / revalidation
-4. Negative knowledge / failure boundary / constraints
-5. Applicability
-6. Runtime assumption monitoring
-7. Multi-knowledge conflict
-8. Decision Synthesis
-9. Expected Value
-10. R3 → R4 handoff
-11. distinction between Foundation and Research Knowledge
+1. Capital governance
+2. Portfolio / correlation / concentration
+3. Risk budget / drawdown / ruin protection
+4. risk permission
+5. fast safety / emergency path
+6. execution fidelity
+7. exchange-independent order intent
+8. reconciliation
+9. canonical position / exposure truth
+10. runtime position protection
+11. exit / reduce / block
+12. R4 → R5 production evidence
 
 Do NOT:
 - adopt Phase 5 candidates as final architecture
 - finalize DB/Object/Python
-- convert research result directly into Knowledge
-- run Phase 6 destruction review early
+- let R3 issue capital permission
+- let runtime finding mutate Knowledge directly
 - modify formal Current Architecture
+- run Phase 6 destruction review early
 
 READ:
 - 98_DESIGN_STUDY/市場理解OS_全体再構築_設計ログ.md
-- 02_ARCHITECTURE/CONNECTIONS/04_KNOWLEDGE_APPLICABILITY.md
-- 98_DESIGN_STUDY/市場理解OS_研究機関_設計検討リファレンス.md
 - 99_REFERENCE/旧市場理解OS_設計知識リファレンス.md
 - 98_DESIGN_STUDY/DAISUKE_MARKET_UNDERSTANDING_OS_PROPOSAL.md
+- 00_HUMAN/PROJECT_CHARTER.md
+- future Current 05/06 only if/when created; do not invent them
 
 Git Write Permission Reminder:
 REQUIRE CURRENT-CHAT USER AUTHORIZATION
