@@ -2019,3 +2019,941 @@ Phase 5
 =
 Concept / Responsibility level Reconstruction
 ```
+
+
+---
+
+# 13. Checkpoint 006 — Phase 5 Reconstruction / Top-Level Responsibility Pass
+
+**Date:** 2026-09-30  
+**State:** SAVED  
+**Formal Current Architecture Changed:** NO  
+**Current Reconstruction Stage:** Phase 5 ACTIVE
+
+## 13.1 Reconstruction Rule
+
+Phase 5ではConcept名を保存することを目的にしない。
+
+```text
+Original Concept Name
+↓
+Original Intent
+↓
+Capability Served
+↓
+Problem / Overlap
+↓
+Reconstruction Decision Candidate
+↓
+Replacement Responsibility
+```
+
+で再構築する。
+
+判定:
+
+```text
+KEEP
+REDESIGN
+SPLIT
+MERGE
+DROP
+DEFER
+NEW
+```
+
+はWorking Candidateであり、Phase 6 Destruction Review前の最終採用ではない。
+
+---
+
+# 13.2 Top-Level Responsibility Reconstruction Candidate
+
+Phase 3 Capability MapとPhase 4 Stress結果を基に、Whole OSを以下の責任群として再構築する候補を置く。
+
+```text
+R1 Perception / Relation / Current Understanding
+R2 Research
+R3 Knowledge / Applicability / Decision Preparation
+R4 Capital / Production
+R5 Learning / Feedback
+R6 Long-Term Foundation / Operations / Human Projection
+X  Cross-Cutting Capabilities
+```
+
+重要:
+
+```text
+R1-R6
+≠
+Final Layers
+≠
+Python packages
+≠
+Processes
+≠
+DB schemas
+```
+
+責任再構築のためのWorking Skeleton。
+
+---
+
+# 13.3 R1 — Perception / Relation / Current Understanding
+
+## Original Intents Recovered
+
+Legacy:
+- Observation / Feature / MarketEvent / MarketContextを分離
+- CauseCandidateを原因確定と分離
+- Market DNAで現在市場と過去状態を比較したい
+
+Current:
+- Qualified ObservationからCurrent Market Understandingを作る
+- Observation / Feature / Context / Interpretationを分離
+- Current Understanding自身はResearch / Trade / Riskを行わない
+
+Daisuke Proposal:
+- 人間の「関係性による理解」を形式化する
+- Flow / Constraint / Propagation / Lag等を共通言語候補にする
+- 世界・経済の基礎をResearchの土台として利用する
+
+Phase 4:
+- Relation/Foundationは有望
+- ただしWorld ModelをTruth Authorityにしない
+- Relation Modelの無制限膨張を防ぐ
+- Current SafetyはResearch完了を待たない
+
+## Reconstruction Candidate
+
+```text
+External / World Observation
+↓
+Observation Integrity
+↓
+Relation / Foundation Context
++
+Current Observation Context
+↓
+Current Market Understanding
+↓
+├─ Research Question sources
+├─ Runtime Context
+└─ Unexplained / Contradiction / Cause Candidate sources
+```
+
+### Concept Decisions
+
+```text
+Observation semantics
+→ KEEP
+
+Observation Integrity
+→ KEEP
+
+Current Market Understanding
+→ KEEP / REDESIGN
+  Relation/Foundation Contextを利用可能にする
+  Prediction / Signal / Trade Authorityは持たない
+
+Market Intelligence
+→ REDESIGN
+  独立最上位Engineとして固定せず、
+  Current Understandingを作るInterpretation / synthesis responsibilityへ吸収候補
+
+World Economic Library
+→ REDESIGN / MERGE
+  「Library」という物理構造を固定しない
+  Relation / Foundation Representation責任へ統合候補
+
+Research Foundation
+→ MERGE
+  Research専有物ではなく、R1の共有Foundation/Relation Contextへ寄せる候補
+
+Cause Candidate
+→ KEEP semantics / REDESIGN placement
+  Current Understandingから生成され得るResearch Question sourceの一種
+  原因確定ではない
+  全Market Understanding cycleで必須生成にはしない
+
+Causal Engine
+→ SPLIT
+  Candidate generationはR1/R5側
+  causal validation / confounder / temporal order等はR2 Research側
+
+Market DNA
+→ REDESIGN / DEFER exact form
+  保存するのは「Current Market Stateを比較可能に表現する能力」
+  Market DNAという名称・Object・EngineをRequired Architectureにはしない
+
+Market DNA Snapshot
+→ DEFER exact object
+  C04 Current Market Understandingのrepresentation candidateとしてPhase 6以降再評価
+
+Feature / Derived Context
+→ KEEP responsibility
+  HOW / object granularityは後
+```
+
+## R1 Key Boundary
+
+```text
+Relation/Foundation
+≠ Truth
+
+Current Understanding
+≠ Hypothesis Proof
+≠ Knowledge
+≠ Signal
+≠ Trade Permission
+```
+
+---
+
+# 13.4 R2 — Research
+
+## Original Intents Recovered
+
+Legacy:
+- ResearchCandidate / Intake / Routing / Plan / Trial / Validation
+- Evidence independence
+- Stress / Failure Boundary
+- causal research
+- Result Validation
+
+Current:
+- Research ResultとKnowledgeを分離
+- Research Candidateを共通入口へ
+- Historical / OOS / Forward / Stress / Refutation / Alternativeを扱う
+- Process FailureとHypothesis Refutationを分離
+
+Research Institute Reference:
+- Proactive + Reactive entry
+- Research Question
+- Exploratory / Confirmatory / Replication
+- Research Ledger
+- Red Team
+- Open Discovery
+- External Research Replication
+
+Daisuke Proposal:
+- Foundationから通常市場も研究
+- 異常・矛盾・失敗も研究
+- reverse investigationで新しい原因候補を作る
+
+Phase 4:
+- Research-centered思想はResearch Domain内部で非常に強い
+- Whole Runtime Authorityにはしない
+- Researchを待たないRuntime Safetyが必要
+
+## Reconstruction Candidate
+
+```text
+Multiple Question Sources
+↓
+Research Question
+↓
+Priority / Admission
+↓
+Common Research Core
+├─ Exploratory
+├─ Confirmatory
+├─ Replication
+├─ Causal / Alternative / Confounder
+├─ Stress / Boundary
+└─ External Research Replication
+↓
+Validated Research Result
+```
+
+### Concept Decisions
+
+```text
+Research Question
+→ NEW / KEEP candidate
+  Cause Candidateより広いCanonical conceptual entry候補
+
+Research Candidate
+→ REDESIGN
+  QuestionがResearch queueへ入るAdmission candidateとして配置候補
+
+Research Intake + Priority + Router
+→ MERGE / REDESIGN
+  C05/C06としてAdmission / Priority / route responsibilitiesを整理
+
+Dual-Entry / Single-Core
+→ KEEP principle / REDESIGN
+  実際はMulti-Entry / Common Core候補
+  Foundation / anomaly / failure / knowledge decay / external research等から入る
+
+Research Plan / Trial / Execution
+→ KEEP responsibility
+
+Exploratory / Confirmatory / Replication
+→ KEEP distinction candidate
+
+Research Ledger
+→ KEEP responsibility
+  trial history / search historyを保持
+
+Red Team
+→ KEEP responsibility / DEFER exact implementation
+  independent challenge roleとして保持
+  AI Team固定はしない
+
+Stress Lab
+→ MERGE / REDESIGN
+  独立Layer必須ではなくResearch Method / Boundary Discovery familyへ
+
+Causal Engine
+→ SPLIT
+  causal validation methodsをResearch Coreへ
+
+Validated Research Result Boundary
+→ KEEP
+
+Research Result → Knowledge direct mutation
+→ DROP
+  Knowledge admissionを必ず分離
+```
+
+## R2 Key Boundary
+
+```text
+Research
+≠ Runtime Safety
+≠ Capital Permission
+≠ Execution
+
+Research Result
+≠ Knowledge
+```
+
+---
+
+# 13.5 R3 — Knowledge / Applicability / Decision Preparation
+
+## Original Intents Recovered
+
+Legacy:
+- Knowledge Admission / Record / Relationship / Lifecycle
+- Applicability
+- Applicable Knowledge Set
+- Decision Context / Thesis / EV
+- Knowledge ≠ Applicability ≠ Positive EV ≠ Trade Permission
+
+Current:
+- Validated Research Result → Knowledge
+- Knowledge maintenanceとruntime applicabilityを分離
+- Current Understanding / Market contextをApplicabilityで利用
+- Knowledge多数決禁止
+- Conflict Resolutionは後段責任
+
+Daisuke Proposal:
+- 世界/基礎情報とOS自身が得たKnowledgeを分離
+- Knowledgeを直接Real Tradeへ使わない
+- RuntimeでもKnowledge成立条件を観測する
+
+Phase 4:
+- KnowledgeはLong-term semantic assetとして強い
+- 既存KnowledgeだけをPerception Lensにしない
+- Decision Synthesis独立責任が必要
+
+## Reconstruction Candidate
+
+```text
+Validated Research Result
+↓
+Knowledge Admission / Formation
+↓
+Knowledge Lifecycle / Revalidation
+↓
+Current Applicability
+↓
+Decision Synthesis / Conflict Resolution
+↓
+Economic Value Assessment
+↓
+R4 Capital / Production
+```
+
+Runtime side:
+
+```text
+Current Market Context
+↓
+Knowledge Assumption Monitoring
+↓
+Applicability degradation / runtime warning
+↓
+R4 Runtime Protection and/or R5 Feedback
+```
+
+### Concept Decisions
+
+```text
+Knowledge Admission
+→ KEEP
+
+Knowledge Library / Knowledge Pool
+→ MERGE / REDESIGN
+  Logical Knowledge Domainとして保持
+  物理巨大Store名は固定しない
+
+Knowledge Record / Conditional Knowledge
+→ KEEP responsibility
+
+Knowledge Graph
+→ REDESIGN
+  Canonical duplicate storeではなくView / relationship representation candidate
+
+Knowledge Lifecycle
+→ KEEP
+  exact state / writer authorityはDEFER
+
+Applicability
+→ KEEP
+
+Runtime Knowledge Assumption Monitoring
+→ SPLIT responsibility from static/pre-decision applicability
+  semanticsは共有するがTwo-Speed pathで別処理候補
+
+Decision Synthesis / Conflict Resolution
+→ NEW
+  Applicable Knowledge群・opposing thesis・WAIT/UNKNOWNを統合する責任
+
+Expected Value
+→ KEEP / REDESIGN
+  Decision SynthesisとRiskから分離
+
+Signal Engine
+→ DROP as required top-level concept
+  Signalは後のHOW / derived output candidate
+  CapabilityとしてはDecision Synthesis / EVで代替可能
+
+Knowledge majority vote
+→ DROP
+
+Knowledge direct Trade Permission
+→ DROP
+```
+
+## R3 Key Boundary
+
+```text
+Knowledge Valid
+≠
+Applicable Now
+
+Applicable Now
+≠
+Decision Candidate
+
+Decision Candidate
+≠
+Positive Economic Value
+
+Positive Economic Value
+≠
+Capital Permission
+```
+
+---
+
+# 13.6 R4 — Capital / Production
+
+## Original Intents Recovered
+
+Legacy:
+- DecisionとDefenseを分離
+- RiskState single-writer principle
+- Emergency Fast Path
+- Execution / Reconciliation
+- Logical Position / Protection / Exit
+- venue actionとcanonical exposure truthを分離
+
+Current:
+- 05 / 06未完成だがApplicability → Decision → Risk → Executionの境界思想あり
+
+Daisuke Proposal:
+- Real capitalを長期的に増やす
+- DDを抑える
+- Trade中もCurrent Marketを監視
+- 単純価格StopではなくKnowledge成立条件変化を扱いたい
+
+Phase 4:
+- Capital / Productionの独立Authority Boundaryが強く支持
+- Two-Speed Runtime Safetyが必要
+- API failure / AI failure / market failureを分離
+
+## Reconstruction Candidate
+
+```text
+Economic Opportunity
+↓
+Capital / Portfolio / Risk Permission
+↓
+Execution Fidelity
+↓
+Position / Exposure Truth
+↓
+Runtime Protection / Exit
+↓
+Outcome
+```
+
+Fast Safety Path:
+
+```text
+Current Runtime Context
++
+System Health
++
+Risk State
++
+Knowledge Assumption Deviation
+↓
+Restriction / Reduce / Protect / Stop
+```
+
+### Concept Decisions
+
+```text
+Decision vs Risk separation
+→ KEEP
+
+Capital Allocation / Portfolio Risk
+→ NEW / REDESIGN
+  Legacy部品を統合しWhole Capital viewを追加
+
+Defense Layer
+→ SPLIT / DROP monolithic form
+  - capital/risk permission
+  - runtime protection
+  - emergency restriction
+  に責任分解候補
+
+RiskState single-writer principle
+→ KEEP principle / DEFER exact object
+
+Emergency Fast Path
+→ KEEP / REDESIGN
+  Research completionを待たない
+  未検証Knowledge promotionとは分離
+
+Execution
+→ KEEP
+
+Execution Reconciliation
+→ KEEP
+
+Position / Exposure canonical truth
+→ KEEP responsibility
+
+Protection / Exit / In-Trade Defense
+→ MERGE / REDESIGN under Position / Runtime Protection responsibility
+
+Exchange Adapter as final canonical truth
+→ DROP
+
+Production Promotion as Trade Permission
+→ DROP legacy meaning
+```
+
+## R4 Key Boundary
+
+```text
+Research Confidence
+≠
+Risk Permission
+
+Order Sent
+≠
+Execution Success
+
+Exchange Response
+≠
+Canonical Position Truth
+
+Fast Safety
+≠
+Fast Research Promotion
+```
+
+---
+
+# 13.7 R5 — Learning / Feedback
+
+## Original Intents Recovered
+
+Legacy:
+- Production Evaluation
+- Finding normalization
+- Cross-analysis
+- Candidate Promotion
+- Feedback → Research
+- Loss ≠ Thesis Failure
+- Finding ≠ Root Cause
+
+Current:
+- Post-Analysis → Re-Research
+- OutcomeとHypothesis / Thesis / Execution / Riskを分離
+
+Daisuke Proposal:
+- Unexpected Resultを単純再学習しない
+- 順方向 + 逆方向で原因候補を探索
+- 根本原因に応じて適切な場所へ戻す
+
+Phase 4:
+- Feedback RouterはWhole OSを閉Loopにする重要接続点
+- Reverse InvestigationはRoot Cause AuthorityではなくCandidate generation Method
+
+## Reconstruction Candidate
+
+```text
+Outcome / Production Evidence
+↓
+Decision-Quality / Execution / Risk / Market Evaluation
+↓
+Finding / Contradiction / Unknown
+↓
+Failure Classification / Feedback Routing
+├─ R1 perception / data
+├─ R2 research
+├─ R3 knowledge / applicability / decision
+├─ R4 capital / execution
+└─ X / operations
+```
+
+Research route:
+
+```text
+Unexpected Outcome
+↓
+Reverse Investigation
+↓
+Cause / Explanation Candidates
+↓
+R2 Formal Research
+```
+
+### Concept Decisions
+
+```text
+Production Evaluation
+→ KEEP / REDESIGN
+
+TradeResult alone as learning signal
+→ DROP
+
+Finding concept
+→ KEEP semantics / REDESIGN
+  Root Causeではなくresearch / correction candidate
+
+Finding Pipeline
+→ MERGE into Feedback Routing responsibility
+
+Cross-Analysis
+→ KEEP method candidate
+  Conflict / relation detection
+  Root Cause Authorityではない
+
+Reverse Investigation
+→ NEW method
+  Candidate generation only
+
+Trainer as universal feedback destination
+→ DROP
+  Failure-specific routingへ置換
+
+Failure Museum
+→ MERGE / REDESIGN
+  Negative / failure research assetsとしてC19 / Knowledge domainへ
+  独立Top-Level Layer必須ではない
+
+Direct Knowledge mutation from outcome
+→ DROP
+
+Counterfactual
+→ KEEP method candidate / DEFER exact implementation
+```
+
+## R5 Key Boundary
+
+```text
+Outcome
+≠
+Decision Quality
+
+Finding
+≠
+Root Cause
+
+Reverse Story
+≠
+Causal Proof
+
+Feedback
+≠
+Automatic Retraining
+```
+
+---
+
+# 13.8 R6 — Long-Term Foundation / Operations / Human Projection
+
+## Original Intents Recovered
+
+Legacy:
+- Monitoring / Recovery / Deployment
+- Telegram / Outer Control
+- Security / Credential / Classification
+- State / Approval / Audit / Migration / Backup
+
+Current Charter:
+- Research Assetを長期保存
+- Human-readable research
+- implementationよりmeaning / evidence / historyを残す
+
+Daisuke Proposal:
+- long-term storage pressure
+- AI / API / Python / market交換
+- Debug / API / Error / system monitoring
+- Telegram / iPhone control
+- Japanese research output
+
+Phase 4:
+- X01-X11は横断
+- Publicationはderived projection
+- Provider / AI / Exchangeをsemantic source of truthにしない
+
+## Reconstruction Candidate
+
+Cross-Cutting:
+
+```text
+X01 Time / Temporal Integrity
+X02 Trace / Provenance
+X03 Version / Lineage
+X04 Uncertainty / Calibration
+X05 State / Lifecycle Integrity
+X06 Authority / Governance
+X07 Human Control
+X08 Cognitive Assistance Integration
+X09 Security / Identity / Credential / Classification
+X10 Monitoring / Incident / Recovery
+X11 Storage / Retention / Migration
+```
+
+Long-term semantic responsibilities:
+
+```text
+Research Asset Preservation
+Replaceability / Market Extensibility
+Human-readable Projection
+```
+
+### Concept Decisions
+
+```text
+AI Team
+→ REDESIGN / DROP monolithic form
+  X08 Cognitive Assistanceとして各責任へ接続
+  AI consensusをAuthorityにしない
+
+Telegram Interface
+→ REDESIGN
+  Human Control Adapter候補
+  Authorityそのものではない
+
+Monitoring
+→ KEEP
+  State writer / market interpretation authorityではない
+
+Recovery / Incident
+→ KEEP
+
+Security / Credential / Classification
+→ KEEP
+
+Auditability
+→ MERGE as property from Time + Trace + Version + State + Authority
+
+Research Asset Preservation
+→ KEEP / REDESIGN
+  raw-data hoardingではなくmeaning / evidence / history preservation
+
+Storage / Retention / Migration
+→ NEW / REDESIGN as explicit long-term responsibility
+
+Market-specific extensibility
+→ NEW / KEEP intent
+  shared OS + market-specific data/method/execution boundary候補
+
+Human-readable Research Projection
+→ NEW
+  internal SoTを変更しないderived output
+
+Publication as internal Knowledge writer
+→ DROP
+```
+
+---
+
+# 13.9 First-Pass Reconstruction Skeleton
+
+Phase 5 Working Candidate:
+
+```text
+WORLD / MARKET
+      ↓
+[R1 PERCEPTION / RELATION / CURRENT UNDERSTANDING]
+      │
+      ├──────────────→ FAST RUNTIME CONTEXT ───────────────┐
+      │                                                    │
+      ↓                                                    │
+Research Question Sources                                  │
+      ↓                                                    │
+[R2 RESEARCH]                                              │
+      ↓                                                    │
+Validated Research Result                                  │
+      ↓                                                    │
+[R3 KNOWLEDGE / APPLICABILITY / DECISION PREPARATION]      │
+      ↓                                                    │
+Economic Opportunity                                       │
+      ↓                                                    │
+[R4 CAPITAL / PRODUCTION] ◀────────────────────────────────┘
+      ↓
+Outcome
+      ↓
+[R5 LEARNING / FEEDBACK]
+      ├→ R1
+      ├→ R2
+      ├→ R3
+      ├→ R4
+      └→ Operations / Cross-Cutting
+
+[R6 LONG-TERM FOUNDATION / HUMAN PROJECTION]
+supports all
+
+[X01-X11 CROSS-CUTTING]
+applies horizontally to all responsibilities
+```
+
+Two-speed candidate:
+
+```text
+EVIDENCE / LEARNING PATH
+R1 → R2 → R3 → R4 → R5
+
+FAST RUNTIME / SAFETY PATH
+R1 runtime context + X10 system health + R3 assumption monitoring
+→ R4 capital / position protection
+```
+
+Important:
+
+```text
+Fast Runtime Path
+does not create new Knowledge.
+
+Slow Research Path
+does not block emergency protection.
+```
+
+---
+
+# 13.10 Major Concept Classification — First Pass
+
+| Concept | Phase 5 Candidate | Reconstruction Meaning |
+|---|---|---|
+| Observation / Quality / Time | KEEP | R1 foundation |
+| Current Market Understanding | KEEP / REDESIGN | relation-aware, non-trading understanding |
+| Market Intelligence | REDESIGN / MERGE | R1 interpretation responsibility |
+| World Economic Library | REDESIGN / MERGE | Relation/Foundation responsibility |
+| Research Foundation | MERGE | shared R1 foundation, not Research-only |
+| Cause Candidate | KEEP / REDESIGN | optional Research Question source |
+| Causal Engine | SPLIT | candidate generation vs formal research |
+| Market DNA | REDESIGN / DEFER | preserve state-comparison capability, not mandatory concept |
+| Research Question | NEW / KEEP | broad conceptual research entry |
+| Research Intake / Router | MERGE / REDESIGN | Priority / Admission / routing |
+| Research Core | KEEP / REDESIGN | common multi-entry research |
+| Stress Lab | MERGE / REDESIGN | research method / boundary discovery |
+| Research Ledger | KEEP | research integrity asset |
+| Red Team | KEEP / DEFER implementation | independent challenge responsibility |
+| Knowledge Library / Pool | MERGE / REDESIGN | logical Knowledge domain |
+| Knowledge Graph | REDESIGN | view / relationship representation |
+| Knowledge Lifecycle | KEEP | revalidation / aging |
+| Applicability | KEEP | current usability |
+| Decision Synthesis | NEW | conflict / action candidate synthesis |
+| Expected Value | KEEP / REDESIGN | economic assessment |
+| Signal Engine | DROP as top-level requirement | optional later implementation |
+| Defense Layer | SPLIT / DROP monolith | risk permission / protection / emergency |
+| Capital / Portfolio | NEW / REDESIGN | whole-capital responsibility |
+| Execution | KEEP | venue action fidelity |
+| Position / Protection | KEEP / REDESIGN | exposure truth + runtime protection |
+| Finding Pipeline | MERGE / REDESIGN | feedback routing |
+| Reverse Investigation | NEW method | cause candidate generation |
+| Trainer universal loop | DROP | failure-specific routing |
+| Failure Museum | MERGE / REDESIGN | negative/failure research asset |
+| AI Team | REDESIGN / DROP monolith | cognitive assistance |
+| Telegram | REDESIGN | human-control adapter |
+| Monitoring / Recovery | KEEP | operations |
+| Human Research Report | NEW / KEEP intent | derived projection |
+| Storage / Migration | NEW / REDESIGN | explicit long-term responsibility |
+
+---
+
+# 13.11 Phase 5 Open Questions Before Concept-Level Reconstruction
+
+以下はまだ決めない。
+
+```text
+1. Relation / Foundationは独立Responsibilityか、R1内部Subdomainか
+2. Current Market UnderstandingのCanonical representationを何にするか
+3. Market DNAというConcept名を残すか
+4. Research Question / Candidate / Intakeを何段階にするか
+5. Causal ResearchをResearch Method familyとしてどこまで統合するか
+6. Knowledge Lifecycle writer / final authority
+7. Runtime ApplicabilityとRuntime Protectionのexact boundary
+8. Decision SynthesisのOutput semantics
+9. EVとCapital Allocationのexact handoff
+10. Capital / Portfolio / Riskを一つのresponsibilityにするか分割するか
+11. Runtime Protectionのemergency authority
+12. Feedback Routerのclassification authority
+13. Relation/FoundationとKnowledgeのrelationship storageを共通化するか
+14. Human / AI / Production final authority
+15. Market-specific extension contract
+```
+
+---
+
+# 13.12 Phase State
+
+```text
+Phase 5 — Reconstruction
+STATUS:
+ACTIVE
+
+Top-Level Responsibility Pass:
+COMPLETE
+
+NEXT:
+Concept-Level Reconstruction Matrix
+starting with R1:
+Perception / Relation / Current Understanding
+```
+
+重要:
+
+```text
+Reconstruction Skeleton
+≠
+Final Architecture
+
+Phase 5 Candidate
+≠
+KEEP decision after Destruction Review
+
+Market DNA / Causal Engine / World Economic Library etc.
+remain replaceable HOW / concept candidates until Phase 6.
+```
