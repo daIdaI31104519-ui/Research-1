@@ -18,83 +18,71 @@ Last Updated:
 Conversation Focus:
 Whole Market Understanding OS Reconstruction.
 Phases 1-4 are checkpointed.
-Current active work is Phase 5 — Reconstruction.
+Phase 5 top-level responsibility reconstruction is checkpointed.
+Current active work is Phase 5 concept-level reconstruction.
 
 Important Boundary:
 AI_CONTEXT remains authoritative for formal Project Current State.
-PROJECT_CHARTER Section 3 — What Not To Maximize remains the formal Current design focus.
-The Reconstruction side-thread does NOT replace Current Architecture yet.
-Current 01〜04 remain existing Working Baselines until Phase 5 comparison / redesign.
-Legacy Reference remains historical/non-authoritative.
-DAISUKE proposal remains authoritative only as the user's reconstruction source, not Final Current Design.
-Phase 2 / 3 / 4 are WORKING RECONSTRUCTION BASELINES.
+PROJECT_CHARTER formal Current focus is unchanged.
+Reconstruction work does NOT replace Current Architecture yet.
+Current 01-04 remain Working Baselines until explicit adoption.
+Phase 5 decisions are reconstruction candidates, not adopted design.
 
-PHASE 4 CANDIDATES:
-A Research-Centered
-B Relation / World-Model-Centered
-C Knowledge-Loop-Centered
-D Multi-Core Hybrid
+PHASE 5 WORKING RESPONSIBILITY SKELETON:
+R1 Perception / Relation / Current Understanding
+R2 Research
+R3 Knowledge / Applicability / Decision Preparation
+R4 Capital / Production
+R5 Learning / Feedback
+R6 Long-Term Foundation / Operations / Human Projection
+X  Cross-Cutting Capabilities
 
-PHASE 4 STRESS RESULT:
-- A is strongest as Research-domain design philosophy, but whole-OS use risks research overreach / latency
-- B is strongest for relation-based market understanding and multi-market semantics, but whole-OS use risks world-model / ontology explosion
-- C is strongest for long-term knowledge lifecycle and publication, but whole-OS use risks known-knowledge bias
-- D gives the clearest whole-OS responsibility separation and failure routing, but risks contract/object/state bureaucracy
-- no candidate is adopted yet
+TWO-SPEED CANDIDATE:
+Evidence / Learning Path:
+R1 → R2 → R3 → R4 → R5
 
-CROSS-CASE PRINCIPLES SENT TO PHASE 5:
-1. Relation/Foundation may be shared market-understanding language, not truth authority
-2. Research may be common research core, not runtime authority
-3. Knowledge may be long-term semantic asset, not exclusive perception lens
-4. Capital/Production needs independent real-capital authority boundary
-5. Feedback routing needs cross-domain failure classification
-6. X01-X11 should remain horizontal capabilities/governance rather than normal sequential layers
-7. Whole OS likely needs two speeds:
-   Evidence/Learning path
-   Runtime/Safety path
-8. Human-readable publication should be derived projection, not internal source of truth
+Fast Runtime / Safety Path:
+R1 runtime context + X10 system health + R3 assumption monitoring
+→ R4 capital / position protection
 
-PHASE 5 GOAL:
-Compare and reconstruct:
-- Legacy concepts
-- Current responsibilities
-- Daisuke proposal concepts
-- Research Institute concepts
-- Phase 4 architecture learnings
+BOUNDARY:
+Fast Runtime Path does not create new Knowledge.
+Slow Research Path does not block emergency protection.
 
-Use:
-KEEP
-REDESIGN
-SPLIT
-MERGE
-DROP
-DEFER
-NEW
-
-Do not preserve names automatically.
-For every important concept record:
-- original intent
-- current problem
-- capability served
-- reconstruction decision candidate
-- replacement / merge target
-- what would be lost
+MAJOR FIRST-PASS RECONSTRUCTION:
+- World Economic Library + Research Foundation → Relation/Foundation responsibility candidate
+- Cause Candidate retained as optional research-question source, not cause proof
+- Causal Engine split between candidate generation and formal research
+- Market DNA exact form deferred; state-comparison capability preserved
+- Research Question added as broad conceptual research entry
+- Research Intake/Router redesigned around priority/admission/routing
+- Stress Lab becomes research method/boundary-discovery candidate, not mandatory top-level layer
+- Knowledge Library/Pool retained logically, physical structure not fixed
+- Decision Synthesis / Conflict Resolution added
+- Signal Engine dropped as required top-level concept
+- Defense Layer split into capital/risk permission, runtime protection, emergency safety
+- Execution and Position/Protection remain separate responsibilities
+- Feedback Router replaces universal Trainer/relearning loop
+- Reverse Investigation is candidate-generation method, not root-cause authority
+- AI Team monolith removed in favor of cross-cutting cognitive assistance
+- Telegram treated as human-control adapter, not authority
+- Human-readable research is derived projection, not Knowledge SoT
+- explicit storage/retention/migration responsibility added
 
 NEXT:
-Start Phase 5 with top-level responsibility reconstruction before individual object design.
-
-Recommended first pass:
-1. Perception / Relation / Current Understanding
-2. Research
-3. Knowledge / Applicability / Decision
-4. Capital / Production
-5. Feedback
-6. Cross-Cutting / Operations / Human Output
+Concept-level Reconstruction Matrix beginning with R1:
+1. Observation / Event / Feature / Context
+2. Relation / Foundation
+3. Current Market Understanding
+4. Cause Candidate / Contradiction / Unexplained
+5. Current market state representation / Market DNA candidate
+6. exact R1 → R2 / R3 / R4 outputs
 
 Do NOT:
-- finalize DB/Object/Python
-- assume Candidate D wholesale
-- run Phase 6 Destruction Review yet
+- adopt Phase 5 skeleton as final architecture
+- choose DB/Object/Python
+- finalize Market DNA name
+- run Phase 6 destruction review early
 - modify formal Current Architecture without explicit adoption
 
 READ:
@@ -102,8 +90,10 @@ READ:
 - 98_DESIGN_STUDY/DAISUKE_MARKET_UNDERSTANDING_OS_PROPOSAL.md
 - 98_DESIGN_STUDY/市場理解OS_研究機関_設計検討リファレンス.md
 - 99_REFERENCE/旧市場理解OS_設計知識リファレンス.md
-- 00_HUMAN/PROJECT_CHARTER.md
-- Current 01〜04 for Phase 5 comparison
+- 02_ARCHITECTURE/CONNECTIONS/01_EXTERNAL_DATA.md
+- 02_ARCHITECTURE/CONNECTIONS/02_MARKET_UNDERSTANDING.md
+- 02_ARCHITECTURE/CONNECTIONS/03_RESEARCH.md
+- 02_ARCHITECTURE/CONNECTIONS/04_KNOWLEDGE_APPLICABILITY.md
 
 Git Write Permission Reminder:
 REQUIRE CURRENT-CHAT USER AUTHORIZATION
