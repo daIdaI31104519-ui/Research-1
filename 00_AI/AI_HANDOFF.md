@@ -18,7 +18,7 @@ Last Updated:
 Conversation Focus:
 Whole Market Understanding OS Reconstruction.
 Phases 1-4 checkpointed.
-Phase 5 R1 / R2 / R3 concept-level reconstruction complete.
+Phase 5 R1-R3 concept-level reconstruction complete.
 Current active work: R4 Capital / Production.
 
 Important Boundary:
@@ -38,65 +38,74 @@ X Cross-Cutting
 R3 KEY RECONSTRUCTION:
 - Foundation and Research Knowledge remain separate epistemic domains
 - Validated Research Result does not auto-promote to Knowledge
-- Knowledge Admission / Formation replaces ambiguous Production-like promotion meaning
-- Knowledge stores conditional semantics: conditions, failure boundaries, uncertainty, market/horizon, version, validation history
-- positive, negative, no-edge, refutation, failure/boundary, constraint, unknown knowledge remain valuable
-- Knowledge Pool/Library is a logical domain; Knowledge Graph is only a possible derived view
-- Knowledge Lifecycle is separate from Runtime Applicability
-- Lifecycle Assessment is separate from authoritative state transition
-- old/stale does not mean false; revalidation can be requested
-- Constraint is split into Research Constraint Candidate / Knowledge Constraint / Runtime Authorized Constraint
-- Applicability remains current-usability assessment, not Trade
-- Runtime Assumption Monitoring is separated from pre-decision applicability and cannot rewrite Knowledge
-- Knowledge Conflict Detection is separate from Conflict Resolution
-- shared evidence / dependency prevents knowledge-count majority voting
-- Decision Synthesis / Conflict Resolution is a distinct R3 responsibility
-- legacy Trade Thesis is broadened toward Decision Thesis / Action Candidate because WAIT / NO TRADE / REDUCE / UNKNOWN are valid
-- Decision Scope / Horizon is explicit
-- Economic Value is separate from Applicability and Capital Permission
-- EV should retain distribution / uncertainty / costs, not only one average
-- Signal Engine is dropped as a required top-level concept
-- R3 outputs a traceable Economic Decision Candidate to R4, not Capital Permission or OrderIntent
+- Knowledge Admission checks reuse value, conditions, boundaries, evidence provenance, uncertainty, version and relation to existing Knowledge
+- Knowledge can preserve positive, negative, no-edge, refutation, boundary, constraint, mechanism, context and unknown information
+- Knowledge Pool is a logical domain; Knowledge Graph is a derived view, not duplicate source of truth
+- Knowledge Version / Lineage retained; history is never overwritten
+- Knowledge Age is separated from Knowledge Health
+- old does not mean false; loss does not mean invalid
+- Revalidation routes through R2 before Knowledge lifecycle updates
+- Knowledge Health assessment is separate from lifecycle state transition authority
+- Current Applicability is separate from Knowledge validity
+- Runtime Assumption Monitoring is separate from pre-decision Applicability and from Position authority
+- Runtime monitoring cannot directly rewrite Knowledge or close Positions
+- Scope / Horizon normalization occurs before declaring Knowledge conflict
+- Knowledge overlap / shared evidence / dependency prevents majority-vote integration
+- Decision Synthesis / Conflict Resolution is explicit R3 responsibility
+- TradeThesis exact name deferred; semantic responsibility retained as Decision Thesis candidate
+- WAIT / NO TRADE / UNKNOWN are valid synthesis outcomes
+- Expected Value is separate from win rate and from Risk Permission
+- R3 can use modeled cost assumptions; R4 owns current executable conditions and capital risk
+- R3 -> R4 boundary candidate is Economic Opportunity
+- Signal Engine is not required as a top-level concept
 
-R3 TWO-SPEED:
-Slow:
-Validated Research Result → Knowledge Admission / Version / Lifecycle
+R3 FLOW:
+Validated Research Result
+→ Knowledge Admission
+→ Knowledge Formation / Version / Relationship
+→ Knowledge Lifecycle
+→ Applicability
+→ Scope/Horizon normalization
+→ Conflict / Overlap analysis
+→ Decision Synthesis
+→ Expected Value
+→ Economic Opportunity
+→ R4
 
-Fast:
-Existing Knowledge + Current Context → Applicability → Decision Synthesis → EV
-
-Active Runtime:
-Knowledge assumptions + Runtime Context → Deviation assessment → R4 Fast Safety / R5 Feedback
+FAST RUNTIME:
+Active Knowledge assumptions + current context
+→ Runtime Assumption Monitoring
+→ deviation / boundary warning
+→ R4 Fast Safety + R5 feedback
 
 NEXT — R4:
 Reconstruct:
-1. Capital state / portfolio view
-2. risk budget / allocation
-3. drawdown / ruin protection
-4. Decision vs Risk Permission
-5. authorized constraints
-6. fast safety / emergency restriction
-7. recovery / permission expansion
-8. execution intent
-9. order submission / fill / reconciliation
+1. Capital permission
+2. Risk budget
+3. Portfolio exposure / correlation
+4. position sizing
+5. drawdown / ruin / concentration
+6. authorized constraints
+7. emergency fast path
+8. execution admission
+9. execution intent / venue / reconciliation
 10. logical position / exposure truth
-11. position protection / exit
-12. AI/API/exchange failure boundaries
-13. R4 → R5 outcome evidence
+11. runtime protection / exit
+12. R4 -> R5 outcome boundary
 
 Do NOT:
 - adopt Phase 5 candidates as final architecture
 - finalize DB/Object/Python
-- let EV grant capital permission
-- let runtime monitoring rewrite Knowledge
-- modify formal Current Architecture
+- let Positive EV equal Trade permission
+- let Runtime monitoring directly rewrite Knowledge
 - run Phase 6 destruction review early
+- modify formal Current Architecture
 
 READ:
 - 98_DESIGN_STUDY/市場理解OS_全体再構築_設計ログ.md
 - 99_REFERENCE/旧市場理解OS_設計知識リファレンス.md
+- 02_ARCHITECTURE/CONNECTIONS/04_KNOWLEDGE_APPLICABILITY.md
 - 98_DESIGN_STUDY/DAISUKE_MARKET_UNDERSTANDING_OS_PROPOSAL.md
-- 00_HUMAN/PROJECT_CHARTER.md
 
 Git Write Permission Reminder:
 REQUIRE CURRENT-CHAT USER AUTHORIZATION
