@@ -761,3 +761,434 @@ HOW Candidate
 ≠
 Required Capability
 ```
+
+
+---
+
+# 11. Checkpoint 004 — Phase 3 Capability Map Closure
+
+**Date:** 2026-09-30  
+**State:** SAVED  
+**Formal Current Architecture Changed:** NO  
+**Current Reconstruction Stage:** Phase 3 COMPLETE → Phase 4 READY
+
+## 11.1 Review Method
+
+Phase 3 Capability Mapを以下の5 Testで再確認した。
+
+```text
+A. Remove Test
+Capabilityを消した時、Design Intentが失われるか
+
+B. Merge Test
+別Capabilityと統合しても責任・失敗原因・意味を失わないか
+
+C. Split Test
+一つのCapabilityが大きすぎて異なる責任を抱えていないか
+
+D. Coverage Test
+Phase 2 Design Intentが最低1つのCapabilityで実現可能になっているか
+
+E. HOW Contamination Test
+Market DNA / Engine / Layer / DB / AI Team等の実現手段がRequired Capabilityへ混入していないか
+```
+
+## 11.2 Important Review Findings
+
+### Finding A — Decision Synthesis Gap
+
+旧Mapでは、
+
+```text
+Applicability
+↓
+Economic Value
+```
+
+の間に、
+
+> 複数Applicable Knowledge、反対Thesis、Conflict、WAIT / NO TRADE等を統合し、Decision Candidateへ変換する能力
+
+が明示されていなかった。
+
+そのため新Capabilityとして追加する。
+
+```text
+Decision Synthesis / Conflict Resolution
+```
+
+重要:
+
+```text
+Applicable Knowledge
+≠
+Decision Candidate
+
+Knowledge Conflict
+≠
+Majority Vote
+
+Decision Synthesis
+≠
+Risk Permission
+```
+
+### Finding B — Execution / Position Split
+
+旧C14相当の、
+
+```text
+Execution / Position
+```
+
+は責任が広すぎる。
+
+以下を分離する。
+
+```text
+Execution Fidelity
+=
+意図した注文をVenueへ安全に提出・確認・Reconcileする能力
+
+Position / Runtime Protection
+=
+成立したExposureを追跡し、Protection / Exit / Runtime Safetyを維持する能力
+```
+
+### Finding C — Human-readable Research Projection Gap
+
+Phase 2 Secondary Intentに、
+
+- Human-readable Research
+- Research Note / Research Diary / Graph
+- Application / Publication / Business Opportunity
+- External OutputでResearch Integrityを歪めない
+
+があるが、Main Capabilityに直接対応するCapabilityが不足していた。
+
+Secondary Capabilityとして、
+
+```text
+Human-readable Research Projection
+```
+
+を追加する。
+
+これは内部Knowledgeを書き換える能力ではなく、
+
+```text
+Internal Research Asset
+↓
+traceable projection
+↓
+Human-readable output
+```
+
+を作る能力。
+
+```text
+Publication Output
+≠
+Knowledge Source of Truth
+```
+
+## 11.3 Merge / Keep Results
+
+以下は似ているが統合しない。
+
+```text
+Observation Integrity
+≠
+System Monitoring
+
+Relation Understanding
+≠
+Current Market Understanding
+
+Research Validation
+≠
+Boundary Discovery
+
+Knowledge Formation
+≠
+Knowledge Lifecycle
+
+Knowledge Lifecycle
+≠
+Generic State / Lifecycle Integrity
+
+Applicability
+≠
+Decision Synthesis
+
+Decision Synthesis
+≠
+Economic Value
+
+Economic Value
+≠
+Capital / Risk Permission
+
+Outcome Understanding
+≠
+Feedback Routing
+
+Research Asset Preservation
+≠
+Storage / Retention / Migration
+
+Trace / Provenance
+≠
+Version / Lineage
+
+Authority / Governance
+≠
+Human Control
+```
+
+理由:
+責任、入力、出力、Failure Mode、Authorityが異なるため。
+
+## 11.4 HOW Contamination Result
+
+以下はRequired Capabilityへ固定しない。
+
+```text
+Market DNA
+Causal Engine
+World Economic Library
+Knowledge Library
+AI Team
+Signal Engine
+Defense Layer
+Stress Lab
+Failure Museum
+Quantum Layer
+Knowledge Graph
+Telegram
+Specific Database
+Specific AI Model
+Specific Exchange
+Specific Python Library
+```
+
+これらはPhase 4以降のHOW / Architecture Candidate。
+
+AIについてはRequired Semantic Coreではなく、
+
+> Replaceable Cognitive Assistanceを安全に接続できる横断Capability
+
+として扱う。
+
+## 11.5 Final Main Capability Map
+
+### Family A — OBSERVE / UNDERSTAND
+
+```text
+C01 World / Market Observation
+C02 Observation Integrity
+C03 Relation / Foundation Representation
+C04 Current Market Understanding
+```
+
+### Family B — DISCOVER / RESEARCH
+
+```text
+C05 Research Question Discovery
+C06 Research Priority / Admission
+C07 Validation / Refutation / Replication
+C08 Boundary / Constraint Discovery
+```
+
+### Family C — KNOWLEDGE / DECISION PREPARATION
+
+```text
+C09 Knowledge Formation
+C10 Knowledge Lifecycle / Revalidation
+C11 Knowledge Applicability / Runtime Assumption Monitoring
+C12 Decision Synthesis / Conflict Resolution
+C13 Economic Value Assessment
+```
+
+### Family D — CAPITAL / PRODUCTION
+
+```text
+C14 Capital Allocation / Risk / Portfolio Governance
+C15 Execution Fidelity
+C16 Position / Runtime Protection
+```
+
+### Family E — LEARN / FEEDBACK
+
+```text
+C17 Outcome / Decision Quality Understanding
+C18 Feedback / Research Routing
+```
+
+### Family F — LONG-TERM FOUNDATION
+
+```text
+C19 Research Asset Preservation
+C20 Replaceability / Market Extensibility / System Evolution
+```
+
+### Family G — HUMAN VALUE / SECONDARY
+
+```text
+C21 Human-readable Research Projection
+```
+
+重要:
+
+```text
+21 Capabilities
+≠
+21 Layers
+```
+
+Capability MapはArchitectureではない。
+
+## 11.6 Final Cross-Cutting Capability Map
+
+```text
+X01 Time / Temporal Integrity
+X02 Trace / Provenance
+X03 Version / Lineage
+X04 Uncertainty / Calibration
+X05 State / Lifecycle Integrity
+X06 Authority / Governance
+X07 Human Control
+X08 Cognitive Assistance Integration
+X09 Security / Identity / Credential / Classification
+X10 Monitoring / Incident / Recovery
+X11 Storage / Retention / Migration
+```
+
+補足:
+
+```text
+Auditability
+=
+X01 + X02 + X03 + X05 + X06
+
+Reproducibility
+=
+C07 + C19 + X01 + X02 + X03
+```
+
+の組合せで成立可能なため、現時点では独立Cross-Cutting Capabilityを追加しない。
+
+## 11.7 Coverage Check
+
+Phase 2 Intent Coverage:
+
+```text
+Relationship-based understanding
+→ C03 / C04
+
+Proactive + Reactive Research
+→ C05 / C06 / C07 / C08 / C18
+
+Research → Knowledge
+→ C09
+
+Knowledge re-validation
+→ C10
+
+Current usability / runtime assumption
+→ C11
+
+Conflicting Knowledge / action alternatives
+→ C12
+
+Economic opportunity
+→ C13
+
+Real capital / drawdown / portfolio
+→ C14
+
+Safe venue action
+→ C15
+
+Runtime position safety
+→ C16
+
+Outcome / hindsight-safe evaluation
+→ C17 + X01
+
+Root Cause candidate / correct return path
+→ C18
+
+Long-term Research Asset
+→ C19 + X11
+
+Replaceable AI/API/Provider/Market
+→ C20 + X03 / X06 / X10 / X11
+
+Human-readable research / publication
+→ C21 + X02 / X09
+
+Unknown
+→ X04 + C05 / C11 / C17
+
+Human / Production authority
+→ X06 / X07
+
+Temporal integrity
+→ X01
+```
+
+No major Phase 2 Intent remains completely uncovered.
+
+## 11.8 Remaining Open Questions
+
+Capability existenceは確認できたが、Phase 4で複数Architectureを作るまで固定しない。
+
+```text
+- C03 Relation / Foundationをどこに置くか
+- C03とC04を同一Domainにするか分離するか
+- C05への複数Entryをどう構成するか
+- Research Dual-Entry / Single-Coreを採用するか
+- C11 Runtime Assumption MonitoringとC16 Runtime Protectionの境界
+- C12 Decision SynthesisとC13 EVの責任境界
+- C14 Capital / Portfolioを一つのDomainにするか
+- C19とX11のStorage responsibility split
+- X08 Cognitive AssistanceをどこまでCore Runtimeから切り離すか
+- C21 PublicationをCore Runtimeから完全分離するか
+```
+
+## 11.9 Phase State
+
+```text
+Phase 1 — Source Extraction
+COMPLETE
+
+Phase 2 — Design Intent
+COMPLETE / WORKING RECONSTRUCTION BASELINE
+
+Phase 3 — Capability Map
+COMPLETE / WORKING RECONSTRUCTION BASELINE
+
+Phase 4 — Multiple Blank Architecture Candidates
+NEXT
+```
+
+重要:
+
+```text
+Phase 3 COMPLETE
+≠
+Final Architecture
+
+Capability
+≠
+Layer
+
+Cross-Cutting Capability
+≠
+Cross-Cutting Layer
+
+Architecture Candidate
+≠
+Adopted Architecture
+```
