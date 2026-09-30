@@ -18,14 +18,13 @@ Last Updated:
 Conversation Focus:
 Whole Market Understanding OS Reconstruction.
 Phases 1-4 checkpointed.
-Phase 5 top-level pass complete.
-Phase 5 R1 concept-level reconstruction complete.
-Current active work: R2 Research concept-level reconstruction.
+Phase 5 R1 and R2 concept-level reconstruction complete.
+Current active work: R3 Knowledge / Applicability / Decision Preparation.
 
 Important Boundary:
 AI_CONTEXT remains authoritative for formal Project Current State.
 Formal Current Architecture is unchanged.
-Phase 5 R1 is a WORKING RECONSTRUCTION CANDIDATE, not adopted design.
+Phase 5 candidates are not adopted design.
 
 PHASE 5 RESPONSIBILITY SKELETON:
 R1 Perception / Relation / Current Understanding
@@ -36,70 +35,72 @@ R5 Learning / Feedback
 R6 Long-Term Foundation / Operations / Human Projection
 X Cross-Cutting
 
-R1 KEY RECONSTRUCTION:
-- Observation KEEP
-- Market Event split into observed-event fact vs interpreted/detected market event
-- Feature narrowed to reproducible derived measurement
-- Context split into Observation Context / Current Market Context / Runtime Context
-- Relation is split into:
-  1. Relation Vocabulary / Definition
-  2. Foundation Relation Claim
-  3. Current Relation Interpretation
-- World Economic Library + Research Foundation merged conceptually into shared Relation/Foundation responsibility candidate
-- Foundation is not Production Knowledge or permanent truth
-- Foundation Epistemic Status candidate retained:
-  STRUCTURAL FACT / SUPPORTED MECHANISM / WORKING MODEL / HEURISTIC / UNKNOWN
-- Foundation Relevance Gate added to prevent world-model explosion and preserve Crypto First
-- Current Market Understanding retained as current interpretation, not prediction/signal/trade authority
-- Market Intelligence merged/redesigned as R1 internal synthesis capability
-- Contradiction and Unknown/Unexplained retained as research-question sources
-- Cause Candidate retained only for explanation/causal questions; not mandatory R1 output
-- Causal Engine split: candidate generation vs formal research methods
-- Market DNA exact form deferred; current-state comparison capability preserved
-- Current Market State Representation treated as projection for research/applicability, not proof/signal
-- R1 has separate outputs for R2 research, R3 applicability, and R4 fast runtime context
+R2 KEY RECONSTRUCTION:
+- Research Question is the broad conceptual entry
+- Research Candidate is admission target after Question, not the question itself
+- Research Intake / Priority / Routing redesigned around admission and multi-axis routing
+- Research is Multi-Entry / Common-Core, not only anomaly-driven
+- Research Mode explicitly separates EXPLORATORY / CONFIRMATORY / REPLICATION
+- Research Plan is central reproducible specification; material post-result changes require new version
+- Hypothesis / Claim remains distinct from Evidence / Result / Knowledge
+- Causal and Empirical research coexist as Method families
+- Evidence Channel / Role / Outcome / Strength / Dependency remain separate
+- Research Ledger retains full search/trial history to expose hidden search space
+- Red Team / independent challenge retained as responsibility
+- Stress Lab merged into Research Method / Boundary Discovery; stress capability preserved
+- Failure Boundary / Constraint Candidate retained
+- Research Synthesis cannot use simple evidence majority vote
+- Research Process Failure remains separate from Hypothesis Refutation
+- Validated Research Result means research integrity/trace requirements passed, not hypothesis proven true
+- Negative / Refuted / Inconclusive / Unknown results remain valuable research assets
+- Reverse Investigation generates candidates/questions before formal R2 research
+- External Research is a source to replicate/validate, not internal truth
+- AI suggestion/judgment is advisory, not evidence/validation/production authority
+- Research cannot directly mutate Knowledge or Production
 
-R1 KEY BOUNDARY:
-Observation
-≠ Derived Measurement
-≠ Relation Vocabulary
-≠ Foundation Claim
-≠ Current Relation Interpretation
-≠ Cause Candidate
-≠ Hypothesis
-≠ Knowledge
+R2 CANDIDATE FLOW:
+Question Sources
+→ Research Question
+→ Research Candidate
+→ Admission / Priority
+→ Research Plan
+→ Mode + Methods
+→ Trials
+→ Evidence
+→ Independent Challenge
+→ Research Synthesis
+→ Research Result
+→ Validation Gate
+→ Validated Research Result
+→ R3
 
-NEXT — R2:
+NEXT — R3:
 Reconstruct:
-- Research Question
-- Candidate / Admission / Priority / Routing
-- Plan / Trial / Execution
-- Exploratory / Confirmatory / Replication
-- Hypothesis
-- Evidence channels / dependency / strength
-- Causal / empirical / alternative / confounder methods
-- Stress / Boundary
-- Research Ledger
-- Red Team / independent validation
-- Result / Validation
-- process failure vs hypothesis refutation
-- handoff to R3 Knowledge
+1. Knowledge Admission / Formation
+2. Knowledge semantics / relationships
+3. Knowledge lifecycle / aging / revalidation
+4. Negative knowledge / failure boundary / constraints
+5. Applicability
+6. Runtime assumption monitoring
+7. Multi-knowledge conflict
+8. Decision Synthesis
+9. Expected Value
+10. R3 → R4 handoff
+11. distinction between Foundation and Research Knowledge
 
 Do NOT:
-- adopt Phase 5 R1 as final architecture
-- finalize Relation object/schema/database
-- finalize Market DNA name
-- modify formal Current Architecture
+- adopt Phase 5 candidates as final architecture
+- finalize DB/Object/Python
+- convert research result directly into Knowledge
 - run Phase 6 destruction review early
+- modify formal Current Architecture
 
 READ:
 - 98_DESIGN_STUDY/市場理解OS_全体再構築_設計ログ.md
+- 02_ARCHITECTURE/CONNECTIONS/04_KNOWLEDGE_APPLICABILITY.md
 - 98_DESIGN_STUDY/市場理解OS_研究機関_設計検討リファレンス.md
-- 98_DESIGN_STUDY/DAISUKE_MARKET_UNDERSTANDING_OS_PROPOSAL.md
 - 99_REFERENCE/旧市場理解OS_設計知識リファレンス.md
-- 02_ARCHITECTURE/CONNECTIONS/01_EXTERNAL_DATA.md
-- 02_ARCHITECTURE/CONNECTIONS/02_MARKET_UNDERSTANDING.md
-- 02_ARCHITECTURE/CONNECTIONS/03_RESEARCH.md
+- 98_DESIGN_STUDY/DAISUKE_MARKET_UNDERSTANDING_OS_PROPOSAL.md
 
 Git Write Permission Reminder:
 REQUIRE CURRENT-CHAT USER AUTHORIZATION
