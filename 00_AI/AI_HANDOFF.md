@@ -19,7 +19,8 @@ Conversation Focus:
 Whole Market Understanding OS Reconstruction.
 Phase 1 Source Extraction is complete.
 Phase 2 Design Intent is checkpointed.
-Current active work is Phase 3 — Capability Map.
+Phase 3 Capability Map is checkpointed.
+Current active work is Phase 4 — Multiple Blank Architecture Candidates.
 
 Important Boundary:
 AI_CONTEXT remains authoritative for formal Project Current State.
@@ -28,60 +29,79 @@ The Reconstruction side-thread does NOT replace Current Architecture yet.
 Current 01〜04 remain existing Working Baselines until later Reconstruction / comparison.
 Legacy Reference remains historical/non-authoritative.
 DAISUKE proposal remains authoritative only as the user's reconstruction source, not Final Current Design.
-Phase 2 Design Intent is a WORKING RECONSTRUCTION BASELINE, not Canonical Project Philosophy.
+Phase 2 / Phase 3 are WORKING RECONSTRUCTION BASELINES, not Canonical Current Design.
 
-PHASE 1:
-COMPLETE
-- source-by-source intent extraction
-- Shared / Unique / Overlap / Gap review
-- HOW concepts separated from required capabilities
+PHASE 3 FINAL MAIN CAPABILITIES:
+C01 World / Market Observation
+C02 Observation Integrity
+C03 Relation / Foundation Representation
+C04 Current Market Understanding
+C05 Research Question Discovery
+C06 Research Priority / Admission
+C07 Validation / Refutation / Replication
+C08 Boundary / Constraint Discovery
+C09 Knowledge Formation
+C10 Knowledge Lifecycle / Revalidation
+C11 Knowledge Applicability / Runtime Assumption Monitoring
+C12 Decision Synthesis / Conflict Resolution
+C13 Economic Value Assessment
+C14 Capital Allocation / Risk / Portfolio Governance
+C15 Execution Fidelity
+C16 Position / Runtime Protection
+C17 Outcome / Decision Quality Understanding
+C18 Feedback / Research Routing
+C19 Research Asset Preservation
+C20 Replaceability / Market Extensibility / System Evolution
+C21 Human-readable Research Projection
 
-PHASE 2:
-COMPLETE / WORKING RECONSTRUCTION BASELINE
-Key intent:
-- understand market/economic/world events through relationships, not price alone
-- formalize human relationship-based market reasoning for AI / Python / Database
-- proactive + reactive research
-- research integrity and semantic separation
-- conditional knowledge, runtime applicability, economic value, risk separation
-- real-capital connection without destroying capital/research/system continuity for short-term profit
-- forward + reverse investigation, with reverse investigation generating Cause Candidates rather than confirming root cause
-- long-term Research Asset, extensibility, human-readable output
-- evaluate past decisions using information available at that time, not hindsight
+CROSS-CUTTING:
+X01 Time / Temporal Integrity
+X02 Trace / Provenance
+X03 Version / Lineage
+X04 Uncertainty / Calibration
+X05 State / Lifecycle Integrity
+X06 Authority / Governance
+X07 Human Control
+X08 Cognitive Assistance Integration
+X09 Security / Identity / Credential / Classification
+X10 Monitoring / Incident / Recovery
+X11 Storage / Retention / Migration
 
-Important unresolved:
-- exact Survival / Profit priority
-- Human / AI / Production final authority
-- Capital / Portfolio philosophy
-- Foundation exact scope
-- Relation Language formal structure
-- Research Priority
-- Market extension contract
-- long-term storage policy
-- runtime knowledge condition monitoring
+IMPORTANT PHASE 3 CORRECTIONS:
+- added Decision Synthesis / Conflict Resolution between Applicability and EV
+- split Execution Fidelity from Position / Runtime Protection
+- added Human-readable Research Projection as Secondary Capability
+- AI Team / Market DNA / World Economic Library / Stress Lab / Telegram etc. remain HOW candidates, not required capabilities
 
-CURRENT PHASE 3 METHOD:
-Translate WHY into WHAT.
-For each capability record:
-1. Capability ID / Name
-2. Design Intent supported
-3. What the OS must be able to do
-4. Inputs required in meaning, not schema
-5. Outputs required in meaning, not object design
-6. Failure if capability is absent
-7. Cross-cutting dependencies
-8. Existing source support
-9. Known gaps
-10. HOW candidates, clearly non-binding
+PHASE 4 GOAL:
+Create multiple blank-sheet architectures that can satisfy the same C01-C21 + X01-X11 capability set without patching Current 01-04.
+
+Candidate directions may include:
+- Research-centered
+- Relation / World-model-centered
+- Knowledge-loop-centered
+- Hybrid
 
 Do NOT:
-- choose final Layers yet
-- choose final Engine names
-- lock Market DNA / World Economic Library / AI Team etc.
-- run Destruction Review yet
+- choose one architecture too early
+- copy Current 01-04 structure by default
+- preserve Legacy names just because they exist
+- treat Architecture Candidate as adoption
+- run final Destruction Review yet
 
 NEXT:
-Build Phase 3 Capability Map, beginning with top-level capability families and then decomposing each family.
+Build 3-4 blank architecture candidates.
+For each candidate compare:
+1. capability coverage
+2. responsibility boundaries
+3. research quality
+4. real-capital safety
+5. long-term maintainability
+6. market extensibility
+7. complexity / duplication risk
+8. failure routing
+9. human understandability
+10. migration cost from current design
 
 READ:
 - 98_DESIGN_STUDY/市場理解OS_全体再構築_設計ログ.md
@@ -89,8 +109,7 @@ READ:
 - 98_DESIGN_STUDY/市場理解OS_研究機関_設計検討リファレンス.md
 - 99_REFERENCE/旧市場理解OS_設計知識リファレンス.md
 - 00_HUMAN/PROJECT_CHARTER.md
-- 00_HUMAN/HUMAN_MAP.md
-- Current 01〜04 only when responsibility comparison is needed
+- Current 01〜04 only for later comparison, not as the blank-sheet starting structure
 
 Git Write Permission Reminder:
 REQUIRE CURRENT-CHAT USER AUTHORIZATION
