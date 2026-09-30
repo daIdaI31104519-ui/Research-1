@@ -1192,3 +1192,830 @@ Architecture Candidate
 ≠
 Adopted Architecture
 ```
+
+
+---
+
+# 12. Checkpoint 005 — Phase 4 Blank Architecture Stress Comparison
+
+**Date:** 2026-09-30  
+**State:** SAVED  
+**Formal Current Architecture Changed:** NO  
+**Current Reconstruction Stage:** Phase 4 COMPLETE → Phase 5 READY
+
+## 12.1 Blank Architecture Candidates
+
+同一Capability Set:
+
+```text
+C01-C21
++
+X01-X11
+```
+
+を満たす前提で、既存Current 01-04を出発点にせず4案を作成した。
+
+### Candidate A — Research-Centered
+
+中心:
+Research Question / Research Core
+
+性格:
+市場・異常・失敗・外部研究をResearchへ集約し、Research品質を中心にOSを組む。
+
+### Candidate B — Relation / World-Model-Centered
+
+中心:
+Relation / Foundation Representation
+
+性格:
+世界・経済・市場を共通関係として表現し、Current Market / Research / Knowledgeをそこから派生させる。
+
+### Candidate C — Knowledge-Loop-Centered
+
+中心:
+Knowledge Core / Lifecycle
+
+性格:
+Research・Applicability・Decision・OutcomeをKnowledgeの成長と再検証を中心に循環させる。
+
+### Candidate D — Multi-Core Hybrid
+
+中心:
+特定Conceptではなく責任境界
+
+候補Core:
+```text
+Perception
+Research
+Knowledge / Decision
+Capital / Production
+Learning / Feedback
+```
+
+Cross-Cuttingは共通横断Capabilityとして扱う。
+
+重要:
+
+```text
+Candidate
+≠ Recommendation
+≠ Adoption
+```
+
+---
+
+# 12.2 Common Stress Cases
+
+4案すべてに同じCaseを流した。
+
+```text
+Case 1  通常BTC市場で新しいEdgeを探索
+Case 2  突然の規制暴落
+Case 3  KnowledgeがLongなのにBTC急落
+Case 4  Exchange API障害
+Case 5  3つのKnowledgeがLong / Short / WAITで衝突
+Case 6  AI停止
+Case 7  CryptoからGold追加
+Case 8  10年後にData Provider変更
+Case 9  過去KnowledgeのEdge Decay
+Case 10 Research結果を日本語Reportへ出力
+```
+
+---
+
+# 12.3 Case Results
+
+## Case 1 — 通常BTC市場で新しいEdgeを探索
+
+### A Research-Centered
+
+自然なFlow:
+
+```text
+Observation / Current Understanding
+↓
+Question Discovery
+↓
+Research Priority
+↓
+Research Core
+↓
+Knowledge
+```
+
+Strength:
+Research integrityが高い。
+
+Risk:
+Question増殖によりResearch backlog化しやすい。
+
+### B Relation / World-Model-Centered
+
+自然なFlow:
+
+```text
+Observation
+↓
+Relation / Current Model
+↓
+Known relation / unexplained relation
+↓
+Research Question
+```
+
+Strength:
+ダイスケ案の「関係性から研究」に最も自然。
+
+Risk:
+Relation Model拡張そのものが目的化しやすい。
+
+### C Knowledge-Loop-Centered
+
+自然なFlow:
+
+```text
+Current Market
+↓
+Knowledge retrieval
+↓
+Gap / conflict
+↓
+Research
+```
+
+Strength:
+既知Knowledgeとの比較が容易。
+
+Risk:
+既存Knowledgeにない現象をNoiseとして見落としやすい。
+
+### D Multi-Core Hybrid
+
+自然なFlow:
+
+```text
+Perception
+↓
+Question Discovery
+↓
+Research
+↓
+Knowledge
+```
+
+Strength:
+Relation理解とOpen Discoveryの両方を持てる。
+
+Risk:
+Core間Contractが曖昧だと責任が重複する。
+
+---
+
+## Case 2 — 突然の規制暴落
+
+必要条件:
+
+```text
+Researchを待たずRuntime Safetyが動けること
+```
+
+### A
+
+Research側では原因調査に強いが、Production SafetyがResearchに依存すると遅い。
+
+必要:
+Runtime Safety Fast PathをResearchから独立。
+
+### B
+
+Regulation → Participant Behavior → Flow → MarketのPropagation表現に強い。
+
+Risk:
+Relation Model更新を待ってPosition保護が遅れると危険。
+
+必要:
+World Model理解とRuntime Protectionを分離。
+
+### C
+
+既存Knowledge Applicabilityの崩壊を検知しやすい。
+
+Risk:
+未知規制を既存Knowledge Lifecycle問題として誤分類する可能性。
+
+### D
+
+```text
+Perception
+→ Runtime Context
+→ Capital / Production Safety
+
+並行:
+
+Perception
+→ Research Question
+→ Research
+```
+
+と二速度化しやすい。
+
+Phase 4 Finding:
+
+> Emergency / runtime safetyはResearch completionを待たないArchitectureが必要。
+
+---
+
+## Case 3 — KnowledgeがLongなのにBTC急落
+
+### A
+
+```text
+Unexpected Outcome
+→ Research Question
+→ Reverse Investigation
+→ Formal Research
+```
+
+に自然。
+
+### B
+
+```text
+Expected Relation Network
+≠
+Observed Outcome
+↓
+Missing / broken relation candidate
+```
+
+を作りやすい。
+
+Risk:
+説明可能なStoryをRelationで後付けしやすい。
+
+### C
+
+```text
+Knowledge contradiction
+→ Lifecycle / Revalidation
+```
+
+に最も自然。
+
+Risk:
+Knowledge自身のFailureと、外部Event / Data / Execution Failureを混同しない仕組みが必須。
+
+### D
+
+```text
+Outcome
+↓
+Feedback
+├ Perception failure?
+├ Research failure?
+├ Knowledge failure?
+├ Applicability failure?
+├ Capital failure?
+└ Execution failure?
+```
+
+とFailure routingしやすい。
+
+Phase 4 Finding:
+
+> Reverse Investigationは独立Root Cause Authorityではなく、FeedbackからResearch Candidateを生成するMethodとして扱う方が安全。
+
+---
+
+## Case 4 — Exchange API障害
+
+### A
+
+Research中心Architectureでは、Operation FailureがResearch問題へ誤流入しないBoundaryが必要。
+
+### B
+
+Relation / World Modelとは無関係なSystem Failureであり、中心Modelへ入れない方が良い。
+
+### C
+
+Knowledge failureではないため、Knowledge Lifecycleを汚さないBoundaryが必要。
+
+### D
+
+```text
+X10 Monitoring / Incident / Recovery
++
+Capital / Production
+```
+
+で市場理解Loopと分離しやすい。
+
+Phase 4 Finding:
+
+```text
+System Failure
+≠
+Market Failure
+≠
+Knowledge Failure
+```
+
+をArchitecture Boundaryとして守る必要がある。
+
+---
+
+## Case 5 — KnowledgeがLong / Short / WAITで衝突
+
+### A
+
+Researchへ戻すだけでは不十分。
+
+Research済みKnowledge同士がConflictしていても、現在Decisionを作る必要がある。
+
+### B
+
+Relation ModelからConflict Contextを説明しやすいが、Relationの多数決はDecisionにならない。
+
+### C
+
+Knowledge Coreとの相性が高い。
+
+ただし:
+
+```text
+3 Knowledge中2つLong
+→ Long
+```
+
+の多数決は禁止。
+
+### D
+
+Knowledge / Decision責任内に、
+
+```text
+C11 Applicability
+↓
+C12 Decision Synthesis
+↓
+C13 Economic Value
+```
+
+を置きやすい。
+
+Phase 4 Finding:
+
+> C12 Decision Synthesis / Conflict Resolutionは独立責任として残す価値が高い。
+
+---
+
+## Case 6 — AI停止
+
+### A
+
+新規Research能力は低下してよいが、既存Knowledge利用・Risk・Execution Protectionまで停止してはいけない。
+
+### B
+
+Relation Interpretation更新は低下し得るが、Raw Observation / Safetyは維持すべき。
+
+### C
+
+既存Knowledge利用をRule / deterministic logicで継続しやすい。
+
+### D
+
+X08 Cognitive AssistanceをCross-Cuttingとして切り離し、
+
+```text
+AI停止
+≠
+Capital Protection停止
+```
+
+を最も明示しやすい。
+
+Phase 4 Finding:
+
+> AIはCore AuthorityではなくReplaceable Cognitive Assistanceとして扱う方向が強く支持された。
+
+---
+
+## Case 7 — CryptoからGold追加
+
+### A
+
+Research Method / Question入口をMarket Profile化すれば拡張可能。
+
+### B
+
+Flow / Constraint / Expectations / Lag等のRelation Vocabularyを再利用しやすく、共通知識に強い。
+
+Risk:
+Crypto固有RelationをUniversal Relationとして誤適用しないこと。
+
+### C
+
+Market-specific Knowledge分離が必要。
+
+Knowledge reuseは強いが、Market identity / applicabilityを厳密に持つ必要がある。
+
+### D
+
+Shared responsibility + Market-specific adapter / profileへ分離しやすい。
+
+Phase 4 Finding:
+
+> 共通OSとMarket-specific knowledge/method/data/executionを分ける必要性が強く支持された。
+
+---
+
+## Case 8 — 10年後にData Provider変更
+
+### A
+
+Research AssetがSource Providerに密結合していると再現性が壊れる。
+
+### B
+
+Relation ModelのSource lineage移行が複雑になりやすい。
+
+### C
+
+KnowledgeがProvider-independent semantic assetなら強い。
+
+### D
+
+C19 / C20 + X02 / X03 / X11を共通Foundationに置きやすい。
+
+Phase 4 Finding:
+
+> Provider / AI / Exchange / ImplementationはSemantic CoreのSource of Truthにしない。
+
+---
+
+## Case 9 — 過去KnowledgeのEdge Decay
+
+### A
+
+Revalidation Researchへ戻すのが自然。
+
+### B
+
+Underlying relation / market structure changeとして調べやすい。
+
+### C
+
+Knowledge Lifecycle中心なので非常に自然。
+
+### D
+
+```text
+Knowledge Lifecycle
+↓
+Applicability
+↓
+Contradiction / decay
+↓
+Feedback
+↓
+Research
+```
+
+を責任分離して表現できる。
+
+Phase 4 Finding:
+
+```text
+Knowledge Aging
+≠
+Applicability Failure
+≠
+Single Trade Loss
+```
+
+を維持する必要がある。
+
+---
+
+## Case 10 — 日本語Research Reportへ出力
+
+### A
+
+Research Noteから出力しやすいが、Research途中の未検証結論を公開しないGateが必要。
+
+### B
+
+Relation Graph / causal narrativeを説明しやすい。
+
+Risk:
+Model上のRelationを確定事実として表現しないこと。
+
+### C
+
+Validated KnowledgeからReportへ投影しやすい。
+
+Risk:
+Research过程 / uncertaintyが落ちる可能性。
+
+### D
+
+C21を内部Coreの外側に置き、
+
+```text
+Research Asset / Knowledge
+↓
+Traceable Projection
+↓
+Human Output
+```
+
+としやすい。
+
+Phase 4 Finding:
+
+```text
+Publication Output
+≠
+Knowledge Source of Truth
+```
+
+を維持する。
+
+---
+
+# 12.4 Cross-Case Findings
+
+10 Caseを通して、4案すべてから以下が強く支持された。
+
+## Finding 1 — Two-Speed Architecture Requirement
+
+市場理解OSには少なくとも二つの速度が必要。
+
+```text
+Slow / Evidence Path
+=
+Research
+Validation
+Knowledge formation
+Revalidation
+
+Fast / Safety Path
+=
+Current monitoring
+Risk restriction
+Position protection
+Emergency response
+```
+
+重要:
+
+```text
+Fast Safety
+≠
+Fast Unvalidated Knowledge Promotion
+```
+
+Researchを待たないSafetyは必要だが、未検証Hypothesisを即Productionへ入れることとは別。
+
+## Finding 2 — Relation Modelは共通言語として有望だが、Final Authorityにはしない
+
+C03は重要。
+
+ただし:
+
+```text
+Relation Model
+≠
+Truth
+≠
+Research Result
+≠
+Knowledge
+≠
+Trade Permission
+```
+
+Relation / FoundationはResearch Question生成とCurrent Understandingに強い共通言語候補。
+
+World ModelそのものをOS中心Authorityにすると膨張Riskが高い。
+
+## Finding 3 — ResearchはTruth-Seeking Coreとして重要だが、全責任を支配させない
+
+Researchは、
+
+- Proactive discovery
+- Reactive investigation
+- Validation
+- Refutation
+- Replication
+- Boundary discovery
+
+に強い。
+
+しかし:
+
+```text
+Research
+≠
+Runtime Safety
+≠
+Capital Permission
+≠
+Execution
+```
+
+Research-centered思想はResearch Domain内部では強く保持できるが、Whole OS中心Authorityにはしない方が安全な可能性が高い。
+
+## Finding 4 — Knowledgeは中心資産だが、世界を見るLensを独占させない
+
+Knowledgeは長期資産の中心候補。
+
+しかし:
+
+```text
+Current Observation
+→ 既存Knowledgeへ当てはめるだけ
+```
+
+ではUnknown / Novel Structureを見落とす。
+
+そのためOpen Discovery / unexplained observation pathが必要。
+
+## Finding 5 — Production Safetyは独立責任が必要
+
+10 Case中、規制暴落・API障害・AI停止・Knowledge conflictで共通して、
+
+```text
+Research Confidence
+≠
+Risk Permission
+```
+
+が必要。
+
+Capital / Risk / Execution / Position Protectionは研究・Knowledgeから独立したAuthority Boundaryを必要とする方向が強く支持された。
+
+## Finding 6 — Feedback RouterはWhole OSの重要接続点
+
+Unexpected Resultを全部Trainerへ送るのではなく、
+
+```text
+Data
+Understanding
+Research
+Knowledge
+Applicability
+Decision
+Capital
+Execution
+System
+```
+
+のどこへ戻すかを分類できる必要がある。
+
+C18はArchitecture上重要な責任候補。
+
+## Finding 7 — Cross-CuttingはLayer化せずPolicy / Shared Capabilityとして扱う方が自然
+
+Time / Trace / Version / Authority / Security / Monitoring等をMain Flowへ並べると意味が壊れる。
+
+```text
+X01-X11
+=
+all-domain constraints / services / governance capabilities
+```
+
+として扱う方向が4案すべてで自然だった。
+
+---
+
+# 12.5 Candidate Character After Stress
+
+## A Research-Centered
+
+Stress後の評価:
+
+- Research Domain architectureとして非常に強い
+- Whole OS architectureにするとResearch過剰・Safety遅延Risk
+- 採用するなら「Whole OS」ではなくResearch Core設計思想として再利用価値が高い
+
+## B Relation / World-Model-Centered
+
+Stress後の評価:
+
+- C03 / C04設計思想として非常に強い
+- Multi-Market / Proactive Question generationに強い
+- Whole OS centerにするとOntology / Graph / world-model膨張Riskが高い
+- Relation ModelはCommon Language / Perception Foundationとして再利用価値が高い
+
+## C Knowledge-Loop-Centered
+
+Stress後の評価:
+
+- C09-C11 / C19長期資産思想として非常に強い
+- Knowledge lifecycle / decay / publicationに強い
+- Whole OS centerにするとKnown-Knowledge Biasが出る
+- Knowledge System設計思想として再利用価値が高い
+
+## D Multi-Core Hybrid
+
+Stress後の評価:
+
+- Whole OS responsibility separationに最も自然
+- Two-speed Research / Safetyを表現しやすい
+- Failure routingが明確
+- A/B/Cの強みを専用Domainとして取り込める
+- 最大RiskはContract / Object / State過多による官僚化
+
+重要:
+
+```text
+Dが最終採用
+```
+
+とはまだ決定しない。
+
+Phase 5ではDをそのまま採用するのではなく、
+
+> A / B / Cの強い責任思想を、D型責任分離または別Hybridへどう再構築するか
+
+を比較する。
+
+---
+
+# 12.6 Phase 4 Architecture Learnings
+
+Architecture単位ではなく、再利用すべきDesign Principle候補として以下をPhase 5へ送る。
+
+```text
+P1 Relation / Foundation
+= 共通市場理解言語候補
+≠ Truth Authority
+
+P2 Research
+= Common Research Core候補
+≠ Whole Runtime Authority
+
+P3 Knowledge
+= Long-term semantic asset候補
+≠ Exclusive perception lens
+
+P4 Capital / Production
+= Independent real-capital authority candidate
+
+P5 Feedback
+= Cross-domain failure routing candidate
+
+P6 Cross-Cutting
+= horizontal capability / governance candidate
+≠ normal sequential layer
+
+P7 Whole OS
+= Two-speed system candidate
+  Evidence / Learning path
+  Runtime / Safety path
+
+P8 Human-readable Publication
+= Derived projection
+≠ internal source of truth
+```
+
+---
+
+# 12.7 Phase 4 State
+
+```text
+Phase 1 — Source Extraction
+COMPLETE
+
+Phase 2 — Design Intent
+COMPLETE / WORKING RECONSTRUCTION BASELINE
+
+Phase 3 — Capability Map
+COMPLETE / WORKING RECONSTRUCTION BASELINE
+
+Phase 4 — Multiple Blank Architecture Candidates
+COMPLETE / WORKING RECONSTRUCTION BASELINE
+
+Phase 5 — Reconstruction
+NEXT
+```
+
+重要:
+
+```text
+Phase 4 Stress Result
+≠
+Architecture Adoption
+
+Candidate D strongest fit in several stress cases
+≠
+Candidate D is Final Architecture
+
+Phase 5
+=
+Concept / Responsibility level Reconstruction
+```
