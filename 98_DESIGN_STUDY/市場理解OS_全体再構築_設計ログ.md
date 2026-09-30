@@ -10398,3 +10398,514 @@ Exit
 ≠
 Knowledge Invalid
 ~~~
+
+
+---
+
+# 18. Checkpoint 011 — R3 Detailed Refinement / Knowledge Admission + Relationship
+
+**Date:** 2026-09-30  
+**State:** SAVED  
+**Formal Current Architecture Changed:** NO  
+**Phase:** 5 Reconstruction — R3 Detailed Refinement  
+**Purpose:** R3の大枠Checkpoint後に、Knowledge Lifecycle詳細設計へ入る前提として、Knowledge AdmissionとKnowledge Relationshipの意味境界を精密化する。
+
+## 18.1 Knowledge Admission Refinement
+
+Validated Research ResultをそのままKnowledgeへしない。
+
+候補Flow:
+
+~~~text
+Validated Research Result
+↓
+Result Classification
+↓
+Knowledge Worthiness Gate
+↓
+Knowledge Type Classification
+↓
+Condition Extraction
+↓
+Boundary / Constraint Extraction
+↓
+Evidence / Uncertainty Link
+↓
+Existing Knowledge Comparison
+↓
+Duplicate / Conflict / Version Analysis
+↓
+Knowledge Candidate
+↓
+Admission Decision
+~~~
+
+重要:
+
+~~~text
+Validated Research Result
+≠ Knowledge Candidate
+≠ Knowledge Record
+~~~
+
+Knowledge化の中心問い:
+
+> このResearch Resultは、別時点・別判断でも再利用可能な意味を持つか？
+
+Process Failure等、Knowledge化してはいけないResultはR2再研究へ戻す。
+
+Negative / Refuted / Boundary / Unknownも、再利用可能な意味を持つ場合はResearch Asset / Knowledge Candidateになり得る。
+
+Knowledge Admission Decisionは、単純Approve / Rejectだけに限定しない候補。
+
+概念候補:
+
+~~~text
+ADMIT
+ADMIT_WITH_BOUNDARY
+NEGATIVE
+UNKNOWN
+MERGE
+SUPERSEDE_CANDIDATE
+RESEARCH_REQUIRED
+DEFER
+REJECT
+~~~
+
+正式State名は後。
+
+重要:
+
+~~~text
+Research Validity
+≠ Knowledge Worthiness
+~~~
+
+SUPPORTEDでも再利用性・条件・重複等の理由でKnowledge化しない場合があり得る。
+
+---
+
+# 18.2 Knowledge Record Refinement Principle
+
+Knowledge RecordはResearch Resultの要約文ではない。
+
+保持すべき意味候補:
+
+~~~text
+Identity
+Claim
+Knowledge Type
+Market / Asset / Instrument / Venue Scope
+Conditions
+Time Horizon
+Observed / Expected Effect semantics
+Failure Boundary
+Constraint semantics
+Evidence Trace
+Research Trace
+Uncertainty
+Known Contradictions
+Version
+Lifecycle reference
+Provenance
+~~~
+
+重要:
+
+~~~text
+Knowledge
+=
+Claim
++
+Conditions
++
+Failure / Boundary
++
+Evidence Trace
++
+Uncertainty
+~~~
+
+Knowledge RecordへEvidence全文・Research Trial全文を複製しない。
+R2をSource of Truthとして参照する。
+
+---
+
+# 18.3 Knowledge Relationship Purpose
+
+Knowledge Relationshipは、
+
+> Knowledge Record同士の意味上の関係だけをCanonicalに保存する。
+
+重要:
+
+~~~text
+Knowledge Record
+≠ Knowledge Relationship
+≠ Knowledge Graph
+~~~
+
+Relationship側へKnowledge本文・Evidence全文を複製しない。
+
+---
+
+# 18.4 Canonical Knowledge Relationship — Initial Minimal Set
+
+初期Canonical Relation候補:
+
+~~~text
+EQUIVALENT
+DUPLICATE_CANDIDATE
+SPECIALIZES
+REFINES
+EXTENDS
+CONTRADICTS
+SUPERSEDES
+~~~
+
+逆Relationは保存せずQuery時生成を検討。
+
+例:
+
+~~~text
+SPECIALIZES
+↔ GENERALIZES
+~~~
+
+曖昧な、
+
+~~~text
+RELATED
+SIMILAR
+ASSOCIATED
+~~~
+
+はCanonical Relationへ入れない方向。
+
+これらはKnowledge Graph / Search / Derived View側で扱う。
+
+---
+
+# 18.5 Relation Meaning
+
+## EQUIVALENT
+
+意味・Scope・条件・Horizon等が実質同じ。
+
+## DUPLICATE_CANDIDATE
+
+重複疑い。
+自動Merge / 自動削除を意味しない。
+
+## SPECIALIZES
+
+一方のKnowledgeが、もう一方より狭い条件領域を扱う。
+
+## REFINES
+
+Lag / Boundary / Effect / Participant / Condition等を、元Knowledgeより精密化する。
+
+## EXTENDS
+
+元Knowledgeを否定せず、別Market / Asset / Regime等へ適用範囲を拡張する。
+
+## CONTRADICTS
+
+同じ意味領域・同じ条件領域・同じ対象・同じRelevant Horizonで、両立不能なClaim。
+
+## SUPERSEDES
+
+別Knowledgeが旧Knowledgeを正式に置換する関係。
+新しいという理由だけで自動付与しない。
+
+---
+
+# 18.6 Contradiction vs Condition Difference
+
+矛盾判定前にApplicability Domainを比較する。
+
+比較順候補:
+
+~~~text
+1. Market Scope
+2. Asset / Instrument
+3. Venue
+4. Regime
+5. Conditions
+6. Time Horizon
+7. Failure / Boundary
+8. Claim / Effect semantics
+~~~
+
+Scope overlap候補:
+
+~~~text
+NO_OVERLAP
+NESTED
+PARTIAL_OVERLAP
+SAME_SCOPE
+~~~
+
+重要:
+
+~~~text
+Claim A differs from Claim B
+≠
+CONTRADICTION
+~~~
+
+Contradiction候補条件:
+
+~~~text
+Scope overlap exists
+AND
+Condition overlap exists
+AND
+Same target / effect semantics
+AND
+Same relevant horizon
+AND
+Claims cannot simultaneously be true
+~~~
+
+例:
+
+~~~text
+1h bullish
++
+24h bearish
+~~~
+
+は通常Contradictionではない。
+
+~~~text
+Thin Liquidity
+vs
+Deep Liquidity
+~~~
+
+で結論が違う場合も、まずCondition Differenceとして扱う。
+
+同一条件領域で、
+
+~~~text
+Downside Risk ↑
+vs
+Downside Risk ↓
+~~~
+
+ならCONTRADICTS候補。
+
+---
+
+# 18.7 Relationship Candidate vs Canonical Relationship
+
+AI / Python / similarity search等はRelationship Candidateを生成できる。
+
+しかし:
+
+~~~text
+Detected Relationship
+≠ Canonical Relationship
+~~~
+
+候補Flow:
+
+~~~text
+AI / Python / Search
+↓
+Relationship Candidate
+↓
+Scope Comparison
+↓
+Condition / Horizon / Claim Comparison
+↓
+Validation
+↓
+Canonical Knowledge Relationship
+~~~
+
+Embedding similarity等から直接CONTRADICTSを確定しない。
+
+---
+
+# 18.8 Knowledge Relationship Record — Minimal Meaning
+
+候補:
+
+~~~text
+relationship_id
+
+source_knowledge_id
+target_knowledge_id
+
+relationship_type
+scope_overlap
+relationship_basis
+comparison_version
+
+status
+
+created_at
+updated_at
+
+provenance
+~~~
+
+Relationship Basisは、
+
+> なぜこのRelationなのか
+
+を短く説明できる意味を持つ。
+
+Evidence全文はコピーしない。
+
+---
+
+# 18.9 Knowledge Graph Boundary
+
+Knowledge GraphはCanonical Knowledge StoreではなくDerived View候補。
+
+~~~text
+Knowledge Record
++
+Knowledge Relationship
+↓
+Graph Projection
+↓
+Knowledge Graph
+~~~
+
+Graphは消しても再生成可能にする方向。
+
+Knowledge Graph側ではDerived Edgeを持てる。
+
+例:
+
+~~~text
+SIMILAR_TO
+NEAR_IN_EMBEDDING
+SHARES_CONDITION
+SAME_MARKET
+SAME_RESEARCH_DOMAIN
+COMMON_EVIDENCE_SOURCE
+~~~
+
+ただし:
+
+~~~text
+Derived Graph Edge
+≠ Canonical Knowledge Relationship
+~~~
+
+---
+
+# 18.10 Version Lineage vs Knowledge Relationship
+
+同じKnowledge Identity内の、
+
+~~~text
+K021 v1
+→
+K021 v2
+~~~
+
+はVersion Lineageで管理する候補。
+
+別Knowledge K044がK021を置換する場合に、
+
+~~~text
+K044 SUPERSEDES K021
+~~~
+
+を使える。
+
+重要:
+
+~~~text
+Version Lineage
+≠ Knowledge Relationship
+~~~
+
+---
+
+# 18.11 Relationship Responsibility Boundary
+
+Knowledge Relationshipは以下を行わない。
+
+~~~text
+Evidenceを保存しない
+Knowledge本文を複製しない
+Applicabilityを決定しない
+Trade方向を決めない
+Riskを決めない
+Lifecycleを自動変更しない
+Conflictを自動解決しない
+Knowledgeを削除しない
+~~~
+
+Relationshipの責任は、
+
+> このKnowledge同士が意味上どのような関係にあるかをCanonicalに表現すること。
+
+まで。
+
+---
+
+# 18.12 Conflict Feedback
+
+Canonical CONTRADICTSが確認された場合:
+
+~~~text
+Knowledge A
++
+Knowledge B
+↓
+CONTRADICTS
+↓
+Conflict / Research Question
+↓
+R2 Research
+↓
+Validated Research Result
+↓
+Knowledge Admission
+~~~
+
+Knowledge Relationship自体がConflictを解決しない。
+
+---
+
+# 18.13 Current Detailed State
+
+~~~text
+Knowledge Admission
+= detailed refinement saved
+
+Knowledge Record minimum semantics
+= detailed refinement saved
+
+Knowledge Relationship
+= detailed refinement saved
+
+Knowledge Graph boundary
+= detailed refinement saved
+
+NEXT:
+Knowledge Lifecycle detailed design
+- minimal states
+- transition triggers
+- assessment vs transition authority
+- writer / governance authority
+- version vs lifecycle
+~~~
+
+重要:
+
+~~~text
+Detailed Refinement
+≠ Final Object Schema
+≠ DB Table
+≠ Python Class
+≠ Formal Current Architecture Adoption
+~~~
