@@ -7544,3 +7544,1274 @@ Signal Engine dropped as mandatory concept
 Runtime monitoring
 ≠ Knowledge mutation authority
 ~~~
+
+
+---
+
+# 16. Checkpoint 009 — Phase 5 R3 Concept-Level Reconstruction
+
+**Date:** 2026-09-30  
+**State:** SAVED  
+**Formal Current Architecture Changed:** NO  
+**Phase:** 5 Reconstruction  
+**Scope:** R3 — Knowledge / Applicability / Decision Preparation
+
+## 16.1 R3 Purpose Candidate
+
+R3の責任候補:
+
+> R2のValidated Research Resultを、その結果の身分・条件・限界・Evidence・Uncertaintyを失わず再利用可能なResearch KnowledgeへAdmissionし、KnowledgeのVersion / Lifecycle / Revalidationを管理し、R1のCurrent Market Contextと照合して現在のApplicabilityを評価し、複数KnowledgeのConflict / Overlap / Horizon差を整理したうえでDecision Thesis候補へ統合し、Known Cost / Uncertaintyを含むEconomic Valueを評価してR4へ渡す。
+
+R3は以下を行わない。
+
+~~~text
+FoundationをResearch Knowledgeとして自動昇格しない
+Research Resultを自動Knowledge化しない
+Runtime LossだけでKnowledgeを直接Retireしない
+Applicable Knowledgeを多数決でDecisionへ変換しない
+Positive EVだけでCapital Permissionを出さない
+Executionを行わない
+Positionを直接閉じない
+~~~
+
+---
+
+# 16.2 R3は4つの主要責任に分ける候補
+
+~~~text
+A. Knowledge Maintenance
+B. Current Applicability
+C. Decision Synthesis / Conflict Resolution
+D. Economic Value Assessment
+~~~
+
+さらにFast Runtime側で、
+
+~~~text
+E. Runtime Knowledge Assumption Monitoring
+~~~
+
+を持つ候補。
+
+重要:
+
+~~~text
+Knowledge Health
+≠
+Current Applicability
+≠
+Decision Thesis
+≠
+Expected Value
+≠
+Capital Permission
+~~~
+
+---
+
+# 16.3 FoundationとResearch Knowledgeを分離
+
+## Decision Candidate
+KEEP / STRENGTHEN
+
+R1 Foundation:
+
+> Research prior / background understanding / mechanism candidate / structural fact等。
+
+R3 Research Knowledge:
+
+> 市場理解OS自身のResearchを通じて、再利用可能な意味としてAdmissionされた条件付き知識。
+
+重要:
+
+~~~text
+Foundation
+≠
+Research Knowledge
+
+Foundation Claim
+≠
+Validated Research Result
+
+Validated Research Result
+≠
+Knowledge
+~~~
+
+Research KnowledgeがFoundationと矛盾することも許容する。
+
+一回のResearch ResultでFoundationを自動書換えしない。
+Foundation変更は別のReview / Research routeへ送る。
+
+---
+
+# 16.4 Knowledge Admission
+
+## Decision Candidate
+KEEP / STRENGTHEN
+
+Input:
+
+~~~text
+Validated Research Result
+~~~
+
+Admissionが確認する候補:
+
+~~~text
+再利用可能な意味があるか
+Claim / Findingの身分が明確か
+対象Market / Asset / Horizonが分かるか
+成立条件が追跡できるか
+Failure Boundaryが追跡できるか
+Constraint Candidateが追跡できるか
+Evidence provenanceを辿れるか
+Uncertaintyが保存されているか
+Research Mode / Validation historyを辿れるか
+Version / lineageを作れるか
+既存Knowledgeとの重複・更新・矛盾を判定可能か
+Negative / Null resultとして保存価値があるか
+~~~
+
+Output候補:
+
+~~~text
+ADMIT
+MERGE / UPDATE CANDIDATE
+DEFER
+REJECT AS KNOWLEDGE
+NEED MORE CONTEXT
+~~~
+
+重要:
+
+~~~text
+Research ResultがSUPPORTED
+≠
+Knowledge Admission必須
+
+Research ResultがREFUTED
+≠
+Knowledge価値なし
+~~~
+
+---
+
+# 16.5 Knowledge Formation
+
+## Decision Candidate
+KEEP / REDESIGN
+
+Knowledgeは単純な一文にしない。
+
+最低限保持すべき意味候補:
+
+~~~text
+Claim / Effect / Finding
+Knowledge Type
+Target Market / Asset
+Time Horizon
+Scope
+成立条件
+成立しやすいMarket State
+弱くなる条件
+Failure Boundary
+Constraint Knowledge
+Evidence Profile reference
+Uncertainty
+Regime dependence
+Version
+Validation history
+Source Research Result
+Known exceptions
+Open questions
+~~~
+
+重要:
+
+~~~text
+Knowledge
+=
+条件付きで再利用可能な意味
+
+Knowledge
+≠
+Trade Rule
+≠
+Signal
+~~~
+
+---
+
+# 16.6 Positive / Negative / Boundary / Unknown Knowledge
+
+## Decision Candidate
+KEEP / STRENGTHEN
+
+Knowledge family候補:
+
+~~~text
+Positive / Edge Knowledge
+Negative / No-Edge Knowledge
+Refutation Knowledge
+Failure / Boundary Knowledge
+Constraint Knowledge
+Mechanism Knowledge
+Context Knowledge
+Uncertainty / Unknown Knowledge
+Replication / Generalization Knowledge
+~~~
+
+正式Type Registryは後。
+
+例:
+
+~~~text
+Funding単独ではDirectional Edgeを確認できなかった
+~~~
+
+もKnowledge候補。
+
+~~~text
+High Volatility + Thin LiquidityではこのEdgeが崩れる
+~~~
+
+もKnowledge候補。
+
+~~~text
+原因は特定不能だが、特定Regimeで再現性が消える
+~~~
+
+も価値あるKnowledge候補。
+
+---
+
+# 16.7 Knowledge Relationship
+
+## Decision Candidate
+KEEP / REDESIGN
+
+Knowledge同士の関係を追跡できる責任を残す。
+
+候補意味:
+
+~~~text
+supports
+contradicts
+refines
+narrows
+generalizes
+overlaps
+depends_on
+derived_from
+supersedes
+replicates
+fails_under
+shares_evidence_with
+~~~
+
+正式Relation Enumは後。
+
+目的:
+
+- 多数決防止
+- Duplicate / overlap識別
+- Shared Evidence識別
+- Version / supersession理解
+- Multi-horizon coexistence理解
+- Knowledge GraphをDerived Viewとして作れるようにする
+
+重要:
+
+~~~text
+Knowledge Relationship
+≠
+新しいKnowledgeの自動生成
+~~~
+
+---
+
+# 16.8 Knowledge Pool / Knowledge Graph
+
+## Decision Candidate
+MERGE / REDESIGN
+
+~~~text
+Knowledge Pool
+=
+Logical Knowledge Domain
+
+Knowledge Graph
+=
+Knowledge / Relationを探索するDerived View候補
+~~~
+
+とする。
+
+重要:
+
+~~~text
+Knowledge Graph
+≠
+Duplicate Source of Truth
+
+Knowledge Pool
+≠
+One giant database object
+~~~
+
+Knowledge semanticsのCanonical sourceと、検索 / Graph / Vector等のViewを分ける。
+
+---
+
+# 16.9 Knowledge Version / Lineage
+
+## Decision Candidate
+KEEP / STRENGTHEN
+
+~~~text
+Knowledge v1
+↓
+Revalidation / New Evidence
+↓
+Knowledge v2
+~~~
+
+を許容する。
+
+過去Versionを消さない。
+
+追跡候補:
+
+~~~text
+Created From
+Version
+Valid From
+Last Validation
+Supersedes
+Superseded By
+Reason for Change
+Evidence delta
+Boundary delta
+Scope delta
+~~~
+
+重要:
+
+~~~text
+Knowledge Update
+≠
+History Rewrite
+~~~
+
+---
+
+# 16.10 Knowledge LifecycleとKnowledge Healthを分ける
+
+## Decision Candidate
+REDESIGN
+
+Knowledge Ageだけで自動Retireしない。
+
+分離候補:
+
+### Lifecycle State
+
+~~~text
+ACTIVE
+UNDER_REVIEW
+WEAK / DEGRADED
+RETIRED
+SUPERSEDED
+ARCHIVED
+~~~
+
+正式Stateは後。
+
+### Health / Revalidation Assessment
+
+見る候補:
+
+~~~text
+Validation Age
+Recent contradiction
+Replication status
+Forward evidence age
+Production evidence drift
+Market structure change
+Boundary violations
+Source / method obsolescence
+External structural change
+~~~
+
+重要:
+
+~~~text
+Old
+≠
+False
+
+Recent Loss
+≠
+Knowledge Invalid
+
+Age
+≠
+Health
+~~~
+
+AgeはRevalidation Priorityを上げる要因になり得るが、単独でRetire理由にしない。
+
+---
+
+# 16.11 Knowledge Revalidation
+
+## Decision Candidate
+KEEP / STRENGTHEN
+
+Revalidation trigger候補:
+
+~~~text
+Periodic schedule
+Validation age
+Repeated contradiction
+Replication failure
+Applicability mismatch
+Production drift
+Market structure change
+Regulation / venue change
+New competing Knowledge
+Foundation revision
+Major data-method change
+~~~
+
+Flow候補:
+
+~~~text
+Knowledge Revalidation Need
+↓
+Research Question
+↓
+R2
+↓
+Validated Research Result
+↓
+R3 Knowledge Maintenance
+↓
+new version / lifecycle update candidate
+~~~
+
+重要:
+
+~~~text
+Revalidation Need
+≠
+Immediate Retire
+~~~
+
+---
+
+# 16.12 Knowledge Lifecycle Writer / Authority
+
+## Decision Candidate
+NEW / DEFER exact authority
+
+Knowledge Health AssessmentとKnowledge State変更を分離する。
+
+~~~text
+Assessment:
+Knowledge weak / stale / contradicted可能性
+
+≠
+
+State Transition:
+ACTIVE → UNDER_REVIEW / RETIRED
+~~~
+
+誰が最終State Transition Authorityを持つかはX06 Governanceで後決め。
+
+AI / Runtime Monitorが直接Retire writerにならない。
+
+---
+
+# 16.13 Current Applicability
+
+## Decision Candidate
+KEEP / STRENGTHEN
+
+Input候補:
+
+~~~text
+Knowledge
++
+R1 Current Market Understanding
++
+Current State Representation
++
+Quality / Freshness
++
+Current Relation Interpretation
++
+Runtime / Event Context
+~~~
+
+問い:
+
+> このKnowledgeは、今この市場を理解・判断する材料として使えるか？
+
+見る候補:
+
+~~~text
+Market / Asset
+Horizon
+Regime
+Trend
+Volatility
+Liquidity
+Leverage
+Funding
+Flow
+Participant state
+Macro
+Event
+Session
+Data Quality
+Freshness
+Knowledge validation age
+Failure Boundary
+Constraint
+Uncertainty
+~~~
+
+---
+
+# 16.14 Applicability State
+
+## Decision Candidate
+KEEP / REDESIGN
+
+候補:
+
+~~~text
+APPLICABLE
+PARTIALLY_APPLICABLE
+NOT_APPLICABLE
+UNCERTAIN
+BLOCKED_BY_CONSTRAINT
+NOT_EVALUATED
+~~~
+
+正式Enumは後。
+
+重要:
+
+~~~text
+NOT_APPLICABLE
+≠
+RETIRED
+
+UNCERTAIN
+≠
+NEGATIVE
+
+APPLICABLE
+≠
+TRADE
+~~~
+
+---
+
+# 16.15 Applicability Assessment
+
+## Decision Candidate
+KEEP / STRENGTHEN
+
+各Knowledgeについて理由を残す。
+
+候補意味:
+
+~~~text
+Knowledge reference
+Applicability state
+Matched conditions
+Missing conditions
+Current deviations
+Failure Boundary status
+Constraint status
+Contradictions
+Evidence / validation-age context
+Uncertainty
+Overlap / dependency context
+Evaluation time
+~~~
+
+Downstreamが、
+
+> なぜ今回このKnowledgeを使った / 使わなかったか
+
+を後から説明できるようにする。
+
+---
+
+# 16.16 Runtime Assumption Monitoring
+
+## Decision Candidate
+NEW / SPLIT from pre-decision Applicability
+
+Trade開始後もKnowledge成立条件を監視する責任候補。
+
+監視対象:
+
+~~~text
+Entry時に成立していたKnowledge assumptions
+Current Market State deviation
+Failure Boundary approach / crossing
+Constraint activation
+Data Quality degradation
+Material relation change
+Unexpected regime shift
+~~~
+
+Output候補:
+
+~~~text
+ASSUMPTION_STABLE
+ASSUMPTION_DEGRADED
+MATERIAL_DEVIATION
+BOUNDARY_APPROACHING
+BOUNDARY_CROSSED
+UNCERTAIN
+~~~
+
+正式Stateは後。
+
+重要:
+
+~~~text
+Runtime Assumption Monitoring
+≠
+Knowledge Rewrite
+
+Runtime Assumption Monitoring
+≠
+Position Close Authority
+~~~
+
+R3はsemantic deviationを検出。
+
+R4が、
+
+~~~text
+continue
+reduce
+protect
+exit
+block new exposure
+~~~
+
+等のCapital / Position actionを判断する。
+
+---
+
+# 16.17 Applicability Contradiction
+
+## Decision Candidate
+KEEP / STRENGTHEN
+
+Repeated case:
+
+~~~text
+Knowledge says conditions matched
+↓
+Runtime repeatedly behaves outside expected range
+~~~
+
+の場合、
+
+~~~text
+Applicability Contradiction
+↓
+R5 / R2 Research Question
+~~~
+
+へ戻す。
+
+R3自身が即Knowledgeを書き換えない。
+
+---
+
+# 16.18 Knowledge Conflictの前にScope / Horizonを揃える
+
+## Decision Candidate
+NEW / STRENGTHEN
+
+見かけ上のConflictが本当の矛盾とは限らない。
+
+例:
+
+~~~text
+K1:
+4h horizon bullish
+
+K2:
+5m horizon bearish
+~~~
+
+は同時成立可能。
+
+したがってConflict Resolution前に、
+
+~~~text
+Market
+Asset
+Horizon
+Scope
+Regime
+Decision objective
+~~~
+
+を正規化する。
+
+重要:
+
+~~~text
+Different direction
+≠
+Contradiction automatically
+~~~
+
+---
+
+# 16.19 Knowledge Conflict / Overlap / Dependency
+
+## Decision Candidate
+KEEP / STRENGTHEN
+
+Conflict候補:
+
+~~~text
+semantic contradiction
+effect-direction conflict
+condition conflict
+boundary conflict
+constraint conflict
+horizon conflict
+evidence conflict
+~~~
+
+Overlap候補:
+
+~~~text
+same evidence
+same source research
+same mechanism
+derived knowledge
+duplicate scope
+shared cause
+~~~
+
+重要:
+
+~~~text
+Knowledge Count
+≠
+Independent Support Count
+~~~
+
+---
+
+# 16.20 Decision Synthesis / Conflict Resolution
+
+## Decision Candidate
+NEW / KEEP
+
+R3に明示的責任として置く。
+
+Input:
+
+~~~text
+Applicable Knowledge Assessments
+Current Market Understanding
+Knowledge Relationships
+Conflict / Overlap / Dependency
+Horizon / Scope
+Uncertainty
+Current decision objective
+~~~
+
+目的:
+
+> 複数Knowledgeから、現在の市場に対して何をする経済的Thesis候補が存在するかを組み立てる。
+
+Output候補:
+
+~~~text
+Decision Thesis Candidate
+Action Direction Candidate
+WAIT candidate
+NO-TRADE candidate
+UNKNOWN candidate
+Multiple competing thesis candidates
+~~~
+
+重要:
+
+~~~text
+Decision Synthesis
+≠
+Majority Vote
+
+Decision Synthesis
+≠
+Risk Permission
+
+Decision Synthesis
+≠
+Execution
+~~~
+
+---
+
+# 16.21 Trade Thesisという名称
+
+## Decision Candidate
+REDESIGN / DEFER name
+
+Legacy TradeThesisの責任は有用。
+
+ただし将来Multi-Market / Non-trade decisionも考慮し、
+
+~~~text
+Decision Thesis
+Economic Thesis
+Trade Thesis
+Opportunity Thesis
+~~~
+
+のどの名称を使うかは後決め。
+
+必要な意味:
+
+~~~text
+何を期待しているか
+どの方向か
+どのHorizonか
+どのKnowledgeに基づくか
+どの条件で成立するか
+何が反証するか
+どのUncertaintyがあるか
+~~~
+
+---
+
+# 16.22 Decision Synthesisの正常Output
+
+## Decision Candidate
+NEW / STRENGTHEN
+
+必ずTrade候補を作る必要はない。
+
+正常Output候補:
+
+~~~text
+LONG thesis candidate
+SHORT thesis candidate
+WAIT
+NO TRADE
+UNKNOWN
+MULTIPLE COMPETING THESIS
+INSUFFICIENT ECONOMIC BASIS
+~~~
+
+重要:
+
+~~~text
+No Trade
+≠
+System Failure
+~~~
+
+---
+
+# 16.23 Economic Value Assessment
+
+## Decision Candidate
+KEEP / REDESIGN
+
+Decision Thesis候補について、
+
+> Riskを取る前に、経済的に意味のあるOpportunityか？
+
+を評価する。
+
+候補Input:
+
+~~~text
+Outcome distribution
+Expected gain
+Expected loss
+Probability / calibration
+Uncertainty
+Time horizon
+Fees
+Funding / carry
+Estimated slippage / impact
+Liquidity assumptions
+Opportunity cost
+Expected holding time
+Known failure probability / tail sensitivity
+~~~
+
+重要:
+
+~~~text
+Win Rate
+≠
+Expected Value
+~~~
+
+~~~text
+Applicable
+≠
+Positive EV
+~~~
+
+~~~text
+Positive EV
+≠
+Capital Permission
+~~~
+
+---
+
+# 16.24 EVとExecution Costの境界
+
+## Decision Candidate
+NEW / REDESIGN
+
+R3はEconomic Value計算に必要なCost Estimateを参照できる。
+
+ただし実際のExecution条件の最終責任はR4。
+
+候補:
+
+~~~text
+R3:
+expected / modeled fee, funding, slippage, impact assumptions
+
+R4:
+current executable liquidity, order constraints, actual venue / size impact
+~~~
+
+R4でCost条件が materially differentなら、Economic Opportunityを再評価 / blockできる。
+
+---
+
+# 16.25 Economic Opportunity Boundary
+
+## Decision Candidate
+NEW
+
+R3 → R4の主要Boundary候補。
+
+含む意味候補:
+
+~~~text
+Decision Thesis Candidate
+Direction / Action semantics
+Horizon
+Applicable Knowledge references
+Conflict / overlap context
+Expected Value assessment
+Cost assumptions
+Uncertainty
+Invalidation conditions
+Boundary / constraint context
+Decision timestamp / information set
+~~~
+
+重要:
+
+~~~text
+Economic Opportunity
+≠
+Risk Permission
+≠
+Capital Allocation
+≠
+Execution Intent
+~~~
+
+---
+
+# 16.26 R3 Two-Speed Structure
+
+## Slow / Maintenance Path
+
+~~~text
+Validated Research Result
+↓
+Knowledge Admission
+↓
+Knowledge Formation / Version
+↓
+Lifecycle / Revalidation
+↓
+Knowledge Domain
+~~~
+
+## Runtime Decision Path
+
+~~~text
+Knowledge Domain
++
+Current Market Understanding
+↓
+Applicability
+↓
+Decision Synthesis
+↓
+Economic Value
+↓
+Economic Opportunity
+↓
+R4
+~~~
+
+## Fast Runtime Monitoring Path
+
+~~~text
+Active Decision / Position Knowledge Assumptions
++
+Current Runtime Context
+↓
+Assumption Monitoring
+↓
+Deviation / Boundary Warning
+↓
+R4 Fast Safety
++
+R5 Feedback
+~~~
+
+重要:
+
+~~~text
+Runtime path
+does not wait for new Knowledge creation.
+
+Maintenance path
+does not directly modify live Position.
+~~~
+
+---
+
+# 16.27 R3 → R2 Feedback
+
+R3がResearchへ戻す主なQuestion Source候補:
+
+~~~text
+Knowledge Revalidation Need
+Knowledge contradiction
+Applicability contradiction
+Repeated boundary approach
+Unexpected regime dependency
+Knowledge conflict unresolved by scope
+Evidence / validation age concern
+Foundation vs Research Knowledge contradiction
+Runtime assumption repeated failure
+~~~
+
+R3自身がResearchを直接実行しない。
+
+---
+
+# 16.28 R3 → R4 Boundary
+
+R4へ渡すもの候補:
+
+~~~text
+Economic Opportunity
+Current Decision Thesis candidate
+Expected Value
+Uncertainty
+Invalidation / assumption conditions
+Constraint / boundary context
+Required execution assumptions
+Relevant applicability trace
+~~~
+
+R4が決めるもの:
+
+~~~text
+Capital permission
+Position size
+Portfolio compatibility
+Risk budget
+Exposure limits
+ALLOW / REDUCE / BLOCK
+Execution admission
+Runtime protection action
+~~~
+
+---
+
+# 16.29 R3 Candidate Flow
+
+~~~text
+R2 Validated Research Result
+          ↓
+Knowledge Admission
+          ↓
+Knowledge Formation
+          ↓
+Knowledge Version / Relationship
+          ↓
+Knowledge Lifecycle / Revalidation
+          ↓
+       Knowledge Domain
+          │
+          │ + R1 Current Market Understanding
+          ↓
+Applicability Evaluation
+          ↓
+Applicability Assessments
+          ↓
+Scope / Horizon Normalization
+          ↓
+Conflict / Overlap / Dependency Analysis
+          ↓
+Decision Synthesis
+          ↓
+Decision Thesis Candidate(s)
+          ↓
+Economic Value Assessment
+          ↓
+Economic Opportunity
+          ↓
+R4 Capital / Production
+~~~
+
+Parallel runtime:
+
+~~~text
+Active Thesis / Knowledge Assumptions
++
+R1 Runtime Context
+↓
+Runtime Assumption Monitoring
+↓
+Deviation / Boundary Signal
+├→ R4 Fast Safety
+└→ R5 / R2 Feedback
+~~~
+
+---
+
+# 16.30 R3 Concept Classification
+
+| Concept | Phase 5 R3 Candidate |
+|---|---|
+| Foundation vs Research Knowledge separation | KEEP / STRENGTHEN |
+| Knowledge Admission | KEEP / STRENGTHEN |
+| Knowledge Formation | KEEP / REDESIGN |
+| Positive / Negative / Boundary / Unknown Knowledge | KEEP / STRENGTHEN |
+| Knowledge Relationship | KEEP / REDESIGN |
+| Knowledge Pool | KEEP as logical domain |
+| Knowledge Graph | REDESIGN as derived view |
+| Knowledge Version / Lineage | KEEP / STRENGTHEN |
+| Knowledge Lifecycle | KEEP / REDESIGN |
+| Knowledge Health Assessment | NEW / KEEP |
+| Automatic age-based retirement | DROP |
+| Revalidation | KEEP / STRENGTHEN |
+| Lifecycle Writer Authority | NEW / DEFER |
+| Applicability | KEEP / STRENGTHEN |
+| Applicability Assessment | KEEP / STRENGTHEN |
+| Runtime Assumption Monitoring | NEW / SPLIT |
+| Runtime direct Knowledge rewrite | DROP |
+| Knowledge Conflict | KEEP / STRENGTHEN |
+| Scope / Horizon normalization | NEW |
+| Majority-vote Knowledge integration | DROP |
+| Decision Synthesis | NEW / KEEP |
+| TradeThesis exact name | REDESIGN / DEFER |
+| WAIT / NO TRADE / UNKNOWN outcomes | KEEP / STRENGTHEN |
+| Expected Value | KEEP / REDESIGN |
+| Win-rate-as-EV | DROP |
+| Economic Opportunity boundary | NEW |
+| Signal Engine as required top-level concept | DROP |
+| R3 direct Risk Permission | DROP |
+| R3 direct Execution | DROP |
+
+---
+
+# 16.31 R3 Open Questions for Later Design
+
+~~~text
+1. Knowledge Admission authority
+2. Knowledge Type Registry
+3. Knowledge Relationship formal taxonomy
+4. Canonical Knowledge semantics / minimum contract
+5. Knowledge lifecycle state machine
+6. Knowledge Health assessment formula / policy
+7. Revalidation scheduling / priority
+8. Knowledge state transition writer
+9. Applicability state taxonomy
+10. Applicability matching method
+11. Market State Representation dependency level
+12. Runtime Assumption Monitoring thresholds
+13. Semantic deviation vs noise distinction
+14. Multi-horizon thesis normalization
+15. Knowledge conflict resolution method
+16. Decision Thesis exact object / name
+17. WAIT / NO TRADE / UNKNOWN semantics
+18. EV probability calibration
+19. Cost / slippage model ownership
+20. Tail risk representation before R4
+21. Economic Opportunity minimum contract
+22. Constraint Candidate → Runtime Authorized Constraint governance
+23. Foundation contradiction handling
+24. Knowledge migration across market expansion
+25. AI-assisted applicability / synthesis reproducibility
+~~~
+
+---
+
+# 16.32 Phase State
+
+~~~text
+Phase 5 R1
+COMPLETE / WORKING CANDIDATE
+
+Phase 5 R2
+COMPLETE / WORKING CANDIDATE
+
+Phase 5 R3
+COMPLETE / WORKING CANDIDATE
+
+NEXT:
+R4 — Capital / Production
+~~~
+
+重要:
+
+~~~text
+R3 COMPLETE
+≠
+Final Knowledge / Decision Architecture
+
+Knowledge Admission
+≠
+Production Approval
+
+Applicability
+≠
+Decision
+
+Decision Thesis
+≠
+Positive EV
+
+Positive EV
+≠
+Capital Permission
+~~~
