@@ -18,101 +18,51 @@ Last Updated:
 Conversation Focus:
 Whole Market Understanding OS Reconstruction.
 Phases 1-4 checkpointed.
-Phase 5 R1-R4 concept-level reconstruction complete.
-Current active work: R5 Learning / Feedback.
+Phase 5 R1-R4 concept-level reconstruction already exists.
+Current conversation temporarily returns to R3 for detailed refinement before resuming later domains.
 
 Important Boundary:
 AI_CONTEXT remains authoritative for formal Project Current State.
 Formal Current Architecture is unchanged.
-Phase 5 candidates are not adopted design.
+Phase 5 detailed refinements are not adopted design.
 
-PHASE 5 RESPONSIBILITY SKELETON:
-R1 Perception / Relation / Current Understanding
-R2 Research
-R3 Knowledge / Applicability / Decision Preparation
-R4 Capital / Production
-R5 Learning / Feedback
-R6 Long-Term Foundation / Operations / Human Projection
-X Cross-Cutting
+R3 DETAILED REFINEMENT SAVED:
+- Knowledge Admission detailed flow
+- Research Validity != Knowledge Worthiness
+- Knowledge Record minimum semantic responsibilities
+- Canonical Knowledge Relationship minimal taxonomy:
+  EQUIVALENT
+  DUPLICATE_CANDIDATE
+  SPECIALIZES
+  REFINES
+  EXTENDS
+  CONTRADICTS
+  SUPERSEDES
+- contradiction requires overlapping scope/conditions/horizon and mutually incompatible claim semantics
+- condition difference / horizon difference != contradiction
+- Relationship Candidate != Canonical Relationship
+- Knowledge Graph is a derived view, not duplicate source of truth
+- Version Lineage != Knowledge Relationship
+- Canonical Relationship does not mutate lifecycle, applicability, risk or execution
 
-R4 KEY RECONSTRUCTION:
-- Economic Opportunity does not equal Capital Permission
-- Capital / Portfolio context is explicit, not only single-trade risk
-- Risk Budget, Position Sizing, Drawdown/Ruin, Correlation/Concentration are explicit responsibilities
-- Research Constraint Candidate, Knowledge Constraint and Runtime Authorized Constraint remain separate
-- RiskState retained with single-writer principle; exact authority deferred
-- Defense Layer monolith is split into capital permission, constraints, RiskState, emergency safety and runtime protection
-- Emergency Fast Path is risk-reducing / risk-containing only; it cannot create new Knowledge, increase exposure or loosen risk limits
-- Recovery from emergency is stricter than entering emergency
-- Execution Admission rechecks current executability and decision staleness
-- Execution Intent is distinct from order submission/fill/position
-- Reservation / idempotency retained for duplicate-order safety
-- Execution Attempt/Event and Reconciliation retained
-- Adapter / API response is not canonical execution truth
-- Logical Position is canonical exposure representation built from reconciled facts
-- Protection Requirement ownership is placed in R4 candidate to resolve legacy gap
-- R3 detects semantic assumption deviation; R4 decides capital/position protection action
-- Protection orders use the same intent/event/reconciliation discipline
-- TradeResult is only financial-result projection; broader Production Outcome is R4 → R5 boundary
-- System failure remains distinct from market/knowledge failure
-- AI is not Risk / Exit / Execution authority; hard safety should not depend on AI availability
-
-R4 FLOW:
-R3 Economic Opportunity
-→ Capital / Portfolio Context
-→ Risk Budget / Constraints / RiskState
-→ Capital Permission
-→ Position Sizing
-→ Execution Admission
-→ Execution Intent
-→ Reservation / Venue Routing
-→ Execution Attempts / Events
-→ Reconciliation
-→ Execution Record
-→ Logical Position
-→ Protection Requirement / State
-→ Runtime Protection / Exit
-→ Production Outcome
-→ R5
-
-FAST SAFETY:
-R1 Runtime Context
-+ R3 Assumption Monitoring
-+ R4 Exposure/Protection
-+ X10 System Health
-→ Emergency Fast Path
-→ risk-reducing action only
-→ Execution/Reconciliation
-→ updated position/protection
-
-NEXT — R5:
-Reconstruct:
-1. Production Outcome understanding
-2. Decision Quality vs financial result
-3. Thesis / Knowledge / Applicability / Risk / Execution attribution
-4. finding normalization
-5. reverse investigation
-6. root-cause candidate vs confirmed cause
-7. feedback classification / routing
-8. R1/R2/R3/R4/System return paths
-9. missed opportunity / no-trade / block evaluation
-10. counterfactual / demo-live divergence
-11. outcome time-integrity / hindsight controls
-12. feedback asset → R6 / R2
+NEXT:
+Knowledge Lifecycle detailed design:
+1. minimal Lifecycle states
+2. transition triggers
+3. Lifecycle Assessment vs Lifecycle Transition
+4. writer / governance authority
+5. evidence required for material transitions
+6. revalidation flow
+7. Version vs Lifecycle boundary
+8. Runtime observations must not directly retire Knowledge
 
 Do NOT:
-- adopt Phase 5 candidates as final architecture
-- finalize DB/Object/Python
-- let Emergency Fast Path increase risk
-- let Adapter become canonical position truth
-- let Loss directly rewrite Knowledge
-- run Phase 6 destruction review early
+- duplicate Knowledge Graph as another Knowledge store
+- auto-resolve contradictions
+- let one loss retire Knowledge
+- let AI suggestion directly change lifecycle
+- finalize DB/Object/Python yet
 - modify formal Current Architecture
-
-READ:
-- 98_DESIGN_STUDY/市場理解OS_全体再構築_設計ログ.md
-- 99_REFERENCE/旧市場理解OS_設計知識リファレンス.md
-- 98_DESIGN_STUDY/DAISUKE_MARKET_UNDERSTANDING_OS_PROPOSAL.md
 
 Git Write Permission Reminder:
 REQUIRE CURRENT-CHAT USER AUTHORIZATION
