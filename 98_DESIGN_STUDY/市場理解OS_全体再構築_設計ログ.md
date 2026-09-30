@@ -421,3 +421,343 @@ Source Preparation = COMPLETE
 NEXT:
 Phase 1 — Source Extraction
 ```
+
+
+---
+
+# 10. Checkpoint 003 — Phase 1 Closure / Phase 2 Design Intent
+
+**Date:** 2026-09-30  
+**State:** SAVED  
+**Formal Current Architecture Changed:** NO  
+**Current Reconstruction Stage:** Phase 2 COMPLETE → Phase 3 READY
+
+## 10.1 Phase 1 Closure
+
+4つの再構築Sourceを、Layer / Engine / Object名ではなく「何を実現しようとしていたか」で比較した。
+
+対象:
+
+1. 旧市場理解OS
+2. 途中Current市場理解OS
+3. Research Institute Working Reference
+4. ダイスケ正式原案
+
+Phase 1で回収した主要な意味:
+
+```text
+旧市場理解OS
+=
+異常・矛盾・失敗・本番事故を、
+原因を雑に決めず研究・防御・実行・事後分析へ分離し、
+適切な責任へ戻す能力が強い
+
+Current
+=
+Observation / Interpretation / Candidate / Hypothesis / Result /
+Knowledge / Applicability / Decision / Risk 等の意味と責任を混ぜない能力が強い
+
+Research Institute Reference
+=
+Reactive ResearchだけでなくProactive Researchを追加し、
+探索・確認・再現・反証・Ledger・Red Team等によって
+Researchそのものの科学性を高める能力が強い
+
+Daisuke Proposal
+=
+人間が市場を見る時の「関係性による理解」を
+AI / Python / Databaseが扱える共通言語へ形式化し、
+通常市場からの研究、逆方向調査、長期Research Asset、
+実資金運用との接続を強化する
+```
+
+Phase 1で重要な共通Capabilityとして確認したもの:
+
+- 市場を観測する
+- 観測から即Tradeしない
+- 市場を理解してから判断する
+- Researchを持つ
+- 仮説・関係を検証する
+- 反証・失敗を扱う
+- Knowledgeを蓄積する
+- Knowledgeを直接Tradeしない
+- 現在市場との適合を確認する
+- Economic ValueとRiskを分離する
+- Production結果を分析する
+- Researchへ戻るLoopを持つ
+- Unknownを許す
+- 長期的に適応する
+- ResearchとProductionを分離する
+
+Phase 1で確認した重要Gap:
+
+- RelationをMachine-readableにする正式表現
+- Foundation内のFact / Mechanism / Model / Heuristic等の身分管理
+- Long-term Storage / Retention
+- Temporal Integrity / Information Availability
+- Reverse InvestigationのHindsight Bias対策
+- Research Priority
+- Capital / Portfolio Architecture
+- Runtime Knowledge Condition Monitoring
+- Unknown管理
+- Market追加Contract
+- FoundationとCurrent MarketのRelevant Retrieval
+- Self-Modification Governance
+- Human / AI / Production Authority
+- PublicationとInternal Knowledgeの分離
+- Research Asset Migration
+- OS自身のResearch
+- Multi-Knowledge Conflict Resolution
+- Market Understanding Quality評価
+
+重要:
+
+```text
+Market DNA
+Causal Engine
+World Economic Library
+Knowledge Library
+AI Team
+Signal Engine
+Defense Layer
+Stress Lab
+Failure Museum
+Quantum Layer
+Knowledge Graph
+```
+
+等は、この段階ではRequired CapabilityではなくHOW Candidateとして扱う。
+
+---
+
+## 10.2 Phase 2 Review Result
+
+Phase 2 Design Intentは、4SourceとCurrent Charterに照合した結果、大きな矛盾なし。
+
+ただし以下を補正した。
+
+### Correction A — Survival / Profit Priority
+
+Current Charterでは、
+
+```text
+Survival / Profit Priority
+```
+
+の厳密な優先順位は未設計。
+
+したがってPhase 2では、
+
+> 短期ProfitのためにCapital・Research Capability・Knowledge Integrity・System Continuityを破壊しない
+
+までをDesign Intentとして保持する。
+
+```text
+Survival > Profit
+```
+
+という厳密な序列はまだCanonical化しない。
+
+### Correction B — Reverse Investigation
+
+```text
+Unexpected Outcome
+↓
+Reverse Investigation
+↓
+Cause Candidate
+↓
+Formal Research
+```
+
+とする。
+
+```text
+Reverse Investigation
+≠ Root Cause Confirmation
+```
+
+後知恵のStoryをCause確定として扱わない。
+
+### Correction C — Temporal / Decision Integrity
+
+追加Design Intent:
+
+> 過去のDecision / Research / Tradeを、後から判明した情報ではなく、その時点で利用可能だったEvidence・Knowledge・Risk・Uncertainty・Data Qualityに基づいて検証できること。
+
+重要:
+
+```text
+Good Outcome
+≠ Good Decision
+
+Bad Outcome
+≠ Bad Decision
+
+Later Knowledge
+≠ Information Available At Decision Time
+```
+
+これはCurrentのTime / Freshness思想、Decision検証思想、LegacyのOutcome分離と整合する。
+
+---
+
+# 10.3 Final Phase 2 Design Intent Set
+
+## A. Primary Intent
+
+1. 市場・経済・世界の出来事を、価格だけでなく関係性から理解する
+2. 人間の「関係を結んで考える能力」を、AI / Python / Databaseが扱える検証可能な形へ形式化する
+3. 通常市場からもProactiveに研究する
+4. 異常・矛盾・失敗からもReactiveに研究する
+5. ResearchをKnowledgeへ変える
+6. KnowledgeをCurrent Marketへ慎重に適用する
+7. Economic Valueへ接続する
+8. 実資金運用結果を再びResearchへ戻す
+9. Capital・Research Asset・Decision Capabilityを長期間成長させる
+10. この循環を市場変化に合わせて止めずに適応させる
+
+## B. Research / Integrity Intent
+
+- 観測と解釈を混ぜない
+- 発見と確認を混ぜない
+- 相関と因果を混ぜない
+- AI JudgmentとEvidenceを混ぜない
+- Research ResultとKnowledgeを混ぜない
+- KnowledgeとApplicabilityを混ぜない
+- ApplicabilityとEconomic Valueを混ぜない
+- Economic ValueとRisk Permissionを混ぜない
+- Trade OutcomeとHypothesis / Thesis / Execution / Risk Outcomeを混ぜない
+- Unknownを無理に答えへ変えない
+- 失敗・反証・Negative / UnknownもResearch Assetとして扱う
+- Research Historyを保持する
+- 過去判断を当時利用可能だった情報だけで再検証可能にする
+
+## C. Adaptation / Learning Intent
+
+- 成功Knowledgeも永久の正解にしない
+- Foundationを絶対法則として扱わない
+- Knowledge成立条件を再検証する
+- Unexpected ResultをResearch入口へ変える
+- Reverse InvestigationはCause Candidate生成として利用する
+- Root Causeに応じて適切な責任へ戻す
+- 同じFailureを理由なく繰り返さない
+- Runtime中もKnowledge成立条件の変化を観測できる方向を持つ
+
+## D. Capital / Survival Intent
+
+- Researchは実資金のEconomic Valueへ接続する
+- 短期ProfitのためにCapital・Research Capability・Knowledge Integrity・System Continuityを破壊しない
+- Expected Valueが正でもRisk上不適切なら資金を出さない
+- Trade / WAIT / REDUCE / NO TRADE / UNKNOWNを有効なDecision Outcomeとして扱える方向を持つ
+- Drawdown / Ruin / Portfolio Risk等の詳細Priorityは後続設計へ残す
+
+## E. Longevity / Extensibility Intent
+
+- AI / API / Data Provider / Exchange / Python実装等を交換可能にする方向を持つ
+- 実装よりResearch Assetを長生きさせる
+- Long-term Storageを無限膨張させない
+- Crypto Firstを維持しつつFuture Expansion Readyとする
+- 市場固有のData / Research / Execution差を無理に同一化しない
+- Migration後もKnowledge意味・Evidence・Historyを失わない方向を持つ
+
+## F. Human / Secondary Intent
+
+- Research結果を人間が理解できる形にする
+- Research Note / Research Diary / Graph等を再利用可能にする
+- 将来のApplication / Publication / Business Opportunityを許容する
+- External OutputのためにResearch Integrityを歪めない
+
+---
+
+# 10.4 Phase 2 One-Sentence Candidate
+
+> **市場理解OSは、市場・経済・世界の出来事を関係性から理解し、そこから生まれる疑問を検証・反証可能なResearchへ変え、その成果を条件付きKnowledgeとして蓄積し、現在市場・Economic Value・Riskと照合して実資金へ慎重に接続し、結果を当時利用可能だった情報に基づいて検証しながら再び研究へ戻すことで、Capital・Research Asset・Decision Capabilityを長期間成長させ続ける市場研究・資金運用OSを目指す。**
+
+この一文はReconstruction Working Intentであり、PROJECT_CHARTERの正式文を置換しない。
+
+---
+
+# 10.5 Unresolved Intent Tensions
+
+Phase 3以降でCapability / Architectureへ落とす際に解決対象とする。
+
+```text
+Profit
+↔
+Survival
+
+Foundation
+↔
+Open Discovery
+
+Stability
+↔
+Adaptation
+
+Knowledge Utilization
+↔
+Knowledge Re-Validation
+
+Long-Term Preservation
+↔
+Storage Cost / Volume
+
+Multi-Market Expansion
+↔
+Crypto First Simplicity
+
+Automation
+↔
+Human / Production Authority
+
+Runtime Safety
+↔
+Strategy Continuation
+
+Research Freedom
+↔
+Production Safety
+
+Publication
+↔
+Research Integrity
+```
+
+---
+
+# 10.6 Phase State
+
+```text
+Phase 1 — Source Extraction
+STATUS:
+COMPLETE
+
+Phase 2 — Design Intent
+STATUS:
+COMPLETE / WORKING RECONSTRUCTION BASELINE
+
+Phase 3 — Capability Map
+STATUS:
+NEXT
+```
+
+重要:
+
+```text
+Phase 2 COMPLETE
+≠
+Final Philosophy Fixed
+
+Phase 2 Design Intent
+≠
+Current Canonical Design
+
+Phase 3 Capability
+≠
+Architecture Layer
+
+HOW Candidate
+≠
+Required Capability
+```
