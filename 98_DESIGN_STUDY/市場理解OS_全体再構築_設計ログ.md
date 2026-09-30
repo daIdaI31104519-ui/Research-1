@@ -8815,3 +8815,1586 @@ Positive EV
 ≠
 Capital Permission
 ~~~
+
+
+---
+
+# 17. Checkpoint 010 — Phase 5 R4 Concept-Level Reconstruction
+
+**Date:** 2026-09-30  
+**State:** SAVED  
+**Formal Current Architecture Changed:** NO  
+**Phase:** 5 Reconstruction  
+**Scope:** R4 — Capital / Production
+
+## 17.1 R4 Purpose Candidate
+
+R4の責任候補:
+
+> R3から受け取ったEconomic Opportunityを、資本全体・Portfolio Exposure・Risk Budget・Drawdown・Tail Risk・Liquidity・Authorized Constraint・System Health等と照合して「実資金を出してよいか」「どの程度まで許可するか」を判断し、許可されたIntentをVenueへ安全にExecutionし、成立したExposureをCanonical Positionとして追跡しながら、Runtime中のMarket / Knowledge Assumption / System変化に応じてPositionを保護し、最終OutcomeをR5へ渡す。
+
+R4は以下を行わない。
+
+~~~text
+Research ResultをKnowledgeへ変換しない
+Knowledge Applicabilityを再定義しない
+Positive EVだけで自動Tradeしない
+Emergency Fast Pathで新しいEdgeを作らない
+Exchange Adapter responseをCanonical Position Truthにしない
+Runtime LossだけでKnowledgeをRetireしない
+Execution FailureをMarket Failureへ変換しない
+~~~
+
+---
+
+# 17.2 R4を5責任へ分ける候補
+
+~~~text
+A. Capital / Portfolio Permission
+B. Execution Admission / Intent
+C. Execution Fidelity / Reconciliation
+D. Position / Exposure Truth
+E. Runtime Protection / Exit
+~~~
+
+横断:
+
+~~~text
+RiskState
+Authorized Constraints
+Emergency Fast Path
+System Health
+Human / Governance Authority
+~~~
+
+重要:
+
+~~~text
+Economic Opportunity
+≠ Capital Permission
+≠ Execution Intent
+≠ Filled Position
+≠ Runtime Protection Decision
+~~~
+
+---
+
+# 17.3 R3 → R4 Entry Boundary
+
+## Decision Candidate
+KEEP / STRENGTHEN
+
+R3からの主要Input候補:
+
+~~~text
+Economic Opportunity
+Decision Thesis / Action Candidate
+Expected Value assessment
+Uncertainty
+Decision horizon / scope
+Supporting Knowledge
+Opposing / excluded Knowledge
+Applicability rationale
+Invalidation conditions
+Failure Boundary / Constraint context
+Runtime assumptions to monitor
+Cost / liquidity assumptions
+Decision timestamp / information set
+~~~
+
+R4はこれを、
+
+~~~text
+BUY/SELL signal
+~~~
+
+だけへ潰して受け取らない。
+
+目的:
+
+- Risk判断時に根拠を追える
+- Position保有中にThesis / assumptionsを再参照できる
+- Outcome後にDecision Qualityを評価できる
+
+---
+
+# 17.4 Capital Permission
+
+## Decision Candidate
+NEW / KEEP responsibility
+
+R4で最初に答える問い:
+
+> Economic Opportunityが存在するとして、現在の資本状態でRiskを取ることを許可できるか？
+
+Output候補:
+
+~~~text
+ALLOW
+ALLOW_WITH_LIMIT
+REDUCE_ONLY
+BLOCK_NEW_EXPOSURE
+BLOCK
+DEFER / UNKNOWN
+~~~
+
+正式Enumは後。
+
+重要:
+
+~~~text
+Positive EV
+≠ ALLOW
+
+High Confidence
+≠ ALLOW
+
+Applicable Knowledge
+≠ ALLOW
+~~~
+
+---
+
+# 17.5 Capital State / Portfolio Context
+
+## Decision Candidate
+NEW / STRENGTHEN
+
+単一Tradeではなく資本全体を見る。
+
+参照候補:
+
+~~~text
+Total Capital
+Free Capital
+Reserved Capital
+Current Exposure
+Gross Exposure
+Net Exposure
+Leverage
+Open Positions
+Pending Orders
+Unrealized PnL
+Realized Drawdown
+Current Drawdown
+Risk Budget Used
+Venue Exposure
+Asset Concentration
+Directional Concentration
+Strategy / Knowledge Concentration
+Correlation / Common Factor
+Liquidity Exposure
+Tail Exposure
+Operational Exposure
+~~~
+
+重要:
+
+~~~text
+3 positions
+≠
+3 independent risks
+~~~
+
+例:
+
+~~~text
+BTC Long
+ETH Long
+NASDAQ Long
+~~~
+
+が同一Risk-On factorへ強く依存するなら、Portfolioでは集中Riskとして扱える必要がある。
+
+---
+
+# 17.6 Risk Budget
+
+## Decision Candidate
+NEW / KEEP
+
+資本を無制限にOpportunityへ割り当てない。
+
+候補概念:
+
+~~~text
+Global Risk Budget
+Portfolio Risk Budget
+Market / Asset Risk Budget
+Strategy / Thesis Risk Budget
+Position Risk Budget
+Venue Risk Budget
+Emergency Reserve
+~~~
+
+正式階層は後。
+
+Risk Budgetは、
+
+> 「何円使えるか」だけでなく、「どれだけ損失分布 / Exposure / Tailを許容するか」を表す責任候補。
+
+重要:
+
+~~~text
+Capital Available
+≠ Risk Budget Available
+~~~
+
+---
+
+# 17.7 Position Sizing
+
+## Decision Candidate
+NEW / STRENGTHEN
+
+Position Sizeを固定額やConfidenceだけで決めない。
+
+入力候補:
+
+~~~text
+Economic Value
+Expected loss distribution
+Uncertainty
+Failure Boundary distance
+Liquidity
+Slippage / impact
+Volatility
+Current portfolio exposure
+Correlation / common factor
+Risk budget
+Drawdown state
+Venue limits
+Leverage constraints
+Tail sensitivity
+Decision horizon
+~~~
+
+重要:
+
+~~~text
+Higher confidence
+≠ linearly larger size
+
+Positive EV
+≠ maximum size
+~~~
+
+Position sizingはCapital Permissionの一部または直後責任候補。
+
+---
+
+# 17.8 Drawdown / Ruin / Survival Context
+
+## Decision Candidate
+NEW / STRENGTHEN
+
+Phase 2で厳密なSurvival > Profit序列は未固定だが、R4は少なくとも以下を扱える必要がある。
+
+~~~text
+Current Drawdown
+Drawdown acceleration
+Loss streak
+Risk budget exhaustion
+Tail loss scenario
+Ruin / near-ruin condition
+Margin exhaustion
+Liquidity shock
+Cross-position cascade
+Venue failure exposure
+~~~
+
+重要:
+
+~~~text
+High EV opportunity
++
+capital survival threat
+↓
+can still be BLOCKED
+~~~
+
+具体Thresholdは後。
+
+---
+
+# 17.9 Concentration / Correlation / Common Dependency
+
+## Decision Candidate
+NEW
+
+Portfolio riskは単純なAsset別合計だけにしない。
+
+見る候補:
+
+~~~text
+Asset correlation
+Cross-market correlation
+Shared macro factor
+Shared liquidity factor
+Shared venue
+Shared collateral
+Shared stablecoin
+Shared Knowledge / Strategy
+Shared data dependency
+Shared event sensitivity
+~~~
+
+目的:
+
+> 見かけ上分散していても同じFailure原因へ集中しているPortfolioを検出できること。
+
+---
+
+# 17.10 Runtime Authorized Constraint
+
+## Decision Candidate
+NEW / STRENGTHEN
+
+R2のResearch Constraint Candidate、R3のKnowledge Constraintと、本番強制Constraintを分離する。
+
+~~~text
+R2:
+Research Constraint Candidate
+
+R3:
+Knowledge Constraint
+
+R4 / X06:
+Runtime Authorized Constraint
+~~~
+
+Runtime Authorized Constraint候補:
+
+~~~text
+Max leverage
+Max position size
+Max portfolio exposure
+Venue limit
+Liquidity minimum
+Data quality minimum
+Event restriction
+Market-hours restriction
+Drawdown restriction
+RiskState restriction
+Emergency restriction
+~~~
+
+重要:
+
+~~~text
+Research found constraint
+≠ Production constraint automatically
+~~~
+
+本番強制化にはAuthority / Governanceを通す。
+
+---
+
+# 17.11 RiskState
+
+## Decision Candidate
+KEEP / REDESIGN
+
+LegacyのRiskState思想は再利用価値が高い。
+
+目的:
+
+> 現在のProduction risk postureを一つのCanonical Stateとして表現し、Capital / Execution / Runtime Protectionが同じSafety postureを参照できるようにする。
+
+State候補イメージ:
+
+~~~text
+NORMAL
+CAUTION
+RESTRICTED
+REDUCE_ONLY
+EMERGENCY
+RECOVERY
+~~~
+
+正式Stateは後。
+
+重要:
+
+~~~text
+RiskState
+≠ Market Regime
+≠ Knowledge Applicability
+≠ System Health
+~~~
+
+---
+
+# 17.12 RiskState Writer
+
+## Decision Candidate
+KEEP single-writer principle / DEFER implementation
+
+同じRiskStateを複数Moduleが直接書き換えない。
+
+~~~text
+Recommendation
+↓
+Risk evaluation
+↓
+Authorized transition
+↓
+RiskState
+~~~
+
+を基本候補とする。
+
+重要:
+
+~~~text
+Monitoring Alert
+≠ RiskState Change
+
+AI Recommendation
+≠ RiskState Change
+
+Research Constraint
+≠ RiskState Change
+~~~
+
+exact writer / authorityはX06で後決め。
+
+---
+
+# 17.13 Emergency Fast Path
+
+## Decision Candidate
+KEEP / STRENGTHEN
+
+Phase 4 Two-Speed思想をR4へ正式配置候補。
+
+Fast Path Input候補:
+
+~~~text
+R1 Runtime Market Context
+R3 Runtime Assumption Monitoring
+R4 Position / Exposure
+X10 System Health / Incident
+Venue status
+Liquidity collapse
+Data quality collapse
+Margin state
+Authorized emergency constraints
+~~~
+
+重要原則:
+
+> Emergency Fast PathはResearch完了を待たずにRiskを減らせる。
+
+---
+
+# 17.14 Emergency Fast Pathの非対称性
+
+## Decision Candidate
+NEW / STRONG CANDIDATE
+
+Fast PathはRiskを増やす方向へ使わない。
+
+許容候補:
+
+~~~text
+BLOCK new exposure
+CANCEL pending exposure
+REDUCE
+PROTECT
+EXIT
+HEDGE within pre-authorized limits
+FREEZE
+~~~
+
+禁止候補:
+
+~~~text
+新しい未検証Tradeを開始
+Positionを拡大
+新しいKnowledgeを作る
+Risk Limitを緩和
+Emergencyを理由にResearch Ruleを飛ばす
+~~~
+
+原則:
+
+~~~text
+Fast Safety
+=
+risk-reducing / risk-containing path
+
+Fast Safety
+≠
+fast alpha path
+~~~
+
+これはR4の重要Safety候補。
+
+---
+
+# 17.15 Recovery Strict Path
+
+## Decision Candidate
+KEEP / REDESIGN
+
+Emergency状態から通常状態へ戻す時は、Risk低減より厳格にする候補。
+
+~~~text
+Emergency
+↓
+Condition recovered?
+↓
+System healthy?
+↓
+Data reliable?
+↓
+Position reconciled?
+↓
+Risk authority approval?
+↓
+RECOVERY
+↓
+NORMAL / CAUTION
+~~~
+
+重要:
+
+~~~text
+危険検知
+→ 自動で厳しくする
+~~~
+
+ことと、
+
+~~~text
+危険解除
+→ 自動ですぐ緩める
+~~~
+
+ことを対称にしない。
+
+Risk relaxationはより厳しいGateを持つ候補。
+
+---
+
+# 17.16 Defense Layer
+
+## Decision Candidate
+SPLIT / DROP monolith
+
+旧Defense Layerの責任を分解する。
+
+~~~text
+A. Capital / Portfolio Permission
+B. Authorized Constraint
+C. RiskState
+D. Emergency Fast Path
+E. Position Runtime Protection
+~~~
+
+「Defense」という一つの巨大LayerはRequired Architectureにしない。
+
+Defense思想は各責任へ保持する。
+
+---
+
+# 17.17 Execution Admission
+
+## Decision Candidate
+KEEP / REDESIGN
+
+Capital Permission後も、Execution可能とは限らない。
+
+確認候補:
+
+~~~text
+Capital permission still valid
+RiskState permits action
+Authorized constraints satisfied
+Venue available
+Instrument tradable
+Liquidity sufficient
+Order size allowed
+Price / spread conditions acceptable
+No duplicate reservation
+System health acceptable
+Credential / permission valid
+Decision not stale
+~~~
+
+Output候補:
+
+~~~text
+EXECUTION_ALLOWED
+REDUCE_SIZE
+DEFER
+BLOCK
+UNKNOWN
+~~~
+
+正式Stateは後。
+
+---
+
+# 17.18 Decision Staleness / Time Validity
+
+## Decision Candidate
+NEW / STRENGTHEN
+
+R3で作られたOpportunityが古くなっている可能性をExecution前に確認する。
+
+見る候補:
+
+~~~text
+Decision timestamp
+Market movement since decision
+Current spread
+Current liquidity
+Current RiskState
+Knowledge assumption deviation
+Material event since decision
+Data freshness
+~~~
+
+重要:
+
+~~~text
+Decision was valid at T0
+≠
+still executable at T1
+~~~
+
+必要ならR3再評価へ戻す。
+
+---
+
+# 17.19 Execution Intent
+
+## Decision Candidate
+KEEP / REDESIGN
+
+Execution Intentは、
+
+> Capital PermissionとExecution Admissionを通過したActionを、Venueへ渡せる意味へ変換したProduction instruction。
+
+含む意味候補:
+
+~~~text
+Action
+Asset / Instrument
+Side
+Target exposure / size
+Allowed price / slippage boundaries
+Time validity
+Venue constraints
+Protection requirements
+Decision / Opportunity reference
+Risk permission reference
+Authorized constraints
+Idempotency / reservation reference
+~~~
+
+重要:
+
+~~~text
+Execution Intent
+≠ Order sent
+≠ Fill
+≠ Position
+~~~
+
+---
+
+# 17.20 Execution Reservation / Idempotency
+
+## Decision Candidate
+KEEP / STRENGTHEN
+
+重複発注防止。
+
+例:
+
+~~~text
+API timeout
+↓
+response unknown
+↓
+same intent retried
+↓
+double order
+~~~
+
+を防ぐ。
+
+候補責任:
+
+~~~text
+Intent reservation
+Idempotency key
+Pending execution ownership
+Retry safety
+Duplicate detection
+~~~
+
+重要:
+
+~~~text
+Timeout
+≠
+Order not accepted
+~~~
+
+---
+
+# 17.21 Venue Routing
+
+## Decision Candidate
+KEEP / REDESIGN
+
+複数Venueへ対応する場合、
+
+~~~text
+Venue availability
+Fees
+Liquidity
+Spread
+Capability
+Order types
+Minimum size
+Collateral
+Operational health
+Counterparty / venue risk
+~~~
+
+を見てRouting可能にする。
+
+ただしVenue RouterはCapital Authorityではない。
+
+~~~text
+Venue Router
+≠
+Risk Permission
+~~~
+
+---
+
+# 17.22 Execution Attempt / Event
+
+## Decision Candidate
+KEEP
+
+Executionは一発のBoolean successではない。
+
+候補:
+
+~~~text
+Intent created
+Submitted
+Accepted
+Rejected
+Partially filled
+Filled
+Canceled
+Expired
+Unknown
+Retry
+Venue error
+~~~
+
+イベント履歴を追跡可能にする。
+
+重要:
+
+~~~text
+API 200 OK
+≠
+Position exists
+~~~
+
+---
+
+# 17.23 Execution Reconciliation
+
+## Decision Candidate
+KEEP / STRENGTHEN
+
+Execution EventとVenue実状態を照合し、
+
+> 本当に何が約定し、現在どのExposureが存在するか
+
+を確認する。
+
+入力候補:
+
+~~~text
+Execution Intent
+Execution Attempts
+Venue order status
+Fills
+Balance / position snapshot
+Fees
+Funding / carry
+Cancellations
+Unknown responses
+~~~
+
+Output候補:
+
+~~~text
+Reconciled execution facts
+Unresolved execution state
+Mismatch / incident
+~~~
+
+重要:
+
+~~~text
+Adapter response
+≠
+Canonical Execution Truth
+~~~
+
+---
+
+# 17.24 Execution Record
+
+## Decision Candidate
+KEEP / REDESIGN
+
+Reconciliation済みのExecution事実をCanonicalに保持する責任。
+
+候補意味:
+
+~~~text
+What was intended
+What was submitted
+What was filled
+At what price
+At what size
+Fees / cost
+Which venue
+Timing
+Slippage
+Unresolved differences
+Trace to Decision / Risk permission
+~~~
+
+Execution RecordはTrade Resultではない。
+
+---
+
+# 17.25 Logical Position / Exposure Truth
+
+## Decision Candidate
+KEEP / STRENGTHEN
+
+Venueごとの表示をそのままPosition Source of Truthにしない。
+
+Logical Position候補:
+
+> Reconciled Execution / Position Eventsから構成される、OSが認識するCanonical Exposure。
+
+見る候補:
+
+~~~text
+Asset / Instrument
+Net exposure
+Gross exposure
+Average entry
+Venue distribution
+Collateral
+Leverage
+Unrealized PnL
+Protection status
+Decision / Thesis references
+Knowledge assumptions
+Opened time
+Current state
+~~~
+
+重要:
+
+~~~text
+Exchange position screen
+≠
+Canonical Logical Position automatically
+~~~
+
+---
+
+# 17.26 Position Event
+
+## Decision Candidate
+KEEP
+
+Positionは一つの静的RecordではなくEventで変化する。
+
+候補:
+
+~~~text
+OPEN
+INCREASE
+REDUCE
+PARTIAL EXIT
+HEDGE
+TRANSFER
+PROTECTION ADDED
+PROTECTION CHANGED
+CLOSE
+FORCED CHANGE
+RECONCILIATION CORRECTION
+~~~
+
+Current PositionはEvent / execution factsからProjection可能にする方向。
+
+---
+
+# 17.27 Protection Requirement Ownership
+
+## Decision Candidate
+NEW / RESOLVE LEGACY GAP
+
+Legacyで曖昧だった責任。
+
+候補:
+
+> R4 Capital / Productionが、Positionを持つために必要な最低Protection RequirementのCanonical Ownerになる。
+
+Protection Requirementは、
+
+~~~text
+R3 Thesis invalidation / boundary
++
+R4 Risk Permission
++
+Position size
++
+Liquidity / Venue capability
++
+Global RiskState
++
+Authorized Constraint
+~~~
+
+から生成・維持する候補。
+
+重要:
+
+~~~text
+Knowledge Boundary
+≠
+Stop Order price directly
+~~~
+
+研究上のBoundaryを本番Protectionへ変換するのはR4責任。
+
+---
+
+# 17.28 Runtime Protection
+
+## Decision Candidate
+KEEP / STRENGTHEN
+
+Position保有中は、
+
+~~~text
+R1 Runtime Market Context
+R3 Assumption Monitoring
+R4 Logical Position
+RiskState
+System Health
+Liquidity
+Margin
+Authorized Constraints
+Protection Requirement
+~~~
+
+を参照してProtectionを評価する。
+
+Action候補:
+
+~~~text
+CONTINUE
+WATCH
+REDUCE
+HEDGE
+TIGHTEN PROTECTION
+EXIT
+BLOCK ADDITION
+EMERGENCY CLOSE
+~~~
+
+正式Enumは後。
+
+---
+
+# 17.29 Runtime ProtectionとKnowledge Monitoringの境界
+
+## Decision Candidate
+KEEP SEPARATION
+
+R3:
+
+~~~text
+Knowledge / thesis assumptionsが崩れたか？
+~~~
+
+を判断。
+
+R4:
+
+~~~text
+その崩れ方とPosition / Risk状態を踏まえて、
+資金をどう守るか？
+~~~
+
+を判断。
+
+重要:
+
+~~~text
+R3 MATERIAL_DEVIATION
+≠
+automatic close
+
+R4 EXIT
+≠
+Knowledge invalidated
+~~~
+
+---
+
+# 17.30 Exit Decision
+
+## Decision Candidate
+KEEP / REDESIGN
+
+Exit理由を一つにしない。
+
+候補:
+
+~~~text
+Thesis fulfilled
+Thesis invalidated
+Economic value decayed
+Risk budget exceeded
+Portfolio conflict
+Failure Boundary crossed
+Constraint activated
+Liquidity deteriorated
+Emergency safety
+Time horizon expired
+Operational failure
+Manual / governance override
+~~~
+
+Exitは、
+
+~~~text
+勝ち / 負け
+~~~
+
+だけで分類しない。
+
+---
+
+# 17.31 Protection Order Intent
+
+## Decision Candidate
+KEEP / REDESIGN
+
+ProtectionのActionも通常Executionと同じくIntent → Attempt → Event → Reconciliationを通す。
+
+~~~text
+Protection Decision
+↓
+Protection Order Intent
+↓
+Execution
+↓
+Reconciliation
+↓
+Protection State
+~~~
+
+Protection आदेशだけ別の無追跡経路にしない。
+
+---
+
+# 17.32 Protection State
+
+## Decision Candidate
+KEEP / STRENGTHEN
+
+現在Positionがどの程度保護されているかを追跡する。
+
+候補意味:
+
+~~~text
+Required protection
+Actual protection
+Gap
+Pending protection
+Failed protection
+Protection venue
+Protection validity
+Emergency backup state
+~~~
+
+重要:
+
+~~~text
+Protection order submitted
+≠
+Protection active
+~~~
+
+---
+
+# 17.33 Operational / System Failure During Position
+
+## Decision Candidate
+KEEP / STRENGTHEN
+
+例:
+
+~~~text
+Exchange API down
+Websocket stale
+Order status unknown
+DB outage
+Network failure
+Credential failure
+AI unavailable
+Monitoring failure
+~~~
+
+をMarket Failure / Knowledge Failureと分ける。
+
+必要に応じてX10 Incident / RecoveryとR4 Fast Safetyが協調する。
+
+重要:
+
+~~~text
+System Failure
+≠
+Market Thesis Failure
+~~~
+
+---
+
+# 17.34 Execution / Position Failure Paths
+
+候補:
+
+~~~text
+Duplicate order
+Partial fill
+Unexpected fill
+Rejected order
+Stale order
+Slippage breach
+Venue unavailable
+Position mismatch
+Protection missing
+Protection failed
+Margin risk
+Reconciliation unresolved
+Unknown exposure
+~~~
+
+原則:
+
+> Unknown Exposureは通常状態として扱わず、risk-reducing / freeze方向へ寄せる。
+
+exact policyは後。
+
+---
+
+# 17.35 Production Outcome Boundary
+
+## Decision Candidate
+NEW / REDESIGN
+
+R4の出口を単なるPnLにしない。
+
+R5へ渡す候補:
+
+~~~text
+Decision / Opportunity reference
+Capital permission decision
+Risk context
+Execution intent
+Execution record
+Position history
+Protection history
+Exit reason
+Realized PnL
+Unrealized path
+Fees / funding / slippage
+Runtime deviations
+Incidents
+Constraint activations
+RiskState transitions
+Counterfactual-relevant context
+Information available at each decision time
+~~~
+
+これを、
+
+~~~text
+Production Outcome Package
+~~~
+
+等のLogical Boundary候補として扱う。
+
+名称は後。
+
+---
+
+# 17.36 TradeResult
+
+## Decision Candidate
+REDESIGN
+
+TradeResultはR4 Outcomeの一部として残せるが、Whole Outcome Source of Truthにはしない。
+
+~~~text
+TradeResult
+=
+financial result projection
+
+Production Outcome
+=
+decision + risk + execution + position + protection + incident + financial result
+~~~
+
+重要:
+
+~~~text
+Profit
+≠ Good Decision
+
+Loss
+≠ Bad Decision
+~~~
+
+R5がこれを評価する。
+
+---
+
+# 17.37 R4 Fast Safety Inputs
+
+Fast pathへ直接利用可能な候補:
+
+~~~text
+R1:
+material market change
+quality / freshness degradation
+liquidity shock
+event shock
+
+R3:
+assumption degradation
+boundary approaching
+boundary crossed
+applicability contradiction
+
+R4:
+portfolio exposure
+margin / leverage
+drawdown
+protection state
+unknown exposure
+
+X10:
+system incident
+venue outage
+data pipeline failure
+credential failure
+~~~
+
+Fast pathはこれらを統合してRiskを減らせる。
+
+---
+
+# 17.38 R4 Slow / Fast Structure
+
+## Slow Capital / Entry Path
+
+~~~text
+R3 Economic Opportunity
+↓
+Capital / Portfolio Evaluation
+↓
+Risk Permission
+↓
+Position Sizing
+↓
+Execution Admission
+↓
+Execution Intent
+↓
+Execution
+↓
+Position
+~~~
+
+## Fast Safety Path
+
+~~~text
+Runtime Market / Knowledge / System / Position change
+↓
+Emergency / Runtime Protection Evaluation
+↓
+Risk-reducing Action
+↓
+Execution / Reconciliation
+↓
+Updated Position / Protection
+~~~
+
+重要:
+
+~~~text
+Fast path can reduce risk
+without waiting for R2 Research.
+
+Fast path cannot create new Knowledge
+or loosen Risk permission.
+~~~
+
+---
+
+# 17.39 R4 AI / Rule Boundary
+
+Python / Rule候補:
+
+~~~text
+Exposure calculation
+Risk budget checks
+Position sizing formula
+Constraint enforcement
+Drawdown checks
+Leverage / margin checks
+Order validation
+Idempotency
+Reconciliation
+Position projection
+Protection gap detection
+Emergency deterministic guards
+~~~
+
+AI候補:
+
+~~~text
+Risk explanation
+Scenario interpretation
+Human-readable rationale
+Unusual conflict review
+Operational diagnostic assistance
+~~~
+
+重要:
+
+~~~text
+AI says safe
+≠ Risk Permission
+
+AI says exit
+≠ Execution authority
+
+AI unavailable
+≠ Protection unavailable
+~~~
+
+Hard safetyはAI依存を避ける方向。
+
+---
+
+# 17.40 R4 Candidate Flow
+
+~~~text
+R3 Economic Opportunity
+        ↓
+Capital / Portfolio Context
+        ↓
+Risk Budget / Constraint / RiskState
+        ↓
+Capital Permission
+        ↓
+Position Sizing
+        ↓
+Execution Admission
+        ↓
+Execution Intent
+        ↓
+Reservation / Venue Routing
+        ↓
+Execution Attempt / Events
+        ↓
+Reconciliation
+        ↓
+Execution Record
+        ↓
+Logical Position / Exposure
+        ↓
+Protection Requirement / State
+        ↓
+Runtime Protection / Exit
+        ↓
+Position Closed / Finalized
+        ↓
+Production Outcome Boundary
+        ↓
+R5 Learning / Feedback
+~~~
+
+Parallel Fast Safety:
+
+~~~text
+R1 Runtime Context
++
+R3 Assumption Monitoring
++
+R4 Exposure / Protection
++
+X10 System Health
+        ↓
+Emergency Fast Path
+        ↓
+risk-reducing action only
+        ↓
+Execution / Reconciliation
+        ↓
+Updated Position / Protection
+~~~
+
+---
+
+# 17.41 R4 Concept Classification
+
+| Concept | Phase 5 R4 Candidate |
+|---|---|
+| Economic Opportunity → Risk boundary | KEEP / STRENGTHEN |
+| Capital Permission | NEW / KEEP |
+| Capital / Portfolio Context | NEW / STRENGTHEN |
+| Risk Budget | NEW / KEEP |
+| Position Sizing | NEW / STRENGTHEN |
+| Drawdown / Ruin context | NEW / STRENGTHEN |
+| Correlation / Concentration | NEW |
+| Runtime Authorized Constraint | NEW / STRENGTHEN |
+| RiskState | KEEP / REDESIGN |
+| RiskState single-writer | KEEP principle |
+| Defense Layer | SPLIT / DROP monolith |
+| Emergency Fast Path | KEEP / STRENGTHEN |
+| Fast Path risk-increase | DROP |
+| Recovery Strict Path | KEEP / REDESIGN |
+| Execution Admission | KEEP / REDESIGN |
+| Decision Staleness check | NEW |
+| Execution Intent | KEEP / REDESIGN |
+| Reservation / Idempotency | KEEP / STRENGTHEN |
+| Venue Routing | KEEP / REDESIGN |
+| Execution Attempt / Event | KEEP |
+| Reconciliation | KEEP / STRENGTHEN |
+| Execution Record | KEEP / REDESIGN |
+| Logical Position | KEEP / STRENGTHEN |
+| Position Event | KEEP |
+| Current Position Projection | KEEP as derived view |
+| Protection Requirement | NEW / resolve legacy gap |
+| Runtime Protection | KEEP / STRENGTHEN |
+| Exit Decision | KEEP / REDESIGN |
+| Protection Order Intent | KEEP / REDESIGN |
+| Protection State | KEEP / STRENGTHEN |
+| Adapter as canonical truth | DROP |
+| API success = execution success | DROP |
+| TradeResult as whole outcome | DROP / REDESIGN |
+| Production Outcome Boundary | NEW |
+| AI as risk authority | DROP |
+
+---
+
+# 17.42 R4 Open Questions for Later Design
+
+~~~text
+1. Capital hierarchy / account model
+2. Risk Budget hierarchy
+3. Position sizing method
+4. Portfolio correlation / common-factor model
+5. Drawdown / ruin thresholds
+6. Tail-risk representation
+7. RiskState exact state machine
+8. RiskState transition authority
+9. Runtime Authorized Constraint approval / writer
+10. Emergency Fast Path exact allowed actions
+11. Hedge authority and limits
+12. Recovery Gate
+13. Execution Admission minimum contract
+14. Decision staleness threshold
+15. Venue routing policy
+16. Idempotency / reservation protocol
+17. Reconciliation canonical rules
+18. Multi-venue logical position
+19. Protection Requirement generation
+20. Protection State canonical source
+21. Unknown exposure policy
+22. Exit taxonomy
+23. Manual override / human emergency control
+24. Production Outcome minimum contract
+25. Paper / Demo / Live separation
+26. Capital segregation across markets
+27. Crypto spot vs leveraged derivatives risk differences
+28. Market expansion execution contract
+29. AI role in non-hard safety
+30. Incident-to-position safety contract
+~~~
+
+---
+
+# 17.43 Phase State
+
+~~~text
+Phase 5 R1
+COMPLETE / WORKING CANDIDATE
+
+Phase 5 R2
+COMPLETE / WORKING CANDIDATE
+
+Phase 5 R3
+COMPLETE / WORKING CANDIDATE
+
+Phase 5 R4
+COMPLETE / WORKING CANDIDATE
+
+NEXT:
+R5 — Learning / Feedback
+~~~
+
+重要:
+
+~~~text
+R4 COMPLETE
+≠
+Final Capital / Production Architecture
+
+Positive EV
+≠
+Capital Permission
+
+Risk Permission
+≠
+Execution Success
+
+Order Sent
+≠
+Position Exists
+
+Emergency Fast Path
+≠
+Fast Alpha Path
+
+Exit
+≠
+Knowledge Invalid
+~~~
