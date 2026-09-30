@@ -18,7 +18,7 @@ Last Updated:
 Conversation Focus:
 Whole Market Understanding OS Reconstruction.
 Phases 1-4 checkpointed.
-Phase 5 R1, R2, R3 concept-level reconstruction complete.
+Phase 5 R1 / R2 / R3 concept-level reconstruction complete.
 Current active work: R4 Capital / Production.
 
 Important Boundary:
@@ -36,70 +36,59 @@ R6 Long-Term Foundation / Operations / Human Projection
 X Cross-Cutting
 
 R3 KEY RECONSTRUCTION:
-- R3 split conceptually into Knowledge Maintenance, Applicability/Runtime Assumption, Decision Preparation/EV
-- Foundation and Research Knowledge remain separate epistemic categories
-- Validated Research Result does not automatically become Knowledge
-- Knowledge Admission may produce Knowledge, merge/update candidate, Research Asset only, or no Knowledge admission
-- Negative/refutation/boundary knowledge retained; pure inconclusive/process-limited results need not become Knowledge claims
-- Knowledge semantics remain conditional and versioned
-- Knowledge relationships separated from Knowledge semantics; Knowledge Graph becomes derived view candidate
-- Knowledge Lifecycle separated from Applicability
-- Revalidation routes back to R2; R3 does not self-research
-- Research Constraint Candidate / Knowledge Constraint / Runtime Authorized Constraint separated
-- Knowledge Retrieval added before Applicability; retrieved does not mean applicable
-- Applicability remains current-usability assessment and records excluded-knowledge reasons
-- Runtime Assumption Monitoring split from pre-decision applicability but shares semantics
-- Runtime deviation cannot directly mutate Knowledge or decide exit
-- Multi-Knowledge Conflict/Dependency/Overlap explicitly retained
-- Decision Synthesis added between Applicability and EV
-- Trade Thesis renamed/deferred; responsibility retained as traceable Decision Thesis candidate
-- Expected Value separated from Applicability and Capital Permission
-- R3 outputs Economic Opportunity / Decision Proposal context to R4, not Order Intent
-- Signal Engine not required top-level concept
-- BUY/SELL-only canonical decision outcome dropped
-- WAIT / NO ACTION / UNKNOWN / conflicted states remain valid candidates
+- Foundation and Research Knowledge remain separate epistemic domains
+- Validated Research Result does not auto-promote to Knowledge
+- Knowledge Admission / Formation replaces ambiguous Production-like promotion meaning
+- Knowledge stores conditional semantics: conditions, failure boundaries, uncertainty, market/horizon, version, validation history
+- positive, negative, no-edge, refutation, failure/boundary, constraint, unknown knowledge remain valuable
+- Knowledge Pool/Library is a logical domain; Knowledge Graph is only a possible derived view
+- Knowledge Lifecycle is separate from Runtime Applicability
+- Lifecycle Assessment is separate from authoritative state transition
+- old/stale does not mean false; revalidation can be requested
+- Constraint is split into Research Constraint Candidate / Knowledge Constraint / Runtime Authorized Constraint
+- Applicability remains current-usability assessment, not Trade
+- Runtime Assumption Monitoring is separated from pre-decision applicability and cannot rewrite Knowledge
+- Knowledge Conflict Detection is separate from Conflict Resolution
+- shared evidence / dependency prevents knowledge-count majority voting
+- Decision Synthesis / Conflict Resolution is a distinct R3 responsibility
+- legacy Trade Thesis is broadened toward Decision Thesis / Action Candidate because WAIT / NO TRADE / REDUCE / UNKNOWN are valid
+- Decision Scope / Horizon is explicit
+- Economic Value is separate from Applicability and Capital Permission
+- EV should retain distribution / uncertainty / costs, not only one average
+- Signal Engine is dropped as a required top-level concept
+- R3 outputs a traceable Economic Decision Candidate to R4, not Capital Permission or OrderIntent
 
-R3 CANDIDATE FLOW:
-Validated Research Result
-→ Knowledge Admission
-→ Knowledge Version/Lifecycle
-→ Knowledge Domain
-+ Current Market
-→ Retrieval
-→ Applicability
-→ Conflict/Dependency/Overlap
-→ Decision Synthesis
-→ Decision Thesis/Candidate
-→ EV
-→ Economic Opportunity Context
-→ R4
+R3 TWO-SPEED:
+Slow:
+Validated Research Result → Knowledge Admission / Version / Lifecycle
 
-FAST RUNTIME:
-Position-linked Knowledge Assumptions
-+ Current Runtime Context
-→ Assumption Monitoring
-→ R4 Protection / R5 Feedback / R2 Question
+Fast:
+Existing Knowledge + Current Context → Applicability → Decision Synthesis → EV
+
+Active Runtime:
+Knowledge assumptions + Runtime Context → Deviation assessment → R4 Fast Safety / R5 Feedback
 
 NEXT — R4:
 Reconstruct:
-1. Capital governance
-2. Portfolio / correlation / concentration
-3. Risk budget / drawdown / ruin protection
-4. risk permission
-5. fast safety / emergency path
-6. execution fidelity
-7. exchange-independent order intent
-8. reconciliation
-9. canonical position / exposure truth
-10. runtime position protection
-11. exit / reduce / block
-12. R4 → R5 production evidence
+1. Capital state / portfolio view
+2. risk budget / allocation
+3. drawdown / ruin protection
+4. Decision vs Risk Permission
+5. authorized constraints
+6. fast safety / emergency restriction
+7. recovery / permission expansion
+8. execution intent
+9. order submission / fill / reconciliation
+10. logical position / exposure truth
+11. position protection / exit
+12. AI/API/exchange failure boundaries
+13. R4 → R5 outcome evidence
 
 Do NOT:
 - adopt Phase 5 candidates as final architecture
 - finalize DB/Object/Python
-- let R3 issue capital permission
-- let runtime finding mutate Knowledge directly
+- let EV grant capital permission
+- let runtime monitoring rewrite Knowledge
 - modify formal Current Architecture
 - run Phase 6 destruction review early
 
@@ -108,7 +97,6 @@ READ:
 - 99_REFERENCE/旧市場理解OS_設計知識リファレンス.md
 - 98_DESIGN_STUDY/DAISUKE_MARKET_UNDERSTANDING_OS_PROPOSAL.md
 - 00_HUMAN/PROJECT_CHARTER.md
-- future Current 05/06 only if/when created; do not invent them
 
 Git Write Permission Reminder:
 REQUIRE CURRENT-CHAT USER AUTHORIZATION
