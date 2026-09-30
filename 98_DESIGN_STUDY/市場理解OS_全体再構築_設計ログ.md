@@ -2957,3 +2957,802 @@ KEEP decision after Destruction Review
 Market DNA / Causal Engine / World Economic Library etc.
 remain replaceable HOW / concept candidates until Phase 6.
 ```
+
+
+---
+
+# 14. Checkpoint 007 — Phase 5 R1 Concept-Level Reconstruction
+
+**Date:** 2026-09-30  
+**State:** SAVED  
+**Formal Current Architecture Changed:** NO  
+**Phase:** 5 Reconstruction  
+**Scope:** R1 — Perception / Relation / Current Understanding
+
+## 14.1 R1 Purpose Candidate
+
+R1の責任候補:
+
+> 外部世界・市場から得たObservationを、品質・時間・Source・市場文脈を失わず整理し、共通Relation / Foundationを参照しながら「現在市場で何が起きているか」を説明可能な状態へ変換し、Research・Runtime・Applicabilityへ渡す。
+
+R1は以下を行わない。
+
+```text
+Hypothesisを立証しない
+Causeを確定しない
+Knowledgeを生成・承認しない
+Expected Valueを計算しない
+Capital Permissionを出さない
+Tradeを決定しない
+Executionを行わない
+```
+
+---
+
+# 14.2 Epistemic Status Separation
+
+R1で最重要の分離候補:
+
+```text
+Observation
+≠ Derived Measurement
+≠ Relation Vocabulary
+≠ Foundation Claim
+≠ Current Relation Interpretation
+≠ Cause Candidate
+≠ Hypothesis
+≠ Knowledge
+```
+
+この身分差を失うと、
+
+```text
+経済の一般論
+↓
+Current Market Fact扱い
+
+AI Interpretation
+↓
+Knowledge扱い
+
+Current Correlation
+↓
+Cause扱い
+```
+
+が発生するため、R1では意味境界を強く保持する。
+
+---
+
+# 14.3 Observation
+
+## Decision Candidate
+KEEP
+
+Observationは市場理解OSの事実入力として残す。
+
+最低限の意味:
+
+```text
+何が観測されたか
+どのSourceか
+いつ起きた / 公開された / 取得されたか
+Quality / Freshnessはどうか
+```
+
+重要:
+
+```text
+Observation
+≠ Interpretation
+```
+
+Raw / Normalized / Qualifiedの具体Object構造は後続Contractで決める。
+
+---
+
+# 14.4 Market Event
+
+## Decision Candidate
+SPLIT / MERGE
+
+旧MarketEventという一語は曖昧。
+
+以下を分ける候補:
+
+```text
+A. Observed Event
+= 外部Sourceから得たEvent fact
+→ Observation familyへMERGE
+
+B. Detected / Interpreted Market Event
+= 複数ObservationからOSが認識した市場現象
+→ Current Understanding / Derived Interpretation側
+```
+
+例:
+
+```text
+規制当局が発表した
+= Observed Event
+
+その発表後にSpot売り + Liquidation + Liquidity低下が同時発生し、
+市場がregulation shock状態にある
+= Interpreted Market Event
+```
+
+「MarketEvent」という単一身分で両者を混ぜない。
+
+---
+
+# 14.5 Feature / Derived Measurement
+
+## Decision Candidate
+KEEP / REDESIGN
+
+FeatureはR1で必要。
+
+ただし定義を狭める。
+
+```text
+Feature / Derived Measurement
+=
+Observationから再現可能な測定・変換
+```
+
+例:
+
+```text
+Return
+OI change
+Funding change
+Spread
+Imbalance
+Volatility
+Divergence
+Velocity
+```
+
+重要:
+
+```text
+Feature
+≠ Interpretation
+≠ Knowledge
+```
+
+Feature Combinationの探索自体をResearch Resultとみなさない。
+
+---
+
+# 14.6 Context
+
+## Decision Candidate
+SPLIT
+
+Contextは曖昧語なので一つのConceptにしない。
+
+候補:
+
+```text
+Observation Context
+=
+Asset / Market / Venue / Time / Source / Quality / Freshness等、
+Observationを比較可能にする文脈
+
+Current Market Context
+=
+現在市場Understandingを構成する解釈済みContext
+
+Runtime Context
+=
+Applicability / Capital / Position protectionが現在参照するContext
+```
+
+同じContext Objectへ全意味を詰め込まない。
+
+---
+
+# 14.7 Relation Vocabulary
+
+## Decision Candidate
+NEW / KEEP from Daisuke Intent
+
+ダイスケ案の人間的な「関係性による市場理解」を残すため、
+Relationを共通語彙として持てる責任をR1へ置く候補。
+
+初期候補:
+
+```text
+Flow
+Distortion / Imbalance
+Cycle
+Propagation
+Amplification
+Constraint / Bottleneck
+Substitution / Redistribution
+Stock / Accumulation
+Expectations
+Lag
+Threshold / Regime Shift
+Equilibrium / Arbitrage
+```
+
+重要:
+
+```text
+Relation Vocabulary
+=
+関係を表現する言葉・型
+
+Relation Vocabulary
+≠
+「その関係が現在成立している」という主張
+```
+
+Relation一覧はまだ最終固定しない。
+
+---
+
+# 14.8 Relationの3身分分離
+
+Relationを一種類にしない。
+
+## A. Relation Definition / Vocabulary
+
+```text
+Flowとは何を意味するか
+Propagationとは何を意味するか
+```
+
+共通言語。
+
+## B. Foundation Relation Claim
+
+```text
+市場・経済を研究するための背景的な関係主張
+```
+
+例:
+
+```text
+金利上昇はCredit Costへ影響し得る
+FundingはPerpetual市場構造の一部である
+```
+
+TruthではなくEpistemic Statusを持つ。
+
+## C. Current Relation Interpretation
+
+```text
+今の市場でどのRelationが成立している可能性があるかというCurrent Interpretation
+```
+
+例:
+
+```text
+現在、ETFからBTC Spotへの資金Flowが強い可能性
+```
+
+重要:
+
+```text
+Vocabulary
+≠ Foundation Claim
+≠ Current Interpretation
+```
+
+---
+
+# 14.9 Foundation
+
+## Decision Candidate
+REDESIGN / MERGE
+
+```text
+世界経済図書館
++
+Research Foundation
+```
+
+を物理Libraryとして二重に固定しない。
+
+保持する本質:
+
+> Feature総当たりからResearchを始めず、市場・経済・Instrument・Participant・Mechanism等の背景理解をResearch priorとして利用できること。
+
+Foundation候補内容:
+
+```text
+Instrument Mechanics
+Market / Trading Mechanics
+Participant Model
+Basic Economics / External Context
+Relation Definitions
+Trading Benchmark / Archetype
+Market-specific background
+```
+
+ただし:
+
+```text
+Foundation
+≠ Production Knowledge
+≠ 永久の真実
+```
+
+---
+
+# 14.10 Foundation Epistemic Status
+
+## Decision Candidate
+KEEP / REDESIGN
+
+Research Referenceの候補を保持する価値が高い。
+
+```text
+STRUCTURAL FACT
+SUPPORTED MECHANISM
+WORKING MODEL
+HEURISTIC
+UNKNOWN
+```
+
+ただし正式Enumは後で決める。
+
+目的:
+
+```text
+制度上明確な仕組み
+と
+経験則
+と
+未検証説明
+```
+
+を同じ確度で扱わない。
+
+Foundation自身もResearch対象になり得る。
+
+---
+
+# 14.11 Foundation Relevance Gate
+
+## Decision Candidate
+NEW
+
+World-model explosion対策として新しい責任候補。
+
+Foundationは世界中の全情報を常時Current Understandingへ投入しない。
+
+概念:
+
+```text
+Target Market / Research Question / Current Context
+↓
+Relevant Foundation Selection
+↓
+R1 / R2へ供給
+```
+
+目的:
+
+- 世界情報無限膨張を防ぐ
+- Crypto Firstを維持
+- Research Noiseを減らす
+- Market追加時にMarket-specific Foundationを差し替え可能にする
+
+重要:
+
+```text
+Foundation exists
+≠
+Foundation is relevant now
+```
+
+---
+
+# 14.12 Current Market Understanding
+
+## Decision Candidate
+KEEP / REDESIGN
+
+R1の主要Outputとして残す。
+
+定義候補:
+
+> Qualified Observation、Derived Measurement、Relevant Foundation、Relation Interpretation、Quality / Time / Uncertaintyを用いて、「今この市場で何が起きているとOSが理解しているか」を表現するCurrent Interpretation。
+
+重要:
+
+```text
+Current Market Understanding
+≠ Future Prediction
+≠ Hypothesis
+≠ Confirmed Cause
+≠ Knowledge
+≠ Signal
+≠ Trade Decision
+```
+
+UNKNOWN / MIXED / INSUFFICIENTを許す。
+
+---
+
+# 14.13 Market Intelligence
+
+## Decision Candidate
+MERGE / REDESIGN
+
+Market Intelligenceを独立Top-Level Engine必須とはしない。
+
+残す責任:
+
+```text
+複数Observation
++
+Derived Measurement
++
+Relevant Foundation
++
+Relation Vocabulary
+↓
+Current Market Understandingを形成するsynthesis / interpretation
+```
+
+したがって:
+
+```text
+Market Intelligence
+=
+R1内部のInterpretation capability candidate
+```
+
+名称を後で残すかはPhase 6以降。
+
+---
+
+# 14.14 Contradiction
+
+## Decision Candidate
+KEEP semantics / REDESIGN placement
+
+ContradictionはCurrent Understandingが単一結論へ無理に収束しないために必要。
+
+候補:
+
+```text
+Observation vs Observation
+Observation vs Foundation expectation
+Current Interpretation vs Current Interpretation
+Current Understanding vs existing Knowledge expectation
+```
+
+ただし最後のKnowledge contradictionはR3/R5との共有責任候補。
+
+R1で扱うのは主に、
+
+> Current perception上の説明不整合を記録し、Research Question sourceへ渡す。
+
+Contradiction
+≠ Cause
+≠ Refutation completed.
+
+---
+
+# 14.15 Unexplained / Unknown
+
+## Decision Candidate
+KEEP / STRENGTHEN
+
+Current Understandingは説明不能を正式状態として保持できる必要がある。
+
+```text
+UNKNOWN
+MIXED
+UNCERTAIN
+INSUFFICIENT
+UNEXPLAINED
+```
+
+正式state名は後。
+
+目的:
+
+```text
+説明できない
+↓
+既存Foundationへ無理に当てはめる
+```
+
+ことを防ぎ、Open Discovery / Research Questionへ送る。
+
+---
+
+# 14.16 Cause Candidate
+
+## Decision Candidate
+KEEP semantics / REDESIGN placement
+
+Cause Candidateは残すが、R1の必須Outputにはしない。
+
+```text
+Current Understanding
+↓
+Explanation / Causal Questionが必要な場合
+↓
+Cause Candidate(s)
+↓
+R2 Research
+```
+
+重要:
+
+```text
+Cause Candidate
+≠ Research Question全般
+≠ Confirmed Cause
+≠ Hypothesis Result
+≠ Knowledge
+```
+
+Cause Candidateを生成しない研究も正式に許可する。
+
+---
+
+# 14.17 Causal Engine
+
+## Decision Candidate
+SPLIT
+
+R1側:
+
+```text
+Cause Candidate generation
+Alternative explanation generation
+```
+
+R2側:
+
+```text
+Temporal order
+Lag validation
+Confounder analysis
+Alternative hypothesis
+Contradiction
+Evidence
+Historical / OOS / Forward
+Causal / empirical research
+```
+
+巨大な単一Causal EngineとしてArchitecture必須にはしない。
+
+---
+
+# 14.18 Current Market State Representation / Market DNA
+
+## Decision Candidate
+Capability KEEP / Market DNA DEFER
+
+必要能力:
+
+> Current Market Understandingを、Historical Case / Research / Applicabilityが比較可能な形へ投影すること。
+
+候補軸:
+
+```text
+Trend
+Volatility
+Liquidity
+Leverage
+Funding
+Flow
+Participant State
+Macro
+Session / Time
+```
+
+しかし:
+
+```text
+Market DNA
+という名前
+DNA Definition
+DNA Snapshot
+Vector形式
+Score形式
+Similarity Formula
+```
+
+はまだ固定しない。
+
+重要:
+
+```text
+State similarity
+≠
+Hypothesis support
+≠
+Applicability proof
+≠
+Signal
+```
+
+Current Market State Representationは
+Current Understandingの全内容そのものではなく、
+比較用途へのprojection候補として扱う方が自然。
+
+---
+
+# 14.19 R1 Outputs Candidate
+
+R1から同じOutputを全Downstreamへ送らない。
+
+候補:
+
+## R1 → R2 Research
+
+```text
+Research Question Source
+Contradiction
+Unknown / Unexplained
+Cause Candidate
+Current Understanding Context
+Relevant Foundation Context
+State Representation / Case Context
+```
+
+## R1 → R3 Knowledge / Applicability
+
+```text
+Current Market Understanding
+Current State Representation candidate
+Quality / Time / Uncertainty Context
+Relevant current relation interpretation
+```
+
+## R1 → R4 Fast Runtime / Safety
+
+```text
+Runtime Market Context
+Material Change / Deviation indicators
+Quality / Freshness degradation
+Relevant market-state change
+```
+
+重要:
+
+```text
+R1 → R4
+does not mean
+R1 can issue Trade Permission.
+```
+
+---
+
+# 14.20 R1 Candidate Flow
+
+```text
+External World / Market
+        ↓
+Observation
+        ↓
+Observation Integrity / Time / Quality
+        ↓
+Observation Context
+        ↓
+Derived Measurement
+        ↓
+        ├─────────────────────────────┐
+        │                             │
+Relevant Foundation / Relation       │
+        │                             │
+        └──────────────┬──────────────┘
+                       ↓
+             Current Interpretation
+                       ↓
+             Current Market Understanding
+              ┌────────┼──────────────┐
+              │        │              │
+              ↓        ↓              ↓
+        Contradiction  Unknown   State Representation
+              │        │              │
+              └──┬─────┘              ├→ R3
+                 ↓                    └→ R2
+        Research Question Source
+                 ↓
+             Cause Candidate
+             only when relevant
+                 ↓
+                R2
+
+Parallel:
+Current Market Understanding
+→ Runtime Market Context
+→ R4 Fast Safety
+```
+
+Foundation / RelationはCurrent Observationと同じFact streamとして扱わない。
+
+---
+
+# 14.21 Concept Classification — R1
+
+| Concept | Phase 5 R1 Candidate |
+|---|---|
+| Observation | KEEP |
+| Raw / Qualified distinction | KEEP responsibility |
+| Market Event | SPLIT / MERGE into observed vs interpreted |
+| Feature / Derived Measurement | KEEP / REDESIGN |
+| Context | SPLIT |
+| Relation Vocabulary | NEW / KEEP intent |
+| Foundation Relation Claim | NEW / REDESIGN |
+| Current Relation Interpretation | NEW / REDESIGN |
+| World Economic Library | REDESIGN / MERGE |
+| Research Foundation | MERGE into shared Foundation responsibility |
+| Foundation Epistemic Status | KEEP / REDESIGN |
+| Foundation Relevance Gate | NEW |
+| Market Intelligence | MERGE / REDESIGN |
+| Current Market Understanding | KEEP / REDESIGN |
+| Contradiction | KEEP / REDESIGN |
+| Unknown / Unexplained | KEEP / STRENGTHEN |
+| Cause Candidate | KEEP semantics / REDESIGN placement |
+| Causal Engine | SPLIT |
+| Market DNA | DEFER exact concept |
+| Current Market State Representation | KEEP capability / REDESIGN |
+| Signal / Prediction in R1 | DROP |
+| Trade / Risk authority in R1 | DROP |
+
+---
+
+# 14.22 R1 Open Questions for Phase 6 / Detailed Design
+
+```text
+1. Relation Vocabularyの正式最小集合
+2. Relation DefinitionとFoundation Claimのstorage分離
+3. Foundation ClaimのEpistemic Status正式Enum
+4. Foundation Source / Evidence provenance
+5. Foundation Relevance Gateの選別原則
+6. Current Relation Interpretationを独立Objectにするか
+7. Current Market Understandingのminimum semantic contract
+8. Contradictionの責任範囲
+9. Unknown / Unexplainedのstate taxonomy
+10. Cause Candidate生成条件 / 禁止条件
+11. State Representationが必要な最小軸
+12. Market DNA名称を残す価値
+13. Current Understanding → Runtime Contextのmaterial-change判定
+14. Foundation変更がCurrent Understandingへ与えるversion影響
+15. Market-specific Foundation extension contract
+```
+
+---
+
+# 14.23 Phase State
+
+```text
+Phase 5 R1 Concept-Level Reconstruction
+COMPLETE / WORKING CANDIDATE
+
+NEXT:
+R2 Research Concept-Level Reconstruction
+```
+
+重要:
+
+```text
+R1 COMPLETE
+≠
+Final R1 Architecture
+
+World Economic Library MERGE candidate
+≠
+Daisuke intent dropped
+
+Market DNA DEFER
+≠
+state comparison capability dropped
+
+Causal Engine SPLIT
+≠
+causal research dropped
+```
