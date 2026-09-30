@@ -17,83 +17,89 @@ Last Updated:
 
 Conversation Focus:
 Whole Market Understanding OS Reconstruction.
-Phases 1-4 are checkpointed.
-Phase 5 top-level responsibility reconstruction is checkpointed.
-Current active work is Phase 5 concept-level reconstruction.
+Phases 1-4 checkpointed.
+Phase 5 top-level pass complete.
+Phase 5 R1 concept-level reconstruction complete.
+Current active work: R2 Research concept-level reconstruction.
 
 Important Boundary:
 AI_CONTEXT remains authoritative for formal Project Current State.
-PROJECT_CHARTER formal Current focus is unchanged.
-Reconstruction work does NOT replace Current Architecture yet.
-Current 01-04 remain Working Baselines until explicit adoption.
-Phase 5 decisions are reconstruction candidates, not adopted design.
+Formal Current Architecture is unchanged.
+Phase 5 R1 is a WORKING RECONSTRUCTION CANDIDATE, not adopted design.
 
-PHASE 5 WORKING RESPONSIBILITY SKELETON:
+PHASE 5 RESPONSIBILITY SKELETON:
 R1 Perception / Relation / Current Understanding
 R2 Research
 R3 Knowledge / Applicability / Decision Preparation
 R4 Capital / Production
 R5 Learning / Feedback
 R6 Long-Term Foundation / Operations / Human Projection
-X  Cross-Cutting Capabilities
+X Cross-Cutting
 
-TWO-SPEED CANDIDATE:
-Evidence / Learning Path:
-R1 → R2 → R3 → R4 → R5
+R1 KEY RECONSTRUCTION:
+- Observation KEEP
+- Market Event split into observed-event fact vs interpreted/detected market event
+- Feature narrowed to reproducible derived measurement
+- Context split into Observation Context / Current Market Context / Runtime Context
+- Relation is split into:
+  1. Relation Vocabulary / Definition
+  2. Foundation Relation Claim
+  3. Current Relation Interpretation
+- World Economic Library + Research Foundation merged conceptually into shared Relation/Foundation responsibility candidate
+- Foundation is not Production Knowledge or permanent truth
+- Foundation Epistemic Status candidate retained:
+  STRUCTURAL FACT / SUPPORTED MECHANISM / WORKING MODEL / HEURISTIC / UNKNOWN
+- Foundation Relevance Gate added to prevent world-model explosion and preserve Crypto First
+- Current Market Understanding retained as current interpretation, not prediction/signal/trade authority
+- Market Intelligence merged/redesigned as R1 internal synthesis capability
+- Contradiction and Unknown/Unexplained retained as research-question sources
+- Cause Candidate retained only for explanation/causal questions; not mandatory R1 output
+- Causal Engine split: candidate generation vs formal research methods
+- Market DNA exact form deferred; current-state comparison capability preserved
+- Current Market State Representation treated as projection for research/applicability, not proof/signal
+- R1 has separate outputs for R2 research, R3 applicability, and R4 fast runtime context
 
-Fast Runtime / Safety Path:
-R1 runtime context + X10 system health + R3 assumption monitoring
-→ R4 capital / position protection
+R1 KEY BOUNDARY:
+Observation
+≠ Derived Measurement
+≠ Relation Vocabulary
+≠ Foundation Claim
+≠ Current Relation Interpretation
+≠ Cause Candidate
+≠ Hypothesis
+≠ Knowledge
 
-BOUNDARY:
-Fast Runtime Path does not create new Knowledge.
-Slow Research Path does not block emergency protection.
-
-MAJOR FIRST-PASS RECONSTRUCTION:
-- World Economic Library + Research Foundation → Relation/Foundation responsibility candidate
-- Cause Candidate retained as optional research-question source, not cause proof
-- Causal Engine split between candidate generation and formal research
-- Market DNA exact form deferred; state-comparison capability preserved
-- Research Question added as broad conceptual research entry
-- Research Intake/Router redesigned around priority/admission/routing
-- Stress Lab becomes research method/boundary-discovery candidate, not mandatory top-level layer
-- Knowledge Library/Pool retained logically, physical structure not fixed
-- Decision Synthesis / Conflict Resolution added
-- Signal Engine dropped as required top-level concept
-- Defense Layer split into capital/risk permission, runtime protection, emergency safety
-- Execution and Position/Protection remain separate responsibilities
-- Feedback Router replaces universal Trainer/relearning loop
-- Reverse Investigation is candidate-generation method, not root-cause authority
-- AI Team monolith removed in favor of cross-cutting cognitive assistance
-- Telegram treated as human-control adapter, not authority
-- Human-readable research is derived projection, not Knowledge SoT
-- explicit storage/retention/migration responsibility added
-
-NEXT:
-Concept-level Reconstruction Matrix beginning with R1:
-1. Observation / Event / Feature / Context
-2. Relation / Foundation
-3. Current Market Understanding
-4. Cause Candidate / Contradiction / Unexplained
-5. Current market state representation / Market DNA candidate
-6. exact R1 → R2 / R3 / R4 outputs
+NEXT — R2:
+Reconstruct:
+- Research Question
+- Candidate / Admission / Priority / Routing
+- Plan / Trial / Execution
+- Exploratory / Confirmatory / Replication
+- Hypothesis
+- Evidence channels / dependency / strength
+- Causal / empirical / alternative / confounder methods
+- Stress / Boundary
+- Research Ledger
+- Red Team / independent validation
+- Result / Validation
+- process failure vs hypothesis refutation
+- handoff to R3 Knowledge
 
 Do NOT:
-- adopt Phase 5 skeleton as final architecture
-- choose DB/Object/Python
+- adopt Phase 5 R1 as final architecture
+- finalize Relation object/schema/database
 - finalize Market DNA name
+- modify formal Current Architecture
 - run Phase 6 destruction review early
-- modify formal Current Architecture without explicit adoption
 
 READ:
 - 98_DESIGN_STUDY/市場理解OS_全体再構築_設計ログ.md
-- 98_DESIGN_STUDY/DAISUKE_MARKET_UNDERSTANDING_OS_PROPOSAL.md
 - 98_DESIGN_STUDY/市場理解OS_研究機関_設計検討リファレンス.md
+- 98_DESIGN_STUDY/DAISUKE_MARKET_UNDERSTANDING_OS_PROPOSAL.md
 - 99_REFERENCE/旧市場理解OS_設計知識リファレンス.md
 - 02_ARCHITECTURE/CONNECTIONS/01_EXTERNAL_DATA.md
 - 02_ARCHITECTURE/CONNECTIONS/02_MARKET_UNDERSTANDING.md
 - 02_ARCHITECTURE/CONNECTIONS/03_RESEARCH.md
-- 02_ARCHITECTURE/CONNECTIONS/04_KNOWLEDGE_APPLICABILITY.md
 
 Git Write Permission Reminder:
 REQUIRE CURRENT-CHAT USER AUTHORIZATION
