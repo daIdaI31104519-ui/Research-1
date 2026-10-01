@@ -1,4 +1,4 @@
-# 市場理解OS — AI START HERE v0.2
+# 市場理解OS — AI START HERE v0.3
 
 **Document Role:** AI Cold Start Entry / Project Navigation Map  
 **Status:** REVIEWED / WORKING BASELINE  
@@ -285,6 +285,11 @@ Responsibility Boundary
 失敗
 却下理由
 過去判断
+
+98_DESIGN_STUDY/
+=
+再構築中のWorking Study / Proposal / Reference
+Formal Current Designではない
 ```
 
 設計内容のAuthorityは概念上、
@@ -318,6 +323,16 @@ Current Designとして正しい
 ```
 
 下位設計と上位設計が矛盾する場合、まず下位側を再確認する。
+
+ただし、このAuthority階層はStatusを無視して適用しない。
+
+```text
+Higher-level DRAFT / Proposal
+≠
+lower-level Current / Working Baselineを自動上書き
+```
+
+Role / Status / History / Adopted状態を確認した上でAuthorityを判断する。
 
 ---
 
@@ -415,6 +430,27 @@ Current Design正本
 ```
 
 HANDOFFとCurrent Gitが矛盾する場合、HANDOFFを無条件に優先しない。
+
+### Work Selection Rule
+
+```text
+AI_HANDOFF = ACTIVE
++
+Git上の保存済みWorking Study / Checkpointを指している
+↓
+そのConversation Taskを継続候補とする
+
+ただし
+Working Study
+≠
+Formal Current Design
+```
+
+AI_HANDOFFが `CLEAR` / 不在なら、原則として `AI_CONTEXT.md` のCurrent Taskへ戻る。
+
+AI_CONTEXTのFormal Current TaskとACTIVE HANDOFFのWorking Studyが並行している場合、両方の身分を分けて理解する。
+
+どちらを進めるべきかGitから一意に判断できない場合は、勝手に混ぜず人間へ確認する。
 
 ---
 
@@ -941,6 +977,6 @@ CURRENT STATE RECOVERED
 
 ---
 
-# AI_START_HERE v0.2 一文定義
+# AI_START_HERE v0.3 一文定義
 
 > **AI_START_HEREとは、市場理解OSについて前Chat・Memory・会話Contextを持たないAIが、Research-1の位置づけ、主要Documentの責任、設計Authority、Current Designの読み方、Cold Start手順、Recovery Failure時のFallbackを最初に理解し、AI_WORKFLOW・AI_CONTEXT・必要に応じてAI_HANDOFF・Current Taskへ正しく移動して、安全に作業を再開するための安定したAI専用起動地図である。**

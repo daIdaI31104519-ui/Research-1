@@ -1,4 +1,4 @@
-# 市場理解OS — AI_CONTEXT v0.1.10
+# 市場理解OS — AI_CONTEXT v0.1.11
 
 **Document Role:** AI Current-State Index / Navigation Map  
 **Status:** REVIEWED / WORKING BASELINE  
@@ -293,6 +293,38 @@ Role: AI_CONTEXTでは保持しないLatest Conversation Deltaを短く引き継
 AI_HANDOFFはCurrent Designや長期Pendingの正本ではない。
 具体的なField / State / Maintenance RuleはAI_HANDOFF自身を正本とする。
 
+## 3.13 ACTIVE NON-CURRENT DESIGN STUDY
+
+```text
+Path:
+98_DESIGN_STUDY/市場理解OS_全体再構築_設計ログ.md
+
+Status:
+ACTIVE WORKING STUDY / NOT FORMAL CURRENT DESIGN
+
+Role:
+旧OS / Current OS / Research Institute Reference / ダイスケ正式原案を比較し、
+市場理解OS全体を再構築する長期Working Study
+
+Latest precise conversation point:
+00_AI/AI_HANDOFF.md
+```
+
+重要:
+
+```text
+Formal Project Current Task
+≠
+Active Non-Current Design Study
+
+Working Studyを継続
+≠
+Formal Current Architectureへ採用
+```
+
+AI_HANDOFFがACTIVEでこのStudyを指している場合は、Git上の保存地点を確認した上でConversation Taskとして継続できる。
+HANDOFFがCLEAR / 不在の場合は、原則として本ファイルのCurrent TaskをProject作業入口とする。
+
 ---
 
 # 4. Current Design Guardrails
@@ -395,6 +427,8 @@ AI_CONTEXTのContext Sync運用が実際のGit作業で正しく機能するか�
 - AI_WORKFLOW v0.5でSave Destination Resolution / Logical Change Impact Syncを導入
 - AI_WORKFLOW v0.5.1でNo-op Write Check / Checkpoint / Baseline / Recovery / Independent Backup原則を導入
 - AI_WORKFLOW v0.5.2でHuman-Readable File Naming Policyを追加
+- AI_WORKFLOW v0.5.3でInstruction Ambiguity / Coupled Design / Precision-First → Human View / Rule Freshnessを追加
+- Formal Current TaskとActive Non-Current Design Studyの入口をAI_CONTEXT / AI_START_HEREで分離
 ```
 
 ```text
@@ -472,6 +506,10 @@ Cold Start / 新Chat / Context Loss / 別AI交代時の読込順は、
 3. 必要なら 00_AI/AI_HANDOFF.md
 4. 現在Taskの対象md
 ```
+
+AI_HANDOFFがACTIVEで保存済みWorking Studyを指している場合は、Formal Current TaskとWorking Studyの身分を混ぜず、HANDOFFが示す対象mdを追加で確認する。
+
+HANDOFFがCLEAR / 不在なら、原則としてAI_CONTEXTのCurrent Taskから再開する。
 
 PROJECT_CHARTER Reconciliation中は追加で、
 
@@ -620,6 +658,6 @@ GPTはGit・AI_WORKFLOW・AI_CONTEXT・必要ならAI_HANDOFFを使って設計�
 
 ---
 
-# AI_CONTEXT v0.1.10 一文定義
+# AI_CONTEXT v0.1.11 一文定義
 
 > **AI_CONTEXTとは、市場理解OSの設計内容そのものや直前Conversationを複製する文書ではなく、GPTが現在Phase・Current Task・主要Working Baseline・重要Pending・Next Action・参照先を短時間で把握し、Gitという長期作業空間の中から現在Taskに必要な正しい設計情報へ移動するための軽量なAI専用Project Current-State Mapである。**

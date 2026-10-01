@@ -13,40 +13,44 @@ State:
 ACTIVE
 
 Last Updated:
-2026-09-30
+2026-10-01
 
 Conversation Focus:
 Whole Market Understanding OS Reconstruction.
-Phases 1-4 checkpointed.
-Phase 5 R1-R4 concept-level reconstruction already exists.
-Current conversation temporarily returns to R3 for detailed refinement before resuming later domains.
+Phase 5 R1-R4 concept-level reconstruction exists.
+Current detailed work remains R3 Knowledge refinement.
 
-Important Boundary:
-AI_CONTEXT remains authoritative for formal Project Current State.
-Formal Current Architecture is unchanged.
-Phase 5 detailed refinements are not adopted design.
+WORKFLOW UPDATE:
+AI_WORKFLOW v0.5.3 adopted as WORKING BASELINE in this Git change.
+
+New workflow rules:
+- ambiguous human instruction must not become an ambiguous design change
+- design one responsibility at a time by default
+- tightly coupled concepts may be designed together when separation reduces correctness
+- create Precision Design first
+- stop for Precision Review before Human View
+- Human View is a projection, not a second design source of truth
+- important definitions must survive simplification
+- Human Review problems return to Precision Design
+- Human View sync only when human understanding materially changes
+- Workflow rules themselves require freshness checks
+- higher-level DRAFT / Proposal does not automatically override lower-level Current / Working Baseline
+
+Navigation clarification:
+AI_CONTEXT remains authoritative for Formal Project Current State.
+The active whole-OS reconstruction is a NON-CURRENT Working Study.
+AI_CONTEXT now contains a stable entry to:
+98_DESIGN_STUDY/市場理解OS_全体再構築_設計ログ.md
 
 R3 DETAILED REFINEMENT SAVED:
 - Knowledge Admission detailed flow
-- Research Validity != Knowledge Worthiness
 - Knowledge Record minimum semantic responsibilities
-- Canonical Knowledge Relationship minimal taxonomy:
-  EQUIVALENT
-  DUPLICATE_CANDIDATE
-  SPECIALIZES
-  REFINES
-  EXTENDS
-  CONTRADICTS
-  SUPERSEDES
-- contradiction requires overlapping scope/conditions/horizon and mutually incompatible claim semantics
-- condition difference / horizon difference != contradiction
-- Relationship Candidate != Canonical Relationship
-- Knowledge Graph is a derived view, not duplicate source of truth
-- Version Lineage != Knowledge Relationship
-- Canonical Relationship does not mutate lifecycle, applicability, risk or execution
+- Knowledge Relationship detailed refinement
+- Knowledge Graph boundary
+- Version Lineage boundary
 
 NEXT:
-Knowledge Lifecycle detailed design:
+Resume Knowledge Lifecycle detailed design using the new Precision-First workflow:
 1. minimal Lifecycle states
 2. transition triggers
 3. Lifecycle Assessment vs Lifecycle Transition
@@ -55,14 +59,15 @@ Knowledge Lifecycle detailed design:
 6. revalidation flow
 7. Version vs Lifecycle boundary
 8. Runtime observations must not directly retire Knowledge
+9. Precision Review
+10. Human View translation after semantic review
 
-Do NOT:
-- duplicate Knowledge Graph as another Knowledge store
-- auto-resolve contradictions
-- let one loss retire Knowledge
-- let AI suggestion directly change lifecycle
-- finalize DB/Object/Python yet
-- modify formal Current Architecture
+READ:
+98_DESIGN_STUDY/市場理解OS_全体再構築_設計ログ.md
+
+Important Boundary:
+Formal Current Architecture is unchanged.
+Phase 5 reconstruction and detailed refinements remain Working Study / Working Candidate until later adoption.
 
 Git Write Permission Reminder:
 REQUIRE CURRENT-CHAT USER AUTHORIZATION

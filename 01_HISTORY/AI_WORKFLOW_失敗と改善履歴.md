@@ -1,7 +1,7 @@
 # AI_WORKFLOW — 失敗と改善履歴
 
 **Status:** ACTIVE HISTORY  
-**対象:** AI_WORKFLOW v0.1 → v0.5.1  
+**対象:** AI_WORKFLOW v0.1 → v0.5.3  
 **目的:** 市場理解OSをGPTと人間で設計する際に、どの運用案がなぜ問題になり、どう改善したかを残す。
 
 ---
@@ -964,6 +964,137 @@ Human-Firstの観点では、Checkpoint / Baseline要否も人間へ毎回判断
 
 ---
 
+# 24. v0.5.2 — Human-Readable File Namingの追加
+
+## 起きたこと
+
+Repositoryが成長すると、AIにはPathや英語名で追えても、人間がFile名だけから責任を判断しにくくなる問題が見えた。
+
+## 改善
+
+新規Human-facing Design Fileは、原則として日本語で責任が分かる名称を使う方針を追加した。
+
+一方、既存Working BaselineやDirectoryは通常設計へRenameを混ぜず、必要ならDedicated Naming Migrationとして扱う。
+
+## 教訓
+
+```text
+人間に読みやすくする
+≠
+既存構造を無計画にRenameする
+```
+
+---
+
+# 25. v0.5.3 — Precision-First / Human View二段階設計への変更
+
+## 起きたこと
+
+市場理解OSの再構築が進み、Knowledge / Research / Capital等の責任境界が精密になるほど、一回の設計作業で、
+
+```text
+AIが扱うための厳密なSemantic Design
++
+人間が理解するための簡潔な説明
+```
+
+を同時に成立させる負荷が高くなった。
+
+また、人間側が内部Fieldや細かいStateをすべて記憶することは現実的ではない一方、全体Flow・重要Definition・接続関係が見えなければ、違和感や疑問をレビューしにくい問題が見えた。
+
+同時に、指示が曖昧な時にAIが解釈を一つへ勝手に固定する危険、原則一つずつ設計するRuleが強結合Conceptの同時設計まで妨げる危険、古いWorkflow Ruleへ機械的に従う危険も確認した。
+
+## 改善
+
+v0.5.3で次を追加した。
+
+```text
+Instruction Ambiguity Rule
++
+Atomic / Coupled Design Rule
++
+Precision-First Design
++
+Precision Review Gate
++
+Human Translation
++
+Definition Preservation
++
+Dual Representation Boundary
++
+Human View Impact
++
+Rule Freshness Check
++
+Higher-level DRAFT Authority Clarification
+```
+
+新しい基本Flow:
+
+```text
+Human Idea / Question
+↓
+Interpretation
+↓
+Current Git / Existing Design確認
+↓
+Atomic or Coupled Design
+↓
+Precision Design
+↓
+Cross Check
+↓
+Human View
+↓
+Human Review
+↓
+問題があればPrecision Designへ戻る
+```
+
+重要:
+
+```text
+Precision Design
+=
+詳細Semantic Design
+
+Human View
+=
+Precision Designから作る人間向けProjection
+
+Human View
+≠
+第二の独立設計正本
+```
+
+Human Reviewで問題が見つかった場合、Human Viewだけを修正して意味を分岐させず、Precision Designへ戻って修正する。
+
+また、Higher-level DRAFT / Proposalが存在するという理由だけでlower-level Current / Working Baselineを自動的に上書きしないことを明確化した。
+
+## 教訓
+
+```text
+分かりやすさ
+≠
+Semantic Boundaryを丸めること
+
+精密設計
+≠
+人間が全内部詳細を暗記すること
+
+一つずつ設計
+≠
+強結合Conceptまで無理に分離すること
+
+Ruleが存在
+≠
+永久にCurrent
+```
+
+Human-Firstとは、人間へ内部複雑性を押し付けることではなく、AIが精密さを引き受け、人間が正確な全体像・重要Definition・接続・違和感を確認できる状態を作ることである。
+
+---
 # 一文まとめ
 
 > **AI_WORKFLOWの改善は、安全性のために人間やWorkflowへ管理負荷を増やす方向ではなく、人間は普通の言葉で市場理解OSを考え、GPTがCurrent Git・保存先・同期先・History・Conversation Delta・Checkpoint / Baseline・Recovery Safetyを必要範囲で管理するHuman-Firstな方向へ進める。**

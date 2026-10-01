@@ -1,4 +1,4 @@
-# 市場理解OS — AI_WORKFLOW v0.5.2
+# 市場理解OS — AI_WORKFLOW v0.5.3
 
 **Document Role:** AI Design Workflow  
 **Status:** REVIEWED / WORKING BASELINE  
@@ -425,6 +425,21 @@ LEGACY
 
 更新日時だけでCurrent Designを決めない。
 
+また、上位Documentであることだけを理由に、DRAFT / Proposalを下位のCurrent / Working Baselineより自動的に優先しない。
+
+```text
+Authority hierarchy
+=
+Current / Adopted / Working Baselineとして比較可能なDesign同士で
+上位思想から下位設計へ適用する
+
+Higher-level DRAFT / Proposal
+≠
+lower-level Current Designを自動上書き
+```
+
+上位DRAFTと下位Currentが衝突する場合は、勝手に融合・上書きせず、Role / Status / History / Current Taskを確認する。
+
 ---
 
 # 7. 必要なファイルだけ読む
@@ -620,6 +635,41 @@ GPTは関連することを全部その場で設計しない。
 
 とする。
 
+## 10.1 Coupled Design Exception
+
+原則として、一つのResponsibility / Boundary / Conceptを一度に精密に設計する。
+
+ただし、分離して設計すると意味や責任境界を正しく定義できない強結合Conceptは、同じDesign Unitとしてまとめて設計してよい。
+
+まとめて設計する候補:
+
+```text
+相互に定義が必要
+
+同じBoundaryを共有する
+
+一方の決定が他方の意味を直接変える
+
+分離すると責任重複が発生する
+
+Input / Output / State / Authorityを同時に見ないと矛盾する
+
+別々にCross Checkすると誤った境界を固定する危険が高い
+```
+
+重要:
+
+```text
+関連している
+≠
+まとめて設計する
+
+強く結合しており、
+分離する方が設計精度を落とす
+→
+まとめて設計してよい
+```
+
 ---
 
 # 11. 保留はGPTからも提案する
@@ -703,6 +753,159 @@ AI_CONTEXTやAI_HANDOFFを保留事項だけで巨大化させない。
 ```
 
 これをCross Checkの基本とする。
+
+## 13.1 設計解釈と二段階設計
+
+### 13.1.1 Instruction Ambiguity
+
+人間の指示に複数の合理的な解釈が存在し、解釈によってResponsibility / Architecture / Authority / 保存内容 / Current Designへの影響が変わる場合、GPTは勝手に一つの意味へ固定しない。
+
+```text
+Current Git
++
+Current Conversation
++
+既存Design
+から一意に意味を復元できる
+→
+その意味で継続
+
+複数解釈が残る
+→
+解釈候補と設計への影響差を示す
+→
+必要な場合だけ人間へ確認
+```
+
+重要:
+
+```text
+曖昧な指示
+≠
+GPTが曖昧な設計変更を作ってよい
+```
+
+### 13.1.2 Precision-First Design
+
+市場理解OSの詳細設計では、まずAIが設計意味を精密に表現できるPrecision Designを作る。
+
+Precision Designでは、必要な範囲で主に次を明確にする。
+
+```text
+Responsibility
+Boundary
+Definition
+Input
+Output
+State
+Authority
+Failure
+Relationship
+Version / Lineage
+Upstream / Downstream
+Cross-Cutting Impact
+Unknown / Open Issue
+```
+
+この段階では、人間向けに簡単に説明するためにSemantic Boundaryを丸めない。
+
+```text
+精密な意味設計
+→ 先
+
+人間向け簡略化
+→ 後
+```
+
+### 13.1.3 Precision Review Gate
+
+Precision Designを作成したら、Human Viewへ進む前に一度止まり、最低限次をCross Checkする。
+
+```text
+Existing Designとの重複
+Upstream / Downstream
+Responsibility Boundary
+State / Authority
+Failure Path
+Relationship
+Contradiction
+Cross-Cutting Impact
+Current vs Proposal
+過去Failureとの衝突
+```
+
+問題が残る場合、Human Viewへ進む前にPrecision Design側を修正する。
+
+### 13.1.4 Human Translation
+
+Precision Designの意味が安定した後、人間が全体像・接続・違和感を確認できるHuman Viewへ翻訳する。
+
+Human Viewでは主に、
+
+```text
+全体Flow
+Concept同士の接続
+なぜ必要か
+何を受け取るか
+何を出すか
+重要Boundary
+重要用語のDefinition
+Failure / 戻り道
+```
+
+を優先する。
+
+人間が全Field / 内部State / 内部ID / 細かい実装条件を暗記することを前提としない。
+
+### 13.1.5 Definition Preservation
+
+Human Viewは簡単に説明してよい。
+
+ただし、意味を変える簡略化は禁止する。
+
+特にKnowledge / Applicability / Research Result / Evidence / Authority / State / Boundary / Constraint / Risk Permission / Decision / Trade等の重要Conceptは、人間向けでも意味境界が分かるDefinitionを保持する。
+
+重要:
+
+```text
+簡単に説明する
+≠
+意味を曖昧にする
+```
+
+### 13.1.6 Dual Representation Boundary
+
+Precision DesignとHuman Viewは、二つの独立した設計正本ではない。
+
+```text
+Precision Design
+=
+詳細なSemantic Design
+
+Human View
+=
+Precision Designから作る人間向けProjection
+```
+
+Human Viewは、Precision Designに存在しない設計判断を追加しない。
+
+Human Reviewで問題・違和感・矛盾が見つかった場合:
+
+```text
+Human Review
+↓
+Precision Design再確認
+↓
+必要ならPrecision Design修正
+↓
+Human View再生成 / 更新
+```
+
+とする。
+
+Human Viewだけを変更してSemantic Sourceと乖離させない。
+
+保存先は固定Directory名で決め打ちせず、そのDesignがCurrent / Working Study / Detailed DesignのどのRoleにあるかを確認し、Save Destination Resolutionで決める。
 
 ---
 
@@ -1410,7 +1613,44 @@ Repository Purpose変更
 
 内部設計だけなら通常更新しない。
 
-## 20.6 Impact判定
+## 20.6 Human View Impact
+
+Precision Design変更時、Human Viewも更新しなければ人間の理解が古くなるか確認する。
+
+更新候補:
+
+```text
+Responsibility変更
+Boundary変更
+Concept追加 / 削除
+Main Flow変更
+Authority変更
+人間が理解すべき重要Definition変更
+Failure / Research Return Path変更
+全体Mapの意味が変わる変更
+```
+
+通常は更新不要:
+
+```text
+内部Field追加
+Trace情報追加
+軽微なEnum変更
+Implementation詳細
+Human理解を変えない内部整理
+```
+
+重要:
+
+```text
+Precision Design変更
+≠
+毎回Human View変更
+```
+
+Human View更新が必要な場合も、Precision Designの本文をHuman Viewへ複製しない。
+
+## 20.7 Impact判定
 
 各候補Documentは内部的に、
 
@@ -1450,7 +1690,7 @@ REQUIRED
 
 とする。
 
-## 20.7 Scope Guard
+## 20.8 Scope Guard
 
 Logical Change Impact SyncはRepo全体同期ではない。
 
@@ -2580,6 +2820,50 @@ Recovery Ruleが通常作業を重くしすぎる
 
 > **Workflowは設計を助けるための道具であり、Workflowを守ること自体を目的にしない。**
 
+## 32.1 Rule Freshness Check
+
+AI_WORKFLOWにRuleが存在することだけを理由に、永久に正しい前提として機械的に適用しない。
+
+現在Taskで既存Ruleを適用した結果、
+
+```text
+Current Repository Structureと明確に矛盾する
+
+より新しい上位Ruleと衝突する
+
+Document Responsibility変更後も旧前提を使っている
+
+History上で既に置換された考え方へ戻る
+
+Workflow自身が設計精度を下げる
+```
+
+可能性を発見した場合、旧Ruleへ機械的に従わず、
+
+```text
+Rule
+↓
+Current Git
+↓
+Document Role / Status
+↓
+History / Superseded
+↓
+Current Task
+```
+
+を照合する。
+
+解決不能なら人間へ問題を示す。
+
+重要:
+
+```text
+Ruleが書かれている
+≠
+Ruleが永久にCurrent
+```
+
 ---
 
 # 33. GPTの基本姿勢
@@ -2684,26 +2968,46 @@ GPTは、その考えを現在の市場理解OSへ矛盾なく整理・接続・
 
 ---
 
-# Version Note — v0.5.1 → v0.5.2
+# Version Note — v0.5.2 → v0.5.3
 
-`v0.5.2` では、v0.5.1のHuman-First / Save Destination / Logical Change Impact Sync / Git Safety / Recoveryの基本思想は変更しない。
+`v0.5.3` では、v0.5.2のHuman-First / Save Destination / Logical Change Impact Sync / Git Safety / Recovery / Human-Readable File Namingの基本思想は変更しない。
 
-追加内容:
+追加・明確化内容:
 
 ```text
-Human-Readable File Naming Policy
+Instruction Ambiguity
 =
-新規Human-facing Design Fileは原則として日本語の責任名を使う
+指示の解釈差が設計へ影響する場合は勝手に固定しない
 
-既存Working Baseline / DirectoryのRename
+Atomic / Coupled Design
 =
-通常設計変更へ混ぜずDedicated Naming Migrationで扱う
+原則一つずつ設計するが、分離が精度を下げる強結合Conceptは同時設計可能
+
+Precision-First Design
+=
+精密Semantic Designを先に作り、Cross Check後にHuman Viewへ翻訳
+
+Dual Representation Boundary
+=
+Precision DesignとHuman Viewを二重正本にしない
+
+Human View Impact
+=
+人間の理解が変わる変更だけHuman View同期候補とする
+
+Rule Freshness
+=
+Workflow自身もCurrent Git / History / Role変更に照らして再評価する
+
+Authority Clarification
+=
+Higher-level DRAFT / Proposalがlower-level Current Designを自動上書きしない
 ```
 
-目的は日本語化そのものではなく、人間がRepositoryを見てFile Responsibilityを理解できる状態を作ることである。
+目的は、設計精度とHuman理解を一度に同じ表現へ押し込まず、精密設計と人間向け理解を段階分離しながら、意味のSourceを一つに保つことである。
 
 ---
 
-# AI_WORKFLOW v0.5.2 一文定義
+# AI_WORKFLOW v0.5.3 一文定義
 
-> **AI_WORKFLOWとは、人間が市場理解OSについて普通の言葉で目的・疑問・アイデア・方向性を伝えれば、GPTがGitから現在状態と設計の身分を確認し、必要に応じて外部情報や過去設計を調査し、案を深掘り・批判・整理し、既存設計との接続と失敗可能性を確認し、不要な複雑化を止め、重要な保留やConversation Deltaを適切な場所へ振り分け、Logical ChangeのPrimary保存先・同期対象・Status・Checkpoint / Baseline要否と人間が理解できるFile Responsibility表現を判断し、ユーザーから現在のChatで明示的なGit保存許可を受けた場合だけ実差分のある必要なFile SetとRecovery Objectを保存し、保存後にCross-Document Consistencyと復旧可能性まで確認するためのHuman-First作業規則である。**
+> **AI_WORKFLOWとは、人間が市場理解OSについて普通の言葉で目的・疑問・アイデア・方向性を伝えれば、GPTがGitから現在状態と設計の身分を確認し、曖昧な指示を勝手に設計変更へ変えず、原則一つずつ・必要な強結合ConceptだけをまとめてPrecision Designとして精密化し、Cross Check後に意味を変えずHuman Viewへ翻訳し、既存設計との接続・失敗可能性・Rule Freshnessを確認しながら、Logical Changeの保存先・同期対象・Status・Checkpoint / Baseline要否を管理し、現在Chatで明示的なGit保存許可を受けた場合だけ必要なFile SetとRecovery Objectを保存し、保存後の文書間整合と復旧可能性まで確認するためのHuman-First作業規則である。**
