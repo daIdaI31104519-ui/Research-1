@@ -18,7 +18,7 @@ Last Updated:
 Conversation Focus:
 Whole Market Understanding OS Reconstruction.
 Phase 5 R1-R4 concept-level reconstruction exists.
-Current detailed work remains R3 Knowledge refinement.
+Current detailed work remains R3 Knowledge / Decision Preparation refinement.
 
 WORKFLOW:
 AI_WORKFLOW v0.5.3 Precision-First → Precision Review → Human View workflow is active.
@@ -29,51 +29,71 @@ R3 DETAILED REFINEMENT SAVED:
 - Knowledge Relationship detailed refinement
 - Knowledge Graph boundary
 - Version Lineage boundary
-- Knowledge Lifecycle Precision Design
-- Knowledge Lifecycle Precision Review / destruction tests
-- Lifecycle Transition Authority
-- Human View reviewed by Daisuke
+- Knowledge Lifecycle Precision Design / Review / Authority / Human View
+- Knowledge Applicability Precision Design
+- Runtime Assumption Monitoring boundary
+- Applicability State decomposition
+- Knowledge Condition Matching
+- Failure Boundary / Constraint separation
+- Multi-Knowledge Applicability Context
+- Lifecycle ↔ Applicability handoff
+- Applicability Precision Review / destruction tests
+- Applicability Human View reviewed by Daisuke
 
-KNOWLEDGE LIFECYCLE WORKING CANDIDATE:
-Lifecycle Disposition:
-- ACTIVE
-- SUSPENDED
-- RETIRED
+KNOWLEDGE APPLICABILITY WORKING CANDIDATE:
+Core separation:
+- ACTIVE != APPLICABLE
+- SUSPENDED / RETIRED != NOT_APPLICABLE
+- Scope != Condition
+- UNKNOWN != FALSE
+- Failure Boundary != Constraint
+- Semantic Applicability != Knowledge-Use Permission
+- Knowledge-Use Permission != Capital Permission
+- Knowledge Count != Evidence Count
+- Different Knowledge ID != Independent Research
+- Applicability Finding != Lifecycle Transition
+- Applicability Assessment != permanent Current Truth
+- Applicable Knowledge Context Set != Runtime Assumption Set
+- R3 Runtime Deviation != R4 Position Action
 
-Review Status:
-- NO_REVIEW_DUE
-- REVIEW_DUE
-- IN_REVIEW
+Semantic Applicability candidate:
+- APPLICABLE
+- NOT_APPLICABLE
+- UNDETERMINED
 
-Key boundaries:
-- Trigger != Transition
-- Assessment != Transition
-- Lifecycle != Applicability
-- Lifecycle != Version
-- Relationship != Lifecycle writer
-- Runtime Observation != direct Lifecycle Transition
-- RETIRED != DELETE
-- Fast integrity path may SUSPEND but must not fast-RETIRE
-- Lifecycle Governance decides transition
-- Canonical Lifecycle Writer is single-writer
-- Human override also goes through governance/writer trace
+Important logical boundaries:
+- Applicability Context Snapshot / As-Of Context
+- Runtime Assumption Set
+- Decision Material Snapshot
+- Emergency Knowledge-Use Block
+These are logical candidates, not final schemas/classes.
 
 Saved Checkpoint:
-Checkpoint 012 — R3 Detailed Refinement / Knowledge Lifecycle
+Checkpoint 013 — R3 Detailed Refinement / Knowledge Applicability
+
 Primary:
 98_DESIGN_STUDY/市場理解OS_全体再構築_設計ログ.md
 
+Human Review:
+No major conceptual issue found by Daisuke.
+Proceed as Working Candidate.
+
 NEXT:
-Knowledge Applicability detailed refinement using Precision-First workflow:
-1. pre-decision Applicability responsibility
-2. Runtime Assumption Monitoring boundary
-3. Applicability State semantics
-4. Knowledge Condition matching
-5. Constraint / Failure Boundary interaction
-6. Multi-Knowledge applicability context
-7. Lifecycle ↔ Applicability handoff
+Decision Synthesis / Conflict Resolution detailed refinement using Precision-First workflow:
+1. Decision Synthesis responsibility
+2. Decision Material Snapshot input boundary
+3. conflict / opposition handling
+4. no-majority / no-double-count rule
+5. WAIT / UNKNOWN / abstention semantics
+6. Trade Thesis / Decision Candidate responsibility
+7. Runtime Assumption Set handoff
 8. Precision Review
 9. Human View
+
+LATER INTEGRATION:
+Admission / Record / Relationship / Graph / Version include work created before Precision-First.
+Do not stop current recovery for a full rewrite.
+After R3 detailed recovery completes, run R3 Integration Precision Review and revise only gaps that survive that review.
 
 READ:
 98_DESIGN_STUDY/市場理解OS_全体再構築_設計ログ.md
@@ -81,7 +101,8 @@ READ:
 Important Boundary:
 AI_CONTEXT remains authoritative for Formal Project Current State.
 Formal Current Architecture is unchanged.
-Checkpoint 012 is Working Study / Working Candidate, not formal adoption.
+Checkpoint 013 is Working Study / Working Candidate, not formal adoption.
+02_ARCHITECTURE/CONNECTIONS/04_KNOWLEDGE_APPLICABILITY.md was not changed by this checkpoint.
 
 Git Write Permission Reminder:
 REQUIRE CURRENT-CHAT USER AUTHORIZATION

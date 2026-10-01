@@ -12097,3 +12097,1231 @@ Checkpoint 012
 ≠ Python Class
 ≠ Formal Current Architecture Adoption
 ~~~
+
+
+---
+
+# 20. Checkpoint 013 — R3 Detailed Refinement / Knowledge Applicability
+
+**Date:** 2026-10-01  
+**State:** SAVED  
+**Formal Current Architecture Changed:** NO  
+**Phase:** 5 Reconstruction — R3 Detailed Refinement  
+**Purpose:** Knowledge Lifecycleの次段として、ACTIVE Knowledge VersionをCurrent Marketへ適用する責任、Runtime Assumption Monitoringとの境界、Applicabilityの状態分解、Condition Matching、Failure Boundary / Constraint、Multi-Knowledge Context、LifecycleとのHandoffをPrecision Design → Precision Review → Human Viewの順で精密化する。
+
+## 20.1 Knowledge Applicability Responsibility
+
+Pre-Decision Knowledge Applicabilityの責任候補:
+
+> ACTIVEなKnowledge Versionの成立条件・Scope・Time Horizon・Failure Boundary等をCurrent Market Contextと照合し、Knowledge自体の真偽やTrade方向を決めることなく、そのKnowledgeを現在のDecision Material候補として利用可能か評価し、その根拠と不確実性を追跡可能にする。
+
+重要:
+
+~~~text
+Knowledge Valid
+≠ Applicable Now
+
+Applicable Now
+≠ Allowed To Use
+
+Allowed To Use
+≠ Decision
+
+Decision
+≠ Positive Economic Value
+
+Positive Economic Value
+≠ Capital Permission
+~~~
+
+ApplicabilityはResearch Truth Authorityではない。
+Claimの真偽・再現性・成立条件・限界の研究はR2の責任。
+
+---
+
+## 20.2 Lifecycle Eligibility Boundary
+
+Normal Applicability Evaluationの前にLifecycle Eligibilityを確認する。
+
+~~~text
+ACTIVE
+→ Applicability評価資格あり
+
+SUSPENDED
+→ Normal Applicabilityから除外
+
+RETIRED
+→ Normal Applicabilityから除外
+~~~
+
+重要:
+
+~~~text
+ACTIVE
+≠ APPLICABLE
+
+SUSPENDED / RETIRED
+≠ NOT_APPLICABLE
+
+Lifecycle Ineligible
+≠ Market Not Applicable
+~~~
+
+Review Statusは別軸。
+
+~~~text
+REVIEW_DUE
+≠ Automatic Applicability Block
+
+IN_REVIEW
+≠ Automatic Applicability Block
+
+Review Status
+≠ Production Blocking Authority
+~~~
+
+重大問題で通常利用を止める場合はLifecycle SUSPENDED、または後述のAuthorized Knowledge-Use Constraintを使う。
+
+---
+
+## 20.3 Applicability Stateを一軸へ詰め込まない
+
+旧候補:
+
+~~~text
+APPLICABLE
+PARTIALLY_APPLICABLE
+NOT_APPLICABLE
+UNCERTAIN
+BLOCKED_BY_CONSTRAINT
+NOT_EVALUATED
+~~~
+
+は異なる意味軸を混在させるため、そのまま単一Canonical Enumへ固定しない。
+
+Precision Candidate:
+
+~~~text
+Lifecycle Eligibility
++
+Evaluation Status
++
+Scope Status
++
+Condition Match
++
+Failure Boundary Status
++
+Uncertainty Context
++
+Semantic Applicability
++
+Knowledge-Use Constraint
++
+Decision Material Eligibility
++
+Outcome Reason / Trace
+~~~
+
+Semantic Applicabilityの最小候補:
+
+~~~text
+APPLICABLE
+NOT_APPLICABLE
+UNDETERMINED
+~~~
+
+正式Enum / Schemaは後。
+
+重要:
+
+~~~text
+PARTIAL
+≠ final Applicability Outcome
+
+BLOCKED
+≠ Condition Match
+
+UNCERTAIN
+≠ Condition Mismatch
+
+NOT_EVALUATED
+≠ NOT_APPLICABLE
+~~~
+
+---
+
+## 20.4 Scope vs Condition
+
+Knowledge Applicability Domainを、ScopeとConditionに分ける。
+
+Scope候補:
+
+~~~text
+Market
+Asset
+Instrument
+Venue
+Time Horizon
+必要に応じてSession / Participant Domain等
+~~~
+
+Scope mismatchはCondition failureではない。
+
+~~~text
+BTC Perpetual Knowledge
+vs
+ETH Spot Current Market
+↓
+OUT_OF_SCOPE
+~~~
+
+重要:
+
+~~~text
+Scope
+≠ Condition
+~~~
+
+---
+
+## 20.5 Knowledge Condition Semantics
+
+Condition Role本命候補:
+
+~~~text
+REQUIRED
+SUPPORTING
+EXCLUSION
+~~~
+
+### REQUIRED
+
+Knowledge成立のために満たされる必要がある条件。
+
+### SUPPORTING
+
+成立性を補強するが、欠けたことだけで自動NOT_APPLICABLEにしない条件。
+
+### EXCLUSION
+
+Research上、Knowledgeの適用対象から除外される条件。
+
+重要:
+
+~~~text
+EXCLUSION
+≠ Failure Boundary
+≠ Knowledge-Use Constraint
+~~~
+
+各Conditionの基本評価候補:
+
+~~~text
+SATISFIED
+NOT_SATISFIED
+UNKNOWN
+~~~
+
+UNKNOWNをFALSEへ潰さない。
+
+---
+
+## 20.6 Condition Expression / Temporal Meaning
+
+Knowledge Conditionはflat listに限定しない。
+
+候補:
+
+~~~text
+ALL_OF
+ANY_OF
+explicit NOT
+research-defined composite
+~~~
+
+必要に応じてCondition semanticsへ、
+
+~~~text
+Threshold
+Range
+Category
+Relevant Time Window
+Temporal Order
+Lag
+Duration
+Persistence
+~~~
+
+を保持可能にする。
+
+例:
+
+~~~text
+OI increase > 8% within 30m
+THEN
+Funding increase within 15m
+~~~
+
+を、
+
+~~~text
+OI high
+AND
+Funding high
+~~~
+
+へ意味変換しない。
+
+重要:
+
+~~~text
+Condition Count Majority
+≠ Applicability
+
+Threshold
+= Research / Knowledge Version由来
+
+Applicability
+≠ Threshold Creator
+~~~
+
+---
+
+## 20.7 Unknown / Missing / Unconditional Boundary
+
+Precision Reviewで以下を分離した。
+
+~~~text
+UNKNOWN
+≠ NOT_SATISFIED
+≠ PARTIAL
+~~~
+
+Unknown propagationはMateriality依存。
+
+~~~text
+Required Condition UNKNOWN
+→ Semantic Applicability UNDETERMINED候補
+
+Supporting Condition UNKNOWN
+→ 必ずしも全体をUNDETERMINEDにしない
+
+Hard Failure Boundary UNKNOWN
+→ UNDETERMINED候補
+
+Non-material Context UNKNOWN
+→ Uncertaintyとして保持可能
+~~~
+
+さらに、
+
+~~~text
+NO_REQUIRED_CONDITION
+≠
+MISSING_CONDITION_DEFINITION
+~~~
+
+を区別する。
+
+前者はResearchで条件不要と分かったKnowledge semantics。
+後者はKnowledge Formation / Research不足。
+
+---
+
+## 20.8 Current Context Integrity
+
+ApplicabilityはCurrent Market Understanding / Market DNA / Qualified Observation等を参照するが、自身でMarket Understandingを再生成しない。
+
+~~~text
+R1
+= Current Marketを理解
+
+R3 Applicability
+= そのContextを使ってKnowledgeを照合
+~~~
+
+Condition Evaluationでは、
+
+~~~text
+Observed / Interpreted Value
++
+Quality
++
+Freshness
++
+Time Alignment
+↓
+Condition Result
+~~~
+
+を考慮可能にする。
+
+重要:
+
+~~~text
+latest available values
+≠ time-consistent current context
+~~~
+
+Logical Boundary候補:
+
+~~~text
+Applicability Context Snapshot / As-Of Context
+~~~
+
+具体Object Schemaは後。
+
+---
+
+## 20.9 Failure Boundary
+
+Failure Boundary責任候補:
+
+> Knowledgeが成立する領域と、成立性が劣化・消失・逆転する領域とのResearchで確認されたValidity Limit。
+
+重要:
+
+~~~text
+Failure Boundary
+= Research-derived semantic asset
+
+Failure Boundary
+≠ Safety Policy
+
+Applicability
+= Boundary Evaluator
+
+Applicability
+≠ Boundary Creator
+~~~
+
+Status候補:
+
+~~~text
+CLEAR
+APPROACHING
+BREACHED
+UNKNOWN
+~~~
+
+APPROACHINGでもSemantic ApplicabilityはAPPLICABLEであり得る。
+BREACHEDならNOT_APPLICABLE候補。
+
+Known Failure Boundaryを越えたこと自体はKnowledge Failureではない。
+
+~~~text
+Known Boundary Breach
+≠ Knowledge Refuted
+≠ Lifecycle RETIRED
+~~~
+
+---
+
+## 20.10 Constraintを一種類へ潰さない
+
+Constraintを少なくとも次へ分離する。
+
+~~~text
+A. Knowledge-Use Constraint
+B. Production / Capital Constraint
+~~~
+
+### Knowledge-Use Constraint
+
+Knowledge VersionはACTIVE / SemanticにAPPLICABLEでも、特定用途でDecision Materialとして使用させないAuthorized Restriction。
+
+例:
+
+~~~text
+Evidence Provenance確認待ちのため
+Live Decision使用禁止
+~~~
+
+### Production / Capital Constraint
+
+Portfolio exposure、Margin、Daily Loss、RiskState、Venue availability等、R4がCapital Permissionを制御するConstraint。
+
+重要:
+
+~~~text
+Knowledge Semantic Applicability
+≠ Knowledge-Use Permission
+
+Knowledge-Use Permission
+≠ Capital Permission
+
+Production Risk Constraint
+≠ Knowledge Not Applicable
+~~~
+
+また、
+
+~~~text
+Constraint Knowledge
+≠ Knowledge-Use Constraint
+~~~
+
+とする。
+
+Constraint KnowledgeはResearchから得られたKnowledge Record。
+Knowledge-Use Constraintは利用制限。
+
+---
+
+## 20.11 Decision Material Eligibility
+
+Semantic ApplicabilityとKnowledge-Use Permissionを分離する。
+
+例:
+
+~~~text
+Semantic Applicability:
+APPLICABLE
+
+Knowledge-Use Constraint:
+ACTIVE
+
+Decision Material Eligibility:
+BLOCKED
+~~~
+
+Decision Material Eligibilityの候補:
+
+~~~text
+ELIGIBLE
+BLOCKED
+UNDETERMINED
+~~~
+
+正式Enumは後。
+
+一時的ConstraintをKnowledge semantics変更の永久代用にしない。
+
+~~~text
+temporary operational restriction
+→ Constraint
+
+validated semantic discovery
+→ Knowledge Condition / Boundary / New Version candidate
+~~~
+
+---
+
+## 20.12 Pre-Decision Applicability Flow
+
+Precision Candidate:
+
+~~~text
+Canonical Knowledge Version
+        +
+Canonical Lifecycle State
+        ↓
+Lifecycle Eligibility Gate
+        ↓
+Scope Gate
+        ↓
+Applicability Context Availability / Integrity
+        ↓
+Condition Matching
+        ↓
+Failure Boundary Check
+        ↓
+Semantic Applicability
+        ↓
+Knowledge-Use Constraint
+        ↓
+Decision Material Eligibility
+        ↓
+Cross-Knowledge Context
+        ↓
+Decision Material Snapshot
+        ↓
+Decision Synthesis
+~~~
+
+Applicability自身は、
+
+~~~text
+Trade direction
+Expected Value
+Position Size
+Capital Permission
+Execution
+~~~
+
+を決めない。
+
+---
+
+## 20.13 Runtime Assumption Monitoring Boundary
+
+Pre-Decision ApplicabilityとRuntime Assumption MonitoringはCondition semanticsを共有できるが責任を分ける。
+
+~~~text
+Pre-Decision Applicability
+=
+このKnowledgeを今Decision材料として使えるか？
+
+Runtime Assumption Monitoring
+=
+このKnowledge / Thesisを使って既に行った判断の前提は
+今も維持されているか？
+~~~
+
+RuntimeではKnowledge Pool全件ではなく、実際のDecision / Thesisが依存したKnowledge Versionと重要Assumptionを監視する。
+
+Logical Boundary候補:
+
+~~~text
+Runtime Assumption Set
+~~~
+
+意味候補:
+
+~~~text
+Used Knowledge Version references
+Thesis reference
+Material Required Conditions
+Material Supporting Conditions
+Failure Boundaries
+Relevant Constraints
+Expected Effect / Horizon
+Critical Uncertainty
+Decision-time Context Reference
+~~~
+
+重要:
+
+~~~text
+Applicable Knowledge Context Set
+≠ Runtime Assumption Set
+
+Entry Thesis
+≠ Runtime hindsight rewrite
+~~~
+
+Position中に新KnowledgeがApplicableになった場合、Original Decisionを書き換えずNew Decision Event候補として扱う。
+
+---
+
+## 20.14 R3 Runtime Monitoring vs R4 Runtime Protection
+
+核心:
+
+~~~text
+R3 Runtime Assumption Monitoring
+=
+前提がどう変わったか
+
+R4 Runtime Protection
+=
+その変化に対して資金をどう守るか
+~~~
+
+R3出力候補:
+
+~~~text
+Required condition broken
+Failure boundary approaching
+Failure boundary crossed
+Constraint activated
+Assumption unknown
+Horizon expired
+Material deviation
+~~~
+
+R4はPosition / Exposure / Margin / Liquidity / RiskState / Protection / Portfolio Context等と統合し、
+
+~~~text
+CONTINUE
+WATCH
+REDUCE
+HEDGE
+TIGHTEN PROTECTION
+EXIT
+BLOCK ADDITION
+EMERGENCY CLOSE
+~~~
+
+等を判断する候補。
+
+重要:
+
+~~~text
+R3 MATERIAL_DEVIATION
+≠ automatic EXIT
+
+R4 EXIT
+≠ Knowledge invalidated
+
+Unknown before Entry
+≠ Unknown while Exposed
+~~~
+
+正式Runtime State / Action Enumは後。
+
+---
+
+## 20.15 Multi-Knowledge Applicability Context
+
+複数Knowledgeが同時にApplicableでも、多数決しない。
+
+~~~text
+Multiple Applicable Knowledge
+≠ Independent Support
+
+Knowledge Count
+≠ Evidence Count
+
+Different Knowledge ID
+≠ Independent Research
+~~~
+
+Cross-Knowledge Context候補:
+
+~~~text
+Canonical Semantic Relationship
+Scope / Horizon Overlap
+Evidence Overlap
+Research Lineage Dependency
+Cause / Mechanism Dependency
+Data / Feature Source Overlap
+Contradiction Context
+Unknown Dependency
+~~~
+
+Canonical Relationship:
+
+~~~text
+EQUIVALENT
+DUPLICATE_CANDIDATE
+SPECIALIZES
+REFINES
+EXTENDS
+CONTRADICTS
+SUPERSEDES
+~~~
+
+を参照できるが、Applicability自身がRelationshipを作成・変更・Conflict Winner決定しない。
+
+~~~text
+Canonical CONTRADICTS
+≠ Applicabilityがwinnerを決める
+
+No known overlap
+≠ Proven independent
+
+Confidence Sum
+≠ Independent Support
+~~~
+
+Negative / Boundary / Constraint-related / Unknown Knowledgeも、現在RelevantならDecision Materialになり得る。
+
+---
+
+## 20.16 Relationship / Version Compatibility
+
+Precision Reviewで、Relationshipを新Versionへ盲目的に継承しない必要を確認した。
+
+例:
+
+~~~text
+K021 v2 CONTRADICTS K044 v1
+↓
+K021 v3でClaim変更
+~~~
+
+の場合、
+
+~~~text
+K021 v3 CONTRADICTS K044 v1
+~~~
+
+を自動的なCurrent Truthにしない。
+
+Cross-Knowledge ContextはRelationshipのVersion Compatibilityを確認可能にする必要がある。
+
+exact Version Lineage / Relationship granularityは後の詳細設計で確定。
+
+---
+
+## 20.17 Lifecycle ↔ Applicability Handoff
+
+方向は非対称。
+
+~~~text
+Lifecycle
+↓
+Applicability Eligibility
+~~~
+
+は直接影響。
+
+一方、
+
+~~~text
+Applicability Finding
+↓
+Lifecycle State
+~~~
+
+は直接禁止。
+
+Applicability Findingは分類する。
+
+~~~text
+A. Expected Current-Market Mismatch
+→ Trace only
+
+B. Research / Semantic Concern
+→ R2 Research Candidate
+
+C. Lifecycle / Integrity Concern
+→ Lifecycle Trigger Candidate
+~~~
+
+重要:
+
+~~~text
+NOT_APPLICABLE
+≠ Lifecycle Trigger automatically
+
+Known Boundary Breach
+≠ Lifecycle Problem automatically
+
+Applicability Finding
+≠ Lifecycle Transition
+
+Applicability
+≠ Canonical Lifecycle Writer
+~~~
+
+Lifecycle TransitionはCheckpoint 012のGovernance / Single Writer Authorityを維持する。
+
+---
+
+## 20.18 Stale Applicability / Temporal Integrity
+
+Applicability AssessmentはPermanent Current Truthではない。
+
+Stale化候補:
+
+~~~text
+Time elapsed
+Material Market Change
+Regime change
+Liquidity shock
+Data quality degradation
+Lifecycle change
+Knowledge-Use Constraint change
+Knowledge Version change
+~~~
+
+Assessment時に最低限、
+
+~~~text
+Knowledge Version reference
+Lifecycle reference / revision
+Current Context reference
+Assessment Time / As-Of
+~~~
+
+を追える必要がある。
+
+Lifecycleが、
+
+~~~text
+ACTIVE → SUSPENDED
+~~~
+
+となった場合、
+
+~~~text
+Past Applicability Assessment
+→ Historyとして保持
+
+Current-use eligibility
+→ 無効
+~~~
+
+とする。
+
+SUSPENDED → ACTIVEに戻っても、古いAPPLICABLE判定を自動復活させない。
+Fresh Applicability Evaluationが必要。
+
+Later Knowledge / Relationship / Lifecycle情報でPast Decision Contextを書き換えない。
+
+---
+
+## 20.19 Decision Material Snapshot
+
+Decision Synthesisへ渡す時点のLogical Boundary候補:
+
+~~~text
+Decision Material Snapshot
+~~~
+
+意味候補:
+
+~~~text
+Knowledge Versions
+Applicability Assessments
+Lifecycle references
+Knowledge-Use Constraint references
+Current Context references
+Cross-Knowledge Context
+As-Of Time
+~~~
+
+目的:
+
+> そのDecisionが、その時点で何を知り、何を使い、何を使えなかったのかを後から復元可能にする。
+
+重要:
+
+~~~text
+Later Knowledge
+≠ Information Available At Past Decision Time
+
+Later Relationship
+≠ Past Decision Context
+
+Later Version
+≠ Original Decision Reason
+~~~
+
+具体Schemaは後。
+
+---
+
+## 20.20 Emergency Knowledge-Use Block
+
+Precision ReviewでHard Integrity FindingとLifecycle Writer不通が同時に起こるケースを確認した。
+
+候補Flow:
+
+~~~text
+Verified Hard Integrity Finding
+↓
+Pre-authorized Emergency Knowledge-Use Block
+↓
+New Decision Materialから即時除外
+↓
+並行して
+Lifecycle Fast Suspension Path
+↓
+Lifecycle Governance / Writer
+↓
+SUSPENDED
+~~~
+
+重要:
+
+~~~text
+Emergency Knowledge-Use Block
+≠ Canonical Lifecycle State mutation
+
+Fast Safety
+≠ Fast RETIRE
+~~~
+
+これにより、Lifecycle Single Writer原則を壊さず、新しいDecisionへの利用を安全側へ止められる。
+
+exact implementation / fail-open / fail-closed policyは後。
+
+---
+
+## 20.21 Precision Review / Destruction Test
+
+以下を含むケースで破壊テストした。
+
+~~~text
+Normal applicable Knowledge
+Scope mismatch
+Required data missing
+Supporting condition unknown
+Explicit unconditional Knowledge
+Old validation age
+Fresh market data + old Knowledge validation
+Lifecycle change during evaluation
+SUSPENDED → ACTIVE
+Knowledge-Use Constraint only
+Constraint information unavailable
+Hard Integrity + Lifecycle Writer unavailable
+Known Failure Boundary breached
+Repeated unexpected mismatch inside valid domain
+AI disagrees with hard condition rule
+Time-misaligned current context
+Temporal composite condition
+Multiple same-direction Knowledge from same Research
+Opposing Knowledge with different lineage
+Stale Relationship after new Knowledge Version
+Relationship Store unavailable
+Knowledge Graph unavailable
+Negative Knowledge
+Constraint Knowledge
+Unknown Knowledge
+RETIRED Knowledge matching current market
+New Applicable Knowledge during open position
+Supporting Knowledge suspended during open position
+Market shock immediately after Applicability assessment
+Decision starts before material context/lifecycle change
+~~~
+
+Result:
+
+~~~text
+Pre-Decision Applicability Responsibility
+= SURVIVED
+
+Runtime Assumption Monitoring Boundary
+= SURVIVED
+
+State decomposition
+= SURVIVED / STRENGTHENED
+
+Condition Matching
+= SURVIVED / REFINED
+
+Failure Boundary / Constraint split
+= SURVIVED / STRENGTHENED
+
+Multi-Knowledge Context
+= SURVIVED
+
+Lifecycle ↔ Applicability
+= SURVIVED / STRENGTHENED
+~~~
+
+Reviewで追加・強化された主な候補:
+
+~~~text
+Unknown Materiality
+Explicit Unconditional semantics
+Validation Age responsibility separation
+Evaluation consistency / stale guard
+Emergency Knowledge-Use Block
+As-Of Context integrity
+Relationship Version Compatibility
+Constraint Knowledge vs Knowledge-Use Constraint
+Semantic Staleness
+Decision Material Snapshot
+~~~
+
+---
+
+## 20.22 Applicability Precision Invariants
+
+~~~text
+P-01 ACTIVE ≠ APPLICABLE。
+P-02 SUSPENDED / RETIRED ≠ NOT_APPLICABLE。
+P-03 Scope mismatch ≠ Condition failure。
+P-04 UNKNOWN ≠ FALSE。
+P-05 Missing Data ≠ Condition mismatch。
+P-06 Supporting Unknown ≠ automatic UNDETERMINED。
+P-07 No Required Condition ≠ Missing Condition Definition。
+P-08 Failure Boundary ≠ Constraint。
+P-09 Known Boundary Breach ≠ Knowledge Failure。
+P-10 Semantic Applicability ≠ Knowledge-Use Permission。
+P-11 Knowledge-Use Permission ≠ Capital Permission。
+P-12 Validation Age ≠ Semantic Applicability。
+P-13 Constraint Knowledge ≠ Knowledge-Use Constraint。
+P-14 Knowledge Count ≠ Evidence Count。
+P-15 Different Knowledge ID ≠ Independent Research。
+P-16 No known dependency ≠ Proven independence。
+P-17 Relationship must not be blindly inherited across semantic versions。
+P-18 AI Advisory ≠ Hard Applicability Authority。
+P-19 Applicability Finding ≠ Lifecycle Transition。
+P-20 Applicability Assessment ≠ permanent Current Truth。
+P-21 Later Lifecycle / Relationship / Knowledge Version ≠ Past Decision Context rewrite。
+P-22 Current Context must be sufficiently time-consistent。
+P-23 Hard Integrity concern may block new use without bypassing Lifecycle Single Writer。
+P-24 Applicable Knowledge Context Set ≠ Runtime Assumption Set。
+P-25 R3 Runtime Deviation ≠ R4 Position Action。
+~~~
+
+---
+
+## 20.23 Human View
+
+人間向け中心Flow:
+
+~~~text
+Knowledge
+↓
+今もACTIVE？
+├─ NO
+│   → Normal Applicabilityには使わない
+│
+└─ YES
+    ↓
+対象Scope？
+    ↓
+成立条件は合っている？
+    ↓
+Exclusionはない？
+    ↓
+Failure Boundary内？
+    ↓
+Semantic Applicability
+    ├─ APPLICABLE
+    ├─ NOT_APPLICABLE
+    └─ UNDETERMINED
+    ↓
+そのKnowledgeを今使ってよい？
+    ├─ YES → Decision Material候補
+    └─ NO  → BLOCKED
+    ↓
+他Knowledgeとの
+Relationship / Evidence重複 / Research依存 / Contradiction確認
+    ↓
+Decision Material Snapshot
+    ↓
+Decision Synthesis
+~~~
+
+Trade / Position開始後:
+
+~~~text
+実際にDecisionが依存したKnowledge / Thesis
+↓
+Runtime Assumption Set
+↓
+Current Runtime Contextと継続比較
+↓
+前提維持 / 劣化 / 逸脱 / Unknown
+↓
+R4 Runtime Protection
++
+R5 Feedback
+~~~
+
+人間向け重要定義:
+
+~~~text
+Lifecycle
+=
+Knowledge Version自体を現在どう扱うか
+
+Semantic Applicability
+=
+ACTIVE Knowledgeが今の市場で成立するか
+
+Knowledge-Use Eligibility
+=
+成立するKnowledgeを今Decision材料として使わせるか
+
+Decision Synthesis
+=
+複数Decision Materialをどう統合するか
+
+R4 Capital Permission
+=
+その判断へ実資金を出してよいか
+~~~
+
+---
+
+## 20.24 Human Review Result
+
+2026-10-01のConversationでHuman Viewを確認。
+
+Result:
+
+~~~text
+No major conceptual issue found by Daisuke.
+Proceed with this direction as Working Candidate.
+~~~
+
+重要:
+
+~~~text
+Human Review completed
+≠ Formal Current Architecture Adoption
+~~~
+
+---
+
+## 20.25 Checkpoint Result
+
+~~~text
+Knowledge Applicability Precision Design
+= COMPLETE / WORKING CANDIDATE
+
+Runtime Assumption Monitoring Boundary
+= COMPLETE / WORKING CANDIDATE
+
+Precision Review / Destruction Test
+= COMPLETE
+
+Human View
+= COMPLETE / REVIEWED IN CONVERSATION
+
+Formal Current Architecture
+= UNCHANGED
+~~~
+
+Current R3 detailed refinement state:
+
+~~~text
+Knowledge Admission
+= detailed refinement saved
+
+Knowledge Record minimum semantics
+= detailed refinement saved
+
+Knowledge Relationship
+= detailed refinement saved
+
+Knowledge Graph boundary
+= detailed refinement saved
+
+Version Lineage boundary
+= detailed refinement saved
+
+Knowledge Lifecycle
+= Precision refinement saved
+
+Knowledge Applicability
+= Precision refinement saved
+~~~
+
+NEXT candidate:
+
+~~~text
+Decision Synthesis / Conflict Resolution detailed refinement
+using Precision-First workflow:
+
+1. Decision Synthesis responsibility
+2. Decision Material Snapshot input boundary
+3. conflict / opposition handling
+4. no-majority / no-double-count rule
+5. WAIT / UNKNOWN / abstention semantics
+6. Trade Thesis / Decision Candidate responsibility
+7. Runtime Assumption Set handoff
+8. Precision Review
+9. Human View
+~~~
+
+Later Integration Reminder:
+
+~~~text
+R3前半のAdmission / Record / Relationship / Graph / Versionは
+Precision-First導入前に作られた部分を含む。
+
+今は回収を止めて全面再設計せず、
+R3 detailed recovery一巡後の
+R3 Integration Precision Reviewで
+不足部分だけ再検証する。
+~~~
+
+重要:
+
+~~~text
+Checkpoint 013
+≠ Final Object Schema
+≠ DB Table
+≠ Python Class
+≠ Formal Current Architecture Adoption
+~~~
