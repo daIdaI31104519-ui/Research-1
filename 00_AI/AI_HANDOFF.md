@@ -20,27 +20,8 @@ Whole Market Understanding OS Reconstruction.
 Phase 5 R1-R4 concept-level reconstruction exists.
 Current detailed work remains R3 Knowledge refinement.
 
-WORKFLOW UPDATE:
-AI_WORKFLOW v0.5.3 adopted as WORKING BASELINE in this Git change.
-
-New workflow rules:
-- ambiguous human instruction must not become an ambiguous design change
-- design one responsibility at a time by default
-- tightly coupled concepts may be designed together when separation reduces correctness
-- create Precision Design first
-- stop for Precision Review before Human View
-- Human View is a projection, not a second design source of truth
-- important definitions must survive simplification
-- Human Review problems return to Precision Design
-- Human View sync only when human understanding materially changes
-- Workflow rules themselves require freshness checks
-- higher-level DRAFT / Proposal does not automatically override lower-level Current / Working Baseline
-
-Navigation clarification:
-AI_CONTEXT remains authoritative for Formal Project Current State.
-The active whole-OS reconstruction is a NON-CURRENT Working Study.
-AI_CONTEXT now contains a stable entry to:
-98_DESIGN_STUDY/市場理解OS_全体再構築_設計ログ.md
+WORKFLOW:
+AI_WORKFLOW v0.5.3 Precision-First → Precision Review → Human View workflow is active.
 
 R3 DETAILED REFINEMENT SAVED:
 - Knowledge Admission detailed flow
@@ -48,26 +29,59 @@ R3 DETAILED REFINEMENT SAVED:
 - Knowledge Relationship detailed refinement
 - Knowledge Graph boundary
 - Version Lineage boundary
+- Knowledge Lifecycle Precision Design
+- Knowledge Lifecycle Precision Review / destruction tests
+- Lifecycle Transition Authority
+- Human View reviewed by Daisuke
+
+KNOWLEDGE LIFECYCLE WORKING CANDIDATE:
+Lifecycle Disposition:
+- ACTIVE
+- SUSPENDED
+- RETIRED
+
+Review Status:
+- NO_REVIEW_DUE
+- REVIEW_DUE
+- IN_REVIEW
+
+Key boundaries:
+- Trigger != Transition
+- Assessment != Transition
+- Lifecycle != Applicability
+- Lifecycle != Version
+- Relationship != Lifecycle writer
+- Runtime Observation != direct Lifecycle Transition
+- RETIRED != DELETE
+- Fast integrity path may SUSPEND but must not fast-RETIRE
+- Lifecycle Governance decides transition
+- Canonical Lifecycle Writer is single-writer
+- Human override also goes through governance/writer trace
+
+Saved Checkpoint:
+Checkpoint 012 — R3 Detailed Refinement / Knowledge Lifecycle
+Primary:
+98_DESIGN_STUDY/市場理解OS_全体再構築_設計ログ.md
 
 NEXT:
-Resume Knowledge Lifecycle detailed design using the new Precision-First workflow:
-1. minimal Lifecycle states
-2. transition triggers
-3. Lifecycle Assessment vs Lifecycle Transition
-4. writer / governance authority
-5. evidence required for material transitions
-6. revalidation flow
-7. Version vs Lifecycle boundary
-8. Runtime observations must not directly retire Knowledge
-9. Precision Review
-10. Human View translation after semantic review
+Knowledge Applicability detailed refinement using Precision-First workflow:
+1. pre-decision Applicability responsibility
+2. Runtime Assumption Monitoring boundary
+3. Applicability State semantics
+4. Knowledge Condition matching
+5. Constraint / Failure Boundary interaction
+6. Multi-Knowledge applicability context
+7. Lifecycle ↔ Applicability handoff
+8. Precision Review
+9. Human View
 
 READ:
 98_DESIGN_STUDY/市場理解OS_全体再構築_設計ログ.md
 
 Important Boundary:
+AI_CONTEXT remains authoritative for Formal Project Current State.
 Formal Current Architecture is unchanged.
-Phase 5 reconstruction and detailed refinements remain Working Study / Working Candidate until later adoption.
+Checkpoint 012 is Working Study / Working Candidate, not formal adoption.
 
 Git Write Permission Reminder:
 REQUIRE CURRENT-CHAT USER AUTHORIZATION

@@ -10909,3 +10909,1191 @@ Detailed Refinement
 ≠ Python Class
 ≠ Formal Current Architecture Adoption
 ~~~
+
+
+---
+
+# 19. Checkpoint 012 — R3 Detailed Refinement / Knowledge Lifecycle
+
+**Date:** 2026-10-01  
+**State:** SAVED  
+**Formal Current Architecture Changed:** NO  
+**Phase:** 5 Reconstruction — R3 Detailed Refinement  
+**Purpose:** Knowledge Admission / Record / Relationshipの詳細化後、Knowledge Versionが時間・新Evidence・矛盾・再検証・Integrity変化を受けながら、どのように維持・一時停止・退役されるかをPrecision Design → Precision Review → Authority Design → Human Viewの順で精密化する。
+
+## 19.1 Knowledge Lifecycle Responsibility
+
+Knowledge Lifecycleの責任候補:
+
+> Admission済みKnowledge Versionが、現在も維持対象として扱えるか、一時的に通常利用を止めるべきか、Current Operational Knowledgeとしての通常利用を終了すべきかを、時間・新Evidence・矛盾・再検証・Integrity変化を追跡しながら管理する。
+
+重要:
+
+~~~text
+Knowledge Lifecycle
+≠ Researchそのもの
+
+Knowledge Lifecycle
+≠ Applicability
+
+Knowledge Lifecycle
+≠ Version Lineage
+
+Knowledge Lifecycle
+≠ Knowledge Relationship
+
+Knowledge Lifecycle
+≠ Runtime Position Action
+~~~
+
+真偽・再現性・成立条件・限界の研究はR2 Researchの責任。
+Lifecycleは、そのResearch / Evidence / Integrity情報を受けてKnowledge Versionを現在どう扱うかを管理する。
+
+---
+
+## 19.2 Lifecycle Unit
+
+Canonical Lifecycle Stateは原則としてKnowledge Identity全体ではなく、Knowledge Version単位で持つ候補。
+
+例:
+
+~~~text
+K021
+├─ v1 RETIRED
+├─ v2 RETIRED
+└─ v3 ACTIVE
+~~~
+
+重要:
+
+~~~text
+Lifecycle State
+→ Knowledge Version
+
+Knowledge Identity全体のCurrent Status
+→ Version Lineage等から作るDerived View候補
+~~~
+
+同一Knowledge IdentityでどのVersionをCurrent Semantic Versionとして扱うかはVersion Lineage側の責任候補であり、Lifecycleだけで複数Version競合を解決しない。
+
+---
+
+## 19.3 Lifecycle Stateを一軸へ詰め込まない
+
+以前候補にあった、
+
+~~~text
+ACTIVE
+AGING
+UNDER_REVIEW
+DEGRADED
+RETIRED
+~~~
+
+を一つのLifecycle State Machineへ入れない方向。
+
+理由:
+
+~~~text
+AGING
+= Recency / Review Need
+
+UNDER_REVIEW
+= Review進行状態
+
+DEGRADED
+= Assessment Finding
+
+ACTIVE / SUSPENDED / RETIRED
+= Canonical Operational Treatment
+~~~
+
+異なる意味軸を一つのEnumへ詰めるとState Explosionと責任混同が起きる。
+
+---
+
+## 19.4 Lifecycle Disposition — Minimal Canonical Set
+
+Precision Review後の本命候補:
+
+~~~text
+ACTIVE
+SUSPENDED
+RETIRED
+~~~
+
+### ACTIVE
+
+Current Knowledge Assetとして維持され、通常のApplicability評価対象になれる。
+
+重要:
+
+~~~text
+ACTIVE
+≠ Currently Applicable
+≠ Positive Knowledge
+≠ Trade Permission
+~~~
+
+Negative Knowledge / Constraint Knowledge等もACTIVEになり得る。
+
+### SUSPENDED
+
+Knowledgeは保存されているが、重大な未解決問題があり、通常のApplicability経路へ流すことを一時停止する。
+
+重要:
+
+~~~text
+SUSPENDED
+≠ Refuted
+≠ Retired
+≠ Deleted
+~~~
+
+再研究・Integrity確認後にACTIVEへ戻れる可逆的Safety State。
+
+### RETIRED
+
+Current Operational Knowledgeとしての通常利用を終了した状態。
+
+重要:
+
+~~~text
+RETIRED
+≠ DELETE
+~~~
+
+Research Asset / Historyとして保持する。
+過去Decision・Trade・ResearchでどのKnowledge Versionが使われたかを後から追跡可能にする。
+
+---
+
+## 19.5 Review Status — Separate Axis
+
+Lifecycle Dispositionとは別にReview状態を持つ候補。
+
+~~~text
+NO_REVIEW_DUE
+REVIEW_DUE
+IN_REVIEW
+~~~
+
+CURRENT という名称は、
+
+~~~text
+Current Knowledge
+Current Version
+Current Market
+~~~
+
+等と意味衝突しやすいため、Precision Reviewで NO_REVIEW_DUE へ変更候補。
+
+重要:
+
+~~~text
+Review Status
+≠ Lifecycle Disposition
+
+REVIEW_DUE
+≠ Automatic Suspension
+
+Review Status
+≠ Production Blocking Authority
+~~~
+
+重大性が高く通常利用を止める必要がある場合は、Lifecycle Assessmentを通してSUSPENDEDへ変更する。
+
+---
+
+## 19.6 Assessment Finding — Stateではない
+
+以下はLifecycle StateではなくAssessment Finding / Trigger Contextとして扱う候補。
+
+~~~text
+Aging / Recency
+Evidence Degradation
+Contradiction
+Structural Change
+Integrity Problem
+Production Mismatch
+Repeated Applicability Mismatch
+Validation Age
+Replication Failure
+OOS Deterioration
+~~~
+
+重要:
+
+~~~text
+Degradation
+≠ Lifecycle State
+
+Aging
+≠ Lifecycle State
+
+Finding
+≠ Transition
+~~~
+
+---
+
+## 19.7 Lifecycle Trigger
+
+Trigger候補Source:
+
+~~~text
+Time / Recency
+New Evidence
+Replication Failure
+OOS / Forward deterioration
+Market Structure Change
+New Failure Boundary
+New Constraint
+Canonical CONTRADICTS
+SUPERSEDES candidate / relation
+Repeated Applicability Mismatch
+Production Feedback
+Integrity Failure
+Human concern
+AI suggestion
+~~~
+
+重要:
+
+~~~text
+Trigger
+=
+「調べる理由が発生した」
+
+Trigger
+≠ Transition
+≠ Evidence Strength
+≠ Majority Vote
+~~~
+
+Trigger数が多いことをTransition根拠の多数決にしない。
+
+---
+
+## 19.8 Lifecycle Assessment
+
+Triggerを受けた後、R3内部のLifecycle Assessmentが、
+
+~~~text
+対象Knowledge Version
+Trigger Type
+Materiality
+Evidence / Research References
+Known Contradictions
+Integrity Status
+Structural Change
+Applicabilityだけの問題か
+Productionだけの問題か
+Revalidation Required?
+Immediate Suspension Required?
+Potential Impact
+Unresolved Questions
+Transition Recommendation
+~~~
+
+等の意味を評価する候補。
+
+具体Field / Object Schemaは後。
+
+重要:
+
+~~~text
+Lifecycle Assessment
+≠ Research Truth Authority
+
+Lifecycle Assessment
+≠ Canonical Transition
+~~~
+
+Claimの真偽・再現性・条件・限界を研究するのはR2。
+
+---
+
+## 19.9 Revalidation Boundary
+
+Lifecycleが再検証必要と判断しても、自身でResearchを実行しない。
+
+~~~text
+Lifecycle Trigger
+↓
+Lifecycle Assessment
+↓
+Revalidation Required
+↓
+R2 Research Candidate / Research Intake
+↓
+Replication / OOS / Forward / Stress等
+↓
+Validated Research Result
+↓
+R3 Lifecycle / Admission
+~~~
+
+再検証結果候補:
+
+~~~text
+SUPPORTED / meaning unchanged
+→ ACTIVE維持
+→ Review Status = NO_REVIEW_DUE
+→ Validation History追加
+
+SUPPORTED / semantics changed
+→ New Knowledge Version Candidate
+→ Knowledge Admission
+
+REFUTED / no longer reusable
+→ RETIRED candidate
+
+INCONCLUSIVE
+→ ACTIVE + REVIEW_DUE
+or
+→ SUSPENDED + IN_REVIEW
+
+PROCESS LIMITED / RESEARCH FAILURE
+→ Knowledge Falseとは扱わずResearch修復へ
+~~~
+
+---
+
+## 19.10 Version vs Lifecycle Boundary
+
+~~~text
+Lifecycle
+=
+そのKnowledge Versionを現在どう扱うか
+
+Version
+=
+Knowledgeの意味がどう変わったか
+~~~
+
+例:
+
+~~~text
+K021 v3
+ACTIVE → SUSPENDED → ACTIVE
+~~~
+
+はSemantic Version変更なしでも可能。
+
+一方、
+
+~~~text
+Claim変更
+Conditions変更
+Failure Boundary変更
+Horizon変更
+Scope変更
+~~~
+
+等、Knowledgeの意味が変わる場合は新Version候補。
+
+重要:
+
+~~~text
+Lifecycle Transition
+≠ Semantic Version Change
+
+Semantic Version Change
+≠ Lifecycle Transition
+~~~
+
+---
+
+## 19.11 Relationship vs Lifecycle Boundary
+
+Canonical Relationship自身はLifecycleを書き換えない。
+
+~~~text
+EQUIVALENT
+→ direct lifecycle effectなし
+
+DUPLICATE_CANDIDATE
+→ direct lifecycle effectなし
+
+SPECIALIZES
+→ direct lifecycle effectなし
+
+REFINES
+→ direct lifecycle effectなし
+
+EXTENDS
+→ direct lifecycle effectなし
+
+CONTRADICTS
+→ Assessment / Revalidation Trigger候補
+
+SUPERSEDES
+→ Retirement Assessmentへの強いInput候補
+~~~
+
+重要:
+
+~~~text
+CONTRADICTS
+≠ RETIRED
+
+SUPERSEDES
+≠ Lifecycle Writer
+~~~
+
+---
+
+## 19.12 Applicability vs Lifecycle Boundary
+
+~~~text
+Lifecycle
+=
+Knowledge Version自体をCurrent Knowledgeとしてどう扱うか
+
+Applicability
+=
+そのACTIVE Knowledgeを今のCurrent Marketで使えるか
+~~~
+
+基本候補:
+
+~~~text
+ACTIVE
+→ Applicability評価対象になれる
+
+SUSPENDED
+→ Normal Applicabilityから除外
+
+RETIRED
+→ Normal Applicabilityから除外
+~~~
+
+重要:
+
+~~~text
+ACTIVE
+≠ APPLICABLE
+
+NOT_APPLICABLE
+≠ SUSPENDED
+≠ RETIRED
+~~~
+
+Repeated NOT_APPLICABLEは研究Trigger候補にはなり得るが、直接Lifecycle Transitionしない。
+
+---
+
+## 19.13 Runtime Observation Boundary
+
+~~~text
+Runtime Observation
+Runtime Assumption Deviation
+Trade Loss
+Unexpected Outcome
+~~~
+
+からKnowledge Lifecycleへ直接State変更しない。
+
+候補Flow:
+
+~~~text
+Runtime Observation / Outcome
+↓
+R4 Runtime Protection and/or R5 Feedback
+↓
+必要ならResearch Trigger
+↓
+R2 Research
+↓
+Lifecycle Assessment
+~~~
+
+重要:
+
+~~~text
+One Loss
+≠ Knowledge Invalid
+
+Repeated Loss
+≠ Automatic Retirement
+
+Runtime Assumption Deviation
+≠ Lifecycle Transition
+
+Lifecycle Change
+≠ Position Action
+~~~
+
+Position保有中にKnowledgeがSUSPENDEDになった場合も、R3がEXITを命令しない。
+Lifecycle State Changed EventをR4へ渡し、R4がHOLD / REDUCE / PROTECT / EXIT等を判断する。
+
+---
+
+## 19.14 Transition Matrix
+
+初期候補:
+
+| From | To | Candidate |
+|---|---|---|
+| ACTIVE | SUSPENDED | ALLOW |
+| ACTIVE | RETIRED | ALLOW with strong basis |
+| SUSPENDED | ACTIVE | ALLOW after issue resolution |
+| SUSPENDED | RETIRED | ALLOW with strong basis |
+| RETIRED | ACTIVE | NO DIRECT TRANSITION |
+| RETIRED | SUSPENDED | NO |
+
+RETIRED Knowledgeが後年再び成立しそうな場合:
+
+~~~text
+Retired Knowledge
+↓
+R2 Revalidation
+↓
+Knowledge Admission
+↓
+New Version / New Knowledge
+↓
+ACTIVE
+~~~
+
+とし、過去Versionを直接ACTIVEへ戻さない方向。
+
+---
+
+## 19.15 Precision Review / Destruction Test
+
+以下のケースで3-state Disposition + separate Review Statusを破壊テストした。
+
+~~~text
+正常Knowledge
+Canonical Contradiction
+False Contradiction / Condition Difference
+Market Structure Change
+One Trade Loss
+Repeated Loss
+Revalidation Success
+Semantic Change after Revalidation
+Refutation
+Revalidation Process Failure
+Confirmed Leakage / Integrity Failure
+SUPERSEDES
+10-year Validation Age
+Long-term NOT_APPLICABLE
+Retired Knowledge becoming relevant again
+Open Position during Suspension
+Negative Knowledge
+Constraint Knowledge
+Multiple simultaneous Triggers
+~~~
+
+Result:
+
+~~~text
+ACTIVE / SUSPENDED / RETIRED
+=
+追加Canonical Stateなしで主要ケースを表現可能
+
+AGING
+→ Recency / Review情報
+
+WEAK / DEGRADED
+→ Evidence / Assessment Finding
+
+UNDER_REVIEW
+→ Review Status
+
+SUPERSEDED
+→ Relationship / Lineage
+
+ARCHIVED
+→ Storage / Retention
+
+BLOCKED
+→ LifecycleならSUSPENDED
+  Current usabilityならApplicability
+~~~
+
+Stateを増やすより責任軸を分離する方が意味が安定する。
+
+---
+
+## 19.16 Precision Review Additional Invariants
+
+~~~text
+L-01 Knowledge CandidateにはLifecycle Stateを持たせない。
+L-02 Canonical Lifecycle StateはKnowledge Version単位。
+L-03 ACTIVE ≠ Currently Applicable。
+L-04 NOT_APPLICABLE ≠ Knowledge Invalid。
+L-05 Trigger ≠ Transition。
+L-06 Assessment ≠ Transition。
+L-07 R2 Research Result ≠ Lifecycle Writer。
+L-08 AI / Python / Relationship / Runtime Observation ≠ Lifecycle Writer。
+L-09 Lifecycle Transition ≠ Version Change。
+L-10 Semantic ChangeはNew Version Candidate。
+L-11 RETIREDから直接ACTIVEへ戻さない。
+L-12 SUSPENDEDは可逆的Safety State。
+L-13 RETIRED ≠ DELETE。
+L-14 Past Lifecycle StateをLater Evidenceで書き換えない。
+L-15 Lifecycle Change ≠ Position Action。
+L-16 Review Status ≠ Lifecycle Disposition。
+L-17 REVIEW_DUE ≠ Automatic Suspension。
+L-18 Review StatusはProduction Blocking Authorityを持たない。
+L-19 同一Knowledge IdentityのCurrent Semantic Version管理はVersion Lineage側の責任候補。
+~~~
+
+---
+
+## 19.17 Lifecycle Transition Authority — Four Responsibility Split
+
+Authorityは以下を分離する候補。
+
+~~~text
+1. Trigger Authority
+2. Assessment Authority
+3. Transition Decision Authority
+4. Canonical Write Authority
+~~~
+
+重要:
+
+~~~text
+Triggerできる
+≠ Assessmentできる
+
+Assessmentできる
+≠ Transitionを決定できる
+
+Transitionを決定できる
+≠ 直接Canonical Storeを書き換えてよい
+~~~
+
+---
+
+## 19.18 Trigger Authority
+
+Trigger発生源は広く許容できる。
+
+候補:
+
+~~~text
+R1 Current Market Understanding
+R2 Research
+Knowledge Relationship
+Applicability
+R4 Production
+R5 Feedback
+Time / Scheduler
+Integrity / Monitoring
+AI
+Human
+~~~
+
+ただし、AIはTrigger Candidate / Advisoryとして扱う。
+
+~~~text
+AI Suggestion
+≠ Canonical Trigger Truth
+≠ Transition Authority
+~~~
+
+---
+
+## 19.19 Assessment Authority
+
+R3内部のKnowledge Lifecycle AssessmentをLogical Responsibilityとして置く候補。
+
+内部で利用可能:
+
+~~~text
+Python / Rule
+→ Age / Trace / Version / Hard Integrity / deterministic checks
+
+AI
+→ contradiction explanation / context organization / alternative explanation / review assistance
+
+R2
+→ Validated Research Result / Evidence input
+~~~
+
+Assessment結果はAI OutputそのものではなくLifecycle Assessmentとして扱う。
+
+---
+
+## 19.20 Transition Proposal
+
+AssessmentからCanonical Stateへ直接書かない。
+
+~~~text
+Lifecycle Assessment
+↓
+Transition Proposal
+~~~
+
+Transition Proposalは、
+
+~~~text
+Target Knowledge Version
+Current Disposition
+Recommended Disposition
+Reason
+Evidence / Research References
+Revalidation Requirement
+Materiality
+~~~
+
+等の意味を持てる候補。
+
+重要:
+
+~~~text
+Transition Proposal
+≠ Transition Decision
+~~~
+
+---
+
+## 19.21 Transition Decision Authority
+
+Logical Responsibility候補:
+
+~~~text
+Knowledge Lifecycle Governance
+~~~
+
+責任:
+
+> Lifecycle Assessment、Validated Research Result、Knowledge Relationship、Version Lineage、Integrity Context、Governance Policy、必要ならAuthorized Human Overrideを基に、Lifecycle Transitionを承認・拒否・保留する。
+
+Decision候補:
+
+~~~text
+APPROVE
+REJECT
+DEFER
+REQUIRE_RESEARCH
+REQUIRE_MORE_EVIDENCE
+~~~
+
+正式Enumは後。
+
+---
+
+## 19.22 Canonical Write Authority — Single Writer
+
+Canonical Lifecycle StateはSingle Writerだけが更新する候補。
+
+Logical Responsibility候補:
+
+~~~text
+Knowledge Lifecycle Writer
+~~~
+
+責任:
+
+> Authorized Lifecycle DecisionだけをCanonical Lifecycle Stateへ反映し、Lifecycle Eventを残す。
+
+以下は直接Writerにならない。
+
+~~~text
+AI
+R1
+R2
+Knowledge Relationship
+Applicability
+R4
+R5
+Monitoring
+Human UI
+~~~
+
+Human Overrideも直接DB Updateではなく、
+
+~~~text
+Human Authorized Override
+↓
+Lifecycle Governance
+↓
+Authorized Decision
+↓
+Single Writer
+~~~
+
+を通す方向。
+
+---
+
+## 19.23 Governance vs Writer Boundary
+
+~~~text
+Lifecycle Governance
+=
+何に変えるべきか判断
+
+Lifecycle Writer
+=
+承認されたDecisionを正確にCanonical Stateへ反映
+~~~
+
+Semantic Responsibilityとして分ける。
+
+実装上は同一Service内でもよい。
+
+重要:
+
+~~~text
+Separate Responsibility
+≠ Separate Process
+≠ Separate Server
+~~~
+
+HOWは後。
+
+---
+
+## 19.24 Hard Integrity Fast Path
+
+Confirmed Look-Ahead Leakage、Evidence Corruption、Wrong Dataset、Knowledge Identity Corruption、Broken Provenance等のHard Integrity Failureでは、通常の長い再研究完了を待たずSuspensionまで進めるFast Path候補。
+
+~~~text
+Verified Hard Integrity Failure
+↓
+Fast Lifecycle Assessment
+↓
+Pre-authorized Suspension Policy
+↓
+Lifecycle Governance
+↓
+Single Writer
+↓
+SUSPENDED
+~~~
+
+重要:
+
+~~~text
+Fast Safety Authority
+→ SUSPENDまで
+
+Fast Safety Authority
+≠ RETIRE Authority
+
+Immediate Suspension
+≠ Immediate Retirement
+~~~
+
+原則:
+
+> 止める判断は速く、捨てる判断は慎重に。
+
+---
+
+## 19.25 Transition Evidence Asymmetry
+
+Transitionごとに必要Evidence強度を同じにしない候補。
+
+~~~text
+ACTIVE → SUSPENDED
+= comparatively lower threshold
+  reversible safety action
+
+SUSPENDED → ACTIVE
+= medium / high
+  issue resolution evidence required
+
+ACTIVE / SUSPENDED → RETIRED
+= high
+  long-term operational retirement decision
+
+RETIRED → New Active Version
+= R2 Research + Admission required
+~~~
+
+exact thresholdは後。
+
+---
+
+## 19.26 Lifecycle Event / Temporal Integrity
+
+Canonical Stateだけを上書きして履歴を失わない。
+
+Lifecycle Transition時に最低限、
+
+~~~text
+Knowledge Version
+Previous State
+New State
+Trigger Reference
+Assessment Reference
+Research Result Reference
+Decision Reason
+Authority
+Decision Time
+Effective Time
+Provenance
+~~~
+
+を後から追えるLifecycle Eventを持つ必要がある。
+
+具体Schemaは後。
+
+Temporal Integrity:
+
+~~~text
+2027:
+Knowledge was ACTIVE
+
+2030:
+New evidence caused RETIRE decision
+~~~
+
+を両方保持する。
+
+重要:
+
+~~~text
+Later Knowledge
+≠ Information Available At Past Decision Time
+
+Later Lifecycle Decision
+≠ Rewrite Past Lifecycle State
+~~~
+
+---
+
+## 19.27 Stale Decision Protection
+
+Canonical Writerは判断主体ではないが、壊れたWriteを防ぐIntegrity Gateを持つ候補。
+
+最低確認候補:
+
+~~~text
+Authorized Transition Decision exists
+Expected Previous State matches
+Target transition is legal
+Knowledge Version exists
+Decision not stale
+Provenance / time valid
+Duplicate writeではない
+~~~
+
+例:
+
+~~~text
+Assessment時:
+ACTIVE
+
+別Transition後:
+SUSPENDED
+
+古いDecision:
+ACTIVE → RETIRED
+
+↓
+Expected Previous State mismatch
+↓
+WRITE REJECTED
+↓
+Re-assessment
+~~~
+
+---
+
+## 19.28 Authority Matrix
+
+| Domain | Trigger | Assessment | Transition Decision | Canonical Write |
+|---|---:|---:|---:|---:|
+| R1 Market Understanding | YES | NO | NO | NO |
+| R2 Research | YES | Evidence only | NO | NO |
+| Knowledge Relationship | YES | Relation meaning only | NO | NO |
+| Applicability | YES | Current usability only | NO | NO |
+| R4 Production | YES | Runtime safety only | NO | NO |
+| R5 Feedback | YES | Outcome finding only | NO | NO |
+| Monitoring / Integrity | YES | Integrity signal | NO | NO |
+| AI | Candidate | Advisory | NO | NO |
+| Human | YES | Review possible | Authorized Override possible | NO direct write |
+| Lifecycle Assessment | — | YES | Proposal only | NO |
+| Lifecycle Governance | — | Review | YES | NO |
+| Lifecycle Writer | — | NO | NO | YES |
+
+---
+
+## 19.29 Authority Invariants
+
+~~~text
+A-01 Trigger Authority ≠ Transition Authority。
+A-02 Trigger SourceはCanonical Lifecycle Stateを書けない。
+A-03 AIはTrigger Candidate / Assessment Advisoryまで。
+A-04 R2はValidated Research Resultを提供するがLifecycle Writerではない。
+A-05 Knowledge RelationshipはLifecycle Triggerを発生させ得るがWriterではない。
+A-06 ApplicabilityはCurrent usabilityを評価するがLifecycle Writerではない。
+A-07 R4 / R5 OutcomeはTriggerになり得るがKnowledge Stateを直接変更しない。
+A-08 Lifecycle AssessmentはTransition Proposalまで。
+A-09 Lifecycle GovernanceだけがTransition Decisionを承認できる候補。
+A-10 Canonical Lifecycle StateはSingle Writerだけが更新する。
+A-11 Human OverrideもSingle Writer経由で記録する。
+A-12 Hard Integrity Fast PathはSUSPENDまで。
+A-13 Fast RETIREは禁止。
+A-14 WriterはExpected Previous Stateを確認する。
+A-15 State変更はLifecycle EventとしてTraceを残す。
+~~~
+
+---
+
+## 19.30 Human View
+
+人間向け中心Flow:
+
+~~~text
+Research
+↓
+Validated Research Result
+↓
+Knowledge Admission
+↓
+Knowledge誕生
+↓
+ACTIVE
+↓
+普段はApplicabilityで「今使えるか」を別確認
+↓
+時間経過 / 矛盾 / Loss / 市場変化 / 新Evidence / Integrity問題
+↓
+「このKnowledgeは怪しくないか？」
+↓
+Lifecycle Assessment
+↓
+軽い問題
+→ ACTIVE + REVIEW_DUE
+
+重大な未解決問題
+→ SUSPENDED + IN_REVIEW
+↓
+必要ならR2で再研究
+↓
+問題なし
+→ ACTIVE
+
+意味が変わった
+→ New Version Candidate
+→ Knowledge Admission
+
+現在のKnowledgeとして維持不能
+→ RETIRED
+→ ただしHistory / Research Assetとして保存
+~~~
+
+Human Viewで覚える重要定義:
+
+~~~text
+ACTIVE
+=
+Knowledge自体は現在も維持
+
+SUSPENDED
+=
+問題が未解決なので通常利用を一時停止
+
+RETIRED
+=
+Current Operational Knowledgeとして通常利用終了
+ただし削除しない
+
+Lifecycle
+=
+Knowledge自体を現在どう扱うか
+
+Applicability
+=
+そのKnowledgeを今の市場で使えるか
+
+Version
+=
+Knowledgeの意味がどう変わったか
+~~~
+
+---
+
+## 19.31 Human Review Result
+
+2026-10-01のConversationでHuman Viewを確認。
+
+Result:
+
+~~~text
+No major conceptual issue found by Daisuke.
+Proceed with this direction as Working Candidate.
+~~~
+
+重要:
+
+~~~text
+Human Review completed
+≠ Formal Current Architecture Adoption
+~~~
+
+---
+
+## 19.32 Checkpoint Result
+
+~~~text
+Knowledge Lifecycle Precision Design
+= COMPLETE / WORKING CANDIDATE
+
+Precision Review / Destruction Test
+= COMPLETE
+
+Lifecycle Transition Authority
+= COMPLETE / WORKING CANDIDATE
+
+Human View
+= COMPLETE / REVIEWED IN CONVERSATION
+
+Formal Current Architecture
+= UNCHANGED
+~~~
+
+Current R3 detailed refinement state:
+
+~~~text
+Knowledge Admission
+= detailed refinement saved
+
+Knowledge Record minimum semantics
+= detailed refinement saved
+
+Knowledge Relationship
+= detailed refinement saved
+
+Knowledge Graph boundary
+= detailed refinement saved
+
+Version Lineage boundary
+= detailed refinement saved
+
+Knowledge Lifecycle
+= detailed refinement saved
+~~~
+
+NEXT candidate:
+
+~~~text
+Knowledge Applicability detailed refinement
+- pre-decision Applicability responsibility
+- Runtime Assumption Monitoring boundary
+- Applicability State semantics
+- Knowledge Condition matching
+- Constraint / Failure Boundary interaction
+- Multi-Knowledge applicability context
+- Lifecycle ↔ Applicability handoff
+~~~
+
+重要:
+
+~~~text
+Checkpoint 012
+≠ Final Object Schema
+≠ DB Table
+≠ Python Class
+≠ Formal Current Architecture Adoption
+~~~
