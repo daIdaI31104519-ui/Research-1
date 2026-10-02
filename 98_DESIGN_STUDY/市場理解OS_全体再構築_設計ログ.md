@@ -13325,3 +13325,1076 @@ Checkpoint 013
 ≠ Python Class
 ≠ Formal Current Architecture Adoption
 ~~~
+
+
+---
+
+# 21. Checkpoint 014 — R3 Detailed Refinement / Decision Synthesis
+
+**State:** SAVED / WORKING CANDIDATE  
+**Phase:** Phase 5 Reconstruction — R3 Detailed Refinement  
+**Formal Current Architecture Changed:** NO  
+**Human Review:** No major conceptual issue found by Daisuke  
+**Save Role:** AI Precision Design + Precision Review + Human ViewをWorking Studyとして保存する。正式採用ではない。
+
+## 21.1 Scope
+
+このCheckpointは、Knowledge Applicabilityの下流に位置するDecision Synthesisを、次の7項目としてPrecision-Firstで精密化した結果を保存する。
+
+1. Decision Synthesis Responsibility
+2. Decision Material Snapshot Input Boundary
+3. Conflict / Opposition Handling
+4. Majority Vote / Evidence Double Counting / Weight Semantics
+5. INCONCLUSIVE / WAIT / ABSTAIN / NO-TRADE separation
+6. Decision Thesis / Decision Candidate / Trade Thesis / Formal Output
+7. Trade Thesis → Runtime Assumption Set handoff
+
+加えて、全体Precision Review / Destruction TestとHuman Viewを保存する。
+
+---
+
+## 21.2 Decision Synthesis Responsibility
+
+正式責任候補:
+
+> Decision Synthesisは、Decision Material Snapshotに含まれる利用可能なDecision Materialを、Conflict、Unknown、Boundary、Relationship、Evidence / Research / Data dependencyを失わずに統合し、現在のTarget / Scope / Horizonについて成立し得るDecision Thesis Candidateを構成する責任を持つ。
+
+Decision Synthesisは次を決めない。
+
+~~~text
+Decision Synthesis
+!= Knowledge Applicability
+!= Knowledge Lifecycle
+!= Research Truth Authority
+!= Canonical Relationship Authority
+!= Economic Value
+!= Capital Permission
+!= Position Sizing
+!= Execution
+~~~
+
+中心的な意味:
+
+~~~text
+Applicability
+= 何が今使えるか
+
+Decision Synthesis
+= 使える材料を合わせると今何が言えるか
+
+Economic Value
+= そのAction Candidateに経済価値があるか
+
+R4
+= 実資金を出してよいか
+~~~
+
+Conflict Resolutionを「勝者決定」として扱わない。
+
+~~~text
+Conflict Handling
+!= Conflict Winner Selection
+~~~
+
+---
+
+## 21.3 Decision Material Snapshot Input Boundary
+
+Decision Material SnapshotはKnowledge一覧ではない。
+
+正式候補:
+
+> 特定Decision Context / As-Of時点に対して、Current Market Context、利用可能なKnowledge Version、Applicability、Boundary、Relationship、Dependency、Unknownおよび重要なExcluded / Blocked Traceを固定し、Decision Synthesisが途中で変化するCurrent Stateに引きずられず再現可能な判断を行うためのImmutable Decision Input。
+
+Logical blocks:
+
+~~~text
+Decision Material Snapshot
+|
+|-- A. Snapshot Identity / Time Context
+|-- B. Current Market Context
+|-- C. Eligible Decision Materials
+|-- D. Cross-Knowledge Context
++-- E. Excluded / Blocked / Unknown Trace
+~~~
+
+重要境界:
+
+~~~text
+Decision Material Snapshot
+!= Knowledge Pool
+!= Current Market Source of Truth
+!= Canonical Knowledge Record
+!= Decision Output
+!= Raw Data Warehouse
+~~~
+
+Knowledge Version、Current Context reference、Relationship / Dependency contextをAs-Ofで固定する。
+
+ただし:
+
+~~~text
+Immutable Snapshot
+!= Forever Valid Snapshot
+~~~
+
+Snapshotの過去内容は書き換えないが、Lifecycle変更、Knowledge-Use Constraint、重大なMarket Change等によりCurrent-use validityは失われ得る。
+
+そのため:
+
+~~~text
+Decision Material Snapshot
+↓
+Decision Material Validity Gate
+├─ VALID → Synthesis
+└─ STALE / INVALID → Snapshot再構築
+~~~
+
+### ACTIVE INPUT vs TRACE ONLY
+
+~~~text
+ACTIVE INPUT
+= ThesisへInfluenceしてよい
+
+TRACE ONLY
+= Audit / Explanation / Findingには参照可能
+  ただしThesis Support / Oppositionには使わない
+~~~
+
+重要:
+
+~~~text
+Readable
+!= Influence-Eligible
+~~~
+
+Blocked Knowledgeを「見えているから」という理由で実質的な反対票・支持票にしてはならない。
+
+---
+
+## 21.4 Conflict / Opposition Handling
+
+Opposite DirectionとContradictionを分離する。
+
+~~~text
+Opposite Direction
+!= Contradiction
+~~~
+
+比較前に最低限、Target / Effect Semantics / Scope / Horizonを整列する。
+
+候補分類:
+
+~~~text
+Compatible Diversity
+Horizon / Scope Divergence
+Mechanism Competition
+Canonical Contradiction
+Unresolved / Unknown Conflict
+~~~
+
+例:
+
+~~~text
+30m Bullish
+24h Bearish
+↓
+Cross-Horizon Opposition
+!= Neutral
+!= automatic Contradiction
+~~~
+
+SpotとPerpetual等のSegment差も同様に、単純矛盾として潰さない。
+
+Canonical CONTRADICTSが存在してもDecision SynthesisはKnowledgeのTruth Winnerを決めない。
+
+~~~text
+Canonical Contradiction
+↓
+Competing Thesis A
+Competing Thesis B
+or
+Unresolved Conflict
+~~~
+
+Conflictがあるから必ずINCONCLUSIVEになるわけでもない。各Thesisがcoherentに構成できれば複数Thesisとして保持できる。
+
+Decision-time CompetitionとKnowledge-level Contradictionを分離する。
+
+---
+
+## 21.5 Majority Vote / Double Counting / Influence
+
+正式禁止:
+
+> Knowledge数、同方向Material数、Support Cluster数、Confidence単純合計、独立Research数のいずれも、それ単独でThesisの真偽・採否・Winnerを決めるVoteとして使用しない。
+
+~~~text
+Knowledge Count
+!= Vote Count
+
+Same-direction Material Count
+!= Thesis Strength
+
+Independent Research Count
+!= Automatic Winner
+
+Confidence Sum
+!= Thesis Strength
+~~~
+
+Evidence / Experiment / Dataset / Derived Feature / Mechanismが依存している複数Materialを、独立Evidence Contributionとして重複加算しない。
+
+ただし、重複したKnowledge Recordを機械的に削除するという意味ではない。
+
+~~~text
+Deduplicate Influence
+!= Delete Semantic Material
+~~~
+
+### Independent Convergence
+
+多数決禁止は、独立Researchの収束を無視することではない。
+
+~~~text
+Independent Research Convergence
+Independent Mechanism Convergence
+Cross-Dataset Replication
+~~~
+
+等はConvergence Contextとして保持できる。
+
+ただし:
+
+~~~text
+Convergence
+!= Vote Count
+!= Automatic Winner
+~~~
+
+### Material Influence Profile
+
+Universal Knowledge WeightはSemantic Coreに置かない。
+
+代わりにThesis-specificなMaterial Influence Profileを持つ方向を採る。
+
+候補軸:
+
+~~~text
+Material Role
+Decision Relevance
+Semantic Directness
+Research / Evidence Context
+Dependency Context
+Applicability Robustness
+Boundary Context
+Current Uncertainty
+Effect Semantics
+Source / Trace
+~~~
+
+重要分離:
+
+~~~text
+Evidence Strength
+!= Decision Relevance
+
+Independence
+!= Evidence Strength
+
+Boundary Proximity
+!= Research Weakness
+
+Current Uncertainty
+!= Research Weakness
+~~~
+
+必要な数値化は後段でPurpose-Specificに行う。
+
+~~~text
+Universal Knowledge Weight
+→ 採用しない
+
+Semantic Context
+↓
+EV-specific interpretation
+Risk-specific interpretation
+etc.
+~~~
+
+---
+
+## 21.6 Decision Synthesis Formal Output
+
+正式Output候補:
+
+~~~text
+Decision Synthesis Result
+~~~
+
+定義:
+
+> 特定Decision Material Snapshotを統合した結果として、形成されたDecision Thesis Candidate群、未解消Conflict、Critical Unknown、Boundary / Dependency Context、Synthesis outcomeを追跡可能に保持するDecision Synthesisの正式出力。
+
+### State軸修正
+
+COHERENT / COMPETING / INCONCLUSIVEを1個のEnumへ詰めない。
+
+理由:
+
+~~~text
+COHERENT
+= Thesis内部の一貫性
+
+COMPETING
+= 複数Thesis間の関係
+
+INCONCLUSIVE
+= 十分なThesis形成ができたか
+~~~
+
+したがって意味軸を分ける。
+
+候補:
+
+~~~text
+A. Synthesis Outcome
+   - THESIS_FORMED
+   - INCONCLUSIVE
+
+B. Thesis Set Structure
+   - SINGLE
+   - MULTIPLE_COMPATIBLE
+   - MULTIPLE_COMPETING
+~~~
+
+Exact enumは未確定。
+
+### Decision Thesis Candidate
+
+定義:
+
+> Decision Material Snapshotから構成された、特定Target / Scope / Horizonに関する市場判断仮説。Supporting / Opposing Material、Boundary、Critical Unknown、Dependency、Uncertaintyを保持するが、Action・Economic Value・Capital投入を決定しない。
+
+~~~text
+Decision Thesis
+!= Directional Signal
+~~~
+
+Decision Thesisは非Directionalでもよい。
+
+例:
+
+~~~text
+Volatility expansion likely
+Spot / Perpetual divergence exists
+Market structure fragile
+~~~
+
+### AI Synthesis Traceability
+
+Decision ThesisのMaterialなClaimはSourceへ追跡可能でなければならない。
+
+~~~text
+Thesis Claim
+↓
+Source Materials / allowed composition
+~~~
+
+AIは新しいCause / Threshold / Mechanism / ProbabilityをDecision Truthとして勝手に発明しない。
+
+価値ある新規推論は:
+
+~~~text
+Research Hypothesis Candidate
+↓
+R2
+~~~
+
+へ送る。
+
+---
+
+## 21.7 Decision Candidate / EV / Disposition Boundary
+
+Decision Candidate:
+
+> Decision Thesis Candidateから導出される、Economic Value評価対象となるAction Option。Target / Exposure Intent / Horizon / Preconditions / Invalidation referencesを持つが、まだ採用・資金投入・Position Size・Executionを決定しない。
+
+~~~text
+Decision Thesis
+= 市場について何が言えるか
+
+Decision Candidate
+= その市場理解から何をAction Optionとして評価できるか
+~~~
+
+良いThesisでもActionable Candidateを作れない場合がある。
+
+~~~text
+Good Thesis
+!= Actionable Opportunity
+~~~
+
+Decision Candidateが無い場合、Fake EVを作らない。
+
+~~~text
+No Decision Candidate
+→ No Fake EV
+~~~
+
+### INCONCLUSIVE / WAIT / ABSTAIN / NO-TRADE
+
+~~~text
+INCONCLUSIVE
+= 十分なDecision Thesisを形成できなかったSynthesis状態
+
+WAIT
+= Current Opportunityを終了せず、明示的な再評価条件を伴って一時保留
+
+ABSTAIN
+= Current Decision Opportunityへの参加を終了
+
+NO-TRADE
+= 結果として新規Tradeが発生しなかったDerived Outcome / Human Projection候補
+~~~
+
+重要:
+
+~~~text
+INCONCLUSIVE
+!= WAIT
+!= ABSTAIN
+!= NO-TRADE
+~~~
+
+WAITには「何を待つか」「何が変われば再評価するか」が必要。
+
+WAIT != HOLD。
+
+ABSTAIN後に市場が変わった場合、Old Decisionを無言で再開せずNew Decision Event候補とする。
+
+NO-TRADEは原因を失わせない。
+
+例:
+
+~~~text
+NO TRADE
+because
+Synthesis INCONCLUSIVE → ABSTAIN
+
+NO TRADE
+because
+Positive EV → R4 Portfolio Constraint BLOCK
+~~~
+
+同じNO-TRADEでもDecision Qualityは異なる。
+
+### PROCEED refinement
+
+PROCEEDは曖昧なOpportunity全体状態にせず、少なくとも具体的Decision Candidate Referenceを伴う。
+
+Opportunity DispositionとCandidate Advancementを将来分離する可能性を残す。
+
+---
+
+## 21.8 Trade Thesis
+
+Trade Thesis:
+
+> Economic Value評価を通過し、Decision Disposition / Candidate AdvancementでR4へ進めるとされたDecision Candidateについて、どのDecision Thesis、Knowledge Version、Boundary、Critical Unknown、Invalidation条件に依存してR4へ提出するかを固定するTrade-specific reasoning package。
+
+生成順:
+
+~~~text
+Decision Thesis
+↓
+Decision Candidate
+↓
+Economic Value
+↓
+Candidate Advancement / PROCEED
+↓
+Trade Thesis
+↓
+R4
+~~~
+
+重要:
+
+~~~text
+Trade Thesis
+!= Knowledge
+!= Market Truth
+!= Capital Permission
+!= Executed Trade
+~~~
+
+Trade Thesisは「その時点で採用したTrade理由」。
+
+Snapshotに存在した全Knowledgeではなく、実際に依存したKnowledge Versionを固定する。
+
+~~~text
+Applicable Knowledge Set
+!= Used Knowledge Set
+~~~
+
+Later Knowledge VersionやLater RelationshipでHistorical Trade Thesisを書き換えない。
+
+---
+
+## 21.9 R4 Boundary
+
+R4はCapital Expressionを変更できるが、Decision Semanticsを書き換えない。
+
+可能例:
+
+~~~text
+Position Size縮小
+Leverage縮小
+Protection追加
+Capital BLOCK
+~~~
+
+Decisionへ戻す必要があるMaterial変更例:
+
+~~~text
+LONG → SHORT
+BTC → ETH
+15m → 4h
+Materially different instrument / exposure meaning
+~~~
+
+原則:
+
+~~~text
+R4 adjusts capital expression
+!= R4 rewrites market decision
+~~~
+
+MaterialなDirection / Instrument / Horizon変更は:
+
+~~~text
+New Decision Candidate
+↓
+EV再評価
+↓
+New Trade Thesis
+~~~
+
+を要求する。
+
+---
+
+## 21.10 Trade Thesis → Runtime Assumption Set Handoff
+
+Precision refinementにより、Trade ThesisからActive Runtime Assumption Setへ直接飛ばさない。
+
+~~~text
+Trade Thesis
+↓
+Runtime Assumption Seed / Handoff
+↓
+R4 Capital Approval
+↓
+Execution
+↓
+Actual Exposure成立
+↓
+Pre-Activation Validity Recheck
+↓
+Active Runtime Assumption Set
+~~~
+
+Runtime Assumption Set:
+
+> 実際に成立したDecision / Exposureについて、Trade Thesisが依存したKnowledge Version、Material Assumption、Failure Boundary、Trade-specific Invalidation、Critical Unknown、Horizon、Decision-time Baselineを固定し、保有中に「当初の判断前提が現在も維持されているか」を評価するためのRuntime baseline。
+
+重要分離:
+
+~~~text
+Decision Material Snapshot
+= 利用可能だった材料
+
+Trade Thesis
+= 実際に採用した理由
+
+Runtime Assumption Set
+= Active Exposureが依存する監視対象の重要前提
+~~~
+
+~~~text
+Applicable Knowledge
+!= Used Knowledge
+!= Must-Monitor Assumption
+~~~
+
+### Handoff content candidates
+
+~~~text
+Decision / Trade Lineage
+Relied-Upon Knowledge Versions
+Knowledge Role
+Material Assumptions
+Knowledge-derived Assumptions
+Thesis-derived Assumptions
+Decision-context Assumptions
+Failure Boundaries
+Trade Thesis Invalidation Conditions
+Critical Unknowns
+Decision-Time Baseline
+Horizon / Temporal Semantics
+Evaluation Source References
+~~~
+
+Trade Thesis AssumptionはCanonical Knowledgeではない。
+
+~~~text
+Trade Thesis Assumption
+!= Knowledge Record
+~~~
+
+### Boundary separation
+
+~~~text
+Knowledge Failure Boundary
+!= Trade Thesis Invalidation Condition
+!= R4 Stop / Capital Protection Rule
+~~~
+
+~~~text
+Semantic Failure
+!= Price Stop
+~~~
+
+Runtime Assumption CriticalityはPosition Actionを決めない。
+
+~~~text
+Assumption Criticality
+!= EXIT Policy
+~~~
+
+### Activation boundary
+
+No Fillの場合:
+
+~~~text
+Trade Thesis exists
+R4 ALLOW
+Order submitted
+No Fill
+↓
+Active Runtime Assumption Set = none
+~~~
+
+Partial Fill等でActual Exposureが成立した場合のみRuntime activation対象。
+
+Execution遅延等でDecision-time contextからMaterial Changeがある場合はPre-Activation Validity Recheck候補とする。
+
+Trade Thesis creation
+!= Position activation。
+
+Execution economicsの悪化によるEV崩壊はDecision Synthesisではなく、将来のEV ↔ R4 ↔ Execution Contractで扱うPending。
+
+### Runtime Monitoring
+
+Runtime Monitorは、Handoffで定義されたMaterial / Critical / Time-Sensitive assumptionsを評価する。
+
+Runtime Monitor自身が監視対象を勝手に増減し、Original Thesisを書き換えない。
+
+~~~text
+Runtime Monitoring
+= 前提がどう変わったか
+
+R4 Runtime Protection
+= その変化に対して資金をどう守るか
+~~~
+
+Runtime data missing / staleはAssumption Violationへ変換しない。
+
+~~~text
+Missing Runtime Data
+!= Assumption Violation
+~~~
+
+Horizon expiryもKnowledge Failureではない。
+
+Knowledge Lifecycle / Knowledge-Use statusのMaterial ChangeはR4へEventとして渡せるが、自動EXITではない。
+
+---
+
+## 21.11 Precision Review / Destruction Test Result
+
+代表破壊ケース:
+
+- 単一の一貫したKnowledge群
+- Bullish 3 vs Bearish 1
+- 同一Evidenceから3 Knowledge
+- 独立Researchが同方向へ収束
+- 30m Bull / 24h Bear
+- same-horizon Canonical CONTRADICTS
+- Critical Data missing
+- Snapshot作成後にKnowledge SUSPENDED
+- BLOCKED KnowledgeがTRACE ONLYで存在
+- AIが新Causeを発明
+- INCONCLUSIVE + no Candidate
+- COHERENTだがAction mappingなし
+- Multiple competing Candidates
+- Multiple positive EV candidates
+- R4 BLOCK
+- R4によるDirection / Instrument意味変更
+- Trade Thesisあり / No Fill
+- Execution Delay + Market急変
+- Partial Fill
+- Entry後のKnowledge Version更新
+- Entry後のLifecycle SUSPEND
+- Runtime Data missing
+- Horizon expired
+- Stop Loss到達
+- Thesis崩壊だがPriceは利益中
+- repeated runtime mismatch
+- WAIT後の再評価
+- ABSTAIN後のMarket change
+- NO-TRADE Reason Chain
+- Later EvidenceによるPast Decision rewrite
+
+Result:
+
+~~~text
+① Decision Synthesis Responsibility
+= SURVIVED
+
+② Decision Material Snapshot
+= SURVIVED / STRENGTHENED
+
+③ Conflict / Opposition Handling
+= SURVIVED
+
+④ Majority Vote / Weight Semantics
+= SURVIVED / STRENGTHENED
+
+⑤ INCONCLUSIVE / WAIT / ABSTAIN / NO-TRADE
+= SURVIVED / RESPONSIBILITY SPLIT REFINED
+
+⑥ Decision Thesis / Candidate / Formal Output
+= SURVIVED / STATE MODEL REFINED
+
+⑦ Trade Thesis → Runtime Assumption Set
+= SURVIVED / ACTIVATION BOUNDARY STRENGTHENED
+~~~
+
+Precision Gate:
+PASS as Working Candidate with the refinements in this checkpoint.
+
+---
+
+## 21.12 Key Precision Invariants
+
+~~~text
+DS-01 Decision Synthesis != Applicability。
+DS-02 Decision Synthesis != Economic Value。
+DS-03 Decision Synthesis != Capital Permission。
+DS-04 Decision Material Snapshot != Knowledge Pool。
+DS-05 Immutable Snapshot != Forever Valid Snapshot。
+DS-06 ACTIVE INPUTとTRACE ONLYを分離する。
+DS-07 Readable != Influence-Eligible。
+DS-08 Opposite Direction != Contradiction。
+DS-09 Different Horizon / Scope != automatic Contradiction。
+DS-10 Canonical CONTRADICTS != Winner Selection。
+DS-11 Knowledge Count != Vote Count。
+DS-12 Same-direction Material Count != Thesis Strength。
+DS-13 Shared EvidenceをIndependent contributionとして二重計上しない。
+DS-14 No known dependency != Proven independence。
+DS-15 Independent Convergence != Vote Count。
+DS-16 Universal Knowledge WeightをSemantic Core primitiveにしない。
+DS-17 Material InfluenceはThesis-specificであり得る。
+DS-18 Input Validity != Synthesis Outcome。
+DS-19 THESIS_FORMEDとMULTIPLE_COMPETINGは別軸。
+DS-20 INCONCLUSIVE + no Candidate → Fake EV禁止。
+DS-21 Decision Thesis != Directional Signal。
+DS-22 Decision ThesisのMaterial claimはSourceへ追跡可能であること。
+DS-23 Decision Synthesis Inference != Canonical Knowledge Creation。
+DS-24 Decision Thesis != Decision Candidate。
+DS-25 Good Thesis != Actionable Opportunity。
+DS-26 WAIT != INCONCLUSIVE。
+DS-27 WAIT != HOLD。
+DS-28 ABSTAIN != Knowledge Failure。
+DS-29 NO-TRADEはReason Chainを失わせない。
+DS-30 PROCEED != Trade Permission。
+DS-31 PROCEED / advancementはCandidate Referenceを伴う。
+DS-32 Trade Thesis != Knowledge Truth。
+DS-33 Trade Thesis != Capital Permission。
+DS-34 R4 may alter capital expression, not semantic decision meaning。
+DS-35 Direction / Instrument / HorizonのMaterial変更はNew Decisionを要求する。
+DS-36 Trade Thesis creation != Position activation。
+DS-37 No Fill → no Active Runtime Assumption Set。
+DS-38 Applicable Knowledge != Used Knowledge != Must-Monitor Assumption。
+DS-39 Knowledge Failure Boundary != Trade Thesis Invalidation != R4 Stop。
+DS-40 Runtime Assumption Deviation != Position Action。
+DS-41 Runtime data missing != Assumption violation。
+DS-42 Horizon expiry != Knowledge Failure。
+DS-43 Later Knowledge / Relationship != Past Decision Context rewrite。
+DS-44 Runtime MonitorはMonitoring Contractを勝手に再定義しない。
+~~~
+
+---
+
+## 21.13 Human View
+
+人間向けの最小理解:
+
+~~~text
+今使えるKnowledgeを集める
+↓
+その時点の判断材料を固定する
+↓
+SnapshotはまだCurrent Decisionに有効？
+├─ NO → 作り直す
+└─ YES
+    ↓
+矛盾・重複・Unknown・Boundary・Dependencyを見る
+    ↓
+「今の市場について何が言えるか」をまとめる
+    ↓
+Thesisを作れた？
+├─ NO
+│   → INCONCLUSIVE
+│   ↓
+│   近く解決可能？
+│   ├─ YES → WAIT
+│   └─ NO  → ABSTAIN
+│
+└─ YES
+    ↓
+Thesisは
+├─ 1つ
+├─ 複数だが両立
+└─ 複数で競合
+    ↓
+Decision Candidateを作れる？
+├─ NO → WAIT / ABSTAIN候補
+└─ YES
+    ↓
+Economic Value
+    ↓
+進めるCandidateがある？
+├─ NO → WAIT / ABSTAIN
+└─ YES
+    ↓
+Trade Thesis
+    ↓
+Runtime Assumption Seed
+    ↓
+R4 Capital / Risk
+    ↓
+Execution
+    ↓
+Actual Exposure成立？
+├─ NO → Runtime監視なし
+└─ YES
+    ↓
+Pre-Activation Validity Recheck
+    ↓
+Runtime Assumption Set
+    ↓
+Runtime Monitoring
+    ↓
+R4 Runtime Protection
++
+R5 Feedback
+~~~
+
+Human key definitions:
+
+~~~text
+Decision Material Snapshot
+= その時、何を知っていた？
+
+Decision Synthesis
+= そこから何が言えた？
+
+Decision Thesis
+= 成立した市場判断は何？
+
+Decision Candidate
+= 何をAction候補として評価する？
+
+Economic Value
+= その候補に経済価値はある？
+
+WAIT
+= 今は待つ。再評価する。
+
+ABSTAIN
+= 今回のOpportunityは見送る。
+
+Trade Thesis
+= なぜこのTrade候補をR4へ出す？
+
+R4
+= 実際に金を出していい？
+
+Runtime Assumption Set
+= Entry時の重要前提は何だった？
+
+Runtime Monitoring
+= その前提はまだ生きている？
+~~~
+
+中心思想:
+
+~~~text
+大量Knowledge
+↓
+多数決
+↓
+Trade
+~~~
+
+にはしない。
+
+~~~text
+Knowledge
+↓
+重複・依存・矛盾・Unknownを整理
+↓
+Market Thesis
+↓
+Action Candidate
+↓
+Economic Value
+↓
+Capital Safety
+↓
+Trade
+↓
+Runtime前提監視
+~~~
+
+とする。
+
+---
+
+## 21.14 Human Review Result
+
+Daisuke review:
+
+> 問題は特に無さそう。
+
+解釈:
+
+- Major conceptual issue: NONE FOUND
+- Precision DesignとHuman Viewの責任分離に大きな違和感なし
+- Working Candidateとして継続可能
+- Formal Current Architectureへの採用を意味しない
+
+---
+
+## 21.15 Save / Adoption Boundary
+
+今回の保存先:
+
+~~~text
+98_DESIGN_STUDY/市場理解OS_全体再構築_設計ログ.md
+00_AI/AI_HANDOFF.md
+~~~
+
+今回変更しない:
+
+~~~text
+00_AI/AI_CONTEXT.md
+00_HUMAN/HUMAN_MAP.md
+02_ARCHITECTURE/CONNECTIONS/
+~~~
+
+Human Viewは現時点ではWorking Study内のReview Projectionとして保存する。
+
+正式採用後に必要なら:
+
+~~~text
+02_ARCHITECTURE/
+→ Formal Precision Architecture
+
+00_HUMAN/HUMAN_MAP.md
+→ Formal Human Projection
+~~~
+
+へ改めて圧縮・反映する。
+
+Working Studyを保存したこと自体はFormal adoptionではない。
+
+---
+
+## 21.16 Later Integration Reminder
+
+R3前半のAdmission / Record / Relationship / Graph / VersionにはPrecision-First導入前に作られた部分がある。
+
+現在の回収を止めて全面書換えはしない。
+
+R3 detailed recoveryが一巡した後:
+
+~~~text
+Admission
+→ Record
+→ Relationship
+→ Graph
+→ Version
+→ Lifecycle
+→ Applicability
+→ Decision Synthesis
+→ Economic Value
+↓
+R3 Integration Precision Review
+~~~
+
+を行い、そこで生き残った不足だけを修正する。
+
+その後、Phase 6 Destruction Reviewへ進む。
+
+---
+
+## 21.17 NEXT
+
+次の詳細設計候補:
+
+~~~text
+Economic Value / Opportunity Evaluation
+~~~
+
+開始点候補:
+
+1. Economic Value responsibility
+2. EVが評価する対象 = Decision Candidate
+3. Expected Effect vs Expected Value
+4. Probability / Uncertainty / Distribution semantics
+5. Fees / Slippage / Funding / Carry / Opportunity Cost
+6. Tail / Asymmetric risk
+7. Multiple Candidate comparison boundary
+8. WAIT / ABSTAIN / Candidate Advancement handoff
+9. R4へのEconomic Contract
+10. Precision Review
+11. Human View
+
+---
+
+## 21.18 Checkpoint Result
+
+Checkpoint 014:
+
+~~~text
+R3 Detailed Refinement
+Decision Synthesis
+= SAVED WORKING CANDIDATE
+
+Precision Review
+= PASS
+
+Human View
+= REVIEWED
+
+Human Review
+= NO MAJOR CONCEPTUAL ISSUE FOUND
+
+Formal Current Architecture
+= UNCHANGED
+~~~
