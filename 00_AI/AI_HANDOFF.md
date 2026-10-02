@@ -13,71 +13,74 @@ State:
 ACTIVE
 
 Last Updated:
-2026-10-02
+2026-10-03
 
 Conversation Focus:
 Whole Market Understanding OS Reconstruction.
 Phase 5 R1-R4 concept-level reconstruction exists.
-Current detailed work remains R3 Knowledge / Decision Preparation refinement.
+R3 Knowledge / Decision Preparation detailed recovery now includes Economic Value / Opportunity Evaluation.
 
 WORKFLOW:
 AI_WORKFLOW v0.5.3 Precision-First → Precision Review → Human View workflow is active.
 
 LATEST SAVED CHECKPOINT:
-Checkpoint 014 — R3 Detailed Refinement / Decision Synthesis
+Checkpoint 015 — R3 Detailed Refinement / Economic Value
 
 PRIMARY:
 98_DESIGN_STUDY/市場理解OS_全体再構築_設計ログ.md
 
-DECISION SYNTHESIS WORKING CANDIDATE:
-- Decision Synthesis = usable Decision Materialsから「今の市場について何が言えるか」を構成する責任
-- Decision Synthesis != Applicability / EV / Capital Permission / Execution
-- Formal output candidate = Decision Synthesis Result
-- Decision Thesis != Decision Candidate
-- Decision Thesis may be non-directional
-- Opposite Direction != Contradiction
-- Canonical CONTRADICTS != Winner Selection
-- Majority Vote / Confidence Sum / Evidence double counting prohibited
-- Independent Convergence is preserved as context, not vote
-- Universal Knowledge Weight is not a Semantic Core primitive
-- Material Influence is Thesis-specific / multi-dimensional
-- ACTIVE INPUT and TRACE ONLY are separated
-- Readable != Influence-Eligible
-- Immutable Snapshot != Forever Valid Snapshot
-- Input Validity != Synthesis Outcome
-- THESIS_FORMED / INCONCLUSIVE is separate from SINGLE / MULTIPLE_COMPATIBLE / MULTIPLE_COMPETING
-- No Decision Candidate → No Fake EV
-- INCONCLUSIVE != WAIT != ABSTAIN != NO-TRADE
-- Trade Thesis != Knowledge Truth / Capital Permission / Executed Trade
-- R4 may alter capital expression, not semantic decision meaning
-- Trade Thesis creation != Position activation
-- No Fill → no Active Runtime Assumption Set
-- Applicable Knowledge != Used Knowledge != Must-Monitor Assumption
-- Runtime Deviation != R4 Position Action
-
-RUNTIME HANDOFF:
-Trade Thesis
-→ Runtime Assumption Seed
-→ R4
-→ Execution
-→ Actual Exposure
-→ Pre-Activation Validity Recheck
-→ Active Runtime Assumption Set
-→ Runtime Monitoring
-→ R4 Runtime Protection + R5 Feedback
+ECONOMIC VALUE WORKING CANDIDATE:
+- Economic Value evaluates a specific Decision Candidate Version, not Knowledge.
+- Candidate Objective and Evaluation Baseline / Reference Context are explicit.
+- Candidate As-Of != Evaluation As-Of.
+- Expected Effect != Expected Economic Value.
+- Current Effect Projection cannot re-decide Applicability or Direction.
+- Monetization Mapping converts Market Effect to Candidate-specific Gross Economic Outcome.
+- Gross Economic Outcome != Net Economic Outcome.
+- Probability != Uncertainty; Unknown Probability != 50%.
+- Evaluation Mode distinguishes Probabilistic / Empirical / Scenario / Stress semantics.
+- Strict Expected Value requires valid probability semantics.
+- Economic Cost refined to Economic Friction & Signed Holding Flow.
+- Fee != Spread != Slippage != Market Impact.
+- Cost coverage / dependency must prevent double count and false independence.
+- Expected Economic Value != Economic Risk Profile.
+- Positive EV != Acceptable Capital Risk.
+- Downside / Tail / Asymmetry / Stress remain visible.
+- Hedge / Insurance may require reference-exposure-relative evaluation.
+- Multiple Candidates are evaluated standalone first, then relatively.
+- Highest EV != Automatic Winner.
+- Global Best Candidate ranking is not Canonical Economic Output.
+- Cross-Candidate Economic Dependency remains visible.
+- Candidate Advancement is Candidate-specific: ADVANCE / WAIT / ABSTAIN.
+- ADVANCE != Trade / Capital Permission.
+- WAIT requires a re-evaluation trigger.
+- ABSTAIN != Knowledge Refutation.
+- Trade Thesis references exact EVA / Advancement record and preserves Economic Validity Conditions + Accepted Unknowns.
+- R4 Economic Contract governs allowed capital expression.
+- Economic Envelope is a Joint evaluated region, not independent min/max bounds.
+- R4 is Economic Envelope consumer, not author.
+- Capital-only change stays in R4.
+- Economic parameter change routes to Economic Value.
+- Candidate semantic / new composite leg routes to Candidate Formation.
+- Thesis / Knowledge validity change routes to Applicability / Decision Synthesis.
+- R4 → EV re-evaluation creates new immutable lineage; past EVA is not overwritten.
 
 PRECISION REVIEW:
-Decision Synthesis ①〜⑦ survived destruction review with refinements.
-Major corrections:
-1. COHERENT / COMPETING / INCONCLUSIVEを単一State軸にしない
-2. INCONCLUSIVE + no CandidateでFake EVを作らない
-3. TRACE ONLYを実質的Influenceに使わない
-4. R4がDecision semanticsを書き換えない
-5. Snapshot immutabilityとcurrent-use validityを分離
-6. Trade ThesisとRuntime activationを分離
+Economic Value ①〜⑨ survived destruction review after refinements.
+Major refinements:
+A. Objective-relative Evaluation Baseline / Reference Exposure
+B. Joint Economic Envelope
+C. Strict Expected Value vs Scenario-weighted estimate
+D. Economic Friction + Signed Holding Flow
+E. Current Effect Projection authority boundary
+F. Composite protection / new leg → Candidate Formation
+G. Economic Re-evaluation Request / immutable lineage
+H. Potential vs allocative opportunity cost
+I. Cross-Candidate dependency
+J. Objective-specific No-Action / Evaluation Baseline
 
 HUMAN REVIEW:
-Daisuke: 「問題は特に無さそう」
+Daisuke: 「問題はなそうやな」
 No major conceptual issue found.
 Proceed as Working Candidate.
 
@@ -89,13 +92,12 @@ Formal Current Architecture is unchanged.
 Human View is saved only as Working Study review projection.
 
 NEXT:
-Economic Value / Opportunity Evaluation detailed refinement.
+R3 Integration Precision Review across:
+Admission → Record → Relationship → Graph → Version → Lifecycle → Applicability → Decision Synthesis → Economic Value.
 
-LATER INTEGRATION:
-After R3 detailed recovery completes, run:
-Admission → Record → Relationship → Graph → Version → Lifecycle → Applicability → Decision Synthesis → Economic Value
-as R3 Integration Precision Review.
-Then revise only gaps that survive review and proceed toward Phase 6 Destruction Review.
+Review responsibility overlaps, terminology, object boundaries, version/as-of semantics, unknown handling, authority, return routing, and Human View consistency.
+Revise only gaps that survive integration review.
+Then proceed toward Phase 6 Destruction Review.
 
 Git Write Permission Reminder:
 REQUIRE CURRENT-CHAT USER AUTHORIZATION
