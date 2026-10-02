@@ -14398,3 +14398,1649 @@ Human Review
 Formal Current Architecture
 = UNCHANGED
 ~~~
+
+
+---
+
+# 22. Checkpoint 015 — R3 Detailed Refinement / Economic Value
+
+**State:** SAVED / WORKING CANDIDATE  
+**Phase:** Phase 5 Reconstruction — R3 Detailed Refinement  
+**Formal Current Architecture Changed:** NO  
+**Human Review:** Daisuke: 「問題はなそうやな」  
+**Save Role:** Economic Value / Opportunity Evaluation ①〜⑨、Precision Review / Destruction Test、Refinement、Human ViewをWorking Studyとして保存する。正式採用ではない。
+
+## 22.1 Scope
+
+このCheckpointではDecision Synthesisの下流に位置するEconomic Value / Opportunity Evaluationについて、以下をPrecision-Firstで設計・レビューした。
+
+1. Economic Value / Opportunity Evaluation formal responsibility
+2. Evaluation Target = Decision Candidate Version / Conditions / As-Of
+3. Expected Effect vs Expected Economic Value
+4. Probability / Uncertainty / Distribution separation
+5. Economic Cost / Friction / Holding Flow Model
+6. Downside / Tail Risk / Asymmetry vs R4 Risk Permission
+7. Multiple Decision Candidate comparison boundary
+8. Candidate Advancement / WAIT / ABSTAIN / Trade Thesis handoff
+9. R4 Economic Contract
+10. ①〜⑨ Precision Review / Destruction Test
+11. Human View / Human Review
+
+中心原則:
+
+~~~text
+Market Understanding
+!= Economic Value
+
+Expected Effect
+!= Expected Economic Value
+
+Economic Value
+!= Candidate Advancement
+
+Candidate Advancement
+!= Capital Permission
+
+Capital Permission
+!= Execution
+~~~
+
+---
+
+## 22.2 Economic Value Formal Responsibility
+
+Working definition:
+
+> Economic Value / Opportunity Evaluationとは、特定Decision Candidate Versionについて、Research-derived Market EffectをCandidate-specificなEconomic Outcomeへ変換し、Probability / Distribution / Uncertainty、Fees / Spread / Slippage / Funding / Carry、Downside / Tail / Asymmetry等をCurrent Economic Contextと結び付けて評価し、そのCandidateのEconomic Attractiveness / Risk Structureを追跡可能なEconomic Value Assessmentとして表現する責任である。
+
+Economic Valueが決めないもの:
+
+~~~text
+Knowledge truth
+Decision Thesis formation
+Candidate direction generation
+Candidate semantic mutation
+WAIT / ABSTAIN / ADVANCE itself
+Capital Permission
+Position Size
+Portfolio Allocation
+Execution
+~~~
+
+短縮:
+
+~~~text
+Decision Synthesis
+= 今の市場について何が言える？
+
+Decision Candidate
+= 何を行動候補として評価する？
+
+Economic Value
+= その候補は実際にどんな利益・損失・Cost・Tail・不確実性を持つ？
+
+Candidate Advancement
+= 今Trade Thesis形成へ進めるだけの根拠がある？
+
+R4
+= 今のCapital / Portfolioで実際に資金を出してよい？
+~~~
+
+---
+
+## 22.3 Evaluation Target / Candidate Version / As-Of
+
+Economic Valueの評価対象は、意味が固定された特定Decision Candidate Version。
+
+~~~text
+Economic Evaluation
+=
+f(
+  Decision Candidate Version,
+  Economic Evaluation Context
+)
+~~~
+
+Candidate semantics candidates:
+
+~~~text
+Target
+Instrument
+Exposure Intent
+Candidate Objective
+Relevant Horizon
+Linked Decision Thesis
+Preconditions
+Invalidation References
+Critical Unknowns
+Decision Context Reference
+~~~
+
+Material semantic change examples:
+
+~~~text
+LONG → SHORT
+BTC → ETH
+PERP → SPOT
+15m → 4h
+RETURN_SEEKING → HEDGE
+~~~
+
+これらは同じCandidateのEconomic微調整ではない。
+
+~~~text
+Material Candidate Change
+→ New Candidate / Candidate Version
+→ New Economic Evaluation
+~~~
+
+### Temporal separation
+
+~~~text
+Candidate As-Of
+!= Market Context As-Of
+!= Cost Context As-Of
+!= Economic Evaluation As-Of
+~~~
+
+全Timestamp一致ではなくTemporal Consistencyを要求する。
+
+~~~text
+Fresh Data
+!= Time-Consistent Data
+
+Future Information
+!= Earlier As-Of Input
+~~~
+
+Look-aheadは禁止。
+
+### Candidate Current-Use Validity
+
+~~~text
+Immutable Candidate
+!= Forever Current Candidate
+~~~
+
+Economic Evaluation前にCandidate Current-Use Validityを確認する。
+
+~~~text
+Decision Candidate
+↓
+Current-Use Validity Gate
+├─ VALID → Economic Evaluation
+└─ STALE / INVALID → Re-decision / rebuild
+~~~
+
+---
+
+## 22.4 Economic Evaluation Context
+
+Logical boundary candidates:
+
+~~~text
+Economic Evaluation Context
+│
+├─ Decision Candidate Version Ref
+├─ Decision / Thesis Lineage
+├─ Candidate Objective
+├─ Evaluation Baseline / Reference Context
+├─ Candidate As-Of
+├─ Evaluation As-Of
+├─ Market Context Ref / As-Of
+├─ Valuation Basis
+├─ Venue / Instrument Context
+├─ Fee / Funding / Carry Context
+├─ Liquidity / Spread / Slippage Context
+├─ Horizon
+├─ Critical Unknowns
+├─ Economic Model / Distribution Refs
+└─ Input Freshness / Integrity Context
+~~~
+
+Valuation Basisは、Economic ValueがどのPrice / Bid-Ask / Market Stateを基準に評価したか追跡できる責任。
+
+~~~text
+Old Assessment
+!= Current Assessment
+
+Same Candidate Version
++
+New As-Of / Market Context
+=
+New Economic Value Assessment
+~~~
+
+過去Assessmentを書き換えない。
+
+---
+
+## 22.5 Candidate Objective / Evaluation Baseline
+
+Precision Reviewで追加された重要補強。
+
+Decision CandidateはEconomic Valueの目的を明示できる必要がある。
+
+Candidate Objective candidate examples:
+
+~~~text
+RETURN_SEEKING
+HEDGE
+INSURANCE
+RISK_REDUCTION
+LIQUIDITY_PROTECTION
+~~~
+
+Exact enumは未確定。
+
+### Evaluation Baseline
+
+Economic Valueは「何と比較して価値を測るか」を明示する。
+
+Return-seeking例:
+
+~~~text
+No new exposure
+vs
+Candidate exposure
+~~~
+
+Hedge例:
+
+~~~text
+Reference Exposure without Hedge
+vs
+Reference Exposure + Hedge Candidate
+~~~
+
+重要:
+
+~~~text
+Standalone Economic Value
+!= Objective-relative Economic Value
+
+Negative Standalone EV
+!= Economically Useless for Hedge / Insurance
+~~~
+
+Hedge / Insurance Candidateでは明示的なReference Exposure Snapshotが必要になり得る。
+
+~~~text
+Portfolio-referenced Economic Evaluation
+!= Portfolio Capital Permission
+~~~
+
+R4のCapital Allocation authorityは維持する。
+
+---
+
+## 22.6 Expected Effect vs Expected Economic Value
+
+### Expected Effect
+
+Working definition:
+
+> 特定Cause / Condition / Scope / Horizonのもとで、Target Market VariableがBaseline / Counterfactualに対してどのような変化を示すと研究上期待されるかを表すEffect semantics / distribution。
+
+Expected EffectはPrice Directionに限定しない。
+
+~~~text
+Price
+Volatility
+Liquidity
+Spread
+Funding
+Basis
+OI
+Liquidation
+Correlation
+Flow
+Regime transition
+~~~
+
+~~~text
+Expected Effect
+!= Directional Trade Return
+~~~
+
+### Research Effect Profile
+
+Logical candidate:
+
+~~~text
+Research Effect Profile
+│
+├─ Target Variable
+├─ Scope
+├─ Conditions
+├─ Horizon
+├─ Baseline / Counterfactual
+├─ Effect Direction / Semantics
+├─ Effect Distribution
+├─ Central Tendency
+├─ Dispersion / Tail
+├─ Evidence / OOS / Replication Context
+├─ Uncertainty
+├─ Failure Boundary
+└─ Research Provenance
+~~~
+
+### Current Effect Projection
+
+Working responsibility:
+
+> 既にCurrent-use validと判断されたDecision Thesis / Candidateについて、Research Effect semanticsを今回のEconomic Evaluationに必要なMagnitude / Distribution / Horizon representationへ投影する。
+
+重要境界:
+
+~~~text
+Current Effect Projection
+!= Applicability
+
+!= Decision Thesis Formation
+
+!= Direction Generator
+~~~
+
+Material Context mismatchをEconomic Valueが勝手に修正しない。
+
+~~~text
+Material Current Effect Mismatch
+→ Applicability / Decision Synthesis
+~~~
+
+Arbitrary discountは禁止。
+
+~~~text
+Boundary approaching
+→ Effect × arbitrary discount
+~~~
+
+のような未検証係数をAIが発明しない。
+
+### Monetization Mapping
+
+Working definition:
+
+> Research-derived Market Effectを、特定Decision CandidateのInstrument / Exposure / Horizon / Valuation Basisに対するGross Economic Outcomeへ変換する規則。
+
+~~~text
+Market Effect Distribution
+↓
+Instrument-specific Payoff / Monetization Mapping
+↓
+Gross Economic Outcome Distribution
+~~~
+
+~~~text
+Expected Effect
+!= Candidate Economic Outcome
+~~~
+
+Valid EffectでもCandidate-specific mappingが無ければEVを捏造しない。
+
+~~~text
+Valid Market Effect
++
+No validated Monetization Mapping
+→ Economic Mapping INSUFFICIENT
+→ possible Research Gap
+~~~
+
+---
+
+## 22.7 Gross vs Net Economic Outcome
+
+Economic ValueはGrossとNetを分離する。
+
+~~~text
+Current Effect Projection
+↓
+Monetization Mapping
+↓
+Gross Economic Outcome Distribution
+↓
+Economic Friction & Holding Flow
+↓
+Net Economic Outcome Distribution
+~~~
+
+~~~text
+Gross Economic Outcome
+!= Net Economic Outcome
+~~~
+
+Expected Economic Valueは上位Truthではなく、Net Economic Outcome Distributionから導出されるDerived Metric。
+
+~~~text
+Expected Value number
+!= Full Economic Value Assessment
+~~~
+
+---
+
+## 22.8 Probability / Distribution / Uncertainty
+
+中心分離:
+
+~~~text
+Distribution
+= どんなOutcomeがどの範囲・形で起こり得るか
+
+Probability
+= 特定Outcome / EventへどれだけProbability Massを置くか
+
+Uncertainty
+= Distribution / Probability / Mapping自体をどこまで信用できるか
+~~~
+
+~~~text
+Probability
+!= Uncertainty
+
+Distribution
+!= Single Probability
+
+Uncertainty
+!= 1 - Probability
+~~~
+
+### Uncertainty dimensions
+
+少なくとも意味として以下を分離する。
+
+~~~text
+Outcome / Aleatoric Uncertainty
+Data Uncertainty
+Model Uncertainty
+Parameter / Estimation Uncertainty
+Regime / Context-Match Uncertainty
+Mapping Uncertainty
+Cost / Execution Uncertainty
+Dependency / Structural Uncertainty
+~~~
+
+Unknownも別。
+
+~~~text
+Unknown
+!= Uncertainty
+
+Unknown Probability
+!= 50%
+
+Missing Data
+!= Neutral Outcome
+~~~
+
+### Outcome Distribution vs Distribution Uncertainty
+
+~~~text
+Level 1:
+Outcome Distribution
+
+Level 2:
+Uncertainty About That Distribution
+~~~
+
+MeanだけをFull Distributionとしない。
+
+### Probability provenance
+
+ProbabilityはSource / Calibration / Validation / Regime / Sample / Uncertaintyへ追跡可能にする。
+
+~~~text
+Outcome Probability
+!= Knowledge Truth Probability
+
+Calibration
+!= Accuracy
+!= Edge
+~~~
+
+### Evaluation Mode
+
+Precision Reviewで追加。
+
+~~~text
+Economic Value Assessment
+│
+├─ Probabilistic Evaluation
+├─ Empirical Distribution Evaluation
+├─ Scenario Evaluation
+└─ Stress Evaluation / Context
+~~~
+
+Exact enumは未確定。
+
+Strict Expected Economic Valueを使うにはvalid probability semanticsが必要。
+
+~~~text
+Scenario Weight
+!= Validated Probability
+
+Scenario-weighted Estimate
+!= Strict Expected Value
+
+Stress Exposure
+!= Expected Value
+when Probability is unknown
+~~~
+
+---
+
+## 22.9 Economic Friction & Holding Flow Model
+
+Precision Reviewで「Cost Model」より意味を広げる。
+
+Working responsibility:
+
+> Candidateを特定Venue / Instrument / Horizon / Exposure / Market Contextで実行・保有した時に発生し得るEconomic FrictionとSigned Holding Flowを、Size / Market State / Time / Path dependency、Uncertainty、Coverage Boundary、Provenanceを保持して評価する。
+
+本命構造:
+
+~~~text
+Entry Friction
+├─ Fee / Rebate
+├─ Spread
+├─ Slippage
+└─ Market Impact
+
+Holding Economic Flow
+├─ Funding
+├─ Carry
+└─ Borrow / Financing
+
+Exit Friction
+├─ Fee / Rebate
+├─ Spread
+├─ Slippage
+└─ Market Impact
+~~~
+
+Opportunity CostはDirect Friction / Flowと分離する。
+
+~~~text
+Direct Economic Friction / Holding Flow
+!= Relative Opportunity Cost
+~~~
+
+Funding / Rebateは正負両方向。
+
+~~~text
+Funding
+!= Always Cost
+~~~
+
+### Cost behavior
+
+~~~text
+Fixed / Schedule-based
+Size-dependent
+Market-State-dependent
+Time-dependent
+Path-dependent
+Relative / Opportunity-dependent
+~~~
+
+### Coverage / Double Count Guard
+
+~~~text
+Fee
+!= Spread
+!= Slippage
+!= Market Impact
+~~~
+
+Modelが別Componentを内包する場合があるためCoverage Boundaryを明示する。
+
+~~~text
+Slippage includes Spread
+→ do not add Spread again
+~~~
+
+FundingがCarryに含まれる場合も二重計上禁止。
+
+### Joint dependency
+
+悪いMarket Outcome時にCostも悪化し得る。
+
+~~~text
+Price Down
+→ Volatility Up
+→ Liquidity Down
+→ Spread / Slippage Up
+~~~
+
+Known material dependencyを独立仮定へ置き換えない。
+
+~~~text
+Marginal Distributions alone
+!= Joint Economic Distribution
+
+No known dependency
+!= Proven independence
+~~~
+
+Expected CostとRealized Costを分離し、RealizedでPast Expected Costを書き換えない。
+
+---
+
+## 22.10 Downside / Tail / Asymmetry
+
+Economic Value側の責任:
+
+> Net Economic Outcome Distributionについて、通常損失、Lower-tail、Extreme Tail、Gain/Loss Asymmetry、Stress Exposure等を記述する。ただしそのRiskを実際にCapitalとして許容するかはR4が決定する。
+
+~~~text
+Expected Economic Value
+!= Economic Risk Profile
+
+Economic Risk Characterization
+!= Capital Risk Permission
+
+Positive EV
+!= Acceptable Risk
+~~~
+
+### Downside
+
+~~~text
+Loss Probability
+Loss Magnitude Distribution
+Lower Quantiles
+Conditional Loss Severity
+~~~
+
+Loss ProbabilityだけでDownside Riskを表さない。
+
+### Tail
+
+~~~text
+Downside Risk
+!= Tail Risk
+
+Tail Severity
+!= Tail Probability
+
+Unknown Tail Probability
+!= Zero Tail Risk
+~~~
+
+Probabilistic TailとStress Tailを分離。
+
+~~~text
+Expected Distribution Tail
++
+Stress Exposure Context
+~~~
+
+Stress Probabilityを勝手に発明しない。
+
+### Asymmetry
+
+Upside / Downside / Tail / Payoff shapeを別々に保持する。
+
+~~~text
+Same EV
+!= Same Asymmetry
+~~~
+
+VaR / Expected Shortfall / Sharpe等は必要ならDerived ViewでありCanonical Economic Truthではない。
+
+### Economic Risk Profile
+
+Logical candidate:
+
+~~~text
+Economic Risk Profile
+│
+├─ Downside Profile
+├─ Probabilistic Tail
+├─ Tail Severity / Uncertainty
+├─ Unknown Tail Context
+├─ Asymmetry Profile
+├─ Stress Exposure
+├─ Liquidity / Exit Fragility
+├─ Path Dependency
+├─ Cost-tail Dependency
+├─ Risk Uncertainty
+└─ Provenance / As-Of
+~~~
+
+---
+
+## 22.11 Multiple Candidate Comparison
+
+順番:
+
+~~~text
+Candidate
+↓
+Standalone Economic Value Assessment
+↓
+Comparison Eligibility
+↓
+Relative Economic Comparison
+~~~
+
+Relative ComparisonでStandalone Economic Valueを書き換えない。
+
+~~~text
+Candidate coexistence
+!= Direct Comparability
+~~~
+
+比較前に少なくともObjective / Horizon / Economic Basis / Numeraire / As-Of / Size Region / Venue / Validityを確認する。
+
+Economic Valueはdimension-specific comparisonを出してよい。
+
+~~~text
+Expected EV
+Median
+Cost
+Downside
+Tail
+Asymmetry
+Uncertainty
+Liquidity / Exit
+Stress
+Size Region
+~~~
+
+ただし、
+
+~~~text
+Highest EV
+!= Automatic Winner
+
+Lower Risk
+!= Automatic Winner
+
+Dimension-specific ordering
+!= Overall Candidate Selection
+~~~
+
+Global Best Candidate RankingはCanonicalにしない。
+
+### Dominance / Non-Dominated Set
+
+~~~text
+Economically Dominated
+!= Automatically Rejected
+
+Non-Dominated Set
+!= Final Selected Set
+~~~
+
+### Cross-Candidate dependency
+
+Precision Reviewで追加。
+
+~~~text
+shared market factor
+shared liquidity dependency
+shared venue
+shared funding regime
+shared underlying
+~~~
+
+等のCross-Candidate Economic DependencyをR4へ渡せるようにする。
+
+---
+
+## 22.12 Opportunity Context
+
+Economic Value側では、
+
+~~~text
+Standalone Economic Value
++
+Relative Economic Difference
++
+Potential Opportunity Context
+~~~
+
+を扱える。
+
+しかし本当のOpportunity CostにはCapital scarcity / mutual exclusivity / execution timing / portfolio constraintsが関わる。
+
+~~~text
+Potential Opportunity Context
+!= Allocative / Realized Opportunity Cost
+
+Economic Alternative
+!= Capital Mutually Exclusive
+~~~
+
+Portfolio AllocationはR4。
+
+No-Actionも常に0とは固定しない。
+
+~~~text
+Economic Value
+=
+Candidate Outcome
+relative to
+explicit Evaluation Baseline
+~~~
+
+---
+
+## 22.13 Candidate Advancement / WAIT / ABSTAIN
+
+Working definition:
+
+> 特定Decision Candidate VersionとCurrent-use ValidなEconomic Value Assessmentを受け取り、必要に応じRelative Economic Comparison Contextを参照し、Versioned Advancement Criteriaに基づいて、現在Trade Thesisを形成するに足るEconomic / Decision BasisがあるかをCandidate-specificに判定する。
+
+~~~text
+Candidate Advancement
+!= Best Candidate Selection
+!= Capital Permission
+!= Position Sizing
+!= Portfolio Allocation
+!= Execution
+~~~
+
+### ADVANCE
+
+~~~text
+ADVANCE
+=
+Trade Thesisを形成してよい
+
+ADVANCE
+!= Tradeしてよい
+!= Capital Permission
+~~~
+
+0 / 1 / multiple Candidatesが同時にADVANCE可能。
+
+### WAIT
+
+~~~text
+今は進めない
++
+Opportunityはまだ生きている
++
+何を待つか / 再評価条件が明示されている
+~~~
+
+WAIT requires Re-evaluation Trigger.
+
+~~~text
+WAIT Trigger
+↓
+Candidate Current-Use Validity
+↓
+New Economic Evaluation Context
+↓
+New Economic Value Assessment
+↓
+New Candidate Advancement Record
+~~~
+
+WAIT recordを直接ADVANCEへ書き換えない。
+
+### ABSTAIN
+
+~~~text
+今回のCandidate Opportunityを終了する
+~~~
+
+ただし、
+
+~~~text
+ABSTAIN
+!= Permanent Ban
+!= Knowledge Refutation
+!= Thesis Failure
+~~~
+
+Positive EVもAutomatic ADVANCEではない。
+Negative standalone EVもHedge等ではAutomatic ABSTAINではない。
+
+Advancement thresholdをAIがad hocに発明しない。
+
+---
+
+## 22.14 Candidate Advancement Record
+
+Logical candidate:
+
+~~~text
+Candidate Advancement Record
+│
+├─ Candidate Version Ref
+├─ Decision Opportunity Ref
+├─ Economic Value Assessment Ref
+├─ Relative Comparison Ref [optional]
+├─ Disposition: ADVANCE / WAIT / ABSTAIN
+├─ Advancement Basis
+├─ Critical Economic Findings
+├─ Critical Unknowns
+├─ Economic Validity Conditions
+├─ Policy / Criteria Version
+├─ Evaluation As-Of
+├─ WAIT Trigger / Expiry
+├─ ABSTAIN Reason
+└─ Trace / Provenance
+~~~
+
+Historical recordはimmutable。
+
+~~~text
+Immutable ADVANCE Record
+!= Forever Valid Advancement
+~~~
+
+Trade Thesis形成前にCurrent-use validityを再確認できるようにする。
+
+---
+
+## 22.15 Economic Value → Trade Thesis Handoff
+
+Economic Value AssessmentからTrade Thesisへ直接飛ばさない。
+
+~~~text
+Economic Value Assessment
+↓
+Candidate Advancement
+↓
+Candidate Advancement Record
+↓
+[ADVANCE]
+Trade Thesis Formation
+~~~
+
+情報を3段階へ分離する。
+
+~~~text
+Evaluated Economic Evidence
+!= Advancement Basis
+!= Trade Thesis Economic Basis
+~~~
+
+Trade ThesisへのEconomic handoff候補:
+
+~~~text
+Candidate / Decision Lineage
+Candidate Objective
+Economic Assessment Reference
+Advancement Basis
+Economic Validity Conditions
+Accepted Risks / Unknowns
+Evaluation Scope / As-Of
+~~~
+
+Trade ThesisへEconomic Value Assessment全文を複製せず、Reference + materially relied-upon economicsを固定する。
+
+### Economic Validity Conditions
+
+> 今回のEconomic Assessmentが経済的意味を保つために必要な条件。
+
+例:
+
+~~~text
+Venue
+Evaluated size region
+Leverage region
+Spread / Slippage region
+Funding / Carry region
+Entry valuation region
+Horizon
+Execution assumption region
+~~~
+
+重要分離:
+
+~~~text
+Knowledge Failure Boundary
+!= Trade Thesis Invalidation
+!= Economic Validity Condition
+!= R4 Capital Constraint
+~~~
+
+Accepted UnknownはResolved Unknownではない。
+
+---
+
+## 22.16 R4 Economic Contract
+
+Working definition:
+
+> ADVANCEされたDecision Candidate / Trade Thesisについて、どのEconomic Value Assessment、Economic Risk Profile、Economic Validity Conditions、Evaluated Economic Region、Accepted Unknowns等を前提としてR4がCapital Permission / Capital Expressionを判断できるかを固定し、R4が変更可能な範囲と上流再評価境界を定める論理契約。
+
+中心原則:
+
+~~~text
+R4 is an Economic Envelope consumer,
+not the Economic Envelope author.
+~~~
+
+R4へ渡す論理ブロック:
+
+~~~text
+Decision / Trade Lineage
+Candidate Semantics
+Economic Assessment
+Joint Economic Envelope
+Economic Risk Profile
+Accepted Unknowns / Validity Conditions
+Current Validity / As-Of
+~~~
+
+R4が勝手に変更しない:
+
+~~~text
+Target
+Material Instrument Semantics
+Direction / Exposure Intent
+Candidate Objective
+Material Horizon
+Decision Thesis
+Canonical Knowledge
+Economic Assessment
+Risk Characterization
+Accepted Unknown truth state
+~~~
+
+R4 Mutable Fields候補:
+
+~~~text
+Capital Permission
+Approved Exposure Size
+Approved Leverage
+Capital Reservation
+Protection Requirements
+Portfolio Allocation
+~~~
+
+ただしJoint Economic Envelope内。
+
+---
+
+## 22.17 Joint Economic Envelope
+
+Precision Reviewで強化。
+
+~~~text
+Economic Envelope
+=
+evaluated combinations / joint region
+~~~
+
+例えば:
+
+~~~text
+(Size, Leverage, Venue, Order Type, Spread, Horizon)
+~~~
+
+のJoint Context。
+
+重要:
+
+~~~text
+Inside every individual bound
+!= Inside evaluated Joint Economic Envelope
+~~~
+
+例:
+
+~~~text
+0.02 BTC @ 1x evaluated
+0.005 BTC @ 2x evaluated
+
+does not imply
+
+0.02 BTC @ 2x evaluated
+~~~
+
+Joint Economic Envelope外ならEconomic Re-evaluation required。
+
+---
+
+## 22.18 R4 Change Classification / Return Router
+
+R4で変更が必要になった時、全部Economic Valueへ返さない。
+
+### Type A — Capital-only Change
+
+~~~text
+Evaluated Joint Envelope内のSize selection
+Capital reservation
+Portfolio exposure limitation
+BLOCK
+~~~
+
+→ R4内。
+
+### Type B — Economic Change
+
+~~~text
+Size outside envelope
+Leverage outside envelope
+Unevaluated Venue
+Material entry valuation change
+Spread / Slippage regime change
+Funding / Carry change
+Material execution-method change
+Economically material protection change
+~~~
+
+→ Economic Re-evaluation。
+
+### Type C — Candidate Semantic / Composite Change
+
+~~~text
+Long → Short
+BTC → ETH
+RETURN_SEEKING → HEDGE
+15m → 4h
+new instrument leg
+new composite payoff
+~~~
+
+→ Decision Candidate Formation。
+
+### Type D — Thesis / Knowledge Validity Change
+
+~~~text
+Trade Thesis invalidation
+Core Knowledge SUSPENDED
+Critical Applicability change
+Failure Boundary breached
+Material contradiction
+~~~
+
+→ Applicability / Decision Synthesis。
+
+---
+
+## 22.19 R4 Protection Refinement
+
+Protectionを3種類へ分ける。
+
+~~~text
+Protection A
+=
+already inside evaluated Economic Envelope
+→ R4
+
+Protection B
+=
+same Candidate semantics,
+but materially changes Economic Profile
+→ Economic Re-evaluation
+
+Protection C
+=
+new instrument leg / new objective / new payoff structure
+→ New / Composite Decision Candidate
+~~~
+
+~~~text
+Safer-looking change
+!= Economically neutral change
+
+New economic leg
+!= mere parameter adjustment
+~~~
+
+---
+
+## 22.20 Economic Re-evaluation Lineage
+
+R4 ↔ EVを上書きLoopにしない。
+
+Logical candidate:
+
+~~~text
+Economic Re-evaluation Request
+│
+├─ Source R4 Decision Ref
+├─ Current Economic Assessment Ref
+├─ Requested Change
+├─ Change Classification
+├─ Reason
+├─ Requested Evaluation Context
+└─ As-Of
+~~~
+
+Lineage:
+
+~~~text
+EVA-101
+↓
+R4 Re-evaluation Request
+↓
+EVA-102
+↓
+New Candidate Advancement Record
+↓
+New / updated Trade Thesis lineage
+↓
+New R4 Economic Contract
+↓
+R4
+~~~
+
+Past Economic Assessmentを上書きしない。
+
+---
+
+## 22.21 Precision Review / Destruction Test
+
+代表ケース:
+
+- Research Effect +0.8% / Long Candidate
+- 同じEffect / Short Candidate
+- Volatility Effect / Spot Long mapping unavailable
+- Research Horizon 24h / Candidate 15m
+- Candidate作成後Market急変
+- Past EV +0.5 / Current EV -0.1
+- Uncalibrated P(up)=65%
+- Stress -20% / probability unknown
+- Mean only / no full distribution
+- Slippage missing
+- Spread already inside Slippage model
+- Funding benefit
+- Bad market outcome + bad cost dependence
+- Positive EV + severe Tail
+- Hedge negative standalone EV
+- Multiple positive candidates
+- Return vs Hedge comparison
+- Multiple ADVANCE
+- WAIT + information update
+- ADVANCE becomes stale
+- R4 size inside envelope
+- R4 size outside envelope
+- R4 Long → Short
+- R4 Venue change
+- R4 Stop change
+- R4 adds new Hedge leg
+- Knowledge SUSPENDED during R4
+- Old EV used later
+- R4 → EV → R4 repeated re-evaluation
+- individual bounds inside but joint combination untested
+- Economic Value attempts to re-decide Bull / Bear
+- Research correct but monetization / cost failed
+- Trade profitable but original research wrong
+
+Result:
+
+~~~text
+① Economic Value Formal Responsibility
+= SURVIVED
+
+② Evaluation Target / As-Of
+= SURVIVED / STRENGTHENED
+
+③ Expected Effect → Economic Value
+= SURVIVED / CURRENT EFFECT AUTHORITY REFINED
+
+④ Probability / Uncertainty / Distribution
+= SURVIVED / EVALUATION MODE REFINED
+
+⑤ Cost Model
+= SURVIVED / FRICTION + SIGNED FLOW REFINED
+
+⑥ Downside / Tail / Asymmetry vs R4
+= SURVIVED / HEDGE BASELINE REFINED
+
+⑦ Multiple Candidate Comparison
+= SURVIVED / CROSS-CANDIDATE DEPENDENCY STRENGTHENED
+
+⑧ Candidate Advancement / Trade Thesis Handoff
+= SURVIVED
+
+⑨ R4 Economic Contract
+= SURVIVED / JOINT ENVELOPE + COMPOSITE PROTECTION + RETURN ROUTER REFINED
+~~~
+
+Precision Gate:
+
+~~~text
+PASS AS WORKING CANDIDATE
+after current refinements
+~~~
+
+---
+
+## 22.22 Key Precision Review Refinements
+
+A. Hedge / Insurance requires explicit Objective-relative Baseline / Reference Exposure when needed.
+
+B. Economic Envelope is Joint, not independent per-field bounds.
+
+C. Strict Expected Value requires valid probability semantics.
+
+D. Direct Cost wording is widened to Economic Friction & Signed Holding Flow.
+
+E. Current Effect Projection cannot re-decide Applicability or Direction.
+
+F. New R4 protection leg is Composite Candidate formation, not mere EV parameter tweak.
+
+G. R4 ↔ EV re-evaluation must form immutable lineage.
+
+H. Potential Opportunity Context remains distinct from Allocative / Realized Opportunity Cost.
+
+I. Cross-Candidate dependency should remain visible to R4.
+
+J. No-Action semantics depend on Objective / Evaluation Baseline.
+
+---
+
+## 22.23 Key Precision Invariants
+
+~~~text
+EVP-01 Economic Value evaluates a specific Decision Candidate Version.
+EVP-02 Candidate semantics must not mutate inside Economic Evaluation.
+EVP-03 Candidate As-Of != Evaluation As-Of.
+EVP-04 Immutable Candidate != Forever Current Candidate.
+EVP-05 Economic Value Assessment is Context-bound / As-Of-bound.
+EVP-06 Past Economic Assessment must not be overwritten by later Assessment.
+EVP-07 Candidate Objective must be explicit enough to interpret value.
+EVP-08 Evaluation Baseline / Reference Context must be explicit.
+EVP-09 Standalone EV != Objective-relative Economic Value.
+EVP-10 Expected Effect != Expected Economic Value.
+EVP-11 Market Effect != Candidate P&L.
+EVP-12 Valid Effect != Monetizable by every Candidate.
+EVP-13 Current Effect Projection != Applicability.
+EVP-14 Current Effect Projection != Direction Generator.
+EVP-15 Missing Monetization Mapping != Zero EV.
+EVP-16 Gross Economic Outcome != Net Economic Outcome.
+EVP-17 Probability != Uncertainty.
+EVP-18 Unknown Probability != 50%.
+EVP-19 Scenario Weight != Validated Probability.
+EVP-20 Scenario-weighted Estimate != Strict Expected Value.
+EVP-21 Stress Probability must not be invented.
+EVP-22 Mean Outcome != Full Outcome Distribution.
+EVP-23 Outcome Distribution != Uncertainty about Distribution.
+EVP-24 Funding / Rebate may be signed Benefit or Cost.
+EVP-25 Fee != Spread != Slippage != Market Impact.
+EVP-26 Cost Coverage boundaries must prevent double counting.
+EVP-27 Expected Cost != Realized Cost.
+EVP-28 Known material outcome/cost dependency must not be silently treated independent.
+EVP-29 Expected Economic Value != Economic Risk Profile.
+EVP-30 Positive EV != Acceptable Capital Risk.
+EVP-31 Downside Risk != Tail Risk.
+EVP-32 Unknown Tail Probability != Zero Tail Risk.
+EVP-33 Same EV != Same Asymmetry.
+EVP-34 Candidate Economic Risk != Portfolio Risk.
+EVP-35 Candidate coexistence != Direct Comparability.
+EVP-36 Highest EV != Automatic Winner.
+EVP-37 Global Best Candidate Ranking is not Canonical Economic Output.
+EVP-38 Economic Alternative != Capital Mutually Exclusive.
+EVP-39 Potential Opportunity Context != Allocative Opportunity Cost.
+EVP-40 Economic Value Assessment != Candidate Advancement.
+EVP-41 ADVANCE != Trade Permission.
+EVP-42 Multiple Candidates may ADVANCE.
+EVP-43 WAIT requires identifiable Re-evaluation Trigger.
+EVP-44 WAIT Trigger → New Assessment / New Advancement, not direct ADVANCE.
+EVP-45 ABSTAIN != Knowledge Refutation.
+EVP-46 Positive EV != Automatic ADVANCE.
+EVP-47 Negative Standalone EV != Automatic ABSTAIN for Hedge / Insurance.
+EVP-48 Advancement Criteria must be explicit / versioned.
+EVP-49 Trade Thesis must reference exact EVA / Advancement record.
+EVP-50 Accepted Unknown != Resolved Unknown.
+EVP-51 Knowledge Failure Boundary != Economic Validity Condition.
+EVP-52 Economic Validity Condition != R4 Capital Constraint.
+EVP-53 R4 is an Economic Envelope consumer, not author.
+EVP-54 Economic Envelope is a Joint evaluated region.
+EVP-55 Inside individual bounds != inside Joint Economic Envelope.
+EVP-56 R4 must not rewrite Direction / Target / Objective / Thesis.
+EVP-57 R4 must not rewrite Economic Value / Risk characterization.
+EVP-58 R4 may BLOCK a valid positive-EV Candidate.
+EVP-59 R4 BLOCK != Economic invalidity.
+EVP-60 Outside Joint Economic Envelope → Economic Re-evaluation.
+EVP-61 New instrument leg / composite payoff → Candidate Formation.
+EVP-62 Thesis / Knowledge validity change != mere Economic re-evaluation.
+EVP-63 R4 → EV Re-evaluation creates new immutable lineage.
+EVP-64 Capital Permission != Forever-valid Execution Permission.
+EVP-65 Execution must remain within authorized Economic / Capital conditions.
+~~~
+
+---
+
+## 22.24 Human View
+
+Human-level definition:
+
+> Economic Valueとは、市場理解から作られた具体的な行動候補について、「この条件なら、実際にどんな利益・損失分布になり、どんなCost・Tail Risk・不確実性を持つのか」を調べる仕組み。その候補を次へ進めるかはCandidate Advancement、実際に資金を出すかはR4が決める。
+
+全体:
+
+~~~text
+市場研究
+↓
+今使えるKnowledge
+↓
+Decision Thesis
+↓
+Decision Candidate
+↓
+何を目的にやる？
+↓
+何と比較して価値を測る？
+↓
+市場の動きをこのCandidateでどうP&Lへ変える？
+↓
+Fee / Spread / Slippage / Funding / Carry等を反映
+↓
+Net Outcome Distribution
+↓
+EV / Downside / Tail / Asymmetry / Unknown
+↓
+他CandidateとのEconomic difference
+↓
+Trade Thesisへ進める？
+├─ ADVANCE
+├─ WAIT
+└─ ABSTAIN
+↓
+ADVANCE
+↓
+Trade Thesis
+↓
+R4
+↓
+Current Portfolio / Capitalで本当に資金を出せる？
+~~~
+
+Human key definitions:
+
+~~~text
+Expected Effect
+= 市場がどう動く？
+
+Monetization Mapping
+= その動きをこのCandidateではどうP&Lへ変える？
+
+Economic Value
+= Costまで入れるとどんな利益・損失構造？
+
+Distribution
+= 何が起こり得る？
+
+Probability
+= どれくらい起こりそう？
+
+Uncertainty
+= その推定自体をどこまで信用できる？
+
+Downside
+= 負ける側はどう？
+
+Tail
+= 最悪側ではどこまで壊れる？
+
+ADVANCE
+= Trade Thesisを作る段階へ進める
+
+WAIT
+= 再評価条件付きで待つ
+
+ABSTAIN
+= 今回のOpportunityは見送る
+
+R4
+= 現在の口座で実際にどれだけRisk / Capitalを許可する？
+~~~
+
+Economic Envelope Human View:
+
+> Economic Valueが「ちゃんと評価済み」の条件組み合わせ。
+
+~~~text
+各条件が個別に範囲内
+!=
+その組み合わせも評価済み
+~~~
+
+Hedge Human View:
+
+~~~text
+Return Candidate
+= これ単体でどんな経済性？
+
+Hedge Candidate
+= Reference Exposureへ追加した時、
+  Loss Distributionがどう改善する？
+~~~
+
+Return Router Human View:
+
+~~~text
+資金量だけ / 評価済みEnvelope内
+→ R4
+
+Fee / Size / Venue / Slippage等のEconomic条件
+→ Economic Value
+
+Long→Short / BTC→ETH / new Hedge leg等
+→ Decision Candidate
+
+市場判断が崩れた
+→ Decision Synthesis
+
+Knowledgeが使えなくなった
+→ Applicability
+~~~
+
+---
+
+## 22.25 Human Review Result
+
+Daisuke review:
+
+> 問題はなそうやな
+
+Interpretation:
+
+~~~text
+Major conceptual issue:
+NONE FOUND
+
+Human View:
+ACCEPTABLE
+
+Precision Design / Human View mismatch:
+NO MAJOR ISSUE FOUND
+
+Working Candidate:
+READY TO SAVE
+~~~
+
+これはFormal Current Architecture adoptionを意味しない。
+
+---
+
+## 22.26 Save / Adoption Boundary
+
+今回保存:
+
+~~~text
+98_DESIGN_STUDY/市場理解OS_全体再構築_設計ログ.md
+00_AI/AI_HANDOFF.md
+~~~
+
+今回変更しない:
+
+~~~text
+00_AI/AI_CONTEXT.md
+00_HUMAN/HUMAN_MAP.md
+02_ARCHITECTURE/
+~~~
+
+Human Viewは現時点ではWorking Study内のReview Projection。
+
+正式採用後、必要ならFormal Precision ArchitectureとOfficial Human Projectionへ圧縮・反映する。
+
+---
+
+## 22.27 R3 Integration Review Boundary
+
+Economic Valueまでで、R3 detailed recoveryの主要連鎖は次まで揃った。
+
+~~~text
+Knowledge Admission
+→ Knowledge Record
+→ Knowledge Relationship
+→ Knowledge Graph
+→ Version Lineage
+→ Knowledge Lifecycle
+→ Knowledge Applicability
+→ Decision Synthesis
+→ Economic Value
+~~~
+
+Admission / Record / Relationship / Graph / Versionの一部はPrecision-First導入前に作成された。
+
+次工程:
+
+~~~text
+R3 Integration Precision Review
+~~~
+
+Review target:
+
+~~~text
+Admission
+→ Record
+→ Relationship
+→ Graph
+→ Version
+→ Lifecycle
+→ Applicability
+→ Decision Synthesis
+→ Economic Value
+~~~
+
+責任重複、用語ズレ、Object境界、Version / As-Of、Unknown handling、Authority、Return Route、Human View consistencyを横断確認し、生き残った不足だけを修正する。
+
+その後Phase 6 Destruction Reviewへ進む。
+
+---
+
+## 22.28 Checkpoint Result
+
+Checkpoint 015:
+
+~~~text
+R3 Detailed Refinement
+Economic Value / Opportunity Evaluation
+= SAVED WORKING CANDIDATE
+
+Precision Review
+= PASS AFTER REFINEMENTS
+
+Human View
+= REVIEWED
+
+Human Review
+= NO MAJOR CONCEPTUAL ISSUE FOUND
+
+Formal Current Architecture
+= UNCHANGED
+~~~
