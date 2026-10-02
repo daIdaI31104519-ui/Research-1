@@ -13,7 +13,7 @@ State:
 ACTIVE
 
 Last Updated:
-2026-10-01
+2026-10-02
 
 Conversation Focus:
 Whole Market Understanding OS Reconstruction.
@@ -23,90 +23,84 @@ Current detailed work remains R3 Knowledge / Decision Preparation refinement.
 WORKFLOW:
 AI_WORKFLOW v0.5.3 Precision-First → Precision Review → Human View workflow is active.
 
-R3 DETAILED REFINEMENT SAVED:
-- Knowledge Admission detailed flow
-- Knowledge Record minimum semantic responsibilities
-- Knowledge Relationship detailed refinement
-- Knowledge Graph boundary
-- Version Lineage boundary
-- Knowledge Lifecycle Precision Design / Review / Authority / Human View
-- Knowledge Applicability Precision Design
-- Runtime Assumption Monitoring boundary
-- Applicability State decomposition
-- Knowledge Condition Matching
-- Failure Boundary / Constraint separation
-- Multi-Knowledge Applicability Context
-- Lifecycle ↔ Applicability handoff
-- Applicability Precision Review / destruction tests
-- Applicability Human View reviewed by Daisuke
+LATEST SAVED CHECKPOINT:
+Checkpoint 014 — R3 Detailed Refinement / Decision Synthesis
 
-KNOWLEDGE APPLICABILITY WORKING CANDIDATE:
-Core separation:
-- ACTIVE != APPLICABLE
-- SUSPENDED / RETIRED != NOT_APPLICABLE
-- Scope != Condition
-- UNKNOWN != FALSE
-- Failure Boundary != Constraint
-- Semantic Applicability != Knowledge-Use Permission
-- Knowledge-Use Permission != Capital Permission
-- Knowledge Count != Evidence Count
-- Different Knowledge ID != Independent Research
-- Applicability Finding != Lifecycle Transition
-- Applicability Assessment != permanent Current Truth
-- Applicable Knowledge Context Set != Runtime Assumption Set
-- R3 Runtime Deviation != R4 Position Action
-
-Semantic Applicability candidate:
-- APPLICABLE
-- NOT_APPLICABLE
-- UNDETERMINED
-
-Important logical boundaries:
-- Applicability Context Snapshot / As-Of Context
-- Runtime Assumption Set
-- Decision Material Snapshot
-- Emergency Knowledge-Use Block
-These are logical candidates, not final schemas/classes.
-
-Saved Checkpoint:
-Checkpoint 013 — R3 Detailed Refinement / Knowledge Applicability
-
-Primary:
+PRIMARY:
 98_DESIGN_STUDY/市場理解OS_全体再構築_設計ログ.md
 
-Human Review:
-No major conceptual issue found by Daisuke.
+DECISION SYNTHESIS WORKING CANDIDATE:
+- Decision Synthesis = usable Decision Materialsから「今の市場について何が言えるか」を構成する責任
+- Decision Synthesis != Applicability / EV / Capital Permission / Execution
+- Formal output candidate = Decision Synthesis Result
+- Decision Thesis != Decision Candidate
+- Decision Thesis may be non-directional
+- Opposite Direction != Contradiction
+- Canonical CONTRADICTS != Winner Selection
+- Majority Vote / Confidence Sum / Evidence double counting prohibited
+- Independent Convergence is preserved as context, not vote
+- Universal Knowledge Weight is not a Semantic Core primitive
+- Material Influence is Thesis-specific / multi-dimensional
+- ACTIVE INPUT and TRACE ONLY are separated
+- Readable != Influence-Eligible
+- Immutable Snapshot != Forever Valid Snapshot
+- Input Validity != Synthesis Outcome
+- THESIS_FORMED / INCONCLUSIVE is separate from SINGLE / MULTIPLE_COMPATIBLE / MULTIPLE_COMPETING
+- No Decision Candidate → No Fake EV
+- INCONCLUSIVE != WAIT != ABSTAIN != NO-TRADE
+- Trade Thesis != Knowledge Truth / Capital Permission / Executed Trade
+- R4 may alter capital expression, not semantic decision meaning
+- Trade Thesis creation != Position activation
+- No Fill → no Active Runtime Assumption Set
+- Applicable Knowledge != Used Knowledge != Must-Monitor Assumption
+- Runtime Deviation != R4 Position Action
+
+RUNTIME HANDOFF:
+Trade Thesis
+→ Runtime Assumption Seed
+→ R4
+→ Execution
+→ Actual Exposure
+→ Pre-Activation Validity Recheck
+→ Active Runtime Assumption Set
+→ Runtime Monitoring
+→ R4 Runtime Protection + R5 Feedback
+
+PRECISION REVIEW:
+Decision Synthesis ①〜⑦ survived destruction review with refinements.
+Major corrections:
+1. COHERENT / COMPETING / INCONCLUSIVEを単一State軸にしない
+2. INCONCLUSIVE + no CandidateでFake EVを作らない
+3. TRACE ONLYを実質的Influenceに使わない
+4. R4がDecision semanticsを書き換えない
+5. Snapshot immutabilityとcurrent-use validityを分離
+6. Trade ThesisとRuntime activationを分離
+
+HUMAN REVIEW:
+Daisuke: 「問題は特に無さそう」
+No major conceptual issue found.
 Proceed as Working Candidate.
 
-NEXT:
-Decision Synthesis / Conflict Resolution detailed refinement using Precision-First workflow:
-1. Decision Synthesis responsibility
-2. Decision Material Snapshot input boundary
-3. conflict / opposition handling
-4. no-majority / no-double-count rule
-5. WAIT / UNKNOWN / abstention semantics
-6. Trade Thesis / Decision Candidate responsibility
-7. Runtime Assumption Set handoff
-8. Precision Review
-9. Human View
-
-LATER INTEGRATION:
-Admission / Record / Relationship / Graph / Version include work created before Precision-First.
-Do not stop current recovery for a full rewrite.
-After R3 detailed recovery completes, run R3 Integration Precision Review and revise only gaps that survive that review.
-
-READ:
-98_DESIGN_STUDY/市場理解OS_全体再構築_設計ログ.md
-
-Important Boundary:
+FORMAL BOUNDARY:
 AI_CONTEXT remains authoritative for Formal Project Current State.
 Formal Current Architecture is unchanged.
-Checkpoint 013 is Working Study / Working Candidate, not formal adoption.
-02_ARCHITECTURE/CONNECTIONS/04_KNOWLEDGE_APPLICABILITY.md was not changed by this checkpoint.
+00_HUMAN/HUMAN_MAP.md is not updated yet.
+02_ARCHITECTURE/ is not updated by this checkpoint.
+Human View is saved only as Working Study review projection.
+
+NEXT:
+Economic Value / Opportunity Evaluation detailed refinement.
+
+LATER INTEGRATION:
+After R3 detailed recovery completes, run:
+Admission → Record → Relationship → Graph → Version → Lifecycle → Applicability → Decision Synthesis → Economic Value
+as R3 Integration Precision Review.
+Then revise only gaps that survive review and proceed toward Phase 6 Destruction Review.
 
 Git Write Permission Reminder:
 REQUIRE CURRENT-CHAT USER AUTHORIZATION
 ~~~
+
 ---
 
 # 1. ROLE
