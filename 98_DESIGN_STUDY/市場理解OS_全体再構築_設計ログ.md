@@ -16044,3 +16044,1061 @@ Human Review
 Formal Current Architecture
 = UNCHANGED
 ~~~
+
+---
+
+# 23. Checkpoint 016 — R3 Integration Precision Review / Issue Consolidation & Repair Plan
+
+**Date:** 2026-10-03  
+**State:** SAVED / WORKING REVIEW CHECKPOINT  
+**Formal Current Architecture Changed:** NO  
+**Phase:** 5 Reconstruction — R3 Integration Precision Review  
+**Save Role:** Checkpoint 015までに復元したR3をAdmission〜Economic Valueまで横断し、STEP 1〜7で発見したFindingをRoot Issueへ統合し、Integration Repair前の基準点として保存する。  
+**Repair Applied In This Checkpoint:** NO  
+**Next:** Repair Package A — Knowledge Foundation から開始する。
+
+## 23.1 Review Target
+
+今回の横断対象:
+
+~~~text
+Knowledge Admission
+→ Knowledge Record
+→ Knowledge Relationship
+→ Knowledge Graph
+→ Version Lineage
+→ Knowledge Lifecycle
+→ Knowledge Applicability
+→ Decision Material Snapshot
+→ Decision Synthesis
+→ Decision Thesis
+→ Decision Candidate
+→ Economic Value
+→ Candidate Advancement
+→ Trade Thesis
+→ R4 Economic Contract boundary
+~~~
+
+目的:
+
+> 各Componentが単体で成立しているかではなく、1本のR3 Systemとして接続した時に、責任・Authority・Object Truth・Version / As-Of・Unknown・Dependency・Return Routeが壊れていないかを確認し、生き残った問題だけをRepair対象へする。
+
+中心Review Questions:
+
+~~~text
+上流は何を保証する？
+何を渡す？
+下流は何を信じてよい？
+下流は何を変更してはいけない？
+問題時はどのSemantic Ownerへ戻す？
+~~~
+
+---
+
+## 23.2 STEP 1 — Canonical Vocabulary Review
+
+Result:
+
+~~~text
+PASS WITH INTEGRATION ISSUES
+~~~
+
+主要Vocabulary統合方向:
+
+~~~text
+Lifecycle State
+→ Precisionでは Lifecycle Disposition を優先
+
+Decision Thesis Candidate
+→ Decision Thesis へ統一方向
+
+PROCEED
+→ ADVANCE へ統一方向
+
+Decision Disposition
+→ Candidate Disposition へ寄せる
+
+Economic Value / Opportunity Evaluation
+→ Economic Value Evaluation を責任名候補
+
+Economic Envelope
+→ Joint Economic Envelope を精密名として優先
+
+Economic Cost Model
+→ Economic Friction & Holding Flow Model
+~~~
+
+Generic単語の単独使用は避ける方向:
+
+~~~text
+Current
+Valid
+State
+Unknown
+Blocked
+Boundary
+Constraint
+Candidate
+Version
+Confidence
+EV
+~~~
+
+必ず対象軸を明示する。
+
+重要分離:
+
+~~~text
+Failure Boundary
+!= Knowledge-Use Constraint
+!= Trade Thesis Invalidation Condition
+!= Economic Validity Condition
+!= R4 Capital Constraint
+~~~
+
+---
+
+## 23.3 STEP 2 — Responsibility / Authority Matrix
+
+Result:
+
+~~~text
+PASS WITH AUTHORITY GAPS
+~~~
+
+R3共通Authority分離候補:
+
+~~~text
+Generate / Detect
+!= Assess
+!= Decide / Authorize
+!= Canonical Write
+~~~
+
+特にKnowledge Lifecycleは既に強い基準形:
+
+~~~text
+Trigger
+↓
+Lifecycle Assessment
+↓
+Transition Proposal
+↓
+Lifecycle Governance
+↓
+Authorized Decision
+↓
+Single Writer
+↓
+Canonical Lifecycle State
+~~~
+
+確認されたAuthority Gap:
+
+~~~text
+A. Knowledge Admission Decision / Canonical Record Writer
+B. Canonical Knowledge Relationship Approval / Writer
+C. Knowledge Version Approval / Version Lineage Writer
+D. Knowledge-Use Constraint Authorization
+E. Decision Material Eligibility / Snapshot sealing authority
+F. Decision Candidate Formation authority
+G. Candidate Advancement Policy Governance
+H. Trade Thesis Adoption / Canonical Writer
+I. R4 Economic Contract creation / version owner
+~~~
+
+横断原則:
+
+> 下流は上流の結果を利用できるが、上流の意味を再定義してはいけない。問題を見つけたら、その意味を所有するAuthorityへ返す。
+
+---
+
+## 23.4 STEP 3 — Object Boundary Review
+
+Result:
+
+~~~text
+PASS WITH 6 BOUNDARY REFINEMENTS
+~~~
+
+Object分類:
+
+~~~text
+Canonical Semantic Object
+Assessment Object
+Snapshot / Historical Object
+Derived View
+~~~
+
+中心原則:
+
+~~~text
+Canonical semantic fact
+=
+one canonical owner
+
+Downstream reference
+!= duplicated canonical truth
+~~~
+
+主要Boundary Finding:
+
+~~~text
+1. Knowledge Record Known Contradictions
+   vs Canonical Knowledge Relationship
+
+2. Knowledge Record
+   vs Knowledge Version
+
+3. Decision Synthesis Result
+   vs Decision Thesis
+
+4. EVA
+   vs Risk / Cost / Envelope sub-object ownership
+
+5. Critical / Accepted Unknown
+   source identity / downstream treatment
+
+6. Failure Boundary definition
+   vs downstream Boundary status / usage
+~~~
+
+重要:
+
+~~~text
+Logical Object count
+!= Database Table count
+!= Python Class count
+~~~
+
+現段階では意味所有権だけを確定し、Physical implementationへ降ろさない。
+
+---
+
+## 23.5 STEP 4 — Forward Handoff Review
+
+Result:
+
+~~~text
+PASS WITH 5 CONFIRMED INTEGRATION FINDINGS
+~~~
+
+Finding:
+
+~~~text
+FH-001
+Decision Material Snapshot must pin
+Decision Target / Scope / Horizon.
+
+FH-002
+Decision Snapshot must not consume
+floating Knowledge Relationships.
+
+FH-003
+Decision Thesis Candidate
+should converge toward Decision Thesis
+unless a real promotion boundary is found.
+
+FH-004
+Decision Candidate contract is older than
+Economic Value requirements.
+
+FH-005
+Economic Value Assessment needs
+an explicit Evaluation Availability / Sufficiency axis.
+~~~
+
+特にFH-004 / FH-005はRepair必須。
+
+Forward principle:
+
+~~~text
+Meaning Preservation
+Progressive Narrowing
+Reference over Copy
+~~~
+
+---
+
+## 23.6 STEP 5 — Version / As-Of / Lineage Review
+
+Result:
+
+~~~text
+PASS WITH 8 TEMPORAL INTEGRATION FINDINGS
+~~~
+
+Finding:
+
+~~~text
+VT-001
+Knowledge Version needs explicit temporal identity.
+
+VT-002
+Event / Source Time
+!= Information Availability Time
+!= Assessment / Decision Time.
+
+VT-003
+New Knowledge Version must not silently inherit
+old Applicability / Relationship / Lifecycle assumptions.
+
+VT-004
+Relationship requires Version + historical availability semantics.
+
+VT-005
+Knowledge-Use Constraint requires revision / effective-time semantics.
+
+VT-006
+Decision Thesis should be immutable per synthesis context.
+
+VT-007
+Trade Thesis re-evaluation must create a new immutable revision / record,
+not in-place overwrite.
+
+VT-008
+Historical replay requires exact refs,
+policy / model versions,
+and temporal semantics.
+~~~
+
+R3共通Temporal原則候補:
+
+~~~text
+Semantic Change
+→ New Version
+
+Context Change
+→ New Assessment
+
+Later Information
+!= Past Decision Context
+
+Immutable Historical Record
+!= Forever Current-Use Valid
+
+Event Time
+!= Information Availability Time
+!= Assessment / Decision Time
+~~~
+
+Historical Decision Reconstruction ChainをLineage横断概念として維持する。
+
+---
+
+## 23.7 STEP 6 — Unknown / Conflict / Dependency Review
+
+Result:
+
+~~~text
+PASS WITH 15 INTEGRATION FINDINGS
+~~~
+
+Unknown:
+
+~~~text
+UNKNOWN != FALSE
+Missing != Mismatch
+Unknown != Uncertainty
+Unknown existence != Criticality
+Accepted Unknown != Resolved Unknown
+~~~
+
+Unknownはsource identityを保持し、下流はLayer-specific treatmentだけを追加する方向。
+
+Conflict:
+
+~~~text
+Canonical Contradiction
+!= Decision-time Competition
+!= Unresolved Conflict
+
+Opposite Direction
+!= Contradiction
+
+Conflict
+!= Uncertainty
+~~~
+
+Dependency:
+
+~~~text
+Knowledge Count
+!= Evidence Count
+
+Different Knowledge ID
+!= Independent Evidence
+
+No known dependency
+!= Proven independence
+
+Unavailable dependency information
+!= No dependency
+
+Independent Convergence
+requires an explicit independence basis.
+~~~
+
+Semantic RelationshipとEvidence / Research Dependencyは別。
+
+新しい巨大Dependency Layer / Unknown Layerは現段階で追加しない。
+
+---
+
+## 23.8 STEP 7 — Backward Return Router Review
+
+Result:
+
+~~~text
+PASS WITH 13 INTEGRATION FINDINGS
+~~~
+
+中心原則:
+
+~~~text
+Detection location
+!= Semantic Authority
+~~~
+
+Return routingはRaw Event Typeではなく、何の意味が変わったかで決める。
+
+統合Return:
+
+~~~text
+Research / Knowledge semantics changed
+→ R2 Research / Knowledge Admission
+
+Knowledge operational trust changed
+→ Knowledge Lifecycle
+
+Current applicability changed
+→ Knowledge Applicability
+
+Semantic relationship changed
+→ Knowledge Relationship
+
+Decision meaning changed
+→ Decision Synthesis
+
+Candidate semantics changed
+→ Decision Candidate Formation
+
+Economic context changed
+→ Economic Value Re-evaluation
+
+Capital / Portfolio only
+→ R4
+~~~
+
+重要:
+
+~~~text
+Return
+!= history rewind
+
+Backward Routing
+→ Forward Rebuild
+~~~
+
+過去Objectは削除・上書きせず、Current-use validityを失わせ、必要な依存Chainだけ新しく再構築する。
+
+One Findingは複数Consumerへfan-out可能だが、Primary Semantic Ownerは1つ。
+
+Two-Speed:
+
+~~~text
+Fast R4 Safety
+!= Slow Research / Knowledge conclusion
+~~~
+
+---
+
+## 23.9 Consolidated R3 Integration Issue List v0.1
+
+STEP 1〜7のFindingをRoot Cause単位へ統合した。
+
+### Priority Definition
+
+| Priority | Meaning |
+|---|---|
+| CRITICAL | STEP 8 End-to-End Destruction Test前にRepair必須 |
+| HIGH | Flowは動くがAuthority / Truth / Reproducibilityを壊し得るため同Repair cycleで修正 |
+| MEDIUM | Semantic Coreは成立。Formal Architecture前に整理 |
+| LATER | DB / Python / Physical implementationで確定可能 |
+
+### Root Issues
+
+| ID | Root Issue | Priority |
+|---|---|---|
+| R3-INT-001 | Knowledge Record / Version / Identity の正本境界 | CRITICAL |
+| R3-INT-002 | R3共通Temporal Contract / Look-Ahead防止 | CRITICAL |
+| R3-INT-003 | Decision Material Snapshot Contract不足 | CRITICAL |
+| R3-INT-004 | Decision Candidate Contract Backfill | CRITICAL |
+| R3-INT-005 | Economic Value Assessment Evaluation Availability / Sufficiency不足 | CRITICAL |
+| R3-INT-006 | Knowledge Admissionの意味軸 / Authority混在 | HIGH |
+| R3-INT-007 | Knowledge Relationship Canonical Ownership / Version / Temporal Contract | HIGH |
+| R3-INT-008 | Unknown Identity / Treatment Model | HIGH |
+| R3-INT-009 | Dependency / Independence Provenance | HIGH |
+| R3-INT-010 | Decision Synthesis Result / Decision Thesis境界 | HIGH |
+| R3-INT-011 | Candidate Advancement Governance / Disposition語彙 | HIGH |
+| R3-INT-012 | Trade Thesis Revision / Canonical Write Boundary | HIGH |
+| R3-INT-013 | Knowledge-Use Constraint Authority / Time | HIGH |
+| R3-INT-014 | Backward Return RouterのR3共通Rule化 | MEDIUM |
+
+Count:
+
+~~~text
+CRITICAL = 5
+HIGH     = 8
+MEDIUM   = 1
+TOTAL    = 14
+~~~
+
+---
+
+## 23.10 R3-INT-001 — Knowledge Record / Version / Identity
+
+Repair Direction:
+
+~~~text
+Knowledge Identity
+=
+Knowledge系列Identity
+
+Knowledge Record
+=
+特定VersionのCanonical Semantic Record
+
+Knowledge Version
+=
+Knowledge RecordをVersion単位で指すLogical Identity
+
+Version Lineage
+=
+Version間の履歴 / 関係
+~~~
+
+禁止:
+
+~~~text
+Knowledge Record全文
++
+Knowledge Version全文
+=
+duplicate semantic truth
+~~~
+
+Repair Package Aの先頭で閉じる。
+
+---
+
+## 23.11 R3-INT-002 — Temporal Contract
+
+Repair Direction:
+
+~~~text
+Event / Source Time
+!= Information Available / Known Time
+!= Assessment / Decision Time
+!= Effective Time
+~~~
+
+Historical Decisionへ使用可能なのは、原則としてDecision As-Of以前にSystemが利用可能だった情報だけ。
+
+Semantic Change / Context Change分離も共通化する。
+
+---
+
+## 23.12 R3-INT-003 — Decision Material Snapshot
+
+Repair Direction:
+
+~~~text
+Decision Context
+├─ Target
+├─ Scope
+├─ Relevant Horizon
+└─ Decision As-Of
+~~~
+
+Snapshotはexact immutable refs / revisionsを固定し、floating Current参照を避ける。
+
+---
+
+## 23.13 R3-INT-004 — Decision Candidate Contract
+
+Economic Value要求を上流へBackfillする。
+
+最低意味候補:
+
+~~~text
+Decision Candidate Version
+├─ Decision Thesis Ref
+├─ Target
+├─ Instrument
+├─ Exposure Intent
+├─ Candidate Objective
+├─ Relevant Horizon
+├─ Evaluation Baseline / Reference
+├─ Preconditions
+├─ Candidate-specific Invalidation Refs
+├─ Critical Unknown Refs
+├─ Decision Context Ref
+└─ Candidate As-Of
+~~~
+
+---
+
+## 23.14 R3-INT-005 — Evaluation Availability / Sufficiency
+
+Economic Value Assessmentに、
+
+~~~text
+Economic Direction / Attractiveness
+!= Evaluation Availability / Sufficiency
+~~~
+
+を導入する方向。
+
+例:
+
+~~~text
+potentially positive economics
++
+critical slippage unknown
+=
+not automatically sufficient for advancement
+~~~
+
+Exact enumはRepair時に検討し、現時点では固定しない。
+
+---
+
+## 23.15 R3-INT-006 — Admission Axis / Authority
+
+現行候補:
+
+~~~text
+ADMIT
+ADMIT_WITH_BOUNDARY
+NEGATIVE
+UNKNOWN
+MERGE
+SUPERSEDE_CANDIDATE
+RESEARCH_REQUIRED
+DEFER
+REJECT
+~~~
+
+は1軸にしない。
+
+Repair方向:
+
+~~~text
+Research Result Classification
+Admission Disposition
+Duplicate Handling
+Relationship / Version Handling
+~~~
+
+へ分離。
+
+Admission Assessment / Decision Authority / Canonical Knowledge Writerの境界も補強する。
+
+---
+
+## 23.16 R3-INT-007 — Relationship Canonical Ownership
+
+Repair方向:
+
+~~~text
+Canonical CONTRADICTS truth
+=
+Knowledge Relationship owner
+
+Knowledge Record
+!= contradiction truth owner
+~~~
+
+RelationshipはExact Knowledge VersionとHistorical availabilityを追跡可能にする。
+
+Relationship Candidate → Assessment → Canonicalization Decision → WriterのAuthority境界も検討する。
+
+---
+
+## 23.17 R3-INT-008 — Unknown Identity / Treatment
+
+Unknown Source / Findingを追跡し、下流はTreatmentを追加する。
+
+~~~text
+Unknown existence
+!= Criticality
+
+Economic Value identifies unknown
+↓
+Candidate Advancement
+accepts / waits / blocks
+↓
+Trade Thesis
+records Accepted Unknown
+~~~
+
+Unknown Reason / Causeも意味上区別する。
+
+---
+
+## 23.18 R3-INT-009 — Dependency / Independence
+
+Repair方向:
+
+~~~text
+Dependency Context
+├─ Dependency Type
+├─ Source Refs
+├─ Materiality
+├─ Known / Unknown
+├─ Independence Basis [when claimed]
+└─ Provenance
+~~~
+
+Independent Convergenceを名乗る場合はIndependence Basis必須。
+
+新専用Layerの追加は保留。
+
+---
+
+## 23.19 R3-INT-010 — Synthesis Result / Decision Thesis
+
+Repair方向:
+
+~~~text
+Decision Synthesis Result
+↓
+Decision Thesis
+↓
+Decision Candidate
+~~~
+
+Decision Thesis Candidateは統一候補として廃止方向。
+
+Synthesis Resultは全体結果、Decision Thesisは個別Market Judgment。
+
+Thesisを別Canonical Objectとして保持する場合、ResultはThesis全文複製ではなくRefを持つ。
+
+---
+
+## 23.20 R3-INT-011 — Candidate Advancement
+
+Repair方向:
+
+~~~text
+PROCEED
+→ Deprecated方向
+
+ADVANCE
+→ Candidate-specific advancement term
+
+Candidate Disposition
+=
+ADVANCE / WAIT / ABSTAIN
+~~~
+
+Advancement Policy / Criteriaは明示・Versioned。
+
+Candidate Advancement logicはPolicy Consumerであり、ad hoc Policy Authorではない。
+
+---
+
+## 23.21 R3-INT-012 — Trade Thesis Revision
+
+Trade Thesisはimmutable reasoning record方向。
+
+~~~text
+TT-101
+↓
+Economic Re-evaluation
+↓
+TT-102
+predecessor = TT-101
+~~~
+
+in-place overwriteは禁止。
+
+Trade Thesis Formation / Adoption / Writer責任も後のRepairで明示する。
+
+---
+
+## 23.22 R3-INT-013 — Knowledge-Use Constraint
+
+Repair方向:
+
+~~~text
+Knowledge-Use Constraint Candidate
+↓
+Constraint Authorization
+↓
+Authorized Knowledge-Use Constraint
+~~~
+
+最低意味:
+
+~~~text
+Target Knowledge Version
+Revision
+Effective Time
+Expiry / Release
+Authority
+Provenance
+~~~
+
+Emergency Knowledge-Use Blockも同じTemporal vocabularyへ接続する。
+
+---
+
+## 23.23 R3-INT-014 — Return Router Common Rule
+
+新しい万能Router Layerは追加しない。
+
+既存Return semanticsをR3共通Ruleへ圧縮する。
+
+~~~text
+Backward Routing
+→ Forward Rebuild
+
+Detection Location
+!= Semantic Authority
+
+Historical Record
+!= Mutable Current State
+~~~
+
+Upstream changeはMaterially dependentな下流だけ再構築する。
+
+Fast Safety pathはSlow semantic reviewを待たない。
+
+---
+
+## 23.24 Repair Packages
+
+14 Issueを個別にバラバラ修正せず、4 Packageへまとめる。
+
+### Repair Package A — Knowledge Foundation
+
+~~~text
+R3-INT-001
+R3-INT-006
+R3-INT-007
+R3-INT-013
+~~~
+
+対象:
+
+~~~text
+Admission
+Knowledge Identity
+Knowledge Record
+Knowledge Version
+Version Lineage
+Knowledge Relationship
+Knowledge-Use Constraint
+~~~
+
+### Repair Package B — Temporal / Reproducibility
+
+~~~text
+R3-INT-002
+R3-INT-003
+~~~
+
+対象:
+
+~~~text
+Temporal vocabulary
+Look-Ahead protection
+Applicability
+Snapshot
+Historical Replay
+exact refs / revisions
+~~~
+
+### Repair Package C — Decision Contract
+
+~~~text
+R3-INT-004
+R3-INT-008
+R3-INT-009
+R3-INT-010
+R3-INT-011
+~~~
+
+対象:
+
+~~~text
+Decision Synthesis
+Decision Thesis
+Decision Candidate
+Unknown
+Dependency
+Candidate Advancement
+~~~
+
+### Repair Package D — Economic / Trade Exit
+
+~~~text
+R3-INT-005
+R3-INT-012
+R3-INT-014
+~~~
+
+対象:
+
+~~~text
+Economic Value Assessment
+Evaluation Availability / Sufficiency
+Trade Thesis revision
+Return Router common rule
+~~~
+
+Repair order:
+
+~~~text
+Package A
+↓
+Package B
+↓
+Package C
+↓
+Package D
+↓
+Adjacent Contract Re-check
+↓
+STEP 8 End-to-End Destruction Test
+~~~
+
+---
+
+## 23.25 Explicit Non-Goals
+
+Checkpoint 016 / Integration Repairでは以下を作らない。
+
+~~~text
+New giant Dependency Layer
+New Unknown architecture layer
+Universal Return Router Service
+DB table design
+Python class design
+API implementation contract
+Exact enum finalization for every axis
+Physical process/server separation
+~~~
+
+現在閉じる範囲:
+
+~~~text
+Meaning
+Ownership
+Authority
+Input / Output Contract
+Version
+As-Of
+Reference
+Lineage
+Current-use validity
+~~~
+
+---
+
+## 23.26 Repair Success Gate
+
+STEP 8へ進む前に最低限:
+
+~~~text
+1. Knowledge semantic truth has one canonical owner.
+
+2. Version / As-Of / Information Availability are historically reproducible.
+
+3. Decision Material Snapshot pins exact decision context and exact revisions.
+
+4. Decision Candidate supplies all semantics Economic Value requires.
+
+5. Economic Value separates economic attractiveness from evaluation sufficiency.
+
+6. Unknown is never silently converted to FALSE / ZERO / 50%.
+
+7. Dependency unknown is never silently promoted to independence.
+
+8. Decision Synthesis Result / Decision Thesis ownership is not duplicated.
+
+9. Trade Thesis re-evaluation never overwrites historical reasoning.
+
+10. Return routing never rewrites history; it routes upstream and rebuilds forward.
+~~~
+
+---
+
+## 23.27 Save / Adoption Boundary
+
+Checkpoint 016として保存するWorking Study:
+
+~~~text
+STEP 1 Canonical Vocabulary Review
+STEP 2 Responsibility / Authority Matrix
+STEP 3 Object Boundary Review
+STEP 4 Forward Handoff Review
+STEP 5 Version / As-Of / Lineage Review
+STEP 6 Unknown / Conflict / Dependency Review
+STEP 7 Backward Return Router Review
+R3 Integration Issue List v0.1
+Repair Package A-D
+Repair Success Gate
+~~~
+
+今回Formal Currentへ昇格しない。
+
+変更しない:
+
+~~~text
+00_AI/AI_CONTEXT.md
+00_HUMAN/HUMAN_MAP.md
+02_ARCHITECTURE/
+~~~
+
+---
+
+## 23.28 Checkpoint Result
+
+Checkpoint 016:
+
+~~~text
+R3 Integration Precision Review
+STEP 1-7
+= COMPLETE
+
+Root Issue Consolidation
+= COMPLETE
+
+Integration Issues
+= 14
+
+CRITICAL
+= 5
+
+HIGH
+= 8
+
+MEDIUM
+= 1
+
+Integration Repair
+= NOT STARTED
+
+Formal Current Architecture
+= UNCHANGED
+
+NEXT
+=
+Repair Package A — Knowledge Foundation
+starting with R3-INT-001
+Knowledge Identity / Knowledge Record / Knowledge Version / Version Lineage
+~~~
+
