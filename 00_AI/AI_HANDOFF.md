@@ -18,93 +18,117 @@ Last Updated:
 Conversation Focus:
 Whole Market Understanding OS Reconstruction.
 Phase 5 R1-R4 concept-level reconstruction exists.
-R3 Knowledge / Decision Preparation detailed recovery now includes Economic Value / Opportunity Evaluation.
+R3 Integration Precision Review STEP 1-7 is now checkpointed.
+Integration Repair has NOT started yet.
 
 WORKFLOW:
 AI_WORKFLOW v0.5.3 Precision-First → Precision Review → Human View workflow is active.
 
 LATEST SAVED CHECKPOINT:
-Checkpoint 015 — R3 Detailed Refinement / Economic Value
+Checkpoint 016 — R3 Integration Precision Review / Issue Consolidation & Repair Plan
 
 PRIMARY:
 98_DESIGN_STUDY/市場理解OS_全体再構築_設計ログ.md
 
-ECONOMIC VALUE WORKING CANDIDATE:
-- Economic Value evaluates a specific Decision Candidate Version, not Knowledge.
-- Candidate Objective and Evaluation Baseline / Reference Context are explicit.
-- Candidate As-Of != Evaluation As-Of.
-- Expected Effect != Expected Economic Value.
-- Current Effect Projection cannot re-decide Applicability or Direction.
-- Monetization Mapping converts Market Effect to Candidate-specific Gross Economic Outcome.
-- Gross Economic Outcome != Net Economic Outcome.
-- Probability != Uncertainty; Unknown Probability != 50%.
-- Evaluation Mode distinguishes Probabilistic / Empirical / Scenario / Stress semantics.
-- Strict Expected Value requires valid probability semantics.
-- Economic Cost refined to Economic Friction & Signed Holding Flow.
-- Fee != Spread != Slippage != Market Impact.
-- Cost coverage / dependency must prevent double count and false independence.
-- Expected Economic Value != Economic Risk Profile.
-- Positive EV != Acceptable Capital Risk.
-- Downside / Tail / Asymmetry / Stress remain visible.
-- Hedge / Insurance may require reference-exposure-relative evaluation.
-- Multiple Candidates are evaluated standalone first, then relatively.
-- Highest EV != Automatic Winner.
-- Global Best Candidate ranking is not Canonical Economic Output.
-- Cross-Candidate Economic Dependency remains visible.
-- Candidate Advancement is Candidate-specific: ADVANCE / WAIT / ABSTAIN.
+CHECKPOINT 016 RESULT:
+- STEP 1 Canonical Vocabulary Review = COMPLETE
+- STEP 2 Responsibility / Authority Matrix = COMPLETE
+- STEP 3 Object Boundary Review = COMPLETE
+- STEP 4 Forward Handoff Review = COMPLETE
+- STEP 5 Version / As-Of / Lineage Review = COMPLETE
+- STEP 6 Unknown / Conflict / Dependency Review = COMPLETE
+- STEP 7 Backward Return Router Review = COMPLETE
+- Root Finding consolidation = COMPLETE
+- Integration Repair = NOT STARTED
+- Formal Current Architecture = UNCHANGED
+
+R3 INTEGRATION ROOT ISSUES:
+CRITICAL = 5
+HIGH = 8
+MEDIUM = 1
+TOTAL = 14
+
+CRITICAL:
+R3-INT-001 Knowledge Record / Version / Identity canonical boundary
+R3-INT-002 R3 temporal contract / look-ahead protection
+R3-INT-003 Decision Material Snapshot contract
+R3-INT-004 Decision Candidate contract backfill
+R3-INT-005 Economic Value Evaluation Availability / Sufficiency
+
+HIGH:
+R3-INT-006 Admission axes / authority
+R3-INT-007 Relationship canonical ownership / version / time
+R3-INT-008 Unknown identity / treatment
+R3-INT-009 Dependency / independence provenance
+R3-INT-010 Synthesis Result / Decision Thesis boundary
+R3-INT-011 Candidate Advancement governance / terminology
+R3-INT-012 Trade Thesis immutable revision
+R3-INT-013 Knowledge-Use Constraint authority / time
+
+MEDIUM:
+R3-INT-014 Backward Return Router common rule
+
+REPAIR PACKAGES:
+A. Knowledge Foundation
+   R3-INT-001 / 006 / 007 / 013
+
+B. Temporal / Reproducibility
+   R3-INT-002 / 003
+
+C. Decision Contract
+   R3-INT-004 / 008 / 009 / 010 / 011
+
+D. Economic / Trade Exit
+   R3-INT-005 / 012 / 014
+
+REPAIR ORDER:
+Package A
+→ Package B
+→ Package C
+→ Package D
+→ Adjacent Contract Re-check
+→ STEP 8 End-to-End Destruction Test
+
+KEY INTEGRATION PRINCIPLES:
+- Canonical semantic fact has one canonical owner.
+- Generate / Assess / Decide / Canonical Write are distinct responsibilities.
+- Semantic Change → New Version.
+- Context Change → New Assessment.
+- Event Time != Information Availability Time != Assessment / Decision Time.
+- Later information != Past Decision Context.
+- Unknown != FALSE != zero != 50%.
+- No known dependency != Proven independence.
+- Decision Synthesis Result != Decision Thesis.
+- Decision Thesis != Decision Candidate.
+- Economic Value Assessment != Candidate Advancement.
 - ADVANCE != Trade / Capital Permission.
-- WAIT requires a re-evaluation trigger.
-- ABSTAIN != Knowledge Refutation.
-- Trade Thesis references exact EVA / Advancement record and preserves Economic Validity Conditions + Accepted Unknowns.
-- R4 Economic Contract governs allowed capital expression.
-- Economic Envelope is a Joint evaluated region, not independent min/max bounds.
-- R4 is Economic Envelope consumer, not author.
-- Capital-only change stays in R4.
-- Economic parameter change routes to Economic Value.
-- Candidate semantic / new composite leg routes to Candidate Formation.
-- Thesis / Knowledge validity change routes to Applicability / Decision Synthesis.
-- R4 → EV re-evaluation creates new immutable lineage; past EVA is not overwritten.
-
-PRECISION REVIEW:
-Economic Value ①〜⑨ survived destruction review after refinements.
-Major refinements:
-A. Objective-relative Evaluation Baseline / Reference Exposure
-B. Joint Economic Envelope
-C. Strict Expected Value vs Scenario-weighted estimate
-D. Economic Friction + Signed Holding Flow
-E. Current Effect Projection authority boundary
-F. Composite protection / new leg → Candidate Formation
-G. Economic Re-evaluation Request / immutable lineage
-H. Potential vs allocative opportunity cost
-I. Cross-Candidate dependency
-J. Objective-specific No-Action / Evaluation Baseline
-
-HUMAN REVIEW:
-Daisuke: 「問題はなそうやな」
-No major conceptual issue found.
-Proceed as Working Candidate.
+- Trade Thesis re-evaluation must not overwrite historical reasoning.
+- Detection location != Semantic Authority.
+- Backward Routing → Forward Rebuild.
+- Fast R4 Safety != Slow Research / Knowledge conclusion.
 
 FORMAL BOUNDARY:
 AI_CONTEXT remains authoritative for Formal Project Current State.
 Formal Current Architecture is unchanged.
-00_HUMAN/HUMAN_MAP.md is not updated yet.
-02_ARCHITECTURE/ is not updated by this checkpoint.
-Human View is saved only as Working Study review projection.
+00_HUMAN/HUMAN_MAP.md is unchanged.
+02_ARCHITECTURE/ is unchanged.
+Checkpoint 016 is Working Study / Repair planning, not formal adoption.
 
 NEXT:
-R3 Integration Precision Review across:
-Admission → Record → Relationship → Graph → Version → Lifecycle → Applicability → Decision Synthesis → Economic Value.
+Repair Package A — Knowledge Foundation.
 
-Review responsibility overlaps, terminology, object boundaries, version/as-of semantics, unknown handling, authority, return routing, and Human View consistency.
-Revise only gaps that survive integration review.
-Then proceed toward Phase 6 Destruction Review.
+FIRST REPAIR TARGET:
+R3-INT-001
+Knowledge Identity / Knowledge Record / Knowledge Version / Version Lineage canonical boundary.
+
+Do not jump directly to DB / Python / tables / classes.
+First close semantic ownership, authority, input/output, version, and lineage.
 
 Git Write Permission Reminder:
 REQUIRE CURRENT-CHAT USER AUTHORIZATION
 ~~~
 
 ---
-
 # 1. ROLE
 
 ```text
