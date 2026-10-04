@@ -16,53 +16,25 @@ Last Updated:
 2026-10-05
 
 Conversation Focus:
-Whole Market Understanding OS Reconstruction
-+
-PROJECT_CHARTER continuation.
+PROJECT_CHARTER continuation after R3 Working Design checkpoint.
 
 WORKFLOW:
 AI_WORKFLOW v0.5.3 Precision-First → Precision Review → Human View workflow is active.
 
 LATEST SAVED WORKING CHECKPOINT:
+PROJECT_CHARTER Section 4 — Survival / Profit Priority
+
+R3 WORKING CHECKPOINT:
 Checkpoint 022 — R3 Full Destruction / Execution Integrity / Formal Adoption Readiness
 
-PRIMARY WORKING STUDY:
-98_DESIGN_STUDY/市場理解OS_全体再構築_設計ログ.md
-
-CHECKPOINT 022 RESULT:
-- R3 Full Destruction unique scenarios = 210
+R3 STATUS:
+- Full Destruction unique scenarios = 210
 - Total destruction executions = 250
-- R3 internal semantic / temporal / concurrency / recovery / replay blocking = NONE
+- Internal semantic / temporal / concurrency / recovery / replay blocking = NONE
 - Overall = PASS WITH CROSS-LAYER HANDOFF REQUIREMENTS
-- Seven execution-integrity / cross-cutting repair families are preserved as Working Design
-- R3 Formal Adoption Candidate = READY
+- Formal Adoption Candidate = READY
 - Formal Adoption = DEFERRED BY PROJECT SEQUENCING
 - Formal Current Architecture = UNCHANGED
-
-R3 CROSS-CUTTING COMPRESSION:
-XC-01 Provenance / Purpose / Dependency Integrity
-XC-02 Current-Use / Temporal Integrity
-XC-03 Return / Coordination / Join Integrity
-XC-04 Canonical Operation / Materialization Integrity
-XC-05 Delivery / Consumer Effect Integrity
-XC-06 Exposure / Safety / Runtime Attribution Integrity
-XC-07 Execution Mode / Recovery / Replay Isolation
-
-R3 FORMAL ADOPTION DESTINATION CANDIDATES:
-04_KNOWLEDGE_APPLICABILITY
-→ Knowledge Identity / Version / Admission / Lifecycle / Applicability / Knowledge-Use Constraint
-
-05_DECISION
-→ Snapshot / Synthesis / Decision Thesis / Candidate / EVA / EAS / Advancement / Trade Thesis
-
-CROSS_CUTTING_MAP
-→ XC-01 ... XC-07
-
-CONNECTION_MAP
-→ master 01 ... 06 connection
-
-PROJECT SEQUENCING BLOCKER:
-00_AI/TEMP_CHARTER_RECONCILIATION_PLAN.md remains active.
 
 PROJECT_CHARTER STATUS:
 Section 1 — Project Mission
@@ -74,60 +46,68 @@ Section 2 — Success Definition
 Section 3 — What Not To Maximize
 = DRAFT / LEADING CANDIDATE SAVED
 
-Section 3 core:
-Not To Maximize
-!= Not To Measure
-!= Not To Improve
-!= Not Important
+Section 4 — Survival / Profit Priority
+= DRAFT / LEADING CANDIDATE SAVED
 
-Do not optimize a single measurable metric at the expense of:
-Project Mission
-Research Integrity
-Knowledge Integrity
-Risk
-Long-Term Survival.
+SECTION 4 CORE:
+Survival
+= Hard Operating Boundary
 
-Core non-maximization targets include:
-Short-Term Profit
-Win Rate
-Prediction Accuracy
-Trade Frequency
-Capital Utilization / Exposure
-Research Count
-Data Amount
-Feature / Metric Count
-Historical / Backtest Performance
-AI / Model Score
-System Complexity
-Automation Percentage
-Publication Reach / User Growth
-Any Single Universal Success Score.
+Profit / Positive Economic Value
+= pursued inside that boundary
 
-Metric Gaming
-= prohibited direction.
+Survival
+!= Zero Risk
 
-FORMAL PROJECT CURRENT DELTA:
-PROJECT_CHARTER Section 3 is now saved.
-Next Charter section is:
-4. Survival / Profit Priority
+Positive EV
+!= automatic Trade / Capital Permission
 
-IMPORTANT NAVIGATION NOTE:
-00_AI/AI_CONTEXT.md was intentionally NOT modified in this save scope.
-It may still display Current Focus = Section 3.
-Treat this HANDOFF as the latest conversation delta until AI_CONTEXT is explicitly synchronized.
+Project-ending / unrecoverable risk
+must not be justified by one opportunity's expected profit alone.
 
-UNCHANGED BY THIS SAVE:
-00_AI/AI_CONTEXT.md
+Recoverability
+is part of Survival.
+
+Capital Survival alone
+!= total OS Survival.
+
+Different Risk Postures may exist,
+but no Mode may bypass the Hard Survival Boundary.
+
+Material Survival-Critical UNKNOWN
+!= SAFE.
+
+Immediate Safety Action
+!= Knowledge Invalidity.
+
+Survival Policy
+does not own Research / Knowledge Truth.
+
+SECTION 4 DETAIL DEFERRED:
+Concrete Risk %, Drawdown Limit, Leverage, Position Size,
+Mode thresholds, Portfolio / Correlation formulas and execution safety implementation
+remain for Section 7 and later detailed design.
+
+PROJECT SEQUENCING:
+00_AI/TEMP_CHARTER_RECONCILIATION_PLAN.md remains active.
+
+CURRENT FORMAL PROJECT FOCUS:
+5. Research Mission
+
+CURRENT NAVIGATION:
+AI_CONTEXT synchronized to Section 5 focus.
+TEMP_CHARTER_RECONCILIATION_PLAN synchronized to Section 5 focus.
+
+UNCHANGED BY THIS CHECKPOINT:
 00_HUMAN/HUMAN_MAP.md
 02_ARCHITECTURE/
 03_RESEARCH
 04_KNOWLEDGE_APPLICABILITY
 
 NEXT:
-1. Re-read saved PROJECT_CHARTER Section 3.
-2. If needed, synchronize AI_CONTEXT current focus without changing Formal Architecture.
-3. Continue PROJECT_CHARTER Section 4 — Survival / Profit Priority.
-4. Do not formally adopt R3 into 02_ARCHITECTURE until Charter Reconciliation sequence permits it.
+1. Re-read PROJECT_CHARTER Sections 1–4 as needed.
+2. Design PROJECT_CHARTER Section 5 — Research Mission.
+3. Do not formally adopt R3 into 02_ARCHITECTURE until Charter Reconciliation sequence permits it.
 
 Git Write Permission Reminder:
 REQUIRE CURRENT-CHAT USER AUTHORIZATION
