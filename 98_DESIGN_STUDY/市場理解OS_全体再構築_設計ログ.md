@@ -19310,3 +19310,1754 @@ R3-INT-004
 Decision Candidate Contract Backfill
 ~~~
 
+---
+
+# 26. Checkpoint 019 — R3 Integration Repair / Package C — Decision Contract & Decision Lineage
+
+**Date:** 2026-10-04  
+**State:** SAVED / WORKING REPAIR CHECKPOINT  
+**Formal Current Architecture Changed:** NO  
+**Phase:** 5 Reconstruction — R3 Integration Repair  
+**Repair Package:** C — Decision Contract  
+**Issues Repaired:** R3-INT-004 / R3-INT-008 / R3-INT-009 / R3-INT-010 / R3-INT-011  
+**Cross-Cutting Addition:** Decision Lineage Contract  
+**Next:** Repair Package D — Economic / Trade Exit, starting with R3-INT-005 Evaluation Availability / Sufficiency.
+
+## 26.1 Package C Purpose
+
+Package Cの目的は、Decision Material SnapshotからTrade Thesis Formation直前までを、Object責任、Unknown、Dependency、Economic Evaluation、Advancement Authority、History / Lineageを混線させず一本のDecision Contractとして閉じること。
+
+Core flow:
+
+~~~text
+Decision Material Snapshot
+↓
+Decision Synthesis Result
+↓
+Decision Thesis
+↓
+Decision Candidate
+↓
+Economic Value Assessment
+↓
+Candidate Advancement Record
+↓
+Trade Thesis Formation
+~~~
+
+このFlowは一対一の一本道ではない。
+
+~~~text
+1 Snapshot
+→ 0 / 1 / multiple Decision Theses
+
+1 Decision Thesis
+→ 0 / 1 / multiple Decision Candidates
+
+1 Decision Candidate
+→ multiple Economic Value Assessments over time
+
+1 Candidate
+→ multiple immutable Advancement Records over time
+
+multiple Candidates
+→ multiple ADVANCE branches may coexist
+~~~
+
+したがってPackage Cは、
+
+> 一本のDecision Lineage Spine + 分岐可能なImmutable DAG
+
+として扱う。
+
+---
+
+## 26.2 R3-INT-004 — Decision Candidate Contract Backfill
+
+Repair Result:
+
+~~~text
+PASS AS WORKING REPAIR
+~~~
+
+Definition:
+
+> Decision Candidateとは、Current-use validなDecision Thesisから導出された、Economic Value評価対象となる具体的かつ意味固定されたAction Option。何を対象に、どのInstrumentで、どのExposure Intent / Objective / Horizonとして評価するかを明示するが、そのEconomic Value、採用、資金量、Executionを決定しない。
+
+Boundary:
+
+~~~text
+Decision Thesis
+= 今の市場について何が言える？
+
+Decision Candidate
+= その市場理解から何をAction Optionとして評価する？
+
+Economic Value
+= そのAction Optionはどんな経済性を持つ？
+~~~
+
+Decision Candidate:
+
+~~~text
+!= Trade Thesis
+!= Candidate Advancement
+!= Capital Permission
+!= Position Size
+!= Order
+!= Execution
+~~~
+
+---
+
+## 26.3 Decision Candidate Logical Contract
+
+Working semantic contract:
+
+~~~text
+Decision Candidate
+│
+├─ Candidate Identity
+├─ Candidate Version
+│
+├─ Decision Thesis Ref(s)
+├─ Decision Context Ref
+│
+├─ Target
+├─ Instrument
+├─ Exposure Intent
+├─ Candidate Objective
+├─ Relevant Horizon
+│
+├─ Evaluation Baseline Specification
+│
+├─ Preconditions
+├─ Candidate-specific Invalidation Refs / Conditions
+├─ Critical Unknown Refs
+│
+├─ Candidate As-Of
+├─ Candidate Available / Materialized At
+│
+└─ Formation / Provenance Trace
+~~~
+
+DB schemaではない。
+
+---
+
+## 26.4 Candidate Identity / Version
+
+Independently coexisting / evaluable Action Options:
+
+~~~text
+→ separate Candidate Identities
+~~~
+
+Same Action Option semantic correction / replacement:
+
+~~~text
+→ same Candidate Identity + new Candidate Version
+~~~
+
+Examples:
+
+~~~text
+Spot Long
+Perp Long
+Long
+Short
+RETURN_SEEKING
+HEDGE
+~~~
+
+は、同時比較可能・独立Action Optionなら別Candidate Identity。
+
+Material semantic changes:
+
+~~~text
+LONG → SHORT
+BTC → ETH
+PERP → SPOT
+15m → 4h
+RETURN_SEEKING → HEDGE
+new instrument leg
+new composite payoff
+~~~
+
+はEconomic Value側で修正しない。
+
+---
+
+## 26.5 Candidate-owned Semantics vs Economic Evaluation Context
+
+Candidate-owned:
+
+~~~text
+Target
+Instrument
+Exposure Intent
+Candidate Objective
+Relevant Horizon
+Evaluation Baseline Specification
+Preconditions
+Candidate Invalidation
+Source Thesis lineage
+Candidate-specific Unknown treatment
+~~~
+
+Economic Evaluation Context-owned:
+
+~~~text
+Actual Reference Exposure Snapshot
+Venue context
+Valuation Basis
+Fee
+Funding
+Carry
+Spread
+Slippage
+Liquidity
+Exact Size / Size Region
+Leverage
+Current Market / Cost Context
+~~~
+
+Important:
+
+~~~text
+Evaluation Baseline Specification
+!= Actual Evaluation Baseline Context Snapshot
+~~~
+
+Candidate semantic is immutable before Economic Evaluation.
+
+---
+
+## 26.6 Candidate Formation Authority
+
+Logical responsibility:
+
+> Decision Candidate Formationは、Current-use validなDecision Thesis / Decision Contextを基に、Economic Valueへ渡すAction Option semanticsを形成・固定する。
+
+Candidate Formation owns Action Option semantics.
+
+It does not own:
+
+~~~text
+Knowledge Truth
+Decision Thesis Truth
+Economic Value
+Economic Risk Profile
+ADVANCE / WAIT / ABSTAIN
+Capital Permission
+Position Size
+Execution
+~~~
+
+Candidate Formation must not silently widen Target / Scope / Horizon beyond source Thesis support.
+
+One Thesis may form zero / one / multiple Candidates.
+
+No viable Action Option:
+
+~~~text
+!= Fake Candidate required
+~~~
+
+---
+
+## 26.7 R3-INT-004 Core Invariants
+
+~~~text
+DC-01 Decision Thesis != Decision Candidate.
+DC-02 Decision Candidate is an Economic Evaluation target, not Trade Permission.
+DC-03 Candidate semantics must be fixed before Economic Evaluation.
+DC-04 Economic Value must not invent missing Candidate semantics.
+DC-05 Candidate must reference exact Decision Thesis lineage.
+DC-06 Candidate Formation must not silently widen Target / Scope / Horizon.
+DC-07 Target != Instrument.
+DC-08 Exposure Intent != Position Size.
+DC-09 Candidate Objective is Candidate semantics.
+DC-10 Different Objective normally implies a different Candidate.
+DC-11 Evaluation Baseline semantics must be explicit.
+DC-12 Baseline Specification != Actual Baseline Context Snapshot.
+DC-13 Mutable Reference Exposure belongs to EVA Context.
+DC-14 Candidate Preconditions != Economic Validity Conditions.
+DC-15 Candidate Invalidation != Knowledge Failure Boundary.
+DC-16 Candidate Invalidation != Trade Thesis Invalidation.
+DC-17 Candidate Invalidation != Economic Validity Condition.
+DC-18 Candidate Critical Unknowns preserve source identity.
+DC-19 Candidate As-Of != Candidate Available At != EVA As-Of.
+DC-20 Immutable Candidate != Forever Current Candidate.
+DC-21 Current-use validity changes must not mutate Candidate semantics.
+DC-22 Economic context change only → New EVA, not Candidate mutation.
+DC-23 Material Action semantic change → New Candidate or New Candidate Version.
+DC-24 Independently evaluable Action Options should be separate Candidate Identities.
+DC-25 Same Action semantic correction may use a new Candidate Version.
+DC-26 One Thesis may form zero / one / multiple Candidates.
+DC-27 No viable Action Option != Fake Candidate required.
+DC-28 INCONCLUSIVE must not silently produce directional Candidate.
+DC-29 Candidate Formation != Economic Value.
+DC-30 Candidate Formation != Candidate Advancement.
+DC-31 Candidate Formation != Capital Permission.
+DC-32 Negative EV != Inverted Candidate.
+DC-33 Positive EV does not authorize Candidate semantic mutation.
+DC-34 Venue change requires New Candidate only if material instrument semantics change.
+DC-35 Size / Leverage / Fee / Funding / Spread / Slippage are normally EVA Context.
+DC-36 New instrument leg / composite payoff requires Candidate Formation.
+DC-37 Economic Value consumes exact Candidate Version.
+DC-38 Incomplete Candidate Contract routes back to Candidate Formation.
+DC-39 Historical Candidate Versions remain immutable.
+DC-40 Candidate Formation / Provenance remains traceable.
+~~~
+
+---
+
+## 26.8 R3-INT-008 — Unknown Identity / Treatment
+
+Repair Result:
+
+~~~text
+PASS AS WORKING REPAIR
+~~~
+
+Core model:
+
+~~~text
+Unknown Source / Finding
++
+Layer-specific Treatment
+~~~
+
+Unknown itself
+!= downstream treatment.
+
+Logical Unknown identity:
+
+~~~text
+Unknown
+│
+├─ Unknown Question / Subject
+├─ Origin Object Ref
+├─ Source Domain / Layer
+├─ Scope
+├─ Relevant Horizon
+├─ Unknown Reason
+├─ As-Of / Availability Context
+└─ Provenance
+~~~
+
+A central new Unknown architecture layer is not required.
+
+---
+
+## 26.9 Unknown Existence vs Criticality
+
+~~~text
+Unknown Existence
+!= Unknown Criticality
+~~~
+
+The same unresolved question can be:
+
+~~~text
+Critical in one Thesis
+Non-material in another Candidate
+Economically material in an EVA
+Accepted under an Advancement Policy
+~~~
+
+Criticality / materiality / acceptance are context-specific Treatments.
+
+Downstream objects should reference the same Unknown source identity rather than copy / redefine the Unknown.
+
+---
+
+## 26.10 Unknown Reasons
+
+Unknown Reason and semantic UNKNOWN are separated.
+
+Candidate reasons may include:
+
+~~~text
+Missing Data
+Stale Data
+Source Conflict
+Insufficient Evidence
+Undefined Semantics
+Model Unavailable
+Probability Not Estimable
+Dependency Unresolved
+Temporal Availability Unknown
+~~~
+
+Exact enum is later work.
+
+Important:
+
+~~~text
+Missing Data
+!= semantic UNKNOWN itself
+
+Missing Data
+may cause
+Condition = UNKNOWN
+~~~
+
+---
+
+## 26.11 Unknown Acceptance / Resolution
+
+Economic Value:
+
+~~~text
+identifies economic relevance of Unknown
+~~~
+
+Candidate Advancement:
+
+~~~text
+under explicit Policy,
+decides whether an Unknown may be accepted for advancement
+~~~
+
+Trade Thesis:
+
+~~~text
+preserves Accepted Unknown refs historically
+~~~
+
+Important:
+
+~~~text
+Accepted Unknown
+!= Resolved Unknown
+!= Ignored Unknown
+!= Low-Risk Truth
+!= Assumed False
+~~~
+
+Later resolution does not rewrite historical Snapshot / Thesis / Advancement / Trade Thesis.
+
+---
+
+## 26.12 R3-INT-008 Core Invariants
+
+~~~text
+UK-01 UNKNOWN != FALSE.
+UK-02 UNKNOWN != ZERO.
+UK-03 UNKNOWN != 50% probability.
+UK-04 Unknown != Uncertainty.
+UK-05 Unknown != Conflict.
+UK-06 Unknown != BLOCKED.
+UK-07 Missing Data != Condition Mismatch.
+UK-08 Unknown Reason != one generic Unknown semantic.
+UK-09 Unknown existence != Criticality.
+UK-10 Criticality is context-relative.
+UK-11 Same unresolved question preserves traceable source identity downstream.
+UK-12 Downstream adds Treatment; it does not redefine source Unknown.
+UK-13 Thesis Critical Unknown is context treatment.
+UK-14 Candidate Critical Unknown is Candidate-specific.
+UK-15 Economic Value evaluates relevance but does not authorize acceptance.
+UK-16 Candidate Advancement owns ADVANCE / WAIT / ABSTAIN treatment under Policy.
+UK-17 Accepted Unknown != Resolved Unknown.
+UK-18 Accepted Unknown != Ignored Unknown.
+UK-19 Trade Thesis preserves Accepted Unknown refs historically.
+UK-20 Later resolution must not rewrite historical Unknown treatment.
+UK-21 Resolution may trigger new Assessment / Snapshot / EVA / Advancement.
+UK-22 WAIT record must not be mutated after Unknown resolution.
+UK-23 Epistemic Unknown != Snapshot Integrity Unknown.
+UK-24 Legitimate epistemic Unknown may exist in valid Snapshot.
+UK-25 Material snapshot integrity unknown may block sealing / use.
+UK-26 Unknown Constraint State != No Constraint.
+UK-27 Unknown Dependency != Independence.
+UK-28 Logical Unknown Identity does not require a new central architecture layer.
+UK-29 Unknown ownership remains with the domain defining the unresolved question.
+UK-30 Historical Unknown remains historically true after later resolution.
+~~~
+
+---
+
+## 26.13 R3-INT-009 — Dependency / Independence Provenance
+
+Repair Result:
+
+~~~text
+PASS AS WORKING REPAIR
+~~~
+
+Core separation:
+
+~~~text
+Semantic Knowledge Relationship
+!= Dependency
+~~~
+
+Canonical provenance / lineage is the source basis.
+
+~~~text
+Provenance Fact
+!= Dependency Assessment
+~~~
+
+Example:
+
+~~~text
+R1 uses D1
+R2 uses D1
+K1 derived from R1
+K2 derived from R2
+~~~
+
+are provenance facts.
+
+Assessment:
+
+~~~text
+K1 / K2 have a material shared-data dependency
+in this Decision Context
+~~~
+
+is contextual.
+
+---
+
+## 26.14 Dependency Dimensions / Scoped Independence
+
+Candidate dimensions include:
+
+~~~text
+Evidence Dependency
+Research / Experiment Lineage Dependency
+Dataset Dependency
+Feature Dependency
+Mechanism Dependency
+Event Dependency
+Model Dependency
+Economic Dependency
+~~~
+
+Exact enum is later work.
+
+Important:
+
+~~~text
+Dependency Existence
+!= Dependency Materiality
+
+Different Dataset
+!= Absolute Independence
+
+No known dependency
+!= Proven independence
+
+No dependency identified
+!= Independence supported
+~~~
+
+Independence must be dimension-scoped.
+
+Independent Convergence requires explicit Independence Basis.
+
+---
+
+## 26.15 Dependency Assessment Contract
+
+Logical candidate:
+
+~~~text
+Dependency Assessment
+│
+├─ Assessment ID
+├─ Context Ref
+├─ Subject Material Refs
+├─ Dependency Dimensions
+├─ Shared Source / Lineage Refs
+├─ Dependency Findings
+├─ Materiality
+├─ Unresolved Dependency Refs
+├─ Independence Basis [if claimed]
+├─ Assessment Policy / Method Ref
+├─ As-Of / Information Cutoff
+└─ Provenance
+~~~
+
+Dependency Assessment does not rewrite canonical provenance.
+
+AI-generated possible dependency
+!= canonical provenance fact.
+
+No giant new Dependency architecture layer is required.
+
+---
+
+## 26.16 Decision Dependency vs Economic Dependency
+
+Decision reasoning dependency:
+
+~~~text
+shared Evidence
+shared Dataset
+shared Research lineage
+shared Feature lineage
+shared Mechanism
+shared Event
+~~~
+
+Cross-Candidate Economic Dependency:
+
+~~~text
+shared underlying
+shared venue
+shared liquidity
+shared funding regime
+shared macro factor
+~~~
+
+Important:
+
+~~~text
+Decision Dependency Context
+!= Cross-Candidate Economic Dependency Context
+~~~
+
+Both remain traceable.
+
+---
+
+## 26.17 R3-INT-009 Core Invariants
+
+~~~text
+DP-01 Semantic Relationship != Dependency.
+DP-02 Canonical provenance is the source basis for dependency assessment.
+DP-03 Dependency Context must not become duplicate universal truth storage.
+DP-04 Provenance Fact != Dependency Assessment.
+DP-05 Dependency Existence != Dependency Materiality.
+DP-06 Dependency preserves type / source / materiality / provenance.
+DP-07 Different Knowledge ID != Independent Evidence.
+DP-08 Different Research ID != Independent Research.
+DP-09 Different Feature Name != Independent Information.
+DP-10 Different Dataset != Absolute Independence.
+DP-11 Multiple observations of one event != multiple independent events.
+DP-12 Shared Dataset != Complete Semantic Duplicate.
+DP-13 Duplicate Knowledge != Duplicate Influence.
+DP-14 Influence Deduplication != Knowledge deletion / merge.
+DP-15 Knowledge Count != Vote Count.
+DP-16 Knowledge Count != Evidence Count.
+DP-17 No known dependency != Proven independence.
+DP-18 No dependency identified != Independence supported.
+DP-19 Dependency unavailable != No Dependency.
+DP-20 Incomplete provenance must not be interpreted as independence.
+DP-21 Independence must be dimension-scoped.
+DP-22 Independence claim requires explicit Independence Basis.
+DP-23 Independence in one dimension != independence in all dimensions.
+DP-24 Independent Convergence != Vote Count.
+DP-25 Independent Convergence != Truth Probability.
+DP-26 Independent Convergence != automatic winner.
+DP-27 Dependency Unknown remains Unknown.
+DP-28 Assessment must not rewrite canonical provenance.
+DP-29 AI possible dependency != canonical provenance fact.
+DP-30 Snapshot pins dependency context available at its cutoff.
+DP-31 Later dependency discovery must not rewrite Past Decision Context.
+DP-32 Synthesis preserves shared dependency instead of independent double count.
+DP-33 Semantic materials may remain separate despite dependent influence.
+DP-34 Thesis may reference Dependency Context without copying full lineage.
+DP-35 Decision Dependency != Cross-Candidate Economic Dependency.
+DP-36 Candidate coexistence != Portfolio independence.
+DP-37 Individual positive EV != independent combined economic value.
+DP-38 Material economic dependency may require Joint Economic Envelope treatment.
+DP-39 Dependency Assessment does not own Advancement / Capital Permission.
+DP-40 Dependency correction creates a new Assessment, not historical mutation.
+~~~
+
+---
+
+## 26.18 R3-INT-010 — Decision Synthesis Result / Decision Thesis Boundary
+
+Repair Result:
+
+~~~text
+PASS AS WORKING REPAIR
+~~~
+
+Canonical flow:
+
+~~~text
+Sealed Decision Material Snapshot
+↓
+Current-Use Validity Gate
+↓
+Decision Synthesis
+↓
+Decision Synthesis Result
+│
+├─ Decision Thesis DT-...
+├─ Decision Thesis DT-...
+└─ Synthesis-wide Findings
+↓
+Decision Candidate Formation
+~~~
+
+Decision Thesis Candidate is deprecated unless a real promotion boundary is introduced later.
+
+~~~text
+Decision Thesis Candidate
+→ deprecated alias / legacy wording
+~~~
+
+---
+
+## 26.19 Decision Synthesis Result
+
+Definition:
+
+> 1つのExact Decision Material SnapshotをDecision Synthesisした一回のImmutableな結果全体。形成されたDecision Thesis群、Synthesis Outcome、Thesis Set Structure、Synthesis-wide Conflict / Unknown / Dependency context、Traceを保持する。
+
+Logical contract:
+
+~~~text
+Decision Synthesis Result
+│
+├─ Result ID
+├─ Exact Decision Material Snapshot Ref
+├─ Decision Context Ref
+│
+├─ Synthesis Outcome
+├─ Thesis Set Structure [if formed]
+├─ Decision Thesis Refs[]
+│
+├─ Synthesis-wide Conflict Refs
+├─ Synthesis-wide Critical Unknown Refs
+├─ Synthesis-wide Dependency Context Refs
+├─ Synthesis Findings / Sufficiency Findings
+│
+├─ Synthesis As-Of
+├─ Synthesis Available At
+├─ Synthesis Policy / Model Ref
+└─ Provenance
+~~~
+
+Synthesis Result owns the whole synthesis event.
+
+Decision Thesis owns one Market Judgment.
+
+Do not duplicate Thesis semantic body inside Synthesis Result.
+
+---
+
+## 26.20 Synthesis Outcome / Thesis Set Structure
+
+Two axes remain separate.
+
+~~~text
+Synthesis Outcome:
+THESIS_FORMED
+INCONCLUSIVE
+~~~
+
+When THESIS_FORMED:
+
+~~~text
+Thesis Set Structure:
+SINGLE
+MULTIPLE_COMPATIBLE
+MULTIPLE_COMPETING
+~~~
+
+Contract:
+
+~~~text
+THESIS_FORMED
+→ one or more Formal Decision Theses
+
+INCONCLUSIVE
+→ zero Formal Decision Theses
+~~~
+
+INCONCLUSIVE is not a fourth Thesis Set Structure.
+
+---
+
+## 26.21 Decision Thesis
+
+Definition:
+
+> 特定Decision Synthesis Result / Snapshot / Decision Contextに基づき、Target / Scope / Relevant Horizonについて形成されたImmutableなCurrent-market Judgment。Supporting / Opposing Material、Boundary、Conflict、Critical Unknown、Dependency、Uncertainty、Source Traceを保持するが、Action、Economic Value、Capital、Executionを決めない。
+
+Logical contract:
+
+~~~text
+Decision Thesis
+│
+├─ Thesis ID
+├─ Decision Synthesis Result Ref
+├─ Decision Material Snapshot Ref
+├─ Decision Context Ref
+│
+├─ Target
+├─ Scope
+├─ Relevant Horizon
+├─ Market Judgment
+│
+├─ Supporting Material Refs
+├─ Opposing Material Refs
+├─ Material Boundary Refs
+├─ Conflict Context Refs
+├─ Critical Unknown Refs
+├─ Dependency Context Refs
+├─ Uncertainty Context
+│
+├─ Thesis As-Of
+├─ Thesis Available At
+├─ Synthesis Policy / Model Ref
+└─ Provenance / Trace
+~~~
+
+Decision Thesis:
+
+~~~text
+!= Directional Signal
+!= Decision Candidate
+!= Trade Thesis
+~~~
+
+Non-directional Thesis is allowed.
+
+---
+
+## 26.22 Decision Thesis Immutability
+
+Decision Thesis is a Snapshot-bound artifact.
+
+Material re-synthesis:
+
+~~~text
+New Snapshot
+↓
+New Synthesis Result
+↓
+New Decision Thesis
+~~~
+
+Do not mutate old Thesis.
+
+Thesis current-use validity is separate from historical integrity.
+
+Supporting / Opposing Material must be ACTIVE INPUT.
+
+TRACE ONLY:
+
+~~~text
+must not provide directional support / opposition
+may affect sufficiency / audit
+~~~
+
+Dependency / Unknown / Conflict treatment remains explicit.
+
+---
+
+## 26.23 R3-INT-010 Core Invariants
+
+~~~text
+DST-01 Decision Synthesis Result != Decision Thesis.
+DST-02 Result owns whole synthesis event; Thesis owns one Market Judgment.
+DST-03 Result references, not duplicates, Thesis bodies.
+DST-04 Decision Thesis Candidate is deprecated without a real promotion boundary.
+DST-05 Decision Synthesis != Canonical Knowledge creation.
+DST-06 Decision Synthesis != Economic Value.
+DST-07 Synthesis Outcome != Thesis Set Structure.
+DST-08 THESIS_FORMED requires at least one Formal Thesis.
+DST-09 INCONCLUSIVE produces no Formal Thesis.
+DST-10 Thesis Set Structure applies only when THESIS_FORMED.
+DST-11 SINGLE / MULTIPLE_COMPATIBLE / MULTIPLE_COMPETING are separate from Outcome.
+DST-12 MULTIPLE_COMPETING != Canonical CONTRADICTS.
+DST-13 CONTRADICTS does not force truth winner.
+DST-14 Decision Thesis is a Snapshot-bound Market Judgment.
+DST-15 Decision Thesis != Directional Signal.
+DST-16 Decision Thesis may be non-directional.
+DST-17 Only ACTIVE INPUT provides formal Thesis support / opposition.
+DST-18 TRACE ONLY must not become directional influence.
+DST-19 TRACE ONLY may affect sufficiency / audit.
+DST-20 Support Count != Vote Count.
+DST-21 Support / Opposition role is Thesis-context-specific.
+DST-22 Dependency Context remains visible in Thesis lineage.
+DST-23 Critical Unknown is context treatment.
+DST-24 Decision Thesis must be source-traceable.
+DST-25 Novel unsupported causal inference must not become Canonical Knowledge via Synthesis.
+DST-26 Novel research-worthy inference routes to R2.
+DST-27 Decision Thesis is immutable.
+DST-28 Material re-synthesis creates a new Thesis.
+DST-29 Thesis As-Of != Thesis Available At.
+DST-30 Later information must not be injected into existing Thesis.
+DST-31 Historical Thesis integrity != current-use validity.
+DST-32 Decision Thesis != Decision Candidate.
+DST-33 Thesis must not own Instrument / Objective / Baseline / Position Size / EV.
+DST-34 One Thesis may form zero / one / multiple Candidates.
+DST-35 Competing Theses must not be silently collapsed into one directional Candidate.
+DST-36 Decision Thesis != Trade Thesis.
+DST-37 Trade Thesis must reference, not rewrite, Decision Thesis.
+DST-38 Synthesis Result pins exact Snapshot / Policy / Model.
+DST-39 Synthesis integrity failure must not appear as valid THESIS_FORMED.
+DST-40 Structurally valid Snapshot may still yield INCONCLUSIVE.
+~~~
+
+---
+
+## 26.24 R3-INT-011 — Candidate Advancement Governance / Terminology
+
+Repair Result:
+
+~~~text
+PASS AS WORKING REPAIR
+~~~
+
+Precision terminology:
+
+~~~text
+PROCEED
+→ deprecated legacy wording
+
+ADVANCE
+→ preferred precision term
+
+Decision Disposition
+→ deprecated ambiguous wording
+
+Candidate Advancement Disposition
+→ ADVANCE / WAIT / ABSTAIN
+~~~
+
+Disposition belongs to an immutable Candidate Advancement Record, not mutable Candidate state.
+
+---
+
+## 26.25 Candidate Advancement Responsibility
+
+Definition:
+
+> 特定のExact Decision Candidate Versionと、そのCandidateに対するCurrent-use validなEconomic Value Assessmentを、明示的かつVersionedなCandidate Advancement Policyの下で評価し、「Trade Thesis Formationへ進める」「条件変化・情報更新を待つ」「今回のCandidate Opportunityを終了する」のいずれかをCandidate-specificに判定する責任。
+
+Core boundary:
+
+~~~text
+Economic Value Assessment
+!= Candidate Advancement
+
+Candidate Advancement
+!= Trade Thesis Formation
+
+ADVANCE
+!= Trade Permission
+
+ADVANCE
+!= Capital Permission
+
+Capital Permission
+!= Execution Permission
+~~~
+
+---
+
+## 26.26 Candidate Advancement Policy Governance
+
+Logical authority:
+
+~~~text
+Candidate Advancement Policy Governance
+↓
+Versioned Candidate Advancement Policy
+↓
+Candidate Advancement Assessment
+↓
+Candidate Advancement Decision
+↓
+Immutable Candidate Advancement Record
+~~~
+
+Policy Governance owns criteria / threshold / Unknown acceptance rules / objective-specific rules.
+
+Advancement logic is a Policy Consumer, not an ad hoc Policy Author.
+
+AI may propose Policy changes but cannot silently activate them.
+
+Policy Version is subject to Package B temporal / historical rules.
+
+---
+
+## 26.27 Advancement Input Contract
+
+Logical inputs:
+
+~~~text
+Exact Decision Candidate Version Ref
+Candidate Current-Use Validity Ref
+Exact Economic Value Assessment Ref
+EVA Current-Use Validity Ref
+Evaluation Availability / Sufficiency Ref
+Optional Relative Economic Comparison Ref
+Candidate Objective
+Critical Unknown Refs / Treatments
+Economic Validity Condition Refs
+Joint Economic Envelope Ref [if material]
+Candidate Advancement Policy Ref
+Advancement As-Of
+Information Cutoff
+Provenance
+~~~
+
+Candidate Advancement must not:
+
+~~~text
+repair missing Candidate semantics
+author Economic Value
+invent probability
+rewrite EVA
+silently invent advancement thresholds
+~~~
+
+---
+
+## 26.28 ADVANCE / WAIT / ABSTAIN
+
+ADVANCE:
+
+> Current Candidate / EVA / Policy basis permits progression to Trade Thesis Formation.
+
+~~~text
+ADVANCE
+!= Trade permission
+!= Global Candidate winner
+~~~
+
+0 / 1 / multiple Candidates may ADVANCE.
+
+WAIT:
+
+> Opportunity remains live, but current conditions do not support advancement; a specific future change / information should trigger re-evaluation.
+
+WAIT requires:
+
+~~~text
+Re-evaluation Trigger
+Re-evaluation Route
+and when needed
+Expiry / Deadline relative to Candidate Horizon
+~~~
+
+WAIT:
+
+~~~text
+!= generic Error Bucket
+!= R4 HOLD
+!= Candidate invalidation
+~~~
+
+ABSTAIN:
+
+> Current Candidate Opportunity is closed under the present Candidate / EVA / Policy context.
+
+ABSTAIN:
+
+~~~text
+!= Knowledge Refutation
+!= Decision Thesis Refutation
+!= Candidate Deletion
+!= Candidate Invalidation
+!= Permanent Ban
+~~~
+
+NO-TRADE remains a derived human outcome, not a canonical Advancement state.
+
+---
+
+## 26.29 Unknown Acceptance in Advancement
+
+Economic Value:
+
+~~~text
+identifies economic relevance of Unknown
+~~~
+
+Candidate Advancement:
+
+~~~text
+under explicit Policy,
+decides advancement-scope acceptance
+~~~
+
+Trade Thesis:
+
+~~~text
+preserves Accepted Unknown refs
+~~~
+
+Accepted Unknown:
+
+~~~text
+!= Resolved Unknown
+~~~
+
+Accepted Unknown does not bind R4 to grant Capital Permission.
+
+---
+
+## 26.30 Candidate Advancement Record
+
+Logical contract:
+
+~~~text
+Candidate Advancement Record
+│
+├─ Advancement Record ID
+├─ Exact Decision Candidate Version Ref
+├─ Candidate Current-Use Validity Ref
+│
+├─ Exact Economic Value Assessment Ref
+├─ EVA Current-Use Validity Ref
+├─ Evaluation Availability / Sufficiency Ref
+├─ Optional Relative Economic Comparison Ref
+│
+├─ Candidate Advancement Policy Ref
+├─ Candidate Advancement Disposition
+│   ├─ ADVANCE
+│   ├─ WAIT
+│   └─ ABSTAIN
+│
+├─ Advancement Basis Refs
+├─ Critical Unknown Treatment Refs
+├─ Accepted Unknown Refs [ADVANCE]
+├─ Economic Validity Condition Refs
+│
+├─ Advancement As-Of
+├─ Information Cutoff
+├─ Record Available At
+│
+├─ WAIT Trigger / Route / Expiry [WAIT]
+├─ ABSTAIN Reason / Closure Scope [ABSTAIN]
+├─ Predecessor / Related Advancement Ref [if re-evaluated]
+└─ Provenance
+~~~
+
+Record is immutable.
+
+Immutable ADVANCE Record
+!= forever-current Advancement.
+
+Trade Thesis Formation rechecks current-use validity.
+
+---
+
+## 26.31 R3-INT-011 Core Invariants
+
+~~~text
+CA-01 Economic Value Assessment != Candidate Advancement.
+CA-02 Candidate Advancement != Trade Thesis Formation.
+CA-03 ADVANCE != Trade Permission.
+CA-04 ADVANCE != Capital Permission.
+CA-05 Capital Permission != Execution Permission.
+CA-06 PROCEED is deprecated; ADVANCE is preferred.
+CA-07 Decision Disposition is deprecated as ambiguous.
+CA-08 Candidate Advancement Disposition = ADVANCE / WAIT / ABSTAIN.
+CA-09 Disposition belongs to immutable Advancement Record.
+CA-10 Positive EV != Automatic ADVANCE.
+CA-11 Negative Standalone EV != Automatic ABSTAIN for Hedge / Insurance.
+CA-12 Advancement Policy must be explicit / versioned.
+CA-13 Advancement logic is a Policy Consumer, not ad hoc Policy Author.
+CA-14 AI may propose but not silently activate Policy changes.
+CA-15 Objective may require objective-specific criteria.
+CA-16 Advancement consumes exact Candidate Version.
+CA-17 Advancement consumes exact current-use valid EVA.
+CA-18 Advancement must not repair Candidate semantics.
+CA-19 Advancement must not author Economic estimates.
+CA-20 Candidate Contract Failure != WAIT.
+CA-21 EVA Integrity Failure != WAIT.
+CA-22 WAIT != Error Bucket.
+CA-23 ADVANCE authorizes Trade Thesis Formation only.
+CA-24 Multiple Candidates may simultaneously ADVANCE.
+CA-25 ADVANCE != Global Winner.
+CA-26 WAIT is a live but temporarily non-advancing Opportunity.
+CA-27 WAIT requires identifiable Trigger.
+CA-28 WAIT preserves an appropriate Re-evaluation Route.
+CA-29 WAIT may require Expiry relative to Candidate Horizon.
+CA-30 WAIT Record must not be mutated into ADVANCE.
+CA-31 WAIT Trigger creates new evaluation / advancement lineage.
+CA-32 WAIT != R4 HOLD.
+CA-33 ABSTAIN closes current Opportunity, not Knowledge / Candidate identity.
+CA-34 ABSTAIN != Knowledge Refutation.
+CA-35 ABSTAIN != Decision Thesis Refutation.
+CA-36 ABSTAIN != Candidate Deletion.
+CA-37 ABSTAIN != Permanent Ban.
+CA-38 ABSTAIN != Candidate Invalidation.
+CA-39 NO-TRADE is derived, not canonical Advancement state.
+CA-40 Unknown Identification != Unknown Acceptance.
+CA-41 Candidate Advancement owns advancement-scope acceptance under Policy.
+CA-42 Accepted Unknown != Resolved Unknown.
+CA-43 Accepted Unknown does not bind R4.
+CA-44 Advancement Record pins exact Policy Version.
+CA-45 Later Policy must not rewrite historical Advancement.
+CA-46 Advancement Basis references upstream findings; it does not duplicate truth.
+CA-47 Advancement Record is immutable.
+CA-48 Immutable ADVANCE != forever-current Advancement.
+CA-49 Current-use loss must not mutate historical Disposition.
+CA-50 Post-ADVANCE material change routes to new Assessment / Evaluation.
+CA-51 Trade Thesis Formation references exact Advancement Record.
+CA-52 Trade Thesis Formation does not re-decide Advancement.
+CA-53 R4 BLOCK != Candidate Advancement Failure.
+CA-54 R4 BLOCK != Economic Invalidity.
+CA-55 Relative Comparison informs Advancement only under explicit Policy.
+CA-56 Relative Comparison does not create universal Global Ranking.
+CA-57 Candidate coexistence != Independent Opportunity.
+CA-58 Dependency Context remains visible downstream.
+CA-59 Evaluation Availability / Sufficiency is explicit input.
+CA-60 Evaluation insufficiency != Automatic WAIT.
+CA-61 Invalid Advancement Input Contract must not be forced into a Disposition.
+CA-62 Advancement Integrity Failure != Advancement Disposition.
+CA-63 Policy Governance != Candidate-specific Decision.
+CA-64 Advancement Assessment != Policy Authoring.
+CA-65 Advancement Decision remains traceable to Candidate / EVA / Policy / As-Of.
+CA-66 Historical Advancement reasoning remains reproducible.
+~~~
+
+---
+
+## 26.32 Decision Lineage Contract
+
+Decision Lineage is a cross-cutting trace contract, not a new architecture layer.
+
+Definition:
+
+> Decision Lineageとは、1つのDecision Contextから派生したDecision Material Snapshot、Decision Synthesis Result、Decision Thesis、Decision Candidate、Economic Value Assessment、Candidate Advancement Record、Trade Thesisへ至るReason / Evidence / Evaluationの系譜を、各Immutable ArtifactのExact Referenceによって追跡可能にした横断Lineage。
+
+Decision Lineage:
+
+~~~text
+!= Canonical Truth Owner
+!= New Decision Engine
+!= Governance Authority
+!= New R3 Layer
+~~~
+
+---
+
+## 26.33 Decision Lineage Root / Branching
+
+Root:
+
+~~~text
+Decision Context
+~~~
+
+Example:
+
+~~~text
+Decision Lineage DL-001
+│
+├─ Decision Context DCX-001
+├─ Snapshot S-001
+├─ Synthesis Result SR-001
+├─ Thesis
+│   ├─ DT-001
+│   └─ DT-002
+├─ Candidate
+│   ├─ CAN-001@v1
+│   ├─ CAN-002@v1
+│   └─ CAN-003@v1
+├─ EVA
+│   ├─ EVA-001
+│   ├─ EVA-002
+│   └─ EVA-003
+├─ Advancement
+│   ├─ AR-001 ADVANCE
+│   ├─ AR-002 WAIT
+│   └─ AR-003 ABSTAIN
+└─ Trade Thesis
+    └─ TT-001
+~~~
+
+Branching is normal.
+
+Branch count
+!= Vote Count.
+
+---
+
+## 26.34 Exact Artifact References vs Decision Lineage ID
+
+Canonical lineage truth is established by exact artifact references.
+
+~~~text
+Exact Parent / Source Refs
+=
+canonical lineage basis
+~~~
+
+A Decision Lineage ID may be used as a correlation / traversal key.
+
+~~~text
+Decision Lineage ID
+!= sole source of lineage truth
+!= authority
+~~~
+
+Lineage ID alone is insufficient to know which Thesis / Candidate / EVA materially caused a downstream artifact.
+
+---
+
+## 26.35 Forward Contract Pattern
+
+Each R3 stage should expose:
+
+~~~text
+INPUT
+PROCESS
+OUTPUT
+GATE
+RETURN
+~~~
+
+Example:
+
+Decision Candidate:
+
+~~~text
+INPUT
+Decision Thesis
+
+PROCESS
+Action Option Formation
+
+OUTPUT
+Decision Candidate
+
+GATE
+Candidate Contract Completeness
+
+RETURN
+Thesis support insufficient
+→ Decision Synthesis
+~~~
+
+Economic Value:
+
+~~~text
+INPUT
+Exact Decision Candidate Version
+
+PROCESS
+Economic Evaluation
+
+OUTPUT
+Economic Value Assessment
+
+GATE
+Evaluation Availability / Sufficiency
+
+RETURN
+Candidate semantics incomplete
+→ Candidate Formation
+~~~
+
+This pattern supports explicit Return Router design later.
+
+---
+
+## 26.36 Unknown Carry-Forward Rule
+
+Package C cross-check clarification:
+
+~~~text
+PC-HO-001
+Material Unknown must be carried forward
+by exact reference
+or explicitly treated as non-material
+for the downstream artifact.
+~~~
+
+Unknown must not silently disappear between Thesis / Candidate / EVA / Advancement / Trade Thesis.
+
+---
+
+## 26.37 Candidate Branch Termination
+
+Package C cross-check clarification:
+
+~~~text
+PC-HO-002
+Candidate-branch termination
+!= Decision-Lineage termination.
+~~~
+
+ABSTAIN of one Candidate does not end sibling Candidate branches.
+
+INCONCLUSIVE may end the lineage before Candidate Formation.
+
+No Candidate is also a valid stopping point.
+
+---
+
+## 26.38 Canonical Lineage Basis
+
+Package C cross-check clarification:
+
+~~~text
+PC-HO-003
+Exact Artifact Refs are the canonical lineage basis.
+
+Decision Lineage ID
+is a correlation / traversal aid.
+~~~
+
+---
+
+## 26.39 Artifact-specific Current-Use Validity
+
+Package C cross-check clarification:
+
+~~~text
+PC-HO-004
+Decision Lineage has no single universal Current-Use Validity state.
+~~~
+
+Validity may differ for:
+
+~~~text
+Snapshot
+Decision Thesis
+Decision Candidate
+Economic Value Assessment
+Candidate Advancement
+Trade Thesis
+~~~
+
+Lineage-level VALID / STALE shown in UI may be derived only.
+
+---
+
+## 26.40 Temporal Integrity of Lineage Edges
+
+Package C cross-check clarification:
+
+~~~text
+PC-HO-005
+For every material lineage edge:
+
+required upstream artifact
+must be available
+before downstream use / evaluation cutoff.
+~~~
+
+Example:
+
+~~~text
+Candidate Available At = 10:00:06
+
+EVA cannot validly use that Candidate
+at 10:00:04.
+~~~
+
+Downstream cannot use a future upstream artifact.
+
+---
+
+## 26.41 Original Decision Lineage vs Retrospective Analysis
+
+Package C cross-check clarification:
+
+~~~text
+PC-HO-006
+Retrospective / Counterfactual artifacts
+must not masquerade as descendants
+of the Original Decision Lineage.
+~~~
+
+Original lineage uses then-available Data / Policy / Model / Knowledge.
+
+Later retrospective analysis remains a separate analysis lineage / explicitly retrospective branch.
+
+---
+
+## 26.42 Decision Lineage Common Invariants
+
+~~~text
+PC-01 Every downstream artifact references exact upstream artifact(s) materially relied upon.
+PC-02 Downstream does not redefine upstream canonical truth.
+PC-03 Decision Lineage may branch.
+PC-04 Branch count != Vote Count.
+PC-05 One Thesis may produce zero / one / multiple Candidates.
+PC-06 One Candidate may have multiple EVA / Advancement descendants over time.
+PC-07 WAIT re-evaluation creates new descendant lineage, not mutable disposition.
+PC-08 ABSTAIN closes one Candidate branch, not whole Decision Lineage.
+PC-09 Multiple ADVANCE branches may coexist.
+PC-10 Unknown source identity remains traceable until later resolution.
+PC-11 Material Unknown must not silently disappear between stages.
+PC-12 Dependency remains visible; dependent support must not become independent influence.
+PC-13 Decision Dependency != Economic Dependency.
+PC-14 Candidate semantics are fixed before EVA.
+PC-15 Economic Value must not mutate Candidate semantics.
+PC-16 Candidate Advancement must not mutate Economic Assessment.
+PC-17 Trade Thesis Formation must not re-decide Candidate Advancement.
+PC-18 Each material artifact preserves As-Of / Available-At semantics.
+PC-19 Downstream artifact cannot precede availability of required upstream artifact.
+PC-20 Historical artifacts are immutable.
+PC-21 Material upstream change creates new descendant artifacts / branches.
+PC-22 Current-Use Validity is artifact-specific, not one Lineage state.
+PC-23 Decision Lineage ID is not a truth owner.
+PC-24 Exact Parent / Source refs define canonical lineage.
+PC-25 Original Decision Lineage != Retrospective Analysis Lineage.
+PC-26 Normal termination before Trade Thesis is valid.
+PC-27 NO-TRADE is a derived human outcome, not canonical lineage state.
+PC-28 Every Trade Thesis must trace back to an exact Decision Material Snapshot.
+~~~
+
+---
+
+## 26.43 Package C End-to-End Contract
+
+~~~text
+Decision Context
+↓
+Decision Material Snapshot
+  - exact decision input boundary
+  - temporal / no-look-ahead integrity
+↓
+Current-Use Validity Gate
+↓
+Decision Synthesis
+↓
+Decision Synthesis Result
+  - synthesis-wide outcome / structure
+↓
+Decision Thesis
+  - immutable Market Judgment
+↓
+Decision Candidate Formation
+↓
+Decision Candidate
+  - immutable Action Option semantics
+↓
+Candidate Current-Use Validity Gate
+↓
+Economic Value Assessment
+  - candidate-specific economics
+↓
+Evaluation Availability / Sufficiency
+↓
+Candidate Advancement
+  - policy-governed ADVANCE / WAIT / ABSTAIN
+↓
+ADVANCE only
+Trade Thesis Formation
+~~~
+
+Trade Thesis Formation details are completed in Package D.
+
+---
+
+## 26.44 Package C Cross Check
+
+Cross-check dimensions:
+
+~~~text
+Object Ownership
+Unknown Continuity
+Dependency Continuity
+Decision Thesis / Candidate Boundary
+Candidate / EVA Boundary
+EVA / Advancement Boundary
+Advancement / Trade Thesis Formation Boundary
+Branching Model
+Temporal / Availability Integrity
+Historical Immutability
+Decision Lineage Traceability
+~~~
+
+Result:
+
+~~~text
+Object Ownership
+= PASS
+
+Unknown Continuity
+= PASS
+
+Dependency Continuity
+= PASS
+
+Decision Thesis / Candidate Boundary
+= PASS
+
+Candidate / EVA Boundary
+= PASS
+
+EVA / Advancement Boundary
+= PASS
+
+Advancement / Trade Thesis Formation Boundary
+= PASS
+
+Branching Model
+= PASS
+
+Temporal / Availability Integrity
+= PASS
+
+Historical Immutability
+= PASS
+
+Decision Lineage Traceability
+= PASS
+
+Blocking Issue
+= NONE
+~~~
+
+---
+
+## 26.45 Package D Cross-Package Dependencies
+
+Package C is closed, but three repair items remain intentionally in Package D.
+
+### CPD-001 — R3-INT-005
+
+~~~text
+Economic Value Assessment
+→ Evaluation Availability / Sufficiency
+~~~
+
+Candidate Advancement consumes this as explicit input.
+
+Detailed semantics remain Package D work.
+
+Non-blocking for Package C.
+
+### CPD-002 — R3-INT-012
+
+~~~text
+ADVANCE
+→ Trade Thesis Formation
+→ immutable Trade Thesis revision / adoption
+~~~
+
+Package C closes the handoff to Trade Thesis Formation.
+
+Trade Thesis revision / adoption / writer semantics remain Package D.
+
+Non-blocking for Package C.
+
+### CPD-003 — R3-INT-014
+
+~~~text
+Backward Return Router Common Rule
+~~~
+
+Package C defines stage-specific Return expectations.
+
+The shared common router / loop rule remains Package D.
+
+Non-blocking for Package C.
+
+---
+
+## 26.46 Save / Adoption Boundary
+
+Checkpoint 019 saves Package C and Decision Lineage Contract as Working Repair only.
+
+Formal Current remains unchanged.
+
+Do not modify:
+
+~~~text
+00_AI/AI_CONTEXT.md
+00_HUMAN/HUMAN_MAP.md
+02_ARCHITECTURE/
+~~~
+
+Still not decided here:
+
+~~~text
+DB tables
+Python classes
+physical Decision Lineage storage
+central vs distributed lineage index
+final enum names
+final exact field names
+runtime process topology
+final fail-open / fail-closed implementation
+~~~
+
+---
+
+## 26.47 Checkpoint Result
+
+~~~text
+Checkpoint 019
+R3 Integration Repair
+Package C — Decision Contract
+= SAVED WORKING REPAIR
+
+R3-INT-004
+Decision Candidate Contract
+= REPAIRED / WORKING
+
+R3-INT-008
+Unknown Identity / Treatment
+= REPAIRED / WORKING
+
+R3-INT-009
+Dependency / Independence Provenance
+= REPAIRED / WORKING
+
+R3-INT-010
+Decision Synthesis Result / Decision Thesis Boundary
+= REPAIRED / WORKING
+
+R3-INT-011
+Candidate Advancement Governance / Terminology
+= REPAIRED / WORKING
+
+Decision Lineage Contract
+= ADDED / WORKING
+
+Package C Cross Check
+= PASS
+
+PC-HO-001
+Material Unknown carry-forward or explicit non-material treatment
+= CLARIFIED
+
+PC-HO-002
+Candidate branch termination != Decision Lineage termination
+= CLARIFIED
+
+PC-HO-003
+Exact Artifact Refs are canonical lineage basis
+= CLARIFIED
+
+PC-HO-004
+Current-Use Validity is artifact-specific
+= CLARIFIED
+
+PC-HO-005
+Downstream cannot use future upstream artifact
+= CLARIFIED
+
+PC-HO-006
+Retrospective artifacts != Original Decision Lineage descendants
+= CLARIFIED
+
+Blocking Issue
+= NONE
+
+Formal Current Architecture
+= UNCHANGED
+
+NEXT
+=
+Repair Package D — Economic / Trade Exit
+
+FIRST TARGET
+=
+R3-INT-005
+Evaluation Availability / Sufficiency
+~~~
+
