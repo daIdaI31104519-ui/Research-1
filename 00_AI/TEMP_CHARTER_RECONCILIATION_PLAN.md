@@ -136,8 +136,14 @@ Section 1 Project Mission
 Section 2 Success Definition
 = DRAFT / LEADING CANDIDATE 保存済み
 
+Section 3 What Not To Maximize
+= DRAFT / LEADING CANDIDATE 保存済み
+
+Section 4 Survival / Profit Priority
+= DRAFT / LEADING CANDIDATE 保存済み
+
 Current Focus
-= 3. What Not To Maximize
+= 5. Research Mission
 ```
 
 ---
@@ -250,7 +256,9 @@ CURRENT DRAFT
 00_HUMAN/PROJECT_CHARTER.md
 = Section 1 Project Mission保存済み
 = Section 2 Success Definition保存済み
-= 現在はSection 3 What Not To Maximizeを設計する
+= Section 3 What Not To Maximize保存済み
+= Section 4 Survival / Profit Priority保存済み
+= 現在はSection 5 Research Missionを設計する
 
 HIGH IMPACT
 00_HUMAN/HUMAN_MAP.md
@@ -287,7 +295,9 @@ STEP 1
 PROJECT_CHARTER v0.1 Draft
 - Section 1 Project Mission = 保存済み
 - Section 2 Success Definition = 保存済み
-- Current = Section 3 What Not To Maximize
+- Section 3 What Not To Maximize = 保存済み
+- Section 4 Survival / Profit Priority = 保存済み
+- Current = Section 5 Research Mission
 
 STEP 2
 PROJECT_CHARTER Cross Check
