@@ -17,176 +17,151 @@ Last Updated:
 
 Conversation Focus:
 Whole Market Understanding OS Reconstruction.
-R3 Integration Repair is active.
-Packages A, B and C are checkpointed.
-Package D — Economic / Trade Exit is next.
+R3 Integration Repair Packages A-D are checkpointed.
+Next is Adjacent Contract Recheck → STEP 8 Destruction Test → R3 Integration Final Review.
 
 WORKFLOW:
 AI_WORKFLOW v0.5.3 Precision-First → Precision Review → Human View workflow is active.
 
 LATEST SAVED CHECKPOINT:
-Checkpoint 019 — R3 Integration Repair / Package C — Decision Contract & Decision Lineage
+Checkpoint 020 — R3 Integration Repair / Package D — Economic / Trade Exit & Backward Return Router
 
 PRIMARY:
 98_DESIGN_STUDY/市場理解OS_全体再構築_設計ログ.md
 
-CHECKPOINT 019 RESULT:
-- R3-INT-004 Decision Candidate Contract = REPAIRED / WORKING
-- R3-INT-008 Unknown Identity / Treatment = REPAIRED / WORKING
-- R3-INT-009 Dependency / Independence Provenance = REPAIRED / WORKING
-- R3-INT-010 Decision Synthesis Result / Decision Thesis Boundary = REPAIRED / WORKING
-- R3-INT-011 Candidate Advancement Governance / Terminology = REPAIRED / WORKING
-- Decision Lineage Contract = ADDED / WORKING
-- Package C Cross Check = PASS
+CHECKPOINT 020 RESULT:
+- R3-INT-005 Evaluation Availability / Sufficiency = REPAIRED / WORKING
+- R3-INT-012 Trade Thesis Revision / Adoption / Immutability = REPAIRED / WORKING
+- R3-INT-014 Backward Return Router Common Rule = REPAIRED / WORKING
+- Package D Cross Check = PASS
 - Blocking Issue = NONE
 - Formal Current Architecture = UNCHANGED
 
-PACKAGE C CORE FLOW:
-Decision Material Snapshot
-→ Decision Synthesis Result
-→ Decision Thesis
-→ Decision Candidate
-→ Economic Value Assessment
-→ Candidate Advancement Record
-→ Trade Thesis Formation.
+R3-INT-005 CORE:
+Evaluation Integrity
+!= Evaluation Availability
+!= Evaluation Coverage
+!= Evaluation Sufficiency
+!= Economic Attractiveness
+!= Candidate Advancement.
 
-This is not a one-to-one pipeline.
-It is a branching immutable Decision Lineage DAG.
+Valid Partial EVA
+!= Invalid EVA.
 
-R3-INT-004 CORE:
-Decision Candidate
-= meaning-fixed Action Option evaluated by Economic Value.
+Strict Expected EV unavailable
+does not invalidate Scenario / Stress evaluation.
 
-Candidate semantics include:
-Target / Instrument / Exposure Intent / Objective / Horizon /
-Evaluation Baseline Specification / Preconditions /
-Candidate Invalidation / Critical Unknown refs /
-Decision Thesis lineage / Decision Context.
+Missing / Unknown values must not become ZERO / 50%.
 
-Candidate semantics
-!= EVA Context.
+Evaluation Sufficiency is relative to an explicit Versioned Evaluation Requirement Profile.
 
-Economic Value must not repair / invent missing Candidate semantics.
+Coverage count / percentage
+!= Sufficiency.
 
-R3-INT-008 CORE:
-Unknown Source / Finding
-!= downstream Treatment.
+Sufficient
+!= ADVANCE.
 
-Unknown existence
-!= Criticality.
+Insufficient
+!= automatic WAIT / ABSTAIN.
 
-UNKNOWN
-!= FALSE / ZERO / 50%.
+R3-INT-012 CORE:
+Trade Thesis
+= immutable Trade-specific Reasoning Artifact submitted to R4.
 
-Accepted Unknown
-!= Resolved Unknown.
+Trade Thesis Formation
+!= Adoption
+!= Materialization
+!= Capital Permission
+!= Position Activation.
 
-Downstream layers preserve source Unknown identity.
+Authority chain:
+ADVANCE Record
+→ Formation
+→ Formation Result
+→ Adoption Assessment
+→ Adoption Authorization
+→ Writer
+→ Immutable Trade Thesis.
 
-R3-INT-009 CORE:
-Semantic Relationship
-!= Dependency.
+Trade Thesis revision
+= new immutable artifact with predecessor lineage,
+not in-place mutation.
 
-Provenance Fact
-!= Dependency Assessment.
+R4 uses exact Trade Thesis refs.
 
-No known dependency
-!= Proven independence.
+No Fill
+→ no Active Runtime Assumption Set.
 
-Independence is dimension-scoped and requires explicit Independence Basis.
+Trade Thesis Invalidation
+!= automatic EXIT.
 
-Decision Dependency
-!= Cross-Candidate Economic Dependency.
+R3-INT-014 CORE:
+Backward Return routing is based on
+what meaning changed,
+not where the issue was detected.
 
-R3-INT-010 CORE:
-Decision Synthesis Result
-= one whole synthesis event.
+Nearest semantic owner rule:
+Capital-only
+→ R4.
 
-Decision Thesis
-= one immutable Snapshot-bound Market Judgment.
+Economic change
+→ EVA / EAS.
 
-Decision Thesis Candidate
-= deprecated unless a real promotion boundary is later introduced.
+Candidate semantic / composite change
+→ Candidate Formation.
 
-THESIS_FORMED
-→ one or more Formal Theses.
+Decision input / Thesis change
+→ new Snapshot / Decision Synthesis.
 
-INCONCLUSIVE
-→ zero Formal Theses.
+Knowledge applicability / use change
+→ Applicability / Constraint / Lifecycle owner
+→ new Snapshot / Synthesis.
 
-Synthesis Outcome
-!= Thesis Set Structure.
+Knowledge validity / novel causal question
+→ R2 Research / Validation path.
 
-R3-INT-011 CORE:
-PROCEED
-→ deprecated.
+Data / Temporal / Integrity defect
+→ owner of the broken source / contract.
 
-ADVANCE
-= preferred Candidate Advancement term.
+Return routing:
+does not rewrite history,
+does not globally rebuild,
+and rebuilds only materially dependent descendants.
 
-Candidate Advancement Disposition:
-ADVANCE / WAIT / ABSTAIN.
+Actual Exposure safety may trigger:
+Fast R4 / Runtime Safety
++
+Slow semantic / research repair
+in parallel.
 
-Disposition belongs to immutable Candidate Advancement Record,
-not mutable Candidate state.
+Fast Safety
+!= Semantic Repair
+!= Knowledge Retirement.
 
-Candidate Advancement Policy must be explicit / versioned.
+PACKAGE D CLARIFICATIONS:
+PD-HO-001 Valid Partial EVA != Invalid EVA.
+PD-HO-002 Sufficiency is Requirement-Profile relative.
+PD-HO-003 Formation != Adoption != Materialization.
+PD-HO-004 Return to nearest semantic owner.
+PD-HO-005 Fast Safety may run parallel with slow repair.
+PD-HO-006 Return routing never rewrites history.
 
-Positive EV != Automatic ADVANCE.
-Negative Standalone EV != Automatic ABSTAIN for Hedge / Insurance.
-
-WAIT requires Re-evaluation Trigger + Route.
-WAIT != R4 HOLD.
-ABSTAIN != Knowledge / Thesis refutation.
-ADVANCE != Trade Permission / Capital Permission.
-
-DECISION LINEAGE:
-Decision Lineage is a cross-cutting trace concept,
-not a new R3 layer or truth owner.
-
-Exact Parent / Source Artifact refs
-= canonical lineage basis.
-
-Decision Lineage ID
-= correlation / traversal aid only.
-
-Decision Lineage may branch.
-
-Historical artifacts are immutable.
-
-Current-use validity is artifact-specific,
-not one universal Lineage state.
-
-Material Unknown must be carried forward by exact ref
-or explicitly treated as non-material.
-
-Downstream cannot use a required upstream artifact
-before that artifact became available.
-
-Retrospective / Counterfactual artifacts
-must not masquerade as Original Decision Lineage descendants.
-
-PACKAGE D CROSS-PACKAGE DEPENDENCIES:
-R3-INT-005
-Evaluation Availability / Sufficiency.
-
-R3-INT-012
-Trade Thesis immutable revision / adoption.
-
-R3-INT-014
-Backward Return Router common rule.
+R3 REPAIR STATUS:
+Package A = checkpointed.
+Package B = checkpointed.
+Package C = checkpointed.
+Package D = checkpointed.
 
 FORMAL BOUNDARY:
 AI_CONTEXT remains authoritative for Formal Project Current State.
 00_HUMAN/HUMAN_MAP.md unchanged.
 02_ARCHITECTURE/ unchanged.
-Checkpoint 019 remains Working Repair, not formal adoption.
+Checkpoint 020 remains Working Repair, not formal adoption.
 
 NEXT:
-Repair Package D — Economic / Trade Exit.
-
-FIRST TARGET:
-R3-INT-005 — Evaluation Availability / Sufficiency.
+Adjacent Contract Recheck
+→ STEP 8 Destruction Test
+→ R3 Integration Final Review.
 
 Git Write Permission Reminder:
 REQUIRE CURRENT-CHAT USER AUTHORIZATION
