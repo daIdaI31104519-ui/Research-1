@@ -142,50 +142,69 @@ Section 3 What Not To Maximize
 Section 4 Survival / Profit Priority
 = DRAFT / LEADING CANDIDATE 保存済み
 
+Section 5 Research Mission
+= DRAFT / LEADING CANDIDATE 保存済み
+
 Current Focus
-= 5. Research Mission
+= 6. Research Category Philosophy
 ```
 
 ---
 
 # 5. Research Missionの現在方向
 
-現時点の議論方向:
+Section 5はDRAFT / LEADING CANDIDATEとして保存済み。
 
-```text
-最上位:
-長期生存を壊さず、市場変化へ適応しながら、
-再現可能な正の期待値を積み上げるKnowledgeを増やす。
-```
+中心思想:
 
-研究カテゴリ候補:
+~~~text
+Research
+!= Research Count Maximization
+!= Hypothesis Confirmation Factory
+!= Production Permission
 
-```text
-SURVIVAL RESEARCH
-= DD / Tail Risk / Failure / No-Trade / Constraint / 生存
+Research
+= Reusable Understanding / Evidence / Failure / Unknown Creation
+~~~
 
-CORE EDGE RESEARCH
-= 派手さより再現性のある正の期待値を積み上げる
+Primary Research Mission Families:
 
-ADAPTATION RESEARCH
-= Regime Shift / Edge Decay / Knowledge Failureを早期発見する
+~~~text
+RM-1 FOUNDATIONAL / MECHANISM RESEARCH
+RM-2 SURVIVAL / FAILURE RESEARCH
+RM-3 ECONOMIC EDGE RESEARCH
+RM-4 ADAPTATION / REVALIDATION RESEARCH
+RM-5 DECISION / EXECUTION QUALITY RESEARCH
+~~~
 
-OPPORTUNITY RESEARCH
-= 非対称な大Opportunityを限定Risk内で研究する
+Cross-Cutting:
 
-INTELLIGENCE / PUBLICATION SUPPORT
-= 研究成果をGraph・独自Data・Research Note・Scenario等として人間が利用可能にする
-```
+~~~text
+Research Integrity / Methodology
+= 全Research Missionへ適用
+~~~
 
-ただしPublication都合でResearch Coreを歪めない。
+Boundary:
 
-```text
-Research Core
-        ├─→ Automated Trading
-        └─→ Human-readable Research Publication
-```
+~~~text
+Validated Research Result
+!= Knowledge
+!= Production Authority
 
-を基本方向とする。
+Research Candidate Source
+!= Research Mission
+
+Research Mission
+!= Intake Disposition
+!= Priority
+!= Validation Method
+!= Research Result
+~~~
+
+Human-readable Research PublicationはPrimary Research MissionではなくDownstream Consumer / Output Routeとして扱う。
+
+CORE EDGE / OPPORTUNITY / Adaptationの詳細研究思想はSection 6へ送る。
+
 
 ---
 
@@ -258,7 +277,8 @@ CURRENT DRAFT
 = Section 2 Success Definition保存済み
 = Section 3 What Not To Maximize保存済み
 = Section 4 Survival / Profit Priority保存済み
-= 現在はSection 5 Research Missionを設計する
+= Section 5 Research Mission保存済み
+= 現在はSection 6 Research Category Philosophyを設計する
 
 HIGH IMPACT
 00_HUMAN/HUMAN_MAP.md
@@ -297,7 +317,8 @@ PROJECT_CHARTER v0.1 Draft
 - Section 2 Success Definition = 保存済み
 - Section 3 What Not To Maximize = 保存済み
 - Section 4 Survival / Profit Priority = 保存済み
-- Current = Section 5 Research Mission
+- Section 5 Research Mission = 保存済み
+- Current = Section 6 Research Category Philosophy
 
 STEP 2
 PROJECT_CHARTER Cross Check
