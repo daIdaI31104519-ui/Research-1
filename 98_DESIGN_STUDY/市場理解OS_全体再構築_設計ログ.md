@@ -21061,3 +21061,1522 @@ R3-INT-005
 Evaluation Availability / Sufficiency
 ~~~
 
+---
+
+# 27. Checkpoint 020 — R3 Integration Repair / Package D — Economic / Trade Exit & Backward Return Router
+
+**Date:** 2026-10-04  
+**State:** SAVED / WORKING REPAIR CHECKPOINT  
+**Formal Current Architecture Changed:** NO  
+**Phase:** 5 Reconstruction — R3 Integration Repair  
+**Repair Package:** D — Economic / Trade Exit  
+**Issues Repaired:** R3-INT-005 / R3-INT-012 / R3-INT-014  
+**Next:** Adjacent Contract Recheck → STEP 8 Destruction Test / R3 Integration Final Review.
+
+## 27.1 Package D Purpose
+
+Package D closes the final R3 integration gap between Economic Value, Evaluation Availability / Sufficiency, Candidate Advancement, Trade Thesis Formation / Adoption, R4 handoff, and backward routing from R4 / Runtime / downstream findings.
+
+Core forward flow:
+
+~~~text
+Decision Candidate
+↓
+Economic Value Assessment
+↓
+Evaluation Availability / Sufficiency Assessment
+↓
+Candidate Advancement
+↓
+ADVANCE
+↓
+Trade Thesis Formation
+↓
+Trade Thesis Adoption
+↓
+Immutable Trade Thesis
+↓
+R4 Economic / Capital Decision
+~~~
+
+Core backward rule:
+
+> A downstream finding must return to the nearest upstream semantic owner of the meaning that actually changed, then rebuild forward only through materially dependent descendants. Historical artifacts are never rewritten.
+
+---
+
+## 27.2 R3-INT-005 — Evaluation Availability / Sufficiency
+
+Repair Result:
+
+~~~text
+PASS AS WORKING REPAIR
+~~~
+
+Economic evaluation is separated into distinct axes:
+
+~~~text
+Evaluation Integrity
+!= Evaluation Availability
+!= Evaluation Coverage
+!= Evaluation Sufficiency
+!= Economic Attractiveness
+!= Candidate Advancement
+~~~
+
+Economic Value Assessment existence:
+
+~~~text
+!= Strict Expected EV availability
+~~~
+
+A valid partial EVA is allowed.
+
+~~~text
+Valid Partial Evaluation
+!= Invalid Evaluation
+~~~
+
+---
+
+## 27.3 Evaluation Integrity
+
+Evaluation Integrity asks whether the EVA is structurally / temporally valid as an economic assessment artifact.
+
+Minimum semantic checks include:
+
+~~~text
+Exact Candidate Version resolved
+Economic Evaluation Context resolved
+Candidate semantics complete
+Temporal eligibility / No-Look-Ahead pass
+Model / Mapping refs resolved
+Required provenance traceable
+No silent Candidate mutation
+No material double counting
+~~~
+
+Integrity failure:
+
+~~~text
+!= Negative EV
+!= Evaluation Insufficiency
+!= WAIT
+!= ABSTAIN
+~~~
+
+It routes to the owner of the defect.
+
+---
+
+## 27.4 Evaluation Availability
+
+Evaluation Availability is component / capability specific.
+
+A single EVA.available boolean is insufficient.
+
+Example:
+
+~~~text
+Gross Outcome
+= AVAILABLE
+
+Net Outcome
+= LIMITED
+
+Strict Expected EV
+= UNAVAILABLE
+
+Scenario Evaluation
+= AVAILABLE
+
+Stress Evaluation
+= AVAILABLE
+
+Probabilistic Tail
+= UNAVAILABLE
+
+Tail Severity
+= AVAILABLE
+~~~
+
+Exact enum is later work.
+
+Important:
+
+~~~text
+Numeric Output Exists
+!= Metric Validly Available
+~~~
+
+---
+
+## 27.5 Evaluation Mode / Probability Boundary
+
+Strict Expected Value requires valid probability semantics.
+
+~~~text
+Unknown Probability
+!= 50%
+
+Scenario Weight
+!= Validated Probability
+
+Scenario-weighted Estimate
+!= Strict Expected Value
+
+Stress Exposure
+!= Expected Loss without valid probability semantics
+~~~
+
+When probabilities are unknown:
+
+~~~text
+Strict Expected EV
+= unavailable
+
+Scenario / Stress evaluation
+= may remain valid
+~~~
+
+Unsupported mode fallback must remain explicit.
+
+---
+
+## 27.6 Gross / Net / Cost Coverage
+
+~~~text
+Gross Economic Availability
+!= Net Economic Availability
+~~~
+
+Missing material Slippage / Funding / Spread / Carry must not silently become zero.
+
+Model Coverage Boundary must prevent:
+
+~~~text
+false missingness
+double counting
+~~~
+
+Example:
+
+~~~text
+Slippage model includes Spread
+→ do not separately count Spread again
+~~~
+
+Raw Data Availability:
+
+~~~text
+!= Economic Metric Availability
+~~~
+
+Data + Model + Mapping + Context / Coverage may all be required.
+
+---
+
+## 27.7 Evaluation Coverage
+
+Coverage describes which required / optional economic dimensions were evaluated.
+
+Coverage count / percentage is not sufficiency.
+
+~~~text
+Coverage Count
+!= Evaluation Sufficiency
+
+Complete Coverage
+!= Automatic Sufficiency
+
+Partial Coverage
+!= Automatic Insufficiency
+~~~
+
+A single missing required component can be material even if most components are available.
+
+---
+
+## 27.8 Evaluation Requirement Profile
+
+Sufficiency is evaluated relative to an explicit Versioned Evaluation Requirement Profile.
+
+Logical candidate:
+
+~~~text
+Evaluation Requirement Profile
+│
+├─ Profile ID / Version
+├─ Applicable Candidate Objective
+├─ Instrument / Exposure Context
+├─ Horizon / Evaluation Purpose
+├─ Required Evaluation Modes
+├─ Required Economic Components
+├─ Conditional Requirements
+├─ Optional / Diagnostic Components
+├─ Required Probability Semantics
+├─ Cost Coverage Requirements
+├─ Tail / Stress Requirements
+├─ Dependency Requirements
+├─ Freshness / Temporal Requirements
+├─ Model Coverage Requirements
+└─ Provenance
+~~~
+
+Component roles may include semantic equivalents of:
+
+~~~text
+REQUIRED
+CONDITIONAL
+OPTIONAL
+DIAGNOSTIC
+~~~
+
+Exact enum is later work.
+
+Candidate Objective / Instrument / Horizon may activate different requirements.
+
+---
+
+## 27.9 Evaluation Sufficiency
+
+Definition:
+
+> Evaluation Sufficiency is the assessment of whether an exact Economic Value Assessment satisfies the applicable Versioned Evaluation Requirement Profile for the intended evaluation purpose.
+
+Working result semantics may include:
+
+~~~text
+SUFFICIENT
+INSUFFICIENT
+UNDETERMINED
+~~~
+
+Exact enum is later work.
+
+Important:
+
+~~~text
+Unknown existence
+!= Automatic Insufficiency
+
+Evaluation Sufficiency
+!= Confidence Score
+
+Evaluation Sufficiency
+!= Coverage Percentage
+
+Sufficient Evaluation
+!= ADVANCE
+
+Insufficient Evaluation
+!= Automatic WAIT
+
+Insufficient Evaluation
+!= Automatic ABSTAIN
+~~~
+
+---
+
+## 27.10 Evaluation Availability / Sufficiency Assessment
+
+Logical contract:
+
+~~~text
+Evaluation Availability / Sufficiency Assessment
+│
+├─ Assessment ID
+├─ Exact Economic Value Assessment Ref
+├─ Exact Decision Candidate Version Ref
+├─ Economic Evaluation Context Ref
+├─ Evaluation Requirement Profile Ref
+├─ Evaluation Mode / Capability Profile
+├─ Component Availability Profile
+├─ Coverage Profile
+├─ Required Component Gap Refs
+├─ Critical Unknown Refs
+├─ Uncertainty / Quality Findings
+├─ Temporal / Freshness Findings
+├─ Model / Mapping Coverage Findings
+├─ Sufficiency Result
+├─ Sufficiency Reason / Limitation Refs
+├─ Assessment As-Of
+├─ Information Cutoff
+├─ Assessment Available At
+└─ Provenance
+~~~
+
+This assessment does not rewrite EVA and does not own Candidate Advancement.
+
+Later Requirement Profile / Market information does not rewrite historical assessments.
+
+---
+
+## 27.11 R3-INT-005 Core Invariants
+
+~~~text
+EAS-01 EVA existence != Strict Expected EV availability.
+EAS-02 Valid Partial EVA != Invalid EVA.
+EAS-03 Evaluation Integrity != Evaluation Availability.
+EAS-04 Evaluation Availability != Evaluation Coverage.
+EAS-05 Evaluation Coverage != Evaluation Sufficiency.
+EAS-06 Evaluation Sufficiency != Economic Attractiveness.
+EAS-07 Economic Attractiveness != Candidate Advancement.
+EAS-08 Numeric Output Exists != Metric validly available.
+EAS-09 Economic Component availability is component-specific.
+EAS-10 Availability respects Data / Model / Mapping / Temporal / Coverage prerequisites.
+EAS-11 Missing Metric != Zero Metric.
+EAS-12 Missing Monetization Mapping != Zero EV.
+EAS-13 Unknown Probability != 50%.
+EAS-14 Scenario Weight != Validated Probability.
+EAS-15 Scenario-weighted Estimate != Strict Expected Value.
+EAS-16 Stress Exposure != Expected Loss without probability semantics.
+EAS-17 Unknown Tail Probability != Zero Tail Risk.
+EAS-18 Gross Availability != Net Availability.
+EAS-19 Missing material Slippage != zero Slippage.
+EAS-20 Coverage boundaries prevent double counting / false missingness.
+EAS-21 Raw Data Availability != Economic Metric Availability.
+EAS-22 Unknown Finding Available != numeric metric available.
+EAS-23 Coverage Count != Sufficiency.
+EAS-24 Complete Coverage != Automatic Sufficiency.
+EAS-25 Partial Coverage != Automatic Insufficiency.
+EAS-26 Requirement Profile is explicit / versioned.
+EAS-27 Sufficiency is relative to applicable Requirement Profile.
+EAS-28 Candidate Objective may require different requirements.
+EAS-29 Instrument / Exposure / Horizon may activate conditional requirements.
+EAS-30 Unknown existence != Automatic Insufficiency.
+EAS-31 Material required Unknown / gap remains explicit.
+EAS-32 Sufficiency != Confidence Score.
+EAS-33 Sufficiency != Coverage Percentage.
+EAS-34 Sufficient Evaluation != ADVANCE.
+EAS-35 Insufficient Evaluation != Automatic WAIT.
+EAS-36 Insufficient Evaluation != Automatic ABSTAIN.
+EAS-37 Integrity Failure must not become Advancement Disposition.
+EAS-38 Assessment references exact EVA / Candidate Version.
+EAS-39 Assessment references exact Requirement Profile Version.
+EAS-40 Assessment does not rewrite Economic Value.
+EAS-41 Assessment does not own Candidate Advancement.
+EAS-42 Later Requirement Profile does not rewrite historical Sufficiency.
+EAS-43 Later market / cost information does not rewrite historical EVA / Sufficiency.
+EAS-44 Material new economic information creates new evaluation lineage.
+EAS-45 Same current-valid EVA may receive new Sufficiency Assessment under a new Requirement Profile.
+EAS-46 Historical Sufficiency != Current-Use Validity.
+EAS-47 Standalone Sufficiency != Relative Comparison Sufficiency.
+EAS-48 Individual Candidate Sufficiency != Joint Economic Envelope Sufficiency.
+EAS-49 Strict Expected Value requires valid probability semantics.
+EAS-50 Unsupported mode fallback must not masquerade as requested mode.
+EAS-51 Unsupported metrics remain unavailable; numbers must not be fabricated.
+EAS-52 Candidate Advancement consumes Availability / Sufficiency; it does not author them ad hoc.
+~~~
+
+---
+
+## 27.12 R3-INT-012 — Trade Thesis Revision / Adoption / Immutability
+
+Repair Result:
+
+~~~text
+PASS AS WORKING REPAIR
+~~~
+
+Definition:
+
+> Trade Thesis is an immutable Trade-specific Reasoning Artifact that fixes why an ADVANCEd exact Decision Candidate is submitted to R4, including exact Decision Thesis, Candidate, EVA, Evaluation Sufficiency, Advancement, Economic Validity Conditions, Accepted Unknowns, Dependencies and Trade-specific Invalidation semantics.
+
+Trade Thesis:
+
+~~~text
+!= Knowledge Truth
+!= Decision Thesis
+!= Decision Candidate
+!= Economic Value Assessment
+!= Candidate Advancement Decision
+!= Capital Permission
+!= Position Size
+!= Execution Order
+!= Actual Exposure
+~~~
+
+---
+
+## 27.13 Trade Thesis Formation / Adoption / Writer
+
+Canonical working authority chain:
+
+~~~text
+Candidate Advancement Record
+Disposition = ADVANCE
+↓
+Current-Use Validity Gate
+↓
+Trade Thesis Formation
+↓
+Trade Thesis Formation Result
+↓
+Trade Thesis Adoption Assessment
+↓
+Trade Thesis Adoption Authorization
+↓
+Trade Thesis Writer
+↓
+Immutable Trade Thesis
+~~~
+
+Key separation:
+
+~~~text
+Formation
+!= Adoption
+
+Adoption
+!= Materialization
+
+Materialization
+!= Capital Permission
+
+Capital Permission
+!= Exposure Activation
+~~~
+
+Adoption checks reasoning-contract integrity; it does not re-run Economic attractiveness or create a second ADVANCE / WAIT / ABSTAIN authority.
+
+---
+
+## 27.14 Trade Thesis Logical Contract
+
+Working semantic contract:
+
+~~~text
+Trade Thesis
+│
+├─ Trade Thesis ID
+├─ Decision Lineage Ref
+├─ Decision Context Ref
+├─ Decision Material Snapshot Ref
+├─ Decision Synthesis Result Ref
+├─ Decision Thesis Ref(s)
+├─ Exact Decision Candidate Version Ref
+├─ Exact Economic Value Assessment Ref
+├─ Exact Evaluation Availability / Sufficiency Assessment Ref
+├─ Exact Candidate Advancement Record Ref
+├─ Relied-Upon Knowledge Version Refs
+├─ Material Dependency Context Refs
+├─ Advancement Basis Refs
+├─ Material Economic Basis Refs
+├─ Economic Risk / Tail Refs
+├─ Economic Validity Condition Refs
+├─ Accepted Unknown Refs
+├─ Trade-specific Invalidation Conditions
+├─ Trade Thesis As-Of
+├─ Information Cutoff
+├─ Available At
+├─ Formation Policy / Method Ref
+├─ Adoption Authorization Ref
+├─ Predecessor Trade Thesis Ref [if revision]
+├─ Revision / Replacement Reason [if applicable]
+└─ Provenance
+~~~
+
+Only materially relied-upon exact upstream refs are fixed; full upstream truth is not copied.
+
+---
+
+## 27.15 Trade Thesis Revision
+
+Trade Thesis is immutable.
+
+Revision means:
+
+~~~text
+new upstream basis
+↓
+new Formation
+↓
+new Adoption
+↓
+new immutable Trade Thesis
+~~~
+
+It does not mean in-place mutation.
+
+Preferred lineage:
+
+~~~text
+TT-101
+↓ predecessor
+TT-202
+~~~
+
+rather than mutable TT-101@v2 semantics.
+
+Economic Re-evaluation:
+
+~~~text
+!= automatic Trade Thesis revision
+~~~
+
+A new Trade Thesis is formed only after the new upstream path reaches a valid ADVANCE and Adoption.
+
+---
+
+## 27.16 Revision vs New Branch
+
+Same Candidate branch + new economic basis:
+
+~~~text
+may produce successor Trade Thesis
+~~~
+
+Material Candidate semantic change:
+
+~~~text
+→ Candidate Formation
+→ new Candidate branch
+→ new Trade Thesis branch
+~~~
+
+New Decision Thesis / Decision Context basis:
+
+~~~text
+→ new Decision lineage branch
+~~~
+
+Do not hide semantic changes as Trade Thesis revision.
+
+---
+
+## 27.17 Trade Thesis Current-Use Validity
+
+Historical Trade Thesis integrity:
+
+~~~text
+!= current-use validity
+~~~
+
+Current-use assessment may consider:
+
+~~~text
+Source Decision Thesis validity
+Candidate validity
+EVA validity
+EAS validity
+Advancement validity
+Accepted Unknown treatment
+Economic Validity Conditions
+Trade Thesis Invalidation Conditions
+Relevant Horizon
+Material Dependency changes
+~~~
+
+Later Knowledge / Relationship / Dependency / Unknown resolution never rewrites the historical Trade Thesis.
+
+---
+
+## 27.18 R4 / Runtime Boundary
+
+R4 consumes exact Trade Thesis refs.
+
+~~~text
+Trade Thesis
+!= R4 Capital Permission
+~~~
+
+Capital-only change inside valid economic envelope:
+
+~~~text
+→ R4 only
+→ no Trade Thesis revision required
+~~~
+
+Economic envelope exceeded:
+
+~~~text
+→ Economic Re-evaluation
+→ EAS
+→ Advancement
+→ if ADVANCE, new Trade Thesis
+~~~
+
+New instrument leg / composite payoff:
+
+~~~text
+→ Candidate Formation
+~~~
+
+Actual Exposure is required before Runtime Assumption Set activation.
+
+~~~text
+Trade Thesis exists
++ R4 ALLOW
++ No Fill
+→ Active Runtime Assumption Set = none
+~~~
+
+Trade Thesis invalidation while exposed routes to Runtime / R4 authority; it does not directly command EXIT.
+
+---
+
+## 27.19 R3-INT-012 Core Invariants
+
+~~~text
+TT-01 Trade Thesis is immutable Trade-specific reasoning.
+TT-02 Trade Thesis != Knowledge Truth.
+TT-03 Trade Thesis != Decision Thesis.
+TT-04 Trade Thesis != Candidate Advancement.
+TT-05 Trade Thesis != Capital Permission.
+TT-06 Trade Thesis creation != Position Activation.
+TT-07 Formation != Adoption.
+TT-08 Adoption != R4 Capital Approval.
+TT-09 Formation consumes exact current-use valid ADVANCE record.
+TT-10 Formation must not re-decide Advancement.
+TT-11 Formation must not mutate Candidate semantics.
+TT-12 Formation must not author Economic Value.
+TT-13 Formation must not add / remove Accepted Unknowns ad hoc.
+TT-14 Formation Result != Adopted Trade Thesis.
+TT-15 Adoption checks reasoning-contract integrity, not Economic attractiveness.
+TT-16 Adoption must not create second Advancement authority.
+TT-17 Adoption Authorization != Trade Thesis Available.
+TT-18 Downstream use begins only after successful materialization.
+TT-19 Writer must not alter authorized semantics.
+TT-20 Writer precondition failure must not be ignored.
+TT-21 Writer failure != predecessor automatically valid.
+TT-22 Trade Thesis pins exact Decision Thesis refs.
+TT-23 Trade Thesis pins exact Candidate Version.
+TT-24 Trade Thesis pins exact EVA.
+TT-25 Trade Thesis pins exact EAS.
+TT-26 Trade Thesis pins exact Advancement Record.
+TT-27 Trade Thesis preserves relied-upon Knowledge Version refs.
+TT-28 Trade Thesis preserves material Dependency Context refs.
+TT-29 Trade Thesis preserves Accepted Unknown refs.
+TT-30 Accepted Unknown != Resolved Unknown.
+TT-31 Trade Thesis preserves Economic Validity Condition refs.
+TT-32 Economic Validity Condition != Trade Thesis Invalidation Condition.
+TT-33 Trade Thesis Invalidation != R4 Stop / EXIT rule.
+TT-34 Trade Thesis Invalidation does not directly command Position Action.
+TT-35 Trade Thesis is immutable.
+TT-36 Revision means a new immutable Trade Thesis artifact.
+TT-37 Revision must not overwrite predecessor reasoning.
+TT-38 Same Candidate + new EVA / Advancement + ADVANCE may create successor Trade Thesis.
+TT-39 Economic Re-evaluation != automatic Trade Thesis revision.
+TT-40 New Candidate semantics creates new branch.
+TT-41 New Decision Thesis lineage creates new reasoning branch.
+TT-42 Capital-only R4 changes do not require Trade Thesis revision.
+TT-43 Change inside valid Economic Envelope does not require Trade Thesis revision.
+TT-44 Change outside Economic Envelope routes through Economic Re-evaluation.
+TT-45 New instrument leg / composite payoff routes through Candidate Formation.
+TT-46 Historical Trade Thesis != forever current-use valid.
+TT-47 Current-use validity != historical integrity.
+TT-48 Later Unknown resolution does not rewrite history.
+TT-49 Later Knowledge Version does not rewrite history.
+TT-50 Later Relationship / Dependency does not rewrite history.
+TT-51 No single Global Current Trade Thesis is required.
+TT-52 R4 consumes exact Trade Thesis refs.
+TT-53 Multiple adopted Trade Thesis branches may coexist.
+TT-54 R4 BLOCK != Trade Thesis invalidity.
+TT-55 R4 BLOCK != Advancement failure.
+TT-56 No Fill → no Active Runtime Assumption Set.
+TT-57 Actual Exposure is required before Runtime Assumption activation.
+TT-58 Runtime Assumption Set references exact Trade Thesis.
+TT-59 Runtime monitoring must not mutate Trade Thesis.
+TT-60 Invalidation while exposed routes to Runtime / R4, not automatic EXIT.
+TT-61 Adoption / Materialization timestamps obey Temporal Contract.
+TT-62 R4 cannot use Trade Thesis before Available At.
+TT-63 Later Adoption Policy does not rewrite historical adoption.
+TT-64 Semantic correction must not silently edit historical Trade Thesis.
+TT-65 Correction != Revision reason.
+TT-66 Retrospective Trade Thesis != Original Decision Lineage output.
+TT-67 Exact artifact refs are canonical reasoning chain.
+TT-68 Adoption does not select a global winner.
+~~~
+
+---
+
+## 27.20 R3-INT-014 — Backward Return Router Common Rule
+
+Repair Result:
+
+~~~text
+PASS AS WORKING REPAIR
+~~~
+
+Definition:
+
+> Backward Return Router Common Rule is a cross-cutting routing protocol that classifies a downstream change / finding by the meaning that actually changed, identifies the nearest upstream authority that owns that meaning, routes the finding to that owner, and rebuilds only materially dependent descendants forward without rewriting historical artifacts.
+
+Important:
+
+~~~text
+Return Router
+!= Universal Router Service
+!= Truth Authority
+!= Economic Authority
+!= Capital Authority
+!= History Mutation Mechanism
+~~~
+
+A dedicated giant Return Router architecture layer is not required.
+
+---
+
+## 27.21 Core Routing Principle — Nearest Semantic Owner
+
+Routing is based on:
+
+~~~text
+What meaning changed?
+~~~
+
+not merely:
+
+~~~text
+Where was the problem detected?
+~~~
+
+Core rule:
+
+~~~text
+Downstream Finding
+↓
+Classify semantic change
+↓
+Check material dependency / affected exact artifacts
+↓
+Choose nearest upstream semantic owner
+↓
+Create immutable Return / Re-evaluation lineage
+↓
+Rebuild forward only through materially affected descendants
+~~~
+
+Do not rewind farther than necessary.
+
+Do not stay downstream if the downstream component does not own the changed meaning.
+
+---
+
+## 27.22 Common Return Classes
+
+### Capital-only / R4-owned Change
+
+Examples:
+
+~~~text
+Capital reservation
+Portfolio capacity
+Position-size reduction
+Capital concentration
+Risk budget
+Protection inside existing authorized semantics
+~~~
+
+When Candidate semantics / EVA envelope / Thesis remain valid:
+
+~~~text
+→ R4 only
+~~~
+
+### Economic Change
+
+Examples:
+
+~~~text
+Spread / Slippage regime change
+Funding / Carry change
+Valuation basis change
+Size outside evaluated region
+Economic model / cost context update
+Joint Economic Envelope insufficiency
+~~~
+
+When Thesis / Candidate semantics remain valid:
+
+~~~text
+→ Economic Value Re-evaluation
+→ EAS
+→ Candidate Advancement
+→ if ADVANCE, new Trade Thesis
+~~~
+
+### Candidate Semantic / Composite Change
+
+Examples:
+
+~~~text
+LONG → SHORT
+Target change
+Instrument semantic change
+Objective change
+Horizon change beyond source support
+New hedge leg
+New composite payoff
+~~~
+
+Route:
+
+~~~text
+→ Decision Candidate Formation
+→ Economic Value
+→ EAS
+→ Advancement
+→ Trade Thesis if ADVANCE
+~~~
+
+### Decision Input / Thesis Change
+
+Examples:
+
+~~~text
+Source Decision Thesis invalidated
+Material Market Context changed
+Material Relationship / Dependency change
+Critical Unknown resolved or changed in a Thesis-material way
+Material decision input set changed
+~~~
+
+Route:
+
+~~~text
+→ new Decision Material Snapshot
+→ Decision Synthesis
+→ new Decision Thesis / downstream branch
+~~~
+
+Do not re-synthesize using a mutated old Snapshot.
+
+### Knowledge Applicability / Use Change
+
+Examples:
+
+~~~text
+Knowledge becomes NOT_APPLICABLE
+Knowledge-Use Constraint activates
+Lifecycle eligibility changes
+Constraint / applicability state materially changes
+~~~
+
+Route first to the owning Applicability / Constraint / Lifecycle authority, then:
+
+~~~text
+→ new Decision Material Snapshot
+→ Decision Synthesis
+→ rebuild affected descendants
+~~~
+
+### Knowledge Validity / Research Change
+
+Examples:
+
+~~~text
+Canonical Knowledge validity challenged
+Evidence contradiction requires revalidation
+Novel causal mechanism discovered
+Research hypothesis required
+Knowledge truth cannot be resolved at Decision layer
+~~~
+
+Route:
+
+~~~text
+→ R2 Research / Validation / Lifecycle / Admission path as appropriate
+~~~
+
+Then only formally available validated / admitted results may flow forward again.
+
+### Data / Temporal / Integrity Defect
+
+Examples:
+
+~~~text
+wrong revision
+look-ahead leak
+source timing defect
+corrupt model ref
+unresolvable exact ref
+data quality defect
+~~~
+
+Route to the owner of the defective data / temporal / assessment contract.
+
+Do not disguise integrity defects as WAIT / ABSTAIN / negative EV.
+
+---
+
+## 27.23 R4 Type A-D Compatibility
+
+The earlier R4-specific classification remains compatible.
+
+~~~text
+Type A — Capital-only Change
+→ R4
+
+Type B — Economic Change
+→ Economic Re-evaluation
+
+Type C — Candidate Semantic / Composite Change
+→ Candidate Formation
+
+Type D — Thesis / Knowledge Validity Change
+→ Decision / Applicability / Research owner according to actual semantic scope
+~~~
+
+Package D refines Type D instead of changing the earlier meaning.
+
+---
+
+## 27.24 Return Routing Assessment
+
+Logical candidate:
+
+~~~text
+Return Routing Assessment
+│
+├─ Routing Assessment ID
+├─ Source Event / Finding Ref
+├─ Source Artifact Ref
+├─ Source Stage
+├─ Detection As-Of / Available At
+├─ Actual Exposure State Ref [if relevant]
+├─ Semantic Change Class
+├─ Affected Exact Artifact Refs
+├─ Material Dependency / Impact Refs
+├─ Current-Use Validity Findings
+├─ Primary Upstream Owner / Route
+├─ Optional Parallel Safety Route
+├─ Re-evaluation / Rebuild Scope
+├─ Return Reason
+├─ Routing Policy / Method Ref
+├─ Predecessor / Related Return Ref
+└─ Provenance
+~~~
+
+This is a logical trace contract, not a requirement for a central service / DB table.
+
+---
+
+## 27.25 Material Dependency Gate
+
+An upstream change does not automatically rebuild the whole lineage.
+
+~~~text
+Upstream changed
+↓
+Was this exact downstream artifact materially dependent on it?
+├─ NO
+│   → no rebuild required
+└─ YES
+    → current-use validity handling
+    → rebuild from nearest owner
+~~~
+
+Important:
+
+~~~text
+Any update
+!= Global rebuild
+~~~
+
+Relied-upon exact refs / dependency context are used to determine impact.
+
+---
+
+## 27.26 Parallel Fast Safety + Semantic Repair
+
+One downstream event may require more than one route.
+
+Example:
+
+~~~text
+Actual Exposure exists
++
+Trade Thesis / Knowledge basis materially degrades
+~~~
+
+Possible response:
+
+~~~text
+Fast Runtime / R4 Safety Route
++
+Slow Semantic / Research Return Route
+~~~
+
+These are parallel responsibilities.
+
+~~~text
+Fast Safety
+!= Knowledge Retirement
+!= Historical Rewrite
+!= automatic Semantic Repair
+~~~
+
+Likewise:
+
+~~~text
+Research Return
+!= immediate Position Action
+~~~
+
+This preserves the Two-Speed architecture.
+
+---
+
+## 27.27 Return Record Immutability
+
+A Return / Re-evaluation request is historical.
+
+Do not mutate:
+
+~~~text
+old EVA
+old EAS
+old Advancement Record
+old Trade Thesis
+old Snapshot
+old Decision Thesis
+~~~
+
+Instead:
+
+~~~text
+Return Event
+↓
+new upstream assessment / evaluation
+↓
+new descendant lineage
+~~~
+
+Repeated loops create immutable lineage, not overwrite loops.
+
+---
+
+## 27.28 Return Route vs Current-Use Validity
+
+Return routing does not itself rewrite semantic truth.
+
+It may produce / consume Current-Use Validity findings.
+
+Example:
+
+~~~text
+TT-101
+historically valid artifact
+
+Current-use validity
+= LOST
+
+Return Route
+= Economic Re-evaluation
+~~~
+
+TT-101 remains unchanged.
+
+---
+
+## 27.29 Unknown / Dependency in Return Routing
+
+Unknown resolution does not automatically choose one global route.
+
+Route depends on where the Unknown is material.
+
+Examples:
+
+~~~text
+Economic-only Unknown resolved
+→ EVA / EAS
+
+Thesis-material Unknown resolved
+→ new Snapshot / Synthesis
+
+Research truth Unknown resolved
+→ Research / Knowledge path
+~~~
+
+Dependency discovery follows the same materiality rule.
+
+~~~text
+Decision dependency change
+→ Decision / Snapshot path
+
+Cross-Candidate Economic dependency change
+→ EVA / Joint Economic Envelope path
+~~~
+
+---
+
+## 27.30 Runtime Findings
+
+Runtime detection location does not imply R4 ownership of semantic truth.
+
+Examples:
+
+~~~text
+Execution spread worsens
+→ Economic / R4 route depending on evaluated envelope
+
+Direction / Candidate semantics need change
+→ Candidate Formation
+
+Source Thesis fails
+→ Snapshot / Decision Synthesis
+
+Canonical Knowledge challenged
+→ Applicability / Lifecycle / Research
+
+Actual capital constraint
+→ R4
+~~~
+
+Runtime may trigger fast protection in parallel.
+
+---
+
+## 27.31 Error / Integrity Route
+
+Contract / integrity failure is not a business disposition.
+
+~~~text
+Integrity Failure
+!= WAIT
+!= ABSTAIN
+!= Negative EV
+!= R4 BLOCK
+~~~
+
+Route to the owner of the broken contract / artifact.
+
+Only after valid replacement artifacts exist may normal downstream flow resume.
+
+---
+
+## 27.32 R3-INT-014 Core Invariants
+
+~~~text
+RR-01 Return routing is based on changed meaning, not detection location.
+RR-02 Return Router Common Rule != universal router service.
+RR-03 Return routing does not own canonical truth.
+RR-04 Return routing does not mutate historical artifacts.
+RR-05 Route to the nearest upstream semantic owner.
+RR-06 Do not rewind farther than necessary.
+RR-07 Do not keep a change downstream when downstream does not own that meaning.
+RR-08 Material dependency is checked before rebuilding descendants.
+RR-09 Any upstream update != global rebuild.
+RR-10 Rebuild only materially affected descendants.
+RR-11 Capital-only change stays in R4 when semantic / economic envelope remains valid.
+RR-12 Economic change routes to EVA / EAS when Candidate / Thesis remain valid.
+RR-13 Candidate semantic change routes to Candidate Formation.
+RR-14 Decision-input / Thesis change creates new Snapshot / Synthesis branch.
+RR-15 Knowledge applicability / use change routes to Applicability / Constraint / Lifecycle owner first.
+RR-16 Knowledge validity / novel causal question routes to Research / Validation authority.
+RR-17 Data / Temporal / Integrity defect routes to its owning contract.
+RR-18 Integrity Failure != WAIT.
+RR-19 Integrity Failure != ABSTAIN.
+RR-20 Integrity Failure != negative EV.
+RR-21 Type A-D R4 classification remains compatible with common router.
+RR-22 Type D is refined by actual Decision / Applicability / Research ownership.
+RR-23 Return Routing Assessment is trace, not semantic authority.
+RR-24 Return / Re-evaluation records are immutable.
+RR-25 Repeated return loops create new lineage, not overwrite loops.
+RR-26 Current-use invalidation != historical mutation.
+RR-27 Unknown resolution routes according to material scope.
+RR-28 Dependency discovery routes according to dependency type / materiality.
+RR-29 Decision dependency != Economic dependency.
+RR-30 Detection in Runtime != semantic ownership by Runtime.
+RR-31 Actual Exposure safety may create a parallel R4 fast route.
+RR-32 Fast Safety != Semantic Repair.
+RR-33 Fast Safety != Knowledge Retirement.
+RR-34 Research Return != immediate Position Action.
+RR-35 Trade Thesis Invalidation != automatic EXIT.
+RR-36 R4 BLOCK != upstream semantic invalidity.
+RR-37 No Fill does not create Runtime Assumption Set.
+RR-38 New valid upstream outputs rebuild forward through normal authority boundaries.
+RR-39 Downstream must use exact new artifacts; stale floating current refs are prohibited.
+RR-40 Historical Replay remains based on the original lineage, not later return outcomes.
+~~~
+
+---
+
+## 27.33 Package D End-to-End Contract
+
+Forward:
+
+~~~text
+Exact Decision Candidate Version
+↓
+Economic Value Assessment
+↓
+Evaluation Availability / Sufficiency Assessment
+↓
+Candidate Advancement
+↓
+ADVANCE
+↓
+Trade Thesis Formation
+↓
+Adoption Assessment
+↓
+Adoption Authorization
+↓
+Trade Thesis Writer
+↓
+Immutable Trade Thesis
+↓
+R4 Economic / Capital Decision
+↓
+Execution
+↓
+Actual Exposure?
+↓
+Runtime Assumption Set [only if exposure exists]
+~~~
+
+Backward:
+
+~~~text
+R4 / Runtime / downstream Finding
+↓
+Return Routing Assessment
+↓
+What meaning actually changed?
+↓
+Material dependency check
+↓
+Nearest semantic owner
+↓
+New upstream artifact / assessment
+↓
+Rebuild forward through exact descendant lineage
+~~~
+
+---
+
+## 27.34 Package D Cross Check
+
+Cross-check dimensions:
+
+~~~text
+EVA vs Availability / Sufficiency ownership
+Availability / Sufficiency vs Advancement authority
+Advancement vs Trade Thesis Formation
+Formation vs Adoption
+Adoption vs Writer
+Trade Thesis vs R4 authority
+Trade Thesis vs Runtime activation
+Current-Use Validity vs Historical integrity
+Backward routing semantic ownership
+Return routing material dependency
+Fast Safety vs Slow Semantic / Research return
+Unknown continuity
+Dependency continuity
+Temporal / Availability integrity
+Decision Lineage immutability
+~~~
+
+Result:
+
+~~~text
+EVA / EAS Boundary
+= PASS
+
+EAS / Advancement Boundary
+= PASS
+
+Advancement / Trade Thesis Formation Boundary
+= PASS
+
+Formation / Adoption Boundary
+= PASS
+
+Adoption / Writer Boundary
+= PASS
+
+Trade Thesis / R4 Boundary
+= PASS
+
+Trade Thesis / Runtime Activation Boundary
+= PASS
+
+Historical Immutability
+= PASS
+
+Current-Use Validity Separation
+= PASS
+
+Backward Routing Ownership
+= PASS
+
+Material Dependency Routing
+= PASS
+
+Fast Safety / Slow Repair Separation
+= PASS
+
+Unknown Continuity
+= PASS
+
+Dependency Continuity
+= PASS
+
+Temporal / Availability Integrity
+= PASS
+
+Decision Lineage Traceability
+= PASS
+
+Blocking Issue
+= NONE
+~~~
+
+---
+
+## 27.35 Package D Clarifications
+
+~~~text
+PD-HO-001
+Valid Partial EVA
+!= Invalid EVA.
+
+PD-HO-002
+Evaluation Sufficiency is relative to an explicit Versioned Requirement Profile.
+
+PD-HO-003
+Trade Thesis Formation
+!= Adoption
+!= Materialization.
+
+PD-HO-004
+Backward Return routes to the nearest semantic owner,
+not automatically to Economic Value.
+
+PD-HO-005
+Fast R4 / Runtime safety may run in parallel with
+slow semantic / research repair.
+
+PD-HO-006
+Return routing invalidates current-use only where material;
+it never rewrites historical artifacts.
+~~~
+
+---
+
+## 27.36 R3 Integration Repair Status After Package D
+
+~~~text
+Package A — Knowledge Foundation
+= COMPLETE / CHECKPOINTED
+
+Package B — Temporal / Reproducibility
+= COMPLETE / CHECKPOINTED
+
+Package C — Decision Contract / Decision Lineage
+= COMPLETE / CHECKPOINTED
+
+Package D — Economic / Trade Exit / Return Router
+= COMPLETE / WORKING CHECKPOINT
+
+R3 Integration Repair blocking issue
+= NONE
+~~~
+
+Remaining planned work:
+
+~~~text
+Adjacent Contract Recheck
+↓
+STEP 8 Destruction Test
+↓
+R3 Integration Final Review
+↓
+Formal adoption decision later
+~~~
+
+---
+
+## 27.37 Save / Adoption Boundary
+
+Checkpoint 020 saves Package D as Working Repair only.
+
+Formal Current remains unchanged.
+
+Do not modify:
+
+~~~text
+00_AI/AI_CONTEXT.md
+00_HUMAN/HUMAN_MAP.md
+02_ARCHITECTURE/
+~~~
+
+Still not decided here:
+
+~~~text
+DB table structure
+Python classes
+physical Return Router implementation
+centralized vs distributed routing runtime
+final enum names
+final exact field names
+runtime scheduling / concurrency model
+final fail-open / fail-closed implementation
+formal adoption into 02_ARCHITECTURE
+~~~
+
+---
+
+## 27.38 Checkpoint Result
+
+~~~text
+Checkpoint 020
+R3 Integration Repair
+Package D — Economic / Trade Exit & Backward Return Router
+= SAVED WORKING REPAIR
+
+R3-INT-005
+Evaluation Availability / Sufficiency
+= REPAIRED / WORKING
+
+R3-INT-012
+Trade Thesis Revision / Adoption / Immutability
+= REPAIRED / WORKING
+
+R3-INT-014
+Backward Return Router Common Rule
+= REPAIRED / WORKING
+
+Package D Cross Check
+= PASS
+
+PD-HO-001
+Valid Partial EVA != Invalid EVA
+= CLARIFIED
+
+PD-HO-002
+Sufficiency is Requirement-Profile relative
+= CLARIFIED
+
+PD-HO-003
+Formation != Adoption != Materialization
+= CLARIFIED
+
+PD-HO-004
+Return to nearest semantic owner
+= CLARIFIED
+
+PD-HO-005
+Fast Safety may run parallel with slow repair
+= CLARIFIED
+
+PD-HO-006
+Return routing never rewrites history
+= CLARIFIED
+
+Blocking Issue
+= NONE
+
+Formal Current Architecture
+= UNCHANGED
+
+NEXT
+=
+Adjacent Contract Recheck
+→ STEP 8 Destruction Test
+→ R3 Integration Final Review
+~~~
+
