@@ -3,7 +3,7 @@
 **Document Role:** Project Constitution / Top-Level Mission  
 **Status:** DRAFT / LEADING CANDIDATE  
 **Purpose:** 市場理解OSが何のために存在し、何を優先し、どの方向へ育てるかを定義する最上位方針文書。  
-**Current Scope:** Section 1 `Project Mission`、Section 2 `Success Definition`、Section 3 `What Not To Maximize` を設計済み。Section 4以降は未設計であり、現時点では固定しない。
+**Current Scope:** Section 1 `Project Mission`、Section 2 `Success Definition`、Section 3 `What Not To Maximize`、Section 4 `Survival / Profit Priority` を設計済み。Section 5以降は未設計であり、現時点では固定しない。
 
 ---
 
@@ -585,7 +585,7 @@ Secondary Successは重要だが、Core OSが成立するための絶対条件�
 
 またSecondary SuccessのためにResearch Integrity・Risk Control・長期生存を犠牲にしてはならない。
 
-具体的な最大化禁止事項、SurvivalとProfitの優先順位、Business / Publicationの詳細は後続Sectionで定義する。
+最大化禁止事項はSection 3、SurvivalとProfitの優先順位はSection 4で定義する。Business / Publicationの詳細は後続Sectionで定義する。
 
 ---
 
@@ -1276,12 +1276,509 @@ Not Maximize
 > **測りやすい数字を最大化するのではなく、市場を理解し、学び、適応し、生存しながらEconomic Valueへ接続できるSystem全体を育てる。**
 
 
+
+---
+
+# 4. Survival / Profit Priority
+
+## 4.1 Core Principle
+
+市場理解OSは、SurvivalとProfitのどちらか一方だけを最大化するSystemではない。
+
+> **市場理解OSは、長期生存をEconomic ActivityのHard Operating Boundaryとし、その境界を壊さない範囲で、Research・Knowledge・Decisionに基づく正のExpected Economic Valueを持つ利益機会を選択的かつ積極的に追求する。**
+
+基本関係は、
+
+~~~text
+Survival
+= Hard Operating Boundary
+
+Profit / Positive Economic Value
+= Objective pursued inside that boundary
+~~~
+
+とする。
+
+SurvivalのためにEconomic Missionを恒常的に放棄せず、Profitのために市場理解OS全体の継続能力を賭けない。
+
+---
+
+## 4.2 SurvivalはHard Operating Boundaryである
+
+Survivalは、Profit・Win Rate・Model Score等と同列の一つのMetricとして扱わない。
+
+Hard Survival Boundaryを満たさないOpportunityを、
+
+~~~text
+高Profit
+高Expected Value
+高Confidence
+高Backtest Result
+~~~
+
+等で数値的に相殺しない。
+
+概念順序は、
+
+~~~text
+Survival Gate
+↓
+PASS
+↓
+Economic Evaluation / Decision
+~~~
+
+とする。
+
+Hard Survival Violationを万能Scoreの中へ埋め込み、他の高いScoreで打ち消してはならない。
+
+---
+
+## 4.3 ProfitはEconomic Objectiveであり続ける
+
+Survival Boundaryを設けることは、Profitを軽視することではない。
+
+市場理解OSは純粋な保存・防御Systemではなく、Research・Knowledge・Decisionを利用してEconomic Valueへ接続するSystemである。
+
+したがって、
+
+> **Hard Survival Boundaryの内側では、正のExpected Economic Valueを持つ利益機会を選択的かつ積極的に追求する。**
+
+ただし、
+
+~~~text
+Positive Expected Value
+!= automatic Trade Permission
+!= automatic Capital Permission
+~~~
+
+とする。
+
+Survival Boundaryを通過した後でも、Expected Value一つだけで最終Actionを決めない。
+
+---
+
+## 4.4 SurvivalはZero Riskを意味しない
+
+市場理解OSはRiskを完全に避けるSystemではない。
+
+~~~text
+Survival
+!= Zero Risk
+~~~
+
+とする。
+
+Riskを一切取らなければ、Economic Missionそのものを失う。
+
+市場理解OSは、
+
+> **理解・制限・回復可能なRiskを選択的に引き受ける。**
+
+ことを基本方向とする。
+
+どの程度のRiskを許容するか、どのようなRisk Budgetを持つかは後続のCapital / Risk設計で定義する。
+
+---
+
+## 4.5 Project-ending / Unrecoverable Risk
+
+市場には完全には予測できないEventが存在するため、市場理解OSは「あらゆる未来で絶対に損失しない」ことを保証しない。
+
+一方で、
+
+> **合理的に認識可能なProject-ending / Unrecoverable Failure Pathを、単一OpportunityのExpected Profitだけを理由に受け入れない。**
+
+とする。
+
+ここでいうProject-ending / Unrecoverable Failureは、Capital残高がゼロになる場合だけを意味しない。
+
+市場理解OSが今後も、
+
+~~~text
+観測する
+研究する
+Knowledgeを保持する
+判断する
+運用する
+復旧する
+再研究する
+~~~
+
+能力を現実的に継続できなくなるFailureを含む。
+
+---
+
+## 4.6 Recoverability
+
+Survivalには、LossやFailureの発生を完全に防ぐことだけでなく、発生後に市場理解OSの主要Loopへ戻れることを含める。
+
+> **Recoverabilityとは、Loss・Failure・System Damageの後でも、必要なCapital・Research・Knowledge・Decision・Operation能力を再構築し、Observation → Research → Decision → Operation → Re-Researchへ現実的に復帰できる能力である。**
+
+~~~text
+生き残った
+!=
+Recovery Pathが残っている
+~~~
+
+場合があるため、単に現在動いていることだけでSurvivalを判定しない。
+
+また、
+
+~~~text
+一回のLossからRecover可能
+!=
+同じRiskを無制限に繰り返してよい
+~~~
+
+とする。
+
+累積DamageによってRecoverabilityが失われる可能性を考慮する。
+
+---
+
+## 4.7 SurvivalはCapitalだけではない
+
+市場理解OSのSurvivalは、少なくとも以下の能力を含む。
+
+~~~text
+Capital Survival
+Research Capability
+Knowledge Integrity
+Decision Integrity
+Operational Continuity
+~~~
+
+したがって、
+
+~~~text
+Capitalが残った
+=
+市場理解OS全体がSurviveした
+~~~
+
+とは限らない。
+
+Trading活動によってResearch能力・Knowledge履歴・Decision Trace・復旧能力等を恒常的に破壊してはならない。
+
+---
+
+## 4.8 Loss / Drawdownは自動的にSurvival Failureではない
+
+市場でRiskを取る以上、LossやDrawdownは発生し得る。
+
+~~~text
+Loss
+!= Survival Failure
+
+Drawdown
+!= automatically Project Failure
+~~~
+
+とする。
+
+理解・許容されたRisk Boundary内で発生し、Decisionと原因を後から検証可能なLossは、正常な市場結果になり得る。
+
+一方、同じ金額のLossでも、
+
+~~~text
+Constraint無視
+Material Unknown無視
+Failure Boundary無視
+Recovery不能
+~~~
+
+等によって発生した場合は意味が異なる。
+
+具体的Drawdown上限・Loss Limitは後続Risk設計で定義する。
+
+---
+
+## 4.9 過剰なRisk Avoidanceも目的ではない
+
+市場理解OSはSurvivalを理由に、
+
+~~~text
+常にWAIT
+常にNO TRADE
+常に最小Exposure
+~~~
+
+を選び続けるSystemではない。
+
+十分に研究・検証され、Hard Survival Boundary内にあり、正のExpected Economic Valueを持つOpportunityを恒常的に捨て続けることもEconomic Missionと両立しない。
+
+> **Survivalは利益機会を永久に避ける理由ではなく、利益機会を継続的に利用できる状態を守るための境界である。**
+
+---
+
+## 4.10 複数のRisk Postureを許容する
+
+市場理解OSは、通常時と高い非対称性を持つOpportunity時で、異なるRisk Postureを持つことを将来許容できる。
+
+概念上、
+
+~~~text
+CORE MODE
++
+OPPORTUNITY MODE
+~~~
+
+等の異なる運用姿勢を後続設計で定義してよい。
+
+ただしSection 4では、
+
+~~~text
+Mode entry条件
+Mode exit条件
+Risk Envelope差
+Exposure差
+Risk倍率
+具体Threshold
+~~~
+
+は固定しない。
+
+これらはSection 7 Capital / Risk Philosophyと後続Detailed Designで扱う。
+
+---
+
+## 4.11 どのModeもHard Survival Boundaryを回避できない
+
+異なるRisk Postureを許容しても、
+
+~~~text
+CORE MODE
++
+OPPORTUNITY MODE
+↓
+same Hard Survival Boundary
+~~~
+
+とする。
+
+Opportunity Mode等は、Risk Governanceを解除する例外ではない。
+
+特に、
+
+~~~text
+COREでRisk制約に抵触した
+↓
+Opportunity扱いへ変更
+↓
+制約を回避
+~~~
+
+というMode Shoppingを禁止方向とする。
+
+また、
+
+~~~text
+Profit Target不足
+過去Loss
+過去Profit
+連勝
+AI / Model Confidence
+~~~
+
+等を、それ自体でHard Survival Boundaryの緩和理由にしない。
+
+---
+
+## 4.12 Survival-Critical Unknown
+
+市場理解OSはUnknownを自動的に安全扱いしない。
+
+~~~text
+UNKNOWN
+!= SAFE
+~~~
+
+とする。
+
+ただしUnknownが存在するだけで全てのActionを禁止するわけではない。
+
+> **SurvivalにMaterialなUnknownは、安全が確認された既知状態として扱わず、明示的な判断・制約・Research対象とする。**
+
+具体的なMateriality判定方法は後続設計で定義する。
+
+---
+
+## 4.13 Hard Survival ViolationをEconomic Scoreで相殺しない
+
+Hard Survival Boundary違反を、
+
+~~~text
+高Profit
+Positive EV
+高Win Rate
+高Confidence
+高Model Score
+~~~
+
+等で相殺しない。
+
+~~~text
+Economic attractiveness
+!= Survival permission
+~~~
+
+とする。
+
+これはSection 3の、
+
+~~~text
+一つの万能Scoreで重大Failureを相殺しない
+~~~
+
+という原則をRisk / Survivalへ適用するものである。
+
+---
+
+## 4.14 Fast SafetyとResearch / Knowledge Truthを分離する
+
+市場急変・Execution異常・Actual Exposure Risk等によってImmediate Safety Actionが必要な場合、Research完了を待たずに保護Actionを実行できる方向を持つ。
+
+一方で、
+
+~~~text
+Immediate Safety Action
+!= Knowledge Invalidity
+!= Research Refutation
+~~~
+
+とする。
+
+> **Survival保護の即時Actionと、Knowledgeが正しいか・壊れたかというResearch判断を別のAuthorityとして扱う。**
+
+Safety Actionを行ったことだけを理由にKnowledgeを無効化せず、Knowledge評価のために危険なExposureを放置もしない。
+
+---
+
+## 4.15 Aggregate / Sequence-level Survival
+
+Survivalは単一Trade・単一Decisionだけで評価しない。
+
+~~~text
+Individually bounded risk
+!= Aggregate risk bounded
+~~~
+
+とする。
+
+複数の小さいRiskでも、
+
+~~~text
+同時Exposure
+累積Exposure
+共通原因
+同一Market Direction
+同一Liquidity Risk
+同一Exchange Risk
+~~~
+
+等によって、System全体では大きなSurvival Riskになる可能性がある。
+
+具体的なCorrelation・Portfolio Risk・Stress計算は後続Risk設計で定義する。
+
+---
+
+## 4.16 Research TruthとSurvival PolicyのAuthorityを分離する
+
+Survivalを守る必要があっても、Research / Knowledgeの結論をRisk都合で書き換えてはならない。
+
+~~~text
+Research / Knowledge
+= What is supported / known?
+
+Survival / Risk Policy
+= May we act on it under current constraints?
+~~~
+
+と分離する。
+
+したがって、
+
+~~~text
+Knowledge is valid
+!= Capital / Risk Permission
+
+Risk blocks use
+!= Knowledge is false
+~~~
+
+とする。
+
+同様に、Profit期待が高いことを理由にKnowledgeのValidity・Applicability・Unknownを都合よく変更してはならない。
+
+---
+
+## 4.17 このSectionで決めないこと
+
+Section 4ではPriorityとBoundary Philosophyを定義し、具体的なRisk数値・Formula・Implementationは固定しない。
+
+以下は後続設計で扱う。
+
+~~~text
+Maximum Drawdown %
+Single Trade Risk %
+Daily / Weekly Loss Limit
+Leverage Limit
+Exposure Limit
+Capital Reserve Ratio
+Position Size Formula
+Stop Loss Rule
+CORE / OPPORTUNITY Mode Threshold
+Mode-specific Risk Envelope
+Emergency Threshold
+Correlation / Portfolio Risk Formula
+Exchange Concentration Limit
+Tail Risk Budget
+~~~
+
+---
+
+## 4.18 Core Invariants
+
+~~~text
+SP-01 Survival and Profit are both Project requirements.
+SP-02 Survival is a Hard Operating Boundary, not one interchangeable score.
+SP-03 Profit / Positive Economic Value is pursued inside that boundary.
+SP-04 Survival != Zero Risk.
+SP-05 Positive EV != automatic Trade / Capital Permission.
+SP-06 Reasonably foreseeable project-ending / unrecoverable risk is not justified by one opportunity's expected profit alone.
+SP-07 Loss != automatically Survival Failure.
+SP-08 Drawdown != automatically Project Failure.
+SP-09 Excessive permanent Risk Avoidance is not the intended Economic behavior.
+SP-10 Recoverability is part of Survival.
+SP-11 Capital Survival alone != total OS Survival.
+SP-12 Single-event bounded risk != aggregate / sequence-level bounded risk.
+SP-13 Different Risk Postures may exist, but no Mode may bypass the Hard Survival Boundary.
+SP-14 Profit shortfall / past Loss / past Profit / Model Confidence do not independently justify Hard Boundary relaxation.
+SP-15 Material Survival-Critical UNKNOWN != SAFE.
+SP-16 Hard Survival Violation cannot be numerically offset by Economic Score.
+SP-17 Immediate Safety Action != Knowledge Invalidity.
+SP-18 Safety protection may act before slow Research completion.
+SP-19 Survival Policy does not own Research / Knowledge Truth.
+SP-20 Knowledge Validity != Risk / Capital Permission.
+~~~
+
+---
+
+# Survival / Profit Priority — 一文定義
+
+> **市場理解OSは、長期生存をEconomic ActivityのHard Operating Boundaryとし、その境界を壊さない範囲で正のExpected Economic ValueとProfitを積極的に追求する。Riskをゼロにするのではなく理解・制限・回復可能なRiskを選択的に引き受け、異なるRisk Postureを許容してもHard Survival Boundaryを回避する例外は作らず、単一Opportunityの利益のために市場理解OS全体の継続能力を交換しない。**
+
+簡潔には、
+
+> **生き残るために利益を捨て続けず、利益のために生き残る能力を賭けない。**
+
+
 # 未設計
 
 以下は今後、一項目ずつ設計する。
 
 ```text
-4. Survival / Profit Priority
 5. Research Mission
 6. Research Category Philosophy
 7. Capital / Risk Philosophy
