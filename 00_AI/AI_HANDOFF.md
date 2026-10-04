@@ -13,116 +13,125 @@ State:
 ACTIVE
 
 Last Updated:
-2026-10-03
+2026-10-04
 
 Conversation Focus:
 Whole Market Understanding OS Reconstruction.
-Phase 5 R1-R4 concept-level reconstruction exists.
-R3 Integration Precision Review STEP 1-7 is now checkpointed.
-Integration Repair has NOT started yet.
+R3 Integration Repair is active.
+Package A — Knowledge Foundation is checkpointed.
+Package B — Temporal / Reproducibility is next.
 
 WORKFLOW:
 AI_WORKFLOW v0.5.3 Precision-First → Precision Review → Human View workflow is active.
 
 LATEST SAVED CHECKPOINT:
-Checkpoint 016 — R3 Integration Precision Review / Issue Consolidation & Repair Plan
+Checkpoint 017 — R3 Integration Repair / Package A — Knowledge Foundation
 
 PRIMARY:
 98_DESIGN_STUDY/市場理解OS_全体再構築_設計ログ.md
 
-CHECKPOINT 016 RESULT:
-- STEP 1 Canonical Vocabulary Review = COMPLETE
-- STEP 2 Responsibility / Authority Matrix = COMPLETE
-- STEP 3 Object Boundary Review = COMPLETE
-- STEP 4 Forward Handoff Review = COMPLETE
-- STEP 5 Version / As-Of / Lineage Review = COMPLETE
-- STEP 6 Unknown / Conflict / Dependency Review = COMPLETE
-- STEP 7 Backward Return Router Review = COMPLETE
-- Root Finding consolidation = COMPLETE
-- Integration Repair = NOT STARTED
+CHECKPOINT 017 RESULT:
+- R3-INT-001 Knowledge Record / Version / Identity = REPAIRED / WORKING
+- R3-INT-006 Admission axes / authority = REPAIRED / WORKING
+- R3-INT-007 Relationship ownership / version / time = REPAIRED / WORKING
+- R3-INT-013 Knowledge-Use Constraint authority / time = REPAIRED / WORKING
+- Package A Cross Check = PASS
+- Blocking Issue = NONE
 - Formal Current Architecture = UNCHANGED
 
-R3 INTEGRATION ROOT ISSUES:
-CRITICAL = 5
-HIGH = 8
-MEDIUM = 1
-TOTAL = 14
+PACKAGE A CORE:
+Knowledge Identity
+= stable family identity, not semantic body.
 
-CRITICAL:
-R3-INT-001 Knowledge Record / Version / Identity canonical boundary
-R3-INT-002 R3 temporal contract / look-ahead protection
-R3-INT-003 Decision Material Snapshot contract
-R3-INT-004 Decision Candidate contract backfill
-R3-INT-005 Economic Value Evaluation Availability / Sufficiency
+Knowledge Record K021@v3
+= sole canonical semantic truth for exact version.
 
-HIGH:
-R3-INT-006 Admission axes / authority
-R3-INT-007 Relationship canonical ownership / version / time
-R3-INT-008 Unknown identity / treatment
-R3-INT-009 Dependency / independence provenance
-R3-INT-010 Synthesis Result / Decision Thesis boundary
-R3-INT-011 Candidate Advancement governance / terminology
-R3-INT-012 Trade Thesis immutable revision
-R3-INT-013 Knowledge-Use Constraint authority / time
+Knowledge Version
+= logical exact-version identity, not duplicate semantic object.
 
-MEDIUM:
-R3-INT-014 Backward Return Router common rule
+Version Lineage
+= same-identity continuity / history.
 
-REPAIR PACKAGES:
-A. Knowledge Foundation
-   R3-INT-001 / 006 / 007 / 013
+Same-Identity evolution
+= Version Lineage.
 
-B. Temporal / Reproducibility
-   R3-INT-002 / 003
+Cross-Identity semantics
+= Knowledge Relationship.
 
-C. Decision Contract
-   R3-INT-004 / 008 / 009 / 010 / 011
+Knowledge Candidate
+!= Canonical Knowledge Version.
 
-D. Economic / Trade Exit
-   R3-INT-005 / 012 / 014
+Admission:
+Research Result Classification
+!= Knowledge Worthiness
+!= Canonicalization Need
+!= Admission Disposition.
 
-REPAIR ORDER:
-Package A
-→ Package B
-→ Package C
-→ Package D
-→ Adjacent Contract Re-check
-→ STEP 8 End-to-End Destruction Test
+Admission Disposition working direction:
+ADMIT / DEFER / RESEARCH_REQUIRED / REJECT.
 
-KEY INTEGRATION PRINCIPLES:
-- Canonical semantic fact has one canonical owner.
-- Generate / Assess / Decide / Canonical Write are distinct responsibilities.
-- Semantic Change → New Version.
-- Context Change → New Assessment.
-- Event Time != Information Availability Time != Assessment / Decision Time.
-- Later information != Past Decision Context.
-- Unknown != FALSE != zero != 50%.
-- No known dependency != Proven independence.
-- Decision Synthesis Result != Decision Thesis.
-- Decision Thesis != Decision Candidate.
-- Economic Value Assessment != Candidate Advancement.
-- ADVANCE != Trade / Capital Permission.
-- Trade Thesis re-evaluation must not overwrite historical reasoning.
-- Detection location != Semantic Authority.
-- Backward Routing → Forward Rebuild.
-- Fast R4 Safety != Slow Research / Knowledge conclusion.
+ADMIT_WITH_BOUNDARY / NEGATIVE / UNKNOWN / MERGE / SUPERSEDE_CANDIDATE
+are not one canonical Admission-Disposition axis.
+
+Admission authority:
+Assessment
+→ Knowledge Admission Governance
+→ Authorized Decision
+→ Knowledge Admission Writer.
+
+Canonical Knowledge Relationship:
+- exact Knowledge Version scoped
+- sole semantic relation truth owner
+- Known Contradictions removed from Knowledge Record ownership
+- DUPLICATE_CANDIDATE is not canonical relation type
+- no silent carry-forward to new versions
+- Candidate / Assessment / Governance / Writer separated
+- later relationships do not rewrite past decision context.
+
+Knowledge-Use Constraint:
+- exact Knowledge Version scoped
+- operational permission restriction, not Knowledge semantics
+- Usage Scope explicit
+- Candidate / Assessment / Governance / Writer separated
+- Release does not delete history
+- old Constraint does not silently carry to new Version
+- Emergency fast block remains authorized and does not imply RETIRE.
+
+PACKAGE A ADJACENT HANDOFF:
+PA-HO-001
+Successful Admission → Lifecycle Initialization.
+Admission Writer does not choose Lifecycle Disposition.
+
+PA-HO-002
+Admission Governance owns semantic NEW_VERSION decision.
+Admission Writer materializes:
+Knowledge Record creation
++ Version Lineage update
++ Current Canonical Knowledge Version ref update.
+
+KEY PACKAGE A INVARIANTS:
+- one canonical fact = one owner
+- Generate / Assess / Decide / Write separated
+- Current Canonical Version != ACTIVE != APPLICABLE
+- no fallback to previous version
+- new version does not silently inherit old Relationship / Constraint
+- historical consumers pin exact refs
+- canonical writers do not invent semantics
 
 FORMAL BOUNDARY:
 AI_CONTEXT remains authoritative for Formal Project Current State.
-Formal Current Architecture is unchanged.
-00_HUMAN/HUMAN_MAP.md is unchanged.
-02_ARCHITECTURE/ is unchanged.
-Checkpoint 016 is Working Study / Repair planning, not formal adoption.
+00_HUMAN/HUMAN_MAP.md unchanged.
+02_ARCHITECTURE/ unchanged.
+Checkpoint 017 remains Working Repair, not formal adoption.
 
 NEXT:
-Repair Package A — Knowledge Foundation.
+Repair Package B — Temporal / Reproducibility.
 
-FIRST REPAIR TARGET:
-R3-INT-001
-Knowledge Identity / Knowledge Record / Knowledge Version / Version Lineage canonical boundary.
+FIRST TARGET:
+R3-INT-002 — Temporal / Look-Ahead Contract.
 
-Do not jump directly to DB / Python / tables / classes.
-First close semantic ownership, authority, input/output, version, and lineage.
+Then:
+R3-INT-003 — Decision Material Snapshot Contract.
 
 Git Write Permission Reminder:
 REQUIRE CURRENT-CHAT USER AUTHORIZATION
