@@ -22580,3 +22580,1529 @@ Adjacent Contract Recheck
 → R3 Integration Final Review
 ~~~
 
+---
+
+# 28. Checkpoint 021 — R3 Adjacent Contract Recheck / Cross-Cutting Contract Repair
+
+**Date:** 2026-10-04  
+**State:** SAVED / WORKING REPAIR CHECKPOINT  
+**Formal Current Architecture Changed:** NO  
+**Phase:** 5 Reconstruction — R3 Integration Repair / Adjacent Contract Recheck  
+**Repairs Closed:** R3-ADJ-001 / R3-ADJ-002 / R3-ADJ-003 / R3-ADJ-004  
+**Cross Check Result:** PASS  
+**Blocking Issue:** NONE  
+**Next:** STEP 8 — R3 Full Destruction Test.
+
+## 28.1 Purpose
+
+Packages A-D closed the major R3 object and authority boundaries. Adjacent Contract Recheck examines the cross-cutting contracts that sit between those packages and could otherwise remain implicit:
+
+~~~text
+R3-ADJ-001
+Artifact Current-Use Validity Common Contract
+
+R3-ADJ-002
+Evaluation Requirement Profile Governance
+
+R3-ADJ-003
+Trade Thesis Adoption Contract Governance
+
+R3-ADJ-004
+Multi-Domain Return / Minimal Semantic Owner Set
+~~~
+
+The objective is not to add new architecture layers. The objective is to close authority, temporal, immutability, policy-selection and multi-domain return ambiguity before STEP 8 destruction testing.
+
+---
+
+## 28.2 Adjacent Contract Recheck — Major Boundary Result
+
+~~~text
+Admission → Knowledge Version
+= PASS
+
+Knowledge Version → Lifecycle
+= PASS
+
+Lifecycle → Applicability
+= PASS
+
+Applicability / Constraint → Decision Material Eligibility
+= PASS
+
+Decision Material Eligibility → Snapshot
+= PASS
+
+Snapshot → Decision Synthesis
+= PASS
+
+Synthesis Result → Decision Thesis
+= PASS
+
+Decision Thesis → Decision Candidate
+= PASS
+
+Decision Candidate → EVA
+= PASS
+
+EVA → Evaluation Availability / Sufficiency
+= PASS
+
+EAS → Candidate Advancement
+= PASS
+
+Candidate Advancement → Trade Thesis Formation
+= PASS
+
+Formation → Adoption
+= PASS
+
+Adoption → Writer
+= PASS
+
+Trade Thesis → R4
+= PASS
+
+R4 → Execution / Runtime
+= PASS
+
+Runtime / R4 → Backward Return Router
+= PASS WITH ADJACENT CLARIFICATIONS
+~~~
+
+No major ownership collision was found.
+
+---
+
+# 28.3 R3-ADJ-001 — Artifact Current-Use Validity Common Contract
+
+**Repair Result:**
+
+~~~text
+PASS AS WORKING REPAIR
+~~~
+
+Definition:
+
+> Artifact Current-Use Validity is a context-bound assessment of whether an exact immutable historical artifact may still be used as a material input for a specific intended downstream use at a specific current As-Of / Information Cutoff, without mutating the historical artifact.
+
+Core separation:
+
+~~~text
+Historical Integrity
+!= Current-Use Validity
+
+Current-Use Validity
+!= Freshness
+
+Current-Use Validity
+!= Knowledge Lifecycle
+
+Current-Use Validity
+!= Knowledge Applicability
+
+Current-Use Validity
+!= Knowledge-Use Constraint
+
+Current-Use Validity
+!= Economic Validity Condition
+
+Current-Use Validity
+!= Invalidation Condition
+
+Artifact Availability
+!= Current-Use Validity
+
+CUV Result
+!= Return Route
+!= Action
+~~~
+
+---
+
+## 28.4 CUV Intended-Use Specificity
+
+A universal mutable:
+
+~~~text
+is_valid = true / false
+~~~
+
+is not canonical truth.
+
+Current-use validity is always tied to:
+
+~~~text
+Exact Artifact Ref
++
+Intended Downstream Use
++
+Use Context
++
+Assessment As-Of
++
+Information Cutoff
++
+Material Dependency
++
+Assessment Policy / Method Version
+~~~
+
+The same artifact may be valid for historical audit while invalid for new R4 submission.
+
+---
+
+## 28.5 CUV Logical Contract
+
+Working semantic contract:
+
+~~~text
+Artifact Current-Use Validity Assessment
+│
+├─ Assessment ID
+├─ Exact Target Artifact Ref
+├─ Target Artifact Type
+├─ Intended Downstream Use
+├─ Use Context Ref
+├─ Assessment As-Of
+├─ Information Cutoff
+├─ Assessment Available At
+├─ Assessment Policy / Method Ref
+├─ Material Dependency Refs
+├─ Material Upstream State Refs
+├─ Freshness Findings
+├─ Temporal Findings
+├─ Invalidation Finding Refs
+├─ Relevant Unknown Refs
+├─ Dependency Change Refs
+├─ Constraint / Condition Findings
+├─ Current-Use Validity Result
+├─ Reason / Limitation Refs
+├─ Recheck Trigger Refs [if known]
+├─ Related / Predecessor Assessment Ref
+└─ Provenance
+~~~
+
+Candidate semantic result concepts:
+
+~~~text
+VALID_FOR_USE
+NOT_VALID_FOR_USE
+UNDETERMINED
+~~~
+
+Exact enum is later work.
+
+Material-use gates do not silently treat UNDETERMINED as VALID.
+
+---
+
+## 28.6 CUV Gate Locations
+
+Minimum R3 material-use boundaries:
+
+~~~text
+Decision Material Snapshot
+↓
+CUV for Decision Synthesis
+↓
+Decision Synthesis
+
+Decision Thesis
+↓
+CUV for Candidate Formation
+↓
+Decision Candidate
+
+Decision Candidate
+↓
+CUV for Economic Evaluation
+↓
+EVA
+
+EVA / EAS
+↓
+CUV for Candidate Advancement
+↓
+Advancement
+
+ADVANCE Record
+↓
+CUV for Trade Thesis Formation
+↓
+Trade Thesis
+
+Trade Thesis
+↓
+CUV for R4 Submission
+↓
+R4
+~~~
+
+CUV is generated on material use / material trigger / explicit reuse request, not mechanically for every artifact every second.
+
+---
+
+## 28.7 CUV Material Dependency / Propagation Rule
+
+~~~text
+Upstream Change
+↓
+Did the target artifact materially rely on the changed meaning
+for the intended use?
+├─ NO
+│   → may remain usable
+├─ YES
+│   → assess current-use impact
+└─ UNKNOWN
+    → UNDETERMINED
+~~~
+
+Upstream NOT_VALID does not propagate by blind flag inheritance.
+
+Current Canonical Version change does not automatically invalidate all historical descendants.
+
+Latest artifact invalid does not imply predecessor usable.
+
+Silent predecessor fallback is prohibited.
+
+---
+
+## 28.8 CUV Authority
+
+The Common CUV Contract defines shared semantics but does not create a central truth engine.
+
+Artifact-domain-specific semantic owner remains responsible for its own CUV policy / assessment semantics.
+
+Working delegation:
+
+~~~text
+Snapshot CUV
+→ Snapshot / Decision Input domain
+
+Decision Thesis CUV
+→ Decision Synthesis domain
+
+Decision Candidate CUV
+→ Candidate Formation domain
+
+EVA / EAS CUV
+→ Economic Evaluation domain
+
+Advancement CUV
+→ Candidate Advancement domain
+
+Trade Thesis CUV
+→ Trade Thesis / Adoption domain
+~~~
+
+Generic CUV must not duplicate Knowledge Lifecycle / Applicability / Constraint state.
+
+---
+
+## 28.9 CUV Temporal / Historical Rules
+
+CUV Assessment is immutable.
+
+~~~text
+CUV-101
+VALID at 10:00
+
+later trigger
+
+CUV-102
+NOT_VALID at 10:05
+~~~
+
+Do not mutate CUV-101.
+
+~~~text
+Assessment As-Of
+!= Assessment Available At
+~~~
+
+Downstream use cannot rely on a CUV assessment before its Available At.
+
+Later CUV Policy / Assessment must not rewrite past original decisions.
+
+Retrospective CUV is separate from Original Decision CUV.
+
+Historical Integrity Failure is not ordinary staleness and routes to the Temporal / Integrity owner.
+
+---
+
+## 28.10 R3-ADJ-001 Core Invariants
+
+~~~text
+CUV-01 Historical Integrity != Current-Use Validity.
+CUV-02 CUV is context-bound and intended-use-specific.
+CUV-03 Current-use invalid != historical artifact was wrong.
+CUV-04 Freshness is an input finding, not CUV truth.
+CUV-05 Universal mutable is_valid is prohibited as canonical truth.
+CUV-06 CUV targets an Exact Artifact Ref.
+CUV-07 One artifact may have multiple immutable CUV assessments.
+CUV-08 UNDETERMINED != VALID_FOR_USE.
+CUV-09 Trigger != Assessment != Result != Return Route.
+CUV-10 CUV Result does not issue ADVANCE / WAIT / ABSTAIN / EXIT.
+CUV-11 Material dependency is checked before propagation.
+CUV-12 Any upstream update != automatic downstream invalidation.
+CUV-13 Current Canonical Version change != automatic historical descendant invalidation.
+CUV-14 Common CUV Contract != Central Truth Authority.
+CUV-15 Artifact-domain owner owns its current-use semantics.
+CUV-16 CUV assessment is immutable.
+CUV-17 Later reassessment creates a new assessment.
+CUV-18 VALID assessment != forever-valid artifact.
+CUV-19 Downstream cannot use CUV before its Available At.
+CUV-20 Later assessment must not rewrite historical decision context.
+CUV-21 CUV assessor must not repair artifact semantics.
+CUV-22 CUV assessor must not choose predecessor fallback.
+CUV-23 Latest artifact invalid != predecessor automatically valid.
+CUV-24 Actual Exposure may require parallel fast safety routing.
+CUV-25 Historical replay uses then-available CUV information only.
+~~~
+
+---
+
+# 28.11 R3-ADJ-002 — Evaluation Requirement Profile Governance
+
+**Repair Result:**
+
+~~~text
+PASS AS WORKING REPAIR
+~~~
+
+Definition:
+
+> Evaluation Requirement Profile is a versioned Economic Evaluation Policy Contract specifying what evaluation modes, economic components, probability semantics, cost / tail / stress / dependency / freshness / model coverage are required for a specific Candidate Objective / Instrument or Exposure Context / Horizon / Evaluation Purpose.
+
+Core:
+
+~~~text
+EVA
+= what was economically evaluated
+
+Evaluation Requirement Profile
+= what must be evaluated
+
+EAS
+= whether the EVA satisfies the applicable Requirement basis
+~~~
+
+Requirement Profile:
+
+~~~text
+!= Economic Value
+!= Market Truth
+!= Candidate Semantics
+!= Candidate Advancement Decision
+~~~
+
+---
+
+## 28.12 Evaluation Requirement Authority
+
+Canonical policy authority:
+
+~~~text
+Economic Evaluation Requirement Governance
+~~~
+
+Authority chain:
+
+~~~text
+Requirement Change Trigger
+↓
+Evaluation Requirement Profile Proposal
+↓
+Requirement Impact Assessment
+↓
+Economic Evaluation Requirement Governance
+↓
+Authorized Requirement Profile Decision
+↓
+Requirement Profile Writer
+↓
+Available Versioned Evaluation Requirement Profile
+↓
+Requirement Profile Resolver
+↓
+Exact Applicable Profile Version / Resolved Requirement Set
+↓
+EAS
+~~~
+
+Separation:
+
+~~~text
+Trigger
+!= Proposal
+!= Impact Assessment
+!= Governance Decision
+!= Write
+!= Profile Resolution
+!= Sufficiency Assessment
+~~~
+
+---
+
+## 28.13 Requirement Consumers vs Owners
+
+~~~text
+Economic Value Engine
+= Requirement consumer
+
+EAS
+= Requirement consumer
+
+Candidate Advancement
+= EAS consumer
+
+R4
+= Capital authority
+
+Runtime / AI
+= may generate review trigger / proposal
+~~~
+
+None of them may silently mutate the active Requirement Profile.
+
+Candidate Advancement Policy does not own the economic evaluation requirements themselves.
+
+---
+
+## 28.14 Requirement Profile Identity / Version
+
+Material requirement changes create a new Profile Version.
+
+Examples:
+
+~~~text
+OPTIONAL → REQUIRED
+new required evaluation mode
+new probability semantics requirement
+new tail / stress requirement
+freshness threshold change
+model coverage requirement change
+cost coverage change
+dependency requirement change
+~~~
+
+Materially different evaluation purposes may use separate Profile identities.
+
+Profile explosion should be controlled through semantic classes and explicit conditional rules rather than market-symbol × timeframe combinatorial duplication.
+
+---
+
+## 28.15 Requirement Profile Resolution / Composition
+
+Logical resolver:
+
+> Candidate Objective / Instrument / Exposure Context / Horizon / Evaluation Purpose / As-Of are used to resolve the exact then-available applicable Requirement Profile Version(s).
+
+Resolver:
+
+~~~text
+!= Requirement Author
+!= EAS
+~~~
+
+Profile composition may use:
+
+~~~text
+Base Profile
++
+explicit Overlay(s)
+↓
+Resolved Requirement Set
+~~~
+
+Composition is explicit and preserves exact source Profile refs.
+
+Conflict resolution is governed; runtime discretion is prohibited.
+
+Unresolved profile conflict remains UNDETERMINED / unresolved and does not silently fallback.
+
+Latest Profile unavailable does not imply previous Profile automatically usable.
+
+---
+
+## 28.16 Requirement Profile Temporal Rules
+
+~~~text
+Governance Decision Time
+!= Effective Time
+!= Available At
+~~~
+
+A Profile cannot be used before Available At.
+
+Retroactive Effective Time does not create retroactive information availability.
+
+Historical EAS pins exact then-available Requirement Profile basis.
+
+Later Profile Version must not rewrite:
+
+~~~text
+Historical EAS
+Historical ADVANCE
+Historical Trade Thesis
+~~~
+
+Material downstream impact is handled through CUV + Return Router.
+
+---
+
+## 28.17 Research / Production Boundary
+
+~~~text
+Research Sufficiency
+!= Production Advancement Sufficiency
+~~~
+
+Exploratory research evaluation may use a different Requirement Profile from Candidate Advancement production evaluation.
+
+A Research Profile does not silently become a Production Profile.
+
+Stress Lab / Failure Museum / Analyzer / Trainer / AI / Human findings may produce Requirement change proposals, not automatic active policy mutation.
+
+Emergency relaxation cannot bypass the requirement contract.
+
+Temporary emergency tightening may exist only under a traceable pre-authorized policy / overlay.
+
+---
+
+## 28.18 R3-ADJ-002 Core Invariants
+
+~~~text
+ERP-01 Requirement Profile is a versioned Economic Evaluation Policy Contract.
+ERP-02 Economic Evaluation Requirement Governance owns canonical requirement policy.
+ERP-03 EVA / EAS / Advancement / R4 / Runtime / AI do not author active requirements ad hoc.
+ERP-04 AI may propose requirement changes, not activate them.
+ERP-05 Trigger != Proposal != Assessment != Governance != Write.
+ERP-06 Material requirement change creates a new immutable Profile Version.
+ERP-07 Later Profile does not rewrite historical EAS / ADVANCE / Trade Thesis.
+ERP-08 Resolver selects; it does not author.
+ERP-09 Resolver != EAS.
+ERP-10 Composition is explicit and exact-version traceable.
+ERP-11 Profile conflict is not resolved by arbitrary runtime discretion.
+ERP-12 Unresolved conflict must remain unresolved / UNDETERMINED.
+ERP-13 Decision Time != Effective Time != Available At.
+ERP-14 Future Profile must not affect original historical evaluation.
+ERP-15 Retroactive effective time != retroactive information availability.
+ERP-16 Research Sufficiency != Production Sufficiency.
+ERP-17 Stress / Failure findings may propose, not mutate, requirements.
+ERP-18 Latest Profile unavailable != predecessor automatically usable.
+ERP-19 EAS references exact resolved Requirement basis.
+ERP-20 Advancement consumes EAS; it does not reinterpret Requirement semantics.
+ERP-21 Governance does not decide Economic attractiveness.
+ERP-22 Governance does not decide ADVANCE / WAIT / ABSTAIN.
+ERP-23 Governance does not decide Capital Permission.
+~~~
+
+---
+
+# 28.19 R3-ADJ-003 — Trade Thesis Adoption Contract Governance
+
+**Repair Result:**
+
+~~~text
+PASS AS WORKING REPAIR
+~~~
+
+Definition:
+
+> Trade Thesis Adoption Contract is a versioned Reasoning Integrity Contract defining what a Trade Thesis Formation Result must satisfy before it may be adopted as a formal R3 Trade Thesis available for R4 submission.
+
+Core separation:
+
+~~~text
+Candidate Advancement Policy
+= may the Candidate proceed to Trade Thesis Formation?
+
+Trade Thesis Formation Policy
+= how is the Trade-specific reasoning package formed?
+
+Trade Thesis Adoption Contract
+= is that Formation Result complete and integrity-valid as a formal R3 submission artifact?
+
+R4
+= may capital / exposure be permitted?
+~~~
+
+---
+
+## 28.20 Trade Thesis Adoption Contract Authority
+
+Canonical authority:
+
+~~~text
+Trade Thesis Adoption Contract Governance
+~~~
+
+Authority chain:
+
+~~~text
+Adoption Contract Change Trigger
+↓
+Trade Thesis Adoption Contract Proposal
+↓
+Adoption Contract Impact Assessment
+↓
+Trade Thesis Adoption Contract Governance
+↓
+Authorized Adoption Contract Version
+↓
+Adoption Contract Writer
+↓
+Available Versioned Adoption Contract
+↓
+Adoption Contract Resolver
+↓
+Exact Applicable Contract Version / Resolved Contract Set
+↓
+Trade Thesis Adoption Assessment
+↓
+CONTRACT_SATISFIED
+↓
+Trade Thesis Adoption Authorization
+↓
+Trade Thesis Writer
+↓
+Immutable Trade Thesis
+~~~
+
+Contract authoring is distinct from Formation / Assessment / Authorization / Writer / R4.
+
+---
+
+## 28.21 Adoption Contract Scope
+
+Working integrity blocks:
+
+~~~text
+A. Upstream Exact Reference Integrity
+B. Current-Use Validity Integrity
+C. Temporal / Availability Integrity
+D. Semantic Preservation Integrity
+E. Reasoning / Unknown / Dependency Completeness
+F. R4 Handoff Completeness
+~~~
+
+The Adoption Contract does not define:
+
+~~~text
+Economic attractiveness
+Evaluation Sufficiency truth
+Unknown acceptance
+ADVANCE / WAIT / ABSTAIN
+Capital Permission
+Execution Permission
+~~~
+
+---
+
+## 28.22 Adoption Contract Result Semantics
+
+Candidate result concepts:
+
+~~~text
+CONTRACT_SATISFIED
+CONTRACT_NOT_SATISFIED
+CONTRACT_UNDETERMINED
+~~~
+
+Exact enum is later work.
+
+Important:
+
+~~~text
+CONTRACT_NOT_SATISFIED
+!= WAIT
+!= ABSTAIN
+
+CONTRACT_UNDETERMINED
+!= Adoptable
+~~~
+
+Adoption Assessment checks exact current-use-valid upstream refs; it does not author CUV truth.
+
+---
+
+## 28.23 Non-Bypassable Core
+
+Working core integrity requirements include:
+
+~~~text
+Exact upstream artifact references
+Exact ADVANCE Record
+Material upstream CUV pass
+No-Look-Ahead / temporal integrity
+Accepted Unknown preservation
+Material Dependency preservation
+Candidate semantic preservation
+Economic assessment non-mutation
+Reasoning provenance
+Immutable lineage
+Writer authorization requirement
+~~~
+
+Market / instrument overlays may add or tighten requirements but must not weaken the Non-Bypassable Core.
+
+Emergency safety uses R4 / Runtime fast safety rather than bypassing core R3 adoption integrity.
+
+---
+
+## 28.24 Adoption Contract Resolution / Composition
+
+A Base Contract + explicit market / instrument overlay model is permitted.
+
+Composition preserves exact Contract Version refs.
+
+Resolver:
+
+~~~text
+selects applicable Contract basis
+!= Contract Author
+~~~
+
+Unresolved contract selection / conflict does not silently fallback to a predecessor contract.
+
+Latest Contract unavailable does not imply previous Contract automatically usable.
+
+Formation Policy Version age alone does not determine adoption success or failure; Contract satisfaction does.
+
+---
+
+## 28.25 Trade Thesis Contract Backfill
+
+Working Trade Thesis logical contract is extended to preserve the adoption basis:
+
+~~~text
+Exact Trade Thesis Adoption Contract Ref
+or
+Resolved Adoption Contract Set Ref
+
+Trade Thesis Adoption Assessment Ref
+
+Adoption Authorization Ref
+~~~
+
+This complements the already defined:
+
+~~~text
+Formation Policy / Method Ref
+Exact Decision Thesis Ref(s)
+Exact Candidate Version Ref
+Exact EVA Ref
+Exact EAS Ref
+Exact Advancement Record Ref
+Accepted Unknown Refs
+Material Dependency Refs
+Economic Validity Condition Refs
+Trade-specific Invalidation Conditions
+~~~
+
+---
+
+## 28.26 Adoption Temporal / Historical Rules
+
+~~~text
+Formation As-Of
+!= Adoption Assessment Time
+!= Adoption Authorization Time
+!= Writer Materialization Time
+!= Trade Thesis Available At
+~~~
+
+A Trade Thesis is downstream-usable only after successful materialization / Available At.
+
+Later Adoption Contract Version must not rewrite historical Adoption / Trade Thesis.
+
+A later material Contract change may trigger CUV reassessment for current reuse.
+
+Retrospective Adoption Review remains separate from Original Adoption.
+
+---
+
+## 28.27 R3-ADJ-003 Core Invariants
+
+~~~text
+TAC-01 Adoption Contract is a versioned Reasoning Integrity Contract.
+TAC-02 Adoption Contract != Advancement Policy != ERP != R4 Capital Contract.
+TAC-03 Adoption Contract Governance owns canonical adoption-integrity policy.
+TAC-04 Formation / Adoption Assessment / R4 / Runtime / AI do not author active contract ad hoc.
+TAC-05 Adoption does not redefine Economic attractiveness or Unknown acceptance.
+TAC-06 Material Contract change creates a new immutable Contract Version.
+TAC-07 Adoption Assessment pins an exact Contract basis.
+TAC-08 Adoption Assessment Result != ADVANCE / WAIT / ABSTAIN.
+TAC-09 Material CUV UNDETERMINED must not silently pass.
+TAC-10 Exact upstream refs and temporal integrity are required.
+TAC-11 Candidate / EVA / Unknown / Dependency semantics must not be mutated.
+TAC-12 Formation Policy != Adoption Contract.
+TAC-13 Adoption Authorization permits materialization only.
+TAC-14 Authorization != successful materialization.
+TAC-15 Writer must not reinterpret Contract.
+TAC-16 Writer failure means Trade Thesis is not available.
+TAC-17 Base Non-Bypassable Core must not be weakened by overlays.
+TAC-18 Contract composition is exact-version traceable.
+TAC-19 Unresolved Contract selection does not silently fallback.
+TAC-20 Decision Time != Effective Time != Available At.
+TAC-21 Later Contract does not rewrite historical adoption / Trade Thesis.
+TAC-22 Emergency safety does not bypass Core Adoption Integrity.
+TAC-23 Multiple Trade Thesis branches may independently satisfy the Contract.
+TAC-24 R4 BLOCK != Adoption failure.
+TAC-25 Historical replay uses then-available exact Contract / Assessment / Authorization lineage.
+~~~
+
+---
+
+# 28.28 R3-ADJ-004 — Multi-Domain Return / Minimal Semantic Owner Set
+
+**Repair Result:**
+
+~~~text
+PASS AS WORKING REPAIR
+~~~
+
+Definition:
+
+> Minimal Semantic Owner Set is the smallest non-redundant set of semantic owners required to repair all material findings from a source event, after decomposing the event into atomic findings and removing downstream routes that are necessarily regenerated by a valid upstream repair, while preserving independent semantic owners and any required fast exposure-safety route.
+
+Core:
+
+~~~text
+One Source Event
+may produce multiple Semantic Findings.
+
+One Source Event
+!= One Return destination.
+
+Finding Count
+!= Return Count.
+
+Minimal
+!= Single Owner.
+~~~
+
+---
+
+## 28.29 Multi-Domain Routing Flow
+
+~~~text
+One Source Event
+↓
+Atomic Finding Decomposition
+↓
+Semantic Domain Classification
+↓
+Material Dependency / CUV Impact
+↓
+Candidate Semantic Owners
+↓
+Route Dominance / Subsumption Check
+↓
+Minimal Semantic Owner Set
+│
+├─ Slow Semantic Route A
+├─ Slow Semantic Route B [if independently required]
+└─ Fast Safety Route [if material Actual Exposure risk]
+↓
+Required Join Point
+↓
+Forward Rebuild
+~~~
+
+Routing still follows the changed meaning, not the detection location.
+
+---
+
+## 28.30 Route Subsumption Rule
+
+An upstream route may subsume a downstream route only when:
+
+~~~text
+1. The upstream owner owns the actual changed meaning.
+2. The downstream artifact materially depends on that meaning.
+3. Normal forward rebuild from the upstream owner necessarily regenerates the downstream semantics.
+4. The downstream route has no independent semantic repair obligation.
+~~~
+
+Example:
+
+~~~text
+Decision Thesis materially changes
+→ new Snapshot / Synthesis
+→ new Thesis
+→ new Candidate
+→ new EVA
+~~~
+
+The same-branch Candidate / EVA returns are subsumed.
+
+But an independent R4 capital issue is not subsumed.
+
+---
+
+## 28.31 Return Route Relations
+
+Child return routes may be:
+
+~~~text
+SEQUENTIAL
+PARALLEL
+SUBSUMED
+~~~
+
+Semantic relation concepts:
+
+~~~text
+depends_on
+parallel_with
+subsumed_by
+joins_at
+~~~
+
+Sequential is used when one owner's output is required by the next owner.
+
+Parallel is used for independent semantic repair.
+
+Subsumed records why a lower route was not separately emitted.
+
+---
+
+## 28.32 Same-Owner Merge Rule
+
+Multiple findings may be merged into one Return Request when they share:
+
+~~~text
+same Semantic Owner
++
+same affected Artifact Scope
++
+same relevant Evaluation / Decision Context
+~~~
+
+Example:
+
+~~~text
+Funding change
+Spread change
+Slippage change
+→ one Economic Return Request
+with three Finding refs
+~~~
+
+Merge does not erase individual finding identity.
+
+Same owner does not automatically permit cross-lineage semantic merge.
+
+---
+
+## 28.33 Return Routing Group
+
+Logical trace / coordination concept:
+
+~~~text
+Return Routing Group
+│
+├─ Return Group ID
+├─ Root Source Event Ref
+├─ Atomic Finding Refs[]
+├─ Detection Context
+├─ Actual Exposure State Ref
+├─ Semantic Domain Classifications[]
+├─ Material Impact Refs[]
+├─ Candidate Owner Refs[]
+├─ Subsumption Decisions[]
+├─ Minimal Semantic Owner Set[]
+├─ Slow Semantic Return Routes[]
+├─ Optional Fast Safety Route[]
+├─ Join / Synchronization Requirements
+├─ Forward Rebuild Boundary
+├─ Group As-Of
+├─ Information Cutoff
+├─ Available At
+└─ Provenance
+~~~
+
+Return Routing Group is not a new truth authority.
+
+---
+
+## 28.34 Fast Safety vs Slow Semantic Repair
+
+Actual Exposure safety is an independent routing dimension.
+
+If Actual Exposure exists and a material safety trigger fires:
+
+~~~text
+Fast Runtime / R4 Safety
++
+Slow Semantic / Research Repair
+~~~
+
+may run in parallel.
+
+Fast Safety:
+
+~~~text
+must not wait for slow semantic repair
+!= Semantic Repair
+!= Knowledge Retirement
+!= historical rewrite
+~~~
+
+Semantic repair:
+
+~~~text
+!= immediate Position Action
+~~~
+
+No Actual Exposure means no active-exposure safety route is required.
+
+Future Decision Repair and Existing Exposure Protection must not be conflated.
+
+---
+
+## 28.35 Required Join Point
+
+When multiple material slow semantic routes must converge before future downstream use, the join is explicit.
+
+Definition:
+
+> Required Join Point is the first common downstream authority boundary at which all required repaired exact upstream outputs must be available and compatible before forward decision reuse resumes.
+
+Examples:
+
+~~~text
+Knowledge repair + Market Context change
+→ Join at new Decision Material Snapshot / Synthesis input boundary
+
+Economic re-evaluation + current Portfolio state
+→ Join at R4 Capital Decision
+~~~
+
+A failed required slow child route prevents false repair-complete status for dependent future-use paths.
+
+Fast Safety is outside the slow join barrier.
+
+---
+
+## 28.36 Reclassification / Historical Rules
+
+Initial routing classification may later prove wrong.
+
+Do not mutate the old routing record.
+
+~~~text
+RR-101
+initial classification = Economic
+
+new finding
+↓
+RR-102
+reclassified route = Candidate Formation
+~~~
+
+Misclassification remains historical evidence.
+
+Repeated return cycles create new immutable routing lineage.
+
+Historical replay uses the original Source Event / Finding / Owner / route lineage, not later repaired routes.
+
+---
+
+## 28.37 R3-ADJ-004 Core Invariants
+
+~~~text
+MSO-01 Source Event != Semantic Finding.
+MSO-02 One event may create multiple findings.
+MSO-03 Finding count != Return count.
+MSO-04 Every material finding must be covered by at least one route.
+MSO-05 NON_MATERIAL finding may explicitly produce no repair route.
+MSO-06 Silent finding disappearance is prohibited.
+MSO-07 Minimal Semantic Owner Set contains non-redundant owners only.
+MSO-08 Minimal != single owner.
+MSO-09 Nearest Semantic Owner principle remains active.
+MSO-10 Upstream route subsumes downstream only under explicit dependency / rebuild conditions.
+MSO-11 Independent semantic state retains its own owner route.
+MSO-12 Candidate semantic repair may subsume same-branch EVA repair.
+MSO-13 Decision Thesis repair may subsume same-branch Candidate / EVA repair.
+MSO-14 Knowledge repair does not subsume independent R4 capital state.
+MSO-15 Material Dependency / CUV is checked before subsumption.
+MSO-16 Fast Safety route is not subsumed by slow semantic repair.
+MSO-17 Same Owner + same Scope may merge findings into one request.
+MSO-18 Merge preserves individual finding identity.
+MSO-19 Same owner does not imply cross-lineage merge.
+MSO-20 Route relation may be Sequential / Parallel / Subsumed.
+MSO-21 Return Routing Group is trace / coordination, not truth authority.
+MSO-22 Required Join Point is explicit when slow routes must converge.
+MSO-23 Fast Safety does not wait for slow join.
+MSO-24 Failed required child route blocks false future-use repair completion.
+MSO-25 Join creates new downstream artifacts; it does not mutate history.
+MSO-26 Misclassification correction creates new routing lineage.
+MSO-27 Routing Policy / Method is explicit / traceable.
+MSO-28 Router does not decide Knowledge truth, Economic attractiveness or Capital Permission.
+MSO-29 Future Decision Repair != Existing Exposure Protection.
+MSO-30 Historical replay preserves original return lineage.
+~~~
+
+---
+
+# 28.38 Adjacent Cross Check — Authority
+
+Cross-check:
+
+~~~text
+CUV Common Contract
+vs Lifecycle / Applicability / Constraint
+= NO DUPLICATE AUTHORITY
+
+Economic Evaluation Requirement Governance
+vs EVA / EAS / Advancement / R4
+= NO DUPLICATE AUTHORITY
+
+Trade Thesis Adoption Contract Governance
+vs Advancement / Formation / R4
+= NO DUPLICATE AUTHORITY
+
+Minimal Semantic Owner Set
+vs semantic domain owners
+= NO TRUTH OWNERSHIP
+
+Fast Safety
+vs Semantic Repair
+= AUTHORITY SEPARATED
+~~~
+
+Result:
+
+~~~text
+PASS
+~~~
+
+---
+
+# 28.39 Adjacent Cross Check — Temporal / Historical
+
+~~~text
+CUV Assessment pins As-Of / Cutoff / Available At
+= PASS
+
+Requirement Profile pins Version / Available At
+= PASS
+
+Adoption Contract pins Version / Available At
+= PASS
+
+Return Routing Group pins event / finding / route time context
+= PASS
+
+Future policy / contract cannot retroactively enter Original Decision
+= PASS
+
+Retroactive Effective Time != retroactive availability
+= PASS
+
+Historical artifacts remain immutable
+= PASS
+
+Silent predecessor fallback
+= PROHIBITED
+~~~
+
+Result:
+
+~~~text
+PASS
+~~~
+
+---
+
+# 28.40 Adjacent Cross Check — Unknown / Dependency
+
+~~~text
+CUV UNDETERMINED != VALID
+= PASS
+
+Requirement resolution conflict remains unresolved
+= PASS
+
+Adoption CONTRACT_UNDETERMINED != Adoptable
+= PASS
+
+Material Unknown / Dependency does not silently disappear
+= PASS
+
+Material Dependency controls CUV propagation / route subsumption
+= PASS
+
+Decision Dependency != Economic Dependency
+= PRESERVED
+
+Finding merge does not erase Finding identity
+= PASS
+~~~
+
+Result:
+
+~~~text
+PASS
+~~~
+
+---
+
+# 28.41 Adjacent Cross Check — Forward / Backward Loop
+
+Forward:
+
+~~~text
+Decision Artifact
+↓
+CUV Gate
+↓
+Candidate / EVA / EAS
+↓
+Advancement
+↓
+Trade Thesis Formation
+↓
+Adoption Contract
+↓
+Immutable Trade Thesis
+↓
+R4
+~~~
+
+Backward:
+
+~~~text
+R4 / Runtime / downstream Event
+↓
+Atomic Findings
+↓
+Semantic classification
+↓
+Material Dependency / CUV impact
+↓
+Minimal Semantic Owner Set
+↓
+Repair at nearest non-redundant owners
+↓
+Required Join
+↓
+New exact downstream artifacts
+~~~
+
+Result:
+
+~~~text
+PASS
+~~~
+
+---
+
+# 28.42 Adjacent Cross Check — Non-Blocking Clarifications
+
+The cross-check found no new blocking issue, but four clarifications are fixed before STEP 8.
+
+### ADJ-HO-001 — CUV Policy Ownership
+
+~~~text
+Common CUV Contract
+!= central policy owner.
+
+Artifact-domain governance / semantic owner
+owns its versioned CUV assessment policy.
+
+Common CUV invariants
+must not be weakened by a domain-specific policy.
+~~~
+
+### ADJ-HO-002 — No Recursive CUV Chain
+
+~~~text
+CUV of CUV of CUV ...
+is not required.
+
+A downstream use requests / pins
+an exact CUV Assessment
+for the target artifact.
+
+If the assessment itself is too old for the use boundary,
+a new target-artifact CUV Assessment is created.
+~~~
+
+This prevents recursive validity chains.
+
+### ADJ-HO-003 — Return Routing Group Must Not Deadlock
+
+Within one routing group, required child-route dependency / join relations must not form an unresolved circular wait.
+
+~~~text
+A waits B
+B waits A
+→ invalid routing coordination
+~~~
+
+A semantic cycle requires:
+
+~~~text
+reclassification,
+higher common coordination point,
+or explicit unresolved routing assessment
+~~~
+
+not infinite bounce.
+
+### ADJ-HO-004 — Join Uses Exact Repaired Outputs
+
+A Required Join Point may resume forward flow only from exact repaired outputs that:
+
+~~~text
+are available by the Join cutoff,
+satisfy required Current-Use Validity,
+and cover all non-subsumed required child obligations.
+~~~
+
+A required incomplete child route prevents the joined downstream artifact from being created.
+
+---
+
+# 28.43 Adjacent Contract Recheck Final Result
+
+~~~text
+R3-ADJ-001
+Artifact Current-Use Validity Common Contract
+= REPAIRED / WORKING
+
+R3-ADJ-002
+Evaluation Requirement Profile Governance
+= REPAIRED / WORKING
+
+R3-ADJ-003
+Trade Thesis Adoption Contract Governance
+= REPAIRED / WORKING
+
+R3-ADJ-004
+Multi-Domain Return / Minimal Semantic Owner Set
+= REPAIRED / WORKING
+
+Authority Cross Check
+= PASS
+
+Temporal / Historical Cross Check
+= PASS
+
+Unknown / Dependency Cross Check
+= PASS
+
+Forward / Backward Loop Cross Check
+= PASS
+
+Non-Blocking Clarifications
+= 4
+
+Blocking Issue
+= NONE
+~~~
+
+---
+
+## 28.44 R3 Integration State Before STEP 8
+
+~~~text
+Package A — Knowledge Foundation
+= CHECKPOINTED
+
+Package B — Temporal / Reproducibility
+= CHECKPOINTED
+
+Package C — Decision Contract / Decision Lineage
+= CHECKPOINTED
+
+Package D — Economic / Trade Exit / Return Router
+= CHECKPOINTED
+
+Adjacent Contract Recheck
+= CHECKPOINTED
+
+R3 Integration Blocking Issue
+= NONE
+~~~
+
+Next work:
+
+~~~text
+STEP 8
+R3 Full Destruction Test
+↓
+R3 Integration Final Review
+↓
+Formal Adoption Decision later
+~~~
+
+---
+
+## 28.45 Save / Adoption Boundary
+
+Checkpoint 021 saves the Adjacent Contract Recheck as Working Repair only.
+
+Formal Current remains unchanged.
+
+Do not modify:
+
+~~~text
+00_AI/AI_CONTEXT.md
+00_HUMAN/HUMAN_MAP.md
+02_ARCHITECTURE/
+~~~
+
+Still not decided here:
+
+~~~text
+physical CUV service / storage
+physical Requirement Profile tables
+physical Adoption Contract tables
+physical Return Routing Group implementation
+runtime scheduling / concurrency
+final exact enums / field names
+final fail-open / fail-closed implementation
+formal adoption into 02_ARCHITECTURE
+~~~
+
+---
+
+## 28.46 Checkpoint Result
+
+~~~text
+Checkpoint 021
+R3 Adjacent Contract Recheck / Cross-Cutting Contract Repair
+= SAVED WORKING REPAIR
+
+R3-ADJ-001
+= REPAIRED / WORKING
+
+R3-ADJ-002
+= REPAIRED / WORKING
+
+R3-ADJ-003
+= REPAIRED / WORKING
+
+R3-ADJ-004
+= REPAIRED / WORKING
+
+Adjacent Contract Cross Check
+= PASS
+
+Blocking Issue
+= NONE
+
+Formal Current Architecture
+= UNCHANGED
+
+NEXT
+=
+STEP 8 — R3 Full Destruction Test
+~~~
+
