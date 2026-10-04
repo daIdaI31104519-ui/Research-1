@@ -24106,3 +24106,1104 @@ NEXT
 STEP 8 — R3 Full Destruction Test
 ~~~
 
+
+
+---
+
+# 29. Checkpoint 022 — R3 Full Destruction / Execution Integrity / Formal Adoption Readiness
+
+**Checkpoint Type:** Working Design Checkpoint / NOT Formal Current Architecture
+
+**Scope:**
+Checkpoint 021以降に実施したR3 Full Destruction Test、Concurrency / Recovery Repair、Re-Destruction、Composite Destruction、Final Review、Formal Adoption Readiness Reviewを保存する。
+
+---
+
+## 29.1 Destruction Test Scope / Result
+
+実施したUnique Destruction Scenario:
+
+~~~text
+Batch 1 — Temporal / Knowledge / Decision Lineage
+= 20 cases
+
+Batch 2 — Economic Value / EAS / Advancement
+= 40 cases
+
+Batch 3 — Trade Thesis / Adoption / R4 Boundary
+= 45 cases
+
+Batch 4 — Runtime / Return Router / Multi-Domain
+= 35 cases
+
+Batch 5 — Concurrency / Race / Recovery
+= 40 cases
+
+Cross-Repair Composite Destruction
+= 30 cases
+
+Unique Scenarios
+= 210
+~~~
+
+Batch 5 failing casesはRepair後に40 casesを再実行した。
+
+~~~text
+Original attacks
+= 180
+
+Batch 5 re-attacks
+= 40
+
+Composite attacks
+= 30
+
+Total destruction executions
+= 250
+~~~
+
+Final Working Verdict:
+
+~~~text
+Semantic Blocking
+= NONE
+
+Temporal Blocking
+= NONE
+
+Economic Blocking
+= NONE
+
+Concurrency Blocking
+= NONE
+
+Recovery Blocking
+= NONE
+
+Replay Blocking
+= NONE
+
+Composite Interaction Blocking
+= NONE
+
+Cross-Layer Handoff Requirements
+= REMAIN
+
+Overall
+= PASS WITH CROSS-LAYER HANDOFF REQUIREMENTS
+~~~
+
+---
+
+## 29.2 Batch 1 — Temporal / Knowledge / Decision Lineage
+
+Result:
+
+~~~text
+PASS
+= 19
+
+PASS WITH CLARIFICATION
+= 1
+
+FAIL
+= 0
+
+BLOCKING
+= 0
+~~~
+
+Clarification:
+
+### DST-HO-001 — Material Dependency Role
+
+Multi-source downstream Artifactは、単に複数Refを持つだけではなく、各Material Sourceの意味上のRoleを保持する。
+
+Candidate concepts:
+
+~~~text
+REQUIRED
+SUPPORTING
+ALTERNATIVE
+CONDITIONAL
+~~~
+
+Exact enumはDetailed Designで決める。
+
+核心:
+
+~~~text
+Multiple source refs
+!= equal dependency
+
+Loss of one source
+does not automatically invalidate the downstream artifact
+unless its material dependency role requires it.
+~~~
+
+---
+
+## 29.3 Batch 2 — Economic Value / EAS / Advancement
+
+Batch result:
+
+~~~text
+PASS
+= 37
+
+PASS WITH CLARIFICATION
+= 3
+
+FAIL
+= 0
+
+BLOCKING
+= 0
+~~~
+
+Fixed clarifications:
+
+### DST-HO-002 — Economic Metric Qualification / Derivation Trace
+
+重要Metricは少なくとも以下の意味Contextを追跡可能にする。
+
+~~~text
+Metric Semantic Type
+Evaluation Mode
+Probability Semantics
+Model / Mapping Ref
+As-Of
+Available At
+~~~
+
+Do not collapse:
+
+~~~text
+Strict Expected EV
+Scenario-weighted estimate
+Stress result
+Interval estimate
+~~~
+
+under one generic EV label.
+
+### DST-HO-003 — Sufficiency Purpose Binding
+
+~~~text
+EAS.result = SUFFICIENT
+~~~
+
+だけをCandidate Advancementへ渡さない。
+
+Advancement consumption must align:
+
+~~~text
+Exact Candidate Version
+Evaluation Purpose
+Objective
+Resolved Requirement Basis
+EAS Result
+Advancement Policy
+~~~
+
+Research Sufficiency != Production Advancement Sufficiency.
+
+---
+
+## 29.4 Batch 3 — Trade Thesis / Adoption / R4
+
+Batch result:
+
+~~~text
+PASS
+= 43
+
+PASS WITH CLARIFICATION
+= 2
+
+FAIL
+= 0
+
+BLOCKING
+= 0
+~~~
+
+Main surviving rules:
+
+~~~text
+Formation
+!= Adoption
+!= Materialization
+!= Capital Permission
+!= Exposure Activation
+
+ADVANCE
+!= Trade Permission
+
+R4 BLOCK
+!= Trade Thesis invalid
+
+R4 must not mutate:
+LONG → SHORT
+RETURN_SEEKING → HEDGE
+or other candidate semantics.
+
+No Fill
+→ no Active Runtime Assumption Set.
+~~~
+
+### DST-HO-004 — Exposure / Trade Thesis Attribution
+
+~~~text
+Net Position
+!= Single Trade Thesis
+~~~
+
+Actual Exposure may derive from multiple:
+
+~~~text
+Trade Thesis refs
+Candidate refs
+Execution refs
+Fill refs
+~~~
+
+Runtime handoff must preserve contribution / attribution refs.
+
+---
+
+## 29.5 Batch 4 — Runtime / Return Router / Multi-Domain
+
+Batch result:
+
+~~~text
+PASS
+= 30
+
+PASS WITH CLARIFICATION
+= 5
+
+FAIL
+= 0
+
+BLOCKING
+= 0
+~~~
+
+Fixed clarifications:
+
+### DST-HO-005 — Return Work Supersession / Obsolescence
+
+New Event does not delete older Return work.
+
+Older work may become:
+
+~~~text
+OBSOLETE_FOR_CURRENT_JOIN
+~~~
+
+through a separate immutable assessment.
+
+### DST-HO-006 — Join Compatibility / Temporal Coherence
+
+Required Join requires more than individual availability.
+
+~~~text
+Available
++
+Current-Use Valid
++
+same intended downstream context
++
+mutually compatible temporal basis
++
+all required non-subsumed obligations
+~~~
+
+Individually valid != jointly compatible.
+
+### DST-HO-007 — Return Loop / Oscillation Guard
+
+Repeated equivalent semantic return loops in bounded context must trigger loop detection.
+
+Do not solve loops by:
+
+~~~text
+history mutation
+fake completion
+silent policy relaxation
+~~~
+
+Fast Safety continues independently.
+
+### DST-HO-008 — Fast Safety Obligation Trace
+
+Track separately:
+
+~~~text
+Safety Trigger
+Action Request
+Action Outcome
+Remaining Exposure Risk
+~~~
+
+Safety Request issued != Safety achieved.
+
+---
+
+## 29.6 Batch 5 — First Concurrency / Recovery Result
+
+First run found no new semantic design failure, but found blocking execution-integrity gaps.
+
+~~~text
+Semantic Design Failure
+= 0
+
+Concurrency / Recovery Contract Gaps
+= FOUND
+
+R3 Final Review Blocking
+= YES at first run
+~~~
+
+Root repair areas:
+
+~~~text
+DST-HO-009
+Canonical Materialization Idempotency
+
+DST-HO-010
+Atomic Materialization / Availability Barrier
+
+DST-HO-012
+Canonical Write Precondition / Concurrency Guard
+
+DST-HO-018
+Use-Boundary Cutoff Alignment
+
+DST-HO-013
+Materialization Receipt / Idempotent Delivery
+
+DST-HO-014
+Recoverable Coordination State
+
+DST-HO-020 / 021
+Replay Isolation / Recoverable Execution Context
+~~~
+
+---
+
+## 29.7 DST-HO-009 — Canonical Materialization Idempotency
+
+Definition:
+
+> Same Logical Operation Intent may have multiple Execution Attempts, but must converge to at most one canonical logical result / output bundle.
+
+Core separations:
+
+~~~text
+Logical Operation
+!= Execution Attempt
+
+Operation ID
+!= Artifact ID
+
+Operational Duplicate
+!= Semantic Duplicate
+
+Retry
+!= Reassessment
+!= intentional new run
+
+successful computation
+!= canonical commit
+~~~
+
+Rules:
+
+~~~text
+same operation + same exact basis
+→ return existing canonical result if already committed
+
+same Operation ID + materially different basis
+→ idempotency conflict
+
+new As-Of / Cutoff / Policy / Purpose / material basis
+→ new Logical Operation
+
+content hash
+!= dedup authority
+~~~
+
+Operation output may be a bundle and may use an Output Manifest.
+
+Operation Lineage is execution provenance, not Decision Lineage or semantic truth.
+
+---
+
+## 29.8 DST-HO-010 — Atomic Materialization / Availability Barrier
+
+Definition:
+
+> Canonical Artifact / Output Bundle must not become canonically observable or usable until required semantic content, exact refs, integrity requirements and materialization preconditions are complete and committed.
+
+Core:
+
+~~~text
+Physical row exists
+!= Canonical Artifact Available
+
+Constructed
+!= Materialized
+!= Available
+
+Materialized
+!= Current-Use Valid
+
+Semantic Partial
+!= Physical Partial
+~~~
+
+Crash behavior:
+
+~~~text
+crash before commit
+→ not available
+
+crash after commit
+→ canonically materialized
+  even if caller did not receive ACK
+~~~
+
+Derived projection:
+
+~~~text
+Search Index
+Graph
+UI
+Cache
+!= Canonical Truth
+~~~
+
+Projection failure does not erase canonical commit.
+
+---
+
+## 29.9 DST-HO-012 — Canonical Write Precondition / Concurrency Guard
+
+Definition:
+
+> A Canonical Writer must verify at commit boundary that the material preconditions used to authorize / evaluate the write still hold.
+
+Core:
+
+~~~text
+Assessment-time validity
+!= Commit-time precondition validity
+
+stale precondition
+→ reject canonical commit
+
+Writer must not silently:
+rebase
+substitute latest input
+change predecessor
+change policy basis
+~~~
+
+Conceptually supports:
+
+~~~text
+Expected predecessor
+Expected Current Canonical Ref
+Expected Revision Token
+Expected Authorization basis
+Expected coordination / join revision
+~~~
+
+Physical CAS / transaction / lock method is not fixed here.
+
+Important distinction:
+
+~~~text
+Historical Materialization Preconditions
+!= Immediate Downstream-Use Preconditions
+~~~
+
+Current movement after a frozen historical cutoff does not automatically invalidate historical materialization.
+
+---
+
+## 29.10 DST-HO-018 — Use-Boundary Cutoff Alignment
+
+Definition:
+
+> Downstream material use must not silently cross an unassessed information gap between the CUV assessment cutoff and the actual use boundary.
+
+Core distinctions:
+
+~~~text
+CUV Assessment Time
+!= CUV Information Cutoff
+!= CUV Available At
+!= Downstream Use Time
+!= Downstream Use Information Cutoff
+~~~
+
+Original use must not be justified by future-aware CUV.
+
+Live current use may require:
+
+~~~text
+CUV at C1
++
+Material Change Guard
+C1 → Use Fence
+~~~
+
+If a material trigger appears, old CUV cannot justify the new live use.
+
+Do not create recursive:
+
+~~~text
+CUV-of-CUV-of-CUV
+~~~
+
+Create a new CUV assessment for the target artifact when needed.
+
+---
+
+## 29.11 DST-HO-013 — Materialization Receipt / Idempotent Delivery
+
+Core separations:
+
+~~~text
+Canonical Commit
+!= Materialization Receipt
+!= Delivery Intent
+!= Delivery Attempt
+!= Consumer Receipt
+!= Consumer Processing
+!= Business Action
+~~~
+
+Materialization Receipt records successful canonical materialization; it does not own semantic truth or CUV.
+
+Delivery principle:
+
+~~~text
+Exactly-once transport
+= NOT ASSUMED
+
+At-least-once delivery
++
+Idempotent consumption
+= preferred logical contract
+~~~
+
+Same Artifact may have multiple legitimate Delivery Intents for different downstream use contexts.
+
+~~~text
+same Delivery Intent retry
+!= new downstream use
+
+same Artifact
++
+new legitimate downstream use context
+→ new Delivery Intent
+~~~
+
+Valid at send != valid at consume.
+
+Consumer-side Use Fence may be required.
+
+---
+
+## 29.12 DST-HO-014 — Recoverable Coordination State
+
+Definition:
+
+> Logical obligations, required joins, delivery obligations and safety obligations must survive process crash / restart and be reconstructable from durable exact evidence.
+
+Core:
+
+~~~text
+Canonical Semantic State
+!= Coordination State
+
+Coordination State
+!= Process Memory
+
+Logical Obligation
+!= Worker Attempt
+
+Worker ownership
+!= Truth ownership
+~~~
+
+Recovery principle:
+
+~~~text
+Recover obligation
+↓
+Reconcile canonical / external effects
+↓
+Determine remaining obligation
+↓
+Retry only remaining work
+~~~
+
+Completion status alone is not authority.
+
+~~~text
+status says COMPLETE
+but required exact output absent
+→ reconcile / unresolved
+
+exact required output exists
+but coordination status stale
+→ projection may be repaired
+~~~
+
+Fast Safety obligations are also recoverable where Actual Exposure risk exists.
+
+---
+
+## 29.13 DST-HO-020 — Replay / Retrospective Write Isolation
+
+Execution modes are distinct:
+
+~~~text
+ORIGINAL LIVE
+ORIGINAL RECOVERY
+HISTORICAL RECONSTRUCTION
+RETROSPECTIVE ANALYSIS
+~~~
+
+Core:
+
+~~~text
+Recovery
+!= Historical Reconstruction
+!= Retrospective Analysis
+
+Reconstructed Artifact
+!= Original Artifact
+
+Retrospective Artifact
+!= Original / Reconstructed Artifact
+~~~
+
+Historical Reconstruction uses then-available:
+
+~~~text
+Data
+Knowledge
+Relationship
+Constraint
+Model
+Policy
+~~~
+
+Missing historical basis must not silently fallback to current model / current policy.
+
+Replay / Reconstruction / Retrospective workers must not:
+
+~~~text
+update Live Current Canonical pointers
+directly create Live R4 delivery intents
+directly create current exposure actions
+~~~
+
+---
+
+## 29.14 DST-HO-021 — Recoverable Execution Context
+
+Definition:
+
+> Same-operation recovery must preserve the exact frozen execution basis required to continue the original logical operation without changing its meaning.
+
+Frozen basis may include:
+
+~~~text
+Logical Operation ID
+Execution Lineage Mode
+Exact Input Artifact refs
+Exact Model / Method refs
+Exact Policy / Contract refs
+Authorization refs
+Requirement refs
+As-Of
+Information Cutoff
+Intended Use
+Expected Preconditions
+Output Contract
+~~~
+
+Recovery choices:
+
+~~~text
+canonical result already committed
+→ return existing result
+
+not committed + preconditions valid
+→ resume / retry same operation
+
+preconditions stale or critical context missing
+→ original operation cannot silently continue
+→ explicit unresolved / new reassessment operation
+~~~
+
+Critical temporal rule:
+
+~~~text
+Operation As-Of
+= historical context time
+
+Recovered materialization Available At
+= actual later successful materialization time
+~~~
+
+Do not backdate Available At.
+
+---
+
+## 29.15 Batch 5 Re-Destruction
+
+The original 40 Batch 5 cases were re-run after repair.
+
+Result:
+
+~~~text
+PASS
+= 32
+
+PASS WITH CLARIFICATION
+= 8
+
+FAIL
+= 0
+
+BLOCKING
+= 0
+~~~
+
+R3 internal concurrency blocking:
+
+~~~text
+NONE
+~~~
+
+Cross-layer clarification families:
+
+~~~text
+Source Observation Identity
+Temporal Ordering / No Arrival-Order Authority
+Intentional Reassessment vs Retry
+R4 / Execution external-action idempotency + state fence
+~~~
+
+These are handoff requirements, not new R3 semantic authority.
+
+---
+
+## 29.16 Composite Destruction Test
+
+Cross-repair composite cases:
+
+~~~text
+DST-R3-181 ... DST-R3-210
+= 30 cases
+~~~
+
+Result:
+
+~~~text
+PASS
+= 26
+
+PASS WITH CLARIFICATION
+= 4
+
+FAIL
+= 0
+
+BLOCKING
+= 0
+~~~
+
+Composite clarifications:
+
+### CRX-HO-001 — Handoff Obligation Creation Boundary
+
+~~~text
+Join Complete
+!= Forward Handoff Complete
+~~~
+
+Required forward handoff obligation must be durable or deterministically recoverable.
+
+### CRX-HO-002 — Consumer Effect Binding
+
+~~~text
+Consumer Operation
+→ Canonical Business Result
+~~~
+
+must be recoverable so ACK loss does not create duplicate business effect.
+
+R4 / Execution external action idempotency and Actual Exposure reconciliation remain cross-layer requirements.
+
+---
+
+## 29.17 Final Cross-Cutting Compression
+
+Destruction-test repairs are not adopted as 20+ independent engines.
+
+They compress into seven cross-cutting integrity contracts:
+
+~~~text
+XC-01
+Provenance / Purpose / Dependency Integrity
+
+XC-02
+Current-Use / Temporal Integrity
+
+XC-03
+Return / Coordination / Join Integrity
+
+XC-04
+Canonical Operation / Materialization Integrity
+
+XC-05
+Delivery / Consumer Effect Integrity
+
+XC-06
+Exposure / Safety / Runtime Attribution Integrity
+
+XC-07
+Execution Mode / Recovery / Replay Isolation
+~~~
+
+Cross-Cutting rule:
+
+~~~text
+Semantic Engine
+= decides meaning
+
+Cross-Cutting Contract
+= preserves meaning across time / execution / failure
+
+Cross-Cutting
+does not own:
+Research Truth
+Knowledge Truth
+Economic Attractiveness
+Advancement
+Trade Thesis Direction
+Capital Permission
+Execution Action
+~~~
+
+---
+
+## 29.18 R3 Final Destruction Verdict
+
+~~~text
+R3 FULL DESTRUCTION TEST
+
+Unique Scenarios
+= 210
+
+Total Destruction Executions
+= 250
+
+Authority Collision
+= NONE FOUND
+
+Historical Mutation Blocking
+= NONE
+
+Temporal Blocking
+= NONE
+
+Concurrency Blocking
+= NONE
+
+Recovery Blocking
+= NONE
+
+Replay Blocking
+= NONE
+
+Composite Interaction Blocking
+= NONE
+
+Cross-Layer Handoff Requirements
+= REMAIN
+
+Overall
+= PASS WITH CROSS-LAYER HANDOFF REQUIREMENTS
+~~~
+
+---
+
+## 29.19 Formal Adoption Readiness
+
+Working R3 can be mapped into the future Formal Architecture as follows:
+
+~~~text
+04_KNOWLEDGE_APPLICABILITY
+→ Knowledge Identity / Version / Admission / Lifecycle / Applicability / Knowledge-Use Constraint
+
+05_DECISION
+→ Decision Material Snapshot
+→ Decision Synthesis / Decision Thesis
+→ Decision Candidate
+→ EVA / EAS
+→ Candidate Advancement
+→ Trade Thesis Formation / Adoption / Trade Thesis
+→ R4 handoff
+
+CROSS_CUTTING_MAP
+→ XC-01 ... XC-07
+
+CONNECTION_MAP
+→ 01 ... 06 master connection
+~~~
+
+03_RESEARCH requires no major redesign; its Validated Research Result → 04 boundary remains compatible.
+
+Known future 04 supersede candidates include:
+
+~~~text
+New Evidence
+!= automatically New Knowledge Version
+
+Knowledge Lifecycle
+= ACTIVE / SUSPENDED / RETIRED
+
+Applicability
+!= Knowledge-Use Constraint
+!= Decision Material Eligibility
+
+BLOCKED_BY_CONSTRAINT
+should not remain a peer Applicability state
+
+Current 04 downstream order:
+Trade Thesis → Expected Value
+is superseded by the working R3 order:
+Snapshot → Thesis → Candidate → EVA/EAS → Advancement → Trade Thesis
+~~~
+
+---
+
+## 29.20 Formal Adoption Procedural Gate
+
+Technical readiness:
+
+~~~text
+R3 Design Readiness
+= PASS
+
+Formal Document Destination
+= RESOLVED
+
+Formal Adoption Technical Readiness
+= PASS
+~~~
+
+But current Project sequencing remains governed by:
+
+~~~text
+00_AI/TEMP_CHARTER_RECONCILIATION_PLAN.md
+~~~
+
+Current formal Project sequence:
+
+~~~text
+PROJECT_CHARTER completion / Cross Check
+↓
+HUMAN_MAP reconciliation
+↓
+AI_WORKFLOW reconciliation
+↓
+01–04 reconciliation
+↓
+overall cross-check
+↓
+AI_CONTEXT returns to 05_DECISION
+↓
+05_DECISION formal design resumes
+~~~
+
+Therefore:
+
+~~~text
+R3 Formal Adoption Candidate
+= READY
+
+Formal Adoption Right Now
+= DEFERRED BY PROJECT SEQUENCING
+
+Blocking Issue
+= PROJECT_CHARTER RECONCILIATION NOT COMPLETE
+~~~
+
+This is a procedural / authority-order blocker, not an R3 semantic blocker.
+
+---
+
+## 29.21 Save Boundary
+
+This checkpoint saves Working Design only.
+
+Do not modify as part of this R3 checkpoint:
+
+~~~text
+02_ARCHITECTURE/
+00_HUMAN/HUMAN_MAP.md
+~~~
+
+Formal Current Architecture remains unchanged.
+
+The next formal Project focus remains PROJECT_CHARTER.
+
+R3 Working Design must be recalled when the Project sequence legitimately returns to 05_DECISION.
+
+---
+
+## 29.22 Checkpoint Result
+
+~~~text
+Checkpoint 022
+R3 Full Destruction / Execution Integrity / Formal Adoption Readiness
+= SAVED WORKING DESIGN
+
+R3 Full Destruction
+= PASS WITH CROSS-LAYER HANDOFF REQUIREMENTS
+
+Unique Destruction Scenarios
+= 210
+
+Total Destruction Executions
+= 250
+
+R3 Internal Blocking
+= NONE
+
+Formal Adoption Candidate
+= READY
+
+Formal Adoption
+= DEFERRED BY PROJECT SEQUENCING
+
+Formal Current Architecture
+= UNCHANGED
+
+NEXT FORMAL PROJECT WORK
+=
+PROJECT_CHARTER Section 3
+What Not To Maximize
+~~~
+
