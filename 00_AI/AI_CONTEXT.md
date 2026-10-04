@@ -1,4 +1,4 @@
-# 市場理解OS — AI_CONTEXT v0.1.12
+# 市場理解OS — AI_CONTEXT v0.1.13
 
 **Document Role:** AI Current-State Index / Navigation Map  
 **Status:** REVIEWED / WORKING BASELINE  
@@ -88,8 +88,12 @@ Section 4:
 Survival / Profit Priority
 = DRAFT / LEADING CANDIDATE 保存済み
 
+Section 5:
+Research Mission
+= DRAFT / LEADING CANDIDATE 保存済み
+
 現在焦点:
-5. Research Mission
+6. Research Category Philosophy
 ```
 
 `01_EXTERNAL_DATA`、`02_MARKET_UNDERSTANDING`、`03_RESEARCH`、`04_KNOWLEDGE_APPLICABILITY` はWorking Baselineとして保存済み。
@@ -129,8 +133,9 @@ Current State:
 - Section 2 Success Definition = 保存済み
 - Section 3 What Not To Maximize = 保存済み
 - Section 4 Survival / Profit Priority = 保存済み
-- Section 5以降 = 未設計
-Current Focus: 5. Research Mission
+- Section 5 Research Mission = 保存済み
+- Section 6以降 = 未設計
+Current Focus: 6. Research Category Philosophy
 ```
 
 Project Missionの現在本命方向には、Crypto First、選択的Research、Fast Adaptation / Research Adaptation、Research Note / Research Asset、長期生存と正の期待値、人間向けResearch Publicationが含まれる。
@@ -141,15 +146,17 @@ What Not To Maximizeの現在本命方向は、Short-Term Profit・Win Rate・Pr
 
 Survival / Profit Priorityの現在本命方向は、長期生存をHard Operating Boundaryとし、その境界内で正のExpected Economic Valueを追求し、Survival PolicyとResearch / Knowledge TruthのAuthorityを分離することを中心とする。
 
+Research Missionの現在本命方向は、FOUNDATIONAL / MECHANISM、SURVIVAL / FAILURE、ECONOMIC EDGE、ADAPTATION / REVALIDATION、DECISION / EXECUTION QUALITYの5 Mission Familyを上位目的として持ち、Research Integrityを横断適用し、Research Candidate Source / Mission / Priority / Method / Result / Knowledge Authorityを分離することを中心とする。
+
 重要:
 
 ```text
-Section 1〜4 保存済み
+Section 1〜5 保存済み
 ≠
 PROJECT_CHARTER Working Baseline
 ```
 
-Section 3以降を設計し、PROJECT_CHARTER全体をCross Checkするまでは、Charter全体を確定扱いしない。
+Section 6以降を設計し、PROJECT_CHARTER全体をCross Checkするまでは、Charter全体を確定扱いしない。
 
 ## 3.3 HUMAN MAP
 
@@ -478,7 +485,10 @@ NEXT-001
 PROJECT_CHARTER v0.1 Draftを一項目ずつ作成
 Section 1 Project Mission = DRAFT / LEADING CANDIDATE 保存済み
 Section 2 Success Definition = DRAFT / LEADING CANDIDATE 保存済み
-現在: 3. What Not To Maximize
+Section 3 What Not To Maximize = DRAFT / LEADING CANDIDATE 保存済み
+Section 4 Survival / Profit Priority = DRAFT / LEADING CANDIDATE 保存済み
+Section 5 Research Mission = DRAFT / LEADING CANDIDATE 保存済み
+現在: 6. Research Category Philosophy
 
 NEXT-002
 PROJECT_CHARTER全体をCross Checkし、問題が軽微ならWorking Baseline候補として保存
