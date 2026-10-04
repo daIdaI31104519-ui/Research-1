@@ -3,7 +3,7 @@
 **Document Role:** Project Constitution / Top-Level Mission  
 **Status:** DRAFT / LEADING CANDIDATE  
 **Purpose:** 市場理解OSが何のために存在し、何を優先し、どの方向へ育てるかを定義する最上位方針文書。  
-**Current Scope:** Section 1 `Project Mission`、Section 2 `Success Definition`、Section 3 `What Not To Maximize`、Section 4 `Survival / Profit Priority` を設計済み。Section 5以降は未設計であり、現時点では固定しない。
+**Current Scope:** Section 1 `Project Mission`、Section 2 `Success Definition`、Section 3 `What Not To Maximize`、Section 4 `Survival / Profit Priority`、Section 5 `Research Mission` を設計済み。Section 6以降は未設計であり、現時点では固定しない。
 
 ---
 
@@ -1774,12 +1774,836 @@ SP-20 Knowledge Validity != Risk / Capital Permission.
 > **生き残るために利益を捨て続けず、利益のために生き残る能力を賭けない。**
 
 
+
+---
+
+# 5. Research Mission
+
+## 5.1 Core Research Mission
+
+市場理解OSにおけるResearchは、Hypothesis数・Experiment数・Research件数を増やすために存在しない。
+
+Researchの中心目的は、
+
+> **市場変化・未知・矛盾・Failure・Economic Opportunity・Post-Decision Findingを選択的に研究し、仮説を正当化するのではなく検証・反証・限界確認を行い、その結果を再利用可能なResearch ResultとResearch Assetとして残し、市場理解OSの長期生存・市場適応・意思決定・Economic Value創出能力を継続的に高めること。**
+
+とする。
+
+基本関係は、
+
+~~~text
+Research
+!= Research Count Maximization
+
+Research
+!= Hypothesis Confirmation Factory
+
+Research
+!= Production Permission
+
+Research
+= Reusable Understanding / Evidence / Failure / Unknown Creation
+~~~
+
+とする。
+
+---
+
+## 5.2 Software完成後もResearchは終わらない
+
+市場理解OSでは、
+
+~~~text
+Software完成
+!= Research終了
+~~~
+
+である。
+
+市場・参加者・Liquidity・Leverage・Regime・Macro・Exchange環境・利用可能Data等が変化する以上、現在有効なKnowledge・Edge・Failure Boundaryも永久の正解ではない。
+
+したがって、
+
+~~~text
+Observation
+↓
+Unknown / Change / Contradiction / Failure
+↓
+Research
+↓
+Research Result
+↓
+Knowledge側で評価
+↓
+Decision / Production利用
+↓
+Post-Decision
+↓
+Re-Research
+~~~
+
+という循環を長期的に維持する。
+
+> **市場理解OSが運用される限り、Research Missionも継続する。**
+
+---
+
+## 5.3 Researchは選択的に行う
+
+市場で発見された全ての変化・異常・未知・Cause Candidate・Failure・Opportunityを無条件に正式Researchへ進めない。
+
+Research対象は、
+
+~~~text
+Research Value
+Reusability
+Decisionへの意味
+Survivalへの意味
+Economicへの意味
+Evidence / Researchability
+Cost
+Urgency
+~~~
+
+等を踏まえて選択する。
+
+> **研究しない・後回しにする・既存Researchへ統合する判断も、正常なResearch Governanceの一部である。**
+
+これはSection 3の、
+
+~~~text
+Research Count
+!= Project Success
+~~~
+
+という原則を維持する。
+
+---
+
+## 5.4 ResearchはConfirmationのために行わない
+
+Researchは、既存Hypothesis・Strategy・Knowledge・Trade Thesisを正しいことにするための場所ではない。
+
+Researchは少なくとも、
+
+~~~text
+Validation
+Refutation
+Contradiction
+Alternative Hypothesis
+Failure Boundary
+Constraint
+Unknown
+Inconclusive
+~~~
+
+を扱える必要がある。
+
+> **Hypothesisを守ることではなく、どこまで成立し、どこで壊れ、何がまだ分からないかを明らかにすることを重視する。**
+
+Research中に現在市場・Profit期待・Publication都合に合わせてHypothesisやConclusionを都合よく書き換えない。
+
+---
+
+## 5.5 Research SuccessとSupported Hypothesisを同一視しない
+
+Researchの成功は、Hypothesisが支持されたことだけではない。
+
+例えば、
+
+~~~text
+SUPPORTED
+REFUTED
+FAILURE BOUNDARY FOUND
+CONSTRAINT FOUND
+INCONCLUSIVE
+INSUFFICIENT EVIDENCE
+UNKNOWN
+~~~
+
+はいずれも、正しく検証されTrace可能であれば価値あるResearch Resultになり得る。
+
+> **Research Successとは、望んだ結論を得ることではなく、何が支持され、何が否定され、どこまで通用し、何がまだ分からないかを再利用可能な形で明らかにすること。**
+
+---
+
+## 5.6 Research ResultはKnowledge / Production Authorityではない
+
+ResearchはResearch Resultを生成する。
+
+しかし、
+
+~~~text
+Research Candidate
+!= Hypothesis
+
+Hypothesis
+!= Research Result
+
+Validated Research Result
+!= Knowledge
+
+Knowledge
+!= Current Applicability
+
+Current Applicability
+!= Trade Permission
+~~~
+
+とする。
+
+> **ResearchはKnowledge領域で評価可能なResearch Resultを生成するが、Research自身がKnowledge Promotion・Current Applicability・Trade Permission・Capital Permissionを所有しない。**
+
+ResearchとProductionの責任境界を維持する。
+
+---
+
+## 5.7 Primary Research Mission Families
+
+市場理解OSでは、Research Missionを大きく次の5 Familyとして扱う。
+
+~~~text
+RM-1
+FOUNDATIONAL / MECHANISM RESEARCH
+
+RM-2
+SURVIVAL / FAILURE RESEARCH
+
+RM-3
+ECONOMIC EDGE RESEARCH
+
+RM-4
+ADAPTATION / REVALIDATION RESEARCH
+
+RM-5
+DECISION / EXECUTION QUALITY RESEARCH
+~~~
+
+これはPython Module・Folder・DB Tableを意味しない。
+
+> **Researchを何のために行うかを表す上位Mission Familyである。**
+
+一つのResearchが複数Missionへ関係することを許容する。
+
+---
+
+## 5.8 RM-1 — FOUNDATIONAL / MECHANISM RESEARCH
+
+FOUNDATIONAL / MECHANISM RESEARCHは、
+
+> **市場で何が起き、なぜそのように動くのかを理解するための基礎研究。**
+
+とする。
+
+研究対象候補には、
+
+~~~text
+Market Structure
+Participant Behavior
+Price Formation
+Liquidity Mechanism
+Leverage Mechanism
+Causal Chain
+Cross-Market Transmission
+Unknown Market Structure
+~~~
+
+等を含み得る。
+
+このResearchは、直接Trade Edgeになることを必須条件にしない。
+
+> **Economic Valueへ接続する前段階として、市場を理解すること自体にResearch Valueを認める。**
+
+Research Resultは、将来のKnowledge・Economic Edge・Failure Research・Adaptation Research等の基礎へ再利用できる。
+
+---
+
+## 5.9 RM-2 — SURVIVAL / FAILURE RESEARCH
+
+SURVIVAL / FAILURE RESEARCHは、
+
+> **何が市場理解OSを壊し得るか、どこにFailure Boundaryがあり、どのRiskが許容可能で、どこで停止・縮小・再研究すべきかを理解するためのResearch。**
+
+とする。
+
+研究対象候補には、
+
+~~~text
+Tail Risk
+Failure Pattern
+Failure Boundary
+Constraint
+Liquidity Failure
+Exchange / Infrastructure Failure
+No-Trade Condition
+Survival-Critical Unknown
+Recoverability
+Repeated Failure
+~~~
+
+等を含み得る。
+
+これは全てのRiskを避けるためのResearchではない。
+
+~~~text
+Takeable Risk
+vs
+Unacceptable Risk
+~~~
+
+を区別するためのResearchでもある。
+
+Immediate Safety ActionのAuthorityはResearch自身が所有しない。
+
+---
+
+## 5.10 RM-3 — ECONOMIC EDGE RESEARCH
+
+ECONOMIC EDGE RESEARCHは、
+
+> **Market Understandingを、どの条件で再利用可能なExpected Economic Valueへ接続できるかを研究する。**
+
+とする。
+
+Researchでは単に「儲かったか」を確認するのではなく、
+
+~~~text
+なぜ機能する可能性があるか
+どの条件で成立するか
+どのRegimeで利用可能か
+どのCostに耐えられるか
+どこでEdgeが弱まるか
+どこでFailureするか
+どの程度再現可能か
+~~~
+
+を研究する。
+
+Economic Edge Researchには、将来、
+
+~~~text
+CORE EDGE
+OPPORTUNITY
+~~~
+
+等の異なるResearch Philosophyを持つことができる。
+
+ただし、CORE EDGE / OPPORTUNITYの正式定義・関係・Research Philosophyの詳細はSection 6で設計する。
+
+~~~text
+Economic Edge Research Result
+!= Trade Permission
+!= Opportunity Mode Permission
+~~~
+
+を維持する。
+
+---
+
+## 5.11 RM-4 — ADAPTATION / REVALIDATION RESEARCH
+
+ADAPTATION / REVALIDATION RESEARCHは、
+
+> **既存Knowledge・Edge・Failure Boundary等の成立条件が現在も維持されているかを再検証し、市場構造が変化した場合、その原因と影響を研究する。**
+
+とする。
+
+研究対象候補には、
+
+~~~text
+Regime Shift
+Edge Decay
+Knowledge Failure
+Knowledge Contradiction
+Applicability Contradiction
+Participant Structure Change
+Structural Change
+Periodic Revalidation
+~~~
+
+等を含み得る。
+
+これはEvidenceなしに全てを変更し続けるためのResearchではない。
+
+> **Knowledgeを信用するが永久の正解にはせず、Evidenceに基づいて安定性と適応性を両立する。**
+
+CORE EDGE / OPPORTUNITY / Adaptationのより詳細な研究思想はSection 6で定義する。
+
+---
+
+## 5.12 RM-5 — DECISION / EXECUTION QUALITY RESEARCH
+
+DECISION / EXECUTION QUALITY RESEARCHは、
+
+> **市場理解・Knowledge・Decision Reasoningが、Decision・Defense・Trade / No-Trade・Execution・Post-Decision Outcomeへ意図した通り接続されたかを研究する。**
+
+とする。
+
+研究対象候補には、
+
+~~~text
+TRADE
+WAIT
+REDUCE
+NO TRADE
+Defense
+Missed Opportunity
+Post-Decision Finding
+Execution Cost
+Slippage
+Unexpected Failure
+Decision Quality
+~~~
+
+等を含み得る。
+
+例えば、
+
+~~~text
+Market Understandingは妥当だった
+Trade Thesisも妥当だった
+しかしExecution CostでEconomic Valueが失われた
+~~~
+
+場合、市場理解そのものとExecution Qualityを区別して研究する。
+
+ResearchはExecutionを直接操作するAuthorityではなく、Resultを研究対象として評価する。
+
+---
+
+## 5.13 Research Integrity / Methodologyは全Missionへ適用する
+
+Research Integrityを6つ目のResearch Missionにはしない。
+
+~~~text
+RM-1
+RM-2
+RM-3
+RM-4
+RM-5
+↓
+Research Integrity / Methodology applies to all
+~~~
+
+とする。
+
+Researchでは少なくとも、
+
+~~~text
+Evidence Provenance
+Evidence Source / Role / Time / Version
+Validation / Refutation separation
+Alternative Hypothesis
+Reproducibility
+Leakage avoidance
+Look-ahead avoidance
+Research Process Failure separation
+Traceability
+~~~
+
+を重視する。
+
+具体的なValidation Method・Research Contract・ThresholdはResearch Architecture / Detailed Designで定義する。
+
+> **Research UrgencyやEconomic Opportunityを理由にResearch Integrityを緩和しない。**
+
+---
+
+## 5.14 Research Candidate SourceとResearch Missionを分ける
+
+Researchが発生した理由と、何のために研究するかを混同しない。
+
+~~~text
+Research Candidate Source
+!= Research Mission
+~~~
+
+市場理解OSでは、
+
+~~~text
+Cause Candidate
+Unknown
+Contradiction
+Failure
+Post-Decision Finding
+Missed Opportunity
+AI Suggestion
+~~~
+
+等がResearch Candidateを発生させ得る。
+
+しかし、SourceだけでResearch Mission・Priority・Conclusionを確定しない。
+
+---
+
+## 5.15 一つのResearch Candidateから複数Research Questionを許容する
+
+一つの発見が複数のResearch Questionを持つことを許容する。
+
+例えば、
+
+~~~text
+Liquidity Collapse Anomaly
+↓
+なぜ起きた？
+→ Mechanism
+
+どこまで危険？
+→ Survival / Failure
+
+Economic Edgeになる？
+→ Economic Edge
+
+既存Knowledgeが壊れた？
+→ Adaptation / Revalidation
+~~~
+
+のように、一つのCandidateから複数MissionへResearch Questionが分岐してよい。
+
+~~~text
+One Candidate
+!= Exactly One Mission
+~~~
+
+とする。
+
+同じSourceを別々の独立Evidenceとして水増ししない。
+
+---
+
+## 5.16 Mission ClassificationはConclusionではない
+
+Research Missionは、
+
+> **何を知ろうとしているか**
+
+を表す。
+
+~~~text
+Mission = SURVIVAL
+!= Danger Confirmed
+
+Mission = ECONOMIC EDGE
+!= Edge Confirmed
+
+Mission = ADAPTATION
+!= Knowledge Invalid
+
+Mission = DECISION QUALITY
+!= Execution Failure Confirmed
+~~~
+
+とする。
+
+Mission ClassificationをResearch ResultやAuthorityの代替にしない。
+
+---
+
+## 5.17 Mission / Priority / Method / Resultを分離する
+
+市場理解OSでは、
+
+~~~text
+Research Mission
+!= Intake Disposition
+!= Research Priority
+!= Validation Method
+!= Research Result
+~~~
+
+とする。
+
+Research Missionは、なぜ研究するかを表す。
+
+Research Priorityは、いつ・どれだけ優先して研究するかを表す。
+
+Validation Methodは、どう検証するかを表す。
+
+Research Resultは、何が分かったかを表す。
+
+これらを一つのLabelへ潰さない。
+
+---
+
+## 5.18 Research Priorityの上位原則
+
+Mission名だけでResearch Priorityを決めない。
+
+特に、
+
+~~~text
+SURVIVAL
+= always highest priority
+
+FOUNDATIONAL
+= always low priority
+
+OPPORTUNITY
+= always urgent
+
+Novel
+= automatically important
+
+Repeated
+= automatically important
+~~~
+
+とはしない。
+
+Research Priorityでは概念上、
+
+~~~text
+Importance
+Potential Impact
+Risk / Production Relevance
+Urgency
+Contradiction Severity
+Evidence / Researchability
+Research Cost
+Reusability
+~~~
+
+等を分離して判断できる方向を持つ。
+
+> **Research Priorityを一つの万能Scoreだけへ潰し、一軸の高Scoreで他の重大な問題を相殺しない。**
+
+具体Priority Formula・Queue・Allocationは後続設計で定義する。
+
+---
+
+## 5.19 UrgencyとImportanceを混同しない
+
+~~~text
+Urgent
+!= Important
+
+Important
+!= Urgent
+~~~
+
+とする。
+
+Current Opportunityの消失が近いことはUrgencyを高め得るが、それだけでResearch Value・Evidence Quality・Importanceを確定しない。
+
+一方で、Foundational ResearchやLong-Term Revalidationは緊急でなくても長期的に重要である可能性がある。
+
+> **短期Current MarketのUrgencyだけでResearch Capacity全体を恒常的に支配させない。**
+
+---
+
+## 5.20 Fast Safety NeedとResearch Priorityを分離する
+
+SurvivalにMaterialな問題が現在Exposureへ影響している場合、
+
+~~~text
+Fast Safety / Defense
++
+Research
+~~~
+
+が並列に必要なことがある。
+
+~~~text
+Research Priority = Critical
+!= Safety Action
+~~~
+
+とする。
+
+> **Immediate Safety Protectionが必要な場合、Research完了を待たない。**
+
+Researchは、なぜ危険だったか・どこまで危険か・再発防止に何が必要かを後から研究できる。
+
+---
+
+## 5.21 Negative / Failure / UnknownをResearch Assetとして残す
+
+市場理解OSはPositive ResultだけをResearch Assetとしない。
+
+~~~text
+Refutation
+Failure
+Failure Boundary
+Constraint
+Contradiction
+Unknown
+Inconclusive
+Insufficient Evidence
+Research Process Failure
+~~~
+
+も、将来の再Research・Knowledge評価・Decision Reviewに利用できるResearch Assetになり得る。
+
+> **何が使えるかだけでなく、何を使ってはいけないか、どこで壊れるか、何がまだ分からないかを残す。**
+
+---
+
+## 5.22 Research Process FailureとResearch Conclusionを分ける
+
+~~~text
+Hypothesis Refuted
+!= Research Process Failure
+~~~
+
+とする。
+
+例えば、
+
+~~~text
+Data不足
+Experiment Failure
+Computation Failure
+Evidence Conflict
+Invalid Test Design
+Leakage
+Look-ahead Bias
+External Dependency Failure
+~~~
+
+等によって研究そのものが成立しなかった場合と、正しく研究した結果Hypothesisが反証された場合を混同しない。
+
+Research Process Failureを都合よくNegative ResultまたはPositive Resultへ変換しない。
+
+---
+
+## 5.23 Human-readable Research Outputは下流Consumerである
+
+Research Resultは自動Tradingだけでなく、人間向けResearch Outputへ再利用できる。
+
+基本関係は、
+
+~~~text
+Research Core
+↓
+Validated Research Result
+├─→ Knowledge
+├─→ Re-Research
+├─→ Future Decision / Production Use
+└─→ Human-readable Research Output
+~~~
+
+とする。
+
+ただし、
+
+> **Publication Demand・User Growth・Business ResultはResearch Truthを書き換えるAuthorityを持たない。**
+
+Research Output / Publicationの具体Mission・形式・User ValueはSection 11で設計する。
+
+---
+
+## 5.24 AIはResearch支援者でありResearch Truthそのものではない
+
+AIはResearchにおいて、
+
+~~~text
+Research Question候補
+Hypothesis候補
+Alternative Hypothesis
+Contradiction探索
+Research Plan支援
+Research Review
+説明
+~~~
+
+等を支援できる。
+
+しかし、
+
+~~~text
+AI Output
+!= Research Evidence
+!= Validation Result
+!= Production Authority
+~~~
+
+とする。
+
+AI / Human / Production Authorityの詳細はSection 12で定義する。
+
+---
+
+## 5.25 このSectionで決めないこと
+
+Section 5ではResearch Mission・上位責任・境界を定義し、具体Implementationや詳細Research Contractは固定しない。
+
+以下は後続設計で扱う。
+
+~~~text
+Research Candidate Schema
+Mission ID / Enum
+Primary / Secondary Mission Field
+Intake State詳細
+Mission Classification Algorithm
+Research Priority Formula
+Research Queue
+Research Capacity Allocation
+Routing Algorithm
+Validation Threshold
+Evidence Score
+Hypothesis Score
+DB Schema
+Python Class
+AI Classifier Prompt
+OOS具体期間
+Forward具体期間
+Stress Scenario詳細
+CORE EDGE正式定義
+OPPORTUNITY正式定義
+Adaptation詳細思想
+Publication詳細Mission
+AI / Human / Production Authority詳細
+~~~
+
+CORE EDGE / ADAPTATION / OPPORTUNITYの詳細研究思想はSection 6へ送る。
+
+---
+
+## 5.26 Core Invariants
+
+~~~text
+RM-01 Research Count != Research Value.
+RM-02 Software Completion != Research Completion.
+RM-03 Research is selective; not every Candidate must become formal Research.
+RM-04 Research != Confirmation Factory.
+RM-05 Supported Hypothesis != only successful Research outcome.
+RM-06 Refutation / Failure / Boundary / Constraint / Unknown may be valuable Research Result.
+RM-07 Validated Research Result != Knowledge != Production Authority.
+RM-08 Foundational understanding may have value before direct Economic use.
+RM-09 Survival Research != Safety Action Authority.
+RM-10 Economic Edge Research Result != Trade / Capital Permission.
+RM-11 Adaptation / Revalidation does not mean changing everything continuously.
+RM-12 Decision / Execution Quality is a valid Research Mission.
+RM-13 Research Integrity / Methodology applies across all Research Missions.
+RM-14 Research Candidate Source != Research Mission.
+RM-15 One Candidate may generate multiple Research Questions / Missions.
+RM-16 Mission Classification != Research Conclusion.
+RM-17 Mission != Intake Disposition != Priority != Method != Result.
+RM-18 Mission name alone does not determine Priority.
+RM-19 Urgency does not relax Research Integrity.
+RM-20 Short-term Urgency must not permanently starve long-term Research.
+RM-21 Fast Safety Need != Research Priority.
+RM-22 Research Process Failure != Hypothesis Refutation.
+RM-23 Publication / Business demand does not own Research Truth.
+RM-24 AI Output != Research Evidence / Validation Result / Production Authority.
+~~~
+
+---
+
+# Research Mission — 一文定義
+
+> **市場理解OSのResearch Missionは、市場変化・未知・矛盾・Failure・Economic Opportunity・Post-Decision Findingを選択的に研究し、仮説を正当化するのではなく検証・反証・限界確認を行い、Market Mechanism・Survival / Failure・Economic Edge・Adaptation / Revalidation・Decision / Execution Qualityについて、Knowledge領域・再研究・将来のDecision・人間向けResearch Outputへ再利用可能なResearch ResultとResearch Assetを増やすことで、市場理解OSの長期生存・市場適応・意思決定・Economic Value創出能力を継続的に高めることである。**
+
+簡潔には、
+
+> **研究する目的は、正解を増やすことではなく、なぜ起き、何が通用し、何が壊れ、何がまだ分からず、判断Systemが正しく機能したかを明らかにし、その結果を次の研究と判断へ再利用すること。**
+
+
 # 未設計
 
 以下は今後、一項目ずつ設計する。
 
 ```text
-5. Research Mission
 6. Research Category Philosophy
 7. Capital / Risk Philosophy
 8. Knowledge / Data Asset Philosophy
