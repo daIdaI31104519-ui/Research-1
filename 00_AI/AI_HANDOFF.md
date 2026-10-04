@@ -13,154 +13,121 @@ State:
 ACTIVE
 
 Last Updated:
-2026-10-04
+2026-10-05
 
 Conversation Focus:
-Whole Market Understanding OS Reconstruction.
-R3 Integration Repair Packages A-D and Adjacent Contract Recheck are checkpointed.
-Next is STEP 8 — R3 Full Destruction Test.
+Whole Market Understanding OS Reconstruction
++
+PROJECT_CHARTER continuation.
 
 WORKFLOW:
 AI_WORKFLOW v0.5.3 Precision-First → Precision Review → Human View workflow is active.
 
-LATEST SAVED CHECKPOINT:
-Checkpoint 021 — R3 Adjacent Contract Recheck / Cross-Cutting Contract Repair
+LATEST SAVED WORKING CHECKPOINT:
+Checkpoint 022 — R3 Full Destruction / Execution Integrity / Formal Adoption Readiness
 
-PRIMARY:
+PRIMARY WORKING STUDY:
 98_DESIGN_STUDY/市場理解OS_全体再構築_設計ログ.md
 
-CHECKPOINT 021 RESULT:
-- R3-ADJ-001 Artifact Current-Use Validity Common Contract = REPAIRED / WORKING
-- R3-ADJ-002 Evaluation Requirement Profile Governance = REPAIRED / WORKING
-- R3-ADJ-003 Trade Thesis Adoption Contract Governance = REPAIRED / WORKING
-- R3-ADJ-004 Multi-Domain Return / Minimal Semantic Owner Set = REPAIRED / WORKING
-- Adjacent Contract Cross Check = PASS
-- Blocking Issue = NONE
+CHECKPOINT 022 RESULT:
+- R3 Full Destruction unique scenarios = 210
+- Total destruction executions = 250
+- R3 internal semantic / temporal / concurrency / recovery / replay blocking = NONE
+- Overall = PASS WITH CROSS-LAYER HANDOFF REQUIREMENTS
+- Seven execution-integrity / cross-cutting repair families are preserved as Working Design
+- R3 Formal Adoption Candidate = READY
+- Formal Adoption = DEFERRED BY PROJECT SEQUENCING
 - Formal Current Architecture = UNCHANGED
 
-R3-ADJ-001 CORE:
-Historical Integrity
-!= Current-Use Validity.
+R3 CROSS-CUTTING COMPRESSION:
+XC-01 Provenance / Purpose / Dependency Integrity
+XC-02 Current-Use / Temporal Integrity
+XC-03 Return / Coordination / Join Integrity
+XC-04 Canonical Operation / Materialization Integrity
+XC-05 Delivery / Consumer Effect Integrity
+XC-06 Exposure / Safety / Runtime Attribution Integrity
+XC-07 Execution Mode / Recovery / Replay Isolation
 
-CUV is:
-Exact Artifact
-+ Intended Use
-+ Context
-+ As-Of / Cutoff
-+ Material Dependency
-+ Policy / Method Version.
+R3 FORMAL ADOPTION DESTINATION CANDIDATES:
+04_KNOWLEDGE_APPLICABILITY
+→ Knowledge Identity / Version / Admission / Lifecycle / Applicability / Knowledge-Use Constraint
 
-UNDETERMINED
-!= VALID.
+05_DECISION
+→ Snapshot / Synthesis / Decision Thesis / Candidate / EVA / EAS / Advancement / Trade Thesis
 
-CUV Result
-!= Return Route
-!= Action.
+CROSS_CUTTING_MAP
+→ XC-01 ... XC-07
 
-CUV is artifact-domain-owned under one common contract,
-not a universal central truth engine.
+CONNECTION_MAP
+→ master 01 ... 06 connection
 
-R3-ADJ-002 CORE:
-Evaluation Requirement Profile
-= versioned Economic Evaluation Policy Contract.
+PROJECT SEQUENCING BLOCKER:
+00_AI/TEMP_CHARTER_RECONCILIATION_PLAN.md remains active.
 
-Economic Evaluation Requirement Governance
-owns:
-what must be evaluated for sufficiency.
+PROJECT_CHARTER STATUS:
+Section 1 — Project Mission
+= DRAFT / LEADING CANDIDATE SAVED
 
-EVA / EAS / Advancement / R4 / Runtime / AI
-must not author active requirements ad hoc.
+Section 2 — Success Definition
+= DRAFT / LEADING CANDIDATE SAVED
 
-Requirement Profile Resolver selects exact applicable basis.
-Profile composition is explicit.
-No silent fallback.
-Research Sufficiency != Production Sufficiency.
+Section 3 — What Not To Maximize
+= DRAFT / LEADING CANDIDATE SAVED
 
-R3-ADJ-003 CORE:
-Trade Thesis Adoption Contract
-= versioned Reasoning Integrity Contract.
+Section 3 core:
+Not To Maximize
+!= Not To Measure
+!= Not To Improve
+!= Not Important
 
-Trade Thesis Adoption Contract Governance
-owns:
-what Formation Result must satisfy
-to become a formal R3 Trade Thesis for R4.
+Do not optimize a single measurable metric at the expense of:
+Project Mission
+Research Integrity
+Knowledge Integrity
+Risk
+Long-Term Survival.
 
-Advancement Policy
-!= Formation Policy
-!= Adoption Contract
-!= R4 Capital Contract.
+Core non-maximization targets include:
+Short-Term Profit
+Win Rate
+Prediction Accuracy
+Trade Frequency
+Capital Utilization / Exposure
+Research Count
+Data Amount
+Feature / Metric Count
+Historical / Backtest Performance
+AI / Model Score
+System Complexity
+Automation Percentage
+Publication Reach / User Growth
+Any Single Universal Success Score.
 
-Adoption Contract checks:
-Exact refs,
-CUV,
-Temporal integrity,
-Semantic preservation,
-Unknown / Dependency preservation,
-R4 handoff completeness.
+Metric Gaming
+= prohibited direction.
 
-Adoption Contract does not re-decide:
-Economic attractiveness,
-Sufficiency,
-Unknown acceptance,
-ADVANCE / WAIT / ABSTAIN,
-Capital Permission.
+FORMAL PROJECT CURRENT DELTA:
+PROJECT_CHARTER Section 3 is now saved.
+Next Charter section is:
+4. Survival / Profit Priority
 
-Trade Thesis now preserves:
-exact Adoption Contract basis,
-Adoption Assessment ref,
-Adoption Authorization ref.
+IMPORTANT NAVIGATION NOTE:
+00_AI/AI_CONTEXT.md was intentionally NOT modified in this save scope.
+It may still display Current Focus = Section 3.
+Treat this HANDOFF as the latest conversation delta until AI_CONTEXT is explicitly synchronized.
 
-R3-ADJ-004 CORE:
-One Source Event
-may produce multiple Atomic Findings.
-
-Finding Count
-!= Return Count.
-
-Minimal Semantic Owner Set
-= smallest non-redundant owner set
-covering all material findings.
-
-Upstream route may subsume downstream route
-only when normal forward rebuild necessarily regenerates
-the affected downstream semantics.
-
-Independent semantic owner remains separate.
-
-Actual Exposure Safety
-is an independent fast route
-and is never subsumed by slow semantic repair.
-
-Route relations:
-SEQUENTIAL / PARALLEL / SUBSUMED.
-
-Required Join Point is explicit
-when material slow routes must converge.
-
-ADJACENT NON-BLOCKING CLARIFICATIONS:
-ADJ-HO-001 CUV policy is domain-owned; common invariants cannot be weakened.
-ADJ-HO-002 No recursive CUV-of-CUV chain.
-ADJ-HO-003 Return Routing Group must not deadlock on circular waits.
-ADJ-HO-004 Join resumes only from exact available current-use-valid repaired outputs.
-
-R3 STATUS:
-Package A = checkpointed.
-Package B = checkpointed.
-Package C = checkpointed.
-Package D = checkpointed.
-Adjacent Contract Recheck = checkpointed.
-R3 Integration Blocking Issue = NONE.
-
-FORMAL BOUNDARY:
-AI_CONTEXT remains authoritative for Formal Project Current State.
-00_HUMAN/HUMAN_MAP.md unchanged.
-02_ARCHITECTURE/ unchanged.
-Checkpoint 021 remains Working Repair, not formal adoption.
+UNCHANGED BY THIS SAVE:
+00_AI/AI_CONTEXT.md
+00_HUMAN/HUMAN_MAP.md
+02_ARCHITECTURE/
+03_RESEARCH
+04_KNOWLEDGE_APPLICABILITY
 
 NEXT:
-STEP 8 — R3 Full Destruction Test
-→ R3 Integration Final Review
-→ Formal Adoption Decision later.
+1. Re-read saved PROJECT_CHARTER Section 3.
+2. If needed, synchronize AI_CONTEXT current focus without changing Formal Architecture.
+3. Continue PROJECT_CHARTER Section 4 — Survival / Profit Priority.
+4. Do not formally adopt R3 into 02_ARCHITECTURE until Charter Reconciliation sequence permits it.
 
 Git Write Permission Reminder:
 REQUIRE CURRENT-CHAT USER AUTHORIZATION
