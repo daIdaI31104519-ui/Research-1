@@ -18,120 +18,116 @@ Last Updated:
 Conversation Focus:
 Whole Market Understanding OS Reconstruction.
 R3 Integration Repair is active.
-Package A — Knowledge Foundation is checkpointed.
-Package B — Temporal / Reproducibility is next.
+Package A and Package B are checkpointed.
+Package C — Decision Contract is next.
 
 WORKFLOW:
 AI_WORKFLOW v0.5.3 Precision-First → Precision Review → Human View workflow is active.
 
 LATEST SAVED CHECKPOINT:
-Checkpoint 017 — R3 Integration Repair / Package A — Knowledge Foundation
+Checkpoint 018 — R3 Integration Repair / Package B — Temporal / Reproducibility
 
 PRIMARY:
 98_DESIGN_STUDY/市場理解OS_全体再構築_設計ログ.md
 
-CHECKPOINT 017 RESULT:
-- R3-INT-001 Knowledge Record / Version / Identity = REPAIRED / WORKING
-- R3-INT-006 Admission axes / authority = REPAIRED / WORKING
-- R3-INT-007 Relationship ownership / version / time = REPAIRED / WORKING
-- R3-INT-013 Knowledge-Use Constraint authority / time = REPAIRED / WORKING
-- Package A Cross Check = PASS
+CHECKPOINT 018 RESULT:
+- R3-INT-002 Temporal / Look-Ahead Contract = REPAIRED / WORKING
+- R3-INT-003 Decision Material Snapshot Contract = REPAIRED / WORKING
+- Package B Cross Check = PASS
 - Blocking Issue = NONE
 - Formal Current Architecture = UNCHANGED
 
-PACKAGE A CORE:
-Knowledge Identity
-= stable family identity, not semantic body.
+PACKAGE B CORE:
+Event / Domain Time
+!= Source Available Time
+!= System Information Available Time
+!= As-Of / Information Cutoff
+!= Assessment / Decision Time
+!= Effective Time.
 
-Knowledge Record K021@v3
-= sole canonical semantic truth for exact version.
+Historical Decision eligibility uses:
+input.system_available_at <= information_cutoff.
 
-Knowledge Version
-= logical exact-version identity, not duplicate semantic object.
+Event Time alone is insufficient.
 
-Version Lineage
-= same-identity continuity / history.
+Historical Reconstruction
+!= Retrospective / Counterfactual Analysis.
 
-Same-Identity evolution
-= Version Lineage.
+Derived information cannot be available before its material dependencies.
 
-Cross-Identity semantics
-= Knowledge Relationship.
+Later correction / Model / Policy / Relationship / Constraint / Lifecycle information
+must not rewrite Past Decision Context.
 
-Knowledge Candidate
-!= Canonical Knowledge Version.
+Decision Material Snapshot:
+= immutable Decision Input Boundary.
 
-Admission:
-Research Result Classification
-!= Knowledge Worthiness
-!= Canonicalization Need
-!= Admission Disposition.
+Decision Context must pin:
+Target / Scope / Relevant Horizon / Decision As-Of.
 
-Admission Disposition working direction:
-ADMIT / DEFER / RESEARCH_REQUIRED / REJECT.
+Snapshot temporal header:
+Decision As-Of / Information Cutoff / Sealed At are distinct.
 
-ADMIT_WITH_BOUNDARY / NEGATIVE / UNKNOWN / MERGE / SUPERSEDE_CANDIDATE
-are not one canonical Admission-Disposition axis.
+Snapshot logical blocks:
+A Identity / Decision Context
+B Market Context
+C ACTIVE INPUT
+D Cross-Knowledge Context
+E TRACE ONLY / Excluded / Blocked / Unknown Trace
+F Integrity / Seal Trace
 
-Admission authority:
-Assessment
-→ Knowledge Admission Governance
-→ Authorized Decision
-→ Knowledge Admission Writer.
+ACTIVE INPUT
+!= TRACE ONLY.
 
-Canonical Knowledge Relationship:
-- exact Knowledge Version scoped
-- sole semantic relation truth owner
-- Known Contradictions removed from Knowledge Record ownership
-- DUPLICATE_CANDIDATE is not canonical relation type
-- no silent carry-forward to new versions
-- Candidate / Assessment / Governance / Writer separated
-- later relationships do not rewrite past decision context.
+TRACE ONLY:
+may affect sufficiency / audit,
+must not become directional support/opposition.
 
-Knowledge-Use Constraint:
-- exact Knowledge Version scoped
-- operational permission restriction, not Knowledge semantics
-- Usage Scope explicit
-- Candidate / Assessment / Governance / Writer separated
-- Release does not delete history
-- old Constraint does not silently carry to new Version
-- Emergency fast block remains authorized and does not imply RETIRE.
+Snapshot Assembler
+!= Decision Material Eligibility Authority.
 
-PACKAGE A ADJACENT HANDOFF:
-PA-HO-001
-Successful Admission → Lifecycle Initialization.
-Admission Writer does not choose Lifecycle Disposition.
+Snapshot Sealer
+= integrity authority,
+not semantic truth authority.
 
-PA-HO-002
-Admission Governance owns semantic NEW_VERSION decision.
-Admission Writer materializes:
-Knowledge Record creation
-+ Version Lineage update
-+ Current Canonical Knowledge Version ref update.
+Sealed Snapshot is immutable.
 
-KEY PACKAGE A INVARIANTS:
-- one canonical fact = one owner
-- Generate / Assess / Decide / Write separated
-- Current Canonical Version != ACTIVE != APPLICABLE
-- no fallback to previous version
-- new version does not silently inherit old Relationship / Constraint
-- historical consumers pin exact refs
-- canonical writers do not invent semantics
+Historical Snapshot Integrity
+!= Current-Use Validity.
+
+Material current-use invalidation
+→ new Snapshot,
+not mutation.
+
+Decision Synthesis consumes the sealed Snapshot
+and does not silently re-query moving Current state.
+
+PACKAGE B CLARIFICATIONS:
+PB-HO-001
+Snapshot Seal Success != Decision Sufficiency.
+
+PB-HO-002
+Original Snapshot Replay != Historical Reconstruction.
+
+PB-HO-003
+Exact Ref must resolve to immutable / historically reconstructable revision.
 
 FORMAL BOUNDARY:
 AI_CONTEXT remains authoritative for Formal Project Current State.
 00_HUMAN/HUMAN_MAP.md unchanged.
 02_ARCHITECTURE/ unchanged.
-Checkpoint 017 remains Working Repair, not formal adoption.
+Checkpoint 018 remains Working Repair, not formal adoption.
 
 NEXT:
-Repair Package B — Temporal / Reproducibility.
+Repair Package C — Decision Contract.
 
 FIRST TARGET:
-R3-INT-002 — Temporal / Look-Ahead Contract.
+R3-INT-004 — Decision Candidate Contract Backfill.
 
 Then:
-R3-INT-003 — Decision Material Snapshot Contract.
+R3-INT-008 Unknown identity / treatment
+R3-INT-009 Dependency / independence provenance
+R3-INT-010 Synthesis Result / Decision Thesis boundary
+R3-INT-011 Candidate Advancement governance / terminology
 
 Git Write Permission Reminder:
 REQUIRE CURRENT-CHAT USER AUTHORIZATION
