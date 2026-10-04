@@ -18235,3 +18235,1078 @@ R3-INT-002
 Temporal / Look-Ahead Contract
 ~~~
 
+---
+
+# 25. Checkpoint 018 — R3 Integration Repair / Package B — Temporal / Reproducibility
+
+**Date:** 2026-10-04  
+**State:** SAVED / WORKING REPAIR CHECKPOINT  
+**Formal Current Architecture Changed:** NO  
+**Phase:** 5 Reconstruction — R3 Integration Repair  
+**Repair Package:** B — Temporal / Reproducibility  
+**Issues Repaired:** R3-INT-002 / R3-INT-003  
+**Next:** Repair Package C — Decision Contract, starting with R3-INT-004 Decision Candidate Contract Backfill.
+
+## 25.1 Package B Purpose
+
+Checkpoint 016で確定したCRITICAL issueのうち、R3のTemporal IntegrityとDecision Input Boundaryを構成する2件を修正した。
+
+~~~text
+R3-INT-002
+R3 common Temporal / Look-Ahead Contract
+
+R3-INT-003
+Decision Material Snapshot Contract
+~~~
+
+目的:
+
+> 後から得た情報を過去Decisionへ逆流させず、「その時点で市場理解OSが何を知ることができ、何をDecision Inputとして固定したか」をExact Version / Revision / Policy / Modelまで含めて再現可能にする。
+
+---
+
+## 25.2 R3-INT-002 — Temporal Contract
+
+Repair Result:
+
+~~~text
+PASS AS WORKING REPAIR
+~~~
+
+R3共通Temporal Vocabularyの中心分離:
+
+~~~text
+Event / Domain Time
+!= Source Available Time
+!= System Information Available Time
+!= As-Of / Information Cutoff
+!= Assessment / Decision Time
+!= Effective Time
+!= Record / Materialization Time
+~~~
+
+各Objectがすべての時刻を持つ必要はない。
+
+ただし、異なる意味の時刻を同じtimestampとして扱わない。
+
+---
+
+## 25.3 Event / Domain Time vs Information Availability
+
+Event / Domain Time:
+
+> 現実世界で出来事・値・状態がいつのものか。
+
+System Information Available Time:
+
+> 市場理解OSがその情報をDecision Inputとして実際に利用可能になった最初の時刻。
+
+Original DecisionのHistorical EligibilityはEvent Timeだけで決めない。
+
+~~~text
+Event Time <= Decision As-Of
+だけでは不十分
+
+Material Input System Available Time
+<= Information Cutoff
+が必要
+~~~
+
+例:
+
+~~~text
+ETF Event Time
+09:58
+
+System Available
+10:03
+
+Decision / Cutoff
+10:00
+
+→ Original Decision Inputとして使用不可
+~~~
+
+---
+
+## 25.4 Source Available vs System Available
+
+外部Sourceが公開済みでも、市場理解OSがまだ取得 / 検証できていなければOriginal Decisionには利用できない。
+
+~~~text
+Source Available Time
+!= System Information Available Time
+~~~
+
+Historical Decision Reconstructionでは、原則としてSystem Information Available Timeを基準にする。
+
+---
+
+## 25.5 As-Of / Information Cutoff / Decision Time / Effective Time
+
+As-Of:
+
+> どの時点の世界を評価対象にしているか。
+
+Information Cutoff:
+
+> Assessment / Decisionへ使用可能な情報の最終Availability時刻。
+
+Assessment / Decision Time:
+
+> 評価またはAuthority Decisionが実際に行われた時刻。
+
+Effective Time:
+
+> 承認されたState / Restriction / PolicyがOperationalに効き始める時刻。
+
+重要:
+
+~~~text
+Decision Time
+!= Effective Time
+
+Retroactive Effective Semantics
+!= Retroactive Information Availability
+~~~
+
+Later Decisionで「過去からeffectiveだった」と判断しても、Past Original Decisionが当時その情報を知っていたことにはしない。
+
+---
+
+## 25.6 Historical Information Eligibility Rule
+
+Original Decision用のMaterial Inputは原則:
+
+~~~text
+input.system_available_at
+<= snapshot.information_cutoff
+~~~
+
+を満たす。
+
+通常:
+
+~~~text
+information_cutoff
+<= decision_as_of
+~~~
+
+を基本とする。
+
+Event Time aloneではNo-Look-Aheadを保証しない。
+
+---
+
+## 25.7 Derived Information Availability
+
+Derived informationはMaterial dependencyより先にAvailableになれない。
+
+~~~text
+derived_available_at
+>= max(material_input_available_at)
+
+and
+
+derived_available_at
+>= calculation / validation completion
+~~~
+
+対象候補:
+
+~~~text
+Feature
+Market Context
+Research Result
+Knowledge Candidate
+Knowledge Record
+Knowledge Relationship
+Applicability Assessment
+Economic Value Assessment
+~~~
+
+Feature label time
+!= Feature availability time.
+
+Future-window featureはEarlier Decisionへ使わない。
+
+---
+
+## 25.8 Data Revision / Correction
+
+Later correctionはPast Decisionが当時利用したRevisionを上書きしない。
+
+例:
+
+~~~text
+10:03
+Revision 1 = 100
+
+10:10
+Decision
+
+11:00
+Revision 2 = 80
+~~~
+
+Historical Original Decision Replay:
+
+~~~text
+Revision 1
+~~~
+
+Retrospective analysis:
+
+~~~text
+Revision 2
+may be used
+~~~
+
+重要:
+
+~~~text
+Corrected Data
+!= Data Known Earlier
+~~~
+
+---
+
+## 25.9 Historical Reconstruction vs Retrospective Analysis
+
+Historical Decision Reconstruction:
+
+> 当時の市場理解OSが何を知り、どのPolicy / Model / Knowledge / Relationship / Constraintで判断したかを再現する。
+
+Retrospective / Counterfactual Analysis:
+
+> Later Knowledge / corrected data / later Model等を使って、過去を現在の視点で再評価する。
+
+重要:
+
+~~~text
+Historical Reconstruction
+!= Retrospective Analysis
+~~~
+
+Later Knowledgeを使った分析をOriginal Decision Contextとして扱わない。
+
+---
+
+## 25.10 Package A Temporal Handoff
+
+Package Aと時間契約を接続。
+
+Admission:
+
+~~~text
+Authorized ADMIT
+!= Canonical Knowledge Available
+
+Admission Governance Decision
+→ Writer
+→ successful canonical materialization
+→ Knowledge becomes decision-available
+~~~
+
+Relationship:
+
+~~~text
+Relationship Decision
+!= Relationship Available To Decision
+~~~
+
+Constraint:
+
+~~~text
+Constraint Decision Time
+!= Constraint Effective Time
+~~~
+
+Lifecycle:
+
+~~~text
+Later Lifecycle Decision
+!= Past Decision Context
+~~~
+
+Canonical authorizationとdecision-availabilityを混同しない。
+
+---
+
+## 25.11 Model / Policy Temporal Integrity
+
+Historical replayはDataだけでなくModel / Policy Versionも当時利用可能だったものへ固定する。
+
+対象例:
+
+~~~text
+Snapshot Assembly Policy
+Relationship Assessment Policy
+Candidate Advancement Policy
+Economic Model
+Slippage Model
+Risk Policy
+~~~
+
+Later Model / PolicyはOriginal Decision Reconstructionへ逆流させない。
+
+---
+
+## 25.12 Temporal Unknown
+
+~~~text
+Missing Availability Time
+!= Zero-Latency Availability
+
+Temporal Availability Unknown
+!= Historically Available
+~~~
+
+Availability Timeを推定する場合は推定であることとUncertaintyを保持する。
+
+Clock / source timing integrityが怪しい情報をperfectly alignedとして扱わない。
+
+---
+
+## 25.13 R3-INT-002 Core Invariants
+
+~~~text
+TC-01 Event / Domain Time != Information Available Time.
+TC-02 Source Available Time != System Information Available Time.
+TC-03 As-Of != Assessment / Decision Time.
+TC-04 Decision Time != Effective Time.
+TC-05 Record / Materialization Time != Domain Event Time.
+TC-06 Historical input requires Information Available Time <= Information Cutoff.
+TC-07 Event Time <= Decision As-Of alone is insufficient.
+TC-08 Later-arriving information must not rewrite past Decision Context.
+TC-09 Later correction must not replace the revision originally available.
+TC-10 Historical Reconstruction != Retrospective Analysis.
+TC-11 Historical Reconstruction uses then-available Data / Knowledge / Relationship / Constraint / Model / Policy.
+TC-12 Later Model / Policy must not appear historically available.
+TC-13 Derived information cannot be available before material dependencies.
+TC-14 Feature label time != Feature availability time.
+TC-15 Future-window features cannot influence earlier decisions.
+TC-16 Authorized Decision != Canonical Object Available.
+TC-17 Canonical availability begins only after successful materialization unless explicitly defined otherwise.
+TC-18 Current Canonical Version is resolved relative to explicit time context.
+TC-19 Later Knowledge Version must not rewrite historical consumers.
+TC-20 Later Relationship must not rewrite Past Decision Context.
+TC-21 Later Constraint release must not rewrite Past Decision Context.
+TC-22 Later Lifecycle Decision must not rewrite Past Decision Context.
+TC-23 Retroactive Effective Time != Retroactive Information Availability.
+TC-24 Original Decision Reconstruction uses what the system could know.
+TC-25 Missing Availability Time != zero-latency availability.
+TC-26 Temporal Availability Unknown remains Unknown.
+TC-27 Snapshot requires explicit As-Of / Information Cutoff.
+TC-28 Snapshot inputs are exact revisions / versions.
+TC-29 Snapshot assembly must not mix moving Current state.
+TC-30 Decision Synthesis consumes sealed Snapshot, not moving Current inputs.
+TC-31 Candidate As-Of != Economic Evaluation As-Of.
+TC-32 Economic Evaluation respects Market / Cost input availability.
+TC-33 Historical immutable object != forever current-use valid.
+TC-34 Semantic Change → New Version.
+TC-35 Context Change → New Assessment.
+TC-36 No-Look-Ahead is a cross-cutting integrity rule.
+TC-37 Confirmed temporal leakage may trigger fast safety but not historical rewrite.
+~~~
+
+---
+
+## 25.14 R3-INT-003 — Decision Material Snapshot Contract
+
+Repair Result:
+
+~~~text
+PASS AS WORKING REPAIR
+~~~
+
+Definition:
+
+> 特定Decision Contextについて、特定Decision As-Of / Information Cutoffまでに市場理解OSが利用可能だったMarket Context、Exact Knowledge Versions、Lifecycle、Applicability、Knowledge-Use Constraints、Canonical Relationships、Dependency / Unknown Context、ならびに重要なExcluded / Blocked TraceをExact Referenceで固定し、Decision Synthesisへ渡すImmutable Decision Input Boundary。
+
+Decision Material Snapshot:
+
+~~~text
+!= Decision Output
+!= Knowledge Pool
+!= Raw Data Warehouse
+!= Trade Thesis
+~~~
+
+---
+
+## 25.15 Decision Context
+
+Snapshotより先にDecision Contextを固定する。
+
+最低意味:
+
+~~~text
+Decision Context
+├─ Target
+├─ Scope
+├─ Relevant Horizon
+├─ Decision As-Of
+└─ Decision Purpose / Question Ref
+~~~
+
+Decision Context
+!= Current Market Context.
+
+Material Target / Scope / Horizon change
+→ New Decision Context + New Snapshot.
+
+---
+
+## 25.16 Snapshot Temporal Header
+
+Snapshotは最低意味として:
+
+~~~text
+Decision As-Of
+Information Cutoff
+Snapshot Sealed At
+~~~
+
+を持つ。
+
+重要:
+
+~~~text
+Decision As-Of
+!= Information Cutoff
+!= Snapshot Sealed At
+~~~
+
+Sealまでに到着した情報全部を入れるのではなく、Information Cutoff以前にAvailableだった情報だけをOriginal Snapshotへ入れる。
+
+---
+
+## 25.17 Snapshot Logical Blocks
+
+Working structure:
+
+~~~text
+Decision Material Snapshot
+│
+├─ A. Snapshot Identity / Decision Context
+├─ B. Market Context Boundary
+├─ C. ACTIVE Decision Materials
+├─ D. Cross-Knowledge Context
+├─ E. TRACE ONLY / Excluded / Blocked / Unknown Trace
+└─ F. Snapshot Integrity / Seal Trace
+~~~
+
+Logical structureでありDB Table数ではない。
+
+---
+
+## 25.18 Block A — Identity / Decision Context
+
+候補:
+
+~~~text
+Snapshot ID
+Decision Context Ref
+Target
+Scope
+Relevant Horizon
+Decision As-Of
+Information Cutoff
+Snapshot Sealed At
+Snapshot Assembly / Eligibility Policy Ref
+Optional predecessor Snapshot Ref
+Optional rebuild reason
+~~~
+
+Historical replayのため、当時のAssembly / Selection Policyを追跡可能にする。
+
+---
+
+## 25.19 Block B — Market Context
+
+SnapshotはMarket Data全文を複製しない。
+
+Exact Context / Observation refs、Data Quality / Freshness / Temporal integrity refsを保持する。
+
+各Material Inputは:
+
+~~~text
+available_at <= information_cutoff
+~~~
+
+を満たす。
+
+Latest-value collection
+!= time-consistent Decision Context.
+
+---
+
+## 25.20 Block C — ACTIVE INPUT
+
+ACTIVE INPUTはDecision Thesisへ実質Influenceしてよい材料のみ。
+
+Logical material:
+
+~~~text
+Exact Knowledge Version Ref
+Lifecycle Revision / Event Ref
+Applicability Assessment Ref
+Knowledge-Use Constraint Refs
+Decision Material Eligibility Ref / Result
+Material Boundary Status Ref
+Material Unknown Refs
+Input Role = ACTIVE INPUT
+~~~
+
+Temporal availabilityだけではACTIVE INPUTにならない。
+
+~~~text
+Temporally Available
+!= Influence Eligible
+~~~
+
+Lifecycle / Applicability / Constraint / Eligibilityを通る。
+
+---
+
+## 25.21 Decision Material Eligibility Authority
+
+Decision Material EligibilityはPre-Decision Knowledge Applicability / Use-Permission pipelineの最終利用可否Assessment。
+
+~~~text
+Lifecycle Eligibility
+↓
+Scope
+↓
+Condition Match
+↓
+Failure Boundary
+↓
+Semantic Applicability
+↓
+Knowledge-Use Constraint
+↓
+Decision Material Eligibility
+~~~
+
+Snapshot AssemblerはEligibilityを勝手に再判断しない。
+
+~~~text
+Snapshot Assembler
+!= Decision Material Eligibility Authority
+~~~
+
+---
+
+## 25.22 Block D — Cross-Knowledge Context
+
+候補:
+
+~~~text
+Exact Canonical Relationship Refs
+Scope / Horizon overlap context
+Contradiction context
+Evidence / Research Dependency refs
+Data / Feature Dependency refs
+Mechanism Dependency refs
+Unknown Dependency refs
+Independence Basis refs [when claimed]
+~~~
+
+SynthesisがCurrent Relationship / Dependency Storeへsilent re-queryしなくて済むようにSnapshotへ必要Contextを固定する。
+
+---
+
+## 25.23 Block E — ACTIVE INPUT vs TRACE ONLY
+
+ACTIVE INPUT:
+
+> Thesis Support / OppositionへInfluenceしてよい。
+
+TRACE ONLY:
+
+> Audit / Explanation / Sufficiency / Findingでは参照可能だが、Thesis Support / Oppositionの実質Influenceとして使わない。
+
+重要:
+
+~~~text
+Readable
+!= Influence-Eligible
+
+TRACE ONLY
+may affect Synthesis Sufficiency
+
+but
+
+TRACE ONLY
+must not become directional support / opposition
+~~~
+
+Blocked-but-readable Knowledgeを反対票 / 賛成票にしない。
+
+---
+
+## 25.24 Excluded / Blocked Trace
+
+Materialに関係したが利用しなかったものは理由を残す。
+
+候補:
+
+~~~text
+Lifecycle Ineligible
+Scope Mismatch
+Semantic NOT_APPLICABLE
+Semantic Applicability UNDETERMINED
+Knowledge-Use Constraint BLOCKED
+Decision Material Eligibility UNDETERMINED
+Applicability stale
+Required data unavailable
+Relationship context unavailable
+Constraint context unavailable
+Temporal eligibility failed
+Outside Decision Context
+Integrity failure
+~~~
+
+ただしEntire Knowledge PoolをSnapshotへ保存しない。
+
+Decision-relevant candidate setのうちMaterialだったものを対象とする。
+
+Retrieval Miss
+!= Explicit Exclusion.
+
+---
+
+## 25.25 Epistemic Unknown vs Snapshot Integrity Unknown
+
+Epistemic Unknown:
+
+> Market / Knowledgeについて分からない。
+
+Snapshot Integrity Unknown:
+
+> 何をDecision Inputとして使ったか正しく固定できない。
+
+重要:
+
+~~~text
+Epistemic Unknown
+!= Snapshot Integrity Failure
+~~~
+
+Exact AssessmentとしてUnknownを保持できるならStructurally valid SnapshotはSeal可能。
+
+Exact Version / Constraint revision / temporal eligibility等がMaterialに解決不能ならSnapshot Integrity Problem。
+
+---
+
+## 25.26 Block F — Snapshot Integrity / Seal
+
+最低確認候補:
+
+~~~text
+Temporal Eligibility Check
+Exact Reference Resolution Check
+Knowledge Version Consistency
+Lifecycle Revision Resolution
+Constraint Resolution
+Relationship Context Availability
+Market Context Time Consistency
+Selection / Coverage Integrity
+No-Look-Ahead Check
+Assembly Policy Ref
+Seal Result / Reason Trace
+~~~
+
+Snapshot SealはSemantic Truth判断ではない。
+
+---
+
+## 25.27 Snapshot Assembler / Sealer Authority
+
+Logical responsibilities:
+
+~~~text
+Decision Material Snapshot Assembler
+=
+Decision Context + authoritative upstream assessmentsから
+exact refsを収集しSnapshot Candidateを構成
+
+Snapshot Integrity Gate / Sealer
+=
+Temporal integrity / exact refs / no-look-ahead /
+required block completenessを確認しImmutable SnapshotをSeal
+~~~
+
+重要:
+
+~~~text
+Snapshot Sealer
+=
+Integrity Authority
+
+Snapshot Sealer
+!= Knowledge / Relationship / Lifecycle / Applicability Authority
+~~~
+
+Separate logical responsibility
+!= Separate process / server.
+
+---
+
+## 25.28 Snapshot Seal vs Decision Sufficiency
+
+Package B cross-checkで明示。
+
+~~~text
+PB-HO-001
+Snapshot Seal Success
+!= Decision Sufficiency
+~~~
+
+Seal成功はInput BoundaryがStructurally validという意味。
+
+Critical Unknownや重要Material unavailableによりDecision SynthesisがINCONCLUSIVEになることは可能。
+
+---
+
+## 25.29 Snapshot Immutability / Current-Use Validity
+
+Sealed SnapshotはImmutable。
+
+~~~text
+Sealed Snapshot
+→ no in-place Current update
+~~~
+
+Later:
+
+~~~text
+Lifecycle change
+Constraint activation / release
+Knowledge Version change
+Material Relationship change
+Market shock
+Context freshness expiry
+Integrity finding
+~~~
+
+があってもSnapshot本文を書き換えない。
+
+重要:
+
+~~~text
+Snapshot Historical Integrity
+!= Snapshot Current-Use Validity
+~~~
+
+Current-use validityは別Assessmentとして扱う方向。
+
+Materially staleなら:
+
+~~~text
+Old Snapshot remains Historical
+↓
+REBUILD_REQUIRED
+↓
+New Snapshot
+~~~
+
+Any update
+!= automatic rebuild.
+
+Material dependencyを確認する。
+
+---
+
+## 25.30 Decision Synthesis Handoff
+
+~~~text
+Sealed Decision Material Snapshot
+↓
+Current-Use Validity Gate
+↓
+Decision Synthesis
+~~~
+
+Decision SynthesisはSnapshotをDecision Input Boundaryとして使い、Current Knowledge / Relationship / Constraint / Market stateをsilent re-queryしてDecision Influenceへ混ぜない。
+
+Synthesis途中でMaterial invalidationが起きた場合:
+
+~~~text
+Historical Snapshot mutation
+= NO
+
+Current synthesis continuation
+= validity handling
+
+Materially stale
+→ New Snapshot
+→ New Synthesis
+~~~
+
+Decision Synthesis ResultはExact Snapshot Refを持つ。
+
+---
+
+## 25.31 Original Snapshot Replay vs Historical Reconstruction
+
+Package B cross-checkで明示。
+
+~~~text
+PB-HO-002
+Original Snapshot Replay
+!= Historical Snapshot Reconstruction
+~~~
+
+Original Snapshot Replay:
+
+> 当時実際にSealされたSnapshotを読む。
+
+Historical Reconstruction:
+
+> Original Snapshotが存在しない場合、当時利用可能だったimmutable revisions / policy / cutoffから後で再構成する。
+
+Reconstructed objectをOriginal Snapshotと偽らない。
+
+Retrospective Analysisはさらに別。
+
+---
+
+## 25.32 Exact Reference Requirement
+
+Package B cross-checkで強化。
+
+~~~text
+PB-HO-003
+Exact Reference
+must resolve to
+immutable / historically reconstructable revision.
+~~~
+
+対象:
+
+~~~text
+Knowledge Version
+Relationship
+Lifecycle Event / Revision
+Constraint
+Applicability Assessment
+Market Context
+Policy
+Model
+~~~
+
+Mutable pointer:
+
+~~~text
+current_btc_context
+current_K021
+~~~
+
+はHistorical Exact Refではない。
+
+---
+
+## 25.33 Package B End-to-End Flow
+
+~~~text
+Event / Information
+↓
+System Information Availability
+↓
+Temporal Eligibility
+available_at <= cutoff
+↓
+Exact Version / Revision Resolution
+↓
+Lifecycle / Applicability / Constraint / Relationship
+↓
+Decision Material Eligibility
+↓
+Snapshot Assembly
+↓
+Integrity / No-Look-Ahead Validation
+↓
+Snapshot Seal
+↓
+Current-Use Validity Gate
+↓
+Decision Synthesis
+↓
+Decision Synthesis Result
+references exact Snapshot
+↓
+Historical storage
+~~~
+
+Later audit:
+
+~~~text
+Original Snapshot exists?
+├─ YES
+│   → Original Snapshot Replay
+│
+└─ NO
+    → Historical Reconstruction
+       from then-available immutable revisions
+       + original policy / cutoff
+~~~
+
+Separate branch:
+
+~~~text
+Retrospective Analysis
+→ may use later Knowledge / Model / corrected data
+→ must not be represented as Original Decision Context
+~~~
+
+---
+
+## 25.34 Package B Destruction Review
+
+Cases checked:
+
+~~~text
+Delayed ETF information
+Future-window feature
+Later data correction
+Later Model / Policy
+Later Relationship
+Retroactive Lifecycle decision
+Constraint release
+Knowledge Version arriving during Snapshot assembly
+Constraint activation after seal
+Legitimate epistemic UNKNOWN
+Structural exact-ref UNKNOWN
+Relationship Store unavailable
+Constraint Store unavailable
+Target / Horizon change
+Retrieval miss
+Synthesis silently re-querying Current store
+Snapshot becoming stale after seal
+~~~
+
+Result:
+
+~~~text
+Temporal Eligibility
+= PASS
+
+Exact Revision Resolution
+= PASS
+
+Snapshot Assembly
+= PASS
+
+Snapshot Seal
+= PASS
+
+Current-Use Validity
+= PASS
+
+Historical Reconstruction
+= PASS
+
+Look-Ahead Protection
+= PASS
+
+Package A Compatibility
+= PASS
+
+Decision Synthesis Handoff
+= PASS
+
+Blocking Issue
+= NONE
+~~~
+
+---
+
+## 25.35 Package B Core Invariants
+
+~~~text
+PB-01 What happened != When the system knew it.
+PB-02 Historical eligibility is determined by Information Availability, not Event Time alone.
+PB-03 Original Decision uses only information available by its Information Cutoff.
+PB-04 Snapshot pins exact historically reproducible revisions.
+PB-05 Snapshot Seal means input integrity, not decision sufficiency.
+PB-06 Sealed Snapshot is immutable.
+PB-07 Historical Integrity != Current-Use Validity.
+PB-08 Material invalidation → New Snapshot, not old Snapshot mutation.
+PB-09 Original Snapshot Replay != Historical Reconstruction != Retrospective Analysis.
+PB-10 Later information never becomes information that the past system had.
+~~~
+
+---
+
+## 25.36 Save / Adoption Boundary
+
+Checkpoint 018 saves Package B as Working Repair only.
+
+Formal Current remains unchanged.
+
+Do not modify:
+
+~~~text
+00_AI/AI_CONTEXT.md
+00_HUMAN/HUMAN_MAP.md
+02_ARCHITECTURE/
+~~~
+
+Still not decided here:
+
+~~~text
+DB tables
+Python classes
+storage engine
+physical snapshot format
+final enum names
+exact fail-open / fail-closed implementation
+~~~
+
+---
+
+## 25.37 Checkpoint Result
+
+~~~text
+Checkpoint 018
+R3 Integration Repair
+Package B — Temporal / Reproducibility
+= SAVED WORKING REPAIR
+
+R3-INT-002
+= REPAIRED / WORKING
+
+R3-INT-003
+= REPAIRED / WORKING
+
+PB-HO-001
+Snapshot Seal Success != Decision Sufficiency
+= CLARIFIED
+
+PB-HO-002
+Original Snapshot Replay != Historical Reconstruction
+= CLARIFIED
+
+PB-HO-003
+Exact Ref must resolve to immutable / historically reconstructable revision
+= CLARIFIED
+
+Blocking Issue
+= NONE
+
+Formal Current Architecture
+= UNCHANGED
+
+NEXT
+=
+Repair Package C — Decision Contract
+
+FIRST TARGET
+=
+R3-INT-004
+Decision Candidate Contract Backfill
+~~~
+
