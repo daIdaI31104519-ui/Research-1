@@ -17,151 +17,150 @@ Last Updated:
 
 Conversation Focus:
 Whole Market Understanding OS Reconstruction.
-R3 Integration Repair Packages A-D are checkpointed.
-Next is Adjacent Contract Recheck → STEP 8 Destruction Test → R3 Integration Final Review.
+R3 Integration Repair Packages A-D and Adjacent Contract Recheck are checkpointed.
+Next is STEP 8 — R3 Full Destruction Test.
 
 WORKFLOW:
 AI_WORKFLOW v0.5.3 Precision-First → Precision Review → Human View workflow is active.
 
 LATEST SAVED CHECKPOINT:
-Checkpoint 020 — R3 Integration Repair / Package D — Economic / Trade Exit & Backward Return Router
+Checkpoint 021 — R3 Adjacent Contract Recheck / Cross-Cutting Contract Repair
 
 PRIMARY:
 98_DESIGN_STUDY/市場理解OS_全体再構築_設計ログ.md
 
-CHECKPOINT 020 RESULT:
-- R3-INT-005 Evaluation Availability / Sufficiency = REPAIRED / WORKING
-- R3-INT-012 Trade Thesis Revision / Adoption / Immutability = REPAIRED / WORKING
-- R3-INT-014 Backward Return Router Common Rule = REPAIRED / WORKING
-- Package D Cross Check = PASS
+CHECKPOINT 021 RESULT:
+- R3-ADJ-001 Artifact Current-Use Validity Common Contract = REPAIRED / WORKING
+- R3-ADJ-002 Evaluation Requirement Profile Governance = REPAIRED / WORKING
+- R3-ADJ-003 Trade Thesis Adoption Contract Governance = REPAIRED / WORKING
+- R3-ADJ-004 Multi-Domain Return / Minimal Semantic Owner Set = REPAIRED / WORKING
+- Adjacent Contract Cross Check = PASS
 - Blocking Issue = NONE
 - Formal Current Architecture = UNCHANGED
 
-R3-INT-005 CORE:
-Evaluation Integrity
-!= Evaluation Availability
-!= Evaluation Coverage
-!= Evaluation Sufficiency
-!= Economic Attractiveness
-!= Candidate Advancement.
+R3-ADJ-001 CORE:
+Historical Integrity
+!= Current-Use Validity.
 
-Valid Partial EVA
-!= Invalid EVA.
+CUV is:
+Exact Artifact
++ Intended Use
++ Context
++ As-Of / Cutoff
++ Material Dependency
++ Policy / Method Version.
 
-Strict Expected EV unavailable
-does not invalidate Scenario / Stress evaluation.
+UNDETERMINED
+!= VALID.
 
-Missing / Unknown values must not become ZERO / 50%.
+CUV Result
+!= Return Route
+!= Action.
 
-Evaluation Sufficiency is relative to an explicit Versioned Evaluation Requirement Profile.
+CUV is artifact-domain-owned under one common contract,
+not a universal central truth engine.
 
-Coverage count / percentage
-!= Sufficiency.
+R3-ADJ-002 CORE:
+Evaluation Requirement Profile
+= versioned Economic Evaluation Policy Contract.
 
-Sufficient
-!= ADVANCE.
+Economic Evaluation Requirement Governance
+owns:
+what must be evaluated for sufficiency.
 
-Insufficient
-!= automatic WAIT / ABSTAIN.
+EVA / EAS / Advancement / R4 / Runtime / AI
+must not author active requirements ad hoc.
 
-R3-INT-012 CORE:
-Trade Thesis
-= immutable Trade-specific Reasoning Artifact submitted to R4.
+Requirement Profile Resolver selects exact applicable basis.
+Profile composition is explicit.
+No silent fallback.
+Research Sufficiency != Production Sufficiency.
 
-Trade Thesis Formation
-!= Adoption
-!= Materialization
-!= Capital Permission
-!= Position Activation.
+R3-ADJ-003 CORE:
+Trade Thesis Adoption Contract
+= versioned Reasoning Integrity Contract.
 
-Authority chain:
-ADVANCE Record
-→ Formation
-→ Formation Result
-→ Adoption Assessment
-→ Adoption Authorization
-→ Writer
-→ Immutable Trade Thesis.
+Trade Thesis Adoption Contract Governance
+owns:
+what Formation Result must satisfy
+to become a formal R3 Trade Thesis for R4.
 
-Trade Thesis revision
-= new immutable artifact with predecessor lineage,
-not in-place mutation.
+Advancement Policy
+!= Formation Policy
+!= Adoption Contract
+!= R4 Capital Contract.
 
-R4 uses exact Trade Thesis refs.
+Adoption Contract checks:
+Exact refs,
+CUV,
+Temporal integrity,
+Semantic preservation,
+Unknown / Dependency preservation,
+R4 handoff completeness.
 
-No Fill
-→ no Active Runtime Assumption Set.
+Adoption Contract does not re-decide:
+Economic attractiveness,
+Sufficiency,
+Unknown acceptance,
+ADVANCE / WAIT / ABSTAIN,
+Capital Permission.
 
-Trade Thesis Invalidation
-!= automatic EXIT.
+Trade Thesis now preserves:
+exact Adoption Contract basis,
+Adoption Assessment ref,
+Adoption Authorization ref.
 
-R3-INT-014 CORE:
-Backward Return routing is based on
-what meaning changed,
-not where the issue was detected.
+R3-ADJ-004 CORE:
+One Source Event
+may produce multiple Atomic Findings.
 
-Nearest semantic owner rule:
-Capital-only
-→ R4.
+Finding Count
+!= Return Count.
 
-Economic change
-→ EVA / EAS.
+Minimal Semantic Owner Set
+= smallest non-redundant owner set
+covering all material findings.
 
-Candidate semantic / composite change
-→ Candidate Formation.
+Upstream route may subsume downstream route
+only when normal forward rebuild necessarily regenerates
+the affected downstream semantics.
 
-Decision input / Thesis change
-→ new Snapshot / Decision Synthesis.
+Independent semantic owner remains separate.
 
-Knowledge applicability / use change
-→ Applicability / Constraint / Lifecycle owner
-→ new Snapshot / Synthesis.
+Actual Exposure Safety
+is an independent fast route
+and is never subsumed by slow semantic repair.
 
-Knowledge validity / novel causal question
-→ R2 Research / Validation path.
+Route relations:
+SEQUENTIAL / PARALLEL / SUBSUMED.
 
-Data / Temporal / Integrity defect
-→ owner of the broken source / contract.
+Required Join Point is explicit
+when material slow routes must converge.
 
-Return routing:
-does not rewrite history,
-does not globally rebuild,
-and rebuilds only materially dependent descendants.
+ADJACENT NON-BLOCKING CLARIFICATIONS:
+ADJ-HO-001 CUV policy is domain-owned; common invariants cannot be weakened.
+ADJ-HO-002 No recursive CUV-of-CUV chain.
+ADJ-HO-003 Return Routing Group must not deadlock on circular waits.
+ADJ-HO-004 Join resumes only from exact available current-use-valid repaired outputs.
 
-Actual Exposure safety may trigger:
-Fast R4 / Runtime Safety
-+
-Slow semantic / research repair
-in parallel.
-
-Fast Safety
-!= Semantic Repair
-!= Knowledge Retirement.
-
-PACKAGE D CLARIFICATIONS:
-PD-HO-001 Valid Partial EVA != Invalid EVA.
-PD-HO-002 Sufficiency is Requirement-Profile relative.
-PD-HO-003 Formation != Adoption != Materialization.
-PD-HO-004 Return to nearest semantic owner.
-PD-HO-005 Fast Safety may run parallel with slow repair.
-PD-HO-006 Return routing never rewrites history.
-
-R3 REPAIR STATUS:
+R3 STATUS:
 Package A = checkpointed.
 Package B = checkpointed.
 Package C = checkpointed.
 Package D = checkpointed.
+Adjacent Contract Recheck = checkpointed.
+R3 Integration Blocking Issue = NONE.
 
 FORMAL BOUNDARY:
 AI_CONTEXT remains authoritative for Formal Project Current State.
 00_HUMAN/HUMAN_MAP.md unchanged.
 02_ARCHITECTURE/ unchanged.
-Checkpoint 020 remains Working Repair, not formal adoption.
+Checkpoint 021 remains Working Repair, not formal adoption.
 
 NEXT:
-Adjacent Contract Recheck
-→ STEP 8 Destruction Test
-→ R3 Integration Final Review.
+STEP 8 — R3 Full Destruction Test
+→ R3 Integration Final Review
+→ Formal Adoption Decision later.
 
 Git Write Permission Reminder:
 REQUIRE CURRENT-CHAT USER AUTHORIZATION
