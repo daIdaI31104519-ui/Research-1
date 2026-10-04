@@ -18,116 +18,175 @@ Last Updated:
 Conversation Focus:
 Whole Market Understanding OS Reconstruction.
 R3 Integration Repair is active.
-Package A and Package B are checkpointed.
-Package C — Decision Contract is next.
+Packages A, B and C are checkpointed.
+Package D — Economic / Trade Exit is next.
 
 WORKFLOW:
 AI_WORKFLOW v0.5.3 Precision-First → Precision Review → Human View workflow is active.
 
 LATEST SAVED CHECKPOINT:
-Checkpoint 018 — R3 Integration Repair / Package B — Temporal / Reproducibility
+Checkpoint 019 — R3 Integration Repair / Package C — Decision Contract & Decision Lineage
 
 PRIMARY:
 98_DESIGN_STUDY/市場理解OS_全体再構築_設計ログ.md
 
-CHECKPOINT 018 RESULT:
-- R3-INT-002 Temporal / Look-Ahead Contract = REPAIRED / WORKING
-- R3-INT-003 Decision Material Snapshot Contract = REPAIRED / WORKING
-- Package B Cross Check = PASS
+CHECKPOINT 019 RESULT:
+- R3-INT-004 Decision Candidate Contract = REPAIRED / WORKING
+- R3-INT-008 Unknown Identity / Treatment = REPAIRED / WORKING
+- R3-INT-009 Dependency / Independence Provenance = REPAIRED / WORKING
+- R3-INT-010 Decision Synthesis Result / Decision Thesis Boundary = REPAIRED / WORKING
+- R3-INT-011 Candidate Advancement Governance / Terminology = REPAIRED / WORKING
+- Decision Lineage Contract = ADDED / WORKING
+- Package C Cross Check = PASS
 - Blocking Issue = NONE
 - Formal Current Architecture = UNCHANGED
 
-PACKAGE B CORE:
-Event / Domain Time
-!= Source Available Time
-!= System Information Available Time
-!= As-Of / Information Cutoff
-!= Assessment / Decision Time
-!= Effective Time.
+PACKAGE C CORE FLOW:
+Decision Material Snapshot
+→ Decision Synthesis Result
+→ Decision Thesis
+→ Decision Candidate
+→ Economic Value Assessment
+→ Candidate Advancement Record
+→ Trade Thesis Formation.
 
-Historical Decision eligibility uses:
-input.system_available_at <= information_cutoff.
+This is not a one-to-one pipeline.
+It is a branching immutable Decision Lineage DAG.
 
-Event Time alone is insufficient.
+R3-INT-004 CORE:
+Decision Candidate
+= meaning-fixed Action Option evaluated by Economic Value.
 
-Historical Reconstruction
-!= Retrospective / Counterfactual Analysis.
+Candidate semantics include:
+Target / Instrument / Exposure Intent / Objective / Horizon /
+Evaluation Baseline Specification / Preconditions /
+Candidate Invalidation / Critical Unknown refs /
+Decision Thesis lineage / Decision Context.
 
-Derived information cannot be available before its material dependencies.
+Candidate semantics
+!= EVA Context.
 
-Later correction / Model / Policy / Relationship / Constraint / Lifecycle information
-must not rewrite Past Decision Context.
+Economic Value must not repair / invent missing Candidate semantics.
 
-Decision Material Snapshot:
-= immutable Decision Input Boundary.
+R3-INT-008 CORE:
+Unknown Source / Finding
+!= downstream Treatment.
 
-Decision Context must pin:
-Target / Scope / Relevant Horizon / Decision As-Of.
+Unknown existence
+!= Criticality.
 
-Snapshot temporal header:
-Decision As-Of / Information Cutoff / Sealed At are distinct.
+UNKNOWN
+!= FALSE / ZERO / 50%.
 
-Snapshot logical blocks:
-A Identity / Decision Context
-B Market Context
-C ACTIVE INPUT
-D Cross-Knowledge Context
-E TRACE ONLY / Excluded / Blocked / Unknown Trace
-F Integrity / Seal Trace
+Accepted Unknown
+!= Resolved Unknown.
 
-ACTIVE INPUT
-!= TRACE ONLY.
+Downstream layers preserve source Unknown identity.
 
-TRACE ONLY:
-may affect sufficiency / audit,
-must not become directional support/opposition.
+R3-INT-009 CORE:
+Semantic Relationship
+!= Dependency.
 
-Snapshot Assembler
-!= Decision Material Eligibility Authority.
+Provenance Fact
+!= Dependency Assessment.
 
-Snapshot Sealer
-= integrity authority,
-not semantic truth authority.
+No known dependency
+!= Proven independence.
 
-Sealed Snapshot is immutable.
+Independence is dimension-scoped and requires explicit Independence Basis.
 
-Historical Snapshot Integrity
-!= Current-Use Validity.
+Decision Dependency
+!= Cross-Candidate Economic Dependency.
 
-Material current-use invalidation
-→ new Snapshot,
-not mutation.
+R3-INT-010 CORE:
+Decision Synthesis Result
+= one whole synthesis event.
 
-Decision Synthesis consumes the sealed Snapshot
-and does not silently re-query moving Current state.
+Decision Thesis
+= one immutable Snapshot-bound Market Judgment.
 
-PACKAGE B CLARIFICATIONS:
-PB-HO-001
-Snapshot Seal Success != Decision Sufficiency.
+Decision Thesis Candidate
+= deprecated unless a real promotion boundary is later introduced.
 
-PB-HO-002
-Original Snapshot Replay != Historical Reconstruction.
+THESIS_FORMED
+→ one or more Formal Theses.
 
-PB-HO-003
-Exact Ref must resolve to immutable / historically reconstructable revision.
+INCONCLUSIVE
+→ zero Formal Theses.
+
+Synthesis Outcome
+!= Thesis Set Structure.
+
+R3-INT-011 CORE:
+PROCEED
+→ deprecated.
+
+ADVANCE
+= preferred Candidate Advancement term.
+
+Candidate Advancement Disposition:
+ADVANCE / WAIT / ABSTAIN.
+
+Disposition belongs to immutable Candidate Advancement Record,
+not mutable Candidate state.
+
+Candidate Advancement Policy must be explicit / versioned.
+
+Positive EV != Automatic ADVANCE.
+Negative Standalone EV != Automatic ABSTAIN for Hedge / Insurance.
+
+WAIT requires Re-evaluation Trigger + Route.
+WAIT != R4 HOLD.
+ABSTAIN != Knowledge / Thesis refutation.
+ADVANCE != Trade Permission / Capital Permission.
+
+DECISION LINEAGE:
+Decision Lineage is a cross-cutting trace concept,
+not a new R3 layer or truth owner.
+
+Exact Parent / Source Artifact refs
+= canonical lineage basis.
+
+Decision Lineage ID
+= correlation / traversal aid only.
+
+Decision Lineage may branch.
+
+Historical artifacts are immutable.
+
+Current-use validity is artifact-specific,
+not one universal Lineage state.
+
+Material Unknown must be carried forward by exact ref
+or explicitly treated as non-material.
+
+Downstream cannot use a required upstream artifact
+before that artifact became available.
+
+Retrospective / Counterfactual artifacts
+must not masquerade as Original Decision Lineage descendants.
+
+PACKAGE D CROSS-PACKAGE DEPENDENCIES:
+R3-INT-005
+Evaluation Availability / Sufficiency.
+
+R3-INT-012
+Trade Thesis immutable revision / adoption.
+
+R3-INT-014
+Backward Return Router common rule.
 
 FORMAL BOUNDARY:
 AI_CONTEXT remains authoritative for Formal Project Current State.
 00_HUMAN/HUMAN_MAP.md unchanged.
 02_ARCHITECTURE/ unchanged.
-Checkpoint 018 remains Working Repair, not formal adoption.
+Checkpoint 019 remains Working Repair, not formal adoption.
 
 NEXT:
-Repair Package C — Decision Contract.
+Repair Package D — Economic / Trade Exit.
 
 FIRST TARGET:
-R3-INT-004 — Decision Candidate Contract Backfill.
-
-Then:
-R3-INT-008 Unknown identity / treatment
-R3-INT-009 Dependency / independence provenance
-R3-INT-010 Synthesis Result / Decision Thesis boundary
-R3-INT-011 Candidate Advancement governance / terminology
+R3-INT-005 — Evaluation Availability / Sufficiency.
 
 Git Write Permission Reminder:
 REQUIRE CURRENT-CHAT USER AUTHORIZATION
