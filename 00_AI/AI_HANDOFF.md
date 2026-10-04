@@ -22,7 +22,7 @@ WORKFLOW:
 AI_WORKFLOW v0.5.3 Precision-First → Precision Review → Human View workflow is active.
 
 LATEST SAVED WORKING CHECKPOINT:
-PROJECT_CHARTER Section 4 — Survival / Profit Priority
+PROJECT_CHARTER Section 5 — Research Mission
 
 R3 WORKING CHECKPOINT:
 Checkpoint 022 — R3 Full Destruction / Execution Integrity / Formal Adoption Readiness
@@ -49,54 +49,74 @@ Section 3 — What Not To Maximize
 Section 4 — Survival / Profit Priority
 = DRAFT / LEADING CANDIDATE SAVED
 
-SECTION 4 CORE:
-Survival
-= Hard Operating Boundary
+Section 5 — Research Mission
+= DRAFT / LEADING CANDIDATE SAVED
 
-Profit / Positive Economic Value
-= pursued inside that boundary
+SECTION 5 CORE:
+Research
+!= Research Count Maximization
+!= Hypothesis Confirmation Factory
+!= Production Permission
 
-Survival
-!= Zero Risk
+Research
+= Reusable Understanding / Evidence / Failure / Unknown Creation
 
-Positive EV
-!= automatic Trade / Capital Permission
+Primary Research Mission Families:
+RM-1 FOUNDATIONAL / MECHANISM
+RM-2 SURVIVAL / FAILURE
+RM-3 ECONOMIC EDGE
+RM-4 ADAPTATION / REVALIDATION
+RM-5 DECISION / EXECUTION QUALITY
 
-Project-ending / unrecoverable risk
-must not be justified by one opportunity's expected profit alone.
+Research Integrity / Methodology
+= cross-cutting across all missions
 
-Recoverability
-is part of Survival.
+Research Candidate Source
+!= Research Mission
 
-Capital Survival alone
-!= total OS Survival.
+One Candidate
+may generate multiple Research Questions / Missions.
 
-Different Risk Postures may exist,
-but no Mode may bypass the Hard Survival Boundary.
+Research Mission
+!= Intake Disposition
+!= Priority
+!= Validation Method
+!= Research Result.
 
-Material Survival-Critical UNKNOWN
-!= SAFE.
+Validated Research Result
+!= Knowledge
+!= Production Authority.
 
-Immediate Safety Action
-!= Knowledge Invalidity.
+Publication / Business demand
+does not own Research Truth.
 
-Survival Policy
-does not own Research / Knowledge Truth.
+AI Output
+!= Research Evidence
+!= Validation Result
+!= Production Authority.
 
-SECTION 4 DETAIL DEFERRED:
-Concrete Risk %, Drawdown Limit, Leverage, Position Size,
-Mode thresholds, Portfolio / Correlation formulas and execution safety implementation
-remain for Section 7 and later detailed design.
+SECTION 5 DETAIL DEFERRED:
+CORE EDGE / OPPORTUNITY / Adaptation detailed research philosophy
+→ Section 6 Research Category Philosophy
+
+Research Intake / Mission Binding / Routing / Prioritization details
+→ later 03_RESEARCH Reconciliation
+
+Publication detailed mission
+→ Section 11
+
+AI / Human / Production Authority details
+→ Section 12
 
 PROJECT SEQUENCING:
 00_AI/TEMP_CHARTER_RECONCILIATION_PLAN.md remains active.
 
 CURRENT FORMAL PROJECT FOCUS:
-5. Research Mission
+6. Research Category Philosophy
 
 CURRENT NAVIGATION:
-AI_CONTEXT synchronized to Section 5 focus.
-TEMP_CHARTER_RECONCILIATION_PLAN synchronized to Section 5 focus.
+AI_CONTEXT synchronized to Section 6 focus.
+TEMP_CHARTER_RECONCILIATION_PLAN synchronized to Section 6 focus.
 
 UNCHANGED BY THIS CHECKPOINT:
 00_HUMAN/HUMAN_MAP.md
@@ -105,9 +125,10 @@ UNCHANGED BY THIS CHECKPOINT:
 04_KNOWLEDGE_APPLICABILITY
 
 NEXT:
-1. Re-read PROJECT_CHARTER Sections 1–4 as needed.
-2. Design PROJECT_CHARTER Section 5 — Research Mission.
-3. Do not formally adopt R3 into 02_ARCHITECTURE until Charter Reconciliation sequence permits it.
+1. Re-read PROJECT_CHARTER Sections 1–5 as needed.
+2. Design PROJECT_CHARTER Section 6 — Research Category Philosophy.
+3. Focus Section 6 on CORE EDGE / ADAPTATION / OPPORTUNITY detailed research philosophy without taking Section 7 Capital / Risk responsibility.
+4. Do not formally adopt R3 into 02_ARCHITECTURE until Charter Reconciliation sequence permits it.
 
 Git Write Permission Reminder:
 REQUIRE CURRENT-CHAT USER AUTHORIZATION
