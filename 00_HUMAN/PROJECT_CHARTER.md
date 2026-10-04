@@ -3,7 +3,7 @@
 **Document Role:** Project Constitution / Top-Level Mission  
 **Status:** DRAFT / LEADING CANDIDATE  
 **Purpose:** 市場理解OSが何のために存在し、何を優先し、どの方向へ育てるかを定義する最上位方針文書。  
-**Current Scope:** Section 1 `Project Mission` と Section 2 `Success Definition` を設計済み。Section 3以降は未設計であり、現時点では固定しない。
+**Current Scope:** Section 1 `Project Mission`、Section 2 `Success Definition`、Section 3 `What Not To Maximize` を設計済み。Section 4以降は未設計であり、現時点では固定しない。
 
 ---
 
@@ -672,12 +672,615 @@ Evidenceを無視する
 
 ---
 
+
+# 3. What Not To Maximize
+
+## 3.1 このSectionの目的
+
+市場理解OSは利益を追求する。
+
+しかし、
+
+> **測りやすい一つの数字を最大化することと、市場理解OS全体を良くすることを同一視しない。**
+
+市場理解OSには、
+
+~~~text
+Profit
+Expected Value
+Win Rate
+Prediction Accuracy
+Trade Count
+Research Count
+Data Amount
+Backtest Result
+Model Score
+User Growth
+~~~
+
+等、多数のMetricが存在し得る。
+
+これらは評価・比較・監視・改善の材料として利用してよい。
+
+しかし、
+
+~~~text
+一つのMetricが良くなる
+=
+市場理解OS全体が良くなる
+~~~
+
+とはしない。
+
+---
+
+## 3.2 「最大化しない」≠「重要ではない」
+
+~~~text
+Not To Maximize
+!= Not To Measure
+!= Not To Improve
+!= Not Important
+~~~
+
+とする。
+
+例えば、
+
+~~~text
+Profitを単独最大化しない
+~~~
+
+とは、Profitを軽視するという意味ではない。
+
+同様に、
+
+~~~text
+Win Rateを単独最大化しない
+~~~
+
+とは、勝率を観測しないという意味ではない。
+
+意味は、
+
+> **単一Metricを、それ以外の重要な条件・Mission・Research Integrity・Knowledge Integrity・Risk・長期生存を破壊してまで最大化しない。**
+
+ことである。
+
+---
+
+## 3.3 Short-Term Profitを単独最大化しない
+
+利益獲得は市場理解OSのEconomic Objectiveである。
+
+ただし、
+
+~~~text
+短期Profit最大化
+↓
+過大Leverage
+過大Exposure
+Failure Boundary無視
+Unknown無視
+未検証KnowledgeのProduction利用
+~~~
+
+となる設計は、市場理解OSのMissionと両立しない。
+
+したがって、
+
+> **Short-Term Profitだけを最上位Objectiveとして最大化しない。**
+
+Profitを評価するときは、
+
+~~~text
+どのように作られた利益か
+どのRiskを負ったか
+Costを考慮したか
+再現可能か
+成立条件は何か
+どこで壊れるか
+~~~
+
+を合わせて確認する。
+
+高Profitそれ自体を悪いものとは扱わない。
+
+---
+
+## 3.4 Win Rateを最大化しない
+
+高Win Rateは有用なMetricになり得る。
+
+しかし、
+
+~~~text
+高Win Rate
++
+稀な巨大Loss
+~~~
+
+のような構造も存在する。
+
+したがって、
+
+> **Win Rateそれ自体をSuccess条件として最大化しない。**
+
+勝率を見る場合も、
+
+~~~text
+Expected Value
+Loss Size
+Tail Risk
+Cost
+Failure Boundary
+Long-Term Survival
+~~~
+
+等と分離せず確認する。
+
+具体的なRisk優先順位・Risk Budget・Leverage Limitは後続Sectionで定義する。
+
+---
+
+## 3.5 Prediction Accuracyを最大化しない
+
+市場理解OSは、
+
+~~~text
+未来を最も多く当てる機械
+~~~
+
+を最終目的としない。
+
+Prediction Accuracyが高くても、
+
+~~~text
+判断理由不明
+Risk不明
+Cost未考慮
+Failure条件不明
+市場変化時の適応不能
+~~~
+
+であれば、市場理解OSとして十分ではない。
+
+逆にPredictionが外れても、その時点で利用可能だったEvidence・Knowledge・Unknown・Riskから合理的なDecisionであった可能性がある。
+
+したがって、
+
+> **Prediction AccuracyをMarket UnderstandingやDecision Qualityの代替Metricとして最大化しない。**
+
+---
+
+## 3.6 Trade Frequencyを最大化しない
+
+市場理解OSは常に市場へ参加することを目的にしない。
+
+正常なDecisionには、
+
+~~~text
+TRADE
+WAIT
+REDUCE
+NO TRADE
+UNKNOWN → Research
+~~~
+
+が含まれ得る。
+
+したがって、
+
+> **Trade回数・市場参加時間を、それ自体の目的として最大化しない。**
+
+~~~text
+No Edge
+Unknown
+Constraint
+Insufficient Evaluation
+~~~
+
+等の状態で、取引回数を増やすためだけにTradeしない。
+
+---
+
+## 3.7 Capital Utilization / Exposureを最大化しない
+
+資本を保有していることは、常時100%市場へ投入しなければならないことを意味しない。
+
+~~~text
+良いOpportunityがない
+Riskが高い
+Knowledgeが不十分
+Current MarketがUNKNOWN
+~~~
+
+等であれば、資本を使わないこと自体が合理的Decisionになり得る。
+
+したがって、
+
+> **Capital Utilization・Exposure・Leverageを、それ自体の目的として最大化しない。**
+
+具体的なCapital Allocation・Risk Budget・Leverage数値は後続Sectionで定義する。
+
+---
+
+## 3.8 Research Countを最大化しない
+
+市場理解OSは、発見した全てを無条件にResearchへ送らない。
+
+Research対象を無制限に増やすと、
+
+~~~text
+重要Researchの遅延
+計算資源消費
+Data / API Cost増加
+Review不能
+未完了Research蓄積
+~~~
+
+等につながり得る。
+
+したがって、
+
+> **Research件数ではなく、Research Value・再利用性・検証価値・意思決定への意味を重視する。**
+
+~~~text
+1000本の浅いResearch
+~~~
+
+が、
+
+~~~text
+10本の重要なResearch
+~~~
+
+より自動的に優れているとはしない。
+
+---
+
+## 3.9 Data Amountを最大化しない
+
+取得できるDataを無条件に全て集め、全て永久保存することをSuccessとはしない。
+
+重視するのは、
+
+~~~text
+何を表すDataか
+品質はどうか
+どのResearch / Decisionに必要か
+再現・検証・説明に必要か
+Costに見合うか
+~~~
+
+である。
+
+したがって、
+
+> **Data Quantityではなく、Information Value・Quality・Traceability・再利用性を重視する。**
+
+具体的Retention Policyは後続設計で定義する。
+
+---
+
+## 3.10 Feature / Metric Countを最大化しない
+
+独自Data・Derived Metric・Research Outputを追加できる構造は重要である。
+
+しかし、
+
+~~~text
+Feature数
+独自Metric数
+Indicator数
+~~~
+
+が多いこと自体を成熟度とは扱わない。
+
+増加によって、
+
+~~~text
+Overlap
+Dependency
+Noise
+Overfitting
+Maintenance Cost
+~~~
+
+が増える可能性がある。
+
+したがって、
+
+> **Feature数・Metric数を、それ自体の目的として最大化しない。**
+
+---
+
+## 3.11 Historical / Backtest Performanceを単独最大化しない
+
+Historical ValidationやBacktestは重要なResearch手段である。
+
+しかし、
+
+~~~text
+Past Profit
+Past Return
+Historical Win Rate
+Historical Sharpe
+~~~
+
+等を単独で最大化すると、過去への過剰適合をSuccessと誤認する可能性がある。
+
+したがって、
+
+> **Historical / Backtest Performanceを、Future Validity・Current Applicability・Production Authorityの代替にしない。**
+
+具体的OOS・Forward・Leakage・Overfitting対策はResearch設計で定義する。
+
+---
+
+## 3.12 AI / Model Scoreを最大化しない
+
+AI / Prediction Modelが、
+
+~~~text
+Confidence
+Accuracy
+AUC
+Loss
+Internal Score
+~~~
+
+等を持つことはあり得る。
+
+しかし、
+
+~~~text
+Model Scoreが高い
+=
+Market Truth
+=
+Trade Permission
+~~~
+
+とはしない。
+
+したがって、
+
+> **AI / Model内部ScoreをResearch Evidence・Knowledge Validity・Decision Authorityの代替として最大化しない。**
+
+具体的なAI / Human / Production Authorityは後続Sectionで定義する。
+
+---
+
+## 3.13 System Complexityを最大化しない
+
+市場理解OSは高度なSystemを目指すが、
+
+~~~text
+Layer数
+AI数
+Model数
+Service数
+Code量
+~~~
+
+が多いほど高度とは限らない。
+
+必要なComplexityは受け入れる。
+
+不要なComplexityは避ける。
+
+~~~text
+Simple
+!= Primitive
+
+Complex
+!= Advanced
+~~~
+
+とする。
+
+> **ComplexityそのものをSystem Quality・高度さ・完成度の代理Metricとして最大化しない。**
+
+---
+
+## 3.14 Automation Percentageを最大化しない
+
+市場理解OSは自動化を重視する。
+
+しかし、完全自動化という数字そのものを目的にはしない。
+
+~~~text
+Automation率が高い
+=
+Decisionが正しい
+=
+Authorityが正しい
+=
+Riskが適切
+~~~
+
+ではない。
+
+したがって、
+
+> **Automation PercentageをSystem Qualityの代理Metricとして最大化しない。**
+
+具体的なHuman / AI / Production Authorityは後続Sectionで定義する。
+
+---
+
+## 3.15 Publication Reach / User GrowthをCore OSより優先しない
+
+Human-readable Research Publication・Application・User Growth等はSecondary Successとして価値を持つ。
+
+しかし、
+
+~~~text
+PV
+User数
+Download数
+SNS反応
+売上
+~~~
+
+等を伸ばすために、
+
+~~~text
+Research Conclusion
+Evidence
+Risk
+Uncertainty
+Unknown
+~~~
+
+を歪めてはならない。
+
+> **Publication Reach・User Growth・Business ResultをResearch Integrityより上位に置かない。**
+
+---
+
+## 3.16 一つの万能Scoreへ潰さない
+
+市場理解OS全体を、
+
+~~~text
+Profit
++
+Win Rate
++
+Prediction Accuracy
++
+Research Count
++
+Model Score
+↓
+One Total Score
+~~~
+
+だけで最適化しない。
+
+一つの高い成果で、
+
+~~~text
+重大Risk Violation
+Data Leakage
+Knowledge Corruption
+Research Integrity Failure
+~~~
+
+を相殺してはならない。
+
+> **市場理解OSのSuccessを、一つの万能Scoreだけで最適化しない。**
+
+---
+
+## 3.17 Metric Gamingを禁止する
+
+市場理解OSは、Metricを良く見せることを目的にしない。
+
+例えば、
+
+~~~text
+Win Rate目標を満たすためだけにCaseを除外する
+
+Profit目標を満たすためだけにRiskを増やす
+
+Research Countを増やすためだけに小さなResearchを量産する
+
+Prediction Accuracyを上げるためだけに曖昧Caseを隠す
+~~~
+
+等は禁止方向とする。
+
+> **Metricを良く見せるために、そのMetricが本来測るべき目的・Mission・Integrityを壊してはならない。**
+
+---
+
+## 3.18 Metricの正しい位置付け
+
+市場理解OSではMetricを、
+
+~~~text
+Evidence
+Indicator
+Diagnostic
+Constraint Input
+Review Trigger
+~~~
+
+として利用できる。
+
+Metricは重要な判断材料である。
+
+しかし、
+
+> **Metricは判断材料であり、Project Missionそのものではない。**
+
+例えばWin Rate低下は、
+
+~~~text
+Variance
+Edge Decay
+Regime Shift
+Cost増加
+Execution Problem
+~~~
+
+等を調べるTriggerになり得るが、Win Rate低下だけで原因を自動確定しない。
+
+---
+
+## 3.19 Core Not-To-Maximize List
+
+市場理解OSは、以下を単独目的として最大化しない。
+
+~~~text
+1. Short-Term Profit
+2. Win Rate
+3. Prediction Accuracy
+4. Trade Frequency
+5. Capital Utilization / Exposure
+6. Research Count
+7. Data Amount
+8. Feature / Metric Count
+9. Historical / Backtest Performance
+10. AI / Model Score
+11. System Complexity
+12. Automation Percentage
+13. Publication Reach / User Growth
+14. Any Single Universal Success Score
+~~~
+
+重要:
+
+~~~text
+Not Maximize
+!= Ignore
+~~~
+
+必要なMetricは測る。
+
+必要なら改善する。
+
+ただし、そのMetricを良くするためにProject Mission・Research Integrity・Knowledge Integrity・Risk・長期生存を壊さない。
+
+---
+
+# What Not To Maximize — 一文定義
+
+> **市場理解OSは、短期Profit・Win Rate・Prediction Accuracy・Trade回数・資本稼働率・Research数・Data量・Model Score・System Complexity・User Growth等の単一Metricを、それ自体の目的として最大化せず、それらを市場理解・Research Integrity・Knowledgeの再利用性・Decision Quality・Risk・長期生存を評価するための部分的な指標として扱う。**
+
+簡潔には、
+
+> **測りやすい数字を最大化するのではなく、市場を理解し、学び、適応し、生存しながらEconomic Valueへ接続できるSystem全体を育てる。**
+
+
 # 未設計
 
 以下は今後、一項目ずつ設計する。
 
 ```text
-3. What Not To Maximize
 4. Survival / Profit Priority
 5. Research Mission
 6. Research Category Philosophy
