@@ -1,4 +1,4 @@
-# 市場理解OS — AI_CONTEXT v0.1.11
+# 市場理解OS — AI_CONTEXT v0.1.12
 
 **Document Role:** AI Current-State Index / Navigation Map  
 **Status:** REVIEWED / WORKING BASELINE  
@@ -80,8 +80,16 @@ Section 2:
 Success Definition
 = DRAFT / LEADING CANDIDATE 保存済み
 
+Section 3:
+What Not To Maximize
+= DRAFT / LEADING CANDIDATE 保存済み
+
+Section 4:
+Survival / Profit Priority
+= DRAFT / LEADING CANDIDATE 保存済み
+
 現在焦点:
-3. What Not To Maximize
+5. Research Mission
 ```
 
 `01_EXTERNAL_DATA`、`02_MARKET_UNDERSTANDING`、`03_RESEARCH`、`04_KNOWLEDGE_APPLICABILITY` はWorking Baselineとして保存済み。
@@ -119,18 +127,24 @@ Status: DRAFT / LEADING CANDIDATE
 Current State:
 - Section 1 Project Mission = 保存済み
 - Section 2 Success Definition = 保存済み
-- Section 3以降 = 未設計
-Current Focus: 3. What Not To Maximize
+- Section 3 What Not To Maximize = 保存済み
+- Section 4 Survival / Profit Priority = 保存済み
+- Section 5以降 = 未設計
+Current Focus: 5. Research Mission
 ```
 
 Project Missionの現在本命方向には、Crypto First、選択的Research、Fast Adaptation / Research Adaptation、Research Note / Research Asset、長期生存と正の期待値、人間向けResearch Publicationが含まれる。
 
 Success Definitionの現在本命方向は、資本・Research Asset・意思決定能力を成長させながら、Knowledge / Edge / Success状態を継続的に再検証し、市場変化へ適応する循環を止めないことを中心とする。
 
+What Not To Maximizeの現在本命方向は、Short-Term Profit・Win Rate・Prediction Accuracy・Trade Frequency・Capital Utilization・Research Count・Data Amount・Model Score等の単一MetricをProject Missionより上位に置かず、Metric Gamingを避けることを中心とする。
+
+Survival / Profit Priorityの現在本命方向は、長期生存をHard Operating Boundaryとし、その境界内で正のExpected Economic Valueを追求し、Survival PolicyとResearch / Knowledge TruthのAuthorityを分離することを中心とする。
+
 重要:
 
 ```text
-Section 1〜2 保存済み
+Section 1〜4 保存済み
 ≠
 PROJECT_CHARTER Working Baseline
 ```
