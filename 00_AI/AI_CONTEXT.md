@@ -1,4 +1,4 @@
-# 市場理解OS — AI_CONTEXT v0.1.13
+# 市場理解OS — AI_CONTEXT v0.1.14
 
 **Document Role:** AI Current-State Index / Navigation Map  
 **Status:** REVIEWED / WORKING BASELINE  
@@ -92,8 +92,12 @@ Section 5:
 Research Mission
 = DRAFT / LEADING CANDIDATE 保存済み
 
+Section 6:
+Research Category Philosophy
+= DRAFT / LEADING CANDIDATE 保存済み
+
 現在焦点:
-6. Research Category Philosophy
+7. Capital / Risk Philosophy
 ```
 
 `01_EXTERNAL_DATA`、`02_MARKET_UNDERSTANDING`、`03_RESEARCH`、`04_KNOWLEDGE_APPLICABILITY` はWorking Baselineとして保存済み。
@@ -134,8 +138,9 @@ Current State:
 - Section 3 What Not To Maximize = 保存済み
 - Section 4 Survival / Profit Priority = 保存済み
 - Section 5 Research Mission = 保存済み
-- Section 6以降 = 未設計
-Current Focus: 6. Research Category Philosophy
+- Section 6 Research Category Philosophy = 保存済み
+- Section 7以降 = 未設計
+Current Focus: 7. Capital / Risk Philosophy
 ```
 
 Project Missionの現在本命方向には、Crypto First、選択的Research、Fast Adaptation / Research Adaptation、Research Note / Research Asset、長期生存と正の期待値、人間向けResearch Publicationが含まれる。
@@ -148,15 +153,17 @@ Survival / Profit Priorityの現在本命方向は、長期生存をHard Operati
 
 Research Missionの現在本命方向は、FOUNDATIONAL / MECHANISM、SURVIVAL / FAILURE、ECONOMIC EDGE、ADAPTATION / REVALIDATION、DECISION / EXECUTION QUALITYの5 Mission Familyを上位目的として持ち、Research Integrityを横断適用し、Research Candidate Source / Mission / Priority / Method / Result / Knowledge Authorityを分離することを中心とする。
 
+Research Category Philosophyの現在本命方向は、CORE EDGE / OPPORTUNITYをEconomic Edge Characterとして分離し、ADAPTATION / REVALIDATIONを両者へ横断する時間軸のResearch Philosophyとして扱う。Repeated ProfitだけでCOREとせず、Rare / Volatile / Large Move / UnknownだけでOpportunityとせず、UNRESOLVEDを許容する。またUnexpected Outcome / Regime Mismatch / Edge Decay / Structural Breakを分離し、Edge Character・Knowledge Lifecycle・Current Applicability・Capital / Risk Permissionを別Authorityとして維持する。
+
 重要:
 
 ```text
-Section 1〜5 保存済み
+Section 1〜6 保存済み
 ≠
 PROJECT_CHARTER Working Baseline
 ```
 
-Section 6以降を設計し、PROJECT_CHARTER全体をCross Checkするまでは、Charter全体を確定扱いしない。
+Section 7以降を設計し、PROJECT_CHARTER全体をCross Checkするまでは、Charter全体を確定扱いしない。
 
 ## 3.3 HUMAN MAP
 
@@ -488,7 +495,8 @@ Section 2 Success Definition = DRAFT / LEADING CANDIDATE 保存済み
 Section 3 What Not To Maximize = DRAFT / LEADING CANDIDATE 保存済み
 Section 4 Survival / Profit Priority = DRAFT / LEADING CANDIDATE 保存済み
 Section 5 Research Mission = DRAFT / LEADING CANDIDATE 保存済み
-現在: 6. Research Category Philosophy
+Section 6 Research Category Philosophy = DRAFT / LEADING CANDIDATE 保存済み
+現在: 7. Capital / Risk Philosophy
 
 NEXT-002
 PROJECT_CHARTER全体をCross Checkし、問題が軽微ならWorking Baseline候補として保存
@@ -682,6 +690,6 @@ GPTはGit・AI_WORKFLOW・AI_CONTEXT・必要ならAI_HANDOFFを使って設計�
 
 ---
 
-# AI_CONTEXT v0.1.11 一文定義
+# AI_CONTEXT v0.1.14 一文定義
 
 > **AI_CONTEXTとは、市場理解OSの設計内容そのものや直前Conversationを複製する文書ではなく、GPTが現在Phase・Current Task・主要Working Baseline・重要Pending・Next Action・参照先を短時間で把握し、Gitという長期作業空間の中から現在Taskに必要な正しい設計情報へ移動するための軽量なAI専用Project Current-State Mapである。**
