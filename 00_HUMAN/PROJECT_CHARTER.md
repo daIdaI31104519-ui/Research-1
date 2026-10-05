@@ -3,7 +3,7 @@
 **Document Role:** Project Constitution / Top-Level Mission  
 **Status:** DRAFT / LEADING CANDIDATE  
 **Purpose:** 市場理解OSが何のために存在し、何を優先し、どの方向へ育てるかを定義する最上位方針文書。  
-**Current Scope:** Section 1 `Project Mission`、Section 2 `Success Definition`、Section 3 `What Not To Maximize`、Section 4 `Survival / Profit Priority`、Section 5 `Research Mission` を設計済み。Section 6以降は未設計であり、現時点では固定しない。
+**Current Scope:** Section 1 `Project Mission`、Section 2 `Success Definition`、Section 3 `What Not To Maximize`、Section 4 `Survival / Profit Priority`、Section 5 `Research Mission`、Section 6 `Research Category Philosophy` を設計済み。Section 7以降は未設計であり、現時点では固定しない。
 
 ---
 
@@ -2599,12 +2599,712 @@ RM-24 AI Output != Research Evidence / Validation Result / Production Authority.
 > **研究する目的は、正解を増やすことではなく、なぜ起き、何が通用し、何が壊れ、何がまだ分からず、判断Systemが正しく機能したかを明らかにし、その結果を次の研究と判断へ再利用すること。**
 
 
+
+---
+
+# 6. Research Category Philosophy
+
+## 6.1 このSectionの役割
+
+Section 5では、Research Missionとして `ECONOMIC EDGE RESEARCH` と `ADAPTATION / REVALIDATION RESEARCH` を定義した。
+
+Section 6では、その下位思想として、
+
+~~~text
+CORE EDGE
+OPPORTUNITY
+ADAPTATION / REVALIDATION
+~~~
+
+の関係を定義する。
+
+ただし、これらを3つの同格Categoryとして扱わない。
+
+~~~text
+CORE EDGE / OPPORTUNITY
+= Economic Edge Character
+
+ADAPTATION / REVALIDATION
+= Cross-Temporal Research Philosophy
+~~~
+
+とする。
+
+> **Section 6は「どのようなEdgeとして研究するか」を定義し、Knowledge Lifecycle・Current Applicability・Trade Permission・Capital / Risk Permissionを所有しない。**
+
+---
+
+## 6.2 Economic Edge Character
+
+市場理解OSでは、Economic Edgeを単純に、
+
+~~~text
+勝った
+負けた
+高Win Rate
+高Backtest
+~~~
+
+だけで分類しない。
+
+Economic Edgeについて、
+
+~~~text
+どの条件で成立するか
+なぜ成立する可能性があるか
+どこで弱まるか
+どこで壊れるか
+どの程度再利用可能か
+時間とともにどう変化するか
+~~~
+
+を研究し、その性質を `Edge Character` として扱う。
+
+Edge CharacterはKnowledge LifecycleやCurrent Applicabilityとは別概念である。
+
+---
+
+## 6.3 CORE EDGE
+
+CORE EDGEとは、
+
+> **成立条件・Mechanism候補・Counter-Evidence・Failure Boundaryを研究可能であり、異なるCaseや時間Contextを通じて再検証・再利用できる可能性を持つEconomic Edge Character。**
+
+とする。
+
+COREは、
+
+~~~text
+Universal
+Permanent
+Always Applicable
+High Win Rate
+Strong Backtest
+~~~
+
+を意味しない。
+
+~~~text
+CORE
+!= Universal
+
+CORE
+!= Permanent
+
+CORE
+!= Always Applicable
+~~~
+
+とする。
+
+COREの意味は、
+
+> **理解された条件下で、繰り返し研究・再利用できる可能性があること。**
+
+である。
+
+---
+
+## 6.4 Repeated ProfitだけでCOREとしない
+
+~~~text
+Repeated Profit
+!= CORE EDGE
+
+Case Count
+!= Independent Repeatability
+
+Backtest Strength
+!= Core Strength
+~~~
+
+とする。
+
+複数回利益が出ても、
+
+~~~text
+同一Regimeへの偏り
+同一Eventへの依存
+Data Leakage
+Look-ahead
+Cost未考慮
+Failure Boundary不明
+Mechanism不明
+~~~
+
+等があれば、COREとして十分に理解されたとは限らない。
+
+> **CORE Researchでは、Performanceだけでなく成立条件・反証・限界を含めて再利用可能性を研究する。**
+
+---
+
+## 6.5 CORE Researchは成功条件とFailure条件を両方研究する
+
+CORE EDGEは、
+
+~~~text
+Where it works
++
+Where it weakens
++
+Where it fails
+~~~
+
+をセットで研究する。
+
+したがって、
+
+~~~text
+Strong Conditions
+Weak Conditions
+Invalid / Failure Conditions
+Unknown Conditions
+~~~
+
+を区別できる方向を持つ。
+
+> **成功Caseだけを集めてCOREを作らず、Counter-EvidenceとFailure BoundaryもCORE理解の一部として扱う。**
+
+---
+
+## 6.6 COREは歴史的成功によって再検証を免除されない
+
+過去に長期間成功したCORE EDGEでも、市場構造・参加者・Liquidity・Cost・Exchange構造等が変化する可能性がある。
+
+~~~text
+Historical Success
+!= Revalidation Exemption
+~~~
+
+とする。
+
+COREは利用可能な限り利用できるが、永久の正解として固定しない。
+
+---
+
+## 6.7 OPPORTUNITY
+
+OPPORTUNITYとは、
+
+> **特定の一時的なDistortion・Imbalance・Event・Market Structure等へEconomic Valueが強く依存し、その条件の消滅とともに価値がDecayする可能性を持つEconomic Edge Character。**
+
+とする。
+
+OPPORTUNITYは単に大きく動いた市場を意味しない。
+
+~~~text
+Rare
+!= Opportunity
+
+Volatile
+!= Opportunity
+
+Large Move
+!= Opportunity
+
+Large Potential Profit
+!= Opportunity
+
+Unknown
+!= Opportunity
+~~~
+
+とする。
+
+---
+
+## 6.8 OPPORTUNITYは一時的Economic Structureとして研究する
+
+OPPORTUNITY Researchでは、少なくとも概念上、
+
+~~~text
+何が歪みを作ったか
+何が歪みを維持しているか
+何が歪みを解消するか
+どのようなDownside / Failure Pathがあるか
+Opportunity自体がどのようにDecayするか
+~~~
+
+を研究する。
+
+> **OPPORTUNITYは「面白い値動き」というLabelではなく、一時的Economic Structureに関するResearch Hypothesisとして扱う。**
+
+---
+
+## 6.9 Asymmetryは最初から確定事実にしない
+
+Opportunityが非対称に見える場合でも、
+
+~~~text
+Potential Asymmetry
+!= Confirmed Asymmetry
+~~~
+
+とする。
+
+Upside・Downside・Liquidity・Cost・Failure Scenario・Time Decay等を研究し、期待される非対称性が本当に存在するかを検証対象とする。
+
+---
+
+## 6.10 Opportunity ClosureとResearch Failureを分ける
+
+Temporary Opportunityは、条件消滅によって正常に終了する場合がある。
+
+~~~text
+Opportunity disappeared
+!= Research Failure
+
+Expected Opportunity Closure
+!= Edge Decay
+~~~
+
+とする。
+
+例えば、Arbitrage・Market Repricing・Event Resolution等によって歪みが消えることは、Opportunityの正常なLifecycleになり得る。
+
+> **Opportunityが消えたこと自体ではなく、なぜ消えたか・想定されたClosureか・最初から誤分類だったかを研究する。**
+
+---
+
+## 6.11 Opportunity ResearchとRisk / Capital Permissionを分離する
+
+~~~text
+Opportunity Research Result
+!= Opportunity Mode Permission
+
+Opportunity Research Result
+!= Trade Permission
+
+Opportunity Research Result
+!= Capital Permission
+~~~
+
+とする。
+
+Section 6はOpportunityのResearch Characterを定義する。
+
+そのOpportunityへどのRisk・Capital・Exposureを許容するかはSection 7以降の責任とする。
+
+---
+
+## 6.12 Edge CharacterがUNRESOLVEDであることを許容する
+
+Economic Edge Candidateが発見されても、
+
+~~~text
+CORE
+or
+OPPORTUNITY
+~~~
+
+へ必ず即時分類しない。
+
+Repeatability・Persistence・Temporary Dependency等がまだ不明な場合、
+
+> **Edge Characterが未解決である状態を許容する。**
+
+とする。
+
+Evidence不足を埋めるためだけにCORE / OPPORTUNITYへ強制分類しない。
+
+---
+
+## 6.13 CORE / OPPORTUNITY Characterは永久固定しない
+
+一時的Opportunityとして研究された現象が、後の研究で、
+
+~~~text
+Repeated Occurrence
+Mechanism Stability
+Conditional Repeatability
+~~~
+
+を持つと分かる場合がある。
+
+逆に、COREとして研究されたEdgeの成立範囲が狭くなる場合もある。
+
+ただし、
+
+~~~text
+Character Change
+!= Historical Rewrite
+~~~
+
+とする。
+
+> **Edge Characterの再評価は新しいResearch Conclusionとして扱い、過去のResearch Historyを消さない。**
+
+---
+
+## 6.14 ADAPTATION / REVALIDATION
+
+ADAPTATION / REVALIDATIONとは、
+
+> **CORE / OPPORTUNITYを永久固定せず、成立条件・Economic Effect・Market Structure・Mechanism・Failure Boundaryが時間とともにどう変化したかを再研究する思想。**
+
+とする。
+
+ADAPTATIONは3つ目のEconomic Edge Characterではない。
+
+~~~text
+CORE / OPPORTUNITY
+= Edge Character
+
+ADAPTATION / REVALIDATION
+= Edge Characterを時間軸で再検証するResearch Philosophy
+~~~
+
+とする。
+
+---
+
+## 6.15 Adaptationは変更すること自体を目的にしない
+
+~~~text
+Adaptation
+!= Always Change
+~~~
+
+とする。
+
+市場理解OSは、Evidenceが維持されているKnowledge / Edgeを理由なく変更し続けない。
+
+同時に、過去に成功したことだけを理由に重大なContradictionを無視し続けない。
+
+> **AdaptationはStabilityとResponsivenessの両方を維持するために行う。**
+
+---
+
+## 6.16 Adaptation TriggerとAdaptation Conclusionを分ける
+
+Loss・Unexpected Outcome・Contradiction等は再研究のTriggerになり得る。
+
+しかし、
+
+~~~text
+Unexpected Outcome
+!= Edge Decay
+
+One Contradiction
+!= Material Change
+~~~
+
+とする。
+
+> **異常結果はAdaptation Researchの入口であり、Edge Decay・Knowledge Failure・Structural Breakの結論そのものではない。**
+
+---
+
+## 6.17 Data / Decision / Execution FailureをEdge Failureへ誤変換しない
+
+Economic Outcomeが悪かった場合でも、原因はEconomic Edgeそのものとは限らない。
+
+~~~text
+Data / Observation Failure
+Decision Failure
+Defense Failure
+Execution Failure
+Temporary Event
+Regime Mismatch
+Variance
+Unknown
+~~~
+
+等を区別する必要がある。
+
+~~~text
+Bad PnL
+!= Edge Failure
+~~~
+
+とする。
+
+原因を最も近いSemantic Ownerへ返し、別領域のFailureを理由にEdge Truthを書き換えない。
+
+---
+
+## 6.18 Regime / Applicability MismatchとKnowledge Failureを分離する
+
+既存Knowledgeの成立条件からCurrent Marketが外れた場合、
+
+~~~text
+Current Applicability Mismatch
+!= Knowledge Failure
+~~~
+
+とする。
+
+例えば、
+
+~~~text
+Knowledge:
+Bull Lateで成立
+
+Current Market:
+Crash
+~~~
+
+であれば、そのKnowledge自体が過去から間違っていたとは限らない。
+
+現在使えるかどうかの最終評価はKnowledge / Applicability領域の責任とする。
+
+---
+
+## 6.19 Edge Decay
+
+Edge Decayは、
+
+> **Materialに比較可能な条件下でも、以前観測されたEconomic Effectが時間とともに継続的に弱まっている現象候補。**
+
+とする。
+
+~~~text
+One Loss
+!= Edge Decay
+
+Temporary Shock
+!= Edge Decay
+~~~
+
+である。
+
+Edge Decayが疑われる場合でも、その原因としてMarket Participant・Arbitrage・Liquidity・Cost・Exchange Mechanics・Crowding等の変化をさらに研究できる。
+
+---
+
+## 6.20 Structural Break
+
+Structural Breakは、
+
+> **Edgeを支えていたMarket Mechanism・Participant Structure・Market Microstructure・Institutional Condition等の生成構造自体がMaterialに変化した状態候補。**
+
+とする。
+
+Regime ShiftとStructural Breakを同一視しない。
+
+~~~text
+Regime Shift
+= Market State Change
+
+Structural Break
+= Generative Market Structure Change
+~~~
+
+とする。
+
+また、
+
+~~~text
+New Event
+!= Structural Break
+
+Temporary Shock
+!= Structural Break
+
+Edge Decay
+!= Structural Break
+~~~
+
+とする。
+
+---
+
+## 6.21 COREとOPPORTUNITYでAdaptation Questionを分ける
+
+COREでは主に、
+
+> **このEdgeは現在も再利用可能か？**
+
+を問う。
+
+OPPORTUNITYでは主に、
+
+> **このTemporary Economic Structureはまだ存在するか？**
+
+を問う。
+
+Edge Characterが未解決の場合は、
+
+> **そもそもこのEdgeのCharacterは何か？**
+
+をResearch対象とする。
+
+---
+
+## 6.22 Overreaction / Underreactionの両方を避ける
+
+Adaptationが敏感すぎる場合、
+
+~~~text
+One Loss
+↓
+Knowledge変更
+↓
+Overreaction
+~~~
+
+となり、安定したKnowledgeを破壊する。
+
+Adaptationが遅すぎる場合、
+
+~~~text
+Persistent Contradiction
+↓
+無視
+↓
+Stale Knowledge継続
+~~~
+
+となる。
+
+したがって、
+
+> **過剰適応と古いKnowledgeへの固執の両方をAdaptation Failureとして扱う。**
+
+---
+
+## 6.23 Edge Character / Lifecycle / Applicabilityを分離する
+
+~~~text
+CORE / OPPORTUNITY
+= Edge Character
+
+ACTIVE / SUSPENDED / RETIRED 等
+= Knowledge Lifecycle
+
+APPLICABLE / NOT_APPLICABLE 等
+= Current Applicability
+~~~
+
+と分離する。
+
+したがって、
+
+~~~text
+CORE
+!= ACTIVE
+
+OPPORTUNITY
+!= WEAK
+
+CORE
+!= Currently Applicable
+
+OPPORTUNITY
+!= Currently Applicable
+
+ADAPTATION RESULT
+!= automatic Lifecycle Change
+~~~
+
+とする。
+
+Knowledge Lifecycle・Current ApplicabilityのAuthorityはKnowledge / Applicability領域へ残す。
+
+---
+
+## 6.24 Historical Research Truthを保存する
+
+Later Edge DecayやStructural Breakによって、過去の成立条件下で支持されていたResearch Resultを、
+
+~~~text
+最初から間違いだった
+~~~
+
+ことに書き換えない。
+
+~~~text
+Historically supported under C1
+↓
+Later market changed under C2
+~~~
+
+として両方を保存する。
+
+> **現在使えないことと、過去に成立していたResearch Historyを消すことを分離する。**
+
+---
+
+## 6.25 このSectionで決めないこと
+
+Section 6ではResearch Category Philosophyと責任境界を定義し、具体的なQualification Formula・Threshold・Risk数値・Implementationは固定しない。
+
+以下は後続設計で扱う。
+
+~~~text
+CORE Qualification Formula
+OPPORTUNITY Qualification Formula
+Minimum Case Count
+Independent Case Definition
+Minimum Expected Value
+Minimum Win Rate
+OOS Period
+Mechanism Confidence Threshold
+Contradiction Threshold
+Edge Decay Threshold
+Structural Break Threshold
+Revalidation Interval
+Opportunity Time Window
+Opportunity Decay Formula
+Asymmetry Formula
+Stress Scenario Count
+Knowledge Lifecycle Rule
+Applicability State Rule
+Position Size
+Leverage
+Capital Allocation
+Risk Budget
+CORE / OPPORTUNITY Mode Risk Envelope
+DB Schema
+Python Class
+Enum / Queue / Scheduler
+~~~
+
+Research Method詳細はResearch Architectureへ、Knowledge Lifecycle / ApplicabilityはKnowledge領域へ、Risk / Capital PhilosophyはSection 7以降へ送る。
+
+---
+
+## 6.26 Core Invariants
+
+~~~text
+RC-01 CORE / OPPORTUNITY are Economic Edge Character, not Knowledge Lifecycle or Current Applicability.
+RC-02 ADAPTATION / REVALIDATION is a cross-temporal Research Philosophy, not a peer Edge Character.
+RC-03 Repeated Profit != CORE.
+RC-04 CORE != Universal / Permanent / Always Applicable.
+RC-05 CORE Research includes both success conditions and failure conditions.
+RC-06 Rare / Volatile / Large Move / Unknown != Opportunity.
+RC-07 Opportunity Research Result != Opportunity Mode / Trade / Capital Permission.
+RC-08 Opportunity disappearance may be expected closure, not Research Failure.
+RC-09 Edge Character may remain UNRESOLVED.
+RC-10 Unexpected Outcome != Edge Decay.
+RC-11 Regime / Applicability Mismatch != Knowledge Failure.
+RC-12 Edge Decay != Structural Break.
+RC-13 Temporary Shock != Structural Break.
+RC-14 One Contradiction != Material Change.
+RC-15 Adaptation Trigger != Adaptation Conclusion.
+RC-16 Overreaction and Underreaction are both Adaptation failures.
+RC-17 PnL alone does not determine Edge Character or Adaptation truth.
+RC-18 Adaptation Research Result != automatic Knowledge Lifecycle change.
+RC-19 Later failure / decay must not erase historical Research validity.
+RC-20 Section 6 does not own Capital / Risk permission.
+~~~
+
+---
+
+# Research Category Philosophy — 一文定義
+
+> **市場理解OSのResearch Category Philosophyは、Economic Edgeを、成立条件・Failure Boundaryを理解し再検証・再利用可能なCORE EDGEと、一時的なDistortion・Imbalance・Event・Market Structure等へ価値が依存するOPPORTUNITYとして研究しつつ、判定不能なEdge Characterを無理に分類せず、ADAPTATION / REVALIDATIONによって両者の成立条件・Economic Effect・Market Structure・Mechanismの時間変化を継続的に再研究することで、過剰適応と古いKnowledgeへの固執の双方を防ぐことである。**
+
+簡潔には、
+
+> **繰り返し使えるものはCOREとして育て、一時的な歪みはOPPORTUNITYとして研究し、分からないものは分からないまま残し、どれも永久の正解にせずADAPTATIONで再検証する。**
+
+
 # 未設計
 
 以下は今後、一項目ずつ設計する。
 
 ```text
-6. Research Category Philosophy
 7. Capital / Risk Philosophy
 8. Knowledge / Data Asset Philosophy
 9. Independent Data / Metric Extensibility
@@ -2615,4 +3315,4 @@ RM-24 AI Output != Research Evidence / Validation Result / Production Authority.
 14. Charter Change Governance
 ```
 
-これらは現時点では `TBD` であり、Section 1〜2から自動的に詳細内容を確定しない。
+これらは現時点では `TBD` であり、Section 1〜6から自動的に詳細内容を確定しない。
