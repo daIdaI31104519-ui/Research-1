@@ -1,4 +1,4 @@
-# TEMP — PROJECT CHARTER RECONCILIATION PLAN v0.4
+# TEMP — PROJECT CHARTER RECONCILIATION PLAN v0.5
 
 **Document Role:** Temporary Design Migration / Navigation Plan  
 **Status:** TEMPORARY / ACTIVE UNTIL RECONCILIATION COMPLETE  
@@ -148,8 +148,11 @@ Section 5 Research Mission
 Section 6 Research Category Philosophy
 = DRAFT / LEADING CANDIDATE 保存済み
 
+Section 7 Capital / Risk Philosophy
+= DRAFT / LEADING CANDIDATE 保存済み
+
 Current Focus
-= 7. Capital / Risk Philosophy
+= 8. Knowledge / Data Asset Philosophy
 ```
 
 ---
@@ -313,31 +316,115 @@ Historical Research Truthを保存し、Later Decay / Structural Breakによっ�
 
 # 7. Capital / Risk Philosophyの現在方向
 
-基本思想候補:
+Section 7はDRAFT / LEADING CANDIDATEとして保存済み。
 
-```text
-通常時
-= 無理をせず、再現性のあるEdgeをコツコツ積み上げる
+中心構造:
 
-明確な非対称Opportunity
-= Failure Boundaryと最大損失を把握した上で、限定Risk内で攻める
-```
+~~~text
+Hard Survival Boundary
+= Project-level constitutional boundary
 
-これは「普段は安全、時々無根拠にギャンブルする」という意味ではない。
+Risk Capacity Profile
+= current multidimensional / scope-sensitive capacity
 
-```text
-CORE MODE
-+
-OPPORTUNITY MODE
-```
+Risk Budget
+= allocation of available capacity
 
-として後続Risk / Decision設計へ反映する方向。
+Risk Posture
+= CORE / OPPORTUNITY等のRisk treatment
 
-具体Risk Budgetや数値は後で設計する。
+Risk Envelope
+= admissible risk conditions
+
+Capital Permission
+= current-use validなTrade Thesisに対するCapital / Exposure Riskの許可判断
+~~~
+
+重要境界:
+
+~~~text
+Capital != Risk
+Risk Capacity != Capital Balance
+Risk Capacity != Risk Budget
+Risk Budget != Risk Envelope
+Economic Edge Character != Risk Posture
+Capital Permission != Execution Permission
+~~~
+
+Risk PostureはGlobal SwitchではなくScope-boundとし、複数Postureが共存してもShared Risk Capacityと同じHard Survival Boundaryの制約を受ける。
+
+~~~text
+CORE EDGE
+!= CORE RISK POSTURE
+
+OPPORTUNITY
+!= OPPORTUNITY RISK POSTURE
+
+OPPORTUNITY RISK POSTURE
+!= Aggressive Mode
+~~~
+
+Risk PostureはRisk Capacityを作らず、Research / Knowledge / Applicability / Economic Value等の上流Truthを書き換えず、UNKNOWNをSAFEへ変換せず、Mode ShoppingによってRisk Ruleを回避しない。
+
+Risk CapacityはCapital・Liquidity・Exposure・Venue・Operational Control・Recoverability・Material Unknown等を含む多面的状態として扱い、一つの万能Scoreへ潰さない。
+
+Capacity ContractionはKnowledge / Edge Failureを意味せず、Existing Exposureに対するBlind Forced Liquidationも自動命令しない。
+
+Recoveryは壊れたCapacity Dimensionに対応するEvidenceで確認し、
+
+~~~text
+Capacity Recovery
+!= automatic Budget Restoration
+!= Old Capital Permission Revival
+!= Opportunity Recovery
+~~~
+
+とする。
+
+Decision / Economic側とのBoundaryは、
+
+~~~text
+Decision / Economic Evaluation
+↓
+Trade Thesis
+↓
+Capital / Risk Authority
+↓
+Capital Permission
+↓
+Execution / Runtime Safety
+~~~
+
+を本命方向とする。
+
+具体Risk数値、Capacity Formula、Budget Allocation Formula、Mode Entry / Exit Threshold、Risk Envelope Threshold、Capital Permission Contract等は後続Detailed Risk / Capital Architectureへ送る。
 
 ---
 
-# 8. 独自Data / 独自Metricの方向
+# 8. Knowledge / Data Asset Philosophyの現在方向
+
+Current Focus。
+
+Section 1〜7から詳細内容を自動確定しない。
+
+次に、Knowledge / Dataを長期資産として扱う上位思想について、
+
+~~~text
+何を長期Assetとして残すか
+Raw Data / Evidence / Research Result / Knowledgeの違い
+Version / Lineage / Historyをどこまで守るか
+再現・再検証・説明可能性
+保存CostとInformation Value
+Knowledge / Dataの更新・廃止・保持
+~~~
+
+等を、既存のResearch / Knowledge設計とAuthority重複しないようにPrecision-Firstで設計する。
+
+具体Retention期間、DB Schema、Storage Engine、File Format、Compression、Cloud構成等はこの段階では固定しない。
+
+---
+
+# 9. 独自Data / 独自Metricの方向
 
 上位思想として、
 
@@ -371,7 +458,7 @@ Market Intelligence / Research / Publication
 
 ---
 
-# 9. 既存ファイルへの影響順位
+# 10. 既存ファイルへの影響順位
 
 ```text
 CURRENT DRAFT
@@ -382,7 +469,8 @@ CURRENT DRAFT
 = Section 4 Survival / Profit Priority保存済み
 = Section 5 Research Mission保存済み
 = Section 6 Research Category Philosophy保存済み
-= 現在はSection 7 Capital / Risk Philosophyを設計する
+= Section 7 Capital / Risk Philosophy保存済み
+= 現在はSection 8 Knowledge / Data Asset Philosophyを設計する
 
 HIGH IMPACT
 00_HUMAN/HUMAN_MAP.md
@@ -410,7 +498,7 @@ NOT YET CREATED
 
 ---
 
-# 10. Reconciliation順序
+# 11. Reconciliation順序
 
 この順番を守る。
 
@@ -423,7 +511,8 @@ PROJECT_CHARTER v0.1 Draft
 - Section 4 Survival / Profit Priority = 保存済み
 - Section 5 Research Mission = 保存済み
 - Section 6 Research Category Philosophy = 保存済み
-- Current = Section 7 Capital / Risk Philosophy
+- Section 7 Capital / Risk Philosophy = 保存済み
+- Current = Section 8 Knowledge / Data Asset Philosophy
 
 STEP 2
 PROJECT_CHARTER Cross Check
@@ -468,7 +557,7 @@ STEP 13
 
 ---
 
-# 11. 修正原則
+# 12. 修正原則
 
 既存設計は以下の順で扱う。
 
@@ -494,7 +583,7 @@ Working Baselineは資産として維持し、Charter導入による差分だけ
 
 ---
 
-# 12. 今回やらないこと
+# 13. 今回やらないこと
 
 Charter Reconciliation中に以下へ広げない。
 
@@ -516,7 +605,7 @@ Plugin実装
 
 ---
 
-# 13. 完了条件
+# 14. 完了条件
 
 以下がすべて満たされたら、このTEMPファイルを削除して05へ戻る。
 
