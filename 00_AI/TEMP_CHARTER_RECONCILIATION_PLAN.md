@@ -1,4 +1,4 @@
-# TEMP — PROJECT CHARTER RECONCILIATION PLAN v0.3
+# TEMP — PROJECT CHARTER RECONCILIATION PLAN v0.4
 
 **Document Role:** Temporary Design Migration / Navigation Plan  
 **Status:** TEMPORARY / ACTIVE UNTIL RECONCILIATION COMPLETE  
@@ -145,8 +145,11 @@ Section 4 Survival / Profit Priority
 Section 5 Research Mission
 = DRAFT / LEADING CANDIDATE 保存済み
 
+Section 6 Research Category Philosophy
+= DRAFT / LEADING CANDIDATE 保存済み
+
 Current Focus
-= 6. Research Category Philosophy
+= 7. Capital / Risk Philosophy
 ```
 
 ---
@@ -203,12 +206,112 @@ Research Mission
 
 Human-readable Research PublicationはPrimary Research MissionではなくDownstream Consumer / Output Routeとして扱う。
 
-CORE EDGE / OPPORTUNITY / Adaptationの詳細研究思想はSection 6へ送る。
+CORE EDGE / OPPORTUNITY / Adaptationの詳細研究思想はSection 6 Research Category Philosophyとして保存済み。
+
 
 
 ---
 
-# 6. Capital / Risk Philosophyの現在方向
+# 6. Research Category Philosophyの現在方向
+
+Section 6はDRAFT / LEADING CANDIDATEとして保存済み。
+
+中心構造:
+
+~~~text
+CORE EDGE / OPPORTUNITY
+= Economic Edge Character
+
+ADAPTATION / REVALIDATION
+= Cross-Temporal Research Philosophy
+~~~
+
+CORE EDGE:
+
+~~~text
+Repeated Profit
+!= CORE
+
+CORE
+!= Universal
+!= Permanent
+!= Always Applicable
+~~~
+
+CORE Researchは、成功条件だけでなくCounter-Evidence・Weak Condition・Failure Boundaryを含めて再利用可能性を研究する。
+
+OPPORTUNITY:
+
+~~~text
+Rare
+!= Opportunity
+
+Volatile
+!= Opportunity
+
+Large Move
+!= Opportunity
+
+Large Potential Profit
+!= Opportunity
+
+Unknown
+!= Opportunity
+~~~
+
+Opportunityは一時的Distortion / Imbalance / Event / Market Structure等へEconomic Valueが依存するEdge Characterとして研究する。
+
+Boundary:
+
+~~~text
+Opportunity Research Result
+!= Opportunity Mode Permission
+!= Trade Permission
+!= Capital Permission
+~~~
+
+Edge Characterが未解決である状態を許容し、CORE / OPPORTUNITYへ強制分類しない。
+
+Adaptation / Revalidation:
+
+~~~text
+Unexpected Outcome
+!= Edge Decay
+
+Regime / Applicability Mismatch
+!= Knowledge Failure
+
+Edge Decay
+!= Structural Break
+
+Temporary Shock
+!= Structural Break
+~~~
+
+Adaptation TriggerとAdaptation Conclusionを分離し、Data / Decision / Defense / Execution Failure等をEdge Failureへ誤変換しない。
+
+Authority Boundary:
+
+~~~text
+CORE / OPPORTUNITY
+= Edge Character
+
+Knowledge Lifecycle
+= separate authority
+
+Current Applicability
+= separate authority
+
+Capital / Risk Permission
+= Section 7以降
+~~~
+
+Historical Research Truthを保存し、Later Decay / Structural Breakによって過去の成立条件下で支持されていたResearch Historyを消さない。
+
+
+---
+
+# 7. Capital / Risk Philosophyの現在方向
 
 基本思想候補:
 
@@ -234,7 +337,7 @@ OPPORTUNITY MODE
 
 ---
 
-# 7. 独自Data / 独自Metricの方向
+# 8. 独自Data / 独自Metricの方向
 
 上位思想として、
 
@@ -268,7 +371,7 @@ Market Intelligence / Research / Publication
 
 ---
 
-# 8. 既存ファイルへの影響順位
+# 9. 既存ファイルへの影響順位
 
 ```text
 CURRENT DRAFT
@@ -278,7 +381,8 @@ CURRENT DRAFT
 = Section 3 What Not To Maximize保存済み
 = Section 4 Survival / Profit Priority保存済み
 = Section 5 Research Mission保存済み
-= 現在はSection 6 Research Category Philosophyを設計する
+= Section 6 Research Category Philosophy保存済み
+= 現在はSection 7 Capital / Risk Philosophyを設計する
 
 HIGH IMPACT
 00_HUMAN/HUMAN_MAP.md
@@ -306,7 +410,7 @@ NOT YET CREATED
 
 ---
 
-# 9. Reconciliation順序
+# 10. Reconciliation順序
 
 この順番を守る。
 
@@ -318,7 +422,8 @@ PROJECT_CHARTER v0.1 Draft
 - Section 3 What Not To Maximize = 保存済み
 - Section 4 Survival / Profit Priority = 保存済み
 - Section 5 Research Mission = 保存済み
-- Current = Section 6 Research Category Philosophy
+- Section 6 Research Category Philosophy = 保存済み
+- Current = Section 7 Capital / Risk Philosophy
 
 STEP 2
 PROJECT_CHARTER Cross Check
@@ -363,7 +468,7 @@ STEP 13
 
 ---
 
-# 10. 修正原則
+# 11. 修正原則
 
 既存設計は以下の順で扱う。
 
@@ -389,7 +494,7 @@ Working Baselineは資産として維持し、Charter導入による差分だけ
 
 ---
 
-# 11. 今回やらないこと
+# 12. 今回やらないこと
 
 Charter Reconciliation中に以下へ広げない。
 
@@ -411,7 +516,7 @@ Plugin実装
 
 ---
 
-# 12. 完了条件
+# 13. 完了条件
 
 以下がすべて満たされたら、このTEMPファイルを削除して05へ戻る。
 
