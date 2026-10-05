@@ -22,7 +22,7 @@ WORKFLOW:
 AI_WORKFLOW v0.5.3 Precision-First → Precision Review → Human View workflow is active.
 
 LATEST SAVED WORKING CHECKPOINT:
-PROJECT_CHARTER Section 6 — Research Category Philosophy
+PROJECT_CHARTER Section 7 — Capital / Risk Philosophy
 
 R3 WORKING CHECKPOINT:
 Checkpoint 022 — R3 Full Destruction / Execution Integrity / Formal Adoption Readiness
@@ -55,89 +55,108 @@ Section 5 — Research Mission
 Section 6 — Research Category Philosophy
 = DRAFT / LEADING CANDIDATE SAVED
 
-SECTION 6 CORE:
-CORE EDGE / OPPORTUNITY
-= Economic Edge Character
+Section 7 — Capital / Risk Philosophy
+= DRAFT / LEADING CANDIDATE SAVED
 
-ADAPTATION / REVALIDATION
-= Cross-Temporal Research Philosophy
+SECTION 7 CORE:
+Hard Survival Boundary
+!= Risk Capacity Profile
 
-Repeated Profit
-!= CORE
+Risk Capacity Profile:
+- multidimensional
+- scope-sensitive
+- not Capital Balance
+- not one universal score
 
-CORE
-!= Universal
-!= Permanent
-!= Always Applicable
+Risk Capacity
+!= Risk Budget
 
-Rare / Volatile / Large Move / Large Potential Profit / Unknown
-!= Opportunity
+Risk Budget
+!= Risk Envelope
 
-Opportunity Research Result
-!= Opportunity Mode Permission
-!= Trade Permission
-!= Capital Permission
+Economic Edge Character
+!= Risk Posture
 
-Edge Character may remain UNRESOLVED.
+CORE EDGE
+!= CORE RISK POSTURE
 
-Unexpected Outcome
-!= Edge Decay
+OPPORTUNITY
+!= OPPORTUNITY RISK POSTURE
 
-Regime / Applicability Mismatch
-!= Knowledge Failure
+OPPORTUNITY RISK POSTURE
+!= Aggressive Mode
 
-Edge Decay
-!= Structural Break
+Risk Posture:
+- scope-bound
+- not one global switch
+- cannot create Risk Capacity
+- cannot rewrite Research / Knowledge / Applicability / Economic truth
+- cannot convert UNKNOWN into SAFE
+- cannot bypass Hard Survival Boundary
+- cannot erase existing Exposure / consumed Risk history
 
-Temporary Shock
-!= Structural Break
+Different Positions / Postures
+!= Independent Risk
 
-Adaptation Trigger
-!= Adaptation Conclusion
+Aggregate / Common-Cause Risk remains visible.
 
-CORE / OPPORTUNITY
-!= Knowledge Lifecycle
-!= Current Applicability
+Capital Permission:
+- downstream of a current-use valid Trade Thesis
+- time / scope / exposure specific
+- does not rewrite Decision / Economic truth
+- != Execution Permission
 
-Later failure / decay must not erase historical Research validity.
+Risk Capacity Contraction
+!= Knowledge / Edge / Research Failure
+!= automatic Forced Liquidation
 
-SECTION 6 DETAIL DEFERRED:
-CORE / Opportunity qualification formula
-→ later 03_RESEARCH Reconciliation / Detailed Research Design
+Recovery:
+- requires evidence relevant to the failed Capacity dimension
+- != automatic Budget Restoration
+- != old Capital Permission Revival
+- != Opportunity Recovery
 
-Knowledge Lifecycle / Current Applicability
-→ 04_KNOWLEDGE_APPLICABILITY Reconciliation
-
-Capital / Risk treatment
-→ Section 7 Capital / Risk Philosophy and later detailed design
+SECTION 7 DETAIL DEFERRED:
+- Single Trade Risk %
+- Maximum Drawdown %
+- Daily / Weekly Loss Limit
+- Leverage / Exposure / Reserve numbers
+- Position Size Formula
+- VaR / CVaR / Correlation / Portfolio Risk Formula
+- Risk Capacity exact dimensions / score / aggregation formula
+- Capacity contraction / recovery thresholds
+- Risk Budget allocation / reallocation / borrowing rules
+- CORE / OPPORTUNITY Risk Posture entry / exit thresholds
+- Mode-specific Risk Envelope
+- Capital Permission TTL / Contract
+- Runtime State Machine / DB / Python implementation
 
 PROJECT SEQUENCING:
 00_AI/TEMP_CHARTER_RECONCILIATION_PLAN.md remains active.
-TEMP plan numbering repaired so Section 6 Research Category Philosophy exists explicitly and later sections are shifted correctly.
 
 CURRENT FORMAL PROJECT FOCUS:
-7. Capital / Risk Philosophy
+8. Knowledge / Data Asset Philosophy
 
 CURRENT NAVIGATION:
-AI_CONTEXT synchronized to Section 7 focus.
-TEMP_CHARTER_RECONCILIATION_PLAN synchronized to Section 7 focus.
+AI_CONTEXT synchronized to Section 8 focus.
+TEMP_CHARTER_RECONCILIATION_PLAN synchronized to Section 8 focus.
 
 UNCHANGED BY THIS CHECKPOINT:
 00_HUMAN/HUMAN_MAP.md
 02_ARCHITECTURE/
 03_RESEARCH
 04_KNOWLEDGE_APPLICABILITY
+R3 Formal Current Architecture
 
 NEXT:
-1. Re-read PROJECT_CHARTER Sections 1–6 as needed.
-2. Design PROJECT_CHARTER Section 7 — Capital / Risk Philosophy.
-3. Preserve Section 4 Hard Survival Boundary while defining how CORE / OPPORTUNITY Research Meaning may inform Risk Posture without granting automatic Capital Permission.
+1. Re-read PROJECT_CHARTER Sections 1–7 as needed.
+2. Design PROJECT_CHARTER Section 8 — Knowledge / Data Asset Philosophy.
+3. Preserve Research Result / Knowledge / Applicability / Decision / Risk authority boundaries while defining what should become a long-lived Knowledge / Data Asset.
 4. Do not formally adopt R3 into 02_ARCHITECTURE until Charter Reconciliation sequence permits it.
 
 Git Write Permission Reminder:
 REQUIRE CURRENT-CHAT USER AUTHORIZATION
 ~~~
-
 ---
 # 1. ROLE
 
