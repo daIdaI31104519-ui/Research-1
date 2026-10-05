@@ -3,7 +3,7 @@
 **Document Role:** Project Constitution / Top-Level Mission  
 **Status:** DRAFT / LEADING CANDIDATE  
 **Purpose:** 市場理解OSが何のために存在し、何を優先し、どの方向へ育てるかを定義する最上位方針文書。  
-**Current Scope:** Section 1 `Project Mission`、Section 2 `Success Definition`、Section 3 `What Not To Maximize`、Section 4 `Survival / Profit Priority`、Section 5 `Research Mission`、Section 6 `Research Category Philosophy` を設計済み。Section 7以降は未設計であり、現時点では固定しない。
+**Current Scope:** Section 1 `Project Mission`、Section 2 `Success Definition`、Section 3 `What Not To Maximize`、Section 4 `Survival / Profit Priority`、Section 5 `Research Mission`、Section 6 `Research Category Philosophy`、Section 7 `Capital / Risk Philosophy` を設計済み。Section 8以降は未設計であり、現時点では固定しない。
 
 ---
 
@@ -3300,12 +3300,1184 @@ RC-20 Section 6 does not own Capital / Risk permission.
 > **繰り返し使えるものはCOREとして育て、一時的な歪みはOPPORTUNITYとして研究し、分からないものは分からないまま残し、どれも永久の正解にせずADAPTATIONで再検証する。**
 
 
+
+# 7. Capital / Risk Philosophy
+
+## 7.1 このSectionの役割
+
+Section 4では、
+
+~~~text
+Survival
+= Hard Operating Boundary
+
+Profit / Positive Economic Value
+= Objective pursued inside that boundary
+~~~
+
+と定義した。
+
+Section 6では、
+
+~~~text
+CORE EDGE / OPPORTUNITY
+= Economic Edge Character
+~~~
+
+と定義し、Edge CharacterそのものはCapital / Risk Permissionを与えないことを明確にした。
+
+Section 7では、その上位原則をCapital / Riskへ落とし、
+
+> **市場理解OSが現在どの程度のRiskを引き受けられるか、そのRiskをどこへ割り当て、どの条件で利用し、具体的なTrade Thesisへ現在Capitalを許可できるかを判断するための最上位思想を定義する。**
+
+とする。
+
+Section 7は、Market Truth・Research Truth・Knowledge Validity・Current Applicability・Economic Valueを再定義する領域ではない。
+
+~~~text
+Research / Knowledge
+= What is supported / known?
+
+Decision / Economic Evaluation
+= What action has economic meaning?
+
+Capital / Risk
+= May the OS take this risk now?
+~~~
+
+というAuthority分離を維持する。
+
+---
+
+## 7.2 CapitalとRiskを同一視しない
+
+市場理解OSでは、
+
+~~~text
+Capital
+!= Risk
+
+Exposure
+!= Risk
+
+Loss
+!= Risk
+~~~
+
+とする。
+
+CapitalはEconomic Activityを継続するための有限資源であり、RiskはそのCapital・Operation・Recoverability等が受ける可能性のあるDamage構造である。
+
+例えば、同じCapital Amountを利用していても、
+
+~~~text
+Leverage
+Liquidity
+Volatility
+Correlation
+Concentration
+Venue / Counterparty
+Execution
+Tail Event
+Unknown
+Recoverability
+~~~
+
+等によって実際のRiskは異なり得る。
+
+したがって、
+
+~~~text
+Capital Balance
+=
+Risk Capacity
+~~~
+
+とはしない。
+
+---
+
+## 7.3 Hard Survival BoundaryとRisk Capacityを分離する
+
+Section 4で定義したHard Survival Boundaryは、Risk Capacityと同じものではない。
+
+~~~text
+Hard Survival Boundary
+= 越えてはならないProject-level Boundary
+
+Risk Capacity
+= そのBoundaryの内側で現在引き受けられるRisk能力
+~~~
+
+とする。
+
+Hard Survival Boundaryは、Opportunity・Mode・Profit状況等によって都合よく変更しない。
+
+一方、Risk Capacityは、
+
+~~~text
+Market Condition
+Capital Condition
+Liquidity
+Current Exposure
+Venue状態
+Operational状態
+Recoverability
+Material Unknown
+~~~
+
+等によって時間とともに変化し得る。
+
+~~~text
+Hard Boundary
+= constitutional
+
+Risk Capacity
+= dynamic
+~~~
+
+とする。
+
+---
+
+## 7.4 Risk Capacity Profile
+
+市場理解OSでは、Risk Capacityを、
+
+~~~text
+口座残高
+利用可能証拠金
+単一Risk Score
+~~~
+
+だけで表現しない。
+
+Risk Capacityとは、
+
+> **現在の市場理解OSが、主要なRisk ScopeにおいてDamageを吸収・制御し、必要な場合にRecoveryできる能力。**
+
+とする。
+
+その評価には、概念上、
+
+~~~text
+Capital / Financial Buffer
+Liquidity / Exit Ability
+Current / Aggregate Exposure
+Venue / Counterparty Condition
+Operational / Control Ability
+Recoverability
+Material Unknown
+~~~
+
+等が関係し得る。
+
+ただし、これらを現時点で固定Schemaや固定Scoreへしない。
+
+Risk Capacityは、
+
+> **多面的かつScope-sensitiveな現在状態**
+
+として扱う。
+
+---
+
+## 7.5 Risk Capacityを万能Scoreへ潰さない
+
+Risk Capacityの異なるDimensionを、一つの高いScoreだけで相殺しない。
+
+例えば、
+
+~~~text
+Capital Buffer = strong
+Liquidity = strong
+
+but
+
+Position Visibility = lost
+~~~
+
+の場合に、
+
+~~~text
+平均すると安全
+~~~
+
+とは扱わない。
+
+同様に、
+
+~~~text
+High Expected Value
+High Win Rate
+High Model Confidence
+Large Capital Balance
+~~~
+
+等によって、CriticalなOperational / Liquidity / Venue / Unknown Riskを自動的に相殺しない。
+
+> **一つのCapacity Dimensionが強いことは、別のCritical Capacity Failureを無効化する理由にならない。**
+
+また、Risk CapacityはScopeを持ち得る。
+
+例えば一つのVenueで障害が発生しても、それだけで無関係な全ScopeのCapacityを自動的にゼロとはしない。
+
+影響範囲を確認し、System-level RiskとScope-specific Riskを分離して評価する方向を持つ。
+
+---
+
+## 7.6 Risk Capacity Contraction
+
+Risk Capacityは、
+
+~~~text
+Capital Loss
+Drawdown
+Liquidity Deterioration
+Exit Ability低下
+Venue / Exchange Failure
+Execution Control喪失
+Operational Failure
+Risk Observability低下
+Aggregate Exposure増加
+Concentration
+Material Unknown
+~~~
+
+等によって縮小し得る。
+
+ただし、
+
+~~~text
+Capital Loss %
+=
+Risk Capacity Reduction %
+~~~
+
+のような単純対応を上位思想として固定しない。
+
+同様に、
+
+~~~text
+連敗回数
+=
+Risk Capacity Truth
+~~~
+
+とも扱わない。
+
+Loss・Drawdown・連続Loss等は、Risk Capacityを再評価する重要Triggerになり得るが、原因として、
+
+~~~text
+Expected Variance
+Edge-related Failure
+Regime / Applicability Mismatch
+Liquidity Shock
+Execution Failure
+Operational Failure
+Common-Cause Exposure
+Unknown
+~~~
+
+等を区別する。
+
+> **結果の悪化だけでRisk Capacityの原因を自動確定しない。**
+
+---
+
+## 7.7 Risk Capacity Recovery / Recoverability
+
+Risk Capacityが縮小した場合、
+
+~~~text
+時間が経過した
+一回勝った
+Priceが戻った
+Capital Balanceが戻った
+~~~
+
+だけで完全Recoveryとは扱わない。
+
+~~~text
+Time Passed
+!= Recovery
+
+One Win
+!= Recovery
+
+Price Recovery
+!= System Recovery
+
+Capital Balance Recovery
+!= Full Risk Capacity Recovery
+~~~
+
+とする。
+
+Risk Capacity Recoveryは、
+
+> **縮小原因となったCapacity Dimensionに対応するRecovery Evidenceによって確認する。**
+
+方向を持つ。
+
+例えば、
+
+~~~text
+Liquidity問題
+→ Liquidity / Exit Abilityの回復
+
+Venue障害
+→ Order / Cancel / Position Reconciliation等の回復
+
+Operational問題
+→ Monitoring / Control / State Visibility等の回復
+~~~
+
+のように、原因とRecovery Evidenceを対応させる。
+
+Risk CapacityはMaterial Riskに対して速やかに縮小できる一方、関連するRecovery Evidenceが得られた後まで根拠なく保守状態を固定し続けない。
+
+必要に応じて段階的Recoveryを許容するが、具体Stage・Threshold・Cooldownは後続設計で定義する。
+
+---
+
+## 7.8 Risk Budget
+
+Risk CapacityとRisk Budgetを分離する。
+
+~~~text
+Risk Capacity
+= 現在どの程度Riskを吸収できるか
+
+Risk Budget
+= そのCapacityをどのScopeへどの程度割り当ててよいか
+~~~
+
+とする。
+
+Risk Budgetは、
+
+~~~text
+Asset
+Market
+Venue
+Edge Family
+Risk Posture
+Time Window
+Portfolio Scope
+~~~
+
+等へ将来割り当てられる可能性を持つ。
+
+ただし具体的なAllocation Unit・Formula・Hierarchyは後続Risk Architectureで定義する。
+
+重要なのは、
+
+~~~text
+Risk Budget
+cannot create Risk Capacity
+~~~
+
+ことである。
+
+Risk Budgetの合計や再配分によって、Systemが実際に吸収可能なRisk能力そのものを増加させてはならない。
+
+---
+
+## 7.9 Risk Budgetは使用目標ではない
+
+Risk Budgetは、
+
+~~~text
+使わなければならない金額
+最大化すべきExposure
+Profit Target達成用のQuota
+~~~
+
+ではない。
+
+~~~text
+Unused Risk Budget
+!= Inefficiency
+
+Risk Budget Available
+!= Trade Permission
+~~~
+
+とする。
+
+Economic Opportunityが存在しない場合、Current Applicabilityが成立しない場合、Risk Envelopeを満たさない場合等には、Budgetを利用しないことが正常な判断になり得る。
+
+また、Risk Capacityが縮小した場合、過去に割り当てられたRisk Budgetを永久の利用権として扱わない。
+
+~~~text
+Capacity Contraction
+may require
+Budget Re-evaluation
+~~~
+
+とする。
+
+---
+
+## 7.10 Risk Posture Philosophy
+
+市場理解OSは、すべてのEconomic Edgeを完全に同一のRisk条件で扱う必要はない。
+
+そのため、将来のRisk / Capital Governanceでは、
+
+~~~text
+CORE RISK POSTURE
+OPPORTUNITY RISK POSTURE
+~~~
+
+等の異なるRisk Postureを許容する。
+
+人間向けには、
+
+~~~text
+CORE MODE
+OPPORTUNITY MODE
+~~~
+
+と表現できる。
+
+ただし正式な意味は、
+
+> **異なるEconomic Edge CharacterやMarket Contextを、どのRisk条件の下で扱うかを示すRisk Posture Profile**
+
+である。
+
+~~~text
+Risk Posture
+!= Economic Edge Character
+~~~
+
+とする。
+
+---
+
+## 7.11 CORE RISK POSTURE
+
+CORE RISK POSTUREは、
+
+> **成立条件・Failure Boundary・再利用可能性等が継続的に研究されているCORE EDGEを扱うための通常Risk Posture。**
+
+とする。
+
+ただし、
+
+~~~text
+CORE
+!= SAFE
+
+CORE RISK POSTURE
+!= Zero-Risk Mode
+~~~
+
+である。
+
+CORE EDGEでも、
+
+~~~text
+Tail Risk
+Liquidity Dependency
+Leverage Sensitivity
+Correlation
+Concentration
+Venue Risk
+~~~
+
+等が大きい可能性がある。
+
+COREであることだけを理由に、大きいRisk Budget・Exposure・Leverageを自動的に許可しない。
+
+---
+
+## 7.12 OPPORTUNITY RISK POSTURE
+
+OPPORTUNITY RISK POSTUREは、
+
+> **特定のTemporary Distortion・Imbalance・Event・Market Structure等へEconomic Valueが依存するOpportunityを、通常Postureとは異なるRisk条件で扱うための限定Risk Posture。**
+
+とする。
+
+ただし、
+
+~~~text
+OPPORTUNITY RISK POSTURE
+!= Aggressive Mode
+
+OPPORTUNITY
+!= Higher Risk Permission
+~~~
+
+である。
+
+Opportunityでは、
+
+~~~text
+Upside
+Downside
+Liquidity
+Exit Ability
+Time Decay
+Tail Risk
+Unknown
+Failure Boundary
+~~~
+
+等によって、COREより大きいExposureが合理的な場合もあれば、逆に小さいExposureやNO TRADEが合理的な場合もある。
+
+> **Opportunity Risk Postureは「Riskを増やすMode」ではなく、「Riskの扱い方をOpportunityの構造へ合わせるPosture」である。**
+
+---
+
+## 7.13 Edge CharacterとRisk Postureを分離する
+
+Section 6の、
+
+~~~text
+CORE EDGE
+OPPORTUNITY
+~~~
+
+はEconomic Edge Characterである。
+
+Section 7の、
+
+~~~text
+CORE RISK POSTURE
+OPPORTUNITY RISK POSTURE
+~~~
+
+はRisk Treatmentである。
+
+したがって、
+
+~~~text
+CORE EDGE
+!= CORE RISK POSTURE Permission
+
+OPPORTUNITY
+!= OPPORTUNITY RISK POSTURE Permission
+~~~
+
+とする。
+
+Economic Edge Characterが特定されたことだけで、Risk Posture Entry・Capital Permission・Exposure Amountを自動決定しない。
+
+Risk Postureは、Current Applicability・Economic Evaluation・Current Risk Capacity・Aggregate Risk・Risk Policy等を踏まえて評価される方向を持つ。
+
+---
+
+## 7.14 Risk PostureはScope-boundである
+
+Risk Postureを、一つのGlobal System Switchとして扱わない。
+
+~~~text
+SYSTEM MODE
+= CORE only
+
+or
+
+SYSTEM MODE
+= OPPORTUNITY only
+~~~
+
+とは固定しない。
+
+市場理解OSでは、異なるRisk Scopeに、
+
+~~~text
+CORE RISK POSTURE
++
+OPPORTUNITY RISK POSTURE
+~~~
+
+が同時に存在することを許容できる。
+
+ただし、
+
+> **複数のRisk Postureが存在しても、それぞれが独立した無限Risk Capacityを持つわけではない。**
+
+全てのRisk Postureは共通のSystem Risk CapacityとHard Survival Boundaryの制約を受ける。
+
+また、
+
+~~~text
+Different Risk Posture
+!= Independent Risk
+~~~
+
+とする。
+
+---
+
+## 7.15 Mode Shopping / Risk Rule Escapeを禁止する
+
+Risk Postureは、Risk制約を回避するためのSemantic Label変更に利用しない。
+
+例えば、
+
+~~~text
+CORE RISK POSTUREではRisk条件に抵触
+↓
+Opportunityと再Label
+↓
+OPPORTUNITY RISK POSTUREへ変更
+↓
+同じRiskを許可
+~~~
+
+というMode Shoppingを禁止方向とする。
+
+~~~text
+Risk Rejection
+cannot be solved
+by semantic relabeling
+~~~
+
+とする。
+
+Risk Postureは、
+
+~~~text
+Risk Capacityを増やす
+Hard Survival Boundaryを緩和する
+Research Truthを書き換える
+Knowledge Validityを書き換える
+Current Applicabilityを書き換える
+Economic Valueを書き換える
+UNKNOWNをSAFEへ変える
+既存Exposureを消す
+Consumed Risk Historyを消す
+~~~
+
+Authorityを持たない。
+
+> **Risk PostureはRisk Treatmentを変えるが、Risk Truthや上流Truthを変更しない。**
+
+---
+
+## 7.16 Risk Envelope
+
+Risk Envelopeとは、
+
+> **あるRisk Scope / Risk Posture / Capital Requestが守らなければならないRisk条件の集合。**
+
+とする。
+
+Risk Envelopeには将来、概念上、
+
+~~~text
+Exposure
+Leverage
+Liquidity
+Exit Ability
+Concentration
+Correlation
+Venue Condition
+Tail Risk
+Time Dependency
+Unknown
+~~~
+
+等が関係し得る。
+
+ただし、現時点で具体Field・Threshold・Score・Formulaを固定しない。
+
+また、
+
+~~~text
+Risk Posture
+!= Single Risk Multiplier
+~~~
+
+とする。
+
+COREを 1x、Opportunityを 3x とするような単一倍率だけでRisk Posture全体を定義しない。
+
+---
+
+## 7.17 Risk BudgetとRisk Envelopeを分離する
+
+Risk BudgetとRisk Envelopeは同じものではない。
+
+~~~text
+Risk Budget
+= How much risk may this scope consume?
+
+Risk Envelope
+= Under what risk conditions may this scope operate?
+~~~
+
+とする。
+
+したがって、
+
+~~~text
+Budget Available
+!= Envelope PASS
+
+Envelope PASS
+!= Budget Available
+~~~
+
+である。
+
+Risk Budgetが残っていてもRisk Envelopeを満たさなければCapital Permissionは与えない方向を持つ。
+
+同様に、Risk Envelope内であっても利用可能Risk Budgetがなければ新しいRiskを取らない方向を持つ。
+
+---
+
+## 7.18 Aggregate / Common-Cause Risk
+
+Riskを単一Trade・単一Positionだけで評価しない。
+
+~~~text
+Different Position
+!= Independent Risk
+~~~
+
+とする。
+
+例えば、
+
+~~~text
+BTC Long
+ETH Long
+SOL Long
+~~~
+
+が別Positionであっても、
+
+~~~text
+同一Crypto Beta
+同一Market Direction
+同一Macro Factor
+同一Liquidity Shock
+同一Venue
+同一Failure Source
+~~~
+
+等を共有していれば、System全体として大きなCommon-Cause Riskを持つ可能性がある。
+
+同様に、
+
+~~~text
+CORE RISK POSTURE
++
+OPPORTUNITY RISK POSTURE
+~~~
+
+へ分かれていることだけでRisk Independenceを仮定しない。
+
+> **Risk Capacity・Risk Budget・Capital Permissionは、個別RiskだけでなくAggregate / Sequence / Common-Cause Riskを考慮する方向を持つ。**
+
+具体的なCorrelation・Portfolio Risk・Stress Formulaは後続設計で定義する。
+
+---
+
+## 7.19 Material Unknown
+
+Section 4の、
+
+~~~text
+UNKNOWN
+!= SAFE
+~~~
+
+をCapital / Riskへ適用する。
+
+Unknownが存在するだけで全Riskを自動的に禁止するわけではない。
+
+一方で、
+
+~~~text
+Maximum Downside UNKNOWN
+Exit Route UNKNOWN
+Actual Exposure UNKNOWN
+Position State UNKNOWN
+Venue Condition UNKNOWN
+~~~
+
+等のMaterial Unknownを、Lossがまだ発生していないことだけを理由に安全扱いしない。
+
+> **Material Unknownは、現在利用可能なRisk Capacity・Risk Envelope・Capital Permissionを縮小・保留する理由になり得る。**
+
+Unknownは件数だけで評価せず、
+
+~~~text
+何がUnknownか
+どのRisk Scopeへ影響するか
+Failure Pathへどう影響するか
+Recoverabilityへどう影響するか
+~~~
+
+を見る。
+
+具体的Materiality Ruleは後続設計で定義する。
+
+---
+
+## 7.20 Capital Permission
+
+Capital Permissionとは、
+
+> **Current-use validなTrade Thesisに基づき、現在のRisk Capacity・Risk Budget・Risk Posture・Risk Envelope・Aggregate Exposure・Material Unknown等を踏まえて、そのCapital / Exposure Riskを現在許可できるかを判断するCapital Governance結果。**
+
+とする。
+
+Capital Permissionは、
+
+~~~text
+Decision Candidate
+Economic Value
+Candidate Advancement
+Trade Thesis
+~~~
+
+そのものではない。
+
+基本関係は、
+
+~~~text
+Decision / Economic Evaluation
+↓
+Trade Thesis
+↓
+Capital / Risk Authority
+↓
+Capital Permission
+~~~
+
+とする。
+
+Capital / Risk領域は、上流のMarket Judgment・Economic Value・Research Truthを都合よく書き換えてCapital Permissionを成立させてはならない。
+
+---
+
+## 7.21 Capital Permissionと他Authorityを分離する
+
+Capital Permissionは、
+
+~~~text
+Knowledge Validity
+Current Applicability
+Economic Value
+Candidate Advancement
+Trade Thesis
+Execution Permission
+~~~
+
+と分離する。
+
+~~~text
+Knowledge is valid
+!= Capital Permission
+
+Trade Thesis exists
+!= Capital Permission
+
+Capital Permission
+!= Execution Permission
+~~~
+
+とする。
+
+Capital / Risk側がBLOCKしても、
+
+~~~text
+Knowledge is false
+Trade Thesis is invalid
+Economic Value is false
+~~~
+
+ことを自動的に意味しない。
+
+同様にCapital Permissionが与えられても、その後のExecution / Runtime Safetyが、
+
+~~~text
+Exchange Failure
+Liquidity Collapse
+Spread Explosion
+Order Route Failure
+Actual Exposure Risk
+~~~
+
+等によってExecutionを停止できる方向を持つ。
+
+> **Capital Permissionは「Risk側として現在許可できる」という判断であり、必ずOrderを実行する命令ではない。**
+
+---
+
+## 7.22 Capacity ContractionとExisting Exposure
+
+Risk Capacityは、Position保有中にも縮小し得る。
+
+例えば、
+
+~~~text
+Existing Exposure Risk
+>
+Current Available Risk Capacity
+~~~
+
+となる可能性がある。
+
+この状態を理由に、
+
+~~~text
+即時
+全Position
+Market Exit
+~~~
+
+を上位原則として強制しない。
+
+Liquidity Collapse等では、Blind Forced Liquidation自体がDamageを拡大する可能性がある。
+
+したがって、
+
+~~~text
+Capacity Contraction
+!= Automatic Forced Liquidation
+
+No New Risk
+!= Immediate Exit
+~~~
+
+とする。
+
+Risk Capacity縮小によって既存Exposureが過剰となった場合、
+
+~~~text
+New Risk抑制
+Existing Exposure再評価
+Aggregate Risk再評価
+Fast Safety / Defense
+~~~
+
+へ進み、利用可能な選択肢の中からSurvival Damageを抑える対応を取れる方向を持つ。
+
+具体的なREDUCE / HOLD / EXIT Policyは後続Risk / Runtime / Execution設計で定義する。
+
+---
+
+## 7.23 Risk Governance ResultとPnLを分離する
+
+Risk判断の品質をPnLだけで判定しない。
+
+~~~text
+Profit
+!= Risk Governance Success
+
+Loss
+!= Risk Governance Failure
+~~~
+
+とする。
+
+例えば、
+
+~~~text
+Risk Rule違反
+↓
+結果はProfit
+~~~
+
+であっても、Risk Decision自体が正しかったとは限らない。
+
+逆に、
+
+~~~text
+定義されたRisk Boundary内
+↓
+正常なMarket VarianceでLoss
+~~~
+
+であれば、そのLossだけを理由にRisk Governance Failureとはしない。
+
+Post-Analysisでは可能な限り、
+
+~~~text
+Economic Outcome Quality
+Risk Decision Quality
+Edge / Knowledge Quality
+Execution Quality
+~~~
+
+を分離して評価する方向を持つ。
+
+---
+
+## 7.24 Recoveryは過去のPermissionを自動復活させない
+
+Risk Capacityが回復しても、
+
+~~~text
+Previous Risk Budget
+Previous Capital Permission
+Previous Opportunity
+Previous Risk Posture Permission
+~~~
+
+を自動的に復活させない。
+
+~~~text
+Capacity Recovery
+!= Automatic Budget Restoration
+
+Capacity Recovery
+!= Old Capital Permission Revival
+
+Capacity Recovery
+!= Opportunity Recovery
+~~~
+
+とする。
+
+Recovery後には、
+
+~~~text
+Current Market Context
+Current Applicability
+Current Economic Condition
+Current Opportunity existence
+Current Risk Budget
+Current Aggregate Exposure
+Current Material Unknown
+~~~
+
+等を現在時点で再評価する。
+
+一度許可されたCapital Permissionを永久Tokenとして扱わない。
+
+~~~text
+Approved Once
+!= Approved Forever
+~~~
+
+とする。
+
+---
+
+## 7.25 このSectionで決めないこと
+
+Section 7ではCapital / Risk Philosophyと上位責任境界を定義し、具体的なRisk数値・Formula・Runtime Contract・Implementationは固定しない。
+
+以下は後続Risk / Capital / Decision / Runtime設計で扱う。
+
+~~~text
+Single Trade Risk %
+Maximum Drawdown %
+Daily / Weekly Loss Limit
+Leverage Limit
+Exposure Limit
+Capital Reserve Ratio
+Protected Reserve Rule
+Position Size Formula
+Stop Loss Rule
+VaR / CVaR
+Correlation Formula
+Portfolio Risk Formula
+Exchange Concentration Limit
+Tail Risk Budget
+
+Risk Capacity exact dimensions
+Risk Capacity Score / Aggregation Formula
+Capacity Contraction Threshold
+Capacity Recovery Threshold
+Recovery Stage
+Cooldown Duration
+
+Risk Budget Allocation Formula
+Budget Reallocation Rule
+Budget Borrowing Rule
+
+CORE RISK POSTURE Entry / Exit Threshold
+OPPORTUNITY RISK POSTURE Entry / Exit Threshold
+Mode-specific Risk Envelope
+Risk Posture State Machine
+
+Risk Envelope Field / Threshold
+Capital Permission TTL
+Capital Permission Contract
+Over-Capacity State Definition
+
+DB Schema
+Python Class
+Enum
+Queue
+Scheduler
+Runtime Implementation
+~~~
+
+Section 7は、
+
+> **Riskをどのように考え、どのAuthorityを分離し、何を越えてはならないか**
+
+を固定する。
+
+具体的に「何%」「何倍」「何分」「何件」で判定するかは後続設計へ送る。
+
+---
+
+## 7.26 Core Invariants
+
+~~~text
+CR-01 Capital != Risk; Risk Capacity != Capital Balance.
+
+CR-02 Risk Capacity is multidimensional and scope-sensitive.
+
+CR-03 Critical failure in one Capacity dimension cannot be silently offset by strength in another.
+
+CR-04 Risk Capacity != Risk Budget; Budget allocates Capacity and cannot create it.
+
+CR-05 Unused Risk Budget != Inefficiency; Risk Budget != Trade Permission.
+
+CR-06 Economic Edge Character != Risk Posture.
+
+CR-07 Risk Posture is scope-bound, not one global system switch.
+
+CR-08 Risk Posture cannot create Capacity, rewrite upstream truth, convert UNKNOWN to SAFE, erase existing Risk, or bypass the Hard Survival Boundary.
+
+CR-09 Risk Budget != Risk Envelope; Budget governs allocation quantity, Envelope governs admissible risk conditions.
+
+CR-10 Risk Posture != Single Risk Multiplier.
+
+CR-11 Different Positions / Postures != Independent Risk; Aggregate / Common-Cause Risk must remain visible.
+
+CR-12 Capital Permission is downstream of a current-use valid Trade Thesis and does not rewrite Decision / Economic truth.
+
+CR-13 Capital Permission is time-, scope-, and exposure-specific; Capital Permission != Execution Permission.
+
+CR-14 Risk Capacity Contraction != Knowledge / Edge / Research Failure; Capital / Risk BLOCK does not rewrite upstream truth.
+
+CR-15 Capacity Contraction != automatic Forced Liquidation; existing Exposure must be re-evaluated rather than blindly exited.
+
+CR-16 Risk Capacity Recovery requires evidence relevant to the failed Capacity dimension; Recovery does not automatically restore Budget, old Permission, or Opportunity.
+~~~
+
+---
+
+# Capital / Risk Philosophy — 一文定義
+
+> **市場理解OSのCapital / Risk Philosophyは、長期生存という共通Hard Survival Boundaryの内側で、Capital残高だけではなくLiquidity・Exposure・Venue・Operational Control・Recoverability・Material Unknown等を含む現在のRisk Capacityを多面的に評価し、そのCapacityを必要なScopeへRisk Budgetとして割り当て、CORE / OPPORTUNITY等のRisk PostureとRisk EnvelopeによってRisk条件を管理し、Current-use validなTrade Thesisへ今そのCapital / Exposure Riskを許可できるかを判断することで、Economic Opportunityを追求しながらも、一時的利益・Mode変更・単一Metricによって市場理解OSの継続能力を賭けないことである。**
+
+簡潔には、
+
+> **利益がありそうだから賭けるのではなく、今のOSが耐えられ、制御でき、壊れても戻れるRiskだけを選んでCapitalを出す。**
+
+---
+
 # 未設計
 
 以下は今後、一項目ずつ設計する。
 
 ```text
-7. Capital / Risk Philosophy
 8. Knowledge / Data Asset Philosophy
 9. Independent Data / Metric Extensibility
 10. Market Scope / Future Expansion Governance
@@ -3315,4 +4487,4 @@ RC-20 Section 6 does not own Capital / Risk permission.
 14. Charter Change Governance
 ```
 
-これらは現時点では `TBD` であり、Section 1〜6から自動的に詳細内容を確定しない。
+これらは現時点では `TBD` であり、Section 1〜7から自動的に詳細内容を確定しない。
