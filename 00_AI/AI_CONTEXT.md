@@ -1,4 +1,4 @@
-# 市場理解OS — AI_CONTEXT v0.1.14
+# 市場理解OS — AI_CONTEXT v0.1.15
 
 **Document Role:** AI Current-State Index / Navigation Map  
 **Status:** REVIEWED / WORKING BASELINE  
@@ -96,8 +96,12 @@ Section 6:
 Research Category Philosophy
 = DRAFT / LEADING CANDIDATE 保存済み
 
+Section 7:
+Capital / Risk Philosophy
+= DRAFT / LEADING CANDIDATE 保存済み
+
 現在焦点:
-7. Capital / Risk Philosophy
+8. Knowledge / Data Asset Philosophy
 ```
 
 `01_EXTERNAL_DATA`、`02_MARKET_UNDERSTANDING`、`03_RESEARCH`、`04_KNOWLEDGE_APPLICABILITY` はWorking Baselineとして保存済み。
@@ -118,7 +122,7 @@ Research Category Philosophy
 
 ```text
 Path: 00_AI/AI_WORKFLOW.md
-Version: v0.5.2
+Version: v0.5.3
 Status: REVIEWED / WORKING BASELINE
 Role: GPTが市場理解OSをどう設計・確認・保存し、保存先・同期対象・文書間整合・Checkpoint / Baseline / Recovery・Human-Readable File Namingをどう管理するかを決める作業規則
 ```
@@ -139,8 +143,9 @@ Current State:
 - Section 4 Survival / Profit Priority = 保存済み
 - Section 5 Research Mission = 保存済み
 - Section 6 Research Category Philosophy = 保存済み
-- Section 7以降 = 未設計
-Current Focus: 7. Capital / Risk Philosophy
+- Section 7 Capital / Risk Philosophy = 保存済み
+- Section 8以降 = 未設計
+Current Focus: 8. Knowledge / Data Asset Philosophy
 ```
 
 Project Missionの現在本命方向には、Crypto First、選択的Research、Fast Adaptation / Research Adaptation、Research Note / Research Asset、長期生存と正の期待値、人間向けResearch Publicationが含まれる。
@@ -155,6 +160,8 @@ Research Missionの現在本命方向は、FOUNDATIONAL / MECHANISM、SURVIVAL /
 
 Research Category Philosophyの現在本命方向は、CORE EDGE / OPPORTUNITYをEconomic Edge Characterとして分離し、ADAPTATION / REVALIDATIONを両者へ横断する時間軸のResearch Philosophyとして扱う。Repeated ProfitだけでCOREとせず、Rare / Volatile / Large Move / UnknownだけでOpportunityとせず、UNRESOLVEDを許容する。またUnexpected Outcome / Regime Mismatch / Edge Decay / Structural Breakを分離し、Edge Character・Knowledge Lifecycle・Current Applicability・Capital / Risk Permissionを別Authorityとして維持する。
 
+Capital / Risk Philosophyの現在本命方向は、Hard Survival Boundaryの内側でRisk CapacityをCapital残高だけではなくLiquidity・Exposure・Venue・Operational Control・Recoverability・Material Unknown等を含む多面的かつScope-sensitiveな現在能力として扱い、Risk Capacity / Risk Budget / Risk Posture / Risk Envelope / Capital Permissionを分離することを中心とする。CORE / OPPORTUNITYはEdge CharacterとRisk Postureを分離し、Risk PostureはGlobal Switchや単一Risk倍率にせず、Shared Risk Capacityの制約下でScope-boundに扱う。Capital Permissionはcurrent-use validなTrade Thesisの下流に置き、Decision / Economic Truthを上書きせず、Execution Permissionとも分離する。Capacity ContractionはKnowledge / Edge FailureやBlind Forced Liquidationを自動的に意味せず、Recoveryは壊れたCapacity Dimensionに対応するEvidenceで確認し、旧Budget / Permission / Opportunityを自動復活させない。
+
 重要:
 
 ```text
@@ -163,7 +170,7 @@ Section 1〜6 保存済み
 PROJECT_CHARTER Working Baseline
 ```
 
-Section 7以降を設計し、PROJECT_CHARTER全体をCross Checkするまでは、Charter全体を確定扱いしない。
+Section 8以降を設計し、PROJECT_CHARTER全体をCross Checkするまでは、Charter全体を確定扱いしない。
 
 ## 3.3 HUMAN MAP
 
@@ -180,7 +187,7 @@ Canonicalではないが、現在の市場理解OSのHuman思想を確認する�
 
 ```text
 Path: 00_AI/TEMP_CHARTER_RECONCILIATION_PLAN.md
-Version: v0.3
+Version: v0.5
 Status: TEMPORARY / ACTIVE UNTIL RECONCILIATION COMPLETE
 Role: PROJECT_CHARTER導入中の作業順・影響範囲・Checkpoint・復帰条件を固定する一時ナビ
 ```
@@ -496,7 +503,8 @@ Section 3 What Not To Maximize = DRAFT / LEADING CANDIDATE 保存済み
 Section 4 Survival / Profit Priority = DRAFT / LEADING CANDIDATE 保存済み
 Section 5 Research Mission = DRAFT / LEADING CANDIDATE 保存済み
 Section 6 Research Category Philosophy = DRAFT / LEADING CANDIDATE 保存済み
-現在: 7. Capital / Risk Philosophy
+Section 7 Capital / Risk Philosophy = DRAFT / LEADING CANDIDATE 保存済み
+現在: 8. Knowledge / Data Asset Philosophy
 
 NEXT-002
 PROJECT_CHARTER全体をCross Checkし、問題が軽微ならWorking Baseline候補として保存
@@ -690,6 +698,6 @@ GPTはGit・AI_WORKFLOW・AI_CONTEXT・必要ならAI_HANDOFFを使って設計�
 
 ---
 
-# AI_CONTEXT v0.1.14 一文定義
+# AI_CONTEXT v0.1.15 一文定義
 
 > **AI_CONTEXTとは、市場理解OSの設計内容そのものや直前Conversationを複製する文書ではなく、GPTが現在Phase・Current Task・主要Working Baseline・重要Pending・Next Action・参照先を短時間で把握し、Gitという長期作業空間の中から現在Taskに必要な正しい設計情報へ移動するための軽量なAI専用Project Current-State Mapである。**
