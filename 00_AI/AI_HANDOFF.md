@@ -22,7 +22,7 @@ WORKFLOW:
 AI_WORKFLOW v0.5.3 Precision-First → Precision Review → Human View workflow is active.
 
 LATEST SAVED WORKING CHECKPOINT:
-PROJECT_CHARTER Section 5 — Research Mission
+PROJECT_CHARTER Section 6 — Research Category Philosophy
 
 R3 WORKING CHECKPOINT:
 Checkpoint 022 — R3 Full Destruction / Execution Integrity / Formal Adoption Readiness
@@ -52,71 +52,75 @@ Section 4 — Survival / Profit Priority
 Section 5 — Research Mission
 = DRAFT / LEADING CANDIDATE SAVED
 
-SECTION 5 CORE:
-Research
-!= Research Count Maximization
-!= Hypothesis Confirmation Factory
-!= Production Permission
+Section 6 — Research Category Philosophy
+= DRAFT / LEADING CANDIDATE SAVED
 
-Research
-= Reusable Understanding / Evidence / Failure / Unknown Creation
+SECTION 6 CORE:
+CORE EDGE / OPPORTUNITY
+= Economic Edge Character
 
-Primary Research Mission Families:
-RM-1 FOUNDATIONAL / MECHANISM
-RM-2 SURVIVAL / FAILURE
-RM-3 ECONOMIC EDGE
-RM-4 ADAPTATION / REVALIDATION
-RM-5 DECISION / EXECUTION QUALITY
+ADAPTATION / REVALIDATION
+= Cross-Temporal Research Philosophy
 
-Research Integrity / Methodology
-= cross-cutting across all missions
+Repeated Profit
+!= CORE
 
-Research Candidate Source
-!= Research Mission
+CORE
+!= Universal
+!= Permanent
+!= Always Applicable
 
-One Candidate
-may generate multiple Research Questions / Missions.
+Rare / Volatile / Large Move / Large Potential Profit / Unknown
+!= Opportunity
 
-Research Mission
-!= Intake Disposition
-!= Priority
-!= Validation Method
-!= Research Result.
+Opportunity Research Result
+!= Opportunity Mode Permission
+!= Trade Permission
+!= Capital Permission
 
-Validated Research Result
-!= Knowledge
-!= Production Authority.
+Edge Character may remain UNRESOLVED.
 
-Publication / Business demand
-does not own Research Truth.
+Unexpected Outcome
+!= Edge Decay
 
-AI Output
-!= Research Evidence
-!= Validation Result
-!= Production Authority.
+Regime / Applicability Mismatch
+!= Knowledge Failure
 
-SECTION 5 DETAIL DEFERRED:
-CORE EDGE / OPPORTUNITY / Adaptation detailed research philosophy
-→ Section 6 Research Category Philosophy
+Edge Decay
+!= Structural Break
 
-Research Intake / Mission Binding / Routing / Prioritization details
-→ later 03_RESEARCH Reconciliation
+Temporary Shock
+!= Structural Break
 
-Publication detailed mission
-→ Section 11
+Adaptation Trigger
+!= Adaptation Conclusion
 
-AI / Human / Production Authority details
-→ Section 12
+CORE / OPPORTUNITY
+!= Knowledge Lifecycle
+!= Current Applicability
+
+Later failure / decay must not erase historical Research validity.
+
+SECTION 6 DETAIL DEFERRED:
+CORE / Opportunity qualification formula
+→ later 03_RESEARCH Reconciliation / Detailed Research Design
+
+Knowledge Lifecycle / Current Applicability
+→ 04_KNOWLEDGE_APPLICABILITY Reconciliation
+
+Capital / Risk treatment
+→ Section 7 Capital / Risk Philosophy and later detailed design
 
 PROJECT SEQUENCING:
 00_AI/TEMP_CHARTER_RECONCILIATION_PLAN.md remains active.
+TEMP plan numbering repaired so Section 6 Research Category Philosophy exists explicitly and later sections are shifted correctly.
 
 CURRENT FORMAL PROJECT FOCUS:
-6. Research Category Philosophy
+7. Capital / Risk Philosophy
 
 CURRENT NAVIGATION:
-AI_CONTEXT synchronized to Section 6 focus.
-TEMP_CHARTER_RECONCILIATION_PLAN synchronized to Section 6 focus.
+AI_CONTEXT synchronized to Section 7 focus.
+TEMP_CHARTER_RECONCILIATION_PLAN synchronized to Section 7 focus.
 
 UNCHANGED BY THIS CHECKPOINT:
 00_HUMAN/HUMAN_MAP.md
@@ -125,9 +129,9 @@ UNCHANGED BY THIS CHECKPOINT:
 04_KNOWLEDGE_APPLICABILITY
 
 NEXT:
-1. Re-read PROJECT_CHARTER Sections 1–5 as needed.
-2. Design PROJECT_CHARTER Section 6 — Research Category Philosophy.
-3. Focus Section 6 on CORE EDGE / ADAPTATION / OPPORTUNITY detailed research philosophy without taking Section 7 Capital / Risk responsibility.
+1. Re-read PROJECT_CHARTER Sections 1–6 as needed.
+2. Design PROJECT_CHARTER Section 7 — Capital / Risk Philosophy.
+3. Preserve Section 4 Hard Survival Boundary while defining how CORE / OPPORTUNITY Research Meaning may inform Risk Posture without granting automatic Capital Permission.
 4. Do not formally adopt R3 into 02_ARCHITECTURE until Charter Reconciliation sequence permits it.
 
 Git Write Permission Reminder:
