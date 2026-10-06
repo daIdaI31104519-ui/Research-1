@@ -1,4 +1,4 @@
-# 市場理解OS — AI_CONTEXT v0.1.15
+# 市場理解OS — AI_CONTEXT v0.1.16
 
 **Document Role:** AI Current-State Index / Navigation Map  
 **Status:** REVIEWED / WORKING BASELINE  
@@ -100,8 +100,12 @@ Section 7:
 Capital / Risk Philosophy
 = DRAFT / LEADING CANDIDATE 保存済み
 
+Section 8:
+Knowledge / Data Asset Philosophy
+= DRAFT / LEADING CANDIDATE 保存済み
+
 現在焦点:
-8. Knowledge / Data Asset Philosophy
+9. Independent Data / Metric Extensibility
 ```
 
 `01_EXTERNAL_DATA`、`02_MARKET_UNDERSTANDING`、`03_RESEARCH`、`04_KNOWLEDGE_APPLICABILITY` はWorking Baselineとして保存済み。
@@ -144,8 +148,9 @@ Current State:
 - Section 5 Research Mission = 保存済み
 - Section 6 Research Category Philosophy = 保存済み
 - Section 7 Capital / Risk Philosophy = 保存済み
-- Section 8以降 = 未設計
-Current Focus: 8. Knowledge / Data Asset Philosophy
+- Section 8 Knowledge / Data Asset Philosophy = 保存済み
+- Section 9以降 = 未設計
+Current Focus: 9. Independent Data / Metric Extensibility
 ```
 
 Project Missionの現在本命方向には、Crypto First、選択的Research、Fast Adaptation / Research Adaptation、Research Note / Research Asset、長期生存と正の期待値、人間向けResearch Publicationが含まれる。
@@ -162,15 +167,17 @@ Research Category Philosophyの現在本命方向は、CORE EDGE / OPPORTUNITY�
 
 Capital / Risk Philosophyの現在本命方向は、Hard Survival Boundaryの内側でRisk CapacityをCapital残高だけではなくLiquidity・Exposure・Venue・Operational Control・Recoverability・Material Unknown等を含む多面的かつScope-sensitiveな現在能力として扱い、Risk Capacity / Risk Budget / Risk Posture / Risk Envelope / Capital Permissionを分離することを中心とする。CORE / OPPORTUNITYはEdge CharacterとRisk Postureを分離し、Risk PostureはGlobal Switchや単一Risk倍率にせず、Shared Risk Capacityの制約下でScope-boundに扱う。Capital Permissionはcurrent-use validなTrade Thesisの下流に置き、Decision / Economic Truthを上書きせず、Execution Permissionとも分離する。Capacity ContractionはKnowledge / Edge FailureやBlind Forced Liquidationを自動的に意味せず、Recoveryは壊れたCapacity Dimensionに対応するEvidenceで確認し、旧Budget / Permission / Opportunityを自動復活させない。
 
+Knowledge / Data Asset Philosophyの現在本命方向は、Semantic / Historical TruthをOriginal Domainに残したまま、将来のResearch・Revalidation・Explanation・Audit・Failure Learningに必要なIdentity・Meaning・History・Material Dependency・Required FidelityをPreservation Requirementとして守り、Current BestとPast Used、Known NowとKnown Thenを分離することを中心とする。Technology / Physical Representationは交換可能とし、Preservation Equivalenceを満たしても自動Destruction Permissionとはせず、Age / Cost / No Current UseだけでDispositionを正当化しない。RETIRED != DELETE、SUPERSEDED != ERASED、Requirement Unsatisfied != Requirement Endedを維持する。
+
 重要:
 
 ```text
-Section 1〜6 保存済み
+Section 1〜8 保存済み
 ≠
 PROJECT_CHARTER Working Baseline
 ```
 
-Section 8以降を設計し、PROJECT_CHARTER全体をCross Checkするまでは、Charter全体を確定扱いしない。
+Section 9以降を設計し、PROJECT_CHARTER全体をCross Checkするまでは、Charter全体を確定扱いしない。
 
 ## 3.3 HUMAN MAP
 
@@ -187,7 +194,7 @@ Canonicalではないが、現在の市場理解OSのHuman思想を確認する�
 
 ```text
 Path: 00_AI/TEMP_CHARTER_RECONCILIATION_PLAN.md
-Version: v0.5
+Version: v0.6
 Status: TEMPORARY / ACTIVE UNTIL RECONCILIATION COMPLETE
 Role: PROJECT_CHARTER導入中の作業順・影響範囲・Checkpoint・復帰条件を固定する一時ナビ
 ```
@@ -504,7 +511,8 @@ Section 4 Survival / Profit Priority = DRAFT / LEADING CANDIDATE 保存済み
 Section 5 Research Mission = DRAFT / LEADING CANDIDATE 保存済み
 Section 6 Research Category Philosophy = DRAFT / LEADING CANDIDATE 保存済み
 Section 7 Capital / Risk Philosophy = DRAFT / LEADING CANDIDATE 保存済み
-現在: 8. Knowledge / Data Asset Philosophy
+Section 8 Knowledge / Data Asset Philosophy = DRAFT / LEADING CANDIDATE 保存済み
+現在: 9. Independent Data / Metric Extensibility
 
 NEXT-002
 PROJECT_CHARTER全体をCross Checkし、問題が軽微ならWorking Baseline候補として保存
@@ -698,6 +706,6 @@ GPTはGit・AI_WORKFLOW・AI_CONTEXT・必要ならAI_HANDOFFを使って設計�
 
 ---
 
-# AI_CONTEXT v0.1.15 一文定義
+# AI_CONTEXT v0.1.16 一文定義
 
 > **AI_CONTEXTとは、市場理解OSの設計内容そのものや直前Conversationを複製する文書ではなく、GPTが現在Phase・Current Task・主要Working Baseline・重要Pending・Next Action・参照先を短時間で把握し、Gitという長期作業空間の中から現在Taskに必要な正しい設計情報へ移動するための軽量なAI専用Project Current-State Mapである。**
