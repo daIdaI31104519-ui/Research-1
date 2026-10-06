@@ -3,7 +3,7 @@
 **Document Role:** Project Constitution / Top-Level Mission  
 **Status:** DRAFT / LEADING CANDIDATE  
 **Purpose:** 市場理解OSが何のために存在し、何を優先し、どの方向へ育てるかを定義する最上位方針文書。  
-**Current Scope:** Section 1 `Project Mission`、Section 2 `Success Definition`、Section 3 `What Not To Maximize`、Section 4 `Survival / Profit Priority`、Section 5 `Research Mission`、Section 6 `Research Category Philosophy`、Section 7 `Capital / Risk Philosophy` を設計済み。Section 8以降は未設計であり、現時点では固定しない。
+**Current Scope:** Section 1 `Project Mission`、Section 2 `Success Definition`、Section 3 `What Not To Maximize`、Section 4 `Survival / Profit Priority`、Section 5 `Research Mission`、Section 6 `Research Category Philosophy`、Section 7 `Capital / Risk Philosophy`、Section 8 `Knowledge / Data Asset Philosophy` を設計済み。Section 9以降は未設計であり、現時点では固定しない。
 
 ---
 
@@ -4473,18 +4473,820 @@ CR-16 Risk Capacity Recovery requires evidence relevant to the failed Capacity d
 
 ---
 
+# 8. Knowledge / Data Asset Philosophy
+
+## 8.1 このSectionの役割
+
+Section 1では、市場理解OSがResearch Note・Evidence・Research Result・Failure・Knowledge・Decision History等を再利用可能なResearch Assetとして蓄積しながら、すべてのRaw Dataを永久保存するのではなく、将来の再検証・再現・説明に必要なEvidence・Context・Version・Historyを保持する方向を定義した。
+
+Section 8では、その上位方針をKnowledge / Data Assetへ落とし、
+
+> **将来のResearch・Revalidation・Explanation・Audit・Failure Learningに必要なIdentity・Meaning・History・Material Dependency・Required Fidelityを失わせず、同時に全Data・全History・全Physical Representationの永久保存も要求しないための長期保存哲学を定義する。**
+
+とする。
+
+市場理解OSは、
+
+~~~text
+保存量が多い
+=
+Knowledge / Research能力が高い
+~~~
+
+とは考えない。
+
+同様に、
+
+~~~text
+最新版だけ残す
+=
+十分なKnowledge管理
+~~~
+
+とも考えない。
+
+基本方向は、
+
+~~~text
+Preserve what must remain understandable and reusable.
+
+Do not preserve every physical representation forever.
+~~~
+
+とする。
+
+---
+
+## 8.2 Semantic OwnershipとResearch Asset Boundary
+
+ArtifactのSemantic IdentityおよびHistorical Factは、それを生成・管理するOriginal Domainが所有する。
+
+例えば、
+
+~~~text
+Raw Observation
+Derived Feature
+Research Result
+Knowledge Version
+Decision / Trade Thesis
+Execution Outcome
+~~~
+
+等の身分を、Section 8がPreservation上の都合によって別のSemantic Objectへ再定義しない。
+
+したがって、
+
+~~~text
+Research Asset designation
+!= Semantic Object Type
+~~~
+
+とする。
+
+Research Asset は、
+
+> **将来のResearch・Revalidation・Explanation・Decision Review・Failure Learning等へ再利用価値を持つArtifact・Context・History・Relationshipを横断的に捉えるための上位概念**
+
+として扱う。
+
+Evidenceについても、Evidence Channel・Source・Role・Time・Version等のResearch上の意味論はResearch Domainが所有する。
+
+Section 8は、それらがMaterialに利用された場合に生じるPreservation Requirementを扱う。
+
+---
+
+## 8.3 PreservationとValidity / Applicability / Authorityを分離する
+
+市場理解OSでは、
+
+~~~text
+Stored
+!= Valid
+!= Applicable
+!= Authorized
+~~~
+
+とする。
+
+Artifactが保存されていることは、
+
+~~~text
+Research上正しい
+Knowledgeとして有効
+Current MarketでApplicable
+Decisionで利用可能
+Trade可能
+Risk / Capital許可済み
+~~~
+
+であることを自動的には意味しない。
+
+同様に、
+
+~~~text
+RETIRED
+!= DELETE
+
+SUPERSEDED
+!= ERASED
+
+NOT_APPLICABLE
+!= RETIRED
+~~~
+
+とする。
+
+Lifecycle・Validity・Applicability・Decision / Production Authorityと、Preservation Requirement / Retention判断を混同しない。
+
+---
+
+## 8.4 Preservation Obligation
+
+Preservation Obligationとは、
+
+> **ArtifactまたはそのMaterialなContextについて、削除・圧縮・Migration・Replacement・Correction等によって、将来必要なResearch・Revalidation・Explanation・Audit・Failure Learning能力をMaterialに破壊してはならないという保存上の義務**
+
+である。
+
+~~~text
+Preservation Obligation
+!= Retention期間
+!= Storage場所
+!= Backup数
+!= File Format
+!= DB Schema
+~~~
+
+とする。
+
+また、
+
+~~~text
+Assetとして価値がある
+=
+永久に同じPhysical Dataを保持する
+~~~
+
+とも限らない。
+
+Preservationの目的は、
+
+> **同じPhysical Bytesを永久に残すことではなく、必要なMeaning・History・Relationship・Fidelityを失わせないこと**
+
+とする。
+
+---
+
+## 8.5 Material Dependency
+
+Preservation Requirementを判断する際は、Material Dependencyを考慮する。
+
+Material Dependencyとは、
+
+> **あるArtifact、Research Result、Knowledge Version、Decision等について、そのDependencyが失われたり変更された場合に、Meaning・Reproducibility・Historical Interpretation・Explanation・Auditability等へMaterialな影響を与える依存関係**
+
+をいう。
+
+ただし、
+
+~~~text
+Material Dependency
+!= Every Reference
+!= Operational Dependencyそのもの
+!= Evidence Roleそのもの
+!= Version Lineageそのもの
+~~~
+
+とする。
+
+また、
+
+~~~text
+Material Dependency
+→ 全Upstream Ancestorを永久Full Retention
+~~~
+
+とはしない。
+
+必要なのは、Materialな依存関係を将来正しく理解・追跡するためのPreservationであり、Dependency Chain全体の無制限Retentionではない。
+
+---
+
+## 8.6 Preservation Requirement
+
+Preservation Requirementとは、
+
+> **あるArtifactまたはContextについて、将来必要なPreservation Capabilityを維持するために、何を失ってはいけないか**
+
+を表す。
+
+Requirementを一つの万能Scoreへ潰さない。
+
+対象に応じて、例えば、
+
+~~~text
+Identity Continuity
+Semantic Interpretability
+Integrity
+Retrievability
+Sufficient Provenance
+Historical State Distinguishability
+Temporal / As-Of Interpretability
+Material Dependency Reference Continuity
+Required Preservation Fidelity
+~~~
+
+等を必要な範囲で組み合わせる。
+
+全Artifactへ同一Requirementを要求しない。
+
+Required Preservation Fidelityも、
+
+~~~text
+Exact Content
+Exact Historical State
+Method Reproduction
+Result Verification
+Historical Reconstruction
+Explanation
+~~~
+
+等のどこまで必要かをContextごとに判断する。
+
+---
+
+## 8.7 Preservation AssessmentとReassessment
+
+Preservation Assessmentは、
+
+> **Original Domainが所有する事実、Material / Historical Reliance、Projectとして維持すべきCapability、Replaceability / Reconstructability、Hard Constraint、Material Unknown等から、そのContextでApplicableなPreservation Requirementを導出する保存上の解釈**
+
+とする。
+
+Preservation Assessment自身は、
+
+~~~text
+Research Truth
+Knowledge Truth
+Applicability
+Decision Authority
+Risk Authority
+~~~
+
+を生成・変更しない。
+
+必要なFuture Capabilityは、
+
+~~~text
+Project Charterで要求される長期Capability
++
+Original DomainがMaterialに必要とするCapability
+~~~
+
+を基礎とする。
+
+単に、
+
+~~~text
+いつか役に立つかもしれない
+~~~
+
+という曖昧な可能性だけで、無制限Retentionを正当化しない。
+
+Preservation Requirementは一度決めて永久固定するものではない。
+
+~~~text
+Material Dependency
+Historical Reliance
+Research利用
+Replacement
+Revalidation
+Hard Constraint
+~~~
+
+等の変化に応じてReassessment可能とする。
+
+ただし、
+
+~~~text
+古い
+高コスト
+現在使っていない
+~~~
+
+という理由だけでRequirementを低下させない。
+
+---
+
+## 8.8 Preservation Equivalence
+
+市場理解OSは長期運用において、
+
+~~~text
+Migration
+Replacement
+Reacquisition
+Compression
+Historical Representation変更
+~~~
+
+を許容する。
+
+別Representationが、
+
+> **Original Artifactに対するApplicable Preservation RequirementをRequired Fidelityで維持できる場合**
+
+Preservation上の代替候補となり得る。
+
+したがって、
+
+~~~text
+Preservation Equivalence
+!= Physical Equality
+~~~
+
+とする。
+
+File Format・Storage Technology・Provider等が変化しても、
+
+~~~text
+Identity
+Meaning
+Required Precision
+Historical / Temporal Context
+Material Reference
+Integrity
+Retrievability
+~~~
+
+等のApplicable Requirementを満たせるなら、Preservationを維持できる。
+
+---
+
+## 8.9 Historical SubstitutionとIrreversible Destruction
+
+Replacement・Migration・Reacquisitionによって、過去をSilentに書き換えてはならない。
+
+特に、
+
+~~~text
+Reacquirable
+!= Historically Identical
+
+Current Best Historical Data
+!= Past-used Historical Data
+
+Replacement
+!= Historical Rewrite
+~~~
+
+とする。
+
+同じSource・Symbol・期間から再取得できても、Correction・Backfill・Cleaning・Schema変更等によって、過去に実際に利用したDataと同一とは限らない。
+
+また、
+
+~~~text
+Preservation Equivalence
+!= Automatic Destruction Permission
+~~~
+
+とする。
+
+Original Artifactへの不可逆な破棄は、少なくとも、
+
+~~~text
+Applicable Preservation Requirement
+Required Fidelity
+Historical Identity / Reliance
+Material Dependency Reference Continuity
+Integrity / Retrievability
+Material Unknown
+Original Physical FormそのものへのRequirement
+~~~
+
+等を確認した上で扱う。
+
+具体的なApproval Workflow、Gate、State、Enumは後続設計で定義する。
+
+---
+
+## 8.10 Historical Truth
+
+市場理解OSはCurrent Stateを更新し続ける。
+
+しかし、その更新によってMaterialなPast TruthをSilentに書き換えてはならない。
+
+基本原則は、
+
+~~~text
+Current Truth
+!= Historical Truth
+
+Current Best
+!= Past Used
+
+Known Now
+!= Known Then
+
+Historical Fact
+!= Later Interpretation
+~~~
+
+とする。
+
+DatasetがCorrectionされ、KnowledgeがSUPERSEDED / RETIREDされ、後のCausal Researchでより良い説明が得られても、
+
+> **過去に実際に何が存在し、何が使用され、何がKnown / Unknownであり、どのStateにあったか**
+
+は必要な範囲で区別可能にする。
+
+Later InterpretationはHistorical Factを補強・訂正・再評価できるが、
+
+~~~text
+当時も現在と同じことを知っていた
+~~~
+
+ことにはしない。
+
+---
+
+## 8.11 Material Historical Preservation
+
+Historical Preservationは、
+
+~~~text
+全Log
+全Field変更
+全Calculation
+全Intermediate State
+~~~
+
+を永久保存することではない。
+
+対象Historyの喪失が、
+
+~~~text
+Research
+Revalidation
+Decision Review
+Failure Learning
+Material Dependency
+Historical Meaning
+~~~
+
+のMaterialな誤解につながる場合、そのHistoryをPreservation対象とする。
+
+したがって、
+
+~~~text
+Historical Preservation
+!= Exhaustive Event Sourcing
+~~~
+
+とする。
+
+Detailed Historyは、Applicable Preservation RequirementとRequired Historical Fidelityを維持できる場合、圧縮・縮約・別Representationへの変更を許容する。
+
+ただし、Materialな、
+
+~~~text
+Historical Identity
+Historical State
+Historical Reliance
+Temporal Context
+Known / Unknown distinction
+~~~
+
+等を失う縮約はPreservation Successとはみなさない。
+
+---
+
+## 8.12 Physical DeletionとHistorical Continuity
+
+~~~text
+Physical Deletion
+!= Historical Non-Existence
+~~~
+
+とする。
+
+Material ArtifactのPhysical Contentが正当に削除された場合でも、Applicable Preservation Requirementに応じて、
+
+~~~text
+Artifactが存在したこと
+Artifact Identity / Meaning
+Material Historical Role
+Material Reliance
+Correction / Replacement Relation
+Known Limitation
+~~~
+
+等を残し得る。
+
+Physical Representationを削除したことを理由に、
+
+~~~text
+最初から存在しなかった
+~~~
+
+状態へ書き換えない。
+
+---
+
+## 8.13 Retention / Disposal Philosophy
+
+市場理解OSは、
+
+~~~text
+一度価値があった
+→ 永久保存
+~~~
+
+とはしない。
+
+RetentionはApplicable Preservation Requirementに基づく。
+
+Requirementが維持される範囲で、
+
+~~~text
+Detailed Content
+↓
+Reduced / Compressed Representation
+↓
+Historical Identity / Material Relation
+~~~
+
+等へ縮小できる。
+
+一方、
+
+~~~text
+Age
+Storage Cost
+No Current Use
+RETIRED
+SUPERSEDED
+~~~
+
+だけではRetention終了理由としない。
+
+Costは、
+
+~~~text
+何を失ってよいか
+~~~
+
+を単独では決めず、
+
+~~~text
+どのようにRequirementをより効率的に満たすか
+~~~
+
+を検討する理由として扱う。
+
+---
+
+## 8.14 Requirement ReductionとRetention Reduction
+
+以下を分離する。
+
+### Requirement Reduction
+
+必要なPreservation Capability自体が正当に低下すること。
+
+例:
+
+~~~text
+Exact Reproduction Required
+↓
+Historical Explanationで十分
+~~~
+
+### Retention Reduction
+
+必要なPreservation Capabilityは維持したまま、より小さい・効率的なRepresentationで満たすこと。
+
+例:
+
+~~~text
+Raw JSON
+↓
+Preservation-equivalent Representation
+~~~
+
+Storage Costや管理都合を理由に、
+
+~~~text
+必要だったCapabilityそのものを
+不要だったことにする
+~~~
+
+ことはしない。
+
+---
+
+## 8.15 Remaining Historical ObligationとNo Remaining Material Preservation Obligation
+
+Detailed ContentへのRetention Requirementが終了しても、
+
+~~~text
+Artifactが存在した
+Researchが利用した
+DecisionがMaterialに依存した
+Correction / Replacementされた
+~~~
+
+等のHistorical Identity / Relationが将来必要なら、Preservation Obligationは終了していない。
+
+したがって、
+
+~~~text
+Historical Identity / Relation Only
+!= No Preservation Obligation
+~~~
+
+とする。
+
+No Remaining Material Preservation Obligation とみなせるのは、
+
+> **現在合理的に把握可能な範囲で、そのArtifactまたはHistorical Informationについて、MaterialなIdentity・Meaning・Historical State・Dependency・Provenance・Research・Revalidation・Explanation・Audit・Failure Learning・Original Physical Formその他のPreservation Requirementが残っておらず、未解決のMaterial Unknownまたは保持を要求するHard Constraintも存在しない場合**
+
+とする。
+
+また、
+
+~~~text
+Requirement Unsatisfied
+!= Requirement Ended
+~~~
+
+を維持する。
+
+Artifactを失ったこと、または保持不能になったことを理由に、Preservation Requirement自体が存在しなかったことにはしない。
+
+---
+
+## 8.16 Hard Constraints
+
+市場理解OSは、Legal・Licensing・Contract・Regulatory等のHard Constraintを無視しない。
+
+Hard Constraintには、
+
+~~~text
+Retentionを要求するConstraint
+~~~
+
+と、
+
+~~~text
+Disposalを要求するConstraint
+~~~
+
+の両方があり得る。
+
+ConstraintによってFull Preservationが不可能な場合でも、可能な範囲で、
+
+~~~text
+Provenance
+Derived Result
+Research Context
+Material Dependency
+Historical Identity
+Known Limitation
+~~~
+
+等を保持する。
+
+特に、
+
+~~~text
+Forced Disposal
+!= Preservation Obligation End
+~~~
+
+とする。
+
+必要だった情報をConstraintによって保持できなかった場合、そのLimitationを隠さない。
+
+---
+
+## 8.17 Technology Replaceability
+
+市場理解OSは長期運用の中で、
+
+~~~text
+Data Source
+API
+DB / Storage
+File Format
+AI Model
+Infrastructure
+~~~
+
+等を変更可能とする。
+
+TechnologyやPhysical Representationを永久固定しない。
+
+基本原則は、
+
+> **Technologyは交換可能とする。ただし、Applicable Preservation Requirementが要求するMeaning・History・Material Reliance・Required Fidelityを破壊しない。**
+
+とする。
+
+---
+
+## 8.18 このSectionで決めないこと
+
+Section 8ではKnowledge / Data Assetの長期保存哲学と上位責任境界を定義し、具体的なRetention Policy・Contract・Implementationは固定しない。
+
+以下は後続Detailed Design / Contract / Implementationで扱う。
+
+~~~text
+具体Retention期間
+
+Storage / DB / File Format
+
+Archive / Compression / Backup / Replication
+
+Delete / Purge / Migration Workflow
+
+具体Schema / Contract / Enum / State Machine
+
+Preservation / Materiality Score
+
+具体Legal / Regulatory保持期間
+
+Python / Runtime Implementation
+~~~
+
+Section 8は、
+
+> **何をなぜ失ってはいけないか、Representationをどの条件で変更できるか、そしてRetentionをどの条件で縮小・終了できるか**
+
+という上位哲学を固定する。
+
+---
+
+## 8.19 Core Invariants
+
+~~~text
+KA-01 Research Asset designation != Semantic Object Type.
+
+KA-02 Semantic / Historical Truth remains owned by the original domain.
+
+KA-03 Stored != Valid != Applicable != Authorized.
+
+KA-04 RETIRED != DELETE; SUPERSEDED != ERASED.
+
+KA-05 Current Best != Past Used.
+
+KA-06 Known Now != Known Then.
+
+KA-07 Historical Fact != Later Interpretation.
+
+KA-08 Physical Existence != Preservation Success.
+
+KA-09 Physical Deletion != Historical Non-Existence.
+
+KA-10 Reacquirable != Historically Identical.
+
+KA-11 Material Dependency != Full Transitive Retention.
+
+KA-12 Preservation Equivalence != Destruction Permission.
+
+KA-13 Equivalence Satisfaction != Preservation Obligation End.
+
+KA-14 Unsatisfied Requirement != Requirement Ended.
+
+KA-15 Age / Cost / No Current Use alone do not authorize disposal.
+
+KA-16 Technology may change; required meaning and history must survive.
+~~~
+
+---
+
+# Knowledge / Data Asset Philosophy — 一文定義
+
+> **市場理解OSのKnowledge / Data Asset Philosophyは、Data・Research Result・Knowledge・Failure・Decision / Outcome History等のSemantic / Historical AuthorityをOriginal Domainに残したまま、将来のResearch・Revalidation・Explanation・Audit・Failure Learningに必要なIdentity・Meaning・History・Material Dependency・Required Fidelityを失わせず、Current TruthによってPast Truthを書き換えず、同時に全DataやPhysical Representationの永久保存を要求せず、Applicable Preservation Requirementが維持される範囲でMigration・Replacement・Compression・Retention Reduction・Disposalを可能にする長期保存哲学である。**
+
+簡潔には、
+
+> **必要な意味と研究史は失わない。しかし、同じPhysical Dataを永久に抱え続けることもしない。**
+
+---
+
 # 未設計
 
 以下は今後、一項目ずつ設計する。
 
-```text
-8. Knowledge / Data Asset Philosophy
+~~~text
 9. Independent Data / Metric Extensibility
 10. Market Scope / Future Expansion Governance
 11. Research Output / Publication Mission
 12. AI / Human / Production Authority
 13. Changeable / Non-Changeable Principles
 14. Charter Change Governance
-```
+~~~
 
-これらは現時点では `TBD` であり、Section 1〜7から自動的に詳細内容を確定しない。
+これらは現時点では TBD であり、Section 1〜8から自動的に詳細内容を確定しない。
