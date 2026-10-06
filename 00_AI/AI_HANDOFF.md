@@ -13,16 +13,16 @@ State:
 ACTIVE
 
 Last Updated:
-2026-10-05
+2026-10-06
 
 Conversation Focus:
-PROJECT_CHARTER continuation after R3 Working Design checkpoint.
+PROJECT_CHARTER continuation after Section 8 Knowledge / Data Asset Philosophy save.
 
 WORKFLOW:
 AI_WORKFLOW v0.5.3 Precision-First → Precision Review → Human View workflow is active.
 
 LATEST SAVED WORKING CHECKPOINT:
-PROJECT_CHARTER Section 7 — Capital / Risk Philosophy
+PROJECT_CHARTER Section 8 — Knowledge / Data Asset Philosophy
 
 R3 WORKING CHECKPOINT:
 Checkpoint 022 — R3 Full Destruction / Execution Integrity / Formal Adoption Readiness
@@ -58,105 +58,60 @@ Section 6 — Research Category Philosophy
 Section 7 — Capital / Risk Philosophy
 = DRAFT / LEADING CANDIDATE SAVED
 
-SECTION 7 CORE:
-Hard Survival Boundary
-!= Risk Capacity Profile
+Section 8 — Knowledge / Data Asset Philosophy
+= DRAFT / LEADING CANDIDATE SAVED
 
-Risk Capacity Profile:
-- multidimensional
-- scope-sensitive
-- not Capital Balance
-- not one universal score
+SECTION 8 CORE:
+- Semantic / Historical Truth remains owned by the original domain.
+- Research Asset designation != Semantic Object Type.
+- Stored != Valid != Applicable != Authorized.
+- RETIRED != DELETE; SUPERSEDED != ERASED.
+- Preservation Requirement protects future Research / Revalidation / Explanation / Audit / Failure Learning capability.
+- Material Dependency != Full Transitive Retention.
+- Preservation Equivalence != Automatic Destruction Permission.
+- Current Best != Past Used.
+- Known Now != Known Then.
+- Historical Fact != Later Interpretation.
+- Physical Deletion != Historical Non-Existence.
+- Requirement Unsatisfied != Requirement Ended.
+- Age / Cost / No Current Use alone do not authorize disposal.
+- Technology / Representation may change while required meaning and history survive.
 
-Risk Capacity
-!= Risk Budget
-
-Risk Budget
-!= Risk Envelope
-
-Economic Edge Character
-!= Risk Posture
-
-CORE EDGE
-!= CORE RISK POSTURE
-
-OPPORTUNITY
-!= OPPORTUNITY RISK POSTURE
-
-OPPORTUNITY RISK POSTURE
-!= Aggressive Mode
-
-Risk Posture:
-- scope-bound
-- not one global switch
-- cannot create Risk Capacity
-- cannot rewrite Research / Knowledge / Applicability / Economic truth
-- cannot convert UNKNOWN into SAFE
-- cannot bypass Hard Survival Boundary
-- cannot erase existing Exposure / consumed Risk history
-
-Different Positions / Postures
-!= Independent Risk
-
-Aggregate / Common-Cause Risk remains visible.
-
-Capital Permission:
-- downstream of a current-use valid Trade Thesis
-- time / scope / exposure specific
-- does not rewrite Decision / Economic truth
-- != Execution Permission
-
-Risk Capacity Contraction
-!= Knowledge / Edge / Research Failure
-!= automatic Forced Liquidation
-
-Recovery:
-- requires evidence relevant to the failed Capacity dimension
-- != automatic Budget Restoration
-- != old Capital Permission Revival
-- != Opportunity Recovery
-
-SECTION 7 DETAIL DEFERRED:
-- Single Trade Risk %
-- Maximum Drawdown %
-- Daily / Weekly Loss Limit
-- Leverage / Exposure / Reserve numbers
-- Position Size Formula
-- VaR / CVaR / Correlation / Portfolio Risk Formula
-- Risk Capacity exact dimensions / score / aggregation formula
-- Capacity contraction / recovery thresholds
-- Risk Budget allocation / reallocation / borrowing rules
-- CORE / OPPORTUNITY Risk Posture entry / exit thresholds
-- Mode-specific Risk Envelope
-- Capital Permission TTL / Contract
-- Runtime State Machine / DB / Python implementation
+SECTION 8 DETAIL DEFERRED:
+- Concrete retention periods
+- Storage / DB / file format
+- Archive / compression / backup / replication
+- Delete / purge / migration workflow
+- Schema / contract / enum / state machine
+- Preservation / materiality score
+- Concrete legal / regulatory retention periods
+- Python / runtime implementation
 
 PROJECT SEQUENCING:
-00_AI/TEMP_CHARTER_RECONCILIATION_PLAN.md remains active.
+00_AI/TEMP_CHARTER_RECONCILIATION_PLAN.md v0.6 remains active.
 
 CURRENT FORMAL PROJECT FOCUS:
-8. Knowledge / Data Asset Philosophy
+9. Independent Data / Metric Extensibility
 
 CURRENT NAVIGATION:
-AI_CONTEXT synchronized to Section 8 focus.
-TEMP_CHARTER_RECONCILIATION_PLAN synchronized to Section 8 focus.
+AI_CONTEXT v0.1.16 synchronized to Section 9 focus.
+TEMP_CHARTER_RECONCILIATION_PLAN v0.6 synchronized to Section 9 focus.
 
 UNCHANGED BY THIS CHECKPOINT:
 00_HUMAN/HUMAN_MAP.md
 02_ARCHITECTURE/
-03_RESEARCH
-04_KNOWLEDGE_APPLICABILITY
 R3 Formal Current Architecture
 
 NEXT:
-1. Re-read PROJECT_CHARTER Sections 1–7 as needed.
-2. Design PROJECT_CHARTER Section 8 — Knowledge / Data Asset Philosophy.
-3. Preserve Research Result / Knowledge / Applicability / Decision / Risk authority boundaries while defining what should become a long-lived Knowledge / Data Asset.
+1. Design PROJECT_CHARTER Section 9 — Independent Data / Metric Extensibility.
+2. Preserve Section 8 ownership / version / lineage / preservation boundaries while defining replaceable custom Data / Derived Metric / Research Output extension philosophy.
+3. Do not fix Plugin Class / Registry / JSON Schema / Python Interface at Charter level.
 4. Do not formally adopt R3 into 02_ARCHITECTURE until Charter Reconciliation sequence permits it.
 
 Git Write Permission Reminder:
 REQUIRE CURRENT-CHAT USER AUTHORIZATION
 ~~~
+
 ---
 # 1. ROLE
 
