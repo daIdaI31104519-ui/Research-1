@@ -1,4 +1,4 @@
-# TEMP — PROJECT CHARTER RECONCILIATION PLAN v0.6
+# TEMP — PROJECT CHARTER RECONCILIATION PLAN v0.7
 
 **Document Role:** Temporary Design Migration / Navigation Plan  
 **Status:** TEMPORARY / ACTIVE UNTIL RECONCILIATION COMPLETE  
@@ -109,7 +109,7 @@ PROJECT_CHARTER自体を変更する場合は明示的な上位設計変更と�
 6. Core Edge / Adaptation / Opportunityの研究思想
 7. Capital / Risk Philosophy
 8. Knowledge / Dataを長期資産として扱う思想
-9. 独自Data / Derived Metric / Research Outputを追加・交換・Version変更可能にする思想
+9. Extensibility / Replaceable Capability Philosophy
 10. Current Market Scope / Future Expansion
     - Current Scope = 仮想通貨FX + 仮想通貨現物
     - Crypto First
@@ -154,8 +154,11 @@ Section 7 Capital / Risk Philosophy
 Section 8 Knowledge / Data Asset Philosophy
 = DRAFT / LEADING CANDIDATE 保存済み
 
+Section 9 Extensibility / Replaceable Capability Philosophy
+= DRAFT / LEADING CANDIDATE 保存済み
+
 Current Focus
-= 9. Independent Data / Metric Extensibility
+= 10. Market Scope / Future Expansion Governance
 ```
 
 ---
@@ -448,39 +451,34 @@ Age / Cost / No Current UseだけでRetention終了を正当化せず、具体Re
 
 ---
 
-# 9. 独自Data / 独自Metricの方向
+# 9. Extensibility / Replaceable Capability Philosophy
 
-Current Focus。
+DRAFT / LEADING CANDIDATEとして保存済み。
 
-上位思想として、
+中心思想:
 
-> **独自Data・Derived Metric・Research Outputは、Core OS全体を書き直さず、追加・交換・Version変更できる構造を目指す。**
+> **市場理解OSとして守るべきMission・Semantic・Research Integrity・Authority・History / Version・Change / Failure・Survival原則を維持したまま、Data Source・Observation・Derived Feature / Metric・Research Method・Research Output・Market-Specific Capability等を追加・交換・Version変更できる構造を持つ。**
 
-例:
+重要境界:
 
-```text
-Liquidation Pressure Index
-ETF-BTC Misalignment Index
-Leverage Fragility Index
-Whale Divergence Index
-Market DNA Similarity Index
-```
+~~~text
+Core != Extension
+Extension Exists != Scope / Purpose-specific Adoption
+Version Change != Silent Semantic Mutation
+Replaceable != Semantically Identical
+Replacement != Historical Rewrite
+Compatibility != Adoption
+Material Dependency != Material Impact
+Operational Failure != Semantic / Historical Invalidity
+Containment != Information Suppression
+Market-specific Method != Research Integrity Exemption
+Market-specific Extension != Separate OS
+Market-specific Extension Exists != Market Scope Authorized
+~~~
 
-ただしこの段階ではPlugin Class / Registry / JSON Schema / Python Interfaceは固定しない。
+Plugin Class / Registry / JSON Schema / Python Interface / Dependency Graph / Failover実装等はCharterでは固定しない。
 
-後のData Contract / Feature Contract / Python Architectureで、
-
-```text
-Custom Metric Definition
-↓
-Versioned Calculation
-↓
-Standard Output Contract
-↓
-Market Intelligence / Research / Publication
-```
-
-へ落とす。
+Section 9 Full Cross Check / Integrated Final Draft / Human Final Reviewまで完了し、Blocking Issueなし。
 
 ---
 
@@ -497,7 +495,8 @@ CURRENT DRAFT
 = Section 6 Research Category Philosophy保存済み
 = Section 7 Capital / Risk Philosophy保存済み
 = Section 8 Knowledge / Data Asset Philosophy保存済み
-= 現在はSection 9 Independent Data / Metric Extensibilityを設計する
+= Section 9 Extensibility / Replaceable Capability Philosophy保存済み
+= 現在はSection 10 Market Scope / Future Expansion Governanceを設計する
 
 HIGH IMPACT
 00_HUMAN/HUMAN_MAP.md

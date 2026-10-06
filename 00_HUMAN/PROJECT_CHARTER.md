@@ -3,7 +3,7 @@
 **Document Role:** Project Constitution / Top-Level Mission  
 **Status:** DRAFT / LEADING CANDIDATE  
 **Purpose:** 市場理解OSが何のために存在し、何を優先し、どの方向へ育てるかを定義する最上位方針文書。  
-**Current Scope:** Section 1 `Project Mission`、Section 2 `Success Definition`、Section 3 `What Not To Maximize`、Section 4 `Survival / Profit Priority`、Section 5 `Research Mission`、Section 6 `Research Category Philosophy`、Section 7 `Capital / Risk Philosophy`、Section 8 `Knowledge / Data Asset Philosophy` を設計済み。Section 9以降は未設計であり、現時点では固定しない。
+**Current Scope:** Section 1 `Project Mission`、Section 2 `Success Definition`、Section 3 `What Not To Maximize`、Section 4 `Survival / Profit Priority`、Section 5 `Research Mission`、Section 6 `Research Category Philosophy`、Section 7 `Capital / Risk Philosophy`、Section 8 `Knowledge / Data Asset Philosophy`、Section 9 `Extensibility / Replaceable Capability Philosophy` を設計済み。Section 10以降は未設計であり、現時点では固定しない。
 
 ---
 
@@ -5276,12 +5276,1069 @@ KA-16 Technology may change; required meaning and history must survive.
 
 ---
 
+# 9. Extensibility / Replaceable Capability Philosophy
+
+## 9.1 このSectionの役割
+
+市場理解OSは、長期間の運用を前提とする。
+
+その間には、
+
+- Data Sourceの変更
+- Provider / APIの変更
+- 新しいObservationの追加
+- 新しいDerived Feature / Metricの追加
+- Research Methodの改善
+- Research Outputの追加
+- 新市場への拡張
+- Failure・Degradation・Replacement
+- 市場構造そのものの変化
+
+が発生し得る。
+
+したがって、市場理解OSは現在のData・Metric・Provider・Research Method・Technologyを永久固定するSystemにはしない。
+
+一方で、変更しやすさを理由として、
+
+- Semanticを曖昧にする
+- Research Integrityを省略する
+- Authority Boundaryを迂回する
+- Historical Truthを書き換える
+- Failure Impactを隠す
+- 市場ごとに別OSへ分裂する
+
+ことも許さない。
+
+Section 9では、
+
+> **市場理解OSとして守るべき意味・責任・Integrityを維持したまま、変化するCapabilityを追加・交換・Version変更できるための上位Extensibility原則**
+
+を定義する。
+
+具体的なPlugin Class、Registry、Python Interface、DB Schema、JSON Contract、Version Numbering、Failover Implementation等はこのSectionでは固定しない。
+
+---
+
+## 9.2 Extensibilityの正式定義
+
+市場理解OSにおけるExtensibilityとは、
+
+> **Project-level Mission・Semantic Boundary・Authority Boundary・Research Integrity・Historical / Version Principle・Change / Failure Principle・Survival Principleを維持したまま、市場・Data Source・Measurement・Research Need等の変化へ対応するCapabilityを追加・交換・Version変更でき、その変更によるMaterial Impactを必要な範囲へ伝えながら、無関係なCore Responsibility全体の再設計を要求しない能力**
+
+とする。
+
+簡潔には、
+
+> **OSの意味と責任を壊さず、必要な能力だけを後から足し、替え、進化させられること。**
+
+とする。
+
+Extensibilityは、
+
+~~~text
+Extension数を増やすこと
+Plugin数を増やすこと
+Technologyを増やすこと
+Automation率を高めること
+~~~
+
+自体を目的としない。
+
+---
+
+## 9.3 Core / Extension Boundary
+
+### 9.3.1 Core
+
+Section 9におけるCoreとは、
+
+> **対象市場・Data Source・Metric・Research Method等が変化しても、市場理解OS全体として維持すべきProject-level Mission・Semantic Ownership / Boundary・Authority Boundary・Integrity / Survival Invariant・共通Responsibility Principle**
+
+をいう。
+
+Coreは、
+
+~~~text
+重要なもの全て
+広く使われるもの全て
+core/ Folder
+共通Python Class
+現在存在するArchitecture全体
+~~~
+
+を意味しない。
+
+したがって、
+
+~~~text
+Important
+!= Core
+
+Widely Used
+!= Core
+
+Shared Usage
+!= Core
+~~~
+
+とする。
+
+### 9.3.2 Extension
+
+Extensionとは、
+
+> **Coreを維持したまま、特定のMarket・Data・Measurement・Research Need等へ対応するために追加・交換・Version変更できるCapability**
+
+をいう。
+
+Extension候補には、
+
+~~~text
+Data Source
+Observation
+Derived Feature / Metric
+Research Method
+Research Output / Representation
+Market-specific Capability
+~~~
+
+等を含み得る。
+
+ただし、この一覧を閉じたEnumとはしない。
+
+### 9.3.3 Extension Change
+
+Extension Changeとは、
+
+> **Core Semantic・Authority・Integrityを変更せず、Extension Capabilityを局所的に追加・交換・Version変更する変更**
+
+をいう。
+
+### 9.3.4 Core Change Candidate
+
+新Capabilityが既存CoreのSemantic / Authority / Integrity Boundaryでは正しく表現できず、
+
+~~~text
+Project Mission
+Semantic Ownership / Meaning
+Authority Boundary
+Research Integrity
+Survival Invariant
+複数Domain共通のResponsibility
+~~~
+
+そのものを変更する必要がある場合、その変更をExtension内部へ隠さない。
+
+その場合は、
+
+> **Core Change Candidate**
+
+として上位設計へEscalateする。
+
+Section 9自身はCore Changeを最終承認しない。
+
+具体的なChange Governanceは後続Sectionで扱う。
+
+---
+
+## 9.4 Semantic / Authority / Adoption Boundary
+
+Extensionを追加できることと、そのExtensionが何者であり、誰が何を決め、どこで利用されるかは分離する。
+
+### Semantic
+
+Semanticとは、
+
+> **Artifact・Extension・Outputが何であり、何を意味し、どのDomain上の身分として扱われるか**
+
+を表す。
+
+Semantic Identityは、
+
+~~~text
+Validity
+Quality
+Evidence Strength
+Current Applicability
+Authorization
+~~~
+
+とは別である。
+
+### Authority
+
+Authorityとは、
+
+> **特定のResponsibility / Questionについて、その判断を市場理解OS上の正式判断として成立させる責任境界**
+
+をいう。
+
+Authorityは、
+
+> 他DomainのSemanticやResearch Truthを自由に書き換える権利
+
+ではない。
+
+### Adoption
+
+Extension Adoptionとは、
+
+> **特定VersionのExtensionを、そのSemantic Identityを変更せず、既存Domain Authorityを迂回せずに、特定Scope / Purposeにおける正式利用対象として受け入れること**
+
+をいう。
+
+したがって、
+
+~~~text
+Extension Exists
+!= Adopted
+
+Adopted
+!= Validated
+
+Adopted
+!= Semantic Promotion
+
+Adopted
+!= Knowledge Admission
+
+Adopted
+!= Current Knowledge Applicability
+
+Adopted
+!= Production Authority
+
+Adopted
+!= Trade Permission
+
+Adopted
+!= Capital Permission
+~~~
+
+とする。
+
+Adoptionは原則として、
+
+~~~text
+Version
+Scope
+Purpose
+~~~
+
+に依存する。
+
+単独の、
+
+~~~text
+adopted = true
+~~~
+
+だけで全用途を表現することを前提にしない。
+
+また、
+
+> **Extension AdoptionとKnowledge Current Applicabilityを同じ概念にしない。**
+
+Current ApplicabilityはKnowledge / Applicability Domainが所有する。
+
+---
+
+## 9.5 Version / Replacement / Compatibility
+
+市場理解OSはCapabilityを変更・交換できる。
+
+しかし、
+
+> **変更可能であることと、変更前後を同じものとして扱えることは別**
+
+とする。
+
+### 9.5.1 Version
+
+Versionとは、
+
+> **既存Capabilityの基本Semantic Identityを維持した変更について、変更前後のMeaning・Behavior・Dependency・Historical Relianceを必要に応じて区別可能にするIdentity Boundary**
+
+をいう。
+
+Version NumberそのものがMaterialityを決めるわけではない。
+
+~~~text
+v1.0.1
+~~~
+
+であってもMaterialな変更はあり得る。
+
+逆に大きなImplementation変更でも、Downstream MeaningへMaterialでない場合がある。
+
+したがって、
+
+~~~text
+Version Label
+!= Change Materiality
+~~~
+
+とする。
+
+MaterialなMeaning / Behavior変更を、区別不能なままSilentに上書きしてはならない。
+
+### 9.5.2 Version Change
+
+Version Changeとは、
+
+> **既存Capabilityの基本Semantic Identityを維持したEvolution**
+
+をいう。
+
+Semantic Identityそのものが変わる場合は、単純なVersion Changeとして押し込まず、
+
+~~~text
+New Extension Candidate
+Core Change Candidate
+~~~
+
+のどちらが適切か再評価する。
+
+### 9.5.3 Replacement
+
+Replacementとは、
+
+> **あるCapability・Provider・Technology等が担っていた今後の役割を別対象へ移すこと**
+
+をいう。
+
+したがって、
+
+~~~text
+Replaceable
+!= Semantically Identical
+
+Replacement
+!= Historical Rewrite
+
+Replacement
+!= Automatic Adoption Transfer
+~~~
+
+とする。
+
+Provider AからProvider Bへ変更できても、
+
+~~~text
+Timestamp
+Aggregation
+Coverage
+Precision
+Correction
+Latency
+Missing Handling
+~~~
+
+等が同じとは限らない。
+
+### 9.5.4 Compatibility
+
+Compatibilityとは、
+
+> **特定Version / Capabilityと、特定Consumer・Contract・Use Contextとの間で、必要なMeaning・Behavior・Interactionを維持できるかを表すContext-sensitiveな関係**
+
+をいう。
+
+したがって、
+
+~~~text
+Interface Compatible
+!= Semantically Equivalent
+
+Runtime Compatible
+!= Research Equivalent
+
+Compatible
+!= Adopted
+
+Adopted
+!= Universally Compatible
+~~~
+
+とする。
+
+Compatibilityを、
+
+~~~text
+compatible = true
+~~~
+
+という万能Booleanだけで扱うことを前提にしない。
+
+### 9.5.5 VersionとOriginal Domain
+
+Section 9は、
+
+> **Material ChangeをSilentに上書きしない**
+
+という共通Version原則を所有する。
+
+一方で、
+
+~~~text
+Hypothesis Version
+Research Method Version
+Knowledge Version
+その他Domain-specific Version
+~~~
+
+の具体的Meaning・Revalidation Requirementは、Original Domainが所有する。
+
+Section 9が全DomainのVersion Lifecycleを一つへ統合しない。
+
+### 9.5.6 Adoption継承
+
+~~~text
+Adoption of Version N
+!= Automatic Adoption of Version N+1
+~~~
+
+とする。
+
+ただし、すべての変更について完全なゼロからの再評価を必須とも定めない。
+
+変更内容・Compatibility・Material Impact等に応じた評価方法は後続設計で定義する。
+
+### 9.5.7 Fallbackとの境界
+
+Operational Failure時に代替Provider / Capabilityへ一時的にFallbackしても、
+
+~~~text
+Operational Fallback
+!= Automatic Durable Replacement
+~~~
+
+とする。
+
+一時代替と正式Replacement Decisionを混同しない。
+
+---
+
+## 9.6 Historical Truthとの関係
+
+Section 8で定義したHistorical Truthを維持する。
+
+~~~text
+Current Best
+!= Past Used
+
+Known Now
+!= Known Then
+
+Later Recalculation
+!= Past-used Value
+
+Replacement
+!= Historical Rewrite
+~~~
+
+とする。
+
+新Versionを用いて過去Dataを再計算できても、それを過去に実際に使った値として扱わない。
+
+また、
+
+~~~text
+SUPERSEDED
+!= ERASED
+!= Automatically Invalid
+~~~
+
+とする。
+
+具体的Preservation Requirement・Required FidelityはSection 8がOwnerであり、Section 9では再定義しない。
+
+---
+
+## 9.7 Change Localization / Material Impact
+
+Extensibilityは、変更を無関係な領域へ広げないことも含む。
+
+ただし、
+
+> **Change LocalizationはMaterial Impactを隠すことではない。**
+
+### 9.7.1 Change Localization
+
+Change Localizationとは、
+
+> **変更によるMaterial Impactを必要なConsumer / Responsibilityへ伝えながら、Materialに関係しないDomainへ不必要な再設計・Version変更・停止・再検証を拡散させない設計原則**
+
+をいう。
+
+人間向けには、
+
+> **変わった所から、意味が変わる所まで追い、意味が変わらない所で止める。**
+
+とする。
+
+### 9.7.2 Material Impact
+
+Material Impactとは、
+
+> **変更・Failure・Degradation・Replacement等によって、ConsumerのMeaning・Behavior・Result・Reproducibility・Research Interpretation・Decision Quality・Risk / Safety判断等へ無視できない変化・欠損・不確実性を与える影響**
+
+をいう。
+
+Material ImpactはConsumer / Purpose / Contextに依存し得る。
+
+したがって、
+
+~~~text
+Dependency Exists
+!= Material Impact
+~~~
+
+とする。
+
+### 9.7.3 Section 8 Material Dependencyとの境界
+
+Section 8のMaterial Dependencyと、Section 9のMaterial Impactを統合しない。
+
+~~~text
+Section 8
+Material Dependency
+=
+将来のPreservation / History /
+Reproducibility / Explanation / Audit上の依存
+
+Section 9
+Material Impact
+=
+現在のChange / Failureが
+Consumerへ与える影響
+~~~
+
+と分離する。
+
+---
+
+## 9.8 Failure Propagation / Containment
+
+Extension Failureは、
+
+~~~text
+Automatic Core Failure
+~~~
+
+を意味しない。
+
+一方で、
+
+~~~text
+Local Extensionだから無視可能
+~~~
+
+とも限らない。
+
+### 9.8.1 Failure Propagation
+
+Failure Propagationとは、
+
+> **Capability / DependencyのFailure・Degradation・Unavailability等によるMaterial Impact Contextを、そのCapabilityへMaterialに依存するConsumerへ必要な範囲で伝えること**
+
+をいう。
+
+ここでいうPropagationは、
+
+> 故障そのものを他Domainへ複製すること
+
+ではない。
+
+### 9.8.2 Containment
+
+Containmentとは、
+
+> **変更・FailureによるExecution / Operational上の障害や不必要な影響を、Materialに依存しないDomain / Capabilityへ拡散させず、影響範囲を必要な責任境界内へ抑えること**
+
+をいう。
+
+したがって、
+
+~~~text
+Containment
+!= Information Suppression
+~~~
+
+とする。
+
+### 9.8.3 中心原則
+
+> **Execution / Operational Failureは可能な限りContainし、Material Impactは必要なConsumerへPropagateする。**
+
+これをSection 9のChange / Failure基本原則とする。
+
+### 9.8.4 FailureとTruthを分離する
+
+~~~text
+Operational Failure
+!= Semantic Invalidity
+
+Current Failure
+!= Historical Invalidity
+
+Dependency Failure
+!= Knowledge Invalidity
+
+Research Process Failure
+!= Hypothesis Refutation
+~~~
+
+とする。
+
+一時的に評価不能であることと、対象自体が無効であることを混同しない。
+
+### 9.8.5 Missing / Failureを正常値へ変換しない
+
+~~~text
+Unavailable
+!= Zero
+
+Unknown
+!= Neutral
+
+Failed
+!= False
+~~~
+
+とする。
+
+Missing / Failed DependencyをConsumerにとって正常な観測値へSilent変換してはならない。
+
+### 9.8.6 Fallback / Redundancy
+
+FallbackやMulti-SourceはFailure Impactを軽減できる可能性がある。
+
+しかし、
+
+~~~text
+Fallback Exists
+!= No Impact
+
+Fallback Success
+!= Semantic Equivalence
+
+Multiple Sources
+!= Equivalent Redundancy
+~~~
+
+とする。
+
+### 9.8.7 Failure PropagationとAuthority
+
+~~~text
+Impact Propagation
+!= Authority Transfer
+~~~
+
+とする。
+
+Upstream CapabilityはFailure Contextを伝える。
+
+そのContextを受けて、
+
+~~~text
+Continue
+Wait
+Reduce
+Block
+Safety Action
+~~~
+
+等を判断するAuthorityは、該当するDownstream Domainに残す。
+
+具体Action RuleはSection 9では定義しない。
+
+---
+
+## 9.9 Market-Specific Extensibility
+
+市場理解OSは、
+
+~~~text
+Crypto
+FX
+Stocks
+Gold
+Other Markets
+~~~
+
+を全て同一Data・Metric・Research Methodへ押し込むことを目的としない。
+
+市場構造が異なる以上、市場固有能力を許容する。
+
+### 9.9.1 Market-Specific Capability
+
+Market-Specific Capabilityとは、
+
+> **特定市場のMarket Structure・Data Availability・Participant Behavior・Institutional Rule・Research Need等へ対応するため、Coreを変更せずに追加・交換・Version変更できる専門Capability**
+
+をいう。
+
+候補には、
+
+~~~text
+Market-specific Data Source
+Observation Content / Type
+Derived Feature / Metric
+Market Intelligence Method
+Research Question / Method
+Evidence Source
+Market DNA Dimension
+Market Context
+Risk Input
+Output Representation
+~~~
+
+等を含み得る。
+
+この一覧を閉じたEnumにはしない。
+
+### 9.9.2 市場固有化してよいもの
+
+市場ごとに、
+
+~~~text
+何を観測するか
+何を測定するか
+どのMetricを作るか
+どのResearch Questionを持つか
+どう研究するか
+どのEvidence Sourceを使うか
+Market DNAのどのAxisを重視するか
+~~~
+
+は異なってよい。
+
+例えば、
+
+~~~text
+Crypto
+→ Funding / OI / Liquidation / On-chain
+
+Stocks
+→ Earnings / Guidance / Sector / Corporate Action
+
+FX
+→ Rates / Central Bank / Macro / Intervention
+
+Gold
+→ Real Yield / USD / Central Bank Demand / ETF Flow
+~~~
+
+等を市場固有Capabilityとして扱える。
+
+### 9.9.3 市場ごとに変えてはいけないもの
+
+一方で、
+
+~~~text
+Observationとは何か
+Derived Featureとは何か
+Interpretationとは何か
+Research Resultとは何か
+Knowledgeとは何か
+Current Applicabilityとは何か
+Authorityとは何か
+Historical Truthをどう扱うか
+Research Integrityをどう守るか
+Hard Survival Boundaryをどう扱うか
+~~~
+
+というCommon Core Principleを市場別に独自化しない。
+
+### 9.9.4 Market-specific Method vs Research Integrity
+
+~~~text
+Research Method
+= Market-specificに変更可能
+
+Research Integrity
+= Marketを問わず共通
+~~~
+
+とする。
+
+したがって、
+
+> **市場ごとに研究方法は変えてよいが、研究として守る条件は変えない。**
+
+例えば市場が異なっても、
+
+~~~text
+Evidence Trace
+Version Trace
+Refutation
+Alternative Hypothesis
+Failure Boundary
+Constraint
+Uncertainty
+UNKNOWN / INCONCLUSIVE
+Research Process Failure separation
+~~~
+
+等のIntegrityを市場固有理由で省略しない。
+
+### 9.9.5 Market-specific Extension != Separate OS
+
+Market-Specific Capabilityを持つことは、
+
+~~~text
+Crypto OS
+Stock OS
+FX OS
+Gold OS
+~~~
+
+という独立OSを作ることではない。
+
+市場固有Moduleが、
+
+~~~text
+Research
+Knowledge
+Decision
+Capital
+Execution
+~~~
+
+まで独自Authority体系として閉じ始めた場合、それは通常のMarket-Specific Extensionではなく、Core Change / OS Fragmentation Candidateとして再評価する。
+
+9-Fで使用してきたCommon OS Skeletonは独立Formal Objectとはせず、
+
+> **9.3で定義したCore Principleを市場横断視点から説明する表現**
+
+として扱う。
+
+### 9.9.6 Market-specific Capability != Authority Island
+
+~~~text
+Market-specific Extension
+!= Authority Island
+~~~
+
+とする。
+
+Market-specific Metric・Research Method・AI・Human Expertise等が存在しても、それだけで、
+
+~~~text
+Knowledge Admission Authority
+Decision Authority
+Capital Permission
+Execution Permission
+~~~
+
+を取得しない。
+
+具体的なAI / Human / Production Authorityは後続Sectionで定義する。
+
+### 9.9.7 Market-specific Risk
+
+市場固有Risk Input / Risk Methodを許容する。
+
+しかし、
+
+~~~text
+Market-specific Risk
+!= Hard Survival Boundary Exemption
+~~~
+
+とする。
+
+市場ごとのRisk構造差を認めても、共通Survival Principleを回避しない。
+
+### 9.9.8 Cross-Market Research
+
+Market-specific specializationはMarket Isolationを意味しない。
+
+~~~text
+Rates
+USD
+Gold
+Stocks
+Crypto
+~~~
+
+等のCross-Market Transmissionを研究できる余地を維持する。
+
+Cross-Market Researchでは、各Market-specific Observation / Featureの元Semantic Identityを保持する。
+
+~~~text
+Cross-Market Research
+!= Semantic Collapse
+~~~
+
+とする。
+
+---
+
+## 9.10 ExtensibilityとMarket Scopeを分離する
+
+Section 9は、
+
+> **新しい市場へ対応するCapabilityを追加できるか**
+
+を扱う。
+
+一方、
+
+> **どの市場をCurrent Research / Production / Trading Scopeへ正式に入れるか**
+
+は後続のMarket Scope Governanceで扱う。
+
+したがって、
+
+~~~text
+Market-Specific Extension Exists
+!= Market Scope Authorized
+~~~
+
+とする。
+
+また、
+
+~~~text
+Future Expansion Ready
+!= Pre-build Every Future Market
+~~~
+
+とする。
+
+Crypto Firstを維持しながら、将来拡張のBoundaryだけを壊さない。
+
+---
+
+## 9.11 Cross-Section Responsibility Boundary
+
+Section 9は他Sectionの責任を奪わない。
+
+~~~text
+Section 8
+=
+Preservation / Historical Continuity
+何を失わせてはいけないか
+
+Section 9
+=
+Extensibility / Replacement
+何をどの境界で変更可能にするか
+
+Section 10
+=
+Market Scope / Future Expansion Governance
+どの市場をいつScopeへ入れるか
+
+Section 11
+=
+Research Output / Publication Mission
+Research Outputをなぜ・誰へ・どう利用するか
+
+Section 12
+=
+AI / Human / Production Authority
+誰が実際のAuthorityを持つか
+
+Section 13 / 14
+=
+Core / Charter Change Governance
+Coreをいつ・どう変更できるか
+~~~
+
+という責任境界を維持する。
+
+---
+
+## 9.12 このSectionで固定しないもの
+
+以下は後続Architecture / Contract / Detailed Design / Implementationで扱う。
+
+~~~text
+Plugin Class
+Extension Base Class
+Extension Registry
+Market Registry
+Dynamic Loader
+Universal Extension Object
+Universal Market Object
+JSON Schema
+Python Interface
+DB Schema
+SemVer MAJOR / MINOR / PATCH
+Version Registry
+Compatibility Enum
+Adoption State Machine
+Dependency Graph
+Impact Graph
+Health State Enum
+Failure Severity Score
+Fallback Priority
+Automatic Failover Rule
+Recovery Gate
+Retry / Timeout
+Circuit Breaker
+Market Capability Matrix
+RBAC
+Deployment Strategy
+Automatic Revalidation Rule
+Automatic Version Propagation
+~~~
+
+Section 9では、これらを実装可能にする上位Boundaryだけを定義する。
+
+---
+
+## 9.13 Section-wide Core Invariants
+
+~~~text
+EX-01 Extensibility != Authority Bypass.
+EX-02 Extension designation != Semantic Object Type.
+EX-03 Important / Widely Used != Core.
+EX-04 New Capability != Automatically Extension.
+EX-05 Unrepresentable Core Semantic Change must escalate as Core Change Candidate.
+EX-06 Extension Exists != Version / Scope / Purpose-specific Adoption.
+EX-07 Adoption != Semantic Promotion != Validation != Production Authority.
+EX-08 Adoption of Version N != Automatic Adoption of Version N+1.
+EX-09 Version Change != Silent Semantic Mutation.
+EX-10 Replaceable != Semantically Identical.
+EX-11 Replacement != Historical Rewrite.
+EX-12 Compatibility != Identity != Adoption.
+EX-13 Permanent Backward Compatibility is not required.
+EX-14 Change Localization != Material Impact Suppression.
+EX-15 Dependency Exists != Material Impact.
+EX-16 Operational Failure != Semantic / Historical Invalidity.
+EX-17 Extension Failure != Automatic Core Failure and != Always Ignorable.
+EX-18 Containment != Information Suppression.
+EX-19 Missing / Failed Dependency != Normal Value.
+EX-20 Impact Propagation != Authority Transfer.
+EX-21 Market-specific Method != Research Integrity Exemption.
+EX-22 Market-specific Extension != Separate OS != Authority Island.
+EX-23 Common Semantic != Identical Physical Schema.
+EX-24 Market-specific Extension Exists != Market Scope Authorized.
+EX-25 Future-ready != Future-overengineered.
+~~~
+
+---
+
+# Extensibility / Replaceable Capability Philosophy — 一文定義
+
+> **市場理解OSのExtensibilityとは、Project-level Mission・Semantic Boundary・Research Integrity・Authority Boundary・Historical / Version Principle・Change / Failure Principle・Survival Principleを維持したまま、Data Source・Observation・Derived Feature / Metric・Research Method・Research Output・Market-Specific Capability等を必要に応じて追加・交換・Version変更でき、変更やFailureのMaterial Impactを必要なConsumerへ伝えながら無関係なDomainへ不必要に拡散させず、新Version・Replacement・Compatibility・Adoption・Market Scopeを互いに混同せず、個々のExtension導入だけを理由として無関係なCore OS全体の再設計を要求しない能力である。**
+
+簡潔には、
+
+> **OSの意味と研究原則は守りながら、必要な能力だけを後から安全に足し、替え、進化させられるようにする。**
+
+---
+
 # 未設計
 
 以下は今後、一項目ずつ設計する。
 
 ~~~text
-9. Independent Data / Metric Extensibility
 10. Market Scope / Future Expansion Governance
 11. Research Output / Publication Mission
 12. AI / Human / Production Authority
@@ -5289,4 +6346,4 @@ KA-16 Technology may change; required meaning and history must survive.
 14. Charter Change Governance
 ~~~
 
-これらは現時点では TBD であり、Section 1〜8から自動的に詳細内容を確定しない。
+これらは現時点では TBD であり、Section 1〜9から自動的に詳細内容を確定しない。

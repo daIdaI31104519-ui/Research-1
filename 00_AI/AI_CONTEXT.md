@@ -1,4 +1,4 @@
-# 市場理解OS — AI_CONTEXT v0.1.16
+# 市場理解OS — AI_CONTEXT v0.1.17
 
 **Document Role:** AI Current-State Index / Navigation Map  
 **Status:** REVIEWED / WORKING BASELINE  
@@ -104,8 +104,12 @@ Section 8:
 Knowledge / Data Asset Philosophy
 = DRAFT / LEADING CANDIDATE 保存済み
 
+Section 9:
+Extensibility / Replaceable Capability Philosophy
+= DRAFT / LEADING CANDIDATE 保存済み
+
 現在焦点:
-9. Independent Data / Metric Extensibility
+10. Market Scope / Future Expansion Governance
 ```
 
 `01_EXTERNAL_DATA`、`02_MARKET_UNDERSTANDING`、`03_RESEARCH`、`04_KNOWLEDGE_APPLICABILITY` はWorking Baselineとして保存済み。
@@ -149,8 +153,9 @@ Current State:
 - Section 6 Research Category Philosophy = 保存済み
 - Section 7 Capital / Risk Philosophy = 保存済み
 - Section 8 Knowledge / Data Asset Philosophy = 保存済み
-- Section 9以降 = 未設計
-Current Focus: 9. Independent Data / Metric Extensibility
+- Section 9 Extensibility / Replaceable Capability Philosophy = 保存済み
+- Section 10以降 = 未設計
+Current Focus: 10. Market Scope / Future Expansion Governance
 ```
 
 Project Missionの現在本命方向には、Crypto First、選択的Research、Fast Adaptation / Research Adaptation、Research Note / Research Asset、長期生存と正の期待値、人間向けResearch Publicationが含まれる。
@@ -169,15 +174,17 @@ Capital / Risk Philosophyの現在本命方向は、Hard Survival Boundaryの内
 
 Knowledge / Data Asset Philosophyの現在本命方向は、Semantic / Historical TruthをOriginal Domainに残したまま、将来のResearch・Revalidation・Explanation・Audit・Failure Learningに必要なIdentity・Meaning・History・Material Dependency・Required FidelityをPreservation Requirementとして守り、Current BestとPast Used、Known NowとKnown Thenを分離することを中心とする。Technology / Physical Representationは交換可能とし、Preservation Equivalenceを満たしても自動Destruction Permissionとはせず、Age / Cost / No Current UseだけでDispositionを正当化しない。RETIRED != DELETE、SUPERSEDED != ERASED、Requirement Unsatisfied != Requirement Endedを維持する。
 
+Extensibility / Replaceable Capability Philosophyの現在本命方向は、Project-level Mission・Semantic Boundary・Research Integrity・Authority Boundary・Historical / Version Principle・Change / Failure Principle・Survival Principleを維持したまま、Data Source・Observation・Derived Feature / Metric・Research Method・Research Output・Market-Specific Capability等を追加・交換・Version変更できることを中心とする。Core / Extension、Semantic / Authority / Adoption、Version / Replacement / Compatibility、Material Impact / Containmentを分離し、Market-specific MethodをResearch Integrityの例外にせず、Market-specific Extension Exists != Market Scope Authorizedを維持する。
+
 重要:
 
 ```text
-Section 1〜8 保存済み
+Section 1〜9 保存済み
 ≠
 PROJECT_CHARTER Working Baseline
 ```
 
-Section 9以降を設計し、PROJECT_CHARTER全体をCross Checkするまでは、Charter全体を確定扱いしない。
+Section 10以降を設計し、PROJECT_CHARTER全体をCross Checkするまでは、Charter全体を確定扱いしない。
 
 ## 3.3 HUMAN MAP
 
@@ -512,7 +519,8 @@ Section 5 Research Mission = DRAFT / LEADING CANDIDATE 保存済み
 Section 6 Research Category Philosophy = DRAFT / LEADING CANDIDATE 保存済み
 Section 7 Capital / Risk Philosophy = DRAFT / LEADING CANDIDATE 保存済み
 Section 8 Knowledge / Data Asset Philosophy = DRAFT / LEADING CANDIDATE 保存済み
-現在: 9. Independent Data / Metric Extensibility
+Section 9 Extensibility / Replaceable Capability Philosophy = DRAFT / LEADING CANDIDATE 保存済み
+現在: 10. Market Scope / Future Expansion Governance
 
 NEXT-002
 PROJECT_CHARTER全体をCross Checkし、問題が軽微ならWorking Baseline候補として保存
@@ -706,6 +714,6 @@ GPTはGit・AI_WORKFLOW・AI_CONTEXT・必要ならAI_HANDOFFを使って設計�
 
 ---
 
-# AI_CONTEXT v0.1.16 一文定義
+# AI_CONTEXT v0.1.17 一文定義
 
 > **AI_CONTEXTとは、市場理解OSの設計内容そのものや直前Conversationを複製する文書ではなく、GPTが現在Phase・Current Task・主要Working Baseline・重要Pending・Next Action・参照先を短時間で把握し、Gitという長期作業空間の中から現在Taskに必要な正しい設計情報へ移動するための軽量なAI専用Project Current-State Mapである。**
