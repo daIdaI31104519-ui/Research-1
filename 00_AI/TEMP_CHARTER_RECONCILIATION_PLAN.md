@@ -1,4 +1,4 @@
-# TEMP — PROJECT CHARTER RECONCILIATION PLAN v0.5
+# TEMP — PROJECT CHARTER RECONCILIATION PLAN v0.6
 
 **Document Role:** Temporary Design Migration / Navigation Plan  
 **Status:** TEMPORARY / ACTIVE UNTIL RECONCILIATION COMPLETE  
@@ -151,8 +151,11 @@ Section 6 Research Category Philosophy
 Section 7 Capital / Risk Philosophy
 = DRAFT / LEADING CANDIDATE 保存済み
 
+Section 8 Knowledge / Data Asset Philosophy
+= DRAFT / LEADING CANDIDATE 保存済み
+
 Current Focus
-= 8. Knowledge / Data Asset Philosophy
+= 9. Independent Data / Metric Extensibility
 ```
 
 ---
@@ -403,28 +406,51 @@ Execution / Runtime Safety
 
 # 8. Knowledge / Data Asset Philosophyの現在方向
 
-Current Focus。
+Section 8はDRAFT / LEADING CANDIDATEとして保存済み。
 
-Section 1〜7から詳細内容を自動確定しない。
-
-次に、Knowledge / Dataを長期資産として扱う上位思想について、
+中心思想:
 
 ~~~text
-何を長期Assetとして残すか
-Raw Data / Evidence / Research Result / Knowledgeの違い
-Version / Lineage / Historyをどこまで守るか
-再現・再検証・説明可能性
-保存CostとInformation Value
-Knowledge / Dataの更新・廃止・保持
+Semantic / Historical Truth
+= Original Domainが所有
+
+Preservation
+= 将来必要なResearch / Revalidation / Explanation / Audit / Failure Learning能力を守る
+
+Current Best
+!= Past Used
+
+Known Now
+!= Known Then
+
+RETIRED
+!= DELETE
+
+SUPERSEDED
+!= ERASED
+
+Preservation Equivalence
+!= Automatic Destruction Permission
+
+Requirement Unsatisfied
+!= Requirement Ended
+
+Technology / Representation
+= 交換可能
+
+必要なMeaning / History / Material Dependency / Required Fidelity
+= 維持
 ~~~
 
-等を、既存のResearch / Knowledge設計とAuthority重複しないようにPrecision-Firstで設計する。
+全Raw Data / 全History / 同一Physical Representationの永久保存は要求しない。
 
-具体Retention期間、DB Schema、Storage Engine、File Format、Compression、Cloud構成等はこの段階では固定しない。
+Age / Cost / No Current UseだけでRetention終了を正当化せず、具体Retention期間、DB Schema、Storage Engine、File Format、Compression、Cloud構成等は後続Detailed Designへ送る。
 
 ---
 
 # 9. 独自Data / 独自Metricの方向
+
+Current Focus。
 
 上位思想として、
 
@@ -470,7 +496,8 @@ CURRENT DRAFT
 = Section 5 Research Mission保存済み
 = Section 6 Research Category Philosophy保存済み
 = Section 7 Capital / Risk Philosophy保存済み
-= 現在はSection 8 Knowledge / Data Asset Philosophyを設計する
+= Section 8 Knowledge / Data Asset Philosophy保存済み
+= 現在はSection 9 Independent Data / Metric Extensibilityを設計する
 
 HIGH IMPACT
 00_HUMAN/HUMAN_MAP.md
@@ -512,7 +539,8 @@ PROJECT_CHARTER v0.1 Draft
 - Section 5 Research Mission = 保存済み
 - Section 6 Research Category Philosophy = 保存済み
 - Section 7 Capital / Risk Philosophy = 保存済み
-- Current = Section 8 Knowledge / Data Asset Philosophy
+- Section 8 Knowledge / Data Asset Philosophy = 保存済み
+- Current = Section 9 Independent Data / Metric Extensibility
 
 STEP 2
 PROJECT_CHARTER Cross Check
