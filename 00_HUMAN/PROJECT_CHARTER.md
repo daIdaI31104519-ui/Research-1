@@ -3,7 +3,7 @@
 **Document Role:** Project Constitution / Top-Level Mission  
 **Status:** DRAFT / LEADING CANDIDATE  
 **Purpose:** 市場理解OSが何のために存在し、何を優先し、どの方向へ育てるかを定義する最上位方針文書。  
-**Current Scope:** Section 1 `Project Mission`、Section 2 `Success Definition`、Section 3 `What Not To Maximize`、Section 4 `Survival / Profit Priority`、Section 5 `Research Mission`、Section 6 `Research Category Philosophy`、Section 7 `Capital / Risk Philosophy`、Section 8 `Knowledge / Data Asset Philosophy`、Section 9 `Extensibility / Replaceable Capability Philosophy` を設計済み。Section 10以降は未設計であり、現時点では固定しない。
+**Current Scope:** Section 1 `Project Mission`、Section 2 `Success Definition`、Section 3 `What Not To Maximize`、Section 4 `Survival / Profit Priority`、Section 5 `Research Mission`、Section 6 `Research Category Philosophy`、Section 7 `Capital / Risk Philosophy`、Section 8 `Knowledge / Data Asset Philosophy`、Section 9 `Extensibility / Replaceable Capability Philosophy`、Section 10 `Market Scope / Future Expansion Governance` を設計済み。Section 11以降は未設計であり、現時点では固定しない。
 
 ---
 
@@ -6347,3 +6347,677 @@ EX-25 Future-ready != Future-overengineered.
 ~~~
 
 これらは現時点では TBD であり、Section 1〜9から自動的に詳細内容を確定しない。
+
+---
+
+# 10. Market Scope / Future Expansion Governance
+
+## 10.1 Purpose and Market Scope Meaning
+
+Market Scope defines the **Project-level responsibility boundary** by which the Market Intelligence OS determines what formal responsibility, if any, it assumes toward a Market or Market Domain.
+
+A **Scope Responsibility** is a Project-level responsibility formally assumed toward a Market or Market Domain within one or more Scope Dimensions.
+
+Market Scope shall not be reduced to a single list of Markets, a binary `IN / OUT` state, the existence of available data, the existence of an Extension, the existence of Research activity, or permission to deploy Real Capital.
+
+A Market may participate in the system under different responsibilities and contexts without all such responsibilities being implied simultaneously.
+
+Accordingly:
+
+```text
+Data Presence
+!= Market Scope
+
+Extension Exists
+!= Market Scope
+
+Research Activity
+!= Market Scope
+
+Reference Use
+!= Target Responsibility
+
+Market Scope
+!= Trade Permission
+```
+
+Market Scope governs what Scope Responsibility the Project formally assumes, not merely what the system is technically capable of observing or processing.
+
+External Context may participate in Research, Knowledge, Dependency, or Decision support without thereby becoming a Market Scope object.
+
+## 10.2 Scope Dimensions
+
+Market Scope shall be representable through separable Scope Dimensions rather than a single universal inclusion state.
+
+Scope Dimensions may include, where applicable:
+
+```text
+Research Responsibility
+Reference / Context Responsibility
+Production Decision Responsibility
+Real-Capital Execution Responsibility
+```
+
+The presence of one Scope Dimension shall not automatically imply the presence of another.
+
+Accordingly:
+
+```text
+Reference Responsibility
+!= Research Target Responsibility
+
+Research Target Responsibility
+!= Production Decision Responsibility
+
+Production Decision Responsibility
+!= Real-Capital Execution Responsibility
+```
+
+These Dimensions do not constitute a mandatory progression or closed permanent set.
+
+The exact state representation, schema, fields, thresholds, or storage mechanism belongs to lower-level design and is not fixed by this Charter.
+
+## 10.3 Scope Responsibility and Actual Project Responsibility
+
+Formal Scope shall be interpreted through the Scope Responsibility actually assumed by the Project.
+
+The existence of a Market in data, Research, Knowledge, Models, Experiments, Dependencies, or historical records shall not by itself establish Project-level Scope Responsibility.
+
+A declared Role shall not conceal a material mismatch between formal Scope and actual Project responsibility.
+
+Actual Project responsibility may be evaluated through materially relevant factors including:
+
+```text
+Purpose
+Persistence
+Operational Dependency
+Resource Commitment
+Formal Output Responsibility
+Downstream Materiality
+```
+
+Where such factors materially diverge from the declared Scope or Role, the mismatch may trigger Scope Review.
+
+Role labels shall not be used to evade Scope Governance.
+
+## 10.4 Current Scope and Crypto First
+
+The current primary Market direction of the Project is **Crypto First**.
+
+Crypto First establishes present Project priority. It does not establish a permanent restriction against other Markets or Market Domains.
+
+Accordingly:
+
+```text
+Crypto First
+!= Crypto Only
+
+Crypto First
+!= Crypto Forever
+```
+
+Non-Crypto Markets may be observed, researched, referenced, experimented upon, or later admitted into formal Scope when justified under this Section.
+
+However, Reference activity, Experiment activity, or supporting Market activity shall not accumulate in a manner that silently replaces the current primary Project priority without explicit Scope Review and authorization.
+
+Future expansion is permitted.
+
+Silent priority replacement is not.
+
+## 10.5 Scope Candidate and Discovery
+
+A Market or Market Domain may first appear through or be identified in connection with:
+
+```text
+Observation
+AI Discovery
+Research Question
+Experiment
+Correlation
+Cross-Market Relationship
+Causal Candidate
+Dependency Discovery
+Operational Need
+```
+
+External Context may reveal, motivate, or support the identification of a Scope Candidate without itself thereby becoming that Scope Candidate or a Market Scope object.
+
+Such discovery may create a Scope Candidate or otherwise make a Market or Market Domain eligible for evaluation.
+
+A Candidate does not by itself establish Scope Responsibility or Scope Authorization.
+
+`Candidate` shall not be interpreted as an independent formal Scope State unless lower-level Governance explicitly defines such a state consistently with this Charter.
+
+A Market may therefore exist as a Candidate, exploratory object, Reference Candidate, or Experiment-level Target before the Project assumes Project-level Scope Responsibility for it.
+
+Casual, temporary, or exploratory observation shall not by itself require formal Scope modification.
+
+## 10.6 Entry and Expansion Criteria
+
+Formal entry or expansion into Market Scope shall require a defined Purpose and justified Scope Responsibility.
+
+Evaluation shall consider, where materially applicable:
+
+```text
+Purpose
+Expected Understanding Value
+Research Value
+Decision Value
+Material Relevance
+Evidence
+Cost
+Complexity
+Operational Burden
+Dependency Burden
+Risk
+Project Capacity
+Compatibility with Current Priority
+```
+
+Potential relevance alone shall not be sufficient.
+
+The existence of technically available data, an available Extension, a temporary correlation, a single successful Experiment, or an AI recommendation shall not independently justify Scope expansion.
+
+Expansion shall remain proportional to the Scope Responsibility actually required.
+
+`Material` shall be interpreted within the relevant governance context and shall not require a universal fixed numerical threshold at Charter level.
+
+## 10.7 Evidence, Review and Authorization Boundary
+
+Evidence may support a Scope decision.
+
+Evidence shall not itself constitute a Scope decision or Scope Authorization.
+
+This applies to:
+
+```text
+AI Discovery
+Correlation
+Causal Candidate
+Experiment Result
+Cross-Market Evidence
+Model Dependency
+Reference Criticality
+Runtime Behavior
+Failure
+```
+
+Accordingly:
+
+```text
+Strong Evidence
+!= Scope Authorization
+
+Experiment Evidence
+!= Scope Authorization
+
+Dependency
+!= Scope Authorization
+```
+
+A **Scope Review** is a governance evaluation of whether an existing or proposed Scope Responsibility remains justified.
+
+Scope Review does not itself authorize a Scope State Change.
+
+Accordingly:
+
+```text
+Scope Review
+!= Scope Authorization
+
+Scope Review
+!= Scope State Change
+```
+
+The conceptual sequence is:
+
+```text
+Discovery / Evidence
+↓
+Scope Review
+↓
+Authorized Scope Decision
+↓
+Scope State Change
+```
+
+This conceptual separation does not require separate organizations, persons, systems, or services to perform each step.
+
+No discovery, Research result, Model behavior, Dependency, or Failure shall silently create Project-level Scope authority.
+
+## 10.8 Scope Change Authority
+
+A change to formal Market Scope shall require explicit authority appropriate to Scope Governance.
+
+Authority shall not arise implicitly from:
+
+```text
+Data Availability
+AI Output
+Research Output
+Experiment Success
+Knowledge Creation
+Dependency Criticality
+Production Use
+Failure Propagation
+```
+
+AI output shall not acquire Scope-changing authority merely by being AI output.
+
+Any Scope-changing authority delegated to an AI, human, service, process, or other actor shall require explicit authorization under Governance.
+
+The identity and implementation of the authorized decision-maker may be defined by lower-level Governance, but the existence of explicit Scope authority shall not be optional.
+
+This Charter does not prescribe the exact human role, AI role, committee, service, database writer, approval interface, or implementation mechanism through which such authority is exercised.
+
+## 10.9 Scope Lifecycle
+
+Formal Market Scope shall be capable of changing over time.
+
+Scope Governance shall support, where applicable:
+
+```text
+Entry
+Expansion
+Promotion
+Maintenance
+Reduction
+Suspension
+Exit
+Re-entry
+```
+
+These states or transitions shall not be interpreted as one mandatory linear ladder.
+
+In particular:
+
+```text
+Reference
+→ Research
+→ Decision
+→ Execution
+```
+
+is not a required universal progression.
+
+Promotion means a justified addition, strengthening, or formalization of Scope Responsibility within an applicable Scope Dimension.
+
+Promotion does not require progression through every other Scope Dimension.
+
+Current Scope and Historical Scope shall remain distinguishable.
+
+## 10.10 Reduction, Suspension and Exit
+
+A Scope Responsibility may be reduced, suspended, or exited when its Purpose, value, evidence, feasibility, risk, cost, dependency structure, Project priority, or continuing justification no longer supports the existing responsibility.
+
+Reduction narrows an existing Scope Responsibility.
+
+Suspension temporarily ceases or disables an applicable current Scope Responsibility without treating its historical identity as though it never existed.
+
+Exit ends the applicable current Scope Responsibility.
+
+These conceptual distinctions do not require a specific lower-level State Machine.
+
+A temporary technical or runtime problem shall not automatically constitute a Scope change.
+
+Accordingly:
+
+```text
+Provider Failure
+!= Market Exit
+
+Temporary Data Failure
+!= Scope Reduction
+
+Capability Failure
+!= Automatic Scope Suspension
+
+Runtime Restriction
+!= Scope Suspension
+```
+
+Failure shall first be handled according to its operational and downstream consequences.
+
+Persistent inability to maintain the required Scope Responsibility may trigger Scope Review, but Failure itself shall not silently perform the Scope change.
+
+## 10.11 Re-entry
+
+A Market or Market Domain that has previously been reduced, suspended, or exited may later be considered for re-entry.
+
+Re-entry shall evaluate the current environment, current Purpose, current evidence, and current justification rather than blindly restoring the former Scope state.
+
+Accordingly:
+
+```text
+Re-entry
+!= Blind Restoration
+```
+
+At the same time, re-entry shall not treat the Market or Market Domain as though no history exists.
+
+Previous Research, Evidence, Failure, Knowledge, Scope history, and historical reasoning may remain relevant subject to their current validity and applicable Preservation obligations.
+
+## 10.12 Reference and Context Markets
+
+The Project may formally use another Market or Market Domain as a Reference or Context in support of Market Understanding, Research, Decision, or another authorized responsibility.
+
+A formal Reference may carry a limited Scope Responsibility appropriate to its Purpose and Materiality.
+
+However:
+
+```text
+Reference Responsibility
+!= Target Responsibility
+
+Reference Scope Expansion
+!= Target Responsibility Expansion
+
+Reference Membership
+!= Mandatory Usage
+
+Reference Membership
+!= Material Dependency
+```
+
+A formal Reference does not automatically establish Research Target Responsibility, Production Decision Responsibility, or Real-Capital Execution Responsibility.
+
+Reference Scope Responsibility shall remain bounded by the Purpose for which the Reference was authorized.
+
+A material change in Reference Purpose may trigger Scope Review rather than being treated as automatically covered by the original authorization.
+
+Adding one Reference shall not imply collection, modeling, Research, or Governance of the entire surrounding Market universe.
+
+## 10.13 Experiment-Level and Project-Level Targets
+
+A Market may be directly studied within a specific Research Question, Experiment, Validation, or Comparison without thereby establishing Project-level Target Responsibility.
+
+Accordingly:
+
+```text
+Experiment-level Target
+!= Project-level Target Responsibility
+```
+
+Experiment evidence may support future Scope expansion but shall not itself authorize that expansion.
+
+Temporary and bounded Experiment activity may occur without rewriting Project-level Scope.
+
+However, the Experiment label shall not be used to evade Scope Governance.
+
+Where Experiment activity becomes materially persistent through continuing Research, dedicated infrastructure, resource commitment, operational dependence, or formal output responsibility, the activity may trigger Project-level Scope Review.
+
+A Market may hold different Roles at different governance levels.
+
+A context-specific Role shall not automatically propagate into another governance level.
+
+## 10.14 Material Dependency Boundary
+
+Material Dependency and Market Scope Responsibility are distinct concepts.
+
+A Market, Data Source, Context, or Capability may materially affect another authorized Research, Decision, Risk, or Execution responsibility without becoming a Target Responsibility itself.
+
+Accordingly:
+
+```text
+Material Dependency
+!= Scope Responsibility
+
+Dependency Criticality
+!= Target Responsibility Promotion
+
+Material Dependency
+!= Proven Causality
+```
+
+Greater Dependency Criticality may justify stronger:
+
+```text
+Monitoring
+Data Quality Responsibility
+Freshness Responsibility
+Uncertainty Handling
+Fallback
+Failure Handling
+Recovery Responsibility
+```
+
+without changing the Market's Scope Role.
+
+Dependency evidence shall not be treated as causal proof.
+
+Capability Dependency design itself remains subject to the appropriate lower-level and Extensibility Governance rather than being redefined by this Section.
+
+## 10.15 Cross-Market Research and Knowledge Identity
+
+The Project may conduct Cross-Market Research without assuming equivalent Project-level or Trading responsibility for every participating Market.
+
+Accordingly:
+
+```text
+Cross-Market Research
+!= Multi-Market Trading
+
+Causal Chain Participation
+!= Formal Target Responsibility
+
+Production Input
+!= Production Target Responsibility
+```
+
+Cross-Market Knowledge may represent relationships involving multiple Markets or Market Domains.
+
+Cross-Market Knowledge shall not be semantically reduced to a single Market where doing so would destroy or materially distort the represented relationship.
+
+Its relevant Participating Markets, Research Context, Usage Context, and Historical Identity shall remain distinguishable where required for correct interpretation.
+
+A current Market Role shall not rewrite the historical Role under which Knowledge was originally produced.
+
+Market Scope change shall not automatically change the lifecycle or historical meaning of Cross-Market Knowledge.
+
+## 10.16 Failure Propagation and Aggregate Burden
+
+Failure may propagate through a Material Dependency.
+
+Scope Responsibility shall not propagate merely because Failure does.
+
+Accordingly:
+
+```text
+Failure Propagation
+!= Scope Propagation
+```
+
+A Reference failure may affect downstream Confidence, Availability, Decision Permission, Fallback behavior, Runtime Permission, or Recovery requirements according to its Materiality.
+
+It shall not automatically establish Target Responsibility for the failed Reference or automatically suspend the associated Market Scope.
+
+Scope Governance shall consider aggregate burden where cumulative effects may become Material.
+
+A collection of individually justified References, Dependencies, or Scope Responsibilities may collectively create material:
+
+```text
+Operational Complexity
+Research Cost
+Monitoring Cost
+Dependency Complexity
+Failure Surface
+Resource Burden
+```
+
+Accordingly:
+
+```text
+Individual Reference Justification
+!= Aggregate Reference Burden Acceptability
+```
+
+Aggregate burden may trigger Scope Review but shall not itself determine which Scope Responsibilities must be reduced, suspended, or exited.
+
+No fixed Market-count limit is established by this Charter.
+
+## 10.17 Extensibility, Preservation and Historical Boundary
+
+Market Scope Governance is distinct from System Extensibility Governance.
+
+Accordingly:
+
+```text
+Capability Extension
+!= Market Scope Expansion
+
+Market Scope Expansion
+!= Necessarily Capability Extension
+```
+
+A newly authorized Market may be supportable through the existing Common OS Skeleton.
+
+Where new capability is genuinely required, that capability shall be governed under the Extensibility principles of Section 9 rather than treating Market expansion itself as permission to alter the Core.
+
+Market Scope Lifecycle is also distinct from Information Lifecycle.
+
+Accordingly:
+
+```text
+Scope Lifecycle
+!= Information Lifecycle
+
+Scope Exit
+!= Historical Erasure
+
+Scope Exit
+!= Automatic Termination of Preservation Obligation
+```
+
+Reduction, Suspension, Exit, or Role Change modifies current Scope Responsibility.
+
+It does not independently authorize destruction of Historical Data, Evidence, Research Results, Cross-Market Knowledge, Decision History, Failure knowledge, or other preserved information.
+
+Preservation and destruction remain governed by Section 8.
+
+## 10.18 Governing Invariants and Interpretation Guard
+
+The preceding provisions shall be interpreted consistently with the following non-equivalence constraints.
+
+These constraints are Interpretation Guards. They do not independently redefine the concepts established in Sections 10.1–10.17.
+
+```text
+Market Scope
+!= Data Presence
+
+Market Scope
+!= Trade Permission
+
+Extension Exists
+!= Scope Inclusion
+
+Observation
+!= Formal Scope Responsibility
+
+External Context Participation
+!= Market Scope Responsibility
+
+Candidate
+!= Formal Scope Responsibility
+
+Discovery
+!= Scope Authorization
+
+Strong Evidence
+!= Scope Authorization
+
+Scope Review
+!= Scope Authorization
+
+Scope Review
+!= Scope State Change
+
+Reference Responsibility
+!= Target Responsibility
+
+Reference Membership
+!= Mandatory Usage
+
+Reference Membership
+!= Material Dependency
+
+Experiment-level Target
+!= Project-level Target Responsibility
+
+Material Dependency
+!= Scope Responsibility
+
+Dependency
+!= Causal Proof
+
+Dependency Criticality
+!= Target Responsibility Promotion
+
+Cross-Market Research
+!= Multi-Market Trading
+
+Production Input
+!= Production Target Responsibility
+
+Failure Propagation
+!= Scope Propagation
+
+Temporary Failure
+!= Automatic Scope Reduction or Exit
+
+Runtime Restriction
+!= Scope Suspension
+
+Capability Extension
+!= Market Scope Expansion
+
+Market Scope Expansion
+!= Necessarily Capability Extension
+
+Scope Lifecycle
+!= Information Lifecycle
+
+Scope Exit
+!= Historical Erasure
+
+Scope Exit
+!= Automatic Termination of Preservation Obligation
+
+Current Role
+!= Historical Role
+
+Crypto First
+!= Crypto Only
+
+Crypto First
+!= Crypto Forever
+
+Re-entry
+!= Blind Restoration
+```
+
+Material Purpose Drift, persistent mismatch between declared Scope and actual Project responsibility, or materially excessive Aggregate Burden may trigger Scope Review.
+
+None of those conditions shall independently constitute Scope Authorization or Scope State Change.
+
+Role labels such as `Reference`, `Experiment`, `Candidate`, or other limited-purpose designations shall not be used to conceal material Project responsibility or evade Scope Governance.
+
+Actual responsibility, persistence, resource commitment, operational dependence, formal output responsibility, Purpose, and material burden may therefore require Scope Review when the declared Role no longer reflects the Project's material reality.
+
+At the same time, Scope Governance shall not be interpreted so aggressively that every observation, temporary Experiment, Reference use, External Context use, or technical Failure requires Project-level Scope modification.
+
+The purpose of this Section is to preserve a deliberate and governable distinction between:
+
+```text
+what the Project can observe,
+
+what the Project can study,
+
+what the Project can use as context,
+
+what the Project depends upon,
+
+what the Project formally accepts Scope Responsibility for,
+
+and what the Project is authorized to act upon.
+```
+
