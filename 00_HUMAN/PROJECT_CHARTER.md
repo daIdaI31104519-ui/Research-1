@@ -3,7 +3,7 @@
 **Document Role:** Project Constitution / Top-Level Mission  
 **Status:** DRAFT / LEADING CANDIDATE  
 **Purpose:** 市場理解OSが何のために存在し、何を優先し、どの方向へ育てるかを定義する最上位方針文書。  
-**Current Scope:** Section 1 `Project Mission`、Section 2 `Success Definition`、Section 3 `What Not To Maximize`、Section 4 `Survival / Profit Priority`、Section 5 `Research Mission`、Section 6 `Research Category Philosophy`、Section 7 `Capital / Risk Philosophy`、Section 8 `Knowledge / Data Asset Philosophy`、Section 9 `Extensibility / Replaceable Capability Philosophy`、Section 10 `Market Scope / Future Expansion Governance` を設計済み。Section 11以降は未設計であり、現時点では固定しない。
+**Current Scope:** Section 1 `Project Mission`、Section 2 `Success Definition`、Section 3 `What Not To Maximize`、Section 4 `Survival / Profit Priority`、Section 5 `Research Mission`、Section 6 `Research Category Philosophy`、Section 7 `Capital / Risk Philosophy`、Section 8 `Knowledge / Data Asset Philosophy`、Section 9 `Extensibility / Replaceable Capability Philosophy`、Section 10 `Market Scope / Future Expansion Governance`、Section 11 `Research Results Usage Governance` を設計済み。Section 12以降は未設計であり、現時点では固定しない。
 
 ---
 
@@ -7021,3 +7021,206 @@ what the Project formally accepts Scope Responsibility for,
 and what the Project is authorized to act upon.
 ```
 
+---
+
+# 11. Research Results Usage Governance
+
+## 11.1 Purpose
+
+The system shall govern how Research Outputs are identified, consumed, considered as Knowledge Candidates, promoted where justified into Reusable Knowledge, adopted for authorized use, transformed or derived into downstream Objects, and evaluated for downstream Material Impact when their Sources materially change or fail.
+
+Research results shall not acquire stronger Evidence, broader Scope, greater Authority, independent Provenance, or unrestricted downstream usability merely through consumption, reuse, transformation, derivation, aggregation, representation change, model training, or repeated use.
+
+## 11.2 Research Output Boundary
+
+A Research Output shall represent an identifiable result produced by a Research activity.
+
+The existence, generation, storage, or availability of a Research Output shall not by itself establish that the Output is Reusable Knowledge, adopted information, Production-authorized information, or Independent Evidence.
+
+Research Output status shall remain distinct from downstream decisions concerning consumption, reuse, Knowledge Promotion, Adoption, Authority, Transformation, and Production Use.
+
+## 11.3 Consumer and Usage Context
+
+Use of a Research Output shall occur within an identifiable Consumer and Usage Context.
+
+Consumption shall not by itself constitute Adoption, Knowledge Promotion, Evidence strengthening, or Production authorization.
+
+Repeated consumption, frequent use, or use by multiple Consumers shall not by itself promote a Research Output into Reusable Knowledge or increase its Authority.
+
+A change of Consumer shall not by itself remove material restrictions, Scope, Evidence limitations, Source Lineage, or other applicable Governance attached to the information being consumed.
+
+## 11.4 Knowledge Candidate and Reusable Knowledge
+
+A Research Output may become a Knowledge Candidate where it is considered for durable reuse beyond its immediate Research context.
+
+A Knowledge Candidate shall not become Reusable Knowledge solely because it is useful, repeatedly consumed, widely referenced, or consistent with existing expectations.
+
+Knowledge Promotion shall preserve material Evidence, Scope, restrictions, Material Provenance, Source Lineage, contradictions, and other material limitations necessary to interpret and reuse the resulting Knowledge correctly.
+
+Reusable Knowledge shall mean information permitted for reuse under its applicable Governance and shall not imply unrestricted use, Production authorization, universal validity, or broader Market Scope.
+
+## 11.5 Independent Evidence
+
+Reuse, duplication, Transformation, Derivation, aggregation, representation change, or repeated observation of materially dependent information shall not create Independent Evidence merely by producing additional Objects or additional agreement.
+
+Independent Evidence shall require sufficient independence to prevent a common Source, shared Material Provenance, or derived Evidence from being counted as independent confirmation of itself.
+
+Derived agreement shall not be used to artificially strengthen the Evidence supporting its own materially shared Source.
+
+## 11.6 Material Provenance and Source Lineage
+
+Material Provenance and Source Lineage shall remain sufficiently traceable for downstream users and processes to understand material origin and dependency where such origin or dependency affects interpretation, validity, reuse, Authority, or Failure Impact.
+
+Creation of a new Object, representation, version, summary, Feature, Market DNA representation, Model, Signal, or other Derived Object shall not by itself establish independent Provenance.
+
+Loss, omission, or absence of Source Lineage shall not be interpreted as proof that no Material Dependency exists.
+
+## 11.7 Adoption Boundary
+
+Knowledge existence and Reusability shall remain distinct from Adoption.
+
+Adoption shall represent a Governance decision permitting information to be used for an identified purpose under applicable conditions.
+
+Consumption, reuse, Knowledge Promotion, Transformation, successful historical performance, or repeated use shall not by itself constitute Adoption.
+
+## 11.8 Production Use and Authority
+
+Production Use shall require applicable Authority and shall not be established merely by the existence, usefulness, reusability, Transformation, or Derivation of Research information.
+
+Reusable Knowledge shall not automatically become Production-authorized Knowledge.
+
+Transformation into a Feature, Market DNA representation, AI output, Model input, Model output, Signal, Defense input, or other downstream Object shall not by itself create Production Authority.
+
+Multiple Sources lacking the required Authority shall not acquire such Authority merely through aggregation or combination.
+
+## 11.9 Authority Preservation Through Derivation
+
+Derivation, Transformation, summarization, aggregation, representation change, model training, or Propagation shall not be used to bypass an Authority restriction applicable to a Source, its material properties, or the intended use.
+
+A Derived Object may possess a distinct Object Identity while remaining materially dependent on one or more Sources.
+
+Distinct Object Identity shall not be treated as independent Authority, independent Provenance, or absence of Material Dependency.
+
+## 11.10 Derivation and Transformation
+
+Transformation shall create a changed representation or form without, by itself, changing the material meaning, Evidence status, Scope, restrictions, Authority, or Provenance required for correct interpretation.
+
+Derivation shall create a downstream Object materially informed by one or more Sources without implying that the Derived Object is independent from those Sources.
+
+Simplification, summarization, quantification, Feature generation, Market DNA conversion, AI interpretation, Knowledge aggregation, model training, or Signal generation shall not by themselves strengthen Evidence, remove restrictions, broaden Scope, or create Authority.
+
+## 11.11 Propagation and Semantic Preservation
+
+Where Research-derived information propagates across Consumers, Knowledge, Features, Market DNA, AI systems, Models, Signals, Defense mechanisms, or other downstream processes, material meaning and applicable Governance shall not be removed or altered solely as a consequence of crossing an Object, Consumer, representation, or system-layer boundary.
+
+A system-layer boundary, Consumer boundary, Object boundary, or representation change shall not by itself constitute a Provenance boundary, Authority reset, or Material Dependency boundary.
+
+Material contradictions, limitations, Failure Boundaries, and other material qualifications shall not be removed solely through downstream Propagation.
+
+## 11.12 Aggregation and Dependent Evidence
+
+Aggregation of multiple Objects shall not be treated as Independent Evidence merely because multiple inputs produce the same or similar conclusion.
+
+Where multiple inputs share a material Source or materially dependent Evidence, that shared dependency shall remain relevant when interpreting aggregated Evidence.
+
+Repeated or transformed expressions of materially shared Evidence shall not be treated as Independent Evidence.
+
+## 11.13 Model and AI Boundary
+
+Use of Research-derived information in AI processing, model training, inference, summarization, classification, prediction, or other computational Transformation shall not sever Material Provenance, Source Lineage, or Material Dependency merely because the information has been encoded, transformed, learned, or represented differently.
+
+Observed downstream performance shall not by itself prove Source independence or absence of Material Impact from a Source defect.
+
+A newer Model, AI output, or Derived Object version shall not by itself establish that relevant Material Dependencies have been removed.
+
+## 11.14 Scope Preservation
+
+Reuse, Knowledge Promotion, Derivation, Transformation, aggregation, generalization, AI processing, or successful downstream use shall not independently expand the Market Scope or Usage Scope permitted for the underlying information.
+
+Reusable Knowledge shall not by itself establish Market Entry Authority.
+
+Where a Source Scope is narrowed, expanded, restricted, or otherwise materially changed, dependent uses shall be evaluated according to their Material Dependency and applicable Scope rather than assuming either universal invalidation or universal continued validity.
+
+Section 11 shall not provide a mechanism for bypassing the Market Scope and Future Expansion Governance established by Section 10.
+
+## 11.15 Material Dependency and Material Impact
+
+Material Dependency shall remain distinct from Material Impact.
+
+The existence of Material Dependency shall not by itself establish that a particular Source change materially affects every dependent Object.
+
+Material Impact shall be determined from the relationship between a material change, failure, contradiction, invalidation, correction, restriction, Scope change, version change, Lifecycle change, or other materially relevant event affecting a Source and the Material Dependency of the downstream Object, Consumer, or Process.
+
+A materially relevant event affecting a Source may create Material Impact without rendering the Source itself universally invalid.
+
+## 11.16 Failure Impact
+
+Failure Impact shall represent Material Impact arising from a failure-related event through Material Dependency.
+
+Source failure, invalidation, retirement, contradiction, Failure Boundary discovery, correction, or Evidence weakening shall not by itself establish either total downstream failure or absence of downstream impact.
+
+Failure Impact shall not automatically imply that an affected Derived Object is invalid, retired, disabled, or unusable in every context.
+
+Likewise, recording a failure, preserving it in the Failure Museum, or correcting the original Source shall not by itself establish that downstream Failure Impact has been resolved.
+
+## 11.17 Impact Boundary
+
+For a materially relevant event affecting a Source, the Impact Boundary shall distinguish the downstream extent for which Material Impact is relevant based on Material Dependency and the material relevance of the event.
+
+The Impact Boundary shall neither be expanded beyond nor truncated before the extent justified by those relationships.
+
+Graph distance, system-layer distance, Object type, Consumer identity, or descendant status shall not by itself establish the Impact Boundary.
+
+A failure shall therefore neither trigger unjustified total Cascade nor be artificially isolated before materially affected dependencies have been considered.
+
+## 11.18 Affected Object
+
+An Affected Object shall be an Object for which Material Impact has been established with respect to a particular materially relevant event affecting a Source and applicable Material Dependency.
+
+Affected status shall not by itself mean invalid, retired, suspended, deleted, retrained, rebuilt, or otherwise remediated.
+
+Material Impact on one material property shall not automatically establish Material Impact on every property of the Object.
+
+Impact determination shall remain distinct from the choice of remediation or operational action.
+
+## 11.19 Unresolved Impact
+
+Unresolved Impact shall apply where available Material Dependency, Source Lineage, Material Provenance, event relevance, or other necessary information is insufficient, unavailable, contradictory, or otherwise inadequate to reasonably determine whether Material Impact exists.
+
+Unresolved Impact shall not be treated as evidence of No Material Impact.
+
+Unresolved Impact shall also not automatically establish that Material Impact exists.
+
+Absence of lineage or dependency information shall not by itself establish absence of Material Dependency or Material Impact.
+
+Unresolved Impact shall represent genuine uncertainty and shall not be used as a substitute for a determination that can reasonably be supported by available information.
+
+## 11.20 Source Change, Version, and Remediation
+
+A change in Source version, correction, replacement, supersession, or remediation shall not by itself establish either Material Impact or absence of Material Impact.
+
+Source correction shall not automatically mean downstream correction.
+
+Source supersession shall not automatically mean migration of existing Derived Objects to the superseding Source.
+
+A newer downstream version shall not by itself establish independence from earlier Material Provenance, Source Lineage, or Material Dependency.
+
+Section 11 shall preserve the Version, Replacement, and Continuity Governance established by Section 9 rather than redefining it.
+
+## 11.21 Governance Structure Is Not a Mandatory Runtime Pipeline
+
+The ordering of Section 11 Governance boundaries shall not require every Research Output to pass through every boundary as a mandatory runtime execution sequence.
+
+A Research Output may terminate at Research use, may never become Reusable Knowledge, may never be adopted for Production Use, and may follow different technical processing paths.
+
+However, omission of a runtime stage or use of a shorter technical path shall not create Authority to bypass any Governance boundary applicable to the actual use.
+
+The structural ordering of these Governance boundaries shall not be interpreted as a mandatory execution order; applicable Governance shall remain applicable regardless of runtime path length.
+
+## 11.22 End-to-End Governance Preservation
+
+Across the complete Research-result usage lifecycle, Research information shall not acquire stronger Evidence, broader Scope, greater Authority, independent Provenance, or immunity from downstream Failure Impact merely by being consumed, reused, promoted, transformed, aggregated, encoded, learned, propagated, or represented as a new Object.
+
+The system shall preserve sufficient semantic and dependency continuity to support both forward use from Research through downstream usage and reverse impact analysis from a materially relevant Source change or failure through Material Dependency to downstream Impact determination.
+
+Research-result usage shall therefore remain sufficiently traceable to prevent unjustified strengthening, removal, reset, expansion, or bypass of Authority, Evidence, Material Provenance, Scope, or failure-related Governance across the Research-to-Production lifecycle.
