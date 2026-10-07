@@ -108,8 +108,12 @@ Section 9:
 Extensibility / Replaceable Capability Philosophy
 = DRAFT / LEADING CANDIDATE 保存済み
 
+Section 10:
+Market Scope / Future Expansion Governance
+= DRAFT / LEADING CANDIDATE 保存済み
+
 現在焦点:
-10. Market Scope / Future Expansion Governance
+11. Research成果の利用先
 ```
 
 `01_EXTERNAL_DATA`、`02_MARKET_UNDERSTANDING`、`03_RESEARCH`、`04_KNOWLEDGE_APPLICABILITY` はWorking Baselineとして保存済み。
@@ -154,8 +158,9 @@ Current State:
 - Section 7 Capital / Risk Philosophy = 保存済み
 - Section 8 Knowledge / Data Asset Philosophy = 保存済み
 - Section 9 Extensibility / Replaceable Capability Philosophy = 保存済み
-- Section 10以降 = 未設計
-Current Focus: 10. Market Scope / Future Expansion Governance
+- Section 10 Market Scope / Future Expansion Governance = 保存済み
+- Section 11以降 = 未設計
+Current Focus: 11. Research成果の利用先
 ```
 
 Project Missionの現在本命方向には、Crypto First、選択的Research、Fast Adaptation / Research Adaptation、Research Note / Research Asset、長期生存と正の期待値、人間向けResearch Publicationが含まれる。
@@ -179,7 +184,7 @@ Extensibility / Replaceable Capability Philosophyの現在本命方向は、Proj
 重要:
 
 ```text
-Section 1〜9 保存済み
+Section 1〜10 保存済み
 ≠
 PROJECT_CHARTER Working Baseline
 ```
