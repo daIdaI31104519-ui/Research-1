@@ -13,88 +13,57 @@ State:
 ACTIVE
 
 Last Updated:
-2026-10-06
+2026-10-07
 
 Conversation Focus:
-PROJECT_CHARTER Section 9 Extensibility / Replaceable Capability Philosophy saved; next focus is Section 10 Market Scope / Future Expansion Governance.
+PROJECT_CHARTER Section 11 Research Results Usage Governance saved. Long-term formal integration strategy agreed and saved as a separate non-current design strategy. Current formal Charter focus moves to Section 12 AI / Human / Production Authority.
 
 WORKFLOW:
-AI_WORKFLOW v0.5.3 Precision-First → Precision Review → Human View workflow is active.
+AI_WORKFLOW v0.5.3 Precision-First → Precision Review → Human View remains active. Current Git workflow is valid for the present Daisuke-design detailing phase; the future Formal Integration phase shall design and approve its own comparative review / Git governance before formal synthesis begins.
 
 LATEST SAVED WORKING CHECKPOINT:
-PROJECT_CHARTER Section 9 — Extensibility / Replaceable Capability Philosophy
+PROJECT_CHARTER Section 11 — Research Results Usage Governance
 
 PRE-SAVE RECOVERY POINT:
-199a0b03c06b7ff335080660b8099799c4514dde
-= Section 8 save/sync completion point
+0ff7b0b58fac489df7802a770a39a02800a42a05
+= Section 11 save completion point before the formal-integration strategy save
 
-R3 WORKING CHECKPOINT:
-Checkpoint 022 — R3 Full Destruction / Execution Integrity / Formal Adoption Readiness
+LONG-TERM STRATEGIC DIRECTION:
+98_DESIGN_STUDY/正式市場理解OS_比較統合設計方針.md
 
-R3 STATUS:
-- Overall = PASS WITH CROSS-LAYER HANDOFF REQUIREMENTS
-- Formal Adoption Candidate = READY
-- Formal Adoption = DEFERRED BY PROJECT SEQUENCING
-- Formal Current Architecture = UNCHANGED
+Core direction:
+- Legacy Market Understanding OS = implementation/history candidate, not automatically rejected.
+- Daisuke Market Understanding OS = current human-origin design candidate being detailed now.
+- GPT Independent Market Understanding OS = future independently generated AI-origin candidate; do not merely paraphrase Daisuke design.
+- Final Market Understanding OS = compare, attack, reject/adopt, and integrate candidates with explicit decision records; do not average them mechanically.
+- Before Formal Integration, redesign the formal comparison/review workflow and Git organization instead of blindly inheriting the current workflow.
 
 PROJECT_CHARTER STATUS:
-Section 1 — Project Mission = DRAFT / LEADING CANDIDATE SAVED
-Section 2 — Success Definition = DRAFT / LEADING CANDIDATE SAVED
-Section 3 — What Not To Maximize = DRAFT / LEADING CANDIDATE SAVED
-Section 4 — Survival / Profit Priority = DRAFT / LEADING CANDIDATE SAVED
-Section 5 — Research Mission = DRAFT / LEADING CANDIDATE SAVED
-Section 6 — Research Category Philosophy = DRAFT / LEADING CANDIDATE SAVED
-Section 7 — Capital / Risk Philosophy = DRAFT / LEADING CANDIDATE SAVED
-Section 8 — Knowledge / Data Asset Philosophy = DRAFT / LEADING CANDIDATE SAVED
-Section 9 — Extensibility / Replaceable Capability Philosophy = DRAFT / LEADING CANDIDATE SAVED
-
-SECTION 9 CORE:
-- Extensibility preserves Mission / Semantic / Research Integrity / Authority / History-Version / Change-Failure / Survival principles.
-- Core != Important / Widely Used / Shared Usage.
-- Unrepresentable Core Semantic change must escalate as Core Change Candidate.
-- Extension Exists != Adoption; Adoption is Version / Scope / Purpose sensitive.
-- Version Change != Silent Semantic Mutation.
-- Replaceable != Semantically Identical.
-- Replacement != Historical Rewrite.
-- Compatibility != Identity != Adoption.
-- Material Dependency != Material Impact.
-- Operational Failure != Semantic / Historical Invalidity.
-- Operational Failure is contained while Material Impact Context is propagated to materially dependent consumers.
-- Market-specific Method != Research Integrity Exemption.
-- Market-specific Extension != Separate OS / Authority Island.
-- Market-specific Extension Exists != Market Scope Authorized.
-- Future-ready != Future-overengineered.
-
-SECTION 9 DETAIL DEFERRED:
-- Plugin / Extension Base Class / Registry
-- Market Registry / Capability Matrix
-- JSON / Python / DB Contract
-- Version numbering / Compatibility enum
-- Dependency / Impact graph
-- Failure health state / failover / recovery implementation
-- Automatic version propagation / revalidation rules
+Section 1–11 = DRAFT / LEADING CANDIDATE SAVED
+Section 12+ = UNDESIGNED
 
 PROJECT SEQUENCING:
-00_AI/TEMP_CHARTER_RECONCILIATION_PLAN.md v0.7 remains active.
+00_AI/TEMP_CHARTER_RECONCILIATION_PLAN.md v0.8 remains active.
 
 CURRENT FORMAL PROJECT FOCUS:
-10. Market Scope / Future Expansion Governance
+12. AI / Human / Production Authority
 
 CURRENT NAVIGATION:
-AI_CONTEXT v0.1.17 synchronized to Section 10 focus.
-TEMP_CHARTER_RECONCILIATION_PLAN v0.7 synchronized to Section 10 focus.
+AI_CONTEXT v0.1.18 synchronized to Section 12 focus and the long-term Formal Integration strategy.
+TEMP_CHARTER_RECONCILIATION_PLAN v0.8 synchronized to Section 12 focus.
 
 UNCHANGED BY THIS SAVE:
+00_HUMAN/PROJECT_CHARTER.md content
 00_HUMAN/HUMAN_MAP.md
 00_AI/AI_WORKFLOW.md
 02_ARCHITECTURE/
 R3 Formal Current Architecture
 
 NEXT:
-1. Design PROJECT_CHARTER Section 10 — Market Scope / Future Expansion Governance.
-2. Preserve Section 9 boundary: Extensibility capability != Market Scope Authorization.
-3. Keep Crypto First; do not pre-build all future markets.
-4. Do not formally adopt R3 into 02_ARCHITECTURE until Charter Reconciliation sequence permits it.
+1. Continue Daisuke-design PROJECT_CHARTER detailing from Section 12.
+2. Do not treat the long-term integration strategy as Current Design or as permission to merge candidate designs now.
+3. After the Daisuke design reaches an agreed closure, create a genuinely independent GPT design at comparable depth.
+4. Only then enter comparative reconciliation and design the Formal Integration workflow / Git structure.
 
 Git Write Permission Reminder:
 REQUIRE CURRENT-CHAT USER AUTHORIZATION

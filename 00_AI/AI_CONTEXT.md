@@ -1,4 +1,4 @@
-# 市場理解OS — AI_CONTEXT v0.1.17
+# 市場理解OS — AI_CONTEXT v0.1.18
 
 **Document Role:** AI Current-State Index / Navigation Map  
 **Status:** REVIEWED / WORKING BASELINE  
@@ -112,8 +112,12 @@ Section 10:
 Market Scope / Future Expansion Governance
 = DRAFT / LEADING CANDIDATE 保存済み
 
+Section 11:
+Research Results Usage Governance
+= DRAFT / LEADING CANDIDATE 保存済み
+
 現在焦点:
-11. Research成果の利用先
+12. AI / Human / Production Authority
 ```
 
 `01_EXTERNAL_DATA`、`02_MARKET_UNDERSTANDING`、`03_RESEARCH`、`04_KNOWLEDGE_APPLICABILITY` はWorking Baselineとして保存済み。
@@ -159,8 +163,9 @@ Current State:
 - Section 8 Knowledge / Data Asset Philosophy = 保存済み
 - Section 9 Extensibility / Replaceable Capability Philosophy = 保存済み
 - Section 10 Market Scope / Future Expansion Governance = 保存済み
-- Section 11以降 = 未設計
-Current Focus: 11. Research成果の利用先
+- Section 11 Research Results Usage Governance = 保存済み
+- Section 12以降 = 未設計
+Current Focus: 12. AI / Human / Production Authority
 ```
 
 Project Missionの現在本命方向には、Crypto First、選択的Research、Fast Adaptation / Research Adaptation、Research Note / Research Asset、長期生存と正の期待値、人間向けResearch Publicationが含まれる。
@@ -184,12 +189,12 @@ Extensibility / Replaceable Capability Philosophyの現在本命方向は、Proj
 重要:
 
 ```text
-Section 1〜10 保存済み
+Section 1〜11 保存済み
 ≠
 PROJECT_CHARTER Working Baseline
 ```
 
-Section 10以降を設計し、PROJECT_CHARTER全体をCross Checkするまでは、Charter全体を確定扱いしない。
+Section 12以降を設計し、PROJECT_CHARTER全体をCross Checkするまでは、Charter全体を確定扱いしない。
 
 ## 3.3 HUMAN MAP
 
@@ -206,7 +211,7 @@ Canonicalではないが、現在の市場理解OSのHuman思想を確認する�
 
 ```text
 Path: 00_AI/TEMP_CHARTER_RECONCILIATION_PLAN.md
-Version: v0.6
+Version: v0.8
 Status: TEMPORARY / ACTIVE UNTIL RECONCILIATION COMPLETE
 Role: PROJECT_CHARTER導入中の作業順・影響範囲・Checkpoint・復帰条件を固定する一時ナビ
 ```
@@ -379,6 +384,38 @@ Formal Current Architectureへ採用
 AI_HANDOFFがACTIVEでこのStudyを指している場合は、Git上の保存地点を確認した上でConversation Taskとして継続できる。
 HANDOFFがCLEAR / 不在の場合は、原則として本ファイルのCurrent TaskをProject作業入口とする。
 
+
+## 3.14 LONG-TERM FORMAL INTEGRATION STRATEGY
+
+```text
+Path:
+98_DESIGN_STUDY/正式市場理解OS_比較統合設計方針.md
+
+Status:
+DRAFT / STRATEGIC DIRECTION
+
+Role:
+旧市場理解OS・ダイスケ案市場理解OS・GPT独立案市場理解OSを独立Candidateとして比較・反証し、理由付きDecision Recordを経て正式な市場理解OSを構築するための長期設計方針
+```
+
+重要:
+
+```text
+Current Daisuke Design
+!= Final Integrated Market Understanding OS
+
+GPT Independent Design
+!= Automatic Replacement
+
+Legacy OS
+!= Automatic Rejection
+
+Candidate Comparison
+!= Simple Averaging
+```
+
+現在はダイスケ案の詳細化を完了させることを優先する。GPT独立案は、ダイスケ案の詳細設計を答えとして模倣しないよう、将来別工程で独立に構築する。その後、旧OS・ダイスケ案・GPT案を比較し、正式版専用の設計審査方法とGit運用を改めて設計してからFormal Integrationへ進む。
+
 ---
 
 # 4. Current Design Guardrails
@@ -525,7 +562,9 @@ Section 6 Research Category Philosophy = DRAFT / LEADING CANDIDATE 保存済み
 Section 7 Capital / Risk Philosophy = DRAFT / LEADING CANDIDATE 保存済み
 Section 8 Knowledge / Data Asset Philosophy = DRAFT / LEADING CANDIDATE 保存済み
 Section 9 Extensibility / Replaceable Capability Philosophy = DRAFT / LEADING CANDIDATE 保存済み
-現在: 10. Market Scope / Future Expansion Governance
+Section 10 Market Scope / Future Expansion Governance = DRAFT / LEADING CANDIDATE 保存済み
+Section 11 Research Results Usage Governance = DRAFT / LEADING CANDIDATE 保存済み
+現在: 12. AI / Human / Production Authority
 
 NEXT-002
 PROJECT_CHARTER全体をCross Checkし、問題が軽微ならWorking Baseline候補として保存
@@ -719,6 +758,6 @@ GPTはGit・AI_WORKFLOW・AI_CONTEXT・必要ならAI_HANDOFFを使って設計�
 
 ---
 
-# AI_CONTEXT v0.1.17 一文定義
+# AI_CONTEXT v0.1.18 一文定義
 
 > **AI_CONTEXTとは、市場理解OSの設計内容そのものや直前Conversationを複製する文書ではなく、GPTが現在Phase・Current Task・主要Working Baseline・重要Pending・Next Action・参照先を短時間で把握し、Gitという長期作業空間の中から現在Taskに必要な正しい設計情報へ移動するための軽量なAI専用Project Current-State Mapである。**

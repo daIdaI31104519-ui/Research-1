@@ -1,4 +1,4 @@
-# TEMP — PROJECT CHARTER RECONCILIATION PLAN v0.7
+# TEMP — PROJECT CHARTER RECONCILIATION PLAN v0.8
 
 **Document Role:** Temporary Design Migration / Navigation Plan  
 **Status:** TEMPORARY / ACTIVE UNTIL RECONCILIATION COMPLETE  
@@ -160,8 +160,11 @@ Section 9 Extensibility / Replaceable Capability Philosophy
 Section 10 Market Scope / Future Expansion Governance
 = DRAFT / LEADING CANDIDATE 保存済み
 
+Section 11 Research Results Usage Governance
+= DRAFT / LEADING CANDIDATE 保存済み
+
 Current Focus
-= 11. Research成果の利用先
+= 12. AI / Human / Production Authority
 ```
 
 ---
@@ -499,7 +502,9 @@ CURRENT DRAFT
 = Section 7 Capital / Risk Philosophy保存済み
 = Section 8 Knowledge / Data Asset Philosophy保存済み
 = Section 9 Extensibility / Replaceable Capability Philosophy保存済み
-= 現在はSection 10 Market Scope / Future Expansion Governanceを設計する
+= Section 10 Market Scope / Future Expansion Governance保存済み
+= Section 11 Research Results Usage Governance保存済み
+= 現在はSection 12 AI / Human / Production Authorityを設計する
 
 HIGH IMPACT
 00_HUMAN/HUMAN_MAP.md
