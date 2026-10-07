@@ -157,8 +157,11 @@ Section 8 Knowledge / Data Asset Philosophy
 Section 9 Extensibility / Replaceable Capability Philosophy
 = DRAFT / LEADING CANDIDATE 保存済み
 
+Section 10 Market Scope / Future Expansion Governance
+= DRAFT / LEADING CANDIDATE 保存済み
+
 Current Focus
-= 10. Market Scope / Future Expansion Governance
+= 11. Research成果の利用先
 ```
 
 ---
